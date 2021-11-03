@@ -30,6 +30,8 @@
     <!-- App CSS -->
     <link type="text/css" href="{{ url('assets/css/app.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/css/app.rtl.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">
@@ -58,7 +60,8 @@
     </div>
     <!-- // END Header Layout -->
     {{ $navigation }}
-
+    <!--  livewire -->
+    @livewireScripts
     <!-- jQuery -->
     <script src="{{ url('assets/vendor/jquery.min.js') }}"></script>
 
@@ -89,6 +92,8 @@
 
     <!-- App Settings (safe to remove) -->
     <script src="{{ url('assets/js/app-settings.js') }}"></script>
+
+    @yield('script')
 </body>
 
 </html>

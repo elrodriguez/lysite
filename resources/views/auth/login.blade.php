@@ -15,35 +15,7 @@
         </div>
     </x-slot>
     
-    <div class="bg-white pt-32pt pt-sm-64pt pb-32pt">
-        <div class="container page__container">
-            <form action="student-dashboard.html" class="col-md-5 p-0 mx-auto">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input id="email" type="text" class="form-control" placeholder="Your email address ...">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input id="password" type="password" class="form-control" placeholder="Your first and last name ...">
-                    <p class="text-right"><a href="reset-password.html" class="small">Forgot your password?</a></p>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Login</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="page-separator m-0">
-        <div class="page-separator__text">or sign-in with</div>
-        <div class="page-separator__bg-top bg-white"></div>
-    </div>
-    <div class="bg-body pt-32pt pb-32pt pb-md-64pt text-center">
-        <div class="container page__container">
-            <a href="student-dashboard.html" class="btn btn-lg btn-secondary btn-block-xs">Facebook</a>
-            <a href="student-dashboard.html" class="btn btn-lg btn-secondary btn-block-xs">Twitter</a>
-            <a href="student-dashboard.html" class="btn btn-lg btn-secondary btn-block-xs">Google+</a>
-        </div>
-    </div>
+    @livewire('auth.login-form')
     
     <x-slot name="navigation">
         <x-navigation></x-navigation>

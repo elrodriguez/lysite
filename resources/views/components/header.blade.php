@@ -62,7 +62,7 @@
                     @auth
                         <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                <img width="32" height="32" class="rounded-circle" src="assets/images/people/50/guy-3.jpg" alt="student" />
+                                <img width="32" height="32" class="rounded-circle" src="{{ url('assets/images/people/50/guy-3.jpg') }}" alt="student" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><strong>Instructor</strong></div>
@@ -73,7 +73,7 @@
                                 <div class="dropdown-header"><strong>Account</strong></div>
                                 <a class="dropdown-item" href="student-edit-account.html">Edit Account</a>
                                 <a class="dropdown-item" href="student-billing-history.html">Billing</a>
-                                <a class="dropdown-item" href="login.html">Logout</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>
                     @else
