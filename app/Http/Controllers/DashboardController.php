@@ -16,7 +16,5 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasrole('Instructor')){
            dd('falta');
         }
-
-        
     }
 }

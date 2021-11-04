@@ -19,6 +19,7 @@ class CreateSetModulePermissionsTable extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->boolean('status')->default(true);
             $table->timestamps();
+            $table->foreign('module_id')->references('id')->on('set_modules');
         });
     }
 

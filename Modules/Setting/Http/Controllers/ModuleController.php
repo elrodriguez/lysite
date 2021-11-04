@@ -23,27 +23,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('setting::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('setting::show');
+        return view('setting::modules.create');
     }
 
     /**
@@ -53,18 +33,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        return view('setting::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return view('setting::modules.edit')->with('id',$id);
     }
 
     /**
@@ -72,8 +41,8 @@ class ModuleController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function permissions($id)
     {
-        //
+        return view('setting::modules.permissions')->with('id',$id);
     }
 }

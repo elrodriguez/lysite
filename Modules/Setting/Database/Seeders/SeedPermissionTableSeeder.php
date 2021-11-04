@@ -21,18 +21,20 @@ class SeedPermissionTableSeeder extends Seeder
 
         $module = SetModule::create([
             'uuid' => Str::uuid(),
-            'logo' => 'fal fa-cogs',
+            'logo' => 'settings',
             'label' => 'Configuraciones',
             'destination_route' => 'setting_dashboard',
             'status' => true
         ]);
 
         $permissions = [];
-
+        
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_nuevo']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_editar']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_permisos']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_eliminar']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_permiso_eliminar']));
 
         $role = Role::find(1);
         foreach($permissions as $permission){

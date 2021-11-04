@@ -30,6 +30,8 @@
     <!-- App CSS -->
     <link type="text/css" href="{{ url('assets/css/app.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/css/app.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
     @yield('styles')
 </head>
@@ -93,6 +95,7 @@
     <!-- App Settings (safe to remove) -->
     <script src="{{ url('assets/js/app-settings.js') }}"></script>
 
+    <script src="{{ url('assets/js/cute-alert/cute-alert.js') }}"></script>
     @yield('script')
 </body>
 

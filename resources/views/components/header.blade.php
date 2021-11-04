@@ -60,13 +60,14 @@
             <nav class="nav navbar-nav ml-auto flex-nowrap">
                 @if (Route::has('login'))
                     @auth
+                        @role('Admin')
                         <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <img width="32" height="32" class="rounded-circle" src="{{ url('assets/images/people/50/guy-3.jpg') }}" alt="student" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-header"><strong>Instructor</strong></div>
-                                <a class="dropdown-item" href="instructor-dashboard.html">Dashboard</a>
+                                <div class="dropdown-header"><strong>Administrador</strong></div>
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                 <a class="dropdown-item" href="instructor-courses.html">Courses</a>
                                 <a class="dropdown-item" href="instructor-quizzes.html">Quizzes</a>
                                 <div class="dropdown-divider"></div>
@@ -76,6 +77,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>
+                        @endrole
                     @else
                         <div class="ml-16pt nav-item">
                             <a href="{{ route('login') }}" class="nav-link">
