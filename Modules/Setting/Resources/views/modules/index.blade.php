@@ -14,7 +14,7 @@
 
             <!-- Navbar toggler -->
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
-                <span class="material-icons">people_outline</span>
+                <i class="fa fa-bars"></i>
             </button>
             @livewire('nav.nav-admin')
         </div>

@@ -18,4 +18,11 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('setting')->group(functi
         Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos_editar'])->get('edit/{id}', 'ModuleController@edit')->name('setting_modules_editar');
         Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos_permisos'])->get('permissions/{id}', 'ModuleController@permissions')->name('setting_modules_permisos');
     });
+
+    Route::group(['prefix' => 'roles'], function() {
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_roles'])->get('list', 'RolesController@index')->name('setting_roles');
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_roles_nuevo'])->get('create', 'RolesController@create')->name('setting_roles_create');
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_roles_editar'])->get('edit/{id}', 'RolesController@edit')->name('setting_roles_editar');
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_roles_permisos'])->get('permissions/{id}', 'RolesController@permissions')->name('setting_roles_permisos');
+    });
 });

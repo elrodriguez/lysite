@@ -60,9 +60,8 @@ class ModulesPermissions extends Component
             'name' => 'required',
             'permission_name' => 'required|unique:permissions,name'
         ]);
-
         
-        $permission = Permission::create(['name' => $this->permission_name]);
+        $permission = Permission::create(['name' => $this->permission_name,'guard_name' => 'web']);
 
         SetModulePermission::create([
             'module_id' => $this->module_id,

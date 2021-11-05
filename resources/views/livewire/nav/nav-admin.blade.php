@@ -14,8 +14,12 @@
         <li class="nav-item dropdown {{ $path[0] == 'setting' ? 'active' : '' }}">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Configuracíon</a>
             <div class="dropdown-menu">
+                @can('configuraciones_modulos')
                 <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'modules' ? 'active' : '' }}" href="{{ route('setting_modules') }}">Modulos</a>
-                <a class="dropdown-item" href="instructor-quizzes.html">Roles</a>
+                @endcan
+                @can('configuraciones_roles')
+                <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'roles' ? 'active' : '' }}" href="{{ route('setting_roles') }}">Roles</a>
+                @endcan
                 <a class="dropdown-item" href="instructor-edit-course.html">Usuarios</a>
                 <a class="dropdown-item" href="instructor-edit-quiz.html">Edit Quiz</a>
             </div>

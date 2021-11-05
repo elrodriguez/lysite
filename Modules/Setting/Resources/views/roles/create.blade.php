@@ -3,7 +3,7 @@
         <div class="bg-gradient-primary">
             <div class="py-32pt">
                 <div class="container">
-                    <h1 class="text-white mb-8pt">Modulos</h1>
+                    <h1 class="text-white mb-8pt">Roles</h1>
                     <span class="text-white">Nuevo</span>
                 </div>
             </div>
@@ -18,7 +18,7 @@
             @livewire('nav.nav-admin')
         </div>
     </div>
-    @livewire('setting::modules.modules-create')
+    @livewire('setting::roles.roles-create')
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot> 

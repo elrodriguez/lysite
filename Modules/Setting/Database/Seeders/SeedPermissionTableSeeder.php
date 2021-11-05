@@ -35,6 +35,11 @@ class SeedPermissionTableSeeder extends Seeder
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_permisos']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_eliminar']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_permiso_eliminar']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_roles']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_roles_nuevo']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_roles_editar']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_roles_eliminar']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_roles_permisos']));
 
         $role = Role::find(1);
         foreach($permissions as $permission){
