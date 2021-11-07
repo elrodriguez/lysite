@@ -34,6 +34,7 @@
     <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
     @yield('styles')
+    
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">

@@ -29,3 +29,5 @@ Route::get('/register', function () {
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+require __DIR__.'/auth.php';

@@ -37,11 +37,16 @@
                             <div class="form-group">
                                 <label for="email">Tu correo electrónico:</label>
                                 <input wire:model="email" id="email" type="email" class="form-control" placeholder="Tu correo electrónicos ...">
+                                @error('email') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-24pt">
                                 <label for="password">Contraseña:</label>
                                 <input wire:model="password" id="password" type="password" class="form-control" placeholder="Tu contraseña ...">
+                                @error('password') <span class="error">{{ $message }}</span> @enderror
                             </div>
+
+                           
+
                             <button class="btn btn-lg btn-accent">Crear una cuenta</button>
                         </form>
                     </div>

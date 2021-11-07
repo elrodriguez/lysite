@@ -9,9 +9,9 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input wire:model="password" id="password" type="password" class="form-control" placeholder="tu contraseña ...">
+                    <input wire:model="password" wire:keydown.enter="login" id="password" type="password" class="form-control" placeholder="tu contraseña ...">
                     @error('password') <span class="text-danger error">{{ $message }}</span>@enderror
-                    <p class="text-right"><a href="reset-password.html" class="small">¿Olvidaste tu contraseña?</a></p>
+                    <p class="text-right"><a href="{{ route('password.request') }}" class="small">¿Olvidaste tu contraseña?</a></p>
                 </div>
                 @if (session()->has('message'))
                 <div class="alert alert-danger" role="alert">
