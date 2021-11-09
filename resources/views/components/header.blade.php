@@ -20,10 +20,10 @@
                         <a href="pricing.html" class="nav-link">Pricing</a>
                     </li>
                     <li class="nav-item {{ $path[0] == 'register' ? 'active' : '' }}">
-                        <a href="{{ route('register') }}" class="nav-link">Signup</a>
+                        <a href="{{ route('register') }}" class="nav-link"> {{ __('labels.signup') }}</a>
                     </li>
                     <li class="nav-item {{ $path[0] == 'login' ? 'active' : '' }}">
-                        <a href="{{ route('login') }}" class="nav-link">Login</a>
+                        <a href="{{ route('login') }}" class="nav-link">@lang('labels.login')</a>
                     </li>
                 </ul>
                 <!-- // END Main Navigation -->
