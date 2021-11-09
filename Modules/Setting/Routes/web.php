@@ -25,4 +25,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('setting')->group(functi
         Route::middleware(['middleware' => 'role_or_permission:configuraciones_roles_editar'])->get('edit/{id}', 'RolesController@edit')->name('setting_roles_editar');
         Route::middleware(['middleware' => 'role_or_permission:configuraciones_roles_permisos'])->get('permissions/{id}', 'RolesController@permissions')->name('setting_roles_permisos');
     });
+
+    Route::group(['prefix' => 'users'], function() {
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_usuarios'])->get('list', 'UserController@index')->name('setting_users');
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_usuarios_nuevo'])->get('create', 'UserController@create')->name('setting_users_create');
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_usuarios_editar'])->get('edit/{id}', 'UserController@edit')->name('setting_users_editar');
+    });
 });

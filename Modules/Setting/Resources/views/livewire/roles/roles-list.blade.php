@@ -74,8 +74,8 @@
         function deletes(id){
             cuteAlert({
                 type: "question",
-                title: "Confirm Title",
-                message: "Confirm Message",
+                title: "¿Desea eliminar estos datos?",
+                message: "Advertencia:¡Esta acción no se puede deshacer!",
                 confirmText: "Okay",
                 cancelText: "Cancel"
             }).then((e)=>{

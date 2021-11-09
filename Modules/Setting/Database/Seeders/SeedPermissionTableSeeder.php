@@ -40,7 +40,11 @@ class SeedPermissionTableSeeder extends Seeder
         array_push($permissions,Permission::create(['name' => 'configuraciones_roles_editar']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_roles_eliminar']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_roles_permisos']));
-
+        array_push($permissions,Permission::create(['name' => 'configuraciones_usuarios']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_usuarios_nuevo']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_usuarios_editar']));
+        array_push($permissions,Permission::create(['name' => 'configuraciones_usuarios_eliminar']));
+        
         $role = Role::find(1);
         foreach($permissions as $permission){
             SetModulePermission::create([
