@@ -7,7 +7,7 @@
                     <h1 class="text-white mb-0">Sign In</h1>
                     <p class="lead measure-lead text-white-50">Account Management</p>
                 </div>
-                <a href="signup.html" class="btn btn-outline-white flex-column">
+                <a href="{{ route('register') }}" class="btn btn-outline-white flex-column">
                     Don't have an account?
                     <span class="btn__secondary-text">Sign up Today!</span>
                 </a>
