@@ -23,17 +23,8 @@
                 @can('configuraciones_usuarios')
                 <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'users' ? 'active' : '' }}" href="{{ route('setting_users') }}">Usuarios</a>
                 @endcan
-                <a class="dropdown-item" href="instructor-edit-quiz.html">Edit Quiz</a>
             </div>
         </li>
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Reports</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="instructor-earnings.html">Earnings</a>
-                <a class="dropdown-item" href="instructor-statement.html">Statement</a>
-            </div>
-        </li>
-
     </ul>
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
