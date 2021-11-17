@@ -6,7 +6,7 @@
                     alt="student">
                 <div class="flex mb-32pt mb-md-0">
                     <h1 class="text-white mb-0">Recupera tu contraseña</h1>
-                    <p class="lead measure-lead text-white-50">se te enviará un código de verificación</p>
+                    <p class="lead measure-lead text-white-50">Ingresa tu nueva Contraseña</p>
                 </div>
                 <a href="{{ route('register') }}" class="btn btn-outline-white flex-column">
                     ¿No tienes una Cuenta todavía?
@@ -15,50 +15,41 @@
             </div>
         </div>
 
-        <div class="mb-4 text-sm text-gray-600 text-center">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a
-            password reset link that will allow you to choose a new one.') }}
-        </div>
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <div class="page-section bg-white">
+            <div class="container page__container">
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-4 text-center" :status="session('status')" />
 
+                <!-- Validation Errors -->
+                <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" />
 
-        <div class="text-center">
-            <form method="POST" action="{{ route('password.update') }}">
-                @csrf
+                <form method="POST" action="{{ route('password.update') }}" class="col-sm-5 mx-auto">
+                    @csrf
 
-                <!-- Password Reset Token -->
-                <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                    <!-- Password Reset Token -->
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-                <!-- Email Address -->
-                <div class="mt-4">
-                    <x-label for="email" :value="__('Email')" />
-<br>
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email"
-                        :value="old('email', $request->email)" required />
-                </div>
+                    <div class="form-group">
+                        
 
-                <!-- Password -->
-                <div class="mt-4">
-                    <x-label for="password" :value="__('Password')" />
-<br>
-                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                        autofocus placeholder="Nueva Contraseña"/>
-                </div>
-
-                <!-- Confirm Password -->
-                <div class="mt-4">
-                    <x-label for="password_confirmation" :value="__('Confirm Password')" />
-<br>
-                    <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                        name="password_confirmation" required placeholder="Confirme Nueva Contraseña"/>
-                </div>
-
-                <div class="flex items-center justify-end mt-4">
-                    <x-button class="btn btn-lg btn-accent">
-                        {{ __('Reset Password') }}
-                    </x-button>
-                </div>
-            </form>
+                        <x-input id="email" class="form-control" type="hidden" name="email"
+                            :value="old('email', $request->email)" required  />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input id="password" type="password" class="form-control" name="password"
+                            placeholder="Ingrese Nueva Contraseña ..." autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Confirme su Contraseña:</label>
+                        <input id="password_confirmation" type="password" class="form-control"
+                            name="password_confirmation" placeholder="Confirme su nueva Contraseña ...">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-accent btn-lg">{{ __('Reset Password') }}</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
 

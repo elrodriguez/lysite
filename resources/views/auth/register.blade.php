@@ -21,11 +21,7 @@
           width: 304px;
         }
         </style>
-    <div>
-        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key')}}"></div>  <!-- reCaptcha -->                        
-    </div>
-    <br/>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+   
     @livewire('auth.register-form')    
     
     <x-slot name="navigation">

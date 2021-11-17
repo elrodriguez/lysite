@@ -33,6 +33,8 @@ return [
     'recaptcha' => [
         'key' => env('GOOGLE_RECAPTCH_KEY'),
         'secret' => env('GOOGLE_RECAPTCH_SECRET'),
+        'key3' => env('GOOGLE_RECAPTCH_KEYv3'),
+        'secret3' => env('GOOGLE_RECAPTCH_SECRETv3'),
     ],
 
 ];

@@ -72,7 +72,7 @@
                                 <a class="dropdown-item" href="instructor-quizzes.html">Quizzes</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-header"><strong>Account</strong></div>
-                                <a class="dropdown-item" href="student-edit-account.html">Edit Account</a>
+                                <a class="dropdown-item" href="{{ route('editAccount') }}">Edit Account</a>
                                 <a class="dropdown-item" href="student-billing-history.html">Billing</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
