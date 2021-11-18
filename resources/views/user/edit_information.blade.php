@@ -36,8 +36,10 @@
             @endrole
         </div>
     </div>
-    @livewire('user.edit-information')
-    
+    {{-- solo esto cambia por cada pagina --}}
+    {{-- inicio --}}
+    @livewire('user.edit-information') 
+    {{-- fin --}}
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot> 
