@@ -168,6 +168,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
+        Laraveles\Spanish\SpanishServiceProvider::class,
         /*
          * Application Service Providers...
          */
