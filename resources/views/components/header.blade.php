@@ -71,10 +71,10 @@
                                 <a class="dropdown-item" href="instructor-courses.html">Courses</a>
                                 <a class="dropdown-item" href="instructor-quizzes.html">Quizzes</a>
                                 <div class="dropdown-divider"></div>
-                                <div class="dropdown-header"><strong>Cuenta</strong></div>
-                                <a class="dropdown-item" href="{{ route('user_edit_account') }}">Editar cuenta</a>
-                                <a class="dropdown-item" href="student-billing-history.html">Facturación</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
+                                <div class="dropdown-header"><strong>Account</strong></div>
+                                <a class="dropdown-item" href="{{ route('editAccount') }}">Edit Account</a>
+                                <a class="dropdown-item" href="student-billing-history.html">Billing</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>
                         @endrole

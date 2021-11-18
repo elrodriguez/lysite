@@ -12,7 +12,6 @@ class RegisterForm extends Component
     public $full_name;
     public $email;
     public $password;
-  
 
     public function render()
     {
@@ -26,20 +25,7 @@ class RegisterForm extends Component
             'password' => 'required|min:8',
 
             'email' => 'required|email',
-            'g-recaptcha-response' => function ($attribute, $value, $fail) {                   //para Recaptcha
-                $secretKey = config('services.recaptcha.secret');
-                $response = $value;
-                $userIP = $_SERVER['REMOTE_ADDR'];
-                $url ="https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$userIP";
-                $response= \file_get_contents($url);
-                $response= json_decode($response);
-                if(!$response->success){
-                    Session::flash('g-recaptcha-response', 'Porfavor marca la recaptcha');
-                    Session::flash('alert-class', 'alert-danger');
-                    $fail($attribute.' google reCaptcha falló');
-                }
-            },                //para Recaptcha
-
+            
         ]);
 
         $user = User::create([
@@ -56,4 +42,6 @@ class RegisterForm extends Component
         return redirect()->intended('dashboard');
 
     }
+
+    
 }

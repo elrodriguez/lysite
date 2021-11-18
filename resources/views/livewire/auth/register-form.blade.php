@@ -8,7 +8,8 @@
                         <span class="progression-bar__item-text h5 mb-0 text-uppercase">Pricing</span>
                     </span>
                 </a>
-                <a href="signup.html" class="progression-bar__item progression-bar__item--complete progression-bar__item--active">
+                <a href="signup.html"
+                    class="progression-bar__item progression-bar__item--complete progression-bar__item--active">
                     <span class="progression-bar__item-content">
                         <i class="material-icons progression-bar__item-icon"></i>
                         <span class="progression-bar__item-text h5 mb-0 text-uppercase">Account details</span>
@@ -32,24 +33,29 @@
                         <form wire:submit.prevent="save">
                             <div class="form-group">
                                 <label for="name">Tu nombre y apellido:</label>
-                                <input wire:model="full_name" id="name" type="text" class="form-control" placeholder="Tu nombre y apellido ...">
+                                <input wire:model="full_name" id="name" type="text" class="form-control"
+                                    placeholder="Tu nombre y apellido ...">
                             </div>
                             <div class="form-group">
                                 <label for="email">Tu correo electrónico:</label>
-                                <input wire:model="email" id="email" type="email" class="form-control" placeholder="Tu correo electrónicos ...">
+                                <input wire:model="email" id="email" type="email" class="form-control"
+                                    placeholder="Tu correo electrónicos ...">
                                 @error('email') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-24pt">
                                 <label for="password">Contraseña:</label>
-                                <input wire:model="password" id="password" type="password" class="form-control" placeholder="Tu contraseña ...">
+                                <input wire:model="password" id="password" type="password" class="form-control"
+                                    placeholder="Tu contraseña ...">
                                 @error('password') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
-                           
 
-                            <button class="btn btn-lg btn-accent">Crear una cuenta</button>
+
+                            <button class="btn btn-lg btn-accent">
+                                Crear una cuenta</button>
                         </form>
                     </div>
+
                     {{-- <div class="col-md-6">
                         <div class="card mb-0">
                             <div class="card-body">
@@ -60,7 +66,8 @@
                                 </div>
                                 <div class="d-flex mb-16pt pb-16pt border-bottom">
                                     <span class="material-icons text-muted mr-8pt">check</span>
-                                    <span class="text-70">Access to over 1.000 high quality courses. For individuals.</span>
+                                    <span class="text-70">Access to over 1.000 high quality courses. For
+                                        individuals.</span>
                                 </div>
                                 <div class="d-flex mb-16pt pb-16pt border-bottom">
                                     <div class="flex"><strong class="text-70">Price</strong></div>
@@ -69,7 +76,8 @@
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" checked id="topic-all">
                                     <label class="custom-control-label">Terms and conditions</label>
-                                    <small class="form-text text-muted">By checking here and continuing, I agree to the Tutorio Terms of Use</small>
+                                    <small class="form-text text-muted">By checking here and continuing, I agree to the
+                                        Tutorio Terms of Use</small>
                                 </div>
                             </div>
                         </div>
