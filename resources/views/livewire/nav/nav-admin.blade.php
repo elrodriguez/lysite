@@ -26,9 +26,9 @@
             </div>
         </li>
     </ul>
-    <ul class="nav navbar-nav ml-auto">
+    {{-- <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
             <a href="instructor-profile.html" class="nav-link">Profile</a>
         </li>
-    </ul>
+    </ul> --}}
 </div>

@@ -13,4 +13,7 @@ class UserController extends Controller
     public function profile(){
         return view('user.edit_profile');
     }
+    public function password(){
+        return view('user.edit_password');
+    }
 }

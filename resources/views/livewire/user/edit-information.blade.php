@@ -154,7 +154,7 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" class="btn btn-accent">Guardar cambios</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">Guardar cambios</button>
                     </div>
                 </div>
             </div>
