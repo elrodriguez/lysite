@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="page-section">
-                    <h4>Privacidad del perfil</h4>
+                    <h4>{{ __('labels.Privacy of your profile') }}</h4>
                     <div class="list-group list-group-form">
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Tu foto</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Your Pic') }}</label>
                                 <div class="col-sm-9 media align-items-center">
                                     <a href="" class="media-left mr-16pt">
                                         @if($avatar_show)
@@ -28,7 +28,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Nombre de Usuario</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Nickname') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="username" type="text" class="form-control">
                                     @error('username') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -37,7 +37,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Acerca de ti</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.About You') }}</label>
                                 <div class="col-sm-9">
                                     <textarea wire:model="description" rows="3" class="form-control"></textarea>
                                 </div>
@@ -46,15 +46,15 @@
                         <div class="list-group-item">
                             <div class="custom-control custom-checkbox">
                                 <input wire:model="np" type="checkbox" class="custom-control-input" checked id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Muestra tu nombre real en tu perfil</label>
-                                <small class="form-text text-muted">Si no está marcada, se mostrará su nombre de perfil en lugar de su nombre completo.</small>
+                                <label class="custom-control-label" for="customCheck1">{{ __('labels.Show your real name on your profile') }}</label>
+                                <small class="form-text text-muted">{{ __('labels.If not checked, your Nickname will be displayed instead of your full name') }}.</small>
                             </div>
                         </div>
                         <div class="list-group-item">
                             <div class="custom-control custom-checkbox">
                                 <input wire:model="pp" type="checkbox" class="custom-control-input" checked id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2">Permitir que todos vean tu perfil</label>
-                                <small class="form-text text-muted">Si no está marcado, su perfil será privado y nadie, excepto usted, podrá verlo.</small>
+                                <label class="custom-control-label" for="customCheck2">{{ __('labels.Allow everyone to see your profile') }}</label>
+                                <small class="form-text text-muted">{{ __('labels.If it is not checked, your profile will be private and no one except you will be able to see it') }}.</small>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">Guardar cambios</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>

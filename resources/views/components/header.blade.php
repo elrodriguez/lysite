@@ -66,14 +66,14 @@
                                 <img width="32" height="32" class="rounded-circle" src="{{ url('assets/images/people/50/guy-3.jpg') }}" alt="student" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-header"><strong>Administrador</strong></div>
+                                <div class="dropdown-header"><strong>{{ __('labels.Administrator') }}</strong></div>
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                 <a class="dropdown-item" href="instructor-courses.html">Courses</a>
                                 <a class="dropdown-item" href="instructor-quizzes.html">Quizzes</a>
                                 <div class="dropdown-divider"></div>
-                                <div class="dropdown-header"><strong>Account</strong></div>
-                                <a class="dropdown-item" href="{{ route('user_edit_account') }}">Edit Account</a>
-                                <a class="dropdown-item" href="student-billing-history.html">Billing</a>
+                                <div class="dropdown-header"><strong>{{ __('labels.Account') }}</strong></div>
+                                <a class="dropdown-item" href="{{ route('user_edit_account') }}">{{ __('labels.Edit Account') }}</a>
+                                <a class="dropdown-item" href="student-billing-history.html">{{ __('labels.Billing') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>

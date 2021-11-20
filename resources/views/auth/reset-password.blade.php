@@ -5,12 +5,12 @@
                 <img src="assets/images/illustration/student/128/white.svg" class="mr-md-32pt mb-32pt mb-md-0"
                     alt="student">
                 <div class="flex mb-32pt mb-md-0">
-                    <h1 class="text-white mb-0">Recupera tu contraseña</h1>
-                    <p class="lead measure-lead text-white-50">Ingresa tu nueva Contraseña</p>
+                    <h1 class="text-white mb-0">{{ __('labels.Recover password') }}</h1>
+                    <p class="lead measure-lead text-white-50">{{ __('labels.Enter your new password') }}</p>
                 </div>
                 <a href="{{ route('register') }}" class="btn btn-outline-white flex-column">
-                    ¿No tienes una Cuenta todavía?
-                    <span class="btn__secondary-text">!Registrate Aquí!</span>
+                    {{ __('labels.Don\'t_ have_ an_account') }}?
+                    <span class="btn__secondary-text">{{ __('labels.Sign_up_Today') }}!</span>
                 </a>
             </div>
         </div>
@@ -30,23 +30,23 @@
                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                     <div class="form-group">
-                        
+
 
                         <x-input id="email" class="form-control" type="hidden" name="email"
                             :value="old('email', $request->email)" required  />
                     </div>
                     <div class="form-group">
-                        <label for="password">Contraseña:</label>
+                        <label for="password">{{ __('labels.Password') }}:</label>
                         <input id="password" type="password" class="form-control" name="password"
-                            placeholder="Ingrese Nueva Contraseña ..." autofocus>
+                            placeholder="{{ __('labels.Enter your new password') }} ..." autofocus>
                     </div>
                     <div class="form-group">
                         <label for="password">Confirme su Contraseña:</label>
                         <input id="password_confirmation" type="password" class="form-control"
-                            name="password_confirmation" placeholder="Confirme su nueva Contraseña ...">
+                            name="password_confirmation" placeholder="{{ __('labels.Confirm your new password') }} ...">
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-accent btn-lg">{{ __('Reset Password') }}</button>
+                        <button type="submit" class="btn btn-accent btn-lg">{{ __('labels.Reset Password') }}</button>
                     </div>
                 </form>
             </div>

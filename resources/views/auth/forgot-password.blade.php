@@ -1,4 +1,4 @@
- 
+
 
   <x-master>
     <x-slot name="jumbotron">
@@ -7,20 +7,20 @@
                 <img src="assets/images/illustration/student/128/white.svg" class="mr-md-32pt mb-32pt mb-md-0"
                     alt="student">
                 <div class="flex mb-32pt mb-md-0">
-                    <h1 class="text-white mb-0">Recupera tu contraseña</h1>
-                    <p class="lead measure-lead text-white-50">se te enviará un código de verificación</p>
+                    <h1 class="text-white mb-0">{{ __('labels.Recover password') }}</h1>
+                    <p class="lead measure-lead text-white-50">{{ __('labels.We will send you an email so you can reset your password') }}</p>
                 </div>
                 <a href="{{ route('register') }}" class="btn btn-outline-white flex-column">
-                    ¿No tienes una Cuenta todavía?
-                    <span class="btn__secondary-text">!Registrate Aquí!</span>
+                    {{ __('labels.Don\'t_ have_ an_account') }}?
+                    <span class="btn__secondary-text">{{ __('labels.Sign_up_Today') }}!</span>
                 </a>
             </div>
         </div>
 
         <div class="page-section bg-white">
             <div class="container page__container">
-            
-                
+
+
  <!-- Session Status -->
  <x-auth-session-status class="mb-4 text-center" :status="session('status')" />
 
@@ -29,14 +29,13 @@
  <form method="POST" action="{{ route('password.email') }}">
      @csrf
      <div class="form-group">
-         <label>Email:</label>
+         <label>{{ __('labels.email') }}:</label>
          <input id="email" type="text" class="form-control" name="email" :value="old('email')"
-             required autofocus placeholder="Your email address ...">
-         <small class="form-text text-muted">Le enviaremos un correo para que pueda resetear su
-             contraseña.</small>
+             required autofocus placeholder="{{ __('labels.forgot_your_password?') }} ...">
+         <small class="form-text text-muted">{{__('labels.We will send you an email so you can reset your password')}}.</small>
      </div>
 
-    
+
      <style>
          div.g-recaptcha {
              margin: 0 auto;
@@ -53,7 +52,7 @@
 
 
      <div class="text-center">
-         <button class="btn btn-accent btn-lg">{{ __('Email Password Reset Link') }}</button>
+         <button class="btn btn-accent btn-lg">{{ __('labels.Email Password Reset Link') }}</button>
      </div>
  </form>
 

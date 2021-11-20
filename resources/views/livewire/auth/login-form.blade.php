@@ -3,15 +3,15 @@
         <div class="container page__container">
             <form  class="col-md-5 p-0 mx-auto">
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input wire:model="email" id="email" type="text" class="form-control" placeholder="Tu correo electrónico ...">
+                    <label for="email">{{ __('labels.email') }}:</label>
+                    <input wire:model="email" id="email" type="text" class="form-control" placeholder="{{ __('labels.Your_email') }} ...">
                     @error('email') <span class="text-danger error">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input wire:model="password" wire:keydown.enter="login" id="password" type="password" class="form-control" placeholder="tu contraseña ...">
+                    <label for="password">{{ __('labels.Password') }}:</label>
+                    <input wire:model="password" wire:keydown.enter="login" id="password" type="password" class="form-control" placeholder="{{ __('labels.Your_password') }} ...">
                     @error('password') <span class="text-danger error">{{ $message }}</span>@enderror
-                    <p class="text-right"><a href="{{ route('password.request') }}" class="small">¿Olvidaste tu contraseña?</a></p>
+                    <p class="text-right"><a href="{{ route('password.request') }}" class="small">{{ __('labels.forgot_your_password?') }}</a></p>
                 </div>
                 @if (session()->has('message'))
                 <div class="alert alert-danger" role="alert">
@@ -19,7 +19,7 @@
                 </div>
                 @endif
                 <div class="text-center">
-                    <button wire:click="login" type="button" class="btn btn-lg btn-accent">Iniciar sesión</button>
+                    <button wire:click="login" type="button" class="btn btn-lg btn-accent">{{ __('labels.login') }}</button>
                 </div>
             </form>
         </div>
