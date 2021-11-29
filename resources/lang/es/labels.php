@@ -61,5 +61,7 @@ return [
     'Show your real name on your profile'=> 'Muestra tu nombre real en tu perfil',
     'If not checked, your Nickname will be displayed instead of your full name' => 'Si no está marcada, se mostrará su nombre de usuario en lugar de su nombre completo',
     'Allow everyone to see your profile' => 'Permite que todos puedan ver tu perfil',
-    'If it is not checked, your profile will be private and no one except you will be able to see it' => 'Si no está marcado solu tu podras ver el perfil'
+    'If it is not checked, your profile will be private and no one except you will be able to see it' => 'Si no está marcado solu tu podras ver el perfil',
+    'Courses' => 'Cursos',
+    'Configs' => 'Configuraciones'
 ];

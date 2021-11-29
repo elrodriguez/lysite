@@ -61,5 +61,7 @@ return [
     'Show your real name on your profile'=> 'Show your real name on your profile',
     'If not checked, your Nickname will be displayed instead of your full name' => 'If not checked, your Nickname will be displayed instead of your full name',
     'Allow everyone to see your profile' => 'Allow everyone to see your profile',
-    'If it is not checked, your profile will be private and no one except you will be able to see it' => 'If it is not checked, your profile will be private and no one except you will be able to see it'
+    'If it is not checked, your profile will be private and no one except you will be able to see it' => 'If it is not checked, your profile will be private and no one except you will be able to see it',
+    'Courses' => 'Cursos',
+    'Configs' => 'Configuraciones'
 ];
