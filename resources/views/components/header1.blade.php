@@ -1,4 +1,5 @@
 <x-master>
+
     <x-slot name="jumbotron">
 
     </x-slot>

@@ -3,14 +3,14 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="page-section">
-                    <h4>Información básica</h4>
+                    <h4>{{ __('labels.Basic information') }}</h4>
                     <div class="list-group list-group-form">
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Tipo de documento</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Document type') }}</label>
                                 <div class="col-sm-4">
                                     <select wire:model="identity_document_type_id" class="form-control">
-                                        <option value="">Seleccionar</option>
+                                        <option value="">{{ __('labels.Select') }}</option>
                                         @foreach($identity_document_types as $identity_document_type)
                                             <option value="{{ $identity_document_type->id }}">{{ $identity_document_type->description }}</option>
                                         @endforeach
@@ -21,7 +21,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Número</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Number') }}</label>
                                 <div class="col-sm-4">
                                     <input wire:model="number" type="text" class="form-control">
                                     @error('number') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -30,7 +30,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Nombres</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Name') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="names" type="text" class="form-control">
                                     @error('names') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -39,7 +39,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Apellido Paterno</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Middle Name') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="last_name_father" type="text" class="form-control">
                                     @error('last_name_father') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -48,7 +48,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Apellido Materno</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Last Name') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="last_name_mother" type="text" class="form-control">
                                     @error('last_name_mother') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -57,7 +57,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Región</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Region') }}</label>
                                 <div class="col-sm-4">
                                     <select wire:change="getProvinces" wire:model="department_id" class="form-control">
                                         <option value="">Seleccionar</option>
@@ -71,10 +71,10 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Province</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Province') }}</label>
                                 <div class="col-sm-4">
                                     <select wire:change="getDistricts" wire:model="province_id" class="form-control">
-                                        <option value="">Seleccionar</option>
+                                        <option value="">{{ __('labels.Select') }}</option>
                                         @foreach($provinces as $province)
                                             <option value="{{ $province->id }}">{{ $province->description }}</option>
                                         @endforeach
@@ -85,10 +85,10 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Distrito</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.District') }}</label>
                                 <div class="col-sm-4">
                                     <select wire:model="district_id" class="form-control">
-                                        <option value="">Seleccionar</option>
+                                        <option value="">{{ __('labels.Select') }}</option>
                                         @foreach($districts as $district)
                                             <option value="{{ $district->id }}">{{ $district->description }}</option>
                                         @endforeach
@@ -99,7 +99,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Dirección</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Address') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="address" type="text" class="form-control">
                                     @error('address') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -108,7 +108,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Teléfono móvil</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Mobile Number') }}</label>
                                 <div class="col-sm-4">
                                     <input wire:model="mobile_phone" type="text" class="form-control">
                                     @error('mobile_phone') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -117,7 +117,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3" for="birth_date">Fecha de nacimiento</label>
+                                <label class="col-form-label col-sm-3" for="birth_date">{{ __('labels.Date of Birth') }}</label>
                                 <div class="col-sm-4">
                                     <input wire:model="birth_date" onchange="this.dispatchEvent(new InputEvent('input'))" id="birth_date" type="text" class="form-control">
                                     @error('birth_date') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -126,12 +126,12 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Género</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Gender') }}</label>
                                 <div class="col-sm-4">
                                     <select wire:model="sex" class="form-control">
-                                        <option value="">Seleccionar</option>
-                                        <option value="1">Hombre</option>
-                                        <option value="0">Mujer</option>
+                                        <option value="">{{ __('labels.Select') }}</option>
+                                        <option value="1">{{ __('labels.Male') }}</option>
+                                        <option value="0">{{ __('labels.Female') }}</option>
                                     </select>
                                     @error('sex') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                                 </div>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Correo electrónico</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Email') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="email" type="email" class="form-control" disabled>
                                     @error('last_name_mother') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -154,7 +154,7 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">Guardar cambios</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>

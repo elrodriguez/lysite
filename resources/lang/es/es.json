@@ -706,6 +706,7 @@
     "Your current payment method is :paypal.": "Su método de pago actual es :paypal.",
     "Your current payment method is a credit card ending in :lastFour that expires on :expiration.": "Su método de pago actual es una tarjeta de crédito que termina en :lastFour que vence el :expiration.",
     "Your registered VAT Number is :vatNumber.": "Su número VAT registrado es :vatNumber.",
+    "Your email address ...": "Tu email ...",
     "Zambia": "Zambia",
     "Zimbabwe": "Zimbabwe",
     "Zip \/ Postal Code": "Zip \/ Código postal",

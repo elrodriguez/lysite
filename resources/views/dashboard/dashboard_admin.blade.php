@@ -7,11 +7,11 @@
                     <h2 class="text-white mb-0">{{ auth()->user()->name }}</h2>
                     <p class="lead text-white-50 d-flex align-items-center">{{ auth()->user()->email }}</p>
                 </div>
-                <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">Editar cuenta</a>
+                <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">{{ __('labels.Edit Account') }}</a>
             </div>
         </div>
     </x-slot>
-    
+
     <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
         <div class="container page__container">
 
@@ -61,7 +61,7 @@
     </div>
     <x-slot name="navigation">
         <x-navigation></x-navigation>
-    </x-slot> 
+    </x-slot>
     @section('script')
     <!-- Global Settings -->
     <script src="{{ url('assets/js/settings.js') }}"></script>

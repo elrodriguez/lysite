@@ -32,27 +32,27 @@
                     <div class="col-md-12 mb-24pt mb-md-0">
                         <form wire:submit.prevent="save">
                             <div class="form-group">
-                                <label for="name">Tu nombre y apellido:</label>
+                                <label for="name">{{ __('labels.Your full name') }}:</label>
                                 <input wire:model="full_name" id="name" type="text" class="form-control"
-                                    placeholder="Tu nombre y apellido ...">
+                                    placeholder="{{ __('labels.Your full name') }} ...">
                             </div>
                             <div class="form-group">
-                                <label for="email">Tu correo electrónico:</label>
+                                <label for="email">{{ __('labels.Your_email') }}:</label>
                                 <input wire:model="email" id="email" type="email" class="form-control"
-                                    placeholder="Tu correo electrónicos ...">
+                                    placeholder="{{ __('labels.Your_email') }} ...">
                                 @error('email') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-24pt">
-                                <label for="password">Contraseña:</label>
+                                <label for="password">{{ __('labels.Password') }}:</label>
                                 <input wire:model="password" id="password" type="password" class="form-control"
-                                    placeholder="Tu contraseña ...">
+                                    placeholder="{{ __('labels.Your Password') }} ...">
                                 @error('password') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
 
 
                             <button class="btn btn-lg btn-accent">
-                                Crear una cuenta</button>
+                                {{ __('labels.signup') }}</button>
                         </form>
                     </div>
 

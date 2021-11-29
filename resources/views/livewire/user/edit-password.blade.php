@@ -6,12 +6,12 @@
                     <h4>{{ __('labels.change_password') }}</h4>
                     <div class="alert alert-light border-1 border-left-3 border-left-accent d-flex mb-24pt" role="alert">
                         <i class="material-icons text-accent mr-3">check_circle</i>
-                        <div class="text-body">Confirme que es usted. escriba su contraseña actual.</div>
+                        <div class="text-body">{{ __('labels.Confirm that it is you and enter your current password') }}.</div>
                     </div>
                     <div class="list-group list-group-form">
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Contraseña actual</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Current Password') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="password_old" type="password" class="form-control">
                                     @error('password_old') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -20,7 +20,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Nueva contraseña</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.New Password') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="password_new" type="password" class="form-control">
                                     @error('password_new') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -29,7 +29,7 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Confirmar Contraseña</label>
+                                <label class="col-form-label col-sm-3">{{ __('labels.Confirm Password') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="password_confirm" type="password" class="form-control">
                                     @error('password_confirm') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -43,7 +43,7 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">Guardar cambios</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>
