@@ -9,8 +9,11 @@ class AcaContentType extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
+    protected $fillable = [
+        'description',
+        'name'
+    ];
+
     protected static function newFactory()
     {
         return \Modules\Academic\Database\factories\AcaContentTypeFactory::new();

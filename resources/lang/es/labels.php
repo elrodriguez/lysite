@@ -63,5 +63,10 @@ return [
     'Allow everyone to see your profile' => 'Permite que todos puedan ver tu perfil',
     'If it is not checked, your profile will be private and no one except you will be able to see it' => 'Si no está marcado solu tu podras ver el perfil',
     'Courses' => 'Cursos',
-    'Configs' => 'Configuraciones'
+    'Configs' => 'Configuraciones',
+    'Status' => 'Estado',
+    'Type' => 'Tipo',
+    'Types' => 'Tipos',
+    'Description' => 'Descripción',
+    'Content Types' => 'Tipos de Contenido'
 ];

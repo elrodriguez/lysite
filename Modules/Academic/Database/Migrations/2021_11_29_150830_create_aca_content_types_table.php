@@ -16,6 +16,7 @@ class CreateAcaContentTypesTable extends Migration
         Schema::create('aca_content_types', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -24,7 +25,7 @@ class CreateAcaContentTypesTable extends Migration
      * Reverse the migrations.
      *
      * @return void
-     */
+     **/
     public function down()
     {
         Schema::dropIfExists('aca_content_types');
