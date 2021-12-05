@@ -29,6 +29,9 @@
         <li class="nav-item dropdown {{ $path[0] == 'academic' ? 'active' : '' }}">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Academico</a>
             <div class="dropdown-menu">
+                @can('academico_tipo_contenido')
+                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Content Types') }}</a>
+                @endcan
                 @can('academico_cursos')
                 <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'courses' ? 'active' : '' }}" href="{{ route('academic_courses') }}">Cursos</a>
                 @endcan
