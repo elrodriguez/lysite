@@ -12,7 +12,7 @@
 */
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(function() {
-    Route::group(['prefix' => 'modules'], function() {
+    Route::group(['prefix' => 'courses'], function() {
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('list', 'CoursesController@index')->name('academic_courses');
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos_nuevo'])->get('create', 'CoursesController@create')->name('academic_courses_create');
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos_editar'])->get('edit/{id}', 'CoursesController@edit')->name('academic_courses_editar');
@@ -23,4 +23,5 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos_editar'])->get('edit/{id}', 'ContentTypesController@edit')->name('academic_content_types_editar');
     });
 });
+
 

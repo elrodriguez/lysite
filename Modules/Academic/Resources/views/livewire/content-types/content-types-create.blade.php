@@ -2,7 +2,7 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('academic_content_types') }}">{{ __('labels.Courses')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('academic_content_types') }}">{{ __('labels.Content Types') }}</a></li>
             <li class="breadcrumb-item active">{{ __('labels.New') }}</li>
         </ol>
     </div>

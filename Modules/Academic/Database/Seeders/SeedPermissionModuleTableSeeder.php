@@ -40,6 +40,9 @@ class SeedPermissionModuleTableSeeder extends Seeder
         array_push($permissions,Permission::create(['name' => 'academico_tipo_contenido_nuevo']));
         array_push($permissions,Permission::create(['name' => 'academico_tipo_contenido_editar']));
         array_push($permissions,Permission::create(['name' => 'academico_tipo_contenido_eliminar']));
+        array_push($permissions,Permission::create(['name' => 'academico_secciones']));
+        array_push($permissions,Permission::create(['name' => 'academico_secciones_nuevo']));
+        array_push($permissions,Permission::create(['name' => 'academico_secciones_editar']));
         
         $role = Role::find(1);
         foreach($permissions as $permission){
