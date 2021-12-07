@@ -2,7 +2,9 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item active">courses</li>
+            <li class="breadcrumb-item"><a href="{{ route('academic_courses') }}">{{ __('academic::labels.courses') }}</a></li>
+            <li class="breadcrumb-item">{{ $course->name }}</li>
+            <li class="breadcrumb-item active">{{ __('academic::labels.sections') }}</li>
         </ol>
     </div>
     <div class="container page__container">
@@ -13,49 +15,41 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Módulos del sistema</p>
                         @can('configuraciones_modulos_nuevo')
-                        <a href="{{ route('academic_courses_create') }}" type="button" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('academic_sections_create',$this->course_id) }}" type="button" class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
                         <!-- Wrapper -->
                         <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
-                            <!-- Search -->
-                            <div class="search-form search-form--light mb-3">
-                                <input wire:keydown.enter="getSearch" wire:model.defer="search" type="text" class="form-control search" placeholder="Search">
-                                <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
-                            </div>
                             <!-- Table -->
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
-                                        <th>Nombre</th>
-                                        <th>Descripcion</th>
+                                        <th>Titulo</th>
+                                        <th>Descripción</th>
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach($courses as $key => $course)
+                                    @foreach($sections as $key => $section)
                                     <tr>
                                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group">
-                                                @can('academico_cursos_editar')
-                                                <a href="{{ route('academic_courses_editar',$course->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                                @can('academico_secciones_editar')
+                                                <a href="{{ route('academic_sections_editar',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
-                                                @can('academico_secciones')
-                                                <a href="{{ route('academic_sections',$course->id) }}" type="button" class="btn btn-success btn-sm" title="Secciones"><i class="fa fa-newspaper"></i></a>
-                                                @endcan
-                                                @can('academico_cursos_eliminar')
-                                                <button onclick="deletes({{ $course->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
+                                                @can('academico_secciones_eliminar')
+                                                <button onclick="deletes({{ $section->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
                                         </td>
-                                        <td class="name align-middle">{{ $course->name }}</td>
-                                        <td class="name align-middle">{{ $course->description }}</td>
+                                        <td class="name align-middle">{{ $section->title }}</td>
+                                        <td class="name align-middle">{{ $section->description }}</td>
                                         <td class="align-middle">
-                                            @if($course->status)
+                                            @if($section->status)
                                             <span class="badge badge-success">Activo</span>
                                             @else
                                             <span class="badge badge-danger">Inactivo</span>
@@ -68,7 +62,7 @@
                                     <tr>
                                         <td class="text-end" colspan="3">
                                             <div class="d-flex flex-row-reverse">
-                                                {{ $courses->links() }}
+                                                {{ $sections->links() }}
                                             </div>
                                         </td>
                                     </tr>
@@ -94,7 +88,7 @@
                 } 
             });
         }
-        window.addEventListener('aca-course-delete', event => {
+        window.addEventListener('aca-section-delete', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

@@ -9,7 +9,14 @@ class AcaSection extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'course_id',
+        'title',
+        'description',
+        'status',
+        'created_by',
+        'updated_by',
+    ];
     
     protected static function newFactory()
     {
