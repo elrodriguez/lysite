@@ -2,7 +2,12 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('labels.Content Types') }}</li>
+            <li class="breadcrumb-item">{{ __('labels.Courses') }}</li>
+            <li class="breadcrumb-item">{{ $course->name }}</li>
+            <li class="breadcrumb-item active">{{ __('academic::labels.sections') }}</li>
+            <li class="breadcrumb-item">{{ $section->title }}</li>
+            <li class="breadcrumb-item active">{{ __('labels.Contents') }}</li>
+
         </ol>
     </div>
     <div class="container page__container">
@@ -11,9 +16,9 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
-                        <p class="text-70">{{ __('labels.Content Types') }}</p>
+                        <p class="text-70">Módulos del sistema</p>
                         @can('configuraciones_modulos_nuevo')
-                        <a href="{{ route('academic_content_types_create') }}" type="button" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('academico_contenido_create',$this->section_id) }}" type="button" class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -31,25 +36,25 @@
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
                                         <th>{{ __('labels.Types') }}</th>
-                                        <th>{{ __('labels.Description') }}</th>
+                                        <th>{{ __('labels.Content') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach($contentTypes as $key => $contentType)
+                                    @foreach($contents as $key => $content)
                                     <tr>
                                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group">
-                                                @can('academico_cursos_editar')
-                                                <a href="{{ route('academic_content_types_editar',$contentType->id) }}" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i></a>
+                                                @can('academico_contenido_editar')
+                                                <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
-                                                @can('academico_cursos_eliminar')
-                                                <button onclick="deletes({{ $contentType->id }})" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
+                                                @can('academico_contenido_eliminar')
+                                                <button onclick="deletes({{ $content->id }})" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
                                         </td>
-                                        <td class="name align-middle">{{ $contentType->name }}</td>
-                                        <td class="name align-middle">{{ $contentType->description }}</td>
+                                        <td class="name align-middle">{{ $content->content_type_id }}</td>
+                                        <td class="name align-middle">{{ $content->content_url }}</td>
 
                                     </tr>
                                     @endforeach
@@ -58,7 +63,7 @@
                                     <tr>
                                         <td class="text-end" colspan="3">
                                             <div class="d-flex flex-row-reverse">
-                                                {{ $contentTypes->links() }}
+                                                {{ $contents->links() }}
                                             </div>
                                         </td>
                                     </tr>
@@ -84,7 +89,7 @@
                 }
             });
         }
-        window.addEventListener('aca-contentType-delete', event => {
+        window.addEventListener('aca-content-delete', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

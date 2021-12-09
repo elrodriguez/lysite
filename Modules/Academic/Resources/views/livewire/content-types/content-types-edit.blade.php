@@ -35,7 +35,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('aca-content-types-update', event => {
+        window.addEventListener('aca-content-update', event => {
             cuteAlert({
                 type: "success",
                 title: event.detail.tit,

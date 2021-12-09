@@ -68,5 +68,12 @@ return [
     'Type' => 'Tipo',
     'Types' => 'Tipos',
     'Description' => 'Descripción',
-    'Content Types' => 'Tipos de Contenido'
+    'Content Types' => 'Tipos de Contenido',
+    'Content Type' => 'Tipo de Contenido',
+    'Content' => 'Contenido',
+    'Contents' => 'Contenidos',
+    'enter the video link here (youtube, vimeo, etc)' => 'ingresa el link de video aquí (youtube, vimeo, etc)',
+    'Photo Preview' => 'Vista Previa de Imagen',
+    'Path' => 'Ruta',
+    'Uploading' => 'Subiendo'
 ];

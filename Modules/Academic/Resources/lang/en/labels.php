@@ -4,5 +4,6 @@ return [
     'courses'       => 'Courses',
     'new'           => 'Nuevo',
     'title'         => 'Titulo',
-    'edit'          => 'Edit'
+    'edit'          => 'Edit',
+    'contents' => 'Contents'
 ];

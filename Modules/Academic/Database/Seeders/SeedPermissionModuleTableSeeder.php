@@ -30,7 +30,7 @@ class SeedPermissionModuleTableSeeder extends Seeder
         ]);
 
         $permissions = [];
-        
+
         array_push($permissions,Permission::create(['name' => 'academico']));
         array_push($permissions,Permission::create(['name' => 'academico_cursos']));
         array_push($permissions,Permission::create(['name' => 'academico_cursos_nuevo']));
@@ -44,7 +44,11 @@ class SeedPermissionModuleTableSeeder extends Seeder
         array_push($permissions,Permission::create(['name' => 'academico_secciones_nuevo']));
         array_push($permissions,Permission::create(['name' => 'academico_secciones_editar']));
         array_push($permissions,Permission::create(['name' => 'academico_secciones_eliminar']));
-        
+        array_push($permissions,Permission::create(['name' => 'academico_contenido']));
+        array_push($permissions,Permission::create(['name' => 'academico_contenido_nuevo']));
+        array_push($permissions,Permission::create(['name' => 'academico_contenido_editar']));
+        array_push($permissions,Permission::create(['name' => 'academico_contenido_eliminar']));
+
         $role = Role::find(1);
         foreach($permissions as $permission){
             SetModulePermission::create([

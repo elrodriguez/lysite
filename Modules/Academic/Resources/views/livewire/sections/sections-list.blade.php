@@ -5,6 +5,7 @@
             <li class="breadcrumb-item"><a href="{{ route('academic_courses') }}">{{ __('academic::labels.courses') }}</a></li>
             <li class="breadcrumb-item">{{ $course->name }}</li>
             <li class="breadcrumb-item active">{{ __('academic::labels.sections') }}</li>
+
         </ol>
     </div>
     <div class="container page__container">
@@ -40,6 +41,9 @@
                                             <div class="btn-group">
                                                 @can('academico_secciones_editar')
                                                 <a href="{{ route('academic_sections_editar',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                                @endcan
+                                                @can('academico_contenido')
+                                                <a href="{{ route('academico_contenido',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Ver/Editar Contenido"><i class="fa fa-list-alt"></i></a>
                                                 @endcan
                                                 @can('academico_secciones_eliminar')
                                                 <button onclick="deletes({{ $section->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
@@ -85,7 +89,7 @@
             }).then((e)=>{
                 if ( e == ("confirm")){
                     @this.destroy(id)
-                } 
+                }
             });
         }
         window.addEventListener('aca-section-delete', event => {

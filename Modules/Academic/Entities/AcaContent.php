@@ -9,8 +9,15 @@ class AcaContent extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
+    protected $fillable = [
+            'section_id',
+            'content_type_id',
+            'content_url',
+            'status',
+            'created_by',
+            'updated_by'
+    ];
+
     protected static function newFactory()
     {
         return \Modules\Academic\Database\factories\AcaContentFactory::new();
