@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateAcaContentTypesTable extends Migration
 {
@@ -19,6 +20,13 @@ class CreateAcaContentTypesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        DB::table('aca_content_types')->insert([
+            ['description' => 'Vincula a una dirección externa o interna','name' => 'Enlaces'],
+            ['description' => 'Subir documentos en pdf o word','name' => 'documento'],
+            ['description' => 'Subir imagenes jpg, png','name' => 'Imagen'],
+            ['description' => 'Escribir texto','name' => 'Texto']
+        ]);
     }
 
     /**

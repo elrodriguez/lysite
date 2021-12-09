@@ -25,4 +25,19 @@ class SectionsList extends Component
     public function getSections(){
         return AcaSection::where('course_id', $this->course_id)->paginate(10);
     }
+
+    public function destroy($id){
+        try {
+            AcaSection::find($id)->delete();
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se eliminó correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar porque cuenta con registros asociados';
+        }
+       
+        $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
 }
