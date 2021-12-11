@@ -1,9 +1,10 @@
 <?php
 return [
-    'sections' => 'Secciones',
+    'sections'  => 'Secciones',
     'courses'   => 'Cursos',
     'new'       => 'Nuevo',
-    'title'       => 'Titulo',
-    'edit'          => 'Editar',
-    'contents' => 'Contenidos'
+    'title'     => 'Titulo',
+    'edit'      => 'Editar',
+    'contents'  => 'Contenidos',
+    'students'  => 'Alumnos'
 ];

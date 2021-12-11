@@ -23,9 +23,10 @@ class CreateAcaContentTypesTable extends Migration
 
         DB::table('aca_content_types')->insert([
             ['description' => 'Vincula a una dirección externa o interna','name' => 'Enlaces'],
+            ['description' => 'Escribir texto','name' => 'Texto'],
             ['description' => 'Subir documentos en pdf o word','name' => 'documento'],
-            ['description' => 'Subir imagenes jpg, png','name' => 'Imagen'],
-            ['description' => 'Escribir texto','name' => 'Texto']
+            ['description' => 'Subir imagenes jpg, png','name' => 'Imagen']
+            
         ]);
     }
 

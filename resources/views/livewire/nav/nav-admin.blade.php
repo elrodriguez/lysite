@@ -35,6 +35,9 @@
                 @can('academico_cursos')
                 <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'courses' ? 'active' : '' }}" href="{{ route('academic_courses') }}">Cursos</a>
                 @endcan
+                @can('academico_alumnos')
+                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'students' ? 'active' : '' }}" href="{{ route('academic_students') }}">Alumnos</a>
+                @endcan
             </div>
         </li>
         @endcan

@@ -3,8 +3,8 @@
         <div class="bg-gradient-primary">
             <div class="py-32pt">
                 <div class="container">
-                    <h1 class="text-white mb-8pt">{{ __('labels.Courses') }}</h1>
-                    <span class="text-white">{{ __('labels.Edit') }}</span>
+                    <h1 class="text-white mb-8pt">{{ __('academic::labels.courses') }}</h1>
+                    <span class="text-white">{{ __('academic::labels.edit') }}</span>
                 </div>
             </div>
         </div>

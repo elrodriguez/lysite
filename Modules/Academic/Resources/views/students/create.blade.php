@@ -1,9 +1,16 @@
 <x-master>
+    @section('styles')
+    <!-- Flatpickr -->
+    <link type="text/css" href="{{ url('assets/css/flatpickr.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/flatpickr.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
+    @endsection
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary">
             <div class="py-32pt">
                 <div class="container">
-                    <h1 class="text-white mb-8pt">{{ __('academic::labels.courses') }}</h1>
+                    <h1 class="text-white mb-8pt">{{ __('academic::labels.students') }}</h1>
                     <span class="text-white">{{ __('academic::labels.new') }}</span>
                 </div>
             </div>
@@ -18,8 +25,13 @@
             @livewire('nav.nav-admin')
         </div>
     </div>
-    @livewire('academic::courses.courses-create')
+    @livewire('academic::students.students-create')
     <x-slot name="navigation">
         <x-navigation></x-navigation>
-    </x-slot> 
+    </x-slot>
+    @section('script')
+    <!-- Flatpickr -->
+    <script src="{{ url('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ url('assets/js/flatpickr.js') }}"></script>
+    @endsection
 </x-master>

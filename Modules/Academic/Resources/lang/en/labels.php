@@ -5,5 +5,6 @@ return [
     'new'           => 'Nuevo',
     'title'         => 'Titulo',
     'edit'          => 'Edit',
-    'contents' => 'Contents'
+    'contents'      => 'Contents',
+    'students'      => 'Alumnos'
 ];
