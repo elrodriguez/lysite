@@ -18,6 +18,7 @@ class CreateAcaContentsTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->unsignedBigInteger('content_type_id');
             $table->text('content_url');
+            $table->text('original_name')->nullable();
             $table->boolean('status')->default(true);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

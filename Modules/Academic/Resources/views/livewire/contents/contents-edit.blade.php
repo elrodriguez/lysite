@@ -19,9 +19,7 @@
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
                         <form wire:submit.prevent="save" class="flex">
-                            <img class="img-fluid rounded float-right"
-                                alt="Borrar ESTO" src="{{'http://127.0.0.1:8000/'.$content_url}}">
-                            <a href="{{'http://127.0.0.1:8000/'.$content_url }}">enlace</a>
+
                             <div class="form-group">
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
                                     *</label>
@@ -57,7 +55,7 @@
 
                             @case(3)
                             <div class="form-group">
-                                {{ __('labels.Path') }}: PENDIENTE
+                                {{ __('labels.Uploaded File') }}: {{ $content->original_name }}
                                 <input type="file" wire:model="content_url" id="content_url"
                                     accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
                                 @error('content_url') <span class="error">{{ $message }}</span> @enderror
@@ -67,13 +65,16 @@
 
                             @case(4)
                             <div class="form-group">
-                                @if ($content_url && $its_image==true)
+                                @if ($content_url && $its_image==true &&($this->content_url_last != $this->content_url))
 
                                 {{ __('labels.Photo Preview') }}:
 
                                 <img class="img-fluid rounded float-right" alt="Responsive image"
                                     src="{{ $content_url->temporaryUrl() }}">
+                                @else
 
+                                <img class="img-fluid rounded float-right" alt="{{ $content->original_name }}::{{ __('labels.Image not available') }}"
+                                    src="{{ env('APP_URL') }}/{{ $content_url }}">
                                 @endif
                                 <input type="file" wire:model="content_url" id="content_url"
                                     accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
@@ -99,7 +100,7 @@
                             </div>
 
 
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save"
+                            <button type="submit" wire:loading.attr="disabled" wire:target="save, content_url"
                                 class="btn btn-primary">Guardar</button>
 
 
@@ -110,7 +111,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('aca-content-create', event => {
+        window.addEventListener('aca-content-update', event => {
             cuteAlert({
                 type: "success",
                 title: event.detail.tit,

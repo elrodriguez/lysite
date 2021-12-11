@@ -22,6 +22,7 @@ class ContentsEdit extends Component
     public $status;
     public $content_type_id_last;
     public $its_image=false;
+    public $original_name;
 
     //entidades
     public $section;
@@ -32,6 +33,7 @@ class ContentsEdit extends Component
         $this->section = AcaSection::find($section_id);
         $this->content = AcaContent::find($content_id);
         $this->content_types = AcaContentType::all();
+        $this->original_name =$this->content->original_name;
         $this->content_type_id = $this->content->content_type_id;
         $this->course = AcaCourse::find($this->section->course_id);
         $this->content_url = $this->content->content_url;
@@ -83,20 +85,27 @@ class ContentsEdit extends Component
 
 
     public function save(){
-
-        $this->validate();
-        if ($this->content_type_id == 3 || $this->content_type_id == 4) {
-            $this->content_url = $this->content_url->store('public/uploads/academic/contents');    // <----------------------Solo para archivos e imagenes-------------------------------------------
-        }
         $this->its_image=false;
+        $this->validate();
+
+        if ($this->content_type_id == 3 || $this->content_type_id == 4) {
+            if($this->content_url_last != $this->content_url){
+                $this->original_name = $this->content_url->getClientOriginalName();
+                $this->content_url = 'storage/'.substr($this->content_url->store('public/uploads/academic/contents'),7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
+                //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
+                //$this->content_url = $this->content_url->store('contents');
+            }
+        }
+
         $this->content->update([
             'content_type_id' => $this->content_type_id,
             'content_url' => $this->content_url,
+            'original_name' => $this->original_name,
             'status' => $this->status,
             'updated_by' => Auth::id(),
         ]);
 
-        $this->content_url=null;
+
 
         $this->dispatchBrowserEvent('aca-content-update', ['tit' => 'Enhorabuena','msg' => 'Se Actualizo correctamente']);
     }

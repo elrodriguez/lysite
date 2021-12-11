@@ -75,5 +75,8 @@ return [
     'enter the video link here (youtube, vimeo, etc)' => 'ingresa el link de video aquí (youtube, vimeo, etc)',
     'Photo Preview' => 'Vista Previa de Imagen',
     'Path' => 'Ruta',
-    'Uploading' => 'Subiendo'
+    'Uploading' => 'Subiendo',
+    'Image not available' => 'Imagen no disponible',
+    'File' => 'Archivo',
+    'Uploaded File' => 'Archivo Subido'
 ];

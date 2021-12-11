@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Lang;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Academic\Entities\AcaContent;
+use Modules\Academic\Entities\AcaContentType;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
 use PhpParser\Node\Stmt\Label;
@@ -43,7 +44,9 @@ class ContentsList extends Component
             }
 
     public function getSections(){
-        return AcaContent::where('section_id', $this->section_id)->paginate(10);
+        //return AcaContent::where('section_id', $this->section_id)->paginate(10);
+        $content_Types = AcaContent::where('section_id', $this->section_id);
+        return $content_Types->paginate(10);
     }
     public function getData(){
         return AcaContent::where('content_url','like','%'.$this->search.'%')
@@ -67,5 +70,9 @@ class ContentsList extends Component
         $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 
+    public function content_type_name($id_type){
+        $content_type = AcaContentType::find($id_type);
+        return $content_type->name;
+    }
 
 }
