@@ -13,6 +13,7 @@ class AcaContent extends Model
             'section_id',
             'content_type_id',
             'content_url',
+            'original_name',
             'status',
             'created_by',
             'updated_by'

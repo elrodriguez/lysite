@@ -53,8 +53,12 @@
                                                 @endcan
                                             </div>
                                         </td>
-                                        <td class="name align-middle">{{ $content->content_type_id }}</td>
+                                        <td class="name align-middle">{{  $this->content_type_name($content->content_type_id) }}</td>
+                                        @if ($content->content_type_id > 2)
+                                        <td class="name align-middle">{{ $content->original_name }}</td>
+                                        @else
                                         <td class="name align-middle">{{ $content->content_url }}</td>
+                                        @endif
 
                                     </tr>
                                     @endforeach

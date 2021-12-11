@@ -18,7 +18,7 @@
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <form wire:submit.prevent="save" class="flex">
+                        <form enctype="multipart/form-data" wire:submit.prevent="save" class="flex">
 
                             <div class="form-group">
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}

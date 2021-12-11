@@ -23,6 +23,7 @@ class ContentsCreate extends Component
     public $content_url;
     public $status;
     public $created_by;
+    public $original_name;
 
     public function render()
     {
@@ -77,25 +78,30 @@ class ContentsCreate extends Component
 
         $this->validate();
         if ($this->content_type_id == 3 || $this->content_type_id == 4) {
-            $this->content_url = $this->content_url->store('public/uploads/academic/contents');    // <----------------------Solo para archivos e imagenes-------------------------------------------
+            $this->original_name = $this->content_url->getClientOriginalName();
+            $this->content_url = 'storage/'.substr($this->content_url->store('public/uploads/academic/contents'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
+
+            //$this->content_url = $this->content_url->store('contents');
         }
 
 
         AcaContent::create([
             'section_id' => $this->section_id,
             'content_type_id' => $this->content_type_id,
-            'content_url' => $this->content_url,
+            'content_url' => $this->content_url, //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
+            'original_name' => $this->original_name,
             'status' => true,
             'created_by' => Auth::id()
         ]);
 
-        $this->section_id = null;
         $this->content_type_id = null;
         $this->content_url = null;
-        $this->status = null;
         $this->created_by = null;
 
         $this->dispatchBrowserEvent('aca-content-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
+        redirect()->route('academico_contenido', [$this->section->course_id, $this->section->id])->with('message', 'Volverás a la Lista de Contenidos');
+
+
     }
 
     public function updatedPhoto()
