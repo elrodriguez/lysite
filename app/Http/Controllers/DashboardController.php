@@ -14,7 +14,7 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasrole('Student')){
             return view('dashboard.dashboard_student');
         }elseif(Auth::user()->hasrole('Instructor')){
-           dd('falta');
+            return view('dashboard.dashboard_instructor');
         }
     }
 }

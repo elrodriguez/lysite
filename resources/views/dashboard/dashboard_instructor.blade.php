@@ -7,11 +7,11 @@
                     <h2 class="text-white mb-0">{{ auth()->user()->name }}</h2>
                     <p class="lead text-white-50 d-flex align-items-center">{{ auth()->user()->email }}</p>
                 </div>
-                <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">Editar cuenta</a>
+                <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">{{ __('labels.Edit Account') }}</a>
             </div>
         </div>
     </x-slot>
-    
+
     <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
         <div class="container page__container">
 
@@ -19,41 +19,17 @@
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <span class="material-icons">people_outline</span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbar-submenu2">
-                <div class="navbar-collapse__content pb-16pt pb-sm-0">
-                    <ul class="nav navbar-nav">
-
-                        <li class="nav-item active">
-                            <a href="student-dashboard.html" class="nav-link">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="student-my-courses.html" class="nav-link">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="student-discussions.html" class="nav-link">Discussions</a>
-                        </li>
-
-                    </ul>
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="student-profile.html" class="nav-link">Profile</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @livewire('nav.nav-instructor')
         </div>
     </div>
-    <div class="container page__container">
-        <div class="page-section">
-            @livewire('dashboard.dashboard-student')
-            @livewire('course.courses-student')
-            @livewire('forum.forum-student')
+    <div class="py-24pt bg-white border-bottom-2">
+        <div class="container page__container">
+            @livewire('dashboard.dashboard-instructor-quantities')
         </div>
     </div>
     <x-slot name="navigation">
         <x-navigation></x-navigation>
-    </x-slot> 
+    </x-slot>
     @section('script')
     <!-- Global Settings -->
     <script src="{{ url('assets/js/settings.js') }}"></script>
