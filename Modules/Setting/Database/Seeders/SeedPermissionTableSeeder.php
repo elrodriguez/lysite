@@ -29,6 +29,7 @@ class SeedPermissionTableSeeder extends Seeder
 
         $permissions = [];
         
+        array_push($permissions,Permission::create(['name' => 'configuraciones']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_nuevo']));
         array_push($permissions,Permission::create(['name' => 'configuraciones_modulos_editar']));

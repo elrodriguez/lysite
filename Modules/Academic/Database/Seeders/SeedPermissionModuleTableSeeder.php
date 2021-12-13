@@ -36,6 +36,8 @@ class SeedPermissionModuleTableSeeder extends Seeder
         array_push($permissions,Permission::create(['name' => 'academico_cursos_nuevo']));
         array_push($permissions,Permission::create(['name' => 'academico_cursos_editar']));
         array_push($permissions,Permission::create(['name' => 'academico_cursos_eliminar']));
+        array_push($permissions,Permission::create(['name' => 'academico_cursos_instructor']));
+        array_push($permissions,Permission::create(['name' => 'academico_cursos_edit_instructor']));
         array_push($permissions,Permission::create(['name' => 'academico_tipo_contenido']));
         array_push($permissions,Permission::create(['name' => 'academico_tipo_contenido_nuevo']));
         array_push($permissions,Permission::create(['name' => 'academico_tipo_contenido_editar']));

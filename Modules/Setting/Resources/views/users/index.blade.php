@@ -4,7 +4,6 @@
             <div class="py-32pt">
                 <div class="container">
                     <h1 class="text-white mb-8pt">Usuarios</h1>
-
                 </div>
             </div>
         </div>
@@ -15,7 +14,7 @@
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <i class="fa fa-bars"></i>
             </button>
-            @livewire('nav.nav-admin')
+            @livewire('nav.nav-global')
         </div>
     </div>
     @livewire('setting::users.users-list')

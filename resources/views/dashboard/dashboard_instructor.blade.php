@@ -19,7 +19,7 @@
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <span class="material-icons">people_outline</span>
             </button>
-            @livewire('nav.nav-instructor')
+            @livewire('nav.nav-global')
         </div>
     </div>
     <div class="py-24pt bg-white border-bottom-2">

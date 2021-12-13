@@ -7,7 +7,7 @@
 @endphp
 <div  class="collapse navbar-collapse" id="navbar-submenu2">
     <ul class="nav navbar-nav">
-
+        @can('configuraciones')
         <li class="nav-item {{ $path[0] == 'dashboard' ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
         </li>
@@ -25,6 +25,7 @@
                 @endcan
             </div>
         </li>
+        @endcan
         @can('academico')
         <li class="nav-item dropdown {{ $path[0] == 'academic' ? 'active' : '' }}">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Academico</a>
@@ -37,6 +38,9 @@
                 @endcan
                 @can('academico_alumnos')
                 <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'students' ? 'active' : '' }}" href="{{ route('academic_students') }}">Alumnos</a>
+                @endcan
+                @can('academico_cursos_instructor')
+                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructor' && $path[2] == 'courses' ? 'active' : '' }}" href="{{ route('academic_instructor_courses_list') }}">Cursos</a>
                 @endcan
             </div>
         </li>

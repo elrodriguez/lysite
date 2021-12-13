@@ -15,7 +15,7 @@
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <i class="fa fa-bars"></i>
             </button>
-            @livewire('nav.nav-admin')
+            @livewire('nav.nav-global')
         </div>
     </div>
     @livewire('academic::contents.contents-list',['course_id'=>$course_id, 'section_id'=>$section_id])

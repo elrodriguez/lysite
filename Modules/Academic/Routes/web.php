@@ -37,6 +37,11 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
         Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_nuevo'])->get('create', 'StudentsController@create')->name('academic_students_create');
         Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_editar'])->get('edit/{id}', 'StudentsController@edit')->name('academic_students_edit');
     });
+
+    Route::group(['prefix' => 'instructor/courses'], function() {
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos_instructor'])->get('list', 'CoursesController@instructorCourses')->name('academic_instructor_courses_list');
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos_edit_instructor'])->get('edit/{id}', 'CoursesController@instructorCoursesEdit')->name('academic_instructor_courses_Edit');
+    });
 });
 
 

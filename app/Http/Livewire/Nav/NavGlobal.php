@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Nav;
 
 use Livewire\Component;
 
-class NavAdmin extends Component
+class NavGlobal extends Component
 {
     public function render()
     {
-        return view('livewire.nav.nav-admin');
+        return view('livewire.nav.nav-global');
     }
 }

@@ -9,15 +9,7 @@
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary border-bottom-white py-32pt">
             <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                @role('Admin')
-                <img src="{{ url('assets/images/illustration/admin/avatar.png') }}" width="104" class="mr-md-32pt mb-32pt mb-md-0" alt="Admin">
-                @endrole
-                @role('Instructor')
-                <img src="{{ url('assets/images/illustration/teacher/128/white.svg') }}" width="104" class="mr-md-32pt mb-32pt mb-md-0" alt="Instructor">
-                @endrole
-                @role('Student')
                 <img src="{{ url('assets/images/illustration/student/128/white.svg') }}" width="104" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
-                @endrole
                 <div class="flex mb-32pt mb-md-0">
                     <h2 class="text-white mb-0">{{ Auth()->user()->name }}</h2>
                     <p class="lead text-white-50 d-flex align-items-center">{{ auth()->user()->email }}</p>
@@ -31,9 +23,7 @@
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <i class="fa fa-bars"></i>
             </button>
-            @role('Admin')
-            @livewire('nav.nav-admin')
-            @endrole
+            @livewire('nav.nav-global')
         </div>
     </div>
     {{-- solo esto cambia por cada pagina --}}

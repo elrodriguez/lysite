@@ -1,11 +1,4 @@
 <x-master>
-    @section('styles')
-    <!-- Flatpickr -->
-    <link type="text/css" href="{{ url('assets/css/flatpickr.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('assets/css/flatpickr.rtl.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
-    @endsection
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary border-bottom-white py-32pt">
             <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
@@ -14,26 +7,22 @@
                     <h2 class="text-white mb-0">{{ Auth()->user()->name }}</h2>
                     <p class="lead text-white-50 d-flex align-items-center">{{ auth()->user()->email }}</p>
                 </div>
+                <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">Editar cuenta</a>
             </div>
         </div>
     </x-slot>
     <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
         <div class="container page__container">
+
             <!-- Navbar toggler -->
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <i class="fa fa-bars"></i>
             </button>
-            @livewire('nav.nav-admin')
+            @livewire('nav.nav-global')
         </div>
     </div>
-    @livewire('user.edit-profile')
-    
+    @livewire('academic::courses.courses-instructor-list')
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot> 
-    @section('script')
-    <!-- Flatpickr -->
-    <script src="{{ url('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ url('assets/js/flatpickr.js') }}"></script>
-    @endsection
 </x-master>
