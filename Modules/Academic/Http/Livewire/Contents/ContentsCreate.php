@@ -32,6 +32,7 @@ class ContentsCreate extends Component
 
     public function mount($section_id)
     {
+        $this->content_type_id=1;
         $this->section_id = $section_id;
         $this->section = AcaSection::find($section_id);
         $this->course = AcaCourse::find($this->section->course_id);

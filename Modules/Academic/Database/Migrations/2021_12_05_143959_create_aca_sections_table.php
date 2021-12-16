@@ -19,6 +19,7 @@ class CreateAcaSectionsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);
+            $table->integer('count')->default(0);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

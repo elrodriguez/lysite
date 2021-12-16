@@ -35,7 +35,8 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
-                                        <th>{{ __('labels.Types') }}</th>
+                                        <th>{{ __('labels.Sort') }}</th>
+                                        <th>{{ __('labels.Type') }}</th>
                                         <th>{{ __('labels.Content') }}</th>
                                     </tr>
                                 </thead>
@@ -53,6 +54,7 @@
                                                 @endcan
                                             </div>
                                         </td>
+                                        <td></td>
                                         <td class="name align-middle">{{  $this->content_type_name($content->content_type_id) }}</td>
                                         @if ($content->content_type_id > 2)
                                         <td class="name align-middle">{{ $content->original_name }}</td>

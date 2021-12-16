@@ -45,7 +45,8 @@ class ContentsList extends Component
 
     public function getSections(){
         //return AcaContent::where('section_id', $this->section_id)->paginate(10);
-        $content_Types = AcaContent::where('section_id', $this->section_id);
+        $content_Types = AcaContent::where('section_id', $this->section_id)
+        ->orderBy('count', 'asc');
         return $content_Types->paginate(10);
     }
     public function getData(){

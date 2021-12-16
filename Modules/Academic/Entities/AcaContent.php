@@ -15,6 +15,7 @@ class AcaContent extends Model
             'content_url',
             'original_name',
             'status',
+            'count',
             'created_by',
             'updated_by'
     ];

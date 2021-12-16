@@ -20,6 +20,7 @@ class CreateAcaContentsTable extends Migration
             $table->text('content_url');
             $table->text('original_name')->nullable();
             $table->boolean('status')->default(true);
+            $table->integer('count')->default(0);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

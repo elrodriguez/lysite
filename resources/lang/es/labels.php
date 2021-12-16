@@ -78,5 +78,9 @@ return [
     'Uploading' => 'Subiendo',
     'Image not available' => 'Imagen no disponible',
     'File' => 'Archivo',
-    'Uploaded File' => 'Archivo Subido'
+    'Uploaded File' => 'Archivo Subido',
+    'Course Picture' => 'Imagen del Curso',
+    'Order' => 'Orden',
+    'Sort' => 'Ordenar',
+    'Down' => 'Abajo'
 ];

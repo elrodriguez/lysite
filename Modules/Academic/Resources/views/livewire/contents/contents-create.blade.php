@@ -18,7 +18,7 @@
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <form enctype="multipart/form-data" wire:submit.prevent="save" class="flex">
+                        <form enctype="multipart/form-data"  wire:submit.prevent="save" class="flex">
 
                             <div class="form-group">
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
@@ -37,7 +37,7 @@
                             @switch($content_type_id)
                             @case(1)
                             <div class="form-group">
-                                <label class="form-label" for="content_url">Enlace del Video *</label>
+                                <label class="form-label" for="content_url">URL *</label>
                                 <input wire:model="content_url" type="text" class="form-control" id="content_url"
                                     placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
                                 @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror

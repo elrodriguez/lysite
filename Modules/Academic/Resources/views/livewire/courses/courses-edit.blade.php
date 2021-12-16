@@ -27,6 +27,25 @@
                                 <textarea wire:model="description" class="form-control" id="description"></textarea>
                                 @error('description') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="name">{{ __('labels.Course Picture') }}</label>
+                                @if ($course_image && ($this->course_image_last != $this->course_image))
+
+                                {{ __('labels.Photo Preview') }}:
+
+                                <img class="img-fluid rounded float-right" alt="Responsive image"
+                                    src="{{ $course_image->temporaryUrl() }}">
+                                @else
+
+                                <img class="img-fluid rounded float-right" alt="{{ __('labels.Image not available') }}"
+                                    src="{{ env('APP_URL') }}/{{ $course_image }}">
+                                @endif
+                                <input type="file" wire:model="course_image" id="course_image"
+                                    accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
+                                @error('course_image') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input wire:model="status" class="custom-control-input" type="checkbox" value="" id="invalidCheck01" >

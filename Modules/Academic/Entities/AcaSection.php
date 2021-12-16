@@ -14,10 +14,11 @@ class AcaSection extends Model
         'title',
         'description',
         'status',
+        'count',
         'created_by',
         'updated_by',
     ];
-    
+
     protected static function newFactory()
     {
         return \Modules\Academic\Database\factories\AcaSectionFactory::new();

@@ -13,10 +13,11 @@ class AcaCourse extends Model
         'name',
         'description',
         'status',
+        'course_image',
         'created_by',
-        'updated_by' 
+        'updated_by'
     ];
-    
+
     protected static function newFactory()
     {
         return \Modules\Academic\Database\factories\AcaCourseFactory::new();
