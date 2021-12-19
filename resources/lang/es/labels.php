@@ -37,7 +37,7 @@ return [
     'Document type' => 'Tipo de Documento',
     'Select' => 'Seleccionar',
     'Number' => 'Número',
-    'Name' => 'Nombres',
+    'Name' => 'Nombre',
     'Middle Name' => 'Apellido Paterno',
     'Last Name' => 'Apellido Materno',
     'Region' => 'Región',

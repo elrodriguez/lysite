@@ -33,7 +33,12 @@
                                 @error('content_type_id') <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
-
+                            <div>
+                                <label class="form-label" for="name">{{ __('labels.Name') }} *</label>
+                                <input wire:model="name" type="text" class="form-control" id="name"
+                                    placeholder="{{ __('labels.Name') }}">
+                                @error('name') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                            </div>
 
                             @switch($content_type_id)
                             @case(1)

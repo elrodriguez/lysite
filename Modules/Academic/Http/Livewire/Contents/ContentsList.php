@@ -19,6 +19,7 @@ class ContentsList extends Component
     public $course_id;
     public $course;
     public $section;
+    public $count;
 
 
     use WithPagination;
@@ -30,6 +31,7 @@ class ContentsList extends Component
         $this->section_id = $section_id;
         $this->course = AcaCourse::find($course_id);
         $this->section = AcaSection::find($section_id);
+        $this->count = AcaContent::where('section_id',$section_id)->count();
     }
 
     public function getSearch()
@@ -45,9 +47,9 @@ class ContentsList extends Component
 
     public function getSections(){
         //return AcaContent::where('section_id', $this->section_id)->paginate(10);
-        $content_Types = AcaContent::where('section_id', $this->section_id)
+        $contents = AcaContent::where('section_id', $this->section_id)
         ->orderBy('count', 'asc');
-        return $content_Types->paginate(10);
+        return $contents->paginate(10);
     }
     public function getData(){
         return AcaContent::where('content_url','like','%'.$this->search.'%')
@@ -75,5 +77,26 @@ class ContentsList extends Component
         $content_type = AcaContentType::find($id_type);
         return $content_type->name;
     }
+    public function changeordernumber($count, $id , $direction){
+        $next_count=null;
+        $section = null;
+        $next_section=null;
+        if($direction == 'down'){
+            $section = AcaContent::find($id)->where('count', $count)->first();
+            $next_section=AcaContent::find($id)->where('count', $count+1)->first();
+            $next_count=$count;
+            $count++;
+        }
+        if($direction == 'up'){
+            $section = AcaContent::find($id)->where('count', $count)->first();
+            $next_section=AcaContent::find($id)->where('count', $count-1)->first();
+            $next_count=$count;
+            $count--;
+        }
 
+        $section->count = $count;
+        $section->update();
+        $next_section->count = $next_count;
+        $next_section->update();
+    }
 }

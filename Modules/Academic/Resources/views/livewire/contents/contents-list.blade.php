@@ -18,7 +18,8 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Módulos del sistema</p>
                         @can('configuraciones_modulos_nuevo')
-                        <a href="{{ route('academico_contenido_create',$this->section_id) }}" type="button" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('academico_contenido_create',$this->section_id) }}" type="button"
+                            class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -26,8 +27,10 @@
                         <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
                             <!-- Search -->
                             <div class="search-form search-form--light mb-3">
-                                <input wire:keydown.enter="getSearch" wire:model.defer="search" type="text" class="form-control search" placeholder="Search">
-                                <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
+                                <input wire:keydown.enter="getSearch" wire:model.defer="search" type="text"
+                                    class="form-control search" placeholder="Search">
+                                <button class="btn" type="button" role="button"><i
+                                        class="material-icons">search</i></button>
                             </div>
                             <!-- Table -->
                             <table class="table">
@@ -36,6 +39,7 @@
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
                                         <th>{{ __('labels.Sort') }}</th>
+                                        <th>{{ __('labels.Name') }}</th>
                                         <th>{{ __('labels.Type') }}</th>
                                         <th>{{ __('labels.Content') }}</th>
                                     </tr>
@@ -47,15 +51,61 @@
                                         <td class="text-center align-middle">
                                             <div class="btn-group">
                                                 @can('academico_contenido_editar')
-                                                <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i></a>
+                                                <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
+                                                    type="button" class="btn btn-info btn-sm"><i
+                                                        class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 @can('academico_contenido_eliminar')
-                                                <button onclick="deletes({{ $content->id }})" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
+                                                <button onclick="deletes({{ $content->id }})" type="button"
+                                                    class="btn btn-danger btn-sm"><i
+                                                        class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
                                         </td>
-                                        <td></td>
-                                        <td class="name align-middle">{{  $this->content_type_name($content->content_type_id) }}</td>
+                                        <!-- Sort -->
+                                        <td class="text-center align-middle">
+                                            @if ($content->count == 0 && $count>1)
+                                            <div role="group" aria-label="Group A">
+                                                <button
+                                                    wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
+                                                    type="button" class="btn btn-info btn-sm"
+                                                    title="{{ __('labels.Down') }}"><i
+                                                        class="fas fa-angle-down"></i></button>
+                                            </div>
+                                            @endif
+
+                                            @if ($content->count > 0 && $content->count < $contents->count()-1)
+                                                <div role="group" aria-label="Group A">
+                                                    <button
+                                                        wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
+                                                        type="button" class="btn btn-info btn-sm"
+                                                        title="{{ __('labels.Down') }}"><i
+                                                            class="fas fa-angle-down"></i></button>
+                                                    <button
+                                                        wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'up')"
+                                                        type="button" class="btn btn-info btn-sm"
+                                                        title="{{ __('labels.Up') }}"><i
+                                                            class="fas fa-angle-up"></i></button>
+                                                </div>
+                                                @endif
+
+                                                @if ($content->count == $contents->count()-1 && $count>1)
+                                                <div role="group" aria-label="Group A">
+                                                    <button
+                                                        wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'up')"
+                                                        type="button" class="btn btn-info btn-sm"
+                                                        title="{{ __('labels.Up') }}"><i
+                                                            class="fas fa-angle-up"></i></button>
+                                                </div>
+                                                @endif
+                                        </td>
+
+                                        <!-- Name -->
+                                        <td class="name align-middle">{{ $content->name }}
+                                        </td>
+
+                                        <td class="name align-middle">{{
+                                            $this->content_type_name($content->content_type_id) }}</td>
                                         @if ($content->content_type_id > 2)
                                         <td class="name align-middle">{{ $content->original_name }}</td>
                                         @else

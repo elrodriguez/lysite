@@ -12,6 +12,7 @@ class AcaContent extends Model
     protected $fillable = [
             'section_id',
             'content_type_id',
+            'name',
             'content_url',
             'original_name',
             'status',
