@@ -11,7 +11,7 @@
             <div class="card card-body mb-32pt">
                 <div class="row">
                     <div class="col-lg-4">
-                        <h4 class="card-title">Formulario de registro</h4>
+                        <h4 class="card-title">Formulario de registro para Nuevo Curso</h4>
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -27,6 +27,21 @@
                                 <textarea wire:model="description" class="form-control" id="description"></textarea>
                                 @error('description') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="name">{{ __('labels.Course Picture') }}</label>
+                                @if ($course_image)
+
+                                {{ __('labels.Photo Preview') }}:
+
+                                <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ $course_image->temporaryUrl() }}">
+
+                                @endif
+                                <input type="file" wire:model="course_image"
+                                    accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
+                                @error('course_image') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input wire:model="status" class="custom-control-input" type="checkbox" value="" id="invalidCheck01" >

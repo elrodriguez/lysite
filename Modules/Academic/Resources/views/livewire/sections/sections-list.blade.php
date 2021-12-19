@@ -28,6 +28,7 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
+                                        <th>{{ __('labels.Sort') }}</th>
                                         <th>Titulo</th>
                                         <th>Descripción</th>
                                         <th>Estado</th>
@@ -43,13 +44,35 @@
                                                 <a href="{{ route('academic_sections_editar',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 @can('academico_contenido')
-                                                <a href="{{ route('academico_contenido',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Ver/Editar Contenido"><i class="fa fa-list-alt"></i></a>
+                                                <a href="{{ route('academico_contenido',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Ver/Editar {{ $section->title }}"><i class="fa fa-list-alt"></i></a>
                                                 @endcan
                                                 @can('academico_secciones_eliminar')
                                                 <button onclick="deletes({{ $section->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
                                         </td>
+
+                                        <td class="text-center align-middle">
+                                            @if ($section->count == 0 && $count>1)
+                                            <div  role="group" aria-label="Group A" >
+                                                <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'down')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Down') }}"><i class="fas fa-angle-down"></i></button>
+                                            </div>
+                                            @endif
+
+                                            @if ($section->count > 0 && $section->count < $sections->count()-1)
+                                            <div  role="group" aria-label="Group A" >
+                                                <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'down')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Down') }}"><i class="fas fa-angle-down"></i></button>
+                                                <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'up')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Up') }}"><i class="fas fa-angle-up"></i></button>
+                                            </div>
+                                            @endif
+
+                                            @if ($section->count == $sections->count()-1 && $count>1)
+                                            <div  role="group" aria-label="Group A" >
+                                                <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'up')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Up') }}"><i class="fas fa-angle-up"></i></button>
+                                            </div>
+                                            @endif
+                                        </td>
+
                                         <td class="name align-middle">{{ $section->title }}</td>
                                         <td class="name align-middle">{{ $section->description }}</td>
                                         <td class="align-middle">

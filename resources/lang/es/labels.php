@@ -37,7 +37,7 @@ return [
     'Document type' => 'Tipo de Documento',
     'Select' => 'Seleccionar',
     'Number' => 'Número',
-    'Name' => 'Nombres',
+    'Name' => 'Nombre',
     'Middle Name' => 'Apellido Paterno',
     'Last Name' => 'Apellido Materno',
     'Region' => 'Región',
@@ -78,5 +78,11 @@ return [
     'Uploading' => 'Subiendo',
     'Image not available' => 'Imagen no disponible',
     'File' => 'Archivo',
-    'Uploaded File' => 'Archivo Subido'
+    'Uploaded File' => 'Archivo Subido',
+    'Course Picture' => 'Imagen del Curso',
+    'Order' => 'Orden',
+    'Sort' => 'Ordenar',
+    'Down' => 'Abajo',
+    'Add Course' => 'Agregar Curso',
+    'View/Assign Instructors' => 'Ver/Asignar Instructores'
 ];

@@ -3,7 +3,11 @@
 namespace Modules\Academic\Http\Livewire\Courses;
 
 use Livewire\Component;
+
 use Modules\Academic\Entities\AcaCourse;
+use Illuminate\Support\Facades\DB;
+use Modules\Academic\Entities\AcaInstructor;
+
 
 class CoursesInstructorEdit extends Component
 {
@@ -22,6 +26,8 @@ class CoursesInstructorEdit extends Component
         $this->course_description = $this->course->description;
         $this->course_status = $this->course->status;
     }
+
+
 
     public function render()
     {

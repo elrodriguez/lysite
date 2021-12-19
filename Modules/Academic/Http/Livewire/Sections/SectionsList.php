@@ -10,10 +10,12 @@ class SectionsList extends Component
 {
     public $course;
     public $course_id;
+    public $count;
 
     public function mount($course_id){
         $this->course_id = $course_id;
         $this->course = AcaCourse::find($course_id);
+        $this->count = AcaSection::where('course_id',$course_id)->count();
     }
 
 
@@ -23,7 +25,8 @@ class SectionsList extends Component
     }
 
     public function getSections(){
-        return AcaSection::where('course_id', $this->course_id)->paginate(10);
+        return AcaSection::where('course_id', $this->course_id)
+        ->orderBy('count', 'asc')->paginate(10);
     }
 
     public function destroy($id){
@@ -37,7 +40,30 @@ class SectionsList extends Component
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
         }
-       
+
         $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
+
+    public function changeordernumber($count, $id , $direction){
+        $next_count=null;
+        $section = null;
+        $next_section=null;
+        if($direction == 'down'){
+            $section = AcaSection::find($id)->where('count', $count)->first();
+            $next_section=AcaSection::find($id)->where('count', $count+1)->first();
+            $next_count=$count;
+            $count++;
+        }
+        if($direction == 'up'){
+            $section = AcaSection::find($id)->where('count', $count)->first();
+            $next_section=AcaSection::find($id)->where('count', $count-1)->first();
+            $next_count=$count;
+            $count--;
+        }
+
+        $section->count = $count;
+        $section->update();
+        $next_section->count = $next_count;
+        $next_section->update();
     }
 }

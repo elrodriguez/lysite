@@ -17,6 +17,7 @@ class ContentsCreate extends Component
     public $section_id;
     public $course;
     public $section;
+    public $name; //nombre o título del contenido
     public $content_types;
 
     public $content_type_id;
@@ -32,6 +33,7 @@ class ContentsCreate extends Component
 
     public function mount($section_id)
     {
+        $this->content_type_id=1;
         $this->section_id = $section_id;
         $this->section = AcaSection::find($section_id);
         $this->course = AcaCourse::find($this->section->course_id);
@@ -84,19 +86,22 @@ class ContentsCreate extends Component
             //$this->content_url = $this->content_url->store('contents');
         }
 
-
+        $count=AcaContent::where('Section_id',$this->section_id)->count();
         AcaContent::create([
             'section_id' => $this->section_id,
             'content_type_id' => $this->content_type_id,
+            'name' => $this->name,
             'content_url' => $this->content_url, //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
             'original_name' => $this->original_name,
             'status' => true,
+            'count' => $count,
             'created_by' => Auth::id()
         ]);
 
         $this->content_type_id = null;
         $this->content_url = null;
         $this->created_by = null;
+        $this->name=null;
 
         $this->dispatchBrowserEvent('aca-content-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
         redirect()->route('academico_contenido', [$this->section->course_id, $this->section->id])->with('message', 'Volverás a la Lista de Contenidos');

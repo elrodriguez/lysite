@@ -22,6 +22,7 @@ class ContentsEdit extends Component
     public $status;
     public $content_type_id_last;
     public $its_image=false;
+    public $name; //nombre o título del contenido
     public $original_name;
 
     //entidades
@@ -39,6 +40,7 @@ class ContentsEdit extends Component
         $this->content_url = $this->content->content_url;
         $this->content_type_id_last = $this->content_type_id;
         $this->status = $this->content->status;
+        $this->name = $this->content->name;
         $this->content_url_last = $this->content_url;
     }
 
@@ -99,6 +101,7 @@ class ContentsEdit extends Component
 
         $this->content->update([
             'content_type_id' => $this->content_type_id,
+            'name' => $this->name,
             'content_url' => $this->content_url,
             'original_name' => $this->original_name,
             'status' => $this->status,
