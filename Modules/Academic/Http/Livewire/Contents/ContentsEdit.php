@@ -40,6 +40,7 @@ class ContentsEdit extends Component
         $this->content_url = $this->content->content_url;
         $this->content_type_id_last = $this->content_type_id;
         $this->status = $this->content->status;
+        $this->name = $this->content->name;
         $this->content_url_last = $this->content_url;
     }
 

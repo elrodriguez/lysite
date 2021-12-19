@@ -40,7 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
 
     Route::group(['prefix' => 'instructor/courses'], function() {
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos_instructor'])->get('list', 'CoursesController@instructorCourses')->name('academic_instructor_courses_list');
-        Route::middleware(['middleware' => 'role_or_permission:academico_cursos_edit_instructor'])->get('edit/{id}', 'CoursesController@instructorCoursesEdit')->name('academic_instructor_courses_Edit');
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos_edit_instructor'])->get('edit/{course_id}', 'CoursesController@instructorCoursesEdit')->name('academic_instructor_courses_Edit');
     });
 });
 

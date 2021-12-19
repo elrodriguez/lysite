@@ -29,8 +29,8 @@
                             <div class="search-form search-form--light mb-3">
                                 <input wire:keydown.enter="getSearch" wire:model.defer="search" type="text"
                                     class="form-control search" placeholder="Search">
-                                <button class="btn" type="button" role="button"><i
-                                        class="material-icons">search</i></button>
+                                <button class="btn" type="button" role="button">
+                                    <i class="material-icons">search</i></button>
                             </div>
                             <!-- Table -->
                             <table class="table">
@@ -53,7 +53,7 @@
                                                 @can('academico_contenido_editar')
                                                 <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
                                                     type="button" class="btn btn-info btn-sm"><i
-                                                        class="fa fa-pencil-alt"></i></a>
+                                                        class="fa fa-pencil-alt" title="Ver/Editar Contenido"></i></a>
                                                 @endcan
                                                 @can('academico_contenido_eliminar')
                                                 <button onclick="deletes({{ $content->id }})" type="button"
@@ -109,7 +109,16 @@
                                         @if ($content->content_type_id > 2)
                                         <td class="name align-middle">{{ $content->original_name }}</td>
                                         @else
-                                        <td class="name align-middle">{{ $content->content_url }}</td>
+                                            @if (strlen($content->content_url) > 115)
+                                                <td class="name align-middle">{{ substr($content->content_url, 0, 115) }}
+                                                    @can('academico_contenido_editar')
+                                                    <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
+                                                        title="Ver y editar Contenido Completo">...</a>
+                                                    @endcan
+                                                </td>
+                                            @else
+                                                <td class="name align-middle">{{ $content->content_url }}</td>
+                                            @endif
                                         @endif
 
                                     </tr>

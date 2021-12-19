@@ -21,8 +21,8 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-    @livewire('academic::courses.courses-instructor-edit')
+    @livewire('academic::courses.courses-instructor-edit',['course_id' => $course_id])
     <x-slot name="navigation">
         <x-navigation></x-navigation>
-    </x-slot> 
+    </x-slot>
 </x-master>

@@ -1,9 +1,10 @@
 <div class="container page__container page-section">
     <div class="mb-heading d-flex align-items-center">
         <h4 class="flex m-0">Manage Courses</h4>
-        <a href="instructor-edit-course.html" class="btn btn-accent">Add Course</a>
+        <a href="{{ route('academic_courses_create') }}" class="btn btn-accent">{{ __('labels.Add Course') }}</a>
     </div>
     <div class="row">
+
         @if(count($courses) > 0)
             @php
                 $course_id = '';
@@ -13,7 +14,7 @@
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                         <a href="instructor-edit-course.html" class="js-image" data-position="">
-                            <img src="{{ url('assets/images/paths/angular_430x168.png') }}" alt="course">
+                            <img src="{{ env('APP_URL') }}/{{ $course->course_image }}" alt="course" height="168px" width="430 px">
                             <span class="overlay__content">
                                 <span class="overlay__action d-flex flex-column text-center">
                                     {{ __('academic::labels.edit_course') }}
@@ -44,7 +45,7 @@
                     <div class="popoverContainer d-none">
                         <div class="media">
                             <div class="media-left">
-                                <img src="{{ url('assets/images/paths/angular_40x40@2x.png') }}" width="40" height="40" alt="Angular" class="rounded">
+                                <img src="{{ env('APP_URL') }}/{{ $course->course_image }}" width="40" height="40" alt="Angular" class="rounded">
                             </div>
                             <div class="media-body">
                                 <div class="card-title mb-0">{{ $course->course_name }}</div>
@@ -72,15 +73,12 @@
                             @endforeach
                         </div>
                         <div class="row align-items-center">
-                            
+
                             <div class="col-auto">
-                                <div class="d-flex align-items-center mb-4pt">
-                                    <span class="material-icons icon-16pt text-black-50 mr-4pt">access_time</span>
-                                    <p class="flex text-black-50 lh-1 mb-0"><small>6 {{ __('academic::labels.hours') }}</small></p>
-                                </div>
+
                                 <div class="d-flex align-items-center mb-4pt">
                                     <span class="material-icons icon-16pt text-black-50 mr-4pt">play_circle_outline</span>
-                                    <p class="flex text-black-50 lh-1 mb-0"><small>{{ $content_quantity }} {{ __('academic::labels.lessons') }}</small></p>
+                                    <p class="flex text-black-50 lh-1 mb-0"><small>{{ $course->sections_quantity }} {{ __('academic::labels.lessons') }}</small></p>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <span class="fa fa-user-graduate text-black-50 mr-4pt"></span>
@@ -88,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="col text-right">
-                                <a href="{{ route('academic_instructor_courses_Edit',$course->course_id) }}" class="btn btn-primary">{{ __('academic::labels.edit_course') }}</a>
+                                <a href="{{ route('academic_instructor_courses_Edit',$course->course_id) }}" class="btn btn-primary">{{ __('labels.View/Assign Instructors') }}</a>
                             </div>
                         </div>
                     </div>

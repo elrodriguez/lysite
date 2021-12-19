@@ -44,7 +44,7 @@
                                                 <a href="{{ route('academic_sections_editar',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 @can('academico_contenido')
-                                                <a href="{{ route('academico_contenido',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Ver/Editar Contenido"><i class="fa fa-list-alt"></i></a>
+                                                <a href="{{ route('academico_contenido',[$course_id,$section->id]) }}" type="button" class="btn btn-info btn-sm" title="Ver/Editar {{ $section->title }}"><i class="fa fa-list-alt"></i></a>
                                                 @endcan
                                                 @can('academico_secciones_eliminar')
                                                 <button onclick="deletes({{ $section->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>

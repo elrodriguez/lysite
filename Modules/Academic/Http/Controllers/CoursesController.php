@@ -41,7 +41,7 @@ class CoursesController extends Controller
         return view('academic::courses.instructor_courses');
     }
 
-    public function instructorCoursesEdit(){
-        return view('academic::courses.instructor_courses_edit');
+    public function instructorCoursesEdit($course_id){
+        return view('academic::courses.instructor_courses_edit')->with('course_id', $course_id);
     }
 }

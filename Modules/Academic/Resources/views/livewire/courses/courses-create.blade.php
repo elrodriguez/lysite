@@ -11,7 +11,7 @@
             <div class="card card-body mb-32pt">
                 <div class="row">
                     <div class="col-lg-4">
-                        <h4 class="card-title">Formulario de registro</h4>
+                        <h4 class="card-title">Formulario de registro para Nuevo Curso</h4>
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">

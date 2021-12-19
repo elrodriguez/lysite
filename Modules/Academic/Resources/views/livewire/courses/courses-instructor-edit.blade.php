@@ -1,3 +1,9 @@
 <div>
-    <h3>The <code>CoursesInstructorEdit</code> livewire component is loaded from the  <code>Academic</code> module.</h3>
+
+    <ol>
+        @foreach ($course as $c)
+            <li>{{$c->course_name}}</li>
+
+        @endforeach
+    </ol>
 </div>

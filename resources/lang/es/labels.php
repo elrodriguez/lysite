@@ -82,5 +82,7 @@ return [
     'Course Picture' => 'Imagen del Curso',
     'Order' => 'Orden',
     'Sort' => 'Ordenar',
-    'Down' => 'Abajo'
+    'Down' => 'Abajo',
+    'Add Course' => 'Agregar Curso',
+    'View/Assign Instructors' => 'Ver/Asignar Instructores'
 ];

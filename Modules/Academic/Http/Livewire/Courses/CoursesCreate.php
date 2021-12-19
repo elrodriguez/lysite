@@ -26,7 +26,8 @@ class CoursesCreate extends Component
     }
 
     protected $rules = [
-        'name' => 'required|max:255|unique:aca_courses,name'
+        'name' => 'required|max:255|unique:aca_courses,name',
+        'course_image' => 'required|max:10240|mimes:jpeg,jpg,png,gif',
     ];
 
     public function save(){
