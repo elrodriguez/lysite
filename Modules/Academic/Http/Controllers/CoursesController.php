@@ -27,7 +27,7 @@ class CoursesController extends Controller
         return view('academic::courses.instructor_courses');
     }
 
-<<<<<<< HEAD
+
     public function instructorCoursesEdit($id){
         return view('academic::courses.instructor_courses_edit')->with('id', $id);
     }
@@ -38,9 +38,6 @@ class CoursesController extends Controller
 
     public function dashinstructorCoursesEdit($id){
         return view('academic::courses.dash_instructor_courses_edit')->with('id', $id);
-=======
-    public function instructorCoursesEdit($course_id){
-        return view('academic::courses.instructor_courses_edit')->with('course_id', $course_id);
->>>>>>> 7be89ee91747b1b8a9ab0cf5a90b40f74a1f6bd1
+
     }
 }
