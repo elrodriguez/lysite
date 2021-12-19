@@ -9,5 +9,15 @@ return [
     'students'      => 'Alumnos',
     'edit_course'   => 'Edit Course',
     'lessons'       => 'Lessons',
-    'hours'         => 'Hours'
+    'hours'         => 'Hours',
+    'course_title'  => 'Course title',
+    'description'   => 'Description',
+    'save_changes'  => 'Save changes',
+    'state'         => 'State',
+    'change_order'  => 'Change order',
+    'active'        => 'Active',
+    'inactive'      => 'Inactive',
+    'add_section'   => 'Add Section',
+    'add_content'   => 'Add content',
+    'close'         => 'Close'
 ];

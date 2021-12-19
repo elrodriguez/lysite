@@ -40,7 +40,7 @@
                 <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'students' ? 'active' : '' }}" href="{{ route('academic_students') }}">Alumnos</a>
                 @endcan
                 @can('academico_cursos_instructor')
-                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructor' && $path[2] == 'courses' ? 'active' : '' }}" href="{{ route('academic_instructor_courses_list') }}">Cursos</a>
+                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructor' && $path[2] == 'courses' ? 'active' : '' }}" href="{{ route('academic_dash_instructor_courses_list') }}">Cursos Instructor</a>
                 @endcan
             </div>
         </li>

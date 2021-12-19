@@ -53,5 +53,5 @@
                 buttonText: "Okay"
             });
         })
-        </script>
+    </script>
 </div>

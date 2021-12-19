@@ -61,6 +61,7 @@
         </div>
         <!-- // END Header Layout Content -->
     </div>
+    
     <!-- // END Header Layout -->
     {{ $navigation }}
     <!--  livewire -->
@@ -98,6 +99,9 @@
 
     <script src="{{ url('assets/js/cute-alert/cute-alert.js') }}"></script>
     @yield('script')
+    @yield('modales')
+    <!-- Modal -->
+    
 </body>
 
 </html>

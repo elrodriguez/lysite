@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="col text-right">
-                                <a href="{{ route('academic_instructor_courses_Edit',$course->course_id) }}" class="btn btn-primary">{{ __('academic::labels.edit_course') }}</a>
+                                <a href="{{ route('academic_dash_instructor_courses_edit',$course->course_id) }}" class="btn btn-primary">{{ __('academic::labels.edit_course') }}</a>
                             </div>
                         </div>
                     </div>
