@@ -14,7 +14,7 @@
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                         <a href="instructor-edit-course.html" class="js-image" data-position="">
-                            <img src="{{ env('APP_URL') }}/{{ $course->course_image }}" alt="course" height="168px" width="430 px">
+                            <img src="{{ url($course->course_image) }}" alt="course" height="168px" width="430 px">
                             <span class="overlay__content">
                                 <span class="overlay__action d-flex flex-column text-center">
                                     {{ __('academic::labels.edit_course') }}

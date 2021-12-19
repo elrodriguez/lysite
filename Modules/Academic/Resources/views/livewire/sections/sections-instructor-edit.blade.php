@@ -25,7 +25,7 @@
                                     @endif
                                 </li>
                                 <li class="list-group-item">
-                                    <button onclick="deletesSecion({{ $section['id'] }})" type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                                    <button onclick="deletesSecion({{ $c }},{{ $section['id'] }})" type="button" class="btn btn-danger btn-sm">Eliminar</button>
                                     <button wire:click="activeEdit({{ $key }})" type="button" class="btn btn-accent btn-sm">{{ __('academic::labels.edit') }}</button>
                                     <button type="button" class="btn btn-primary btn-sm">{{ __('academic::labels.add_content') }}</button>
                                     
@@ -136,7 +136,7 @@
         </div>
     </div>
     <script>
-        function deletesSecion(id){
+        function deletesSecion(number,id){
             cuteAlert({
                 type: "question",
                 title: "¿Desea eliminar estos datos?",
@@ -145,7 +145,7 @@
                 cancelText: "Cancel"
             }).then((e)=>{
                 if ( e == ("confirm")){
-                    @this.destroySection(id);
+                    @this.destroySection(number,id);
                 }
             });
         }

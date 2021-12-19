@@ -13,8 +13,23 @@ class SectionsInstructorEdit extends Component
     public $course_id;
 
     public function mount($course_id){
-        $sections = AcaSection::where('course_id',$course_id)->get();
+        
         $this->course_id = $course_id;
+
+        $this->getData();
+    }
+
+    public function render()
+    {
+        return view('academic::livewire.sections.sections-instructor-edit');
+    }
+
+    public function getData(){
+        $sections = AcaSection::where('course_id',$this->course_id)
+                    ->orderBy('count')
+                    ->get();
+                    
+        
         foreach($sections as $key => $section){
             $this->section_edit[$key] = false;
             $this->sections[$key] = [
@@ -24,40 +39,40 @@ class SectionsInstructorEdit extends Component
                 'id'            => $section->id
             ];
         }
-
-    }
-
-    public function render()
-    {
-        return view('academic::livewire.sections.sections-instructor-edit');
     }
 
     public function changeordernumber($direction,$id,$number,$index){
         if($direction == 1){
+
             $move = AcaSection::where('id',$id);
-            $change_array = $this->stages[$index-1];
+            $change_array = $this->sections[$index-1];
             $change = AcaSection::where('id',$change_array['id']);
 
             $move->update([
-                'number_order' => $number-1
+                'count' => $number-1
             ]);
 
             $change->update([
-                'number_order' => $number
+                'count' => $number
             ]);
+
         }else if($direction == 0){
+
             $move = AcaSection::where('id',$id);
-            $change_array = $this->stages[$index+1];
+            $change_array = $this->sections[$index+1];
             $change = AcaSection::where('id',$change_array['id']);
 
             $move->update([
-                'number_order' => $number+1
+                'count' => $number+1
             ]);
 
             $change->update([
-                'number_order' => $number
+                'count' => $number
             ]);
+
         }
+
+        $this->getData();
     }
 
     public function activeEdit($key){
@@ -85,11 +100,13 @@ class SectionsInstructorEdit extends Component
                 'updated_by' => Auth::id()
             ]);
         }else{
+            $count = count($this->sections);
             AcaSection::create([
                 'course_id' => $this->course_id,
                 'title' => $section['title'],
                 'description' => $section['description'],
                 'status' => $section['status'] ? true : false,
+                'count' => ($count),
                 'created_by' => Auth::id()
             ]);
         }
@@ -110,15 +127,28 @@ class SectionsInstructorEdit extends Component
         array_push($this->sections,$sections);
     }
 
-    public function destroySection($id){
+    public function destroySection($number,$id){
 
         $val = AcaSection::where('id',$id)
                 ->where('created_by',Auth::id())
                 ->exists();
-                
+
         if($val){
             try {
+
+                $count = AcaSection::where('course_id',$this->course_id)->max('count');
+
                 AcaSection::find($id)->delete();
+
+                $this->sections = [];
+                for($c = $number;$c <=$count; $c++){
+                    AcaSection::where('course_id',$this->course_id)
+                            ->where('count',$c)
+                            ->update([
+                                'count' => $c - 1
+                            ]);
+                }
+
                 $res = 'success';
                 $tit = 'Enhorabuena';
                 $msg = 'Se eliminó correctamente';
@@ -134,6 +164,7 @@ class SectionsInstructorEdit extends Component
             $tit = 'Salió mal';
             $msg = 'Ustd. No se puede eliminar esta seccion';
         }
+        $this->getData();
         $this->dispatchBrowserEvent('set-section-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 }
