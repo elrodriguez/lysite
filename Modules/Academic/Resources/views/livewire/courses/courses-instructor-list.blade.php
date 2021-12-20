@@ -45,7 +45,7 @@
                     <div class="popoverContainer d-none">
                         <div class="media">
                             <div class="media-left">
-                                <img src="{{ env('APP_URL') }}/{{ $course->course_image }}" width="40" height="40" alt="Angular" class="rounded">
+                                <img src="{{ url($course->course_image) }}" width="40" height="40" alt="Angular" class="rounded">
                             </div>
                             <div class="media-body">
                                 <div class="card-title mb-0">{{ $course->course_name }}</div>

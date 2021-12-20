@@ -29,13 +29,13 @@ class SectionsCreate extends Component
         $this->validate([
             'title' => 'required|max:255',
         ]);
-$count=AcaSection::where('course_id',$this->course_id)->count();
+        $count=AcaSection::where('course_id',$this->course_id)->count();
         AcaSection::create([
             'course_id'     => $this->course_id,
             'title'         => $this->title,
             'description'   => $this->description,
             'status'        => $this->status ? true : false,
-            'count'         => $count,
+            'count'         => $count + 1,
             'created_by'    => Auth::id()
         ]);
 

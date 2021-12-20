@@ -28,6 +28,8 @@
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot> 
-
+    @section('modales')
+        @livewire('academic::contents.contents-instructor-form')
+    @endsection
 </x-master>
 

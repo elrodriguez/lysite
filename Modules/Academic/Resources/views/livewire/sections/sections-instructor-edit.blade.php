@@ -27,7 +27,7 @@
                                 <li class="list-group-item">
                                     <button onclick="deletesSecion({{ $c }},{{ $section['id'] }})" type="button" class="btn btn-danger btn-sm">Eliminar</button>
                                     <button wire:click="activeEdit({{ $key }})" type="button" class="btn btn-accent btn-sm">{{ __('academic::labels.edit') }}</button>
-                                    <button type="button" class="btn btn-primary btn-sm">{{ __('academic::labels.add_content') }}</button>
+                                    <button wire:click="$emit('instructorOpenModal', {{ $section['id'] }});" type="button" class="btn btn-primary btn-sm">{{ __('academic::labels.add_content') }}</button>
                                     
                                     @if($c > 1)
                                         <button wire:click="changeordernumber('1','{{ $section['id'] }}','{{ $c }}','{{ $key }}')" type="button" class="btn btn-secondary btn-sm">
@@ -156,6 +156,6 @@
                 message: event.detail.msg,
                 buttonText: "Okay"
             });
-        })
+        });
     </script>
 </div>

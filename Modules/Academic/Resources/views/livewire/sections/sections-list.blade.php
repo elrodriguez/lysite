@@ -53,20 +53,20 @@
                                         </td>
 
                                         <td class="text-center align-middle">
-                                            @if ($section->count == 0 && $count>1)
+                                            @if ($section->count == 1 && $count>1)
                                             <div  role="group" aria-label="Group A" >
                                                 <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'down')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Down') }}"><i class="fas fa-angle-down"></i></button>
                                             </div>
                                             @endif
 
-                                            @if ($section->count > 0 && $section->count < $sections->count()-1)
+                                            @if ($section->count > 1 && $section->count < $sections->count())
                                             <div  role="group" aria-label="Group A" >
                                                 <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'down')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Down') }}"><i class="fas fa-angle-down"></i></button>
                                                 <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'up')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Up') }}"><i class="fas fa-angle-up"></i></button>
                                             </div>
                                             @endif
 
-                                            @if ($section->count == $sections->count()-1 && $count>1)
+                                            @if ($section->count == $sections->count() && $count>1)
                                             <div  role="group" aria-label="Group A" >
                                                 <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'up')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Up') }}"><i class="fas fa-angle-up"></i></button>
                                             </div>
