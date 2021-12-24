@@ -14,6 +14,7 @@ class CoursesCreate extends Component
     public $description;
     public $status = true;
     public $course_image;
+    public $main_video;
 
     public function render()
     {
@@ -39,6 +40,7 @@ class CoursesCreate extends Component
             'description' => $this->description,
             'status' => $this->status ? true : false,
             'course_image' => $this->course_image,
+            'main_video' => $this->main_video,
             'created_by' => Auth::id()
         ]);
 
@@ -46,6 +48,7 @@ class CoursesCreate extends Component
         $this->description = null;
         $this->status = true;
         $this->course_image = null;
+        $this->main_video = null;
 
         $this->dispatchBrowserEvent('aca-courses-create', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
     }

@@ -21,7 +21,7 @@
                         <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
                             <!-- Search -->
                             <div class="search-form search-form--light mb-3">
-                                <input wire:keydown.enter="getSearch" wire:model.defer="search" type="text" class="form-control search" placeholder="Search">
+                                <input wire:keydown.enter="getSearch" wire:model.defer="search" type="text" class="form-control search" placeholder="Search" value="">
                                 <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
                             </div>
                             <!-- Table -->
@@ -30,6 +30,7 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
+                                        <th>{{ __('labels.Instructors') }}</th>
                                         <th>Nombre</th>
                                         <th>Descripcion</th>
                                         <th>Estado</th>
@@ -51,6 +52,11 @@
                                                 <button onclick="deletes({{ $course->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
+                                        </td>
+                                        <td class="name align-middle">
+                                        @can('academico_instructores_asignar')
+                                        <a href="{{ route('academic_instructor_assign',$course->id) }}" type="button" class="btn btn-success btn-sm" title="Asignar/Ver {{ __('labels.Instructors') }}"><i class="fa fa-newspaper"></i></a>
+                                        @endcan
                                         </td>
                                         <td class="name align-middle">{{ $course->name }}</td>
                                         <td class="name align-middle">{{ $course->description }}</td>
@@ -91,7 +97,7 @@
             }).then((e)=>{
                 if ( e == ("confirm")){
                     @this.destroy(id)
-                } 
+                }
             });
         }
         window.addEventListener('aca-course-delete', event => {

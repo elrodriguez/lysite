@@ -9,6 +9,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Modules\Academic\Entities\AcaSection;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class ContentsEdit extends Component
 {
@@ -96,6 +97,8 @@ class ContentsEdit extends Component
                 $this->content_url = 'storage/'.substr($this->content_url->store('public/uploads/academic/contents'),7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
                 //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
                 //$this->content_url = $this->content_url->store('contents');
+                $content_url=AcaContent::find($this->content_id)->content_url;
+                Storage::disk('public')->delete(substr($content_url, 8));
             }
         }
 

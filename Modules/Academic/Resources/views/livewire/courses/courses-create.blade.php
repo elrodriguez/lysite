@@ -29,6 +29,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="form-label" for="main_video">{{ __('labels.Url').' '.__('labels.Main Video') }} *</label>
+                                <input wire:model="main_video" type="text" class="form-control" id="main_video">
+                                @error('main_video') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label class="form-label" for="name">{{ __('labels.Course Picture') }}</label>
                                 @if ($course_image)
 
