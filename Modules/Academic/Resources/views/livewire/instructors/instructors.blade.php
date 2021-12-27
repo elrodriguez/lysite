@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">{{ __('labels.Assigned Instructors') }}</h4>
-                        <p class="text-70">{{ $course->name }}</p>
+                        <p class="text-70">{{ __('labels.Course').': '.$course->name }}</p>
 
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -35,11 +35,8 @@
                                         <td class="text-center align-middle">
 
                                             <div class="btn-group">
-                                                @can('academico_secciones_editar')
-                                                <a href="{{ route('academic_sections_editar',[$course_id,$instructor->person_id]) }}" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Assign') }}"><i class="material-icons">person</i></a>
-                                                @endcan
 
-                                                @can('academico_secciones_eliminar')
+                                                @can('academico_instructores_asignar')
                                                 <button onclick="deletes({{ $instructor->person_id }})" type="button" class="btn btn-danger btn-sm" title="{{ __('labels.Remove assignment') }}"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
@@ -72,8 +69,8 @@
         function deletes(id){
             cuteAlert({
                 type: "question",
-                title: "¿Desea eliminar estos datos?",
-                message: "Advertencia:¡Esta acción no se puede deshacer!",
+                title: "¿Desea quitar a este instructor del curso?",
+                message: "¿está seguro?",
                 confirmText: "Okay",
                 cancelText: "Cancel"
             }).then((e)=>{
@@ -82,7 +79,7 @@
                 }
             });
         }
-        window.addEventListener('aca-section-delete', event => {
+        window.addEventListener('aca-assign-delete', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

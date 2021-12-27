@@ -62,4 +62,22 @@ public function getSearch($search)
             return $results;
     }
 
+    public function destroy($id){
+        try {
+            AcaInstructor::where('person_id', $id)
+            ->where('course_id', $this->course_id)
+            ->delete();
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se eliminó correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar porque no cuenta con registros asociados';
+        }
+
+        $this->dispatchBrowserEvent('set-assign-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+        return redirect()->to(route('academic_instructor_assign',$this->course_id));
+    }
+
 }

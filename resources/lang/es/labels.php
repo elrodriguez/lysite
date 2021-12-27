@@ -96,4 +96,5 @@ return [
     'Search Instructors' => 'Buscar Instructores',
     'Search and Assign Instructors' => 'Buscar y Asignar Instructores',
     'Available Instructors' => 'Instructores Disponibles',
+    'Course' => 'Curso',
 ];
