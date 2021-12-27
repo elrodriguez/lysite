@@ -5,22 +5,16 @@ namespace Modules\Academic\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class AcaCourse extends Model
+class AcaInstructors extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'status',
-        'course_image',
-        'main_video',
-        'created_by',
-        'updated_by'
+        'person_id','course_id'
     ];
 
     protected static function newFactory()
     {
-        return \Modules\Academic\Database\factories\AcaCourseFactory::new();
+        return \Modules\Academic\Database\factories\AcaInstructorsFactory::new();
     }
 }

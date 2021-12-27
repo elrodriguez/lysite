@@ -19,6 +19,7 @@ class CreateAcaCoursesTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('status')->defaul(true);
             $table->text('course_image')->nullable();
+            $table->text('main_video')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

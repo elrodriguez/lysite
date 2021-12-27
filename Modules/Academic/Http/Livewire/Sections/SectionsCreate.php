@@ -28,6 +28,7 @@ class SectionsCreate extends Component
     public function save(){
         $this->validate([
             'title' => 'required|max:255',
+            'description' => 'required',
         ]);
         $count=AcaSection::where('course_id',$this->course_id)->count();
         AcaSection::create([

@@ -94,7 +94,7 @@ class ContentsCreate extends Component
             'content_url' => $this->content_url, //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
             'original_name' => $this->original_name,
             'status' => true,
-            'count' => $count,
+            'count' => $count+1,
             'created_by' => Auth::id()
         ]);
 

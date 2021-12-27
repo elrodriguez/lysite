@@ -84,5 +84,17 @@ return [
     'Sort' => 'Ordenar',
     'Down' => 'Abajo',
     'Add Course' => 'Agregar Curso',
-    'View/Assign Instructors' => 'Ver/Asignar Instructores'
+    'View/Assign Instructors' => 'Ver/Asignar Instructores',
+    'Main Video' => 'Video Principal',
+    'Url' => 'Enlace',
+    'Instructors' => 'Instructores',
+    'Assigned Instructors' => 'Instructores Asignados',
+    'Email' => 'Correo Electrónico',
+    'Assign' => 'Asignar',
+    'Remove assignment' => 'Quitar asignación',
+    'Assign New Instructor' => 'Asignar Nuevo Instructor',
+    'Search Instructors' => 'Buscar Instructores',
+    'Search and Assign Instructors' => 'Buscar y Asignar Instructores',
+    'Available Instructors' => 'Instructores Disponibles',
+    'Course' => 'Curso',
 ];

@@ -9,6 +9,7 @@ use Modules\Academic\Entities\AcaContent;
 use Modules\Academic\Entities\AcaContentType;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Stmt\Label;
 use SebastianBergmann\Environment\Console;
 
@@ -60,10 +61,22 @@ class ContentsList extends Component
 
     public function destroy($id){
         try {
+            $content_url=AcaContent::find($id)->content_url;
+            Storage::disk('public')->delete(substr($content_url, 8));
+            $conteo=AcaContent::find($id)->count;
             AcaContent::find($id)->delete();
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
+            $contents = AcaContent::where('section_id', $this->section_id)->get();
+            foreach ($contents as $content) {
+                $value = $content->count;
+                   if($value>$conteo ){
+                       $content->count = $value-1;
+                       $content->update();
+                   }
+
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             $res = 'error';
             $tit = 'Salió mal';

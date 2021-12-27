@@ -31,18 +31,31 @@ class SectionsList extends Component
 
     public function destroy($id){
         try {
+            $conteo=AcaSection::find($id);
+            $conteo=$conteo->count;
             AcaSection::find($id)->delete();
             $res = 'success';
-            $tit = 'Enhorabuena';
+            $tit = 'enhorabuena';
             $msg = 'Se eliminó correctamente';
+            $sections = AcaSection::where('course_id', $this->course_id)->get();
+            foreach ($sections as $section) {
+                $value = $section->count;
+                   if($value>$conteo){
+                       $section->count = $value-1;
+                       $section->update();
+                   }
+
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             $res = 'error';
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
         }
 
-        $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+
+        $this->dispatchBrowserEvent('set-section-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
+
 
     public function changeordernumber($count, $id , $direction){
         $next_count=null;
