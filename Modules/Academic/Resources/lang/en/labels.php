@@ -19,5 +19,8 @@ return [
     'inactive'      => 'Inactive',
     'add_section'   => 'Add Section',
     'add_content'   => 'Add content',
-    'close'         => 'Close'
+    'close'         => 'Close',
+    'name'          => 'Name',
+    'content'       => 'Content',
+    'type'          => 'Type'
 ];
