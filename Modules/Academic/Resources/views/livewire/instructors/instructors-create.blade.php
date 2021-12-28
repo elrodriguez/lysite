@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody class="list">
                                     @foreach($instructors as $key => $instructor)
-                                    @if ($instructor->course_id != $this->course_id)
+                                    {{-- @if ($instructor->course_id != $this->course_id) --}}
                                     <tr>
 
                                         <td class="text-center align-middle">
@@ -50,7 +50,7 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    @endif
+                                    {{-- @endif --}}
                                     @endforeach
                                 </tbody>
                                 <tfoot>

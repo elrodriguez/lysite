@@ -24,15 +24,24 @@ class InstructorsCreate extends Component
     }
 
     public function getSections(){
+        $course_id = $this->course_id;
         $instructors = DB::table('users')
             ->join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
             ->join('people', 'people.user_id', '=', 'users.id')
-            ->leftJoin('aca_instructors', 'aca_instructors.person_id', '=', 'people.id')
-            ->select('people.full_name as full_name', 'people.id as person_id', 'aca_instructors.course_id as course_id')
+            ->select('people.full_name as full_name', 'people.id as person_id')
             ->where('model_has_roles.role_id', '=', '3')
-            ->where('people.full_name', 'like', '%'.$this->search.'%')
-            //->where('people.number', 'like', '%'.$this->search.'%')
+            ->where(function($query) {
+                $query->where('people.number', $this->search)
+                      ->orWhere('people.full_name', 'like', '%'.$this->search.'%');
+            })
+            ->where(function ($query) use ($course_id) {
+                $query->selectRaw('COUNT(person_id)')
+                    ->from('aca_instructors')
+                    ->whereColumn('aca_instructors.person_id', 'people.id')
+                    ->where('aca_instructors.course_id','=',$course_id);
+            }, 'pro')
             ->get();
+
             return $instructors;
 /*
 $instructors = DB::table('users')
