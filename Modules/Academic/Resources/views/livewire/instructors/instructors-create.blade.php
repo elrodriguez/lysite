@@ -17,7 +17,7 @@
                         <div class="table-responsive" data-toggle="lists" data-lists-values='["name"]'>
 
                             <div class="search-form search-form--light mb-3">
-                                <input wire:model="search" type="text" class="form-control search" placeholder="Search">
+                                <input wire:keydown.enter="searchPeople" wire:model.defer="search" type="text" class="form-control search" placeholder="Search">
                                 <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
                             </div>
                             <!-- Table -->
@@ -47,16 +47,14 @@
 
                                         </td>
                                         <td class="name align-middle">{{ $instructor->full_name }}</td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
                                     {{-- @endif --}}
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td class="text-end" colspan="3">
-
+                                        <td class="text-end" colspan="2">
+                                            {{ $instructors->links() }}
                                         </td>
                                     </tr>
                                 </tfoot>
