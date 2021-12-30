@@ -16,6 +16,8 @@ class CreateAcaStudentsTable extends Migration
         Schema::create('aca_students', function (Blueprint $table) {
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('course_id');
+            $table->boolean('status')->default(1);
+            $table->date('registered_until')->nullable();
             $table->timestamps();
             $table->foreign('person_id')->references('id')->on('people');
             $table->foreign('course_id')->references('id')->on('aca_courses');

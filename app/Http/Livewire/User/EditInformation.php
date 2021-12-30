@@ -139,5 +139,11 @@ class EditInformation extends Component
         }
 
         $this->dispatchBrowserEvent('set-person-update', ['tit' => 'Enhorabuena','msg' => 'Se actualizó correctamente']);
+
+        $this->exit();
+
+    }
+    public function exit(){
+        redirect()->route('dashboard');
     }
 }

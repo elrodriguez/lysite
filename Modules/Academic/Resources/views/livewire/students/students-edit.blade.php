@@ -2,7 +2,8 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('academic_students') }}">{{ __('academic::labels.students') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('academic_students') }}">{{ __('academic::labels.students')
+                    }}</a></li>
             <li class="breadcrumb-item">{{ $this->person->full_name }}</li>
             <li class="breadcrumb-item active">{{ __('academic::labels.edit') }}</li>
         </ol>
@@ -20,41 +21,46 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="name">Tipo Documento  *</label>
+                                        <label class="form-label" for="name">Tipo Documento *</label>
                                         <select class="form-control" wire:model="document_type_id">
                                             <option value="">Seleccionar</option>
                                             @foreach($document_types as $document_type)
-                                            <option value="{{ $document_type->id }}">{{ $document_type->description }}</option>
+                                            <option value="{{ $document_type->id }}">{{ $document_type->description }}
+                                            </option>
                                             @endforeach
                                         </select>
-                                        @error('document_type_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('document_type_id') <span class="invalid-feedback-2">{{ $message
+                                            }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="number">Número documento *</label>
                                         <input wire:model="number" type="text" class="form-control">
-                                        @error('number') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('number') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row" >
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="last_name_father">Apellido Paterno *</label>
                                         <input wire:model="last_name_father" type="text" class="form-control" id="name">
-                                        @error('last_name_father') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('last_name_father') <span class="invalid-feedback-2">{{ $message
+                                            }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="last_name_mother">Apellido Materno *</label>
                                         <input wire:model="last_name_mother" type="text" class="form-control" id="name">
-                                        @error('last_name_mother') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('last_name_mother') <span class="invalid-feedback-2">{{ $message
+                                            }}</span> @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-6">   
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="names">Nombre *</label>
                                         <input wire:model="names" type="text" class="form-control" id="name">
@@ -63,33 +69,42 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="birth_date">{{ __('labels.Date of Birth') }}</label>
-                                        <input wire:model="birth_date" onchange="this.dispatchEvent(new InputEvent('input'))" id="birth_date" type="text" class="form-control">
-                                        @error('birth_date') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
-                                    </div> 
+                                        <label class="form-label" for="birth_date">{{ __('labels.Date of Birth')
+                                            }}</label>
+                                        <input wire:model="birth_date"
+                                            onchange="this.dispatchEvent(new InputEvent('input'))" id="birth_date"
+                                            type="text" class="form-control">
+                                        @error('birth_date') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-label">{{ __('labels.Region') }}</label>
-                                        <select wire:change="getProvinces" wire:model="department_id" class="form-control">
+                                        <select wire:change="getProvinces" wire:model="department_id"
+                                            class="form-control">
                                             <option value="">Seleccionar</option>
                                             @foreach($departments as $department)
-                                                <option value="{{ $department->id }}">{{ $department->description }}</option>
+                                            <option value="{{ $department->id }}">{{ $department->description }}
+                                            </option>
                                             @endforeach
                                         </select>
-                                        @error('department_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('department_id') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-label">{{ __('labels.Province') }}</label>
-                                        <select wire:change="getDistricts" wire:model="province_id" class="form-control">
+                                        <select wire:change="getDistricts" wire:model="province_id"
+                                            class="form-control">
                                             <option value="">{{ __('labels.Select') }}</option>
                                             @foreach($provinces as $province)
-                                                <option value="{{ $province->id }}">{{ $province->description }}</option>
+                                            <option value="{{ $province->id }}">{{ $province->description }}</option>
                                             @endforeach
                                         </select>
-                                        @error('province_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('province_id') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -98,17 +113,19 @@
                                         <select wire:model="district_id" class="form-control">
                                             <option value="">{{ __('labels.Select') }}</option>
                                             @foreach($districts as $district)
-                                                <option value="{{ $district->id }}">{{ $district->description }}</option>
+                                            <option value="{{ $district->id }}">{{ $district->description }}</option>
                                             @endforeach
                                         </select>
-                                        @error('district_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('district_id') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-label">{{ __('labels.Address') }}</label>
                                         <input wire:model="address" type="text" class="form-control">
-                                        @error('address') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        @error('address') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -121,8 +138,10 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-label" for="mobile_phone">Telefono *</label>
-                                        <input wire:model="mobile_phone" type="text" class="form-control" id="mobile_phone">
-                                        @error('mobile_phone') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        <input wire:model="mobile_phone" type="text" class="form-control"
+                                            id="mobile_phone">
+                                        @error('mobile_phone') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -139,7 +158,8 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input wire:model="status" class="custom-control-input" type="checkbox" value="" id="invalidCheck01" >
+                                            <input wire:model="status" class="custom-control-input" type="checkbox"
+                                                value="" id="invalidCheck01">
                                             <label class="custom-control-label" for="invalidCheck01">
                                                 Estado
                                             </label>
@@ -157,14 +177,17 @@
                                             <select wire:model="course_id" class="form-control">
                                                 <option value="">{{ __('labels.Select') }}</option>
                                                 @foreach($courses as $course)
-                                                    <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                                <option value="{{ $course->id }}">{{ $course->name }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="input-group-append">
-                                                <button wire:click="addCourse" wire:target="addCourse" wire:loading.attr="disabled" class="btn btn-primary" type="button" >Agregar</button>
+                                                <button wire:click="addCourse" wire:target="addCourse"
+                                                    wire:loading.attr="disabled" class="btn btn-primary"
+                                                    type="button">{{ __('labels.Add') }}</button>
                                             </div>
-                                            </div>
-                                        @error('course_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        </div>
+                                        @error('course_id') <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -174,30 +197,50 @@
                                                 <th class="text-center">#</th>
                                                 <th class="text-center">Acciones</th>
                                                 <th>Nombre Del Curso</th>
+                                                <th class="text-center">{{ __('labels.Registered until') }}</th>
+                                                <th class="text-center">{{ __('labels.Status') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if($student_courses)
-                                                @foreach($student_courses as $key => $student_course)
-                                                    <tr>
-                                                        <td class="text-center">{{ $key + 1 }}</td>
-                                                        <td class="text-center">
-                                                            <button onclick="deletes({{ $key }},{{ $student_course['id'] }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
-                                                        </td>
-                                                        <td>{{ $student_course['name'] }}</td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach($student_courses as $key => $student_course)
+                                            <tr>
+                                                <td class="text-center">{{ $key + 1 }}</td>
+                                                <td class="text-center">
+                                                    <button onclick="deletes({{ $key }},{{ $student_course['id'] }})"
+                                                        type="button" class="btn btn-danger btn-sm" title="Eliminar"><i
+                                                            class="fa fa-trash-alt"></i></button>
+                                                </td>
+                                                <td>{{ $student_course['name'] }}</td>
+                                                <td>
+                                                    <input type="date" name="registered_until" id="registered_until"
+                                                        value="{{ $student_course['registered_until'] }}">
+                                                </td>
+                                                @if ($student_course['status'] == 1)
+                                                <td class="text-center">
+                                                    <span class="badge badge-success">{{ __('labels.Active') }}</span>
+                                                </td>
+
+                                                @else
+                                                <td class="text-center">
+                                                    <span class="badge badge-danger">{{ __('labels.Inactive') }}</span>
+                                                </td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
                                             @else
-                                                <tr>
-                                                    <td class="text-center" colspan="3">No está registrado en ningún curso</td>
-                                                </tr>
+                                            <tr>
+                                                <td class="text-center" colspan="3">No está registrado en ningún curso
+                                                </td>
+                                            </tr>
                                             @endif
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar Cambios</button>
-                           
+                            <button type="submit" wire:loading.attr="disabled" wire:target="save"
+                                class="btn btn-primary">Guardar Cambios</button>
+
                         </form>
                     </div>
                 </div>
@@ -215,7 +258,7 @@
             }).then((e)=>{
                 if ( e == ("confirm")){
                     @this.removeCourse(index,id)
-                } 
+                }
             });
         }
         window.addEventListener('aca-student-delete-course', event => {

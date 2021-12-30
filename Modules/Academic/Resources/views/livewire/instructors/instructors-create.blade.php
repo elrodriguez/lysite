@@ -24,7 +24,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-
+                                        <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
                                         <th>{{ __('labels.Available Instructors') }}</th>
                                     </tr>
@@ -33,11 +33,12 @@
                                     @foreach($instructors as $key => $instructor)
                                     {{-- @if ($instructor->course_id != $this->course_id) --}}
                                     <tr>
+                                        <td class="text-center align-middle">{{ $key+1 }}</td>
 
                                         <td class="text-center align-middle">
 
                                             <div class="btn-group">
-                                                @can('academico_secciones_editar')
+                                                @can('academico_instructores_asignar')
 
                                                 <button wire:click="assign({{ $instructor->person_id }})" title="{{ __('labels.Assign') }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-angle-up"></i></button>
