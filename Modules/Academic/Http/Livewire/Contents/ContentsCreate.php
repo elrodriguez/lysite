@@ -9,7 +9,6 @@ use Modules\Academic\Entities\AcaContentType;
 use Modules\Academic\Entities\AcaSection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
-use Modules\Academic\Http\Livewire\Contents\DB;
 
 class ContentsCreate extends Component
 {
@@ -87,6 +86,7 @@ class ContentsCreate extends Component
         }
 
         $count=AcaContent::where('Section_id',$this->section_id)->count();
+
         AcaContent::create([
             'section_id' => $this->section_id,
             'content_type_id' => $this->content_type_id,

@@ -78,14 +78,14 @@
             <div class="col-md-4">
 
                 <div class="mb-heading d-flex align-items-center">
-                    <h4 class="flex mb-0">Main Video</h4>
-                    <a href="#" class="text-underline">Edit</a>
+                    <h4 class="flex mb-0">{{ __('academic::labels.main_video') }}</h4>
+                    <a wire:click="$emit('instructorOpenModalMainTrailer',{{ $course->id }});" href="#" class="text-underline">{{ __('academic::labels.edit') }}</a>
                 </div>
 
                 <div class="card">
-                    {{-- <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
-                    </div> --}}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        {!! $course->main_video !!}
+                    </div>
                 </div>
 
                 {{-- <div class="mb-heading d-flex align-items-center">
