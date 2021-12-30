@@ -97,4 +97,10 @@ return [
     'Search and Assign Instructors' => 'Buscar y Asignar Instructores',
     'Available Instructors' => 'Instructores Disponibles',
     'Course' => 'Curso',
+    'Assigned Students' => 'Estudiantes Asignados',
+    'Active' => 'Activo',
+    'Inactive' => 'Inactivo',
+    'Registered until' => 'Registrado hasta',
+    'Student' => 'Estudiante',
+    'Add' => 'Agregar',
 ];

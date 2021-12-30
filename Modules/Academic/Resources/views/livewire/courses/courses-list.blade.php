@@ -53,9 +53,9 @@
                                                 @endcan
                                             </div>
                                         </td>
-                                        <td class="name align-middle">
+                                        <td class="text-center align-middle">
                                         @can('academico_instructores_asignar')
-                                        <a href="{{ route('academic_instructor_assign',$course->id) }}" type="button" class="btn btn-success btn-sm" title="Asignar/Ver {{ __('labels.Instructors') }}"><i class="fa fa-newspaper"></i></a>
+                                        <a href="{{ route('academic_instructor_assign',$course->id) }}" type="button" class="btn btn-success btn-sm" title="Asignar/Ver {{ __('labels.Instructors') }}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                                         @endcan
                                         </td>
                                         <td class="name align-middle">{{ $course->name }}</td>

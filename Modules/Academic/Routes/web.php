@@ -55,9 +55,11 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
     });
 
     Route::group(['prefix' => 'assign/courses'], function() {
-        Route::middleware(['middleware' => 'role_or_permission:academico_instructores_asignar'])->get('{course_id}', 'InstructorsController@index')->name('academic_instructor_assign');
-        Route::middleware(['middleware' => 'role_or_permission:academico_instructores_asignar'])->get('{course_id}/new_instructor', 'InstructorsController@create')->name('academic_instructor_assign_create');
+        Route::middleware(['middleware' => 'role_or_permission:academico_instructores_asignar'])->get('instructors/{course_id}', 'InstructorsController@index')->name('academic_instructor_assign');
+        Route::middleware(['middleware' => 'role_or_permission:academico_estudiantes_asignar'])->get('students/{course_id}', 'StudentsController@index')->name('academic_student_assign');
+        Route::middleware(['middleware' => 'role_or_permission:academico_estudiantes_asignar'])->get('student/{course_id}/{id}', 'StudentsController@edit')->name('academic_student_assign_edit');
     });
+
 });
 
 

@@ -10,6 +10,8 @@ use App\Models\Province;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaStudent;
 use App\Models\IdentityDocumentType;
+use DateTime;
+use Illuminate\Support\Facades\DB;
 
 class StudentsEdit extends Component
 {
@@ -35,11 +37,14 @@ class StudentsEdit extends Component
     public $courses = [];
     public $course_id = null;
     public $student_courses = [];
+    public $registered_until = null;
+    public $status_student = 1;
 
-    public function mount($student_id){
-        $this->document_types = IdentityDocumentType::where('status',true)->get();
-        $this->departments = Department::where('active',true)->get();
-        $this->courses = AcaCourse::where('status',true)->get();
+    public function mount($student_id)
+    {
+        $this->document_types = IdentityDocumentType::where('status', true)->get();
+        $this->departments = Department::where('active', true)->get();
+        $this->courses = AcaCourse::where('status', true)->get();
 
         $this->person = Person::find($student_id);
 
@@ -57,20 +62,22 @@ class StudentsEdit extends Component
         $this->department_id = $this->person->department_id;
         $this->province_id = $this->person->province_id;
         $this->district_id = $this->person->district_id;
+        $this->registered_until =  now()->toDateTimeString();
 
-        if($this->department_id){
-            $this->provinces = Province::where('department_id',$this->department_id)->get();
+
+        if ($this->department_id) {
+            $this->provinces = Province::where('department_id', $this->department_id)->get();
         }
 
-        if($this->province_id){
-            $this->districts = District::where('province_id',$this->province_id)->get();
+        if ($this->province_id) {
+            $this->districts = District::where('province_id', $this->province_id)->get();
         }
 
-        $student_courses = AcaStudent::join('aca_courses','aca_students.course_id','aca_courses.id')
-                                    ->select('aca_courses.id', 'aca_courses.name')
-                                    ->where('person_id',$this->person->id)
-                                    ->get();
-        if($student_courses){
+        $student_courses = AcaStudent::join('aca_courses', 'aca_students.course_id', 'aca_courses.id')
+            ->select('aca_courses.id', 'aca_courses.name', 'aca_students.registered_until as registered_until', 'aca_students.status')
+            ->where('person_id', $this->person->id)
+            ->get();
+        if ($student_courses) {
             $this->student_courses = $student_courses->toArray();
         }
     }
@@ -80,21 +87,23 @@ class StudentsEdit extends Component
         return view('academic::livewire.students.students-edit');
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->validate([
             'document_type_id' => 'required',
-            'number' => 'required|max:12|unique:people,number,'.$this->person->id.',id,identity_document_type_id,'.$this->document_type_id,
+            'number' => 'required|max:12|unique:people,number,' . $this->person->id . ',id,identity_document_type_id,' . $this->document_type_id,
             'names' => 'required|max:150',
-            'last_name_father'=> 'required|max:150',
+            'last_name_father' => 'required|max:150',
             'last_name_mother' => 'required|max:150',
             'address' => 'required',
             'sex' => 'required',
-            'birth_date' =>'required',
+            'birth_date' => 'required',
             'email' => 'required',
             'department_id' => 'required',
             'province_id' => 'required',
-            'district_id' => 'required'
+            'district_id' => 'required',
+            'registered_until' => 'required',
         ]);
 
         $this->person->update([
@@ -103,7 +112,7 @@ class StudentsEdit extends Component
             'names' => $this->names,
             'last_name_father' => $this->last_name_father,
             'last_name_mother' => $this->last_name_mother,
-            'full_name' => ($this->names.' '.$this->last_name_father.' '.$this->last_name_mother),
+            'full_name' => ($this->names . ' ' . $this->last_name_father . ' ' . $this->last_name_mother),
             'address' => $this->address,
             'mobile_phone' => $this->mobile_phone,
             'sex' => $this->sex,
@@ -111,49 +120,59 @@ class StudentsEdit extends Component
             'email' => $this->email,
             'department_id' => $this->department_id,
             'province_id' => $this->province_id,
-            'district_id' => $this->district_id
+            'district_id' => $this->district_id,
         ]);
 
         AcaStudent::where('person_id', $this->person->id)->delete();
-        
-        foreach($this->student_courses as $student_course){
-            $aca_student = AcaStudent::where('person_id',$this->person->id)
-                            ->where('course_id',$student_course['id'])
-                            ->exists();
-            if(!$aca_student){
+
+        foreach ($this->student_courses as $student_course) {
+            $aca_student = AcaStudent::where('person_id', $this->person->id)
+                ->where('course_id', $student_course['id'])
+                ->exists();
+            if (!$aca_student) {
                 AcaStudent::create([
                     'person_id' => $this->person->id,
-                    'course_id' => $student_course['id']
+                    'course_id' => $student_course['id'],
+                    'registered_until' => $student_course['registered_until'],
+                    'status' => $student_course['status']
                 ]);
             }
-            
         }
 
-        $this->dispatchBrowserEvent('aca-student-update', ['tit' => 'Enhorabuena','msg' => 'Se actualizó correctamente']);
+        $this->dispatchBrowserEvent('aca-student-update', ['tit' => 'Enhorabuena', 'msg' => 'Se actualizó correctamente']);
     }
 
-    public function addCourse(){
-        
+    public function addCourse()
+    {
+
         $key = array_search($this->course_id, array_column($this->student_courses, 'id'));
-        if($key === false){
+        if ($key === false) {
 
             $course = AcaCourse::find($this->course_id);
 
-            array_push($this->student_courses,array('id'=>$course->id,'name'=>$course->name));
+            array_push($this->student_courses, array(
+                'id' => $course->id,
+                'name' => $course->name,
+                'registered_until' => $this->registered_until,
+                'status' => $this->status_student
+            ));
         }
-        
     }
 
-    public function removeCourse($index,$course_id){
+    public function removeCourse($index, $course_id)
+    {
         unset($this->student_courses[$index]);
         AcaStudent::where('person_id', $this->person->id)
-                    ->where('course_id', $course_id)
-                    ->delete();
-        
+            ->where('course_id', $course_id)
+            ->delete();
+
         $res = 'success';
         $tit = 'Enhorabuena';
         $msg = 'Se eliminó correctamente';
 
         $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
+    public function update(){
+
     }
 }
