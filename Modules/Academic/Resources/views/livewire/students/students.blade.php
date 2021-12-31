@@ -41,7 +41,7 @@
 
                                                 @can('academico_estudiantes_asignar')
 
-                                                <a href="{{ route('academic_student_assign_edit',[$course_id, $student->id]) }}"
+                                                <a href="{{ route('academic_student_assign_edit',[$course_id, $student->person_id]) }}"
                                                     type="button" class="btn btn-info btn-sm"><i
                                                         class="fa fa-pencil-alt" title="Ver/Editar Contenido"></i></a>
 

@@ -41,8 +41,8 @@ class SectionsEdit extends Component
         ]);
 
         $this->section->update([
-            'title'         => $this->title,
-            'description'   => $this->description,
+            'title'         => trim($this->title),
+            'description'   => trim($this->description),
             'status'        => $this->status ? true : false,
             'updated_by'    => Auth::id()
         ]);

@@ -104,7 +104,7 @@ class ContentsEdit extends Component
 
         $this->content->update([
             'content_type_id' => $this->content_type_id,
-            'name' => $this->name,
+            'name' => trim($this->name),
             'content_url' => $this->content_url,
             'original_name' => $this->original_name,
             'status' => $this->status,
