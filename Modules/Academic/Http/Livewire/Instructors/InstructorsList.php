@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Academic\Http\Livewire\Students;
+namespace Modules\Academic\Http\Livewire\Instructors;
 
 use Livewire\Component;
 use Modules\Academic\Entities\AcaStudent;
 use Livewire\WithPagination;
+use Modules\Academic\Entities\AcaInstructor;
 
-class StudentsList extends Component
+class InstructorsList extends Component
 {
     public $search;
 
@@ -16,13 +17,13 @@ class StudentsList extends Component
 
     public function render()
     {
-        return view('academic::livewire.students.students-list',['students' => $this->getData()]);
+        return view('academic::livewire.instructors.instructors-list',['instructors' => $this->getData()]);
     }
 
     public function getData(){
-        return AcaStudent::join('people','person_id','people.id')
+        return AcaInstructor::join('people','person_id','people.id')
                 ->join('identity_document_types','people.identity_document_type_id','identity_document_types.id')
-                ->join('aca_courses','aca_students.course_id','aca_courses.id')
+                ->join('aca_courses','aca_instructors.course_id','aca_courses.id')
                 ->select(
                     'people.id',
                     'people.full_name',

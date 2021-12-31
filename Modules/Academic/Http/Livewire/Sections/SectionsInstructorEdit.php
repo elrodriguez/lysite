@@ -4,6 +4,7 @@ namespace Modules\Academic\Http\Livewire\Sections;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
 
 class SectionsInstructorEdit extends Component
@@ -11,11 +12,12 @@ class SectionsInstructorEdit extends Component
     public $sections = [];
     public $section_edit = [];
     public $course_id;
+    public $course;
 
     public function mount($course_id){
         
         $this->course_id = $course_id;
-
+        $this->course = AcaCourse::find($course_id);
         $this->getData();
     }
 
@@ -110,8 +112,8 @@ class SectionsInstructorEdit extends Component
                 'created_by' => Auth::id()
             ]);
         }
-        
-        $this->section_edit[$key] = false;
+        $this->getData();
+        //$this->section_edit[$key] = false;
     }
 
     public function addSection(){

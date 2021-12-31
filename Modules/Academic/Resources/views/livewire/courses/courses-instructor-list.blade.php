@@ -1,6 +1,6 @@
 <div class="container page__container page-section">
     <div class="mb-heading d-flex align-items-center">
-        <h4 class="flex m-0">Manage Courses</h4>
+        <h4 class="flex m-0">Gestionar cursos</h4>
         <a href="{{ route('academic_courses_create') }}" class="btn btn-accent">{{ __('labels.Add Course') }}</a>
     </div>
     <div class="row">

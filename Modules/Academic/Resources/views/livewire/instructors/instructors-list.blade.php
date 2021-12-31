@@ -2,7 +2,7 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('academic::labels.students') }}</li>
+            <li class="breadcrumb-item active">{{ __('academic::labels.instructors') }}</li>
         </ol>
     </div>
     <div class="container page__container">
@@ -13,7 +13,7 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Módulos del sistema</p>
                         @can('configuraciones_modulos_nuevo')
-                        <a href="{{ route('academic_students_create') }}" type="button" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('academic_instructors_create') }}" type="button" class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -39,25 +39,25 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach($students as $key => $student)
+                                    @foreach($instructors as $key => $instructor)
                                     <tr>
                                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group">
                                                 @can('academico_alumnos_editar')
-                                                <a href="{{ route('academic_students_edit',$student->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                                <a href="{{ route('academic_instructors_edit',$instructor->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 {{-- @can('academico_alumnos_eliminar')
-                                                <button onclick="deletes({{ $student->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
+                                                <button onclick="deletes({{ $instructor->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan --}}
                                             </div>
                                         </td>
-                                        <td class="name align-middle">{{ $student->name }}</td>
-                                        <td class="name align-middle">{{ $student->document_type_name }}</td>
-                                        <td class="name align-middle">{{ $student->number }}</td>
-                                        <td class="name align-middle">{{ $student->full_name }}</td>
-                                        <td class="name align-middle">{{ $student->mobile_phone }}</td>
-                                        <td class="name align-middle">{{ $student->email }}</td>
+                                        <td class="name align-middle">{{ $instructor->name }}</td>
+                                        <td class="name align-middle">{{ $instructor->document_type_name }}</td>
+                                        <td class="name align-middle">{{ $instructor->number }}</td>
+                                        <td class="name align-middle">{{ $instructor->full_name }}</td>
+                                        <td class="name align-middle">{{ $instructor->mobile_phone }}</td>
+                                        <td class="name align-middle">{{ $instructor->email }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -65,7 +65,7 @@
                                     <tr>
                                         <td class="text-end" colspan="3">
                                             <div class="d-flex flex-row-reverse">
-                                                {{ $students->links() }}
+                                                {{ $instructors->links() }}
                                             </div>
                                         </td>
                                     </tr>
@@ -91,7 +91,7 @@
                 } 
             });
         }
-        window.addEventListener('aca-student-delete', event => {
+        window.addEventListener('aca-instructor-delete', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

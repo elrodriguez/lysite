@@ -30,6 +30,7 @@
     </x-slot> 
     @section('modales')
         @livewire('academic::contents.contents-instructor-form')
+        @livewire('academic::courses.courses-main-trailer')
     @endsection
 </x-master>
 

@@ -22,5 +22,10 @@ return [
     'close'         => 'Close',
     'name'          => 'Name',
     'content'       => 'Content',
-    'type'          => 'Type'
+    'type'          => 'Type',
+    'link'          => 'Link',
+    'file'          => 'File',
+    'main_video'    => 'Main Video',
+    'instructor'    => 'Instructor',
+    'instructors'    => 'Instructors'
 ];
