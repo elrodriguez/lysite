@@ -33,8 +33,8 @@ class SectionsCreate extends Component
         $count=AcaSection::where('course_id',$this->course_id)->count();
         AcaSection::create([
             'course_id'     => $this->course_id,
-            'title'         => $this->title,
-            'description'   => $this->description,
+            'title'         => trim($this->title),
+            'description'   => trim($this->description),
             'status'        => $this->status ? true : false,
             'count'         => $count + 1,
             'created_by'    => Auth::id()

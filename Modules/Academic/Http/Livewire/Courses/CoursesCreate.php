@@ -36,11 +36,11 @@ class CoursesCreate extends Component
         $this->validate();
         $this->course_image = 'storage/'.substr($this->course_image->store('public/uploads/academic/courses'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
         AcaCourse::create([
-            'name' => $this->name,
-            'description' => $this->description,
+            'name' => trim($this->name),
+            'description' => trim($this->description),
             'status' => $this->status ? true : false,
             'course_image' => $this->course_image,
-            'main_video' => $this->main_video,
+            'main_video' => trim($this->main_video),
             'created_by' => Auth::id()
         ]);
 

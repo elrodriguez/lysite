@@ -19,6 +19,12 @@ class StudentsController extends Controller
         //return view('academic::students.students')->with('course_id',$course_id);
     }
 
+    public function index2($course_id)
+        {
+
+            return view('academic::students.students')->with('course_id',$course_id);
+        }
+
     /**
      * Show the form for creating a new resource.
      * @return Renderable
@@ -28,6 +34,11 @@ class StudentsController extends Controller
         return view('academic::students.create');
         //return view('academic::students.students-assign')->with('course_id',$course_id);
     }
+
+    public function create2($course_id)
+        {
+            return view('academic::students.students-assign')->with('course_id',$course_id);
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -44,6 +55,16 @@ class StudentsController extends Controller
             'id' => $id
         ]); */
     }
+
+    public function edit2($course_id, $id)
+        {
+
+            return view('academic::students.student-assign-edit')->with([
+
+                'course_id' => $course_id,
+                'id' => $id
+            ]);
+        }
 
 
 }

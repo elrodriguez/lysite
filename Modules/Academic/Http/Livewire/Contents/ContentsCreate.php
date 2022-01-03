@@ -90,7 +90,7 @@ class ContentsCreate extends Component
         AcaContent::create([
             'section_id' => $this->section_id,
             'content_type_id' => $this->content_type_id,
-            'name' => $this->name,
+            'name' => trim($this->name),
             'content_url' => $this->content_url, //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
             'original_name' => $this->original_name,
             'status' => true,

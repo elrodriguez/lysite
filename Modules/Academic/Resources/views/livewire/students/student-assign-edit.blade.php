@@ -28,7 +28,7 @@
                                 @error('registered_until') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar</button>
+                            <button type="submit" wire:loading.attr="disabled" wire:target="update" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('aca-courses-update', event => {
+        window.addEventListener('aca-student-edit', event => {
             cuteAlert({
                 type: "success",
                 title: event.detail.tit,
