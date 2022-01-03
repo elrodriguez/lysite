@@ -19,28 +19,7 @@
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <span class="material-icons">people_outline</span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbar-submenu2">
-                <div class="navbar-collapse__content pb-16pt pb-sm-0">
-                    <ul class="nav navbar-nav">
-
-                        <li class="nav-item active">
-                            <a href="student-dashboard.html" class="nav-link">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="student-my-courses.html" class="nav-link">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="student-discussions.html" class="nav-link">Discussions</a>
-                        </li>
-
-                    </ul>
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="student-profile.html" class="nav-link">Profile</a>
-                        </li>
-                    </ul>
-                </div>
+                @livewire('nav.nav-global')
             </div>
         </div>
     </div>
