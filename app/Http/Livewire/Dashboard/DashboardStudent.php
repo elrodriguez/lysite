@@ -11,20 +11,17 @@ class DashboardStudent extends Component
 {
     public $person_id;
     public $date_end;
-    public $courses = [];
+    public $registered_until = null;
 
     public function mount(){
         $person = Person::where('user_id',Auth::id())->first();
         if($person){
             $this->person_id = $person->id;
             $this->date_end = null;
-            $this->courses = AcaStudent::join('aca_courses','course_id','courses.id')
-                                ->select(
-                                    'aca_courses.name',
-                                    'aca_courses.description'
-                                );
+            $this->registered_until = AcaStudent::where('person_id',$this->person_id)
+                                            ->max('registered_until');
         }
-        
+
     }
 
     public function render()
