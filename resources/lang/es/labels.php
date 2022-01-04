@@ -103,4 +103,5 @@ return [
     'Registered until' => 'Registrado hasta',
     'Student' => 'Estudiante',
     'Add' => 'Agregar',
+    'Register until' => 'Registrar hasta',
 ];

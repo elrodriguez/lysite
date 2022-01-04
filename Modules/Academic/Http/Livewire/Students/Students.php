@@ -34,7 +34,7 @@ class Students extends Component
 
         return AcaStudent::join('aca_courses', 'aca_students.course_id', '=', 'aca_courses.id')
             ->join('people', 'aca_students.person_id', '=', 'people.id')
-            ->select('aca_courses.id as course_id', 'aca_courses.name as course_name', 'people.full_name as full_name', 'aca_students.person_id as person_id', 'aca_students.status as status', 'aca_students.registered_until as registered_until')
+            ->select('aca_courses.id as course_id', 'aca_courses.name as course_name', 'people.full_name as full_name', 'aca_students.person_id as person_id', 'aca_students.status as status', 'aca_students.registered_until as registered_until', 'aca_students.id as id')
             ->where('aca_students.course_id', $this->course_id)
 
             ->paginate(10);
@@ -45,7 +45,7 @@ class Students extends Component
         $course_id = $this->course_id;
         return AcaStudent::join('aca_courses', 'aca_students.course_id', '=', 'aca_courses.id')
             ->join('people', 'aca_students.person_id', '=', 'people.id')
-            ->select('aca_courses.id as course_id', 'aca_courses.name as course_name', 'people.full_name as full_name', 'aca_students.person_id as person_id', 'aca_students.status as status', 'aca_students.registered_until as registered_until')
+            ->select('aca_courses.id as course_id', 'aca_courses.name as course_name', 'people.full_name as full_name', 'aca_students.person_id as person_id', 'aca_students.status as status', 'aca_students.registered_until as registered_until', 'aca_students.id as id')
             ->where('aca_students.course_id', $course_id)
             ->where(function ($query) {
                 $query->where('people.number', 'like', '%' . $this->search . '%')
@@ -59,7 +59,7 @@ class Students extends Component
         $course_id = $this->course_id;
         return AcaStudent::join('aca_courses', 'aca_students.course_id', '=', 'aca_courses.id')
             ->join('people', 'aca_students.person_id', '=', 'people.id')
-            ->select('aca_courses.id as course_id', 'aca_courses.name as course_name', 'people.full_name as full_name', 'aca_students.person_id as person_id', 'aca_students.status as status', 'aca_students.registered_until as registered_until')
+            ->select('aca_courses.id as course_id', 'aca_courses.name as course_name', 'people.full_name as full_name', 'aca_students.person_id as person_id', 'aca_students.status as status', 'aca_students.registered_until as registered_until', 'aca_students.id as id')
             ->where('aca_students.course_id', $course_id)
             ->where(function ($query) use ($search) {
                 $query->where('people.number', 'like', '%' . $search . '%')
