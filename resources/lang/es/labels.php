@@ -103,5 +103,6 @@ return [
     'Registered until' => 'Registrado hasta',
     'Student' => 'Estudiante',
     'Add' => 'Agregar',
+    'my_courses' => 'Mis cursos',
     'Register until' => 'Registrar hasta',
 ];

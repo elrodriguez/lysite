@@ -68,12 +68,11 @@
                                 <div class="dropdown-header"><strong>{{ Auth::user()->name }}</strong></div>
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                 @can('academico_cursos_instructor')
-                                <a class="dropdown-item" href="{{ route('academic_instructor_courses_list') }}">Cursos</a>
+                                <a class="dropdown-item" href="{{ route('academic_dash_instructor_courses_list') }}">Cursos</a>
                                 @endcan
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-header"><strong>{{ __('labels.Account') }}</strong></div>
                                 <a class="dropdown-item" href="{{ route('user_edit_account') }}">{{ __('labels.Edit Account') }}</a>
-                                <a class="dropdown-item" href="student-billing-history.html">{{ __('labels.Billing') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
                             </div>
                         </div>
