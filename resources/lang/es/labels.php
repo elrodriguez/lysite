@@ -105,4 +105,13 @@ return [
     'Add' => 'Agregar',
     'my_courses' => 'Mis cursos',
     'Register until' => 'Registrar hasta',
+    'Assign Students' => 'Asignar Estudiantes',
+    'Students' => 'Estudiantes',
+    'Reset Password' => 'Restablecer Contraseña',
+    'Welcome Video' => 'Video de Bienvenida',
+    'of' => 'de',
+    'Steps' => 'Pasos',
+    'Viewed' => 'Visto',
+    'Table of Contents' => 'Tabla de Contenidos',
+    'Index' => 'Índice',
 ];

@@ -33,8 +33,9 @@
     <link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
+
     @yield('styles')
-    
+
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">
@@ -54,14 +55,14 @@
         <!-- Header Layout Content -->
         <div class="mdk-header-layout__content page-content ">
             {{ $jumbotron }}
-            
+
             {{ $slot }}
 
             <x-footer></x-footer>
         </div>
         <!-- // END Header Layout Content -->
     </div>
-    
+
     <!-- // END Header Layout -->
     {{ $navigation }}
     <!--  livewire -->
@@ -101,7 +102,7 @@
     @yield('script')
     @yield('modales')
     <!-- Modal -->
-    
+
 </body>
 
 </html>

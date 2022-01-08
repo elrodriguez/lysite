@@ -26,7 +26,7 @@ class CreateAcaContentTypesTable extends Migration
             ['description' => 'Escribir texto','name' => 'Texto'],
             ['description' => 'Subir documentos en pdf o word','name' => 'documento'],
             ['description' => 'Subir imagenes jpg, png','name' => 'Imagen']
-            
+
         ]);
     }
 

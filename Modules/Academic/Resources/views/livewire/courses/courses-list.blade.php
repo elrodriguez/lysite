@@ -30,10 +30,10 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
-                                        <th>{{ __('labels.Instructors') }}</th>
-                                        <th>Nombre</th>
-                                        <th>Descripcion</th>
-                                        <th>Estado</th>
+                                        <th>{{ __('labels.Instructors') }}/{{ __('labels.Students') }}</th>
+                                        <th>{{ __('labels.Name') }}</th>
+                                        <th>{{ __('labels.Description') }}</th>
+                                        <th>{{ __('labels.Status') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -54,17 +54,23 @@
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
+
                                         @can('academico_instructores_asignar')
                                         <a href="{{ route('academic_instructor_assign',$course->id) }}" type="button" class="btn btn-success btn-sm" title="Asignar/Ver {{ __('labels.Instructors') }}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                                         @endcan
+
+                                        @can('academico_estudiantes_asignar')
+                                        <a href="{{ route('academic_student_assign',$course->id) }}" type="button" class="btn btn-success btn-sm" title="Asignar/Ver {{ __('labels.Students') }}"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+                                        @endcan
+
                                         </td>
-                                        <td class="name align-middle">{{ $course->name }}</td>
-                                        <td class="name align-middle">{{ $course->description }}</td>
-                                        <td class="align-middle">
+                                        <td class="text-center align-middle">{{ $course->name }}</td>
+                                        <td class="text-center align-middle">{{ $course->description }}</td>
+                                        <td class="text-center align-middle">
                                             @if($course->status)
-                                            <span class="badge badge-success">Activo</span>
+                                            <span class="badge badge-success">{{ __('labels.Active') }}</span>
                                             @else
-                                            <span class="badge badge-danger">Inactivo</span>
+                                            <span class="badge badge-danger">{{ __('labels.Inactive') }}</span>
                                             @endif
                                         </td>
                                     </tr>

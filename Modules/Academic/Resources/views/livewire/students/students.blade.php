@@ -61,11 +61,9 @@
                                         <!-- STATUS -->
                                         <td class="name align-middle">
                                             @if($student->status == 1)
-                                            <input type="checkbox" id="status" name="status" checked  disabled>
-                                            <label for="scales">{{ __('labels.Active') }}</label>
+                                            <span class="badge badge-success">{{ __('labels.Active') }}</span>
                                             @else
-                                            <input type="checkbox" id="status" name="status" disabled>
-                                            <label for="scales">{{ __('labels.Inactive') }}</label>
+                                            <span class="badge badge-danger">{{ __('labels.Inactive') }}</span>
                                             @endif
                                         </td>
 

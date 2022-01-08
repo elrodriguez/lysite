@@ -49,7 +49,7 @@
         </div>
     </x-slot>
 
-    @livewire('academic::students.students-course-section',['course_id' => $course->id])
+    @livewire('academic::students.student-take-lesson',['course_id' => $course_id, 'section_id' => $section_id, 'content_id' => $content_id])
 
     <x-slot name="navigation">
         <x-navigation></x-navigation>
