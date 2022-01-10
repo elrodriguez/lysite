@@ -14,6 +14,8 @@ class StudentsCourseContents extends Component
     public $section_id;
     public $student;
     public $course_id;
+
+
     public function mount($section_id)
     {
         $this->section_id = $section_id;

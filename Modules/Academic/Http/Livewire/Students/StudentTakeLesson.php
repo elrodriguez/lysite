@@ -34,7 +34,9 @@ class StudentTakeLesson extends Component
 
     public function getContent(){
         $content = AcaContent::find($this->content_id);
+       if($content->content_type_id==1){
         $content->content_url = $this->video_selector($content->content_url);
+       }
 
        if(AcaStudentsSectionProgress::where('content_id',$this->content_id)->where('student_id',$this->student)->count()==0){
         AcaStudentsSectionProgress::create([

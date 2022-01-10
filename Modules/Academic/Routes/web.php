@@ -62,6 +62,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
         Route::middleware(['middleware' => 'role_or_permission:academico_estudiantes_asignar'])->get('student/{course_id}/{id}', 'StudentsController@edit2')->name('academic_student_assign_edit');
     });
 
+    Route::group(['prefix' => 'downloads/students'], function() {
+        Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('file/{content_id}/{studentd_id}', 'DownloadsController@downloadFile')->name('download_file');
+    });
+
 });
 
 

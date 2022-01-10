@@ -1,8 +1,4 @@
 <div class="mdk-header-layout__content page-content ">
-
-
-
-
     <div class="navbar navbar-list navbar-submenu navbar-light border-0 navbar-expand-sm" style="white-space: nowrap;">
         <div class="container flex-column flex-sm-row">
             <nav class="nav navbar-nav navbar-list__item">
@@ -12,8 +8,8 @@
                             <a href="student-take-course.html">
 
                                 <div class="avatar avatar-4by3">
-                                    <img src="{{ env('APP_URL') }}/{{ $course->course_image }}"
-                                        alt="Avatar" class="avatar-img rounded">
+                                    <img src="{{ env('APP_URL') }}/{{ $course->course_image }}" alt="Avatar"
+                                        class="avatar-img rounded">
                                 </div>
 
                             </a>
@@ -56,6 +52,10 @@
                 <a data-toggle="tooltip" data-placement="bottom" data-title="Quiz: Getting Started with Angular"
                     href="student-take-quiz.html"><span class="material-icons">hourglass_empty</span></a>
             </nav>
+
+
+            @if ($content->content_type_id == 1)
+
             <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
                 <div class="player embed-responsive-item">
                     <div class="player__content">
@@ -81,6 +81,29 @@
                     </div>
                 </div>
             </div>
+
+            @endif
+
+
+            @if ($content->content_type_id == 2)
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ $content->name }}</h4>
+                    <style>   .text {     width: 100%;   } </style>
+                    <p class="card-text"><textarea class="text" id="" cols="auto-width" rows="10" readonly>{{ $content->content_url }}</textarea></p>
+
+                </div>
+            </div>
+            @endif
+
+
+            @if ($content->content_type_id == 4)
+            <div class="card">
+                <img class="img-fluid rounded float-right"
+                alt="{{ $content->original_name }}::{{ __('labels.Image not available') }}"
+                src="{{ env('APP_URL') }}/{{ $content->content_url }}">
+            </div>
+            @endif
 
             <div class="d-flex flex-wrap align-items-end mb-16pt">
                 <h1 class="text-white flex m-0">{{ $content->name }}</h1>
@@ -176,9 +199,6 @@
         </div>
     </div>
 
-
-
-
-
-
 </div>
+
+
