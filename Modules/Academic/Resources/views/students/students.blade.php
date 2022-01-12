@@ -19,7 +19,7 @@
         </div>
     </div>
     @livewire('academic::students.students',['course_id' => $course_id])
-    @livewire('academic::students.students',['course_id' => $course_id])
+    @livewire('academic::students.students-assign',['course_id' => $course_id])
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>

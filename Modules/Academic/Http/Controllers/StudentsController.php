@@ -67,10 +67,27 @@ class StudentsController extends Controller
                         )
                         ->where('course_id',$id)
                         ->first();
-                        
+
         return view('academic::students.students_my_course')->with([
             'course'    => $course,
             'instruct'  => $instruct
+        ]);
+    }
+
+    public function take_lesson($course_id, $section_id, $content_id){
+        $course = AcaCourse::find($course_id);
+        $instruct = AcaInstructor::join('people','person_id','people.id')
+                        ->select(
+                            'people.names'
+                        )
+                        ->where('course_id',$course_id)
+                        ->first();
+        return view('academic::students.students-take-lesson')->with([
+            'course_id' => $course_id,
+            'section_id' => $section_id,
+            'content_id' => $content_id,
+            'course' => $course,
+            'instruct' => $instruct
         ]);
     }
 }

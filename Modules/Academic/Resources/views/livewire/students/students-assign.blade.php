@@ -13,7 +13,7 @@
             <div class="card card-body mb-32pt">
                 <div class="row">
                     <div class="col-lg-4">
-                        <h4 class="card-title">{{ __('labels.Assigned Students') }}</h4>
+                        <h4 class="card-title">{{ __('labels.Assign Students') }}</h4>
                         <p class="text-70">{{ __('labels.Course').': '.$course->name }}</p>
 
                     </div>
@@ -27,8 +27,7 @@
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
                                         <th>{{ __('labels.Assigned Students') }}</th>
-                                        <th>{{ __('labels.Status') }}</th>
-                                        <th>{{ __('labels.Registered until') }}</th>
+                                        <th>{{ __('labels.Register until') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -40,15 +39,10 @@
                                             <div class="btn-group">
 
                                                 @can('academico_estudiantes_asignar')
-
-                                                <a href="{{ route('academic_student_assign_edit',[$course_id, $student->person_id]) }}"
-                                                    type="button" class="btn btn-info btn-sm"><i
-                                                        class="fa fa-pencil-alt" title="Ver/Editar Contenido"></i></a>
-
-                                                <button onclick="deletes({{ $student->id }})" type="button"
-                                                    class="btn btn-danger btn-sm"
-                                                    title="{{ __('labels.Remove assignment') }}"><i
-                                                        class="fa fa-trash-alt"></i></button>
+                                                <div class="btn-group">
+                                                    <button wire:click="assign({{ $student->person_id }})" title="{{ __('labels.Assign') }}" class="btn btn-info btn-sm">
+                                                    <i class="fas fa-angle-up"></i></button>
+                                                </div>
                                                 @endcan
                                             </div>
 
@@ -59,18 +53,12 @@
                                         <td class="name align-middle">{{ $student->full_name }}</td>
 
                                         <!-- STATUS -->
-                                        <td class="name align-middle">
-                                            @if($student->status == 1)
-                                            <span class="badge badge-success">{{ __('labels.Active') }}</span>
-                                            @else
-                                            <span class="badge badge-danger">{{ __('labels.Inactive') }}</span>
-                                            @endif
-                                        </td>
+
 
                                         <!-- Registered Until -->
                                         <td class="name align-middle">
                                             <input type="date" id="registered_until" name="registered_until"
-                                                value="{{ $student->registered_until }}" disabled>
+                                                value="{{ $hoy_add_185 }}" disabled>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -92,20 +80,8 @@
         </div>
     </div>
     <script>
-        function deletes(id){
-            cuteAlert({
-                type: "question",
-                title: "¿Desea quitar a este Estudiante del curso?",
-                message: "¿está seguro?",
-                confirmText: "Okay",
-                cancelText: "Cancel"
-            }).then((e)=>{
-                if ( e == ("confirm")){
-                   @this.destroy(id)
-                }
-            });
-        }
-        window.addEventListener('aca-assign-delete', event => {
+
+        window.addEventListener('aca-assign-assign', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,
