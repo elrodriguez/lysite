@@ -1,7 +1,6 @@
 
     <div class="navbar navbar-expand-sm navbar-mini navbar-dark fixed-bottom bg-dark d-none d-md-flex p-0" id="demo-navbar">
         <div class="container-fluid">
-
             <!-- Main Navigation -->
             <ul class="nav navbar-nav flex-nowrap">
                 <li class="nav-item dropup active">

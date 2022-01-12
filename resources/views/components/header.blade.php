@@ -76,6 +76,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
                             </div>
                         </div>
+                        @livewire('chat::contact-list')
                     @else
                         <div class="ml-16pt nav-item">
                             <a href="{{ route('login') }}" class="nav-link">

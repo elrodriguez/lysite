@@ -32,7 +32,7 @@
     <link type="text/css" href="{{ url('assets/css/app.rtl.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
-
+    <link type="text/css" href="{{ url('assets/css/chat.css') }}" rel="stylesheet">
     @yield('styles')
     
 </head>
@@ -65,6 +65,9 @@
     <!-- // END Header Layout -->
     {{ $navigation }}
     <!--  livewire -->
+    @if (!Auth::guest())
+        @livewire('chat::chat-messages')
+    @endif
     @livewireScripts
     <!-- jQuery -->
     <script src="{{ url('assets/vendor/jquery.min.js') }}"></script>
