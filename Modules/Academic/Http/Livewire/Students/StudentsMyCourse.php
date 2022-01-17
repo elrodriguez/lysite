@@ -14,10 +14,12 @@ class StudentsMyCourse extends Component
     public $course_id;
     public $sections;
 
+
     public function mount($course_id)
     {
         $this->course_id = $course_id;
         $this->course = AcaCourse::find($course_id);
+
     }
     public function render()
     {
@@ -29,4 +31,6 @@ class StudentsMyCourse extends Component
         return AcaSection::where('course_id',$this->course_id)->get();
               //  ->paginate(10);
     }
+
+
 }

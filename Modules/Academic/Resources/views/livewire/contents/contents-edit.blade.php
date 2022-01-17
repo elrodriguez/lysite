@@ -1,4 +1,4 @@
-<div class="">
+<div class="" onload="modal();">
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
@@ -24,7 +24,7 @@
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
                                     *</label>
                                 <select wire:model="content_type_id" type="select" class="form-control"
-                                    id="content_type_id">
+                                     id="content_type_id">
                                     @foreach ($content_types as $types)
                                     <option value="{{ $types->id }}">{{ $types->name }}</option>
 
@@ -48,68 +48,116 @@
                                     placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
                                 @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
-                            @break
+                            <div class="modal" id="editorForm">
+                                @break
 
-                            @case(2)
-                            <div class="form-group">
-                                <label class="form-label" for="content_url">Texto *</label>
-                                <textarea wire:model="content_url" class="form-control" id="content_url"></textarea>
-                                @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
-                            </div>
-                            @break
-
-                            @case(3)
-                            <div class="form-group">
-                                {{ __('labels.Uploaded File') }}: {{ $content->original_name }}
-                                <input type="file" wire:model="content_url" id="content_url"
-                                    accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
-                                @error('content_url') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-
-                            @break
-
-                            @case(4)
-                            <div class="form-group">
-                                @if ($content_url && $its_image==true &&($this->content_url_last != $this->content_url))
-
-                                {{ __('labels.Photo Preview') }}:
-
-                                <img class="img-fluid rounded float-right" alt="Responsive image"
-                                    src="{{ $content_url->temporaryUrl() }}">
-                                @else
-
-                                <img class="img-fluid rounded float-right" alt="{{ $content->original_name }}::{{ __('labels.Image not available') }}"
-                                    src="{{ env('APP_URL') }}/{{ $content_url }}">
-                                @endif
-                                <input type="file" wire:model="content_url" id="content_url"
-                                    accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
-                                @error('content_url') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                            @break
-                            @default
-                            <div class="form-group">
-                                <label class="form-label" for="content_url">URL *</label>
-                                <input wire:model="content_url" type="text" class="form-control" id="content_url"
-                                    placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
-                                @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
-                            </div>
-                            @endswitch
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input wire:model="status" class="custom-control-input" type="checkbox" value=""
-                                        id="invalidCheck01">
-                                    <label class="custom-control-label" for="invalidCheck01">
-                                        Estado
-                                    </label>
+                                @case(2)
+                                <div class="form-group">
                                 </div>
-                            </div>
+                                <div class="" id="editorForm">
+                                    @break
+
+                                    @case(3)
+                                    <div class="form-group">
+                                        {{ __('labels.Uploaded File') }}: {{ $content->original_name }}
+                                        <input type="file" wire:model="content_url" id="content_url"
+                                            accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
+                                        @error('content_url') <span class="error">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="modal" id="editorForm">
+                                        @break
+
+                                        @case(4)
+                                        <div class="form-group">
+                                            @if ($content_url && $its_image==true &&($this->content_url_last !=
+                                            $this->content_url))
+
+                                            {{ __('labels.Photo Preview') }}:
+
+                                            <img class="img-fluid rounded float-right" alt="Responsive image"
+                                                src="{{ $content_url->temporaryUrl() }}">
+                                            @else
+
+                                            <img class="img-fluid rounded float-right"
+                                                alt="{{ $content->original_name }}::{{ __('labels.Image not available') }}"
+                                                src="{{ env('APP_URL') }}/{{ $content_url }}">
+                                            @endif
+                                            <input type="file" wire:model="content_url" id="content_url"
+                                                accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
+                                            @error('content_url') <span class="error">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="modal" id="editorForm">
+                                            @break
+                                            @default
+                                            <div class="form-group">
+                                                <label class="form-label" for="content_url">URL *</label>
+                                                <input wire:model="content_url" type="text" class="form-control"
+                                                    id="content_url"
+                                                    placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
+                                                @error('content_url') <span class="invalid-feedback-2">{{ $message
+                                                    }}</span> @enderror
+                                            </div>
+                                            @endswitch
 
 
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save, content_url"
-                                class="btn btn-primary">Guardar</button>
+                                            <!-- CK Editor 5 EDITOR  BEGIN BEGIN BEGIN BEGIN BEGIN BEGIN -->
+
+                                            <div wire:ignore>
+                                                <script
+                                                    src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js">
+                                                </script>
+
+                                                <textarea wire:model="content_url_editor" name="editor"
+                                                    class="form-control" id="editor" rows="10" cols="80">
+                                      {{ $content->content_url }}
+                                  </textarea>
+                                                @error('content_url') <span class="invalid-feedback-2">{{ $message
+                                                    }}</span> @enderror
+                                                <script>
+                                                    ClassicEditor
+                                      .create( document.querySelector( '#editor' ), {
+                                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', '|', 'undo', 'redo' ],
+                                    heading: {
+                                        options: [
+                                            { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
+                                            { model: 'heading1', view: 'h1', title: 'Muy Grande', class: 'ck-heading_heading1' },
+                                            { model: 'heading2', view: 'h2', title: 'grande', class: 'ck-heading_heading2' },
+                                            { model: 'heading3', view: 'h3', title: 'Mediano', class: 'ck-heading_heading3' }
+                                        ]
+                                    }
+                                } )
+                                          .then(function(editor){
+                                              editor.model.document.on('change:data', ()=>{
+                                                  @this.set('content_url_editor', editor.getData());
+                                              })
+                                          })
+                                          .catch( error => {
+                                              console.error( error );
+                                          } );
+
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <!-- CK Editor 5 EDITOR END END END END END END END END END END END END -->
+
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input wire:model="status" class="custom-control-input" type="checkbox"
+                                                    value="" id="invalidCheck01">
+                                                <label class="custom-control-label" for="invalidCheck01">
+                                                    Estado
+                                                </label>
+                                            </div>
+                                        </div>
+
+
+                                        <button type="submit" wire:loading.attr="disabled"
+                                            wire:target="save, content_url" class="btn btn-primary">Guardar</button>
 
 
                         </form>
+
                     </div>
                 </div>
             </div>

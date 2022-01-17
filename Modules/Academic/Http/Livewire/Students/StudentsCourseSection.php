@@ -18,6 +18,7 @@ class StudentsCourseSection extends Component
     public $course_id;
     public $Nsections;
 
+
     public function mount($course_id)
     {
         $this->course_id = $course_id;
@@ -42,4 +43,5 @@ class StudentsCourseSection extends Component
        // dd($sections);
               //  ->paginate(10);
     }
+
 }

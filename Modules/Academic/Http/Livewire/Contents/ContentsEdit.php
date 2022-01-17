@@ -19,6 +19,7 @@ class ContentsEdit extends Component
     public $content_id;
     public $content_type_id;
     public $content_url;
+    public $content_url_editor;
     public $content_url_last; // for checking if url is changed y luego debe borrarse el archivo
     public $status;
     public $content_type_id_last;
@@ -43,11 +44,17 @@ class ContentsEdit extends Component
         $this->status = $this->content->status;
         $this->name = $this->content->name;
         $this->content_url_last = $this->content_url;
+        $this->content_url_editor = $this->content->content_url;
     }
 
     public function render()
     {
-        return view('academic::livewire.contents.contents-edit');
+        return view('academic::livewire.contents.contents-edit',['content' => $this->getContent()]);
+    }
+
+    public function getContent(){
+        $this->content = AcaContent::find($this->content_id);
+        return $this->content;
     }
 
     public function updated($propertyName)
@@ -89,6 +96,10 @@ class ContentsEdit extends Component
 
     public function save(){
         $this->its_image=false;
+        if($this->content_type_id==2){
+            $this->content_url=$this->content_url_editor;
+        }
+
         $this->validate();
 
         if ($this->content_type_id == 3 || $this->content_type_id == 4) {

@@ -18,13 +18,13 @@
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <form enctype="multipart/form-data"  wire:submit.prevent="save" class="flex">
+                        <form enctype="multipart/form-data" wire:submit.prevent="save" class="flex">
 
                             <div class="form-group">
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
                                     *</label>
                                 <select wire:model="content_type_id" type="select" class="form-control"
-                                    id="content_type_id">
+                                     id="content_type_id">
                                     @foreach ($content_types as $types)
                                     <option value="{{ $types->id }}">{{ $types->name }}</option>
 
@@ -48,15 +48,13 @@
                                 <input wire:model="content_url" type="text" class="form-control" id="content_url"
                                     placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
                                 @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
-                            </div>
+                            </div><div class="modal">
                             @break
 
                             @case(2)
-                            <div class="form-group">
+                            <div>
                                 <label class="form-label" for="content_url">Texto *</label>
-                                <textarea wire:model="content_url" class="form-control" id="content_url"></textarea>
-                                @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
-                            </div>
+                            </div><div class="">
                             @break
 
                             @case(3)
@@ -64,7 +62,7 @@
                                 <input type="file" wire:model="content_url"
                                     accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
                                 @error('content_url') <span class="error">{{ $message }}</span> @enderror
-                            </div>
+                            </div><div class="modal">
 
                             @break
 
@@ -74,13 +72,14 @@
 
                                 {{ __('labels.Photo Preview') }}:
 
-                                <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ $content_url->temporaryUrl() }}">
+                                <img class="img-fluid rounded float-right" alt="Responsive image"
+                                    src="{{ $content_url->temporaryUrl() }}">
 
                                 @endif
                                 <input type="file" wire:model="content_url"
                                     accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
                                 @error('content_url') <span class="error">{{ $message }}</span> @enderror
-                            </div>
+                            </div><div class="modal">
                             @break
                             @default
                             <div class="form-group">
@@ -91,11 +90,45 @@
                             </div>
                             @endswitch
 
+                            <!-- CK Editor 5 EDITOR -->
 
+                            <div wire:ignore class="form-group" id="editorForm">
+                                <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+                                <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/translations/sp.js"></script>
 
+                                <textarea wire:model="content_url_editor" name="editor" class="form-control" id="editor"
+                                    rows="10" cols="80">
+                                </textarea>
+                                @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                <script>
+                                    ClassicEditor
+                                    .create( document.querySelector( '#editor' ), {
+                                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', '|', 'undo', 'redo' ],
+                                    heading: {
+                                        options: [
+                                            { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
+                                            { model: 'heading1', view: 'h1', title: 'Muy Grande', class: 'ck-heading_heading1' },
+                                            { model: 'heading2', view: 'h2', title: 'grande', class: 'ck-heading_heading2' },
+                                            { model: 'heading3', view: 'h3', title: 'Mediano', class: 'ck-heading_heading3' }
+                                        ]
+                                    }
+                                } )
+                                        .then(function(editor){
+                                            editor.model.document.on('change:data', ()=>{
+                                                @this.set('content_url_editor', editor.getData());
+                                            })
+                                        })
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                <br>
+                            </div></div>
+                            <!-- CK Editor 5 EDITOR END END END END -->
                             <button type="submit" wire:loading.attr="disabled" wire:target="content_url, save"
                                 class="btn btn-primary">Guardar</button>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -112,3 +145,4 @@
         })
     </script>
 </div>
+
