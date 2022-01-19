@@ -30,7 +30,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'ncr',
         'pfp',
         'eft',
-        'cs'
+        'cs',
+        'is_admin',
+        'is_online',
+        'last_activity'
     ];
 
     /**
