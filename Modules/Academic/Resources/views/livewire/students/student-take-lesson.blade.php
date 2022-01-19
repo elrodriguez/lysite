@@ -39,19 +39,8 @@
     </div>
     <div class="bg-gradient-primary pb-lg-64pt py-32pt">
         <div class="container">
-            <nav class="course-nav">
-                <a href="" data-toggle="tooltip" data-placement="bottom"
-                    data-title="Getting Started with Angular: Introduction"><span
-                        class="material-icons text-primary">check_circle</span></a>
-                <a data-toggle="tooltip" data-placement="bottom"
-                    data-title="Getting Started with Angular: Introduction to TypeScript" class="active" href=""><span
-                        class="material-icons">account_circle</span></a>
-                <a data-toggle="tooltip" data-placement="bottom"
-                    data-title="Getting Started with Angular: Comparing Angular to AngularJS" href=""><span
-                        class="material-icons">play_circle_outline</span></a>
-                <a data-toggle="tooltip" data-placement="bottom" data-title="Quiz: Getting Started with Angular"
-                    href="student-take-quiz.html"><span class="material-icons">hourglass_empty</span></a>
-            </nav>
+
+
 
 
             @if ($content->content_type_id == 1)
@@ -90,7 +79,7 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ $content->name }}</h4>
                     <style>   .text {     width: 100%;   } </style>
-                    <p class="card-text"><textarea class="text" id="" cols="auto-width" rows="10" readonly>{{ $content->content_url }}</textarea></p>
+                    <p class="card-text">{!! $content->content_url !!}</p>
 
                 </div>
             </div>
@@ -200,5 +189,3 @@
     </div>
 
 </div>
-
-

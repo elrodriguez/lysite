@@ -21,9 +21,11 @@ class ContentsCreate extends Component
 
     public $content_type_id;
     public $content_url;
+    public $content_url_editor;
     public $status;
     public $created_by;
     public $original_name;
+    public $modal=1;
 
     public function render()
     {
@@ -77,6 +79,9 @@ class ContentsCreate extends Component
     public function save()
     {
 
+        if($this->content_type_id==2){
+            $this->content_url=$this->content_url_editor;
+        }
         $this->validate();
         if ($this->content_type_id == 3 || $this->content_type_id == 4) {
             $this->original_name = $this->content_url->getClientOriginalName();
@@ -84,6 +89,7 @@ class ContentsCreate extends Component
 
             //$this->content_url = $this->content_url->store('contents');
         }
+
 
         $count=AcaContent::where('Section_id',$this->section_id)->count();
 
@@ -100,6 +106,7 @@ class ContentsCreate extends Component
 
         $this->content_type_id = null;
         $this->content_url = null;
+        $this->content_url_editor = null;
         $this->created_by = null;
         $this->name=null;
 
@@ -123,4 +130,7 @@ class ContentsCreate extends Component
     protected $rules = [
         'content_url' => 'required'
     ];
-}
+
+    public function modal(){
+      $this->modal++;
+}}

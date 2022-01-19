@@ -114,4 +114,5 @@ return [
     'Viewed' => 'Visto',
     'Table of Contents' => 'Tabla de Contenidos',
     'Index' => 'Índice',
+    'Edit' => 'Editar',
 ];

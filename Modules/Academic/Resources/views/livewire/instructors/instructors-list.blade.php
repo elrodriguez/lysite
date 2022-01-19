@@ -88,7 +88,7 @@
             }).then((e)=>{
                 if ( e == ("confirm")){
                     @this.destroy(id)
-                } 
+                }
             });
         }
         window.addEventListener('aca-instructor-delete', event => {
