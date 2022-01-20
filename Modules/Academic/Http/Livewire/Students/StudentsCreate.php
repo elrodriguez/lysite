@@ -9,6 +9,7 @@ use App\Models\District;
 use App\Models\Person;
 use App\Models\Province;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaStudent;
 
@@ -148,7 +149,7 @@ class StudentsCreate extends Component
             $user = User::create([
                 'name' => $this->names,
                 'email' => $this->email,
-                'password' => $this->number
+                'password' => Hash::make('12345678')
             ]);
 
             $user->assignRole('Student');

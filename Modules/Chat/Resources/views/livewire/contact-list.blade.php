@@ -7,37 +7,40 @@
         <div data-perfect-scrollbar class="position-relative">
             <div class="dropdown-header"><strong>Messages</strong></div>
             <div class="list-group list-group-flush mb-0">
-
-                <a href="javascript:void(0);" class="list-group-item list-group-item-action unread">
-                    <span class="d-flex align-items-center mb-1">
-                        <small class="text-black-50">5 minutes ago</small>
-                        <span class="ml-auto unread-indicator bg-accent"></span>
-                    </span>
-                    <span class="d-flex">
-                        <span class="avatar avatar-xs mr-2">
-                            <img src="assets/images/people/110/woman-5.jpg" alt="people" class="avatar-img rounded-circle">
+                @foreach($instructors as $instructor)
+                    <a wire:click="$emit('showChatInstructor',{{ $instructor->id }})" href="javascript:void(0);" class="list-group-item list-group-item-action unread">
+                        <span class="d-flex align-items-center mb-1">
+                            <small class="text-black-50">5 minutes ago</small>
+                            <span class="ml-auto unread-indicator bg-accent"></span>
                         </span>
-                        <span class="flex d-flex flex-column">
-                            <strong>Michelle</strong>
-                            <span class="text-black-70">Clients loved the new design.</span>
+                        <span class="d-flex">
+                            <span class="avatar avatar-xs mr-2">
+                                <img src="assets/images/people/110/woman-5.jpg" alt="people" class="avatar-img rounded-circle">
+                            </span>
+                            <span class="flex d-flex flex-column">
+                                <strong>{{ $instructor->full_name }}</strong>
+                                <span class="text-black-70">Clients loved the new design.</span>
+                            </span>
                         </span>
-                    </span>
-                </a>
-                <a href="javascript:void(0);" class="list-group-item list-group-item-action unread">
-                    <span class="d-flex align-items-center mb-1">
-                        <small class="text-black-50">5 minutes ago</small>
-                        <span class="ml-auto unread-indicator bg-accent"></span>
-                    </span>
-                    <span class="d-flex">
-                        <span class="avatar avatar-xs mr-2">
-                            <img src="{{ url('assets/images/people/110/woman-5.jpg') }}" alt="people" class="avatar-img rounded-circle">
+                    </a>
+                @endforeach
+                @foreach($students as $student)
+                    <a wire:click="$emit('showChatStudent',{{ $student->id }})" href="javascript:void(0);" class="list-group-item list-group-item-action unread">
+                        <span class="d-flex align-items-center mb-1">
+                            <small class="text-black-50">5 minutes ago</small>
+                            <span class="ml-auto unread-indicator bg-accent"></span>
                         </span>
-                        <span class="flex d-flex flex-column">
-                            <strong>Michelle</strong>
-                            <span class="text-black-70">Clients loved the new design.</span>
+                        <span class="d-flex">
+                            <span class="avatar avatar-xs mr-2">
+                                <img src="assets/images/people/110/woman-5.jpg" alt="people" class="avatar-img rounded-circle">
+                            </span>
+                            <span class="flex d-flex flex-column">
+                                <strong>{{ $student->full_name }}</strong>
+                                <span class="text-black-70">Clients loved the new design.</span>
+                            </span>
                         </span>
-                    </span>
-                </a>
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>
