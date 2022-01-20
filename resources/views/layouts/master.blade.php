@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ env('APP_NAME','Laravel') }}</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" >
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
 
@@ -106,7 +106,12 @@
     @yield('script')
     @yield('modales')
     <!-- Modal -->
-
+    <script>
+        window.laravelEchoPort = "{{ env('LARAVEL_ECHO_PORT') }}";
+    </script>
+    <script src="//{{ request()->getHost() }}:{{ env('LARAVEL_ECHO_PORT') }}/socket.io/socket.io.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('script-chat')
 </body>
 
 </html>

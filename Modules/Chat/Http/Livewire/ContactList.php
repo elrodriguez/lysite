@@ -45,13 +45,19 @@ class ContactList extends Component
                                 ->join('users','user_id','users.id')
                                 ->select(
                                     'users.id',
-                                    'people.full_name'
+                                    'users.is_online',
+                                    'users.avatar',
+                                    'people.full_name',
+                                    'people.email'
                                 )
                                 ->whereIn('course_id',$course_iids)
                                 ->where('people.id','<>',$person_id)
                                 ->groupBy([
-                                    'people.id',
-                                    'people.full_name'
+                                    'users.id',
+                                    'users.is_online',
+                                    'users.avatar',
+                                    'people.full_name',
+                                    'people.email'
                                 ])
                                 ->get();
 
@@ -59,13 +65,19 @@ class ContactList extends Component
                                 ->join('users','user_id','users.id')
                                 ->select(
                                     'users.id',
-                                    'people.full_name'
+                                    'users.is_online',
+                                    'users.avatar',
+                                    'people.full_name',
+                                    'people.email'
                                 )
                                 ->whereIn('course_id',$course_sids)
                                 ->where('people.id','<>',$person_id)
                                 ->groupBy([
-                                    'people.id',
-                                    'people.full_name'
+                                    'users.id',
+                                    'users.is_online',
+                                    'users.avatar',
+                                    'people.full_name',
+                                    'people.email'
                                 ])
                                 ->get();
     }

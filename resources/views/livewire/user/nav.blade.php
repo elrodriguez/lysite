@@ -8,5 +8,6 @@
         <a class="nav-link {{ $path[1] == 'edit_account' ? 'active' : '' }}" href="{{ route('user_edit_account') }}">Información básica</a>
         <a class="nav-link {{ $path[1] == 'edit_profile' ? 'active' : '' }}" href="{{ route('user_edit_account_profile') }}">Privacidad del perfil</a>
         <a class="nav-link {{ $path[1] == 'edit_password' ? 'active' : '' }}" href="{{ route('user_edit_account_password') }}">{{ __('labels.change_password') }}</a>
+        <a class="nav-link {{ $path[1] == 'edit_avatar' ? 'active' : '' }}" href="{{ route('user_edit_account_avatar') }}">Cambiar avatar</a>
     </nav>
 </div>

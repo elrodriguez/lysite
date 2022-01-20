@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\InstructorOnline;
+use App\Events\PrivateMessage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
@@ -36,5 +38,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardCont
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_account', [UserController::class, 'account'])->name('user_edit_account');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
+Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
+
+Route::get('/chat_i', function () {
+    event(new InstructorOnline());
+})->name('chat_i');
+
 
 require __DIR__.'/auth.php';

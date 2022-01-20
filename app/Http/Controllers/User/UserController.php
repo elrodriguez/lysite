@@ -16,4 +16,7 @@ class UserController extends Controller
     public function password(){
         return view('user.edit_password');
     }
+    public function avatar(){
+        return view('user.edit_avatar');
+    }
 }

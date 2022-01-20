@@ -4,8 +4,8 @@
             $i = 0;
         @endphp
         @foreach($chats as $k => $chat)
-        <div class="ui-widget ui-chatbox" outline="0" style="width: 228px; right: {{ $i == 0 ? '0' : (228*$i)+(7*$i) }}px; display: block;">
-            <div class="ui-widget-header ui-chatbox-titlebar online ui-dialog-header">
+        <div id="inbox-chat{{ $k }}" class="ui-widget ui-chatbox" outline="0" style="width: 228px; right: {{ $i == 0 ? '0' : (228*$i)+(7*$i) }}px; display: block;">
+            <div id="bg-chat{{ $k }}" class="ui-widget-header ui-chatbox-titlebar {{ $chat['background'] }} online ui-dialog-header">
                 <span>
                     <i title="online"></i>{{ $chat['name'] }}
                 </span>
@@ -29,13 +29,14 @@
                     <div class="ui-chatbox-msg" style="max-width: 208px;"><b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : 'DICE' }}: </b><span>{{ $msg['message'] }}</span></div>
                     @endforeach
                 </div>
-                <div class="ui-widget-content ui-chatbox-input">
+                <div class="ui-widget-content ui-chatbox-input" wire:ignore.self>
                     <textarea 
                         id="message{{ $k }}"
+                        wire:click="focusTextArea('{{ $k }}')"
                         onkeyup="textareaWithoutEnter(event.keyCode, this.id,'{{ $k }}');" 
                         wire:model.defer="chats.{{ $k }}.message" 
                         class="ui-widget-content ui-chatbox-input-box" 
-                        style="width: 218px;"></textarea>
+                        style="width: 218px;font-size: 0.8em;"></textarea>
                 </div>
             </div>
         </div>
@@ -47,8 +48,18 @@
     <script>
         window.addEventListener('scroll-button', event => {
             let index = event.detail.index;
+            let user_id = event.detail.user_id
             $('#cha'+index).animate({ scrollTop: $('#cha'+index)[0].scrollHeight}, 10);
+            $('#user-list-chat').removeClass('new-message-icon-animation');
+            $('#user' + user_id).removeClass('text-color-orange');
+            document.getElementById("message"+index).focus();
         });
+
+        window.addEventListener('textarea-null', event => {
+            let index = event.detail.index;
+            document.getElementById("message"+index).value = '';
+        });
+
         /* Suprimir el uso de la tecla ENTER en Textarea 
         Autor: John Sánchez Alvarez 
         Este código es libre de usar y modificarse*/ 
@@ -73,5 +84,32 @@
                 $("#cha"+$index).animate({ scrollTop: $('#cha'+$index)[0].scrollHeight}, 1000);
             }
         }
+
+        
     </script>
+    @section('script-chat')
+    <script>
+        window.Echo.channel('public-channel-instructor-onlinea').listen('.InstructorOnlineaEvent', (data) => {
+            alert('hola publico');
+        });
+
+        window.Echo.private('channel-message.' + {{ auth()->id() }}).listen('.MessageEvent', (data) => {
+            let $index = data.message.conversation_ids;
+            let $user_id = data.message.user_id;
+
+            if ( document.getElementById( "inbox-chat"+$index )) {
+                let $message = data.message;
+
+                @this.addMessages($index,$message);
+
+                $("#cha"+$index).animate({ scrollTop: $('#cha'+$index)[0].scrollHeight}, 1000);
+            }else{
+                $('#user-list-chat').addClass('new-message-icon-animation');
+                $('#user' + $user_id).addClass('text-color-orange');
+            }
+            
+        });
+
+    </script>
+    @endsection
 </div>
