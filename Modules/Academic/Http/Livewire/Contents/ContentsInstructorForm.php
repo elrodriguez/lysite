@@ -41,7 +41,7 @@ class ContentsInstructorForm extends Component
         $this->section_name = AcaSection::find($section_id)->title;
 
         $this->getData();
-        
+
         $this->dispatchBrowserEvent('aca-content-open-modal', ['success' => true]);
     }
 

@@ -79,7 +79,7 @@
                                 <input type="file" wire:model="content_url"
                                     accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
                                 @error('content_url') <span class="error">{{ $message }}</span> @enderror
-                            </div><div class="modal">
+                            </div>
                             @break
                             @default
                             <div class="form-group">
@@ -103,7 +103,7 @@
                                 <script>
                                     ClassicEditor
                                     .create( document.querySelector( '#editor' ), {
-                                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', '|', 'undo', 'redo' ],
+                                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable','mediaEmbed', '|', 'undo', 'redo' ],
                                     heading: {
                                         options: [
                                             { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },

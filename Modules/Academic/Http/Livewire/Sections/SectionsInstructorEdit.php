@@ -13,11 +13,13 @@ class SectionsInstructorEdit extends Component
     public $section_edit = [];
     public $course_id;
     public $course;
+    public $video;
 
     public function mount($course_id){
-        
+
         $this->course_id = $course_id;
         $this->course = AcaCourse::find($course_id);
+        $this->course->main_video = $this->video_selector($this->course->main_video);
         $this->getData();
     }
 
@@ -30,8 +32,8 @@ class SectionsInstructorEdit extends Component
         $sections = AcaSection::where('course_id',$this->course_id)
                     ->orderBy('count')
                     ->get();
-                    
-        
+
+
         foreach($sections as $key => $section){
             $this->section_edit[$key] = false;
             $this->sections[$key] = [
@@ -159,8 +161,8 @@ class SectionsInstructorEdit extends Component
                 $tit = 'Salió mal';
                 $msg = 'No se puede eliminar porque cuenta con registros asociados';
             }
-           
-            
+
+
         }else{
             $res = 'error';
             $tit = 'Salió mal';
@@ -168,5 +170,25 @@ class SectionsInstructorEdit extends Component
         }
         $this->getData();
         $this->dispatchBrowserEvent('set-section-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
+
+    public function video_selector($url){
+        $url2=$url;
+        $url = explode("=", $url);  //revisa si es un enlace de Youtube https://www.youtube.com/watch?v=qYQdKJRHrKM
+        $index=count($url);
+        if($index>1){
+            $this->video=1;  //si es un enlace de Youtube se retorna 1
+            return  $url[$index-1];
+        }else{                      //si no lo es revisa de nuevo para ver si es un enlace de Vimeo o Youtube
+            $url2 = explode("/", $url2);                        // https://vimeo.com/123998967  https://youtu.be/bPmNe5S19TA
+            $index=count($url2);
+            if($url2[2]=="vimeo.com"){
+                $this->video=0;  //si es un enlace de Vimeo se retorna 0
+                return $url2[$index-1];
+            }else{
+                $this->video=1;  //si es un enlace de Youtube se retorna 1
+                return  $url2[$index-1];
+            }
+        }
     }
 }

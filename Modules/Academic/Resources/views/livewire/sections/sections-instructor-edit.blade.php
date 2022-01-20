@@ -83,9 +83,33 @@
                 </div>
 
                 <div class="card">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        {!! $course->main_video !!}
+
+                    <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
+                        <div class="player embed-responsive-item">
+                            <div class="player__content">
+                                <div class="player__image" style="--player-image: url(assets/images/illustration/player.svg)">
+                                </div>
+                                <a href="" class="player__play">
+                                    <span class="material-icons">play_arrow</span>
+                                </a>
+                            </div>
+                            <div class="player__embed d-none">
+                                <!-- Aqui abajo va el Video -->
+                                @if ($video==0)
+                                <iframe class="embed-responsive-item"
+                                    src="https://player.vimeo.com/video/{{ $course->main_video }}?title=0&amp;byline=0&amp;portrait=0"
+                                    allowfullscreen=""></iframe>
+                                @endif
+                                @if ($video==1)
+                                <iframe class="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/{{ $course->main_video }}?title=0&amp;byline=0&amp;portrait=0"
+                                    allowfullscreen=""></iframe>
+                                @endif
+                                <!-- Aqui arriba va el Video -->
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
                 {{-- <div class="mb-heading d-flex align-items-center">

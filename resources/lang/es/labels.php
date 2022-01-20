@@ -115,4 +115,5 @@ return [
     'Table of Contents' => 'Tabla de Contenidos',
     'Index' => 'Índice',
     'Edit' => 'Editar',
+    'Close' => 'Cerrar',
 ];
