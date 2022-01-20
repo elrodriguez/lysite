@@ -18,6 +18,7 @@ class StudentTakeLesson extends Component
     public $course_id;
     public $video;
     public $course;
+    public $content_url;
 
     public function mount($section_id,$content_id)
     {
@@ -26,6 +27,7 @@ class StudentTakeLesson extends Component
         $this->student = DB::table('people')->where('user_id', Auth::user()->id)->first()->id;  //obtener ID de persona
         $this->course_id = AcaSection::find($section_id)->course_id;
         $this->course = AcaCourse::find($this->course_id);
+        $this->content_url = AcaContent::find($content_id)->content_url;
     }
     public function render()
     {

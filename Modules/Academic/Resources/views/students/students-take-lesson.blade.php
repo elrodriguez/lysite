@@ -112,7 +112,7 @@
 
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">{{ __('labels.Close') }}</button>
 
 
             </div>

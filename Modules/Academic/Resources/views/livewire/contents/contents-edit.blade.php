@@ -24,7 +24,7 @@
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
                                     *</label>
                                 <select wire:model="content_type_id" type="select" class="form-control"
-                                     id="content_type_id">
+                                    id="content_type_id">
                                     @foreach ($content_types as $types)
                                     <option value="{{ $types->id }}">{{ $types->name }}</option>
 
@@ -48,13 +48,13 @@
                                     placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
                                 @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
-                            <div class="modal" id="editorForm">
+                            <div class="modal">
                                 @break
 
                                 @case(2)
-                                <div class="form-group">
-                                </div>
-                                <div class="" id="editorForm">
+                                <div>
+                                    <label class="form-label" for="content_url">Texto *</label>
+                                </div><div class="">
                                     @break
 
                                     @case(3)
@@ -64,7 +64,7 @@
                                             accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
                                         @error('content_url') <span class="error">{{ $message }}</span> @enderror
                                     </div>
-                                    <div class="modal" id="editorForm">
+                                    <div class="modal">
                                         @break
 
                                         @case(4)
@@ -86,7 +86,7 @@
                                                 accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
                                             @error('content_url') <span class="error">{{ $message }}</span> @enderror
                                         </div>
-                                        <div class="modal" id="editorForm">
+                                        <div class="modal">
                                             @break
                                             @default
                                             <div class="form-group">
@@ -106,6 +106,9 @@
                                                 <script
                                                     src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js">
                                                 </script>
+                                                <script
+                                                    src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/translations/sp.js">
+                                                </script>
 
                                                 <textarea wire:model="content_url_editor" name="editor"
                                                     class="form-control" id="editor" rows="10" cols="80">
@@ -116,7 +119,7 @@
                                                 <script>
                                                     ClassicEditor
                                       .create( document.querySelector( '#editor' ), {
-                                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', '|', 'undo', 'redo' ],
+                                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'mediaEmbed', '|', 'undo', 'redo' ],
                                     heading: {
                                         options: [
                                             { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },

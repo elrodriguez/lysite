@@ -109,15 +109,28 @@
                                         @if ($content->content_type_id > 2)
                                         <td class="name align-middle">{{ $content->original_name }}</td>
                                         @else
-                                            @if (strlen($content->content_url) > 115)
-                                                <td class="name align-middle">{{ substr($content->content_url, 0, 115) }}
+                                            @if ($content->content_type_id == 2)
+                                                    @if (strlen($content->content_url) > 150)
+                                                    <td class="name align-middle"> {!! substr($content->content_url, 0, 150) !!}
+                                                        @can('academico_contenido_editar')
+                                                        <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
+                                                            title="Ver y editar Contenido Completo">...</a>
+                                                        @endcan
+                                                    </td>
+                                                    @else
+                                                    <td class="name align-middle">{!! $content->content_url !!}</td>
+                                                    @endif
+                                            @else
+                                                @if (strlen($content->content_url) > 120)
+                                                <td class="name align-middle">{{ substr($content->content_url, 0, 120) }}
                                                     @can('academico_contenido_editar')
                                                     <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
                                                         title="Ver y editar Contenido Completo">...</a>
                                                     @endcan
                                                 </td>
-                                            @else
+                                                @else
                                                 <td class="name align-middle">{{ $content->content_url }}</td>
+                                                @endif
                                             @endif
                                         @endif
 
