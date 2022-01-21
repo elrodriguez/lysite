@@ -16,7 +16,16 @@ class ContactList extends Component
     public $instructors = [];
 
     public function mount(){
+        $this->loadData();
+    }
 
+    public function render()
+    {
+
+        return view('chat::livewire.contact-list');
+    }
+
+    public function loadData(){
         $person = Person::where('user_id',Auth::id())->first();
         $person_id = null;
         if($person){
@@ -82,8 +91,7 @@ class ContactList extends Component
                                 ->get();
     }
 
-    public function render()
-    {
-        return view('chat::livewire.contact-list');
+    public function reloadData(){
+        echo 'dddddd';
     }
 }

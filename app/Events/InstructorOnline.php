@@ -19,9 +19,10 @@ class InstructorOnline implements ShouldBroadcast
      *
      * @return void
      */
+
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -39,6 +40,6 @@ class InstructorOnline implements ShouldBroadcast
     }
 
     public function broadcastWith(){
-        return ['message' => 'El Instructor esta en linea'];
+        return ['message' => 'Inicio sesion'];
     }
 }
