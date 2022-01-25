@@ -78,4 +78,7 @@ class CoursesEdit extends Component
 
     }
 
+    public function back(){
+        redirect()->route('academic_courses');
+    }
 }

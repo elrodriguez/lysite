@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAcaCourseRatingsTable extends Migration
+class CreateAcaCourseRatingVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateAcaCourseRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('aca_course_ratings', function (Blueprint $table) {
+        Schema::create('aca_course_rating_votes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->decimal('rating', 3, 2);
-            $table->Integer('voters');
+            $table->unsignedBigInteger('user_id');
+            $table->Integer('rating');
             $table->foreign('course_id')->references('id')->on('aca_courses');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateAcaCourseRatingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aca_course_ratings');
+        Schema::dropIfExists('aca_course_rating_votes');
     }
 }

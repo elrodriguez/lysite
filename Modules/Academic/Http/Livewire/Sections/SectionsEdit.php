@@ -49,4 +49,8 @@ class SectionsEdit extends Component
 
         $this->dispatchBrowserEvent('aca-sections-create', ['tit' => 'Enhorabuena','msg' => 'Se actualizado correctamente']);
     }
+
+    public function back(){
+        redirect()->route('academic_sections',$this->course_id);
+    }
 }

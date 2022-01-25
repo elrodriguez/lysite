@@ -111,7 +111,6 @@ class ContentsCreate extends Component
         $this->name=null;
 
         $this->dispatchBrowserEvent('aca-content-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
-        redirect()->route('academico_contenido', [$this->section->course_id, $this->section->id])->with('message', 'Volverás a la Lista de Contenidos');
 
 
     }
@@ -133,4 +132,9 @@ class ContentsCreate extends Component
 
     public function modal(){
       $this->modal++;
-}}
+}
+
+public function back(){
+    redirect()->route('academico_contenido',[$this->section->course_id,$this->section->id]);
+}
+}

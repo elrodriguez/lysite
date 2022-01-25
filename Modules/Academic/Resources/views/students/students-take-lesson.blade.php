@@ -13,6 +13,7 @@
                                         <img src="{{ asset($course->course_image) }}" alt="Avatar"
                                             class="avatar-img rounded">
                                     </div>
+
     
                                 </a>
                             </div>
@@ -24,6 +25,12 @@
                                 </p>
                             </div>
                         </div>
+                        <ul>
+                            <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">
+                                @livewire('academic::courses.course-rating',['course_id' => $course_id])
+                            </li>
+                        </ul>
+
                     </div>
                 </nav>
                 <ul class="navbar-list__item nav navbar-nav ml-sm-auto align-items-center align-items-sm-end">

@@ -1,5 +1,5 @@
 {
-	"authHost": "http://lysite.test",
+	"authHost": "http://127.0.0.1",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [],
 	"database": "redis",
@@ -10,7 +10,7 @@
 		}
 	},
 	"devMode": true,
-	"host": "lysite.test",
+	"host": "127.0.0.1",
 	"port": "6001",
 	"protocol": "http",
 	"socketio": {},

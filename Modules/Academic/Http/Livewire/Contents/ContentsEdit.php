@@ -141,4 +141,7 @@ class ContentsEdit extends Component
         'content_url' => 'required'
     ];
 
+    public function back(){
+        redirect()->route('academico_contenido',[$this->course->id,$this->section->id]);
+    }
 }
