@@ -37,14 +37,7 @@
                                 Beginner
                             </li> --}}
                             <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">
-                                <div class="rating rating-24">
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star_border</i></div>
-                                </div>
-                                <p class="lh-1 mb-0"><small class="text-muted">20 ratings</small></p>
+                                @livewire('academic::courses.course-rating',['course_id' => $course_id])
                             </li>
                         </ul>
                     </div>

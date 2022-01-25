@@ -51,11 +51,11 @@
                 <img class="navbar-brand-icon mr-0 mr-md-8pt" src="{{ url('assets/images/logo/white-60.png') }}" width="30" alt="{{ env('APP_NAME','Laravel') }}">
                 <span class="d-none d-md-block">{{ env('APP_NAME','Laravel') }}</span>
             </a>
-            <button class="btn btn-black mr-16pt" data-toggle="modal" data-target="#courses">Courses <i class="material-icons">arrow_drop_down</i></button>
-            <form class="search-form search-form--black search-form-courses d-none d-md-flex" action="library-filters.html">
-                <input type="text" class="form-control" placeholder="What would you like to learn?">
-                <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
-            </form>
+
+            <!-- Aquí esta el boton de Cursos -->
+            <button class="btn btn-black mr-16pt" onclick="available_courses();" data-target="#courses">{{ __('labels.Courses') }}<i class="material-icons">arrow_drop_down</i></button>
+
+
             <!-- Main Navigation -->
             <nav class="nav navbar-nav ml-auto flex-nowrap">
                 @if (Route::has('login'))
@@ -68,7 +68,7 @@
                                 <div class="dropdown-header"><strong>{{ Auth::user()->name }}</strong></div>
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                 @can('academico_cursos_instructor')
-                                <a class="dropdown-item" href="{{ route('academic_dash_instructor_courses_list') }}">Cursos</a>
+                                <a class="dropdown-item" href="{{ route('academic_dash_instructor_courses_list') }}">{{ __('labels.Courses') }}</a>
                                 @endcan
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-header"><strong>{{ __('labels.Account') }}</strong></div>
@@ -102,4 +102,75 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal Boton Cursos -->
+<div class="courses-modal" id="available_courses" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-i8-plus bg-body pr-0">
+                        <div class="py-16pt pl-16pt menu">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#courses-development" data-toggle="tab">{{ env('APP_NAME','Laravel') }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-6 col-i8-plus-auto tab-content">
+
+
+                        <div id="courses-development" class="tab-pane show active">
+                            <div class="row no-gutters">
+                                <div class="col-md-6 p-0">
+                                    <div class="p-24pt d-flex h-100 flex-column">
+                                        <div class="flex">
+                                            <h5 class="text-black-100">{{ __('labels.Available Courses') }}</h5>
+                                            <tbody class="list" wire:ignore>
+                                            @if ($courses)
+                                                <ul class="nav flex-column mb-24pt">
+
+                                                    @foreach ($courses as $course)
+                                                        <li class="nav-item">
+                                                            <a class="nav-link px-0" href="#">{{ $course->name }}</a>
+                                                        </li>
+                                                    @endforeach
+
+                                                </ul>
+
+                                            @endif
+
+                                        </div>
+                                        <div>
+                                            <a onclick="close_modal();" class="btn btn-block text-center btn-secondary">{{ __('labels.Close') }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <button type="button" class="close" onclick="close_modal();">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+window.onload = hide;
+    function hide(){
+        $('#available_courses').css('display','none');
+    }
+    function available_courses(){
+            $('#available_courses').css('display','block');
+    }
+    function close_modal(){
+        $('#available_courses').css('display','none');
+    }
+</script>
 @endif

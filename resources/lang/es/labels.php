@@ -116,4 +116,6 @@ return [
     'Index' => 'Índice',
     'Edit' => 'Editar',
     'Close' => 'Cerrar',
+    'Available Courses' => 'Cursos Disponibles',
+    'ratings' => 'calificaciones',
 ];

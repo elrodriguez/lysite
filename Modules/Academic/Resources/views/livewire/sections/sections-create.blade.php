@@ -51,7 +51,9 @@
                 title: event.detail.tit,
                 message: event.detail.msg,
                 buttonText: "Okay"
-            });
+            }).then(() => {
+            @this.back();
+        });
         })
     </script>
 </div>
