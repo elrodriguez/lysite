@@ -9,7 +9,11 @@ class AcaAnswer extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'question_id',
+        'answer_text',
+        'user_id'
+    ];
     
     protected static function newFactory()
     {

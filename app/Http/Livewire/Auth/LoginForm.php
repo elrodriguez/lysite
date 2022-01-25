@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -26,7 +27,10 @@ class LoginForm extends Component
         if(Auth::attempt(array('email' => $this->email, 'password' => $this->password),$this->rememberme)){
 
             request()->session()->regenerate();
-
+            User::find(Auth::id())->update([
+                'is_online'             => true,
+                'chat_last_activity'    => now()->addMinutes(5)
+            ]);
             return redirect()->intended('dashboard');
 
         }else{

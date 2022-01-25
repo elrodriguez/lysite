@@ -110,7 +110,8 @@ class StudentsController extends Controller
         $course->video_type= $this->video;
         $instruct = AcaInstructor::join('people', 'person_id', 'people.id')
             ->select(
-                'people.names'
+                'people.names',
+                'people.email'
             )
             ->where('course_id', $course_id)
             ->first();
@@ -120,6 +121,34 @@ class StudentsController extends Controller
             'content_id' => $content_id,
             'course' => $course,
             'instruct' => $instruct
+        ]);
+    }
+
+    public function discussions_ask($course_id, $section_id, $content_id)
+    {
+        return view('academic::students.students_discussions_ask')->with([
+            'course_id' => $course_id,
+            'section_id' => $section_id,
+            'content_id' => $content_id
+        ]);
+    }
+
+    public function discussions_ask_edit($course_id, $section_id, $content_id, $question_id){
+        return view('academic::students.students_discussions_ask_edit')->with([
+            'course_id' => $course_id,
+            'section_id' => $section_id,
+            'content_id' => $content_id,
+            'question_id' => $question_id
+        ]);
+    }
+
+    public function discussion($course_id, $section_id, $content_id, $question_id)
+    {
+        return view('academic::students.students_discussion')->with([
+            'course_id' => $course_id,
+            'section_id' => $section_id,
+            'content_id' => $content_id,
+            'question_id' => $question_id
         ]);
     }
 }

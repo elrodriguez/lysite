@@ -9,6 +9,7 @@ use Modules\Academic\Entities\AcaSection;
 use Modules\Academic\Entities\AcaContent;
 use Modules\Academic\Entities\AcaStudentsSectionProgress;
 use Modules\Academic\Entities\AcaCourse;
+use Modules\Academic\Entities\AcaQuestion;
 
 class StudentTakeLesson extends Component
 {
@@ -19,6 +20,7 @@ class StudentTakeLesson extends Component
     public $video;
     public $course;
     public $content_url;
+    public $questions = [];
 
     public function mount($section_id,$content_id)
     {
@@ -28,6 +30,7 @@ class StudentTakeLesson extends Component
         $this->course_id = AcaSection::find($section_id)->course_id;
         $this->course = AcaCourse::find($this->course_id);
         $this->content_url = AcaContent::find($content_id)->content_url;
+        $this->getQuestions();
     }
     public function render()
     {
@@ -68,5 +71,24 @@ class StudentTakeLesson extends Component
                 return  $url2[$index-1];
             }
         }
+    }
+
+    public function getQuestions(){
+        $this->questions = AcaQuestion::join('users','aca_questions.user_id','users.id')
+            ->join('people','users.id','people.user_id')
+            ->select(
+                'aca_questions.id',
+                'aca_questions.question_title',
+                'people.full_name',
+                'users.avatar',
+                'aca_questions.created_at'
+            )
+            ->selectSub(function($query) {
+                $query->from('aca_answers')
+                    ->selectRaw('COUNT(question_id)')
+                    ->whereColumn('aca_answers.question_id','aca_questions.id');
+            }, 'answers')
+            ->where('content_id',$this->content_id)
+            ->get();
     }
 }
