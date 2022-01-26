@@ -35,6 +35,8 @@ class CourseRating extends Component
     }
 
     public function votar($voto){
+        if($voto>5)$voto=5;
+        if($voto<1)$voto=1;
 
             AcaCourseRatingVote::updateOrCreate(
                 ['user_id' => Auth::id(), 'course_id' => $this->rating->course_id],
