@@ -20,13 +20,8 @@
                         <ul class="nav navbar-nav flex align-items-sm-center">
                             <li class="nav-item navbar-list__item">
                                 <div class="media align-items-center">
-                                    <span class="media-left mr-16pt">
-                                        <img src="{{ url('assets/images/people/50/guy-6.jpg') }}" width="40" alt="avatar" class="rounded-circle">
-                                    </span>
-                                    <div class="media-body">
-                                        <a class="card-title m-0" href="instructor-profile.html">{{ $instruct ? $instruct->names : 'Instructor' }}</a>
-                                        <p class="text-50 lh-1 mb-0">Instructor</p>
-                                    </div>
+
+                                    @livewire('academic::instructors.instructors-drop-show',['course_id' => $course->id])
                                 </div>
                             </li>
                             {{-- <li class="nav-item navbar-list__item">

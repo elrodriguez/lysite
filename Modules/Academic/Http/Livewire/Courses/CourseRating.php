@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseRating extends Component
 {
-    public $rating = [];
+    public $rating;
     public $i=0;
 
     public function mount($course_id)
@@ -27,7 +27,7 @@ class CourseRating extends Component
                 $this->rating->empty = 5 - $this->rating->rating;
             }
         }
-        
+
     }
     public function render()
     {
