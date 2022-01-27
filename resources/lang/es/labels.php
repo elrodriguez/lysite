@@ -118,4 +118,7 @@ return [
     'Close' => 'Cerrar',
     'Available Courses' => 'Cursos Disponibles',
     'ratings' => 'calificaciones',
+    'My Courses' => 'Mis Cursos',
+    'You still do not have courses registered' => 'Todavía no tienes cursos registrados',
+    'No courses' => 'No hay cursos',
 ];

@@ -3,9 +3,9 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use Modules\Academic\Entities\AcaCourse;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class header extends Component
 {
@@ -13,6 +13,7 @@ class header extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $courses;
+    public $person_id;
 
     protected $listeners = ['CoursesOpenModal' => 'openModalCourses'];
 
@@ -38,9 +39,16 @@ class header extends Component
     }
     public function getCourses()
     {
-        $this->courses=DB::table('Aca_courses')->get();
+        $this->person_id=DB::table('people')->where('user_id', Auth::id())->value('id');
+        $this->courses = DB::table('aca_courses')->join('aca_students', 'aca_courses.id', '=', 'aca_students.course_id')->where('aca_students.person_id', $this->person_id)->get();
+        //$this->courses=DB::table('Aca_courses')->get();
         return $this->courses;
     }
 
+    public function getAvailableCourses() // para mostrar todos los cursos disponibles, pero aun no esta en uso
+    {
+        $this->courses = DB::table('aca_courses')->get();
+        return $this->courses;
+    }
 
 }
