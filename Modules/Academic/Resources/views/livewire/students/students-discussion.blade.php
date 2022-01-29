@@ -10,7 +10,7 @@
                         <a href="{{ route('academic_students_take_lesson', [$this->course_id, $this->section_id, $this->content_id]) }}" class="mr-3">Volver</a>
                         {{-- <a href="#" class="mr-2 text-50">Mute</a>--}}
                         @if($question->user_id == auth()->user()->id)
-                            <a wire:click="deleteQuestion({{ $question->id }})" href="javascript:void(0)" class="mr-2 text-50">Eliminar</a> 
+                            <a wire:click="deleteQuestion({{ $question->id }})" href="javascript:void(0)" class="mr-2 text-50">Eliminar</a>
                             <a href="{{ route('academic_students_discussions_ask_edit',[$this->course_id, $this->section_id, $this->content_id, $question->id]) }}" class="text-50" style="text-decoration: underline;">Editar</a>
                         @endif
                     </p>
@@ -48,7 +48,7 @@
                         </a>
                         <div class="flex">
                             <div class="form-group">
-                                <label for="comment" class="form-label">Tu respuesta</label>
+                                <label for="comment" class="form-label">{{ __('labels.Your answer') }}</label>
                                 <textarea wire:model.defer="answer_text" class="form-control" name="comment" id="comment" rows="3" placeholder="Escribe aquí para responder a {{ $question->full_name }}..."></textarea>
                             </div>
                             <button wire:click="postReply" class="btn btn-accent">Publicar comentario</button>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="pt-3">
                         <h4>{{ count($answers) }} Respuesta{{ count($answers) > 1 ? 's' : '' }}</h4>
-                        
+
                         @foreach ($answers as $answer)
                             <div class="d-flex mb-3">
                                 <a href="javascript:void(0)" class="avatar avatar-xs mr-3">

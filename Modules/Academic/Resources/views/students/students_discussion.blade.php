@@ -22,5 +22,5 @@
     @livewire('academic::students.students-discussion',[$course_id, $section_id, $content_id,$question_id])
     <x-slot name="navigation">
         <x-navigation></x-navigation>
-    </x-slot> 
+    </x-slot>
 </x-master>

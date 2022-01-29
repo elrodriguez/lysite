@@ -17,27 +17,26 @@
                         <h4 class="card-title">Registro de un Nuevo Contenido</h4>
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
-                    <div class="col-lg-8 d-flex align-items-center" wire:ignore.self>
-
-                        <div class="flex">
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <form  wire:submit.prevent="save" class="flex">
 
                             <div class="form-group">
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
                                     *</label>
-                                <select 
-                                    wire:model.defer="content_type_id" 
-                                    type="select" 
+                                <select
+                                    wire:model.defer="content_type_id"
+                                    type="select"
                                     class="form-control"
                                     id="content_type_id"
                                     disabled
                                 >
-                                    <option value="">Seleccionar</option> 
+                                    <option value="">Seleccionar</option>
                                     @foreach ($content_types as $types)
                                     <option value="{{ $types->id }}">{{ $types->name }}</option>
 
                                     @endforeach
                                 </select>
-                                @error('content_type_id') 
+                                @error('content_type_id')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
