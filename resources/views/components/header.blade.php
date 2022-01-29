@@ -112,8 +112,11 @@ $path = explode('/', request()->path());
                 @auth
                 <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img width="32" height="32" class="rounded-circle"
-                            src="{{ url('assets/images/people/50/guy-3.jpg') }}" alt="student" />
+                        @if(Auth::user()->avatar)
+                            <img width="32" height="32" class="rounded-circle" src="{{ url('storage/'.Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}" />
+                        @else
+                            <img width="32" height="32" class="rounded-circle" src="{{ ui_avatars_url(Auth::user()->name,32,'none') }}" alt="{{ Auth::user()->name }}" />
+                        @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-header"><strong>{{ Auth::user()->name }}</strong></div>

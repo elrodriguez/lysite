@@ -69,6 +69,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
         Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('file/{content_id}/{studentd_id}', 'DownloadsController@downloadFile')->name('download_file');
     });
 
+    Route::group(['prefix' => 'reports'], function() {
+        Route::middleware(['middleware' => 'role_or_permission:academico_reporte_total_alumnos'])->get('students_total', 'ReportStudentController@studentTotal')->name('academic_reports_students_total');
+    });
+
 });
 
 

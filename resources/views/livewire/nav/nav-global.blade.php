@@ -31,19 +31,22 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Academico</a>
             <div class="dropdown-menu">
                 @can('academico_tipo_contenido')
-                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Content Types') }}</a>
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Content Types') }}</a>
                 @endcan
                 @can('academico_cursos')
-                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'courses' ? 'active' : '' }}" href="{{ route('academic_courses') }}">Cursos</a>
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'courses' ? 'active' : '' }}" href="{{ route('academic_courses') }}">Cursos</a>
                 @endcan
                 @can('academico_instructors')
-                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructors' ? 'active' : '' }}" href="{{ route('academic_instructors_list') }}">Instructor</a>
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructors' ? 'active' : '' }}" href="{{ route('academic_instructors_list') }}">Instructor</a>
                 @endcan
                 @can('academico_alumnos')
-                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'students' ? 'active' : '' }}" href="{{ route('academic_students') }}">Alumnos</a>
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'students' ? 'active' : '' }}" href="{{ route('academic_students') }}">Alumnos</a>
                 @endcan
                 @can('academico_cursos_instructor')
-                <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructor' && $path[2] == 'courses' ? 'active' : '' }}" href="{{ route('academic_dash_instructor_courses_list') }}">Cursos Instructor</a>
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructor' && $path[2] == 'courses' ? 'active' : '' }}" href="{{ route('academic_dash_instructor_courses_list') }}">Cursos Instructor</a>
+                @endcan
+                @can('academico_reporte_total_alumnos')
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'reports' && $path[2] == 'students_total' ? 'active' : '' }}" href="{{ route('academic_reports_students_total') }}">Reporte Total Estudiantes</a>
                 @endcan
             </div>
         </li>

@@ -47,10 +47,10 @@ class EditProfile extends Component
                 'avatar' => 'max:2048|mimes:jpg,jpeg,png'
             ]);
 
-            $dir = 'users'.DIRECTORY_SEPARATOR.$this->user_id.DIRECTORY_SEPARATOR.'avatars'.DIRECTORY_SEPARATOR;
-            $fna = date('YmdHis').'.png';
-            $this->avatar->storeAs($dir, $fna,'public');
-            $path_avatar = $dir.$fna;
+            $name = Auth::id().'.png';
+  
+            $path_avatar = $this->avatar->storeAs('avatars', $name, 'public');
+ 
         }else{
             $path_avatar = $this->avatar_show;
         }
