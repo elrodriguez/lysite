@@ -59,6 +59,9 @@ $path = explode('/', request()->path());
 
 
             <!-- Aquí esta el boton de Cursos_____________________________________________________ -->
+
+
+            @if (Auth::check())
             <style>
                 #courses:hover {
                     color: gray;
@@ -75,32 +78,32 @@ $path = explode('/', request()->path());
 
                         @if (count($courses) > 0)
                             @foreach ($courses as $course)
-                            <a href="{{ route('academic_students_my_course', $course->id) }}" class="dropdown-item">
-                                <span class="media-left mr-16pt">
-                                    <img src="{{ asset($course->course_image) }}" width="30" alt="avatar"
-                                        class="rounded-circle">
-                                </span>
-                                <div class="media-body">
-                                    {{ $course->name }}
-                                </div>
-                            </a>
+                                    <a href="{{ route('academic_students_my_course', $course->id) }}" class="dropdown-item">
+                                        <span class="media-left mr-16pt">
+                                            <img src="{{ asset($course->course_image) }}" width="30" alt="avatar"
+                                                class="rounded-circle">
+                                        </span>
+                                        <div class="media-body">
+                                            {{ $course->name }}
+                                        </div>
+                                    </a>
                             @endforeach
                         @else
-                            <a href="{{ route('home') }}" class="dropdown-item">
-                                <span class="media-left mr-16pt">
-                                    <img src="{{ url('assets/images/logo/white-60.png') }}" width="30" alt="avatar"
-                                        class="rounded-circle">
-                                </span>
-                                <div class="media-body">
-                                    {{ __('labels.No courses') }}
-                                </div>
-                            </a>
+                                    <a href="{{ route('home') }}" class="dropdown-item">
+                                        <span class="media-left mr-16pt">
+                                            <img src="{{ url('assets/images/logo/white-60.png') }}" width="30" alt="avatar"
+                                                class="rounded-circle">
+                                        </span>
+                                        <div class="media-body">
+                                            {{ __('labels.No courses') }}
+                                        </div>
+                                    </a>
                         @endif
 
                     </div>
                 </div>
             </div>
-
+            @endif
 
 
 

@@ -34,7 +34,6 @@ class header extends Component
      */
     public function render()
     {
-
        return view('components.header', ['courses' => $this->getCourses()]);
     }
     public function getCourses()

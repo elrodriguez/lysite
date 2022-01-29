@@ -121,4 +121,9 @@ return [
     'My Courses' => 'Mis Cursos',
     'You still do not have courses registered' => 'Todavía no tienes cursos registrados',
     'No courses' => 'No hay cursos',
+    'Your answer' => 'Tu respuesta',
+    'Go to Lysite' => 'Ir a Lysite',
+    'by' => 'por',
+    'Question' => 'Pregunta',
+    'Answer' => 'Respuesta',
 ];

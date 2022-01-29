@@ -11,26 +11,16 @@ class CourseRating extends Component
 {
     public $rating;
     public $i=0;
+    public $course_id;
 
     public function mount($course_id)
     {
-        $this->rating = AcaCourseRating::where('course_id', $course_id)->first();
-
-        if($this->rating){
-            if (fmod($this->rating->rating, 1) > 0) {
-                $this->rating->half = true;
-            }
-            $this->rating->rating = $this->rating->rating - fmod($this->rating->rating, 1);
-            if($this->rating->half){
-                $this->rating->empty = 4 - $this->rating->rating;
-            }else{
-                $this->rating->empty = 5 - $this->rating->rating;
-            }
-        }
+        $this->course_id=$course_id;
 
     }
     public function render()
     {
+        $this->Load_rating();
         return view('academic::livewire.courses.course-rating');
     }
 
@@ -53,11 +43,29 @@ class CourseRating extends Component
         //    $this->rating = AcaCourseRating::where('course_id', $this->rating->course_id)->first();
           //  $this->mount($this->rating->course_id);
         $this->dispatchBrowserEvent('aca-vote-success', ['tit' => 'Gracias por tu calificación','msg' => 'Tu elección ha sido registrada correctamente']);
-
-
     }
+
     public function reload(){
-            redirect()->route('academic_students_my_course', $this->rating->course_id);
+            //redirect()->route('academic_students_my_course', $this->rating->course_id);
+    }
+
+    public function Load_rating()
+    {
+        $this->rating = AcaCourseRating::where('course_id', $this->course_id)->first();
+
+        if($this->rating){
+            if (fmod($this->rating->rating, 1) > 0) {
+                $this->rating->half = true;
+            }
+            $this->rating->rating = $this->rating->rating - fmod($this->rating->rating, 1);
+            if($this->rating->half){
+                $this->rating->empty = 4 - $this->rating->rating;
+            }else{
+                $this->rating->empty = 5 - $this->rating->rating;
+            }
+        }
+
+
     }
 
 }

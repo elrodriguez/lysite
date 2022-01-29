@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaAnswer;
 use Modules\Academic\Entities\AcaQuestion;
+use Illuminate\Support\Facades\Mail;
+use Modules\Academic\Emails\AnsweredQuestion;
+use Illuminate\Support\Facades\DB;
+
 
 class StudentsDiscussion extends Component
 {
@@ -58,9 +62,9 @@ class StudentsDiscussion extends Component
             'user_id' => Auth::id()
         ]);
 
-        $this->answer_text = null;
-
+        $this->sendEmailNotification();
         $this->dispatchBrowserEvent('aca-answer-publicate', ['tit' => 'Enhorabuena','msg' => 'Respuesta publicada correctamente']);
+        $this->answer_text = null;
     }
 
     public function getAnswers(){
@@ -92,5 +96,14 @@ class StudentsDiscussion extends Component
             $this->dispatchBrowserEvent('aca-answer-not-delete', ['tit' => 'Error','msg' => 'No se puede eliminar la pregunta, tiene registros asociados']);
         }
 
+    }
+
+    public function sendEmailNotification(){
+        if($this->question->email==1 && $this->question->user_id != Auth::id()){
+            $correo = new AnsweredQuestion($this->question->question_text, $this->answer_text, DB::table('users')->where('id', Auth::id())->first()->name, $this->question_id);
+        //$correo->subject = 'Tu pregunta ha sido respondida';
+        $email = DB::table('users')->where('id',$this->question->user_id)->value('email');
+        Mail::to($email)->send($correo);
+        }
     }
 }
