@@ -32,6 +32,11 @@ class ContentsEdit extends Component
     public $content;
     public $course;
 
+    public $txturl;
+    public $txtimage;
+    public $txtarchivo;
+    public $txttexto;
+
     public function mount($section_id, $content_id){
         $this->section = AcaSection::find($section_id);
         $this->content = AcaContent::find($content_id);
@@ -43,8 +48,19 @@ class ContentsEdit extends Component
         $this->content_type_id_last = $this->content_type_id;
         $this->status = $this->content->status;
         $this->name = $this->content->name;
-        $this->content_url_last = $this->content_url;
-        $this->content_url_editor = $this->content->content_url;
+
+        if($this->content_type_id == 1){
+            $this->txturl = $this->content->content_url;
+        }
+        if($this->content_type_id == 2){
+            $this->txttexto = $this->content->content_url;
+        }
+        if($this->content_type_id == 3){
+            $this->txtarchivo = $this->content->content_url;
+        }
+        if($this->content_type_id == 4){
+            $this->txtimage = $this->content->content_url;
+        }
     }
 
     public function render()
@@ -57,47 +73,20 @@ class ContentsEdit extends Component
         return $this->content;
     }
 
-    public function updated($propertyName)
-    {
-        switch ($this->content_type_id) {
-            case 3:
-                $this->validateOnly($propertyName, [
-
-                    'content_url' => 'required|max:50240|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt',
-
-                ]);
-                break;
-            case 4:
-                $this->validateOnly($propertyName, [
-
-                    'content_url' => 'required|max:20240|image',
-
-                ]);
-                break;
-
-            default:
-
-                $this->validateOnly($propertyName, [
-
-                    'content_url' => 'required',
-
-                ]);
-                break;
-        }
-        if($this->content_type_id_last < 4){
-            $this->its_image = false;
-        }else{
-            $this->its_image = true;
-        }
-        $this->content_type_id_last=$this->content_type_id;
-    }
-
-
-
     public function save(){
         $this->its_image=false;
-        if($this->content_type_id==2){
-            $this->content_url=$this->content_url_editor;
+        
+        if($this->content_type_id == 1){
+            $this->content_url = $this->txturl;
+        }
+        if($this->content_type_id == 2){
+            $this->content_url = $this->txttexto;
+        }
+        if($this->content_type_id == 3){
+            $this->content_url = $this->txtarchivo;
+        }
+        if($this->content_type_id == 4){
+            $this->content_url = $this->txtimage;
         }
 
         $this->validate();
@@ -122,19 +111,12 @@ class ContentsEdit extends Component
             'updated_by' => Auth::id(),
         ]);
 
-
-
         $this->dispatchBrowserEvent('aca-content-update', ['tit' => 'Enhorabuena','msg' => 'Se Actualizo correctamente']);
     }
 
-    public function updatedPhoto()
-
-    {
-
+    public function updatedPhoto(){
         $this->validate([
-
             'content_url' => 'image|max:10240',
-
         ]);
     }
     protected $rules = [

@@ -13,6 +13,7 @@ use Livewire\WithFileUploads;
 class ContentsCreate extends Component
 {
     use WithFileUploads;
+
     public $section_id;
     public $course;
     public $section;
@@ -25,7 +26,11 @@ class ContentsCreate extends Component
     public $status;
     public $created_by;
     public $original_name;
-    public $modal=1;
+
+    public $txturl;
+    public $txtimage;
+    public $txtarchivo;
+    public $txttexto;
 
     public function render()
     {
@@ -34,64 +39,39 @@ class ContentsCreate extends Component
 
     public function mount($section_id)
     {
-        $this->content_type_id=1;
         $this->section_id = $section_id;
         $this->section = AcaSection::find($section_id);
         $this->course = AcaCourse::find($this->section->course_id);
         $this->content_types = AcaContentType::all();
     }
 
-    /*
-    protected $rules = [
-        'content_url' =>'required',
-    ];
-    public $validators; */
-
-    public function updated($propertyName)
-
-    {
-        switch ($this->content_type_id) {
-            case 3:
-                $this->validateOnly($propertyName, [
-
-                    'content_url' => 'required|max:50240|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt',
-
-                ]);
-                break;
-            case 4:
-                $this->validateOnly($propertyName, [
-
-                    'content_url' => 'required|max:20240|image',
-
-                ]);
-                break;
-
-            default:
-                $this->validateOnly($propertyName, [
-
-                    'content_url' => 'required',
-
-                ]);
-                break;
-        }
-    }
 
     public function save()
     {
 
-        if($this->content_type_id==2){
-            $this->content_url=$this->content_url_editor;
+        if($this->content_type_id == 1){
+            $this->content_url = $this->txturl;
         }
+        if($this->content_type_id == 2){
+            $this->content_url = $this->txttexto;
+        }
+        if($this->content_type_id == 3){
+            $this->content_url = $this->txtarchivo;
+        }
+        if($this->content_type_id == 4){
+            $this->content_url = $this->txtimage;
+        }
+
         $this->validate();
+
         if ($this->content_type_id == 3 || $this->content_type_id == 4) {
             $this->original_name = $this->content_url->getClientOriginalName();
             $this->content_url = 'storage/'.substr($this->content_url->store('public/uploads/academic/contents'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
 
-            //$this->content_url = $this->content_url->store('contents');
         }
 
 
-        $count=AcaContent::where('Section_id',$this->section_id)->count();
+        $count = AcaContent::where('Section_id',$this->section_id)->count();
 
         AcaContent::create([
             'section_id' => $this->section_id,
@@ -100,7 +80,7 @@ class ContentsCreate extends Component
             'content_url' => $this->content_url, //tuve que hacer substring para quitar el public del path, ya que no me dejaba cargar la imagen en la carpeta public
             'original_name' => $this->original_name,
             'status' => true,
-            'count' => $count+1,
+            'count' => $count + 1,
             'created_by' => Auth::id()
         ]);
 
@@ -112,17 +92,11 @@ class ContentsCreate extends Component
 
         $this->dispatchBrowserEvent('aca-content-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
 
-
     }
 
-    public function updatedPhoto()
-
-    {
-
+    public function updatedPhoto(){
         $this->validate([
-
             'content_url' => 'image|max:10240',
-
         ]);
     }
 
@@ -130,11 +104,7 @@ class ContentsCreate extends Component
         'content_url' => 'required'
     ];
 
-    public function modal(){
-      $this->modal++;
-}
-
-public function back(){
-    redirect()->route('academico_contenido',[$this->section->course_id,$this->section->id]);
-}
+    public function back(){
+        redirect()->route('academico_contenido',[$this->section->course_id,$this->section->id]);
+    }
 }
