@@ -8,7 +8,7 @@
                 @foreach ($instructors as $instructor)
                             <a href="" class="dropdown-item">
                                 <span class="media-left mr-16pt">
-                                    <img src="{{ url('assets/images/people/50/guy-6.jpg') }}" width="30" alt="avatar" class="rounded-circle">
+                                    <img src="{{ url('storage/'.$instructor->avatar) }}" width="30" alt="avatar" class="rounded-circle">
                                 </span>
                                 <div class="media-body">
                                     {{ $instructor->full_name }}

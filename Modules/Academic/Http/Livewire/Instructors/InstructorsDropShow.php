@@ -14,6 +14,8 @@ class InstructorsDropShow extends Component
         $this->instructors = AcaInstructor::where('course_id', $course_id)->get();
         foreach ($this->instructors as $instructor) {
             $instructor->full_name = DB::table('people')->where('id', $instructor->person_id)->value('full_name');
+            $user_id=DB::table('people')->where('id', $instructor->person_id)->value('user_id');
+            $instructor->avatar = DB::table('users')->where('id', $user_id)->value('avatar');
         }
     }
     public function render()
