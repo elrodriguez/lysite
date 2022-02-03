@@ -19,6 +19,7 @@ class AnsweredQuestion extends Mailable
     public $by="JOSH";
     //////////// variables para la ruta
     public $a, $b, $c, $d;
+    public $Year;
 
 
     /**
@@ -43,6 +44,7 @@ class AnsweredQuestion extends Mailable
     public function build()
     {
         $this->load_route();
+        $this->Year = date("Y");
         return $this->view('academic::emails.answered-question',[
             'subject' => $this->subject,
             'question' => $this->question,
@@ -52,6 +54,7 @@ class AnsweredQuestion extends Mailable
             'b' => $this->b,
             'c' => $this->c,
             'd' => $this->d,
+            'Year' => $this->Year,
         ]);
     }
 

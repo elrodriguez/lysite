@@ -126,4 +126,5 @@ return [
     'by' => 'por',
     'Question' => 'Pregunta',
     'Answer' => 'Respuesta',
+    'Answered by' => 'Respondido por',
 ];
