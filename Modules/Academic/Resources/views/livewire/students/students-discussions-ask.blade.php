@@ -57,7 +57,11 @@
                                                 <div class="col-md-3 mb-8pt mb-md-0">
                                                     <div class="media">
                                                         <div class="media-left mr-16pt">
+                                                            @if($question->avatar)
                                                             <a href="#"><img src="{{ url('storage/'.$question->avatar) }}" width="40" alt="{{ $question->full_name }}" class="rounded-circle"></a>
+                                                            @else
+                                                            <a href="#"><img src="{{ ui_avatars_url($question->full_name,40,'none') }}" width="40" alt="{{ $question->full_name }}" class="rounded-circle"></a>
+                                                            @endif
                                                         </div>
                                                         <div class="media-body media-middle">
                                                             <p class="text-muted m-0">{{ \Carbon\Carbon::parse($question->created_at)->diffForHumans() }}</p>

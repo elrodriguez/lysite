@@ -51,6 +51,16 @@
             </div>
         </li>
         @endcan
+        @can('investigacion')
+        <li class="nav-item dropdown {{ $path[0] == 'investigation' ? 'active' : '' }}">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">investigación</a>
+            <div class="dropdown-menu">
+                @can('investigacion_partes')
+                    <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'parts' ? 'active' : '' }}" href="{{ route('investigation_parts') }}">{{ __('investigation::labels.parts') }}</a>
+                @endcan
+            </div>
+        </li>
+        @endcan
     </ul>
     {{-- <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
