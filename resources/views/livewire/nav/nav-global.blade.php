@@ -60,7 +60,11 @@
                 @endcan
 
                 @can('academico_tipo_contenido')
-                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Contenido Investigación - Prueba') }}</a>
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Mi Tesis') }}</a>
+                @endcan
+
+                @can('academico_tipo_contenido')
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Configuración') }}</a>
                 @endcan
 
             </div>
