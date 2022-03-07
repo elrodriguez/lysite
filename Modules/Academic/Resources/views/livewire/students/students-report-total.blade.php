@@ -27,7 +27,7 @@
                                 </thead>
                                 <tbody class="list">
                                     @php
-                                        $total = 1;
+                                        $total = 0;
                                     @endphp
                                     @foreach($students as $key => $student)
                                         <tr>
