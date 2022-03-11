@@ -12,6 +12,7 @@ class District extends Model
     public $incrementing = false;
     
     protected $fillable = [
+        'id',
         'province_id',
         'description',
         'active'
