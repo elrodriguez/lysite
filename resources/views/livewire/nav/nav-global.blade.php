@@ -51,13 +51,22 @@
             </div>
         </li>
         @endcan
-        @can('investigacion')
+        @can('academico')
         <li class="nav-item dropdown {{ $path[0] == 'investigation' ? 'active' : '' }}">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">investigación</a>
             <div class="dropdown-menu">
                 @can('investigacion_partes')
                     <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'parts' ? 'active' : '' }}" href="{{ route('investigation_parts') }}">{{ __('investigation::labels.parts') }}</a>
                 @endcan
+
+                @can('academico_tipo_contenido')
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Mi Tesis') }}</a>
+                @endcan
+
+                @can('academico_tipo_contenido')
+                    <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Configuración') }}</a>
+                @endcan
+
             </div>
         </li>
         @endcan
