@@ -27,10 +27,10 @@ class UniversitiesEdit extends Component
 
     public function render()
     {
-        return view('investigation::livewire.universities.universities-edit',['countries' => $this->getCountrys()]);
+        return view('investigation::livewire.universities.universities-edit',['countries' => $this->getCountries()]);
     }
 
-    public function getCountrys(){
+    public function getCountries(){
         return Country::all();
     }
 
