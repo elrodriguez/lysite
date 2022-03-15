@@ -127,4 +127,5 @@ return [
     'Question' => 'Pregunta',
     'Answer' => 'Respuesta',
     'Answered by' => 'Respondido por',
+    'country' => 'País'
 ];

@@ -24,6 +24,7 @@ class Person extends Model
         'department_id',
         'province_id',
         'district_id',
-        'user_id'
+        'user_id',
+        'country_id'
     ];
 }

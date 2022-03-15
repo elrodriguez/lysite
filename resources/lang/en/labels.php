@@ -97,5 +97,6 @@ return [
     'Search and Assign Instructors' => 'Search and Assign Instructors',
     'Available Instructors' => 'Available Instructors',
     'Course' => 'Course',
-    'my_courses' => 'My courses'
+    'my_courses' => 'My courses',
+    'country' => 'country'
 ];

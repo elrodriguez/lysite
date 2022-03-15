@@ -57,6 +57,21 @@
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">{{ __('labels.country') }}</label>
+                                <div class="col-sm-4">
+                                    <select wire:change="getProvinces" wire:model="country_id" class="form-control">
+                                        <option value="">Seleccionar</option>
+                                        @foreach($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->description }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('country_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
+                        @if($ubigeo_active)
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">{{ __('labels.Region') }}</label>
                                 <div class="col-sm-4">
                                     <select wire:change="getProvinces" wire:model="department_id" class="form-control">
@@ -97,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">{{ __('labels.Address') }}</label>

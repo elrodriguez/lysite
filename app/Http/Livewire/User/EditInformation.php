@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Country;
 use App\Models\Department;
 use App\Models\District;
 use App\Models\IdentityDocumentType;
@@ -28,12 +29,15 @@ class EditInformation extends Component
     public $province_id = null;
     public $district_id = null;
     public $user_id = null;
+    public $country_id = 'PE';
 
     public $identity_document_types;
+    public $countries = [];
     public $departments = [];
     public $provinces = [];
     public $districts = [];
     public $person;
+    public $ubigeo_active = false;
 
     public function mount(){
         $this->person = Person::where('user_id',Auth::id())->first();
@@ -60,19 +64,29 @@ class EditInformation extends Component
 
         $this->identity_document_types = IdentityDocumentType::where('status',true)->get();
 
-        $this->departments = Department::where('active',true)->get();
-
-        if($this->department_id){
-            $this->provinces = Province::where('department_id',$this->department_id)->get();
-        }
-
-        if($this->province_id){
-            $this->districts = District::where('province_id',$this->province_id)->get();
-        }
     }
 
     public function render()
     {
+        $this->countries = Country::all();
+
+        if($this->country_id == 'PE'){
+            $this->ubigeo_active = true;
+            $this->departments = Department::where('country_id',$this->country_id)->get();
+
+            if($this->department_id){
+                $this->provinces = Province::where('department_id',$this->department_id)->get();
+            }
+    
+            if($this->province_id){
+                $this->districts = District::where('province_id',$this->province_id)->get();
+            }
+            
+        }else{
+            $this->ubigeo_active = false;
+        }
+        
+        
         return view('livewire.user.edit-information');
     }
 
@@ -96,9 +110,10 @@ class EditInformation extends Component
             'sex' => 'required',
             'birth_date' =>'required',
             'email' => 'required',
-            'department_id' => 'required',
-            'province_id' => 'required',
-            'district_id' => 'required'
+            'country_id' => 'required'
+            //'department_id' => 'required',
+            //'province_id' => 'required',
+            //'district_id' => 'required'
         ]);
 
         if($this->person){
@@ -116,7 +131,8 @@ class EditInformation extends Component
                 'email' => trim($this->email),
                 'department_id' => $this->department_id,
                 'province_id' => $this->province_id,
-                'district_id' => $this->district_id
+                'district_id' => $this->district_id,
+                'country_id' => $this->country_id
             ]);
         }else{
             Person::create([
