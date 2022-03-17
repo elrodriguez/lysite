@@ -31,6 +31,7 @@ class SeedPermissionModuleTableSeeder extends Seeder
 
         array_push($permissions,Permission::create(['name' => 'investigacion']));
         array_push($permissions,Permission::create(['name' => 'investigacion_partes']));
+        array_push($permissions,Permission::create(['name' => 'universities_editor']));
 
         $role = Role::find(1);
         foreach($permissions as $permission){

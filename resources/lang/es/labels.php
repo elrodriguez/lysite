@@ -127,5 +127,15 @@ return [
     'Question' => 'Pregunta',
     'Answer' => 'Respuesta',
     'Answered by' => 'Respondido por',
-    'country' => 'País'
+    'My Thesis' => 'Mi Tesis',
+    'Setting' => 'Configuración',
+    'Universities' => 'Universidades',
+    'University' => 'Universidad',
+    'Country' => 'País',
+    'country' => 'país',
+    'Acronym' => 'Siglas',
+    'University Name' => 'Nombre de la Universidad',
+    'University acronym' => 'Siglas de la Universidad',
+    'University name' => 'Nombre de la Universidad',
+    'New' => 'Nuevo',
 ];
