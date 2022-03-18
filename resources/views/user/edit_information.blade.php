@@ -5,6 +5,7 @@
     <link type="text/css" href="{{ url('assets/css/flatpickr.rtl.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/select2/select2.bundle.css') }}" rel="stylesheet">
     @endsection
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary border-bottom-white py-32pt">
@@ -37,5 +38,6 @@
     <!-- Flatpickr -->
     <script src="{{ url('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ url('assets/js/flatpickr.js') }}"></script>
+    <script src="{{ url('assets/js/select2/select2.bundle.js') }}"></script>
     @endsection
 </x-master>

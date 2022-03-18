@@ -69,6 +69,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="list-group-item" wire:ignore>
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">{{ __('labels.University') }}</label>
+                                <div class="col-sm-9">
+                                    <select wire:model="university_id" class="form-control" id="university_id">
+                                        <option value="">Seleccionar</option>
+                                        @foreach($universities as $university)
+                                            <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('country_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
                         @if($ubigeo_active)
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
@@ -187,6 +201,7 @@
         });
         document.addEventListener('livewire:load', function () {
             $("#birth_date").flatpickr();
+            //$('#university_id').select2();
         });
     </script>
 </div>

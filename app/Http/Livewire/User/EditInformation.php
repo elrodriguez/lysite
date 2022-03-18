@@ -8,6 +8,7 @@ use App\Models\District;
 use App\Models\IdentityDocumentType;
 use App\Models\Person;
 use App\Models\Province;
+use App\Models\Universities;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -36,8 +37,10 @@ class EditInformation extends Component
     public $departments = [];
     public $provinces = [];
     public $districts = [];
+    public $universities = [];
     public $person;
     public $ubigeo_active = false;
+    public $university_id;
 
     public function mount(){
         $this->person = Person::where('user_id',Auth::id())->first();
@@ -60,6 +63,7 @@ class EditInformation extends Component
             $this->province_id = $this->person->province_id;
             $this->district_id = $this->person->district_id;
             $this->user_id = $this->person->user_id;
+            $this->university_id = $this->person->university_id;
         }
 
         $this->identity_document_types = IdentityDocumentType::where('status',true)->get();
@@ -69,9 +73,10 @@ class EditInformation extends Component
     public function render()
     {
         $this->countries = Country::all();
-
+        $this->universities = Universities::where('country',$this->country_id)->get();
         if($this->country_id == 'PE'){
             $this->ubigeo_active = true;
+            
             $this->departments = Department::where('country_id',$this->country_id)->get();
 
             if($this->department_id){
@@ -110,7 +115,8 @@ class EditInformation extends Component
             'sex' => 'required',
             'birth_date' =>'required',
             'email' => 'required',
-            'country_id' => 'required'
+            'country_id' => 'required',
+            'university_id' => 'required'
             //'department_id' => 'required',
             //'province_id' => 'required',
             //'district_id' => 'required'
@@ -132,7 +138,8 @@ class EditInformation extends Component
                 'department_id' => $this->department_id,
                 'province_id' => $this->province_id,
                 'district_id' => $this->district_id,
-                'country_id' => $this->country_id
+                'country_id' => $this->country_id,
+                'university_id' => $this->university_id
             ]);
         }else{
             Person::create([
@@ -150,6 +157,8 @@ class EditInformation extends Component
                 'department_id' => $this->department_id,
                 'province_id' => $this->province_id,
                 'district_id' => $this->district_id,
+                'country_id' => $this->country_id,
+                'university_id' => $this->university_id,
                 'user_id' => Auth::id()
             ]);
         }
