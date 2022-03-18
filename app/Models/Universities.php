@@ -12,6 +12,10 @@ class Universities extends Model
     protected $fillable = [
         'name',
         'siglas',
-        'country'
+        'country',
+        'private',
+        'department_id',
+        'province_id',
+        'district_id'
     ];
 }

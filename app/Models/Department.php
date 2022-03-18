@@ -14,6 +14,7 @@ class Department extends Model
     protected $fillable = [
         'id',
         'description',
-        'active'
+        'active',
+        'country_id'
     ];
 }

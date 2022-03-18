@@ -22,6 +22,8 @@ class CreateUniversitiesTable extends Migration
             $table->char('department_id',2)->nullable();
             $table->char('province_id',4)->nullable();
             $table->char('district_id',6)->nullable();
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('country')->references('id')->on('countries');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('province_id')->references('id')->on('provinces');
