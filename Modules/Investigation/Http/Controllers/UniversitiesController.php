@@ -81,4 +81,19 @@ class UniversitiesController extends Controller
     {
         return view('investigation::universities.universities');
     }
+
+    public function schools($id)
+    {
+        return view('investigation::universities.universities-schools')->with('id', $id);
+    }
+
+    public function schools_create($id)
+    {
+        return view('investigation::universities.universities-schools-create')->with('id', $id);
+    }
+
+    public function schools_edit($university_id, $school_id)
+    {
+        return view('investigation::universities.universities-schools-edit')->with('university_id', $university_id)->with('school_id', $school_id);
+    }
 }

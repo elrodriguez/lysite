@@ -19,18 +19,11 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
 
     Route::group(['prefix' => 'universities'], function() {
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('list', 'UniversitiesController@list')->name('Investigation_universities_list');
-    });
-
-    Route::group(['prefix' => 'universities'], function() {
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('edit/{id}', 'UniversitiesController@edit')->name('Investigation_universities_edit');
-    });
-
-    Route::group(['prefix' => 'universities'], function() {
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('create', 'UniversitiesController@create')->name('Investigation_universities_create');
-    });
-
-    Route::group(['prefix' => 'universities'], function() {
-        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools', 'UniversitiesController@schools')->name('Investigation_universities_schools');
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools/{id}', 'UniversitiesController@schools')->name('Investigation_universities_schools');
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools/create/{id}', 'UniversitiesController@schools_create')->name('Investigation_universities_schools_create');
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools/edit/{university_id}/{school_id}', 'UniversitiesController@schools_edit')->name('Investigation_universities_schools_edit');
     });
 
 });

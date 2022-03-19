@@ -138,4 +138,8 @@ return [
     'University acronym' => 'Siglas de la Universidad',
     'University name' => 'Nombre de la Universidad',
     'New' => 'Nuevo',
+    'universities' => 'universidades',
+    'UNIVERSITIES' => 'UNIVERSIDADES',
+    'schools' => 'escuelas',
+    'School name' => 'Nombre de la Escuela',
 ];

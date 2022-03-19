@@ -10,6 +10,7 @@ class universities_schools extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'university_id'
     ];
 }
