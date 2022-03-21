@@ -38,4 +38,21 @@ class UniversitiesSchools extends Component
     {
         return view('investigation::livewire.universities.universities-schools',['schools' => $this->getSchools()]);
     }
+
+    public function destroy($id){
+        try { /*
+            $course_image=AcaCourse::find($id)->course_image;
+            Storage::disk('public')->delete(substr($course_image, 8)); */
+            UniversitiesSchoolsModel::find($id)->delete();
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se eliminó correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar porque cuenta con registros asociados';
+        }
+
+        $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
 }

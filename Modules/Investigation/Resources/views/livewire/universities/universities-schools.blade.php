@@ -32,7 +32,7 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
-                                        <th>{{ __('labels.School') }}</th>
+                                        <th class="text-center">{{ __('labels.School name') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -45,7 +45,7 @@
                                                 <a href="{{ route('Investigation_universities_schools_edit',[$university->id,$school->id]) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 @can('academico_secciones')
-                                                <a href="{{ route('Investigation_universities_schools',$school->id) }}" type="button" class="btn btn-success btn-sm" title="Escuelas"><i class="fa fa-newspaper"></i></a>
+                                                <a href="{{ route('Investigation_universities_schools',$school->id) }}" type="button" class="btn btn-success btn-sm" title="{{ __('labels.Thesis') }}"><i class="fa fa-book"></i></a>
                                                 @endcan
                                                 @can('academico_cursos_eliminar')
                                                 <button onclick="deletes({{ $school->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>

@@ -142,4 +142,5 @@ return [
     'UNIVERSITIES' => 'UNIVERSIDADES',
     'schools' => 'escuelas',
     'School name' => 'Nombre de la Escuela',
+    'Thesis' => 'Tesis',
 ];
