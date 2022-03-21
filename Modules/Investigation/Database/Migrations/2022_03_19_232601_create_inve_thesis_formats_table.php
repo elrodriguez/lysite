@@ -18,10 +18,12 @@ class CreateInveThesisFormatsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('type_thesis');
-            $table->string('normative_thesis');
+            $table->string('normative_thesis')->comment('APA, Vancouver u otros');
             $table->integer('school_id');
             $table->timestamps();
         });
+
+
     }
 
     /**
