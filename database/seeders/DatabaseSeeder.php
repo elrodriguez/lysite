@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Setting\Database\Seeders\SettingDatabaseSeeder;
 use Modules\Academic\Database\Seeders\AcademicDatabaseSeeder;
+use Modules\Investigation\Database\Seeders\InvestigationDatabaseSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SettingDatabaseSeeder::class,
             AcademicDatabaseSeeder::class,
+            InvestigationDatabaseSeeder::class,
         ]);
     }
 }
