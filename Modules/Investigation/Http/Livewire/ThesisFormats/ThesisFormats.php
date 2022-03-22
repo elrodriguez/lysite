@@ -4,12 +4,16 @@ namespace Modules\Investigation\Http\Livewire\ThesisFormats;
 
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisFormat;
+use App\Models\Universities as UniversitiesModel;
+use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
 use Livewire\WithPagination;
 
 class ThesisFormats extends Component
 {
     public $search;
     public $school_id;
+    public $university;
+    public $school;
 
     use WithPagination;
 
@@ -18,6 +22,8 @@ class ThesisFormats extends Component
     public function mount($school_id)
     {
         $this->school_id = $school_id;
+        $this->school=UniversitiesSchoolsModel::find($school_id);
+        $this->university = UniversitiesModel::where('id', $this->school->university_id)->first();
     }
 
     public function getSearch()

@@ -146,4 +146,6 @@ return [
     'Style' => 'Estilo',
     'Format name' => 'Nombre del Formato',
     'Type Thesis' => 'Tipo de Tesis',
+    'Thesis Formats' => 'Formatos de Tesis',
+    'New Thesis Format' => 'Nuevo Formato de Tesis',
 ];

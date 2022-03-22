@@ -4,6 +4,7 @@ namespace Modules\Investigation\Http\Livewire\ThesisFormats;
 
 use Livewire\Component;
 use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
+use App\Models\Universities as UniversitiesModel;
 use Modules\Investigation\Entities\InveThesisFormat;
 
 class ThesisFormatsCreate extends Component
@@ -15,6 +16,8 @@ class ThesisFormatsCreate extends Component
     public $normative_thesis;
     public $enum_types;
     public $enum_normatives;
+    public $university;
+    public $school;
 
     public function mount($school_id)
     {
@@ -22,6 +25,9 @@ class ThesisFormatsCreate extends Component
 
         $this->enum_types = $this->getTypes();
         $this->enum_normatives = $this->getNormatives();
+
+        $this->school=UniversitiesSchoolsModel::find($school_id);
+        $this->university = UniversitiesModel::where('id', $this->school->university_id)->first();
     }
 
     public function getTypes()

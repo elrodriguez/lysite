@@ -2,7 +2,11 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('labels.formats') }}</li>
+            <li class="breadcrumb-item active"><a href="{{ route('Investigation_universities_list') }}">{{ __('labels.universities') }}</a></li>
+            <li class="breadcrumb-item active">{{ $university->siglas }}</li>
+            <li class="breadcrumb-item active"><a href="{{ route('Investigation_universities_schools', $university->id) }}">{{ __('labels.schools') }}</a></li>
+            <li class="breadcrumb-item active">{{ $school->name }}</li>
+            <li class="breadcrumb-item active">{{ __('labels.Thesis Formats') }}</li>
         </ol>
     </div>
     <div class="container page__container">
