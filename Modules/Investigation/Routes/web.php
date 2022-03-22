@@ -13,7 +13,7 @@
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(function() {
     Route::middleware(['middleware' => 'role_or_permission:investigacion'])->get('dashboard', 'InvestigationController@index')->name('investigation_dashboard');
-    
+
     Route::group(['prefix' => 'parts'], function() {
         Route::middleware(['middleware' => 'role_or_permission:investigacion_partes'])->get('list', 'PartsController@index')->name('investigation_parts');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_nuevo'])->get('create', 'PartsController@create')->name('investigation_parts_create');
@@ -28,6 +28,12 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools/{id}', 'UniversitiesController@schools')->name('Investigation_universities_schools');
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools/create/{id}', 'UniversitiesController@schools_create')->name('Investigation_universities_schools_create');
         Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('schools/edit/{university_id}/{school_id}', 'UniversitiesController@schools_edit')->name('Investigation_universities_schools_edit');
+    });
+
+    Route::group(['prefix' => 'thesis_formats'], function() {
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('list/{school_id}', 'ThesisFormatsController@list')->name('Investigation_thesis_formats_list');
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('create/{school_id}', 'ThesisFormatsController@create')->name('Investigation_thesis_formats_create'); /*
+        Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('edit/{school_id}/{thesis_format_id}', 'UniversitiesController@edit')->name('Investigation_universities_edit'); */
     });
 
 });

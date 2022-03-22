@@ -143,4 +143,7 @@ return [
     'schools' => 'escuelas',
     'School name' => 'Nombre de la Escuela',
     'Thesis' => 'Tesis',
+    'Style' => 'Estilo',
+    'Format name' => 'Nombre del Formato',
+    'Type Thesis' => 'Tipo de Tesis',
 ];
