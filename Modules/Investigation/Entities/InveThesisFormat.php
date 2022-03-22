@@ -5,7 +5,7 @@ namespace Modules\Investigation\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class InveThesiFormat extends Model
+class InveThesisFormat extends Model
 {
     use HasFactory;
 

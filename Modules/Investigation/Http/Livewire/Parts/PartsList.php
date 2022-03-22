@@ -3,7 +3,7 @@
 namespace Modules\Investigation\Http\Livewire\Parts;
 
 use Livewire\Component;
-use Modules\Investigation\Entities\InveThesiFormatPart;
+use Modules\Investigation\Entities\InveThesisFormatPart;
 
 class PartsList extends Component
 {
@@ -14,6 +14,6 @@ class PartsList extends Component
     }
 
     public function getParts(){
-        return InveThesiFormatPart::whereNull('belongs')->paginate(10);
+        return InveThesisFormatPart::whereNull('belongs')->paginate(10);
     }
 }
