@@ -3,7 +3,7 @@
 namespace Modules\Investigation\Http\Livewire\ThesisFormats;
 
 use Livewire\Component;
-use App\Models\universities_schools;
+use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
 use Modules\Investigation\Entities\InveThesisFormat;
 
 class ThesisFormatsCreate extends Component
@@ -41,7 +41,7 @@ class ThesisFormatsCreate extends Component
 
     public function getSchool()
     {
-        return universities_schools::find($this->school_id);
+        return UniversitiesSchoolsModel::find($this->school_id);
     }
 
     public function updated($propertyName)
