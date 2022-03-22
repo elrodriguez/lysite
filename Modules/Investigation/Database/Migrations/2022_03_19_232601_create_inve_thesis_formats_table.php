@@ -17,12 +17,12 @@ class CreateInveThesisFormatsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('type_thesis');
-            $table->string('normative_thesis')->comment('APA, Vancouver u otros');
-            $table->integer('school_id');
+            $table->enum('type_thesis',['histórica','descriptiva','experimental']);
+            $table->enum('normative_thesis',['APA','Vancouver','Otros'])->comment('APA, Vancouver u otros');
+            $table->unsignedBigInteger('school_id');
             $table->timestamps();
+            $table->foreign('school_id')->references('id')->on('universities_schools');
         });
-
 
     }
 

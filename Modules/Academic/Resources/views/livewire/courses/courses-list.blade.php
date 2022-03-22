@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
-                        <p class="text-70">Módulos del sistema</p>
+                        <p class="text-70">Cursos</p>
                         @can('configuraciones_modulos_nuevo')
                         <a href="{{ route('academic_courses_create') }}" type="button" class="btn btn-primary">Nuevo</a>
                         @endcan
