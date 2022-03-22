@@ -3,7 +3,7 @@
 namespace Modules\Investigation\Http\Livewire\Universities;
 
 use Livewire\Component;
-use App\Models\universities_schools as UniversitiesSchoolsModel;
+use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
 use App\Models\Universities as UniversitiesModel;
 use Livewire\WithPagination;
 
