@@ -30,9 +30,9 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-center">Acciones</th>
-                                        <th>{{ __('labels.University') }}</th>
-                                        <th>{{ __('labels.Acronym') }}</th>
-                                        <th>{{ __('labels.Country') }}</th>
+                                        <th class="text-center">{{ __('labels.University') }}</th>
+                                        <th class="text-center">{{ __('labels.Acronym') }}</th>
+                                        <th class="text-center">{{ __('labels.Country') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -52,7 +52,7 @@
                                                 @endcan
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle">{{ $university->name }}</td>
+                                        <td>{{ $university->name }}</td>
                                         <td class="text-center align-middle">{{ $university->siglas }}</td>
                                         <td class="text-center align-middle">{{ $university->country }}</td>
 

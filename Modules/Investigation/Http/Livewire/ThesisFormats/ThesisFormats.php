@@ -1,26 +1,29 @@
 <?php
 
-namespace Modules\Investigation\Http\Livewire\Universities;
+namespace Modules\Investigation\Http\Livewire\ThesisFormats;
 
 use Livewire\Component;
-use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
+use Modules\Investigation\Entities\InveThesisFormat;
 use App\Models\Universities as UniversitiesModel;
+use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
 use Livewire\WithPagination;
 
-class UniversitiesSchools extends Component
+class ThesisFormats extends Component
 {
     public $search;
-    public $university_id;
+    public $school_id;
     public $university;
+    public $school;
 
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
 
-
-    public function mount($university_id){
-        $this->university = UniversitiesModel::find($university_id);
-        $this->university_id = $university_id;
+    public function mount($school_id)
+    {
+        $this->school_id = $school_id;
+        $this->school=UniversitiesSchoolsModel::find($school_id);
+        $this->university = UniversitiesModel::where('id', $this->school->university_id)->first();
     }
 
     public function getSearch()
@@ -28,22 +31,22 @@ class UniversitiesSchools extends Component
         $this->resetPage();
     }
 
-    public function getSchools(){
-        return UniversitiesSchoolsModel::where('name','like','%'.$this->search.'%')
-        ->where('university_id',$this->university_id)
+    public function render()
+    {
+        return view('investigation::livewire.thesis-formats.thesis-formats',['formats' => $this->getData(), 'school_id' => $this->school_id]);
+    }
+
+    public function getData(){
+        return InveThesisFormat::where('name','like','%'.$this->search.'%')
             ->paginate(10);
     }
 
-    public function render()
-    {
-        return view('investigation::livewire.universities.universities-schools',['schools' => $this->getSchools()]);
-    }
-
     public function destroy($id){
-        try { /*
+        try {
+            /*
             $course_image=AcaCourse::find($id)->course_image;
             Storage::disk('public')->delete(substr($course_image, 8)); */
-            UniversitiesSchoolsModel::find($id)->delete();
+            InveThesisFormat::find($id)->delete();
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
@@ -55,4 +58,5 @@ class UniversitiesSchools extends Component
 
         $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
+
 }

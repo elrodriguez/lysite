@@ -17,7 +17,7 @@ class CreateInveThesisFormatsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->enum('type_thesis',['histórica','descriptiva','experimental','meta-descriptiva', 'metodologica', 'teorica', 'etc']);
+            $table->enum('type_thesis',['histórica','descriptiva','experimental','meta-descriptiva', 'metodologica', 'teorica', 'Otra']);
             $table->enum('normative_thesis',['APA','Vancouver','Otros'])->comment('APA, Vancouver u otros');
             $table->unsignedBigInteger('school_id');
             $table->timestamps();
