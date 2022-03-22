@@ -31,7 +31,7 @@
                                         <th class="text-center">{{ __('investigation::labels.index') }}</th>
                                         <th class="text-center">Acciones</th>
                                         <th>{{ __('investigation::labels.description') }}</th>
-                                        <th>{{ __('labels.order') }}</th>
+                                        <th>{{ __('investigation::labels.order') }}</th>
                                         <th>{{ __('labels.Status') }}</th>
                                     </tr>
                                 </thead>

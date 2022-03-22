@@ -15,4 +15,12 @@ class InveThesisFormat extends Model
     {
         return \Modules\Investigation\Database\factories\InveThesisFormatsFactory::new();
     }
+    public function inve_Thesis_format_part()
+    {
+        return $this->hasMany(InveThesisFormatPart::class,'thesis_format_id');
+    }
+    public function universities_schools()
+    {
+        return $this->belongsTo(UniversitiesSchools::class, 'school_id');
+    }
 }

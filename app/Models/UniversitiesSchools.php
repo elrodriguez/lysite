@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class universities_schools extends Model
+class UniversitiesSchools extends Model
 {
     use HasFactory;
 
@@ -13,4 +13,9 @@ class universities_schools extends Model
         'name',
         'university_id'
     ];
+
+    public function universities()
+    {
+        return $this->belongsTo(Universities::class,'university_id');
+    }
 }
