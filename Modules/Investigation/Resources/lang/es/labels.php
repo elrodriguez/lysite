@@ -1,5 +1,8 @@
 <?php
 return [
     'parts'      => 'Partes',
-    'thesis_parts' => 'Thesis Parts'
+    'thesis_parts' => 'Partes de tesis',
+    'description' => 'Descripción',
+    'index' => 'Index',
+    'order' => 'Orden'
 ];

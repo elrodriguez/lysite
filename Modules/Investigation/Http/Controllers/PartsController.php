@@ -23,7 +23,7 @@ class PartsController extends Controller
      */
     public function create()
     {
-        return view('investigation::create');
+        return view('investigation::parts.create');
     }
 
     /**

@@ -15,7 +15,8 @@ class InvestigationDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            SeedPermissionModuleTableSeeder::class
+            SeedPermissionModuleTableSeeder::class,
+            ShoolsUniversitiesTableSeeder::class
         ]);
     }
 }

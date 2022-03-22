@@ -28,11 +28,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#</th>
+                                        <th class="text-center">{{ __('investigation::labels.index') }}</th>
                                         <th class="text-center">Acciones</th>
-                                        <th>{{ __('labels.Instructors') }}/{{ __('labels.Students') }}</th>
-                                        <th>{{ __('labels.Name') }}</th>
-                                        <th>{{ __('labels.Description') }}</th>
+                                        <th>{{ __('investigation::labels.description') }}</th>
+                                        <th>{{ __('investigation::labels.order') }}</th>
                                         <th>{{ __('labels.Status') }}</th>
                                     </tr>
                                 </thead>

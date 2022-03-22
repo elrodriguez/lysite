@@ -15,4 +15,9 @@ class InveThesisFormatPart extends Model
     {
         return \Modules\Investigation\Database\factories\InveThesiFormatPartFactory::new();
     }
+
+    public function inve_thesis_format()
+    {
+        return $this->belongsTo(InveThesisFormat::class, 'thesis_format_id');
+    }
 }

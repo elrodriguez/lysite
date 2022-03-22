@@ -18,4 +18,9 @@ class Universities extends Model
         'province_id',
         'district_id'
     ];
+
+    public function universities_schools()
+    {
+        return $this->hasMany(UniversitiesSchools::class);
+    }
 }
