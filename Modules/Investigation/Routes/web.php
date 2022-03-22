@@ -15,10 +15,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
     Route::middleware(['middleware' => 'role_or_permission:investigacion'])->get('dashboard', 'InvestigationController@index')->name('investigation_dashboard');
     
     Route::group(['prefix' => 'parts'], function() {
-        Route::middleware(['middleware' => 'role_or_permission:investigacion_partes'])->get('list', 'PartsController@index')->name('investigation_parts');
-        Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_nuevo'])->get('create', 'PartsController@create')->name('investigation_parts_create');
-        Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_editar'])->get('edit/{id}', 'PartsController@edit')->name('investigation_parts_edit');
-        Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_sub'])->get('subpart/{id}', 'PartsController@subpart')->name('investigation_parts_sub');
+        Route::middleware(['middleware' => 'role_or_permission:investigacion_partes'])->get('list/{id}', 'PartsController@index')->name('investigation_parts');
     });
 
     Route::group(['prefix' => 'universities'], function() {

@@ -14,13 +14,13 @@ class CreateInveThesiFormatPartsTable extends Migration
     public function up()
     {
         Schema::create('inve_thesis_format_parts', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
             $table->string('description');
             $table->text('information');
-            $table->integer('number_order')->default(0);
+            $table->string('number_order')->default(0);
             $table->unsignedBigInteger('content_id')->nullable();
             $table->unsignedBigInteger('thesis_format_id')->nullable();
-            $table->string('belongs')->nullable();
+            $table->unsignedBigInteger('belongs')->nullable();
             $table->boolean('state')->default(true);
             $table->timestamps();
             $table->primary('id');

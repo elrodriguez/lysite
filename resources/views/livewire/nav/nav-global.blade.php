@@ -55,10 +55,6 @@
         <li class="nav-item dropdown {{ $path[0] == 'investigation' ? 'active' : '' }}">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">investigación</a>
             <div class="dropdown-menu">
-                @can('investigacion_partes')
-                    <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'parts' ? 'active' : '' }}" href="{{ route('investigation_parts') }}">{{ __('investigation::labels.parts') }}</a>
-                @endcan
-
                 @can('academico_tipo_contenido')
                     <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('Investigation_universities_list') }}">{{ __('labels.Universities') }}</a>
                 @endcan

@@ -18,8 +18,12 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-    @livewire('investigation::parts.parts-list')
+    <livewire:investigation::parts.parts-list :format_id="$id" />
+    
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot> 
+    @section('modales')
+    <livewire:investigation::parts.parts-create/>
+    @endsection
 </x-master>

@@ -9,7 +9,15 @@ class InveThesisFormatPart extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'description',
+        'information',
+        'number_order',
+        'content_id',
+        'thesis_format_id',
+        'belongs',
+        'state'
+    ];
     
     protected static function newFactory()
     {
