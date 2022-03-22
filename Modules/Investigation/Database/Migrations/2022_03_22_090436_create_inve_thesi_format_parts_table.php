@@ -21,6 +21,7 @@ class CreateInveThesiFormatPartsTable extends Migration
             $table->unsignedBigInteger('content_id')->nullable();
             $table->unsignedBigInteger('thesis_format_id')->nullable();
             $table->string('belongs')->nullable();
+            $table->boolean('state')->default(true);
             $table->timestamps();
             $table->primary('id');
             $table->foreign('content_id')->references('id')->on('aca_contents');
