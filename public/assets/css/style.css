@@ -4,3 +4,6 @@
     font-size: .707rem;
     color: #d9534f;
 }
+.list-point-none li{
+    list-style:none;
+}

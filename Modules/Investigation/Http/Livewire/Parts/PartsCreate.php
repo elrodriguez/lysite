@@ -12,11 +12,12 @@ class PartsCreate extends Component
 
     public $part_id;
     public $format_id;
-
-    public $index_id;
+    public $part = [];
+    public $number_order_old;
+    public $number_order;
     public $description;
     public $information;
-    public $state;
+    public $state = true;
 
     public function render()
     {
@@ -29,15 +30,17 @@ class PartsCreate extends Component
         $title = 'Nueva Parte';
         
         if($this->part_id){
-            $part = InveThesisFormatPart::find($this->part_id);
-            $title = 'Nueva SubParte :' . $part->description;
+            $this->part = InveThesisFormatPart::find($this->part_id);
+            $title = 'Nueva SubParte :' . $this->part->description;
+            $this->number_order = $this->part->number_order.'.';
+            $this->number_order_old = $this->part->number_order.'.';
         }
         $this->dispatchBrowserEvent('open-modal-parts', ['title' => $title]);
     }
 
     public function savePart(){
         $this->validate([
-            'index_id' => 'required|unique:inve_thesis_format_parts,id',
+            'number_order' => 'required|unique:inve_thesis_format_parts,number_order',
             'description' => 'required|string|max:255',
             'information' => 'required|string'
         ]);
@@ -45,12 +48,21 @@ class PartsCreate extends Component
         InveThesisFormatPart::create([
             'description' => $this->description,
             'information' => $this->information,
-            'number_order' => $this->index_id,
+            'number_order' => $this->number_order,
             'thesis_format_id' => $this->format_id,
             'belongs' => $this->part_id,
             'state' => $this->state ? true : false
         ]);
 
+        if($this->part_id){
+            $this->number_order = $this->number_order_old;
+        }else{
+            $this->number_order = null;
+        }
+        $this->description = null;
+        $this->information = null;
+        $this->state = true;
+        $this->emit('listParts');
         $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
     }
 }

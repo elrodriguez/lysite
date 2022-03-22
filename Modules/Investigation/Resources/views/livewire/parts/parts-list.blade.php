@@ -17,8 +17,19 @@
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <!-- Wrapper -->
-
+                        <ul class="list-point-none">
+                            @if(count($parts) > 0)
+                                @foreach($parts as $part)
+                                    <li>
+                                        <button wire:click="$emit('openModalPartCreate',{{ $format_id }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm mr-3">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                        {{ $part['number_order'].' '.$part['description'] }}
+                                        {!! $part['items']  !!}
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </div>
