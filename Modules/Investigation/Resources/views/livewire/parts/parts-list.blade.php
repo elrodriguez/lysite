@@ -21,9 +21,17 @@
                             @if(count($parts) > 0)
                                 @foreach($parts as $part)
                                     <li>
-                                        <button wire:click="$emit('openModalPartCreate',{{ $format_id }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm mr-3">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+                                        <div class="btn-group mr-3">
+                                            <button wire:click="$emit('openModalPartCreate',{{ $format_id }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button wire:click="$emit('openModalPartEditForm',{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </button>
+                                            <button onclick="deletes({{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </button>
+                                        </div>
                                         {{ $part['number_order'].' '.$part['description'] }}
                                         {!! $part['items']  !!}
                                     </li>
@@ -49,7 +57,7 @@
                 }
             });
         }
-        window.addEventListener('aca-part-delete', event => {
+        window.addEventListener('inve-part-delete', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

@@ -25,5 +25,6 @@
     </x-slot> 
     @section('modales')
     <livewire:investigation::parts.parts-create/>
+    <livewire:investigation::parts.parts-edit />
     @endsection
 </x-master>

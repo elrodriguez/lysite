@@ -71,8 +71,8 @@
                 message: event.detail.msg,
                 buttonText: "Okay"
             }).then(() => {
-            @this.back();
-        });
+                @this.back();
+            });
         })
         </script>
 </div>

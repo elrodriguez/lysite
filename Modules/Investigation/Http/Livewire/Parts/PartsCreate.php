@@ -63,6 +63,6 @@ class PartsCreate extends Component
         $this->information = null;
         $this->state = true;
         $this->emit('listParts');
-        $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
+        $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente','res' => 'success']);
     }
 }
