@@ -7,8 +7,9 @@ use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
 use App\Models\Universities as UniversitiesModel;
 use Modules\Investigation\Entities\InveThesisFormat;
 
-class ThesisFormatsCreate extends Component
+class ThesisFormatsEdit extends Component
 {
+
     public $school_id;
     public $name;
     public $description;
@@ -18,16 +19,29 @@ class ThesisFormatsCreate extends Component
     public $enum_normatives;
     public $university;
     public $school;
+    public $format;
+    public $thesis_format_id;
 
-    public function mount($school_id)
+    public function mount($school_id, $thesis_format_id)
     {
         $this->school_id = $school_id;
+        $this->thesis_format_id = $thesis_format_id;
 
         $this->enum_types = $this->getTypes();
         $this->enum_normatives = $this->getNormatives();
 
         $this->school=UniversitiesSchoolsModel::find($school_id);
         $this->university = UniversitiesModel::where('id', $this->school->university_id)->first();
+        $this->format=InveThesisFormat::find($this->thesis_format_id);
+        $this->loadData();
+
+    }
+
+    public function loadData(){
+        $this->name = $this->format->name;
+        $this->description = $this->format->description;
+        $this->type_thesis = $this->format->type_thesis;
+        $this->normative_thesis = $this->format->normative_thesis;
     }
 
     public function getTypes()
@@ -42,13 +56,9 @@ class ThesisFormatsCreate extends Component
 
     public function render()
     {
-        return view('investigation::livewire.thesis-formats.thesis-formats-create', ['school' => $this->getSchool()]);
+        return view('investigation::livewire.thesis-formats.thesis-formats-edit', ['format' => $this->format, 'school' => $this->school]);
     }
 
-    public function getSchool()
-    {
-        return UniversitiesSchoolsModel::find($this->school_id);
-    }
 
     public function updated($propertyName)
     {
@@ -64,7 +74,7 @@ class ThesisFormatsCreate extends Component
 
         $this->validate();
         //$this->course_image = 'storage/'.substr($this->course_image->store('public/uploads/academic/courses'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
-        $newUniversity = InveThesisFormat::create([
+        $this->format->update([
             'name' => trim($this->name),
             'description' => trim($this->description),
             'type_thesis' => trim($this->type_thesis),
@@ -73,7 +83,7 @@ class ThesisFormatsCreate extends Component
         ]);
 
 
-        $this->dispatchBrowserEvent('thesis-format-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
+        $this->dispatchBrowserEvent('thesis-format-edit', ['tit' => 'Enhorabuena', 'msg' => 'Se actualizó correctamente']);
     }
     public function back()
     {

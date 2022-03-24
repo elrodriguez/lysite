@@ -3,7 +3,7 @@
 namespace Modules\Investigation\Http\Livewire\Universities;
 
 use Livewire\Component;
-use App\Models\universities_schools;
+use App\Models\UniversitiesSchools;
 use App\Models\Universities as UniversitiesModel;
 
 class UniversitiesSchoolsEdit extends Component
@@ -16,7 +16,7 @@ class UniversitiesSchoolsEdit extends Component
     public function mount($university_id, $school_id){
         $this->university_id = $university_id;
         $this->university = UniversitiesModel::find($university_id);
-        $this->school = universities_schools::find($school_id);
+        $this->school = UniversitiesSchools::find($school_id);
         $this->name= $this->school->name;
     }
     public function render()

@@ -16,7 +16,7 @@
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Módulos del sistema</p>
-                        @can('configuraciones_modulos_nuevo')
+                        @can('investigacion_partes_nuevo')
                         <a href="{{ route('Investigation_thesis_formats_create', $school_id) }}" type="button" class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
@@ -45,13 +45,13 @@
                                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group">
-                                                @can('academico_cursos_editar')
-                                                <a href="{{ route('Investigation_universities_edit',$format->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                                @can('investigacion_partes_editar')
+                                                <a href="{{ route('Investigation_thesis_formats_edit',[$format->school_id, $format->id]) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
-                                                @can('academico_secciones')
+                                                @can('investigacion_partes')
                                                 <a href="{{ route('Investigation_universities_schools',$format->id) }}" type="button" class="btn btn-success btn-sm" title="Partes"><i class="fa fa-newspaper"></i></a>
                                                 @endcan
-                                                @can('academico_cursos_eliminar')
+                                                @can('investigacion_partes_eliminar')
                                                 <button onclick="deletes({{ $format->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>

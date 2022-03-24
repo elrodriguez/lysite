@@ -3,8 +3,8 @@
 namespace Modules\Investigation\Http\Livewire\Universities;
 
 use Livewire\Component;
-use App\Models\universities_schools;
 use App\Models\Universities as UniversitiesModel;
+use App\Models\UniversitiesSchools;
 
 class UniversitiesSchoolsCreate extends Component
 {
@@ -36,7 +36,7 @@ class UniversitiesSchoolsCreate extends Component
 
         $this->validate();
         //$this->course_image = 'storage/'.substr($this->course_image->store('public/uploads/academic/courses'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
-        $newSchool= universities_schools::create([
+        $newSchool= UniversitiesSchools::create([
             'name' => trim($this->name),
             'university_id' => $this->university_id,
         ]);

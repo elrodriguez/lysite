@@ -81,9 +81,14 @@ class ThesisFormatsController extends Controller
         return view('investigation::thesis-formats.thesis-formats-create')->with('school_id', $school_id);
     }
 
-    public function edit($school_id, $thesis_format_edit)
+    public function edit($school_id, $thesis_format_id)
     {
-        return view('investigation::thesis-formats.thesis-formats-edit')->with('school_id', $school_id)->with('thesis_format_edit', $thesis_format_edit);
+        return view('investigation::thesis-formats.thesis-formats-edit')->with('school_id', $school_id)->with('thesis_format_id', $thesis_format_id);
+    }
+
+    public function list_complete()
+    {
+        return view('investigation::thesis-formats.thesis-formats-list-complete');
     }
 
 }

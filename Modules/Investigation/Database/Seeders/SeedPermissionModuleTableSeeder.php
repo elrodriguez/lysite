@@ -30,12 +30,16 @@ class SeedPermissionModuleTableSeeder extends Seeder
         $permissions = [];
 
         array_push($permissions,Permission::create(['name' => 'investigacion']));
-        array_push($permissions,Permission::create(['name' => 'investigacion_partes']));
+        array_push($permissions,Permission::create(['name' => 'investigacion_partes']));    //usaré para formatos y partes
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_nuevo']));
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_editar']));
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_sub']));
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_eliminar']));
-        array_push($permissions,Permission::create(['name' => 'universities_editor']));
+        array_push($permissions,Permission::create(['name' => 'universities']));
+        array_push($permissions,Permission::create(['name' => 'universities_list']));
+        array_push($permissions,Permission::create(['name' => 'universities_create']));
+        array_push($permissions,Permission::create(['name' => 'universities_edit']));
+        array_push($permissions,Permission::create(['name' => 'universities_delete'])); //universities incluye a escuelas
 
         $role = Role::find(1);
         foreach($permissions as $permission){

@@ -12,7 +12,7 @@
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Módulos del sistema</p>
-                        @can('configuraciones_modulos_nuevo')
+                        @can('universities_create')
                         <a href="{{ route('Investigation_universities_create') }}" type="button" class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
@@ -41,13 +41,13 @@
                                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group">
-                                                @can('academico_cursos_editar')
+                                                @can('universities_edit')
                                                 <a href="{{ route('Investigation_universities_edit',$university->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
-                                                @can('academico_secciones')
+                                                @can('universities_list')
                                                 <a href="{{ route('Investigation_universities_schools',$university->id) }}" type="button" class="btn btn-success btn-sm" title="Escuelas"><i class="fa fa-newspaper"></i></a>
                                                 @endcan
-                                                @can('academico_cursos_eliminar')
+                                                @can('universities_delete')
                                                 <button onclick="deletes({{ $university->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
