@@ -93,7 +93,7 @@
                 }
             });
         }
-        window.addEventListener('aca-universitie-delete', event => {
+        window.addEventListener('inve-format-thesis-delete', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

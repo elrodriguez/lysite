@@ -9,7 +9,6 @@ use App\Models\Country;
 class UniversitiesCreate extends Component
 {
 
-
     public $name;
     public $siglas;
     public $status = true;
@@ -30,7 +29,7 @@ class UniversitiesCreate extends Component
     }
 
     protected $rules = [
-        'name' => 'required|max:255|unique:universities,name',
+        'name' => 'required|max:255',
     ];
 
     public function save(){

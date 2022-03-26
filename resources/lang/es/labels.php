@@ -148,4 +148,5 @@ return [
     'Type Thesis' => 'Tipo de Tesis',
     'Thesis Formats' => 'Formatos de Tesis',
     'New Thesis Format' => 'Nuevo Formato de Tesis',
+    'School' => 'Escuela',
 ];

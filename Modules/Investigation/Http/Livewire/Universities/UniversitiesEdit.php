@@ -40,7 +40,7 @@ class UniversitiesEdit extends Component
     }
 
     protected $rules = [
-        'name' => 'required|max:255|unique:universities,name',
+        'name' => 'required|max:255',
     ];
 
     public function save(){

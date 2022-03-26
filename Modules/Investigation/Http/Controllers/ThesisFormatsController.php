@@ -91,4 +91,9 @@ class ThesisFormatsController extends Controller
         return view('investigation::thesis-formats.thesis-formats-list-complete');
     }
 
+    public function create_complete()
+    {
+        return view('investigation::thesis-formats.thesis-formats-create-complete');
+    }
+
 }

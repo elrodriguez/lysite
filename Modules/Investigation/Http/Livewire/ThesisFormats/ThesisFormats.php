@@ -37,8 +37,9 @@ class ThesisFormats extends Component
     }
 
     public function getData(){
-        return InveThesisFormat::where('name','like','%'.$this->search.'%')
-            ->paginate(10);
+        $formats = InveThesisFormat::where('name','like','%'.$this->search.'%')
+            ->where('school_id',$this->school_id);
+                    return $formats->paginate(10);
     }
 
     public function destroy($id){
@@ -56,7 +57,7 @@ class ThesisFormats extends Component
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
         }
 
-        $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+        $this->dispatchBrowserEvent('inve-format-thesis-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 
 }
