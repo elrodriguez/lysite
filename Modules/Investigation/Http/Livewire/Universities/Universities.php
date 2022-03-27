@@ -26,6 +26,7 @@ class Universities extends Component
 
     public function getData(){
         return UniversitiesModel::where('name','like','%'.$this->search.'%')
+        ->orderBy('name', 'asc')
             ->paginate(10);
     }
 
