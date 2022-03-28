@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
         Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_nuevo'])->get('create/{school_id}', 'ThesisFormatsController@create')->name('Investigation_thesis_formats_create');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_editar'])->get('edit/{school_id}/{thesis_format_id}', 'ThesisFormatsController@edit')->name('Investigation_thesis_formats_edit');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_nuevo'])->get('create/format/new', 'ThesisFormatsController@create_complete')->name('Investigation_thesis_formats_create_complete');
+        Route::middleware(['middleware' => 'role_or_permission:investigacion_partes_nuevo'])->get('edit/format/edit/{thesis_format_id}', 'ThesisFormatsController@edit_complete')->name('Investigation_thesis_formats_edit_complete');
     });
 
 });

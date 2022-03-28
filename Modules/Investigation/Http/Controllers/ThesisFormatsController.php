@@ -96,4 +96,9 @@ class ThesisFormatsController extends Controller
         return view('investigation::thesis-formats.thesis-formats-create-complete');
     }
 
+    public function edit_complete($thesis_format_id)
+    {
+        return view('investigation::thesis-formats.thesis-formats-edit-complete')->with('thesis_format_id', $thesis_format_id);
+    }
+
 }
