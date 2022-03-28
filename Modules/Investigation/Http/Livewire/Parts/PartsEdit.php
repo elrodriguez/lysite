@@ -16,6 +16,7 @@ class PartsEdit extends Component
     public $description;
     public $information;
     public $state;
+    public $index_order;
 
     public function render()
     {
@@ -31,22 +32,24 @@ class PartsEdit extends Component
         $this->description = $this->part->description;
         $this->information = $this->part->information;
         $this->state = $this->part->state;
-
+        $this->index_order = $this->part->index_order;
         $this->dispatchBrowserEvent('open-modal-parts-edit', ['title' => $title]);
     }
 
     public function savePart(){
         $this->validate([
-            'number_order' => 'required|unique:inve_thesis_format_parts,number_order,'.$this->part_id.'id',
+            //'number_order' => 'required|unique:inve_thesis_format_parts,number_order,'.$this->part_id.'id',
             'description' => 'required|string|max:255',
-            'information' => 'required|string'
+            'information' => 'required|string',
+            'index_order' => 'required'
         ]);
 
         $this->part->update([
             'description' => $this->description,
             'information' => $this->information,
             'number_order' => $this->number_order,
-            'state' => $this->state ? true : false
+            'state' => $this->state ? true : false,
+            'index_order' => $this->index_order
         ]);
 
         $this->emit('listParts');

@@ -16,7 +16,8 @@ class InveThesisFormatPart extends Model
         'content_id',
         'thesis_format_id',
         'belongs',
-        'state'
+        'state',
+        'index_order'
     ];
     
     protected static function newFactory()

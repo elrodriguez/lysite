@@ -18,6 +18,7 @@ class PartsCreate extends Component
     public $description;
     public $information;
     public $state = true;
+    public $index_order = 0;
 
     public function render()
     {
@@ -40,9 +41,10 @@ class PartsCreate extends Component
 
     public function savePart(){
         $this->validate([
-            'number_order' => 'required|unique:inve_thesis_format_parts,number_order',
+            //'number_order' => 'required|unique:inve_thesis_format_parts,number_order',
             'description' => 'required|string|max:255',
-            'information' => 'required|string'
+            'information' => 'required|string',
+            'index_order' => 'required'
         ]);
 
         InveThesisFormatPart::create([
@@ -51,7 +53,8 @@ class PartsCreate extends Component
             'number_order' => $this->number_order,
             'thesis_format_id' => $this->format_id,
             'belongs' => $this->part_id,
-            'state' => $this->state ? true : false
+            'state' => $this->state ? true : false,
+            'index_order' => $this->index_order
         ]);
 
         if($this->part_id){
@@ -62,6 +65,7 @@ class PartsCreate extends Component
         $this->description = null;
         $this->information = null;
         $this->state = true;
+        $this->index_order = 0;
         $this->emit('listParts');
         $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente','res' => 'success']);
     }

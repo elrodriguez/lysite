@@ -55,6 +55,11 @@
                                                     type="button" class="btn btn-info btn-sm"><i
                                                         class="fa fa-pencil-alt" title="Ver/Editar Contenido"></i></a>
                                                 @endcan
+                                                @can('academico_contenido_enlazar')
+                                                <a href="{{ route('academico_contenido_enlazar',[$content->section_id, $content->id]) }}"
+                                                    type="button" class="btn btn-success btn-sm"><i
+                                                        class="fa fa-link" title="Enlazar"></i></a>
+                                                @endcan
                                                 @can('academico_contenido_eliminar')
                                                 <button onclick="deletes({{ $content->id }})" type="button"
                                                     class="btn btn-danger btn-sm"><i

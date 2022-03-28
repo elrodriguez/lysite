@@ -15,7 +15,7 @@ class PartsList extends Component
 
     public $format;
     public $format_id;
-    public $parts;
+    public $parts = [];
 
     public function mount($format_id){
         $this->format_id = $format_id;

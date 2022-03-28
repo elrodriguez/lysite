@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
             Route::middleware(['middleware' => 'role_or_permission:academico_contenido'])->get('list/{course_id}/{section_id}', 'ContentsController@index')->name('academico_contenido');
             Route::middleware(['middleware' => 'role_or_permission:academico_contenido_nuevo'])->get('create/{section_id}', 'ContentsController@create')->name('academico_contenido_create');
             Route::middleware(['middleware' => 'role_or_permission:academico_contenido_editar'])->get('edit/{section_id}/{content_id}', 'ContentsController@edit')->name('academico_contenido_editar');
+            Route::middleware(['middleware' => 'role_or_permission:academico_contenido_enlazar'])->get('link/{section_id}/{content_id}', 'ContentsController@link')->name('academico_contenido_enlazar');
         });
 
     });

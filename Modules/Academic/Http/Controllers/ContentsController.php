@@ -62,24 +62,9 @@ class ContentsController extends Controller
                     ->with('content_id',$content_id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+    public function link($section_id, $content_id){
+        return view('academic::contents.add_link')
+                    ->with('section_id',$section_id)
+                    ->with('content_id',$content_id);
     }
 }
