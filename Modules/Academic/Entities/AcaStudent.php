@@ -17,4 +17,9 @@ class AcaStudent extends Model
     {
         return \Modules\Academic\Database\factories\AcaStudentFactory::new();
     }
+
+    public function person()
+    {
+        return $this->belongsTo(\App\Models\Person::class,'person_id');
+    }
 }

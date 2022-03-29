@@ -18,9 +18,9 @@ $path = explode('/', request()->path());
 
                 <!-- Main Navigation -->
                 <ul class="nav navbar-nav ml-auto d-none d-sm-flex">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="pricing.html" class="nav-link">Pricing</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item {{ $path[0] == 'register' ? 'active' : '' }}">
                         <a href="{{ route('register') }}" class="nav-link"> {{ __('labels.signup') }}</a>
                     </li>
@@ -60,101 +60,96 @@ $path = explode('/', request()->path());
 
             <!-- Aquí esta el boton de Cursos_____________________________________________________ -->
 
-
-            @if (Auth::check())
-            <style>
-                #courses:hover {
-                    color: gray;
-                }
-            </style>
-
-            <div class="col-lg d-flex flex-wrap align-items-center">
-                <div class="ml-lg-auto dropdown">
-                    <a href="#" class="btn btn-black mr-16pt" data-toggle="dropdown"
-                        aria-expanded="false" id="courses">{{ __('labels.My Courses') }}</a>
-                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
-                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-38px, 44px, 0px);">
-
-
-                        @if (count($courses) > 0)
-                            @foreach ($courses as $course)
-                                    <a href="{{ route('academic_students_my_course', $course->id) }}" class="dropdown-item">
-                                        <span class="media-left mr-16pt">
-                                            <img src="{{ asset($course->course_image) }}" width="30" alt="avatar"
-                                                class="rounded-circle">
-                                        </span>
-                                        <div class="media-body">
-                                            {{ $course->name }}
-                                        </div>
-                                    </a>
-                            @endforeach
-                        @else
-                                    <a href="{{ route('home') }}" class="dropdown-item">
-                                        <span class="media-left mr-16pt">
-                                            <img src="{{ url('assets/images/logo/white-60.png') }}" width="30" alt="avatar"
-                                                class="rounded-circle">
-                                        </span>
-                                        <div class="media-body">
-                                            {{ __('labels.No courses') }}
-                                        </div>
-                                    </a>
-                        @endif
-
-                    </div>
-                </div>
-            </div>
-            @endif
-
-
-
-
-
             <!-- Main Navigation -->
             <nav class="nav navbar-nav ml-auto flex-nowrap">
-                @if (Route::has('login'))
-                @auth
-                <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        @if(Auth::user()->avatar)
-                            <img width="32" height="32" class="rounded-circle" src="{{ url('storage/'.Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}" />
-                        @else
-                            <img width="32" height="32" class="rounded-circle" src="{{ ui_avatars_url(Auth::user()->name,32,'none') }}" alt="{{ Auth::user()->name }}" />
-                        @endif
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-header"><strong>{{ Auth::user()->name }}</strong></div>
-                        <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
-                        @can('academico_cursos_instructor')
-                        <a class="dropdown-item" href="{{ route('academic_dash_instructor_courses_list') }}">{{
-                            __('labels.Courses') }}</a>
-                        @endcan
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-header"><strong>{{ __('labels.Account') }}</strong></div>
-                        <a class="dropdown-item" href="{{ route('user_edit_account') }}">{{ __('labels.Edit Account')
-                            }}</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
+
+                @if (Auth::check())
+                    <style>
+                        #courses:hover {
+                            color: gray;
+                        }
+                    </style>
+                    <livewire:investigation::thesis.header-investigation />
+                    <div class="nav-item">
+                        <div class="dropdown">
+                            <a href="#" class="btn btn-black mr-16pt" data-toggle="dropdown"
+                                aria-expanded="false" id="courses">{{ __('labels.My Courses') }}</a>
+                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
+                                style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-38px, 44px, 0px);">
+
+
+                                @if (count($courses) > 0)
+                                    @foreach ($courses as $course)
+                                            <a href="{{ route('academic_students_my_course', $course->id) }}" class="dropdown-item">
+                                                <span class="media-left mr-16pt">
+                                                    <img src="{{ asset($course->course_image) }}" width="30" alt="avatar"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <div class="media-body">
+                                                    {{ $course->name }}
+                                                </div>
+                                            </a>
+                                    @endforeach
+                                @else
+                                            <a href="{{ route('home') }}" class="dropdown-item">
+                                                <span class="media-left mr-16pt">
+                                                    <img src="{{ url('assets/images/logo/white-60.png') }}" width="30" alt="avatar"
+                                                        class="rounded-circle">
+                                                </span>
+                                                <div class="media-body">
+                                                    {{ __('labels.No courses') }}
+                                                </div>
+                                            </a>
+                                @endif
+
+                            </div>
+                        </div>
                     </div>
-                </div>
-                @livewire('chat::contact-list')
+                @endif
+                @if (Route::has('login'))
+                    @auth
+                        <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                @if(Auth::user()->avatar)
+                                    <img width="32" height="32" class="rounded-circle" src="{{ url('storage/'.Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}" />
+                                @else
+                                    <img width="32" height="32" class="rounded-circle" src="{{ ui_avatars_url(Auth::user()->name,32,'none') }}" alt="{{ Auth::user()->name }}" />
+                                @endif
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-header"><strong>{{ Auth::user()->name }}</strong></div>
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                                @can('academico_cursos_instructor')
+                                <a class="dropdown-item" href="{{ route('academic_dash_instructor_courses_list') }}">{{
+                                    __('labels.Courses') }}</a>
+                                @endcan
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-header"><strong>{{ __('labels.Account') }}</strong></div>
+                                <a class="dropdown-item" href="{{ route('user_edit_account') }}">{{ __('labels.Edit Account')
+                                    }}</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
+                            </div>
+                        </div>
+                        @livewire('chat::contact-list')
+                    @endauth
                 @else
-                <div class="ml-16pt nav-item">
-                    <a href="{{ route('login') }}" class="nav-link">
-                        <i class="material-icons">lock_open</i>
-                        <span class="sr-only">Login</span>
-                    </a>
-                </div>
-                {{-- @if (Route::has('register'))
-                <div class="ml-16pt nav-item">
-                    <a href="login.html" class="nav-link">
-                        <i class="material-icons">lock_open</i>
-                        <span class="sr-only">Register</span>
-                    </a>
-                </div>
-                @endif --}}
-                <div class="d-none d-sm-flex nav-item">
-                    <a href="pricing.html" class="btn btn-accent">Get started</a>
-                </div>
-                @endauth
+                    <div class="ml-16pt nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">
+                            <i class="material-icons">lock_open</i>
+                            <span class="sr-only">Login</span>
+                        </a>
+                    </div>
+                    {{-- @if (Route::has('register'))
+                    <div class="ml-16pt nav-item">
+                        <a href="login.html" class="nav-link">
+                            <i class="material-icons">lock_open</i>
+                            <span class="sr-only">Register</span>
+                        </a>
+                    </div>
+                    @endif --}}
+                    {{-- <div class="d-none d-sm-flex nav-item">
+                        <a href="pricing.html" class="btn btn-accent">Get started</a>
+                    </div> --}}
                 @endif
             </nav>
             <!-- // END Main Navigation -->

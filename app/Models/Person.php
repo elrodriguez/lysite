@@ -28,4 +28,14 @@ class Person extends Model
         'country_id',
         'university_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(\Modules\Academic\Entities\AcaStudent::class,'person_id');
+    }
 }

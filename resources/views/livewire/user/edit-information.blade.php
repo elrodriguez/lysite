@@ -79,7 +79,7 @@
                                             <option value="{{ $university->id }}">{{ $university->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('country_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('university_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
