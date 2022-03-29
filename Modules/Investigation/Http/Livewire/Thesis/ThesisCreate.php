@@ -67,7 +67,13 @@ class ThesisCreate extends Component
             'format_id' => $this->format_id,
             'state' => $this->state ? true : false
         ]);
-
+        $this->short_name = null;
+        $this->title = null;
+        $this->country_id = 'PE';
+        $this->university_id = null;
+        $this->school_id = null;
+        $this->format_id = null;
+        $this->state = null;
         $this->thesis_id = $thesis->id;
 
         $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
