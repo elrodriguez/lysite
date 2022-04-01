@@ -47,11 +47,7 @@
                                                 <a href="{{ route('Investigation_thesis_formats_edit_complete',$format->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 @can('investigacion_partes')
-<<<<<<< HEAD
                                                 <a href="{{ route('investigation_parts',$format->id) }}" type="button" class="btn btn-success btn-sm" title="Partes"><i class="fa fa-newspaper"></i></a>
-=======
-                                                <a href="{{ route('Investigation_universities_schools',$format->school_id) }}" type="button" class="btn btn-success btn-sm" title="Partes"><i class="fa fa-newspaper"></i></a>
->>>>>>> 932207c916870da18b3da367a9a25c6056a961d9
                                                 @endcan
                                                 @can('investigacion_partes_eliminar')
                                                 <button onclick="deletes({{ $format->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>

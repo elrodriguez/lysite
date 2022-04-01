@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="index_order" class="col-sm-2 col-form-label">Identificador</label>
+                        <label for="index_order" class="col-sm-2 col-form-label">Número de orden</label>
                         <div class="col-sm-4">
                             <input wire:model.defer="index_order" type="text" class="form-control" id="index_order">
                             @error('index_order') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -35,6 +35,15 @@
                         <div class="col-sm-10">
                             <textarea wire:model.defer="information" class="form-control" id="information"></textarea>
                             @error('information') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="information" class="col-sm-2 col-form-label">Ingresar Contenido</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input wire:model="body" class="form-check-input" type="checkbox" name="exampleRadios4" id="exampleRadios4">
+                                <label class="form-check-label" for="exampleRadios4">Si</label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

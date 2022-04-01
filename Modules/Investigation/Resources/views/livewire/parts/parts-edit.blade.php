@@ -3,14 +3,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalPartEditLabel">Modal title</h5>
+                    <h5 class="modal-title" id="modalPartEditLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="index_order" class="col-sm-2 col-form-label">Identificador</label>
+                        <label for="index_order" class="col-sm-2 col-form-label">Número de orden</label>
                         <div class="col-sm-4">
                             <input wire:model.defer="index_order" type="text" class="form-control" id="index_order">
                             @error('index_order') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
@@ -38,6 +38,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="information" class="col-sm-2 col-form-label">Ingresar Contenido</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input wire:model="body" class="form-check-input" type="checkbox" name="exampleRadios4" id="exampleRadios4">
+                                <label class="form-check-label" for="exampleRadios4">Si</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="information" class="col-sm-2 col-form-label">Estado</label>
                         <div class="col-sm-10">
                             <div class="form-check">
@@ -49,7 +58,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('labels.Close') }}</button>
-                    <button wire:click="savePart" type="button" class="btn btn-primary">{{ __('labels.Add') }}</button>
+                    <button wire:click="savePart" type="button" class="btn btn-primary">Actualizar</button>
                 </div>
             </div>
         </div>

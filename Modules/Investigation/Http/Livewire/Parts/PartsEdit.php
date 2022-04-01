@@ -17,6 +17,7 @@ class PartsEdit extends Component
     public $information;
     public $state;
     public $index_order;
+    public $body;
 
     public function render()
     {
@@ -27,12 +28,13 @@ class PartsEdit extends Component
         $this->part_id = $part_id;
 
         $this->part = InveThesisFormatPart::find($this->part_id);
-        $title = 'Editar :' . $this->part->description;
+        $title = 'Editar : ' . $this->part->description;
         $this->number_order = $this->part->number_order;
         $this->description = $this->part->description;
         $this->information = $this->part->information;
         $this->state = $this->part->state;
         $this->index_order = $this->part->index_order;
+        $this->body = $this->part->body;
         $this->dispatchBrowserEvent('open-modal-parts-edit', ['title' => $title]);
     }
 
@@ -49,7 +51,8 @@ class PartsEdit extends Component
             'information' => $this->information,
             'number_order' => $this->number_order,
             'state' => $this->state ? true : false,
-            'index_order' => $this->index_order
+            'index_order' => $this->index_order,
+            'body' => $this->body ? true : false
         ]);
 
         $this->emit('listParts');

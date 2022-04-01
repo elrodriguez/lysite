@@ -19,6 +19,7 @@ class PartsCreate extends Component
     public $information;
     public $state = true;
     public $index_order = 0;
+    public $body = false;
 
     public function render()
     {
@@ -54,7 +55,8 @@ class PartsCreate extends Component
             'thesis_format_id' => $this->format_id,
             'belongs' => $this->part_id,
             'state' => $this->state ? true : false,
-            'index_order' => $this->index_order
+            'index_order' => $this->index_order,
+            'body' => $this->body ? true : false
         ]);
 
         if($this->part_id){
@@ -66,6 +68,7 @@ class PartsCreate extends Component
         $this->information = null;
         $this->state = true;
         $this->index_order = 0;
+        $this->body = false;
         $this->emit('listParts');
         $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente','res' => 'success']);
     }
