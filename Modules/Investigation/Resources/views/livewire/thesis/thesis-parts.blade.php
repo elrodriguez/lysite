@@ -1,3 +1,8 @@
+<script>
+     $(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+</script>
 <div class="">
     <div class="container page__container">
         <ol class="breadcrumb m-0">
@@ -22,15 +27,22 @@
                                 @foreach($parts as $part)
                                     <li>
                                         <div class="btn-group mr-3">
-                                            <button wire:click="$emit('openModalPartCreate',{{ $format_id }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-plus"></i>
+                                            <button
+                                            class="btn btn-secondary btn-sm""
+                                            data-toggle="popover"
+                                            title="{{ $part['information'] }}"
+                                            data-content="{{ $part['information']." contenido" }}"
+                                            data-placement="left">
+                                            <i class="fa fa-info-circle"></i>
                                             </button>
-                                            <button wire:click="$emit('openModalPartEditForm',{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                            @if ($part['body']==true)
+
+                                                <button wire:click="$emit('openModalPartEditForm',{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </button>
-                                            <button onclick="deletes({{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-trash-alt"></i>
-                                            </button>
+                                            @endif
+
+
                                         </div>
                                         {{ $part['number_order'].' '.$part['description'] }}
                                         {!! $part['items']  !!}
@@ -65,5 +77,6 @@
                 buttonText: "Okay"
             });
         })
+
     </script>
 </div>

@@ -63,8 +63,10 @@ class ThesisParts extends Component
             $this->parts[$k] = [
                 'id' => $part->id,
                 'description' => $part->description,
+                'information' => $part->information,
                 'number_order' => $part->number_order,
                 'items' => $this->getSubParts($part->id),
+                'body' => $part->body,
             ];
         }
 
@@ -79,17 +81,23 @@ class ThesisParts extends Component
             $html .= '<ul>';
             foreach($subparts as $k => $subpart){
                 $html .= '<li>';
-                $html .= '<div class="btn-group mr-3">
-                            <button wire:click="openModalTwo('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-plus"></i>
-                            </button>
+                $html .= '
+                                            <button
+                                            class="btn btn-secondary btn-sm"
+                                            data-toggle="popover"
+                                            title="'.$subpart->information.'"
+                                            data-content="'.$subpart->information.'"
+                                            data-placement="left">
+                                            <i class="fa fa-info-circle"></i>
+                                            </button>';
+                if($subpart->body){
+                    $html .= '<div class="btn-group mr-3">
                             <button wire:click="openModalEditTwo('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-pencil-alt"></i>
                             </button>
-                            <button onclick="deletes('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-trash-alt"></i>
-                            </button>
                         </div>';
+                }
+
                 $html .= $subpart->number_order.' '.$subpart->description;
                 $html .= $this->getSubParts($subpart->id);
                 $html .= '</li>';

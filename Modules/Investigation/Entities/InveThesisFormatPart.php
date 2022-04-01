@@ -20,7 +20,7 @@ class InveThesisFormatPart extends Model
         'index_order',
         'body'
     ];
-    
+
     protected static function newFactory()
     {
         return \Modules\Investigation\Database\factories\InveThesiFormatPartFactory::new();
