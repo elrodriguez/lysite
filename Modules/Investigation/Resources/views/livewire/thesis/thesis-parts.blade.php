@@ -45,6 +45,13 @@
 
                                         </div>
                                         {{ $part['number_order'].' '.$part['description'] }}
+                                        @if ($part['body']==true)
+                                        <div>
+                                            <textarea wire:model="txttexto" class="form-control" id="editor"
+                                                rows="10" cols="80"></textarea>
+                                            @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                        </div>
+                                        @endif
                                         {!! $part['items']  !!}
                                     </li>
                                 @endforeach

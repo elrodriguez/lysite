@@ -23,8 +23,8 @@
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
-        <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
-        <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/translations/sp.js"></script>
+        <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('ckeditor/translations/sp.js') }}"></script>
         <script>
             ClassicEditor.create( document.querySelector( '#editor' ), {
                 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable','mediaEmbed', '|', 'undo', 'redo' ],
