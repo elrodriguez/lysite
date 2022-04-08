@@ -39,6 +39,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
     Route::group(['prefix' => 'thesis'], function() {
         Route::get('create', 'ThesisController@create')->name('investigation_thesis_create');
         Route::get('edit/{id}', 'ThesisController@edit')->name('investigation_thesis_edit');
-        Route::get('parts/{id}', 'ThesisController@parts')->name('investigation_thesis_parts');
+        Route::get('parts/{thesis_id}/{sub_part?}', 'ThesisController@parts')->name('investigation_thesis_parts');
     });
 });

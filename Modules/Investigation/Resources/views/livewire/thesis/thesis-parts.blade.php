@@ -1,77 +1,158 @@
 <script>
-     $(function(){
-            $('[data-toggle="popover"]').popover();
-        });
+    $(function() {
+        $('[data-toggle="popover"]').popover();
+    });
 </script>
 <div class="">
     <div class="container page__container">
         <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
             <li class="breadcrumb-item active">{{ __('investigation::labels.thesis_parts') }}</li>
         </ol>
     </div>
+
+
     <div class="container page__container">
-        <div class="col-lg-12 p-0 mx-auto">
-            <div class="card card-body mb-32pt">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <h4 class="card-title">Listado</h4>
-                        <p class="text-70">{{ __('investigation::labels.parts') }}</p>
-                        @can('investigacion_partes_nuevo')
-                        <button wire:click="$emit('openModalPartCreate',{{ $format_id }})" type="button" class="btn btn-primary">Nuevo</button>
-                        @endcan
+
+        <div class="card card-body mb-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-point-none">
+                        @if (count($parts) > 0)
+                        @foreach ($parts as $part)
+                        <li>
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-secondary btn-sm"
+                                onclick="showVideo(event)">
+                                    <i class="fa fa-video"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                                    data-placement="top" title="{{ $part['information'] }}">
+                                    <i class="fa fa-info-circle"></i>
+                                </button>
+                                <!--  por si las dudas lo dejo luego se borra
+                                @if ($part['body'] == true)
+                                <button wire:click="$emit('openModalPartEditForm',{{ $part['id'] }})" type="button"
+                                    class="btn btn-secondary btn-sm">
+                                    <i class="fa fa-pencil-alt"></i>
+                                </button>
+                                @endif
+                                -->
+                            </div>
+                           <a href="{{ route('investigation_thesis_parts',[$thesis_id, $part['id']]) }}"> {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+
+                            {!! $part['items'] !!}
+                        </li>
+                        @endforeach
+                        @endif
+                    </ul>
+                </div>
+                <div class="col-lg-8">
+
+                    <div class="flex">
+                        <label class="form-label" for="content">{{ $focused_part->description }}</label>
+                        <div>
+                            <textarea wire:model="content" class="form-control" id="editor" rows="40"
+                                cols="80"></textarea>
+                            @error('content')
+                            <span class="invalid-feedback-2">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-lg-8 d-flex align-items-center">
-                        <ul class="list-point-none">
-                            @if(count($parts) > 0)
-                                @foreach($parts as $part)
-                                    <li>
-                                        <div class="btn-group mr-3">
-                                            <button
-                                            class="btn btn-secondary btn-sm""
-                                            data-toggle="popover"
-                                            title="{{ $part['information'] }}"
-                                            data-content="{{ $part['information']." contenido" }}"
-                                            data-placement="left">
-                                            <i class="fa fa-info-circle"></i>
-                                            </button>
-                                            @if ($part['body']==true)
 
-                                                <button wire:click="$emit('openModalPartEditForm',{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
-                                                <i class="fa fa-pencil-alt"></i>
-                                            </button>
-                                            @endif
-
-
-                                        </div>
-                                        {{ $part['number_order'].' '.$part['description'] }}
-                                        @if ($part['body']==true)
-                                        <div>
-                                            <textarea wire:model="txttexto" class="form-control" id="editor"
-                                                rows="10" cols="80"></textarea>
-                                            @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
-                                        </div>
-                                        @endif
-                                        {!! $part['items']  !!}
-                                    </li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="ventana_flotante" style="display: none" id="video-flotante">
+
+            <div class="content">
+
+                <div class="header">
+
+                    <h5 class="title" id="exampleModalLabel">ITUTLASOD ASD AS/</h5>
+
+                    <button type="button" class="close" onclick="showVideo(event)" aria-label="Close">
+
+                        <span aria-hidden="true close-btn">×</span>
+
+                    </button>
+
+                </div>
+
+                <div class="body">
+
+                    <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
+                        <div class="player embed-responsive-item">
+                            <div class="player__content">
+                                <div class="player__image"
+                                    style="--player-image: url(assets/images/illustration/player.svg)">
+                                </div>
+                                <a href="" class="player__play">
+                                    <span class="material-icons">play_arrow</span>
+                                </a>
+                            </div>
+
+                            <div class="player__embed d-none">
+                                <!-- Aqui abajo va el Video -->
+                                @if (false)
+                                <iframe class="embed-responsive-item"
+                                    src="https://player.vimeo.com/video/{{ 'VARIABLE VIDEO' }}?title=0&amp;byline=0&amp;portrait=0"
+                                    allowfullscreen=""></iframe>
+                                @endif
+                                @if (2 > 1)
+                                <iframe class="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/{{ 'b1iwTYfY0dU' }}?title=0&amp;byline=0&amp;portrait=0"
+                                    allowfullscreen=""></iframe>
+                                @endif
+                                <!-- Aqui arriba va el Video -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer">
+
+                    <button type="button" onclick="showVideo(event)" class="btn btn-secondary close-btn">{{ __('labels.Close')
+                        }}</button>
+                </div>
+
+            </div>
+
+        </div>
     </div>
     <script>
-        function deletes(id){
+        function deletes(id) {
             cuteAlert({
                 type: "question",
                 title: "¿Desea eliminar estos datos?",
                 message: "Advertencia:¡Esta acción no se puede deshacer!",
                 confirmText: "Okay",
                 cancelText: "Cancel"
-            }).then((e)=>{
-                if ( e == ("confirm")){
+            }).then((e) => {
+                if (e == ("confirm")) {
                     @this.destroy(id)
                 }
             });
@@ -85,5 +166,37 @@
             });
         })
 
+        function showVideo(e) {
+            if (document.getElementById('video-flotante').style.display == 'none') {
+                document.getElementById('video-flotante').style.display = 'block';
+            } else {
+                document.getElementById('video-flotante').style.display = 'none';
+            }
+        }
+        /*
+                document.addEventListener('livewire:load', function () {
+
+                    $('.popover-dismiss').popover({
+          trigger: 'focus'
+        })
+
+        });
+        */
     </script>
 </div>
+
+<style type="text/css">
+    .ventana_flotante {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #DDDDDD;
+        border-radius: 9px 9px 9px 9px;
+        bottom: 50px;
+        left: auto;
+        margin-left: -120px;
+        padding: 10px 0 0;
+        position: fixed;
+        text-align: center;
+        width: 320px;
+        z-index: 15;
+    }
+</style>

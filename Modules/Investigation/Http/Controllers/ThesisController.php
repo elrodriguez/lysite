@@ -27,9 +27,11 @@ class ThesisController extends Controller
         return view('investigation::thesis.thesis_edit')->with('id',$id);
     }
 
-    public function parts($id)
+    public function parts($thesis_id, $sub_part=0)
     {
-        return view('investigation::thesis.thesis_parts')->with('id',$id);
+        return view('investigation::thesis.thesis_parts')
+        ->with('thesis_id',$thesis_id)
+        ->with('sub_part',$sub_part);
     }
 
 }

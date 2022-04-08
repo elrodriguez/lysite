@@ -26,6 +26,11 @@ class ThesisParts extends Component
     public $information;
     public $state;
     public $index_order;
+    public $parts_all; //todas las partes sin filtrar solo ordenados por number order
+
+    public $focus_id;
+    public $focused_part;
+    /*----  id de la subparte que se requiere ver $focus_id  -----*/
 
     use WithPagination;
     protected $listeners = ['listParts' => 'updatingListParts'];
@@ -35,16 +40,18 @@ class ThesisParts extends Component
     public $format;
     public $parts = [];
 
-    public function mount($thesis_id){
+    public function mount($thesis_id, $sub_part){
+        $this->focus_id = $sub_part;
         $this->thesis_id = $thesis_id;
         $this->thesis_student = InveThesisStudent::find($thesis_id);
         $this->format_id = $this->thesis_student->format_id;
         $this->format == InveThesisFormat::find($thesis_id);
+
     }
 
     public function render()
     {
-        $this->getParts();
+       $this->getParts();
         return view('investigation::livewire.thesis.thesis-parts');
     }
 
@@ -54,6 +61,13 @@ class ThesisParts extends Component
     }
 
     public function getParts(){
+        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('number_order')->first()->get();
+        if($this->focus_id == 0){
+            $this->focus_id= $this->parts_all[0]->id;
+        }
+        $this->focused_part = InveThesisFormatPart::find($this->focus_id);
+        //esta es la parte que se mostrará a la derecha de la vista
+
         $parts = InveThesisFormatPart::where('thesis_format_id',$this->format_id)
             ->whereNull('belongs')
             ->orderBy('number_order')
@@ -81,24 +95,26 @@ class ThesisParts extends Component
             $html .= '<ul>';
             foreach($subparts as $k => $subpart){
                 $html .= '<li>';
-                $html .= '
-                                            <button
-                                            class="btn btn-secondary btn-sm"
-                                            data-toggle="popover"
-                                            title="'.$subpart->information.'"
-                                            data-content="'.$subpart->information.'"
-                                            data-placement="left">
-                                            <i class="fa fa-info-circle"></i>
-                                            </button>';
+                $html .= '<button type="button"
+                class="btn btn-secondary btn-sm"
+                data-toggle="modal"
+                data-target=".bd-example-modal-sm">
+                <i class="fa fa-video"></i>
+                </button>';
+                $html .= '<button type="button"
+                class="btn btn-secondary btn-sm"
+                data-toggle="tooltip"
+                title="'.$subpart->information.'"
+                data-placement="top">
+                <i class="fa fa-info-circle"></i>
+                </button>';
+                /*
                 if($subpart->body){
-                    $html .= '<div class="btn-group mr-3">
-                            <button wire:click="openModalEditTwo('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
+                    $html .= '<button wire:click="openModalEditTwo('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-pencil-alt"></i>
-                            </button>
-                        </div>';
-                }
-
-                $html .= $subpart->number_order.' '.$subpart->description;
+                            </button>';
+                } */
+                $html .= '<a href="'.route('investigation_thesis_parts',[$this->thesis_id,$subpart->id]).'">'.$subpart->number_order.' '.$subpart->description.'</a>';
                 $html .= $this->getSubParts($subpart->id);
                 $html .= '</li>';
             }

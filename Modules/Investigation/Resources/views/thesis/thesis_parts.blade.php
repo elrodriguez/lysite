@@ -19,31 +19,32 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-    <livewire:investigation::thesis.thesis-parts :thesis_id="$id" />
+    @livewire('investigation::thesis.thesis-parts',['thesis_id' => $thesis_id, 'sub_part' => $sub_part])
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
         <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-        <script src="{{ asset('ckeditor/translations/sp.js') }}"></script>
+        <script src="{{ asset('ckeditor/translations/es.js') }}"></script>
+
         <script>
-            ClassicEditor.create( document.querySelector( '#editor' ), {
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable','mediaEmbed', '|', 'undo', 'redo' ],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Muy Grande', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'grande', class: 'ck-heading_heading2' },
-                        { model: 'heading3', view: 'h3', title: 'Mediano', class: 'ck-heading_heading3' }
-                    ]
-                }
-            }).then(function(editor){
-                editor.model.document.on('change:data', ()=>{
-                    setDataText(editor.getData());
-                })
-            }).catch( error => {
-                console.error( error );
-            });
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+
+                    language: 'es'
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
         </script>
+
     @endsection
 </x-master>
+
+
+
+
+
+
+
+
