@@ -24,20 +24,20 @@
                             <div class="form-group">
                                 <label class="form-label" for="content_type_id">{{ __('labels.Content Type') }}
                                     *</label>
-                                <select 
-                                    wire:model.defer="content_type_id" 
-                                    type="select" 
+                                <select
+                                    wire:model.defer="content_type_id"
+                                    type="select"
                                     class="form-control"
                                     id="content_type_id"
                                     onchange="selectType(event)"
                                 >
-                                    <option value="">Seleccionar</option> 
+                                    <option value="">Seleccionar</option>
                                     @foreach ($content_types as $types)
                                     <option value="{{ $types->id }}">{{ $types->name }}</option>
 
                                     @endforeach
                                 </select>
-                                @error('content_type_id') 
+                                @error('content_type_id')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -85,7 +85,7 @@
                                     @error('content_url') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <button type="button" wire:loading.attr="disabled" wire:click="save"class="btn btn-primary">Guardar</button>
+                            <button type="button" wire:loading.attr="disabled" wire:click='save' class="btn btn-primary">Guardar</button>
 
                         </div>
 

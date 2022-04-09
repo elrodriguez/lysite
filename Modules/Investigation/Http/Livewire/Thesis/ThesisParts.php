@@ -145,4 +145,24 @@ class ThesisParts extends Component
 
         $this->dispatchBrowserEvent('inve-part-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
+
+    public function save(){
+       /* Aquí debe crearse en la tabla donde se registra la tesis del alumno
+       crear o actualizar la tabla de la tesis del alumno
+
+       $part = InveThesisFormatPart::create([
+            'thesis_format_id' => $this->format_id,
+            'belongs' => $this->part_id,
+            'number_order' => $this->number_order,
+            'description' => $this->description,
+            'information' => $this->information,
+            'state' => $this->state,
+            'index_order' => $this->index_order,
+        ]);
+*/
+dd($this->format_id);
+$this->focused_part->description="la ptm";
+
+        $this->dispatchBrowserEvent('inve-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Se guardó correctamente']);
+    }
 }

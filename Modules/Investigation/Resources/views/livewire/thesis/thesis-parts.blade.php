@@ -51,13 +51,24 @@
 
                     <div class="flex">
                         <label class="form-label" for="content">{{ $focused_part->description }}</label>
-                        <div>
-                            <textarea wire:model="content" class="form-control" id="editor" rows="40"
-                                cols="80"></textarea>
-                            @error('content')
-                            <span class="invalid-feedback-2">{{ $message }}</span>
-                            @enderror
-                        </div>
+                        @if ($focused_part->body == true)
+                            <div class="row">
+                                <textarea wire:model="content" class="form-control" id="editor" rows="40"
+                                    cols="80"></textarea>
+                                @error('content')
+                                <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div><br>
+                            <div class="row">
+                                <button type="button" class="btn-primary btn" wire:loading.attr="disabled" wire:click="save">{{ __('labels.Save') }}</button>
+                            </div>
+
+                        @else
+                            <div>
+                                <h4>Esta Sección solo es un título o subtitulo sin contenido.</h4>
+                            </div>
+                        @endif
+
                     </div>
 
                 </div>
@@ -157,7 +168,7 @@
                 }
             });
         }
-        window.addEventListener('inve-part-delete', event => {
+        window.addEventListener('inve-part-create', event => {
             cuteAlert({
                 type: event.detail.res,
                 title: event.detail.tit,

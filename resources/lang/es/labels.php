@@ -150,4 +150,5 @@ return [
     'New Thesis Format' => 'Nuevo Formato de Tesis',
     'School' => 'Escuela',
     'Normative' => 'Normativa',
+    'Save' => 'Guardar',
 ];
