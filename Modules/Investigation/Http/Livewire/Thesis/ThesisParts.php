@@ -2,13 +2,12 @@
 
 namespace Modules\Investigation\Http\Livewire\Thesis;
 
-use App\Models\Universities;
-use App\Models\UniversitiesSchools;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
+use Modules\Investigation\Entities\InveThesisStudentPart;
 
 class ThesisParts extends Component
 {
@@ -17,28 +16,17 @@ class ThesisParts extends Component
     public $school;
     public $thesis_format;
     public $thesis_student;
-    /* ------------------------------------------------------------------------- */
-    public $part_id;
-    public $format_id;
-    public $part;
-    public $number_order;
-    public $description;
-    public $information;
-    public $state;
-    public $index_order;
+
     public $parts_all; //todas las partes sin filtrar solo ordenados por number order
 
     public $focus_id;
     public $focused_part;
-    /*----  id de la subparte que se requiere ver $focus_id  -----*/
-
-    use WithPagination;
-    protected $listeners = ['listParts' => 'updatingListParts'];
-
-    public $search;
 
     public $format;
     public $parts = [];
+
+    public $content;
+    public $content_old;
 
     public function mount($thesis_id, $sub_part){
         $this->focus_id = $sub_part;
@@ -47,6 +35,13 @@ class ThesisParts extends Component
         $this->format_id = $this->thesis_student->format_id;
         $this->format == InveThesisFormat::find($thesis_id);
 
+        $ThesisStudentPart = InveThesisStudentPart::where( 'inve_thesis_student_id', $this->thesis_student->id)
+        ->where('inve_thesis_format_part_id', $this->focus_id)
+        ->orderBy('version', 'desc')
+        ->limit(1)
+        ->first();
+
+        $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
     }
 
     public function render()
@@ -63,7 +58,7 @@ class ThesisParts extends Component
     public function getParts(){
         $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('number_order')->first()->get();
         if($this->focus_id == 0){
-            $this->focus_id= $this->parts_all[0]->id;
+            $this->focus_id = $this->parts_all[0]->id;
         }
         $this->focused_part = InveThesisFormatPart::find($this->focus_id);
         //esta es la parte que se mostrará a la derecha de la vista
@@ -95,25 +90,19 @@ class ThesisParts extends Component
             $html .= '<ul>';
             foreach($subparts as $k => $subpart){
                 $html .= '<li>';
-                $html .= '<button type="button"
-                class="btn btn-secondary btn-sm"
-                data-toggle="modal"
-                data-target=".bd-example-modal-sm">
-                <i class="fa fa-video"></i>
+                $html .= '<div class="btn-group mr-2"><button type="button"
+                    class="btn btn-secondary btn-sm"
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-sm">
+                    <i class="fa fa-video"></i>
                 </button>';
                 $html .= '<button type="button"
-                class="btn btn-secondary btn-sm"
-                data-toggle="tooltip"
-                title="'.$subpart->information.'"
-                data-placement="top">
+                    class="btn btn-secondary btn-sm"
+                    data-toggle="tooltip"
+                    title="'.$subpart->information.'"
+                    data-placement="top">
                 <i class="fa fa-info-circle"></i>
-                </button>';
-                /*
-                if($subpart->body){
-                    $html .= '<button wire:click="openModalEditTwo('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-pencil-alt"></i>
-                            </button>';
-                } */
+                </button></div>';
                 $html .= '<a href="'.route('investigation_thesis_parts',[$this->thesis_id,$subpart->id]).'">'.$subpart->number_order.' '.$subpart->description.'</a>';
                 $html .= $this->getSubParts($subpart->id);
                 $html .= '</li>';
@@ -146,23 +135,42 @@ class ThesisParts extends Component
         $this->dispatchBrowserEvent('inve-part-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 
-    public function save(){
-       /* Aquí debe crearse en la tabla donde se registra la tesis del alumno
-       crear o actualizar la tabla de la tesis del alumno
-
-       $part = InveThesisFormatPart::create([
-            'thesis_format_id' => $this->format_id,
-            'belongs' => $this->part_id,
-            'number_order' => $this->number_order,
-            'description' => $this->description,
-            'information' => $this->information,
-            'state' => $this->state,
-            'index_order' => $this->index_order,
+    public function saveThesisPartStudentN(){
+       
+        $this->validate([
+            'content' => 'required'
         ]);
-*/
-dd($this->format_id);
-$this->focused_part->description="la ptm";
 
-        $this->dispatchBrowserEvent('inve-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Se guardó correctamente']);
+        $max_version = InveThesisStudentPart::where( 'inve_thesis_student_id', $this->thesis_student->id)
+            ->where('inve_thesis_format_part_id', $this->focus_id)
+            ->max('version');
+
+        InveThesisStudentPart::create([
+            'student_id' => $this->thesis_student->student_id,
+            'inve_thesis_student_id' => $this->thesis_student->id,
+            'inve_thesis_format_part_id' => $this->focus_id,
+            'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+            'version' => ($max_version ? $max_version + 1 : 1)
+        ]);
+
+        $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Se guardó correctamente']);
+    }
+
+    public function goEdit($thesis_id){
+        redirect()->route('investigation_thesis_edit',$thesis_id);
+    }
+    public function deleteThesis($id){
+        try {
+            InveThesisStudent::find($id)->delete();
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se eliminó correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar porque cuenta con registros asociados';
+        }
+
+        $this->dispatchBrowserEvent('inve-thesis-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 }

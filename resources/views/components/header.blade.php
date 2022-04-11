@@ -62,7 +62,6 @@ $path = explode('/', request()->path());
 
             <!-- Main Navigation -->
             <nav class="nav navbar-nav ml-auto flex-nowrap">
-
                 @if (Auth::check())
                     <style>
                         #courses:hover {
@@ -106,7 +105,9 @@ $path = explode('/', request()->path());
                         </div>
                     </div>
                 @endif
+                
                 @if (Route::has('login'))
+                
                     @auth
                         <div class="nav-item dropdown d-none d-sm-flex ml-16pt">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -131,22 +132,21 @@ $path = explode('/', request()->path());
                             </div>
                         </div>
                         @livewire('chat::contact-list')
+                    
+                    @else
+                        <div class="ml-16pt nav-item">
+                            <a href="{{ route('login') }}" class="nav-link">
+                                <i class="material-icons">lock_open</i>
+                                <span class="sr-only">Login</span>
+                            </a>
+                        </div>
+                        @if (Route::has('register'))
+                            <div class="d-none d-sm-flex nav-item">
+                                <a href="{{ route('register') }}" class="btn btn-accent">Registrar</a>
+                            </div>
+                        @endif
                     @endauth
-                @else
-                    <div class="ml-16pt nav-item">
-                        <a href="{{ route('login') }}" class="nav-link">
-                            <i class="material-icons">lock_open</i>
-                            <span class="sr-only">Login</span>
-                        </a>
-                    </div>
-                    {{-- @if (Route::has('register'))
-                    <div class="ml-16pt nav-item">
-                        <a href="login.html" class="nav-link">
-                            <i class="material-icons">lock_open</i>
-                            <span class="sr-only">Register</span>
-                        </a>
-                    </div>
-                    @endif --}}
+                    
                     {{-- <div class="d-none d-sm-flex nav-item">
                         <a href="pricing.html" class="btn btn-accent">Get started</a>
                     </div> --}}

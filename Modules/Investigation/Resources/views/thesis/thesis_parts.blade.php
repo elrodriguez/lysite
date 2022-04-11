@@ -1,4 +1,21 @@
 <x-master>
+    @section('styles')
+    <style type="text/css">
+        .ventana_flotante {
+            background: none repeat scroll 0 0 #FFFFFF;
+            border: 1px solid #DDDDDD;
+            border-radius: 9px 9px 9px 9px;
+            bottom: 50px;
+            left: auto;
+            margin-left: -120px;
+            padding: 10px 0 0;
+            position: fixed;
+            text-align: center;
+            width: 320px;
+            z-index: 15;
+        }
+    </style>
+    @stop
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary">
             <div class="py-32pt">
@@ -24,20 +41,9 @@
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
-        <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-        <script src="{{ asset('ckeditor/translations/es.js') }}"></script>
-
-        <script>
-            ClassicEditor
-                .create( document.querySelector( '#editor' ), {
-
-                    language: 'es'
-                } )
-                .catch( error => {
-                    console.error( error );
-                } );
-        </script>
-
+        <script src="{{ asset('ckeditor-4/ckeditor.js') }}"></script>
+        <script src="{{ asset('ckeditor-4/config.js') }}"></script>
+        <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
     @endsection
 </x-master>
 
