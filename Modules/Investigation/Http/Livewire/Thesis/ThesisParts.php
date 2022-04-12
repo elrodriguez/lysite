@@ -4,6 +4,7 @@ namespace Modules\Investigation\Http\Livewire\Thesis;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Modules\Academic\Entities\AcaContent;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
@@ -31,6 +32,7 @@ class ThesisParts extends Component
     public function mount($thesis_id, $sub_part){
         $this->focus_id = $sub_part;
         $this->thesis_id = $thesis_id;
+
         $this->thesis_student = InveThesisStudent::find($thesis_id);
         $this->format_id = $this->thesis_student->format_id;
         $this->format == InveThesisFormat::find($thesis_id);
@@ -90,19 +92,6 @@ class ThesisParts extends Component
             $html .= '<ul>';
             foreach($subparts as $k => $subpart){
                 $html .= '<li>';
-                $html .= '<div class="btn-group mr-2"><button type="button"
-                    class="btn btn-secondary btn-sm"
-                    data-toggle="modal"
-                    data-target=".bd-example-modal-sm">
-                    <i class="fa fa-video"></i>
-                </button>';
-                $html .= '<button type="button"
-                    class="btn btn-secondary btn-sm"
-                    data-toggle="tooltip"
-                    title="'.$subpart->information.'"
-                    data-placement="top">
-                <i class="fa fa-info-circle"></i>
-                </button></div>';
                 $html .= '<a href="'.route('investigation_thesis_parts',[$this->thesis_id,$subpart->id]).'">'.$subpart->number_order.' '.$subpart->description.'</a>';
                 $html .= $this->getSubParts($subpart->id);
                 $html .= '</li>';
@@ -172,5 +161,20 @@ class ThesisParts extends Component
         }
 
         $this->dispatchBrowserEvent('inve-thesis-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
+
+    public function showVideo(){
+
+        $content_id = $this->focused_part->content_id;
+        $success = false;
+        $video = null;
+
+        if($content_id){
+            $success = true;
+            $url = AcaContent::where('id',$content_id)->value('content_url');
+            $video = str_replace('https://vimeo.com/','', $url);
+        }
+
+        $this->dispatchBrowserEvent('inve-open-modal-video', ['success' => $success, 'video' => $video]);
     }
 }

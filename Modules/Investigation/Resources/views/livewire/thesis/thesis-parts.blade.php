@@ -26,16 +26,6 @@
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
                             <li>
-                                <div class="btn-group mr-2">
-                                    <button type="button" class="btn btn-secondary btn-sm"
-                                    onclick="showVideo(event)">
-                                        <i class="fa fa-video"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip"
-                                        data-placement="top" title="{{ $part['information'] }}">
-                                        <i class="fa fa-info-circle"></i>
-                                    </button>
-                                </div>
                                 <a href="{{ route('investigation_thesis_parts',[$thesis_id, $part['id']]) }}"> {{ $part['number_order'] . ' ' . $part['description'] }}</a>
                                 {!! $part['items'] !!}
                             </li>
@@ -44,9 +34,24 @@
                     </ul>
                 </div>
                 <div class="col-lg-8">
-
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-9">
+                            <label class="form-label" for="content">{{ $focused_part->description }}</label>
+                        </div>
+                        <div class="col col-lg-3">
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-secondary btn-sm" wire:click="showVideo">
+                                    <i class="fa fa-video"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                                    data-placement="top" title="{{ $focused_part->information }}">
+                                    <i class="fa fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex">
-                        <label class="form-label" for="content">{{ $focused_part->description }}</label>
+                        
                         @if ($focused_part->body == true)
                             <div class="row">
                                 <div class="col-12 mb-3">
@@ -83,7 +88,7 @@
 
                     <h5 class="title" id="exampleModalLabel">ITUTLASOD ASD AS/</h5>
 
-                    <button type="button" class="close" onclick="showVideo(event)" aria-label="Close">
+                    <button type="button" class="close" onclick="closeVideo()" aria-label="Close">
 
                         <span aria-hidden="true close-btn">×</span>
 
@@ -103,20 +108,12 @@
                                     <span class="material-icons">play_arrow</span>
                                 </a>
                             </div>
-
+                            
                             <div class="player__embed d-none">
                                 <!-- Aqui abajo va el Video -->
-                                @if (false)
                                 <iframe class="embed-responsive-item"
-                                    src="https://player.vimeo.com/video/{{ 'VARIABLE VIDEO' }}?title=0&amp;byline=0&amp;portrait=0"
+                                    id="iframeVideoPart"
                                     allowfullscreen=""></iframe>
-                                @endif
-                                @if (2 > 1)
-                                <iframe class="embed-responsive-item"
-                                    src="https://www.youtube.com/embed/{{ 'b1iwTYfY0dU' }}?title=0&amp;byline=0&amp;portrait=0"
-                                    allowfullscreen=""></iframe>
-                                @endif
-                                <!-- Aqui arriba va el Video -->
                             </div>
 
                         </div>
@@ -125,7 +122,7 @@
                 </div>
 
                 <div class="footer">
-                    <button type="button" onclick="showVideo(event)" class="btn btn-secondary close-btn">
+                    <button type="button" onclick="closeVideo()" class="btn btn-secondary close-btn">
                         {{ __('labels.Close') }}
                     </button>
                 </div>
@@ -155,14 +152,25 @@
                 message: event.detail.msg,
                 buttonText: "Okay"
             });
-        })
-
-        function showVideo(e) {
-            if (document.getElementById('video-flotante').style.display == 'none') {
+        });
+        window.addEventListener('inve-open-modal-video', event => {
+            if(event.detail.success){
+                let url = "https://player.vimeo.com/video/"+event.detail.video+"?title=0&amp;byline=0&amp;portrait=0"
+                document.getElementById("iframeVideoPart").src=url;
                 document.getElementById('video-flotante').style.display = 'block';
-            } else {
-                document.getElementById('video-flotante').style.display = 'none';
+            }else{
+                cuteAlert({
+                    type: 'error',
+                    title: 'Salió mal',
+                    message: 'No tiene videos vinculados',
+                    buttonText: "Okay"
+                });
             }
+        });
+
+        function closeVideo() {
+            document.getElementById('video-flotante').style.display = 'none';
+            document.getElementById("iframeVideoPart").src=null;
         }
 
         function deleteThesisStudent(id){
