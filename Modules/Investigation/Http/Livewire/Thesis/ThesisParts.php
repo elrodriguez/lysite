@@ -43,7 +43,10 @@ class ThesisParts extends Component
         ->limit(1)
         ->first();
 
-        $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
+        if($ThesisStudentPart){
+            $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
+        }
+        
     }
 
     public function render()
