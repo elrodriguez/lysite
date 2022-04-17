@@ -26,7 +26,7 @@
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
                             <li>
-                                <a href="{{ route('investigation_thesis_parts',[$thesis_id, $part['id']]) }}"> {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                <a href="javascript:changeFocus({{ $thesis_id.", ".$part['id'] }})"> {{ $part['number_order'] . ' ' . $part['description'] }}</a>
                                 {!! $part['items'] !!}
                             </li>
                             @endforeach
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="flex">
-                        
+
                         @if ($focused_part->body == true)
                             <div class="row">
                                 <div class="col-12 mb-3">
@@ -108,7 +108,7 @@
                                     <span class="material-icons">play_arrow</span>
                                 </a>
                             </div>
-                            
+
                             <div class="player__embed d-none">
                                 <!-- Aqui abajo va el Video -->
                                 <iframe class="embed-responsive-item"
@@ -187,6 +187,30 @@
             });
         }
 
+        function changeFocus(thesis_id, part_id){
+            alert("Aquí falta validar que si no hubo cambio cambie de vista sin preguntar");
+            if(true){
+                cuteAlert({
+                type: "question",
+                title: "¿Vas a cambiar de Sección y no has guardado tu contenido, deseas Guardarlo ahora?",
+                message: "Advertencia:¡Esta acción no se puede deshacer!",
+                confirmText: "Guardar",
+                cancelText: "No Guardar"
+            }).then((e)=>{
+                if ( e == ("confirm")){
+                    var data = CKEDITOR.instances.editor.getData();
+                    @this.set('content',data);
+                    @this.savingThesisPartStudentBeforeChange(thesis_id, part_id);
+                }else{
+                    @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+                }
+            });
+        }else{
+            @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+        }
+
+        }
+
         window.addEventListener('inve-thesis-delete', event => {
             cuteAlert({
                 type: event.detail.res,
@@ -207,8 +231,8 @@
         function saveThesisPartStudent(){
             var data = CKEDITOR.instances.editor.getData();
             @this.set('content',data);
-            
-            @this.saveThesisPartStudentN()
+
+            @this.saveThesisPartStudentN(true)
         }
     </script>
 </div>
