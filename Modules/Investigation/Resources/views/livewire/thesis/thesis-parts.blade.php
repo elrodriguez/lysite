@@ -90,7 +90,7 @@
                                     <div class="custom-control custom-checkbox">
                                         <input wire:model="auto_save" class="custom-control-input" type="checkbox"
                                             value="" id="invalidCheck01">
-                                        <label class="custom-control-label" for="invalidCheck01">
+                                        <label class="custom-control-label" for="invalidCheck01" onclick="toggleSaving()">
                                             Auto Guardar
                                         </label>
                                     </div>
@@ -295,7 +295,7 @@
             let old = document.getElementById("content_old").value;
             let actual = data; //ahora el actual esta en data
             let as = document.getElementById('invalidCheck01');
-            // revisa que autoguardado esté activado y que halla habido cambio en el contenido
+            // revisa que autoguardado esté activado y que haya habido cambio en el contenido
             if (as.checked && old != actual) {
                 @this.saveThesisPartStudentAutoSave(); // se guarda el contenido
             }
@@ -304,6 +304,10 @@
         function updateContent(){
             data = CKEDITOR.instances.editor.getData();
             @this.set('content', data);
+        }
+
+        function toggleSaving(){
+            @this.toggleSaving();
         }
         window.onload = activarAutoGuardado; //activa el intervalo de tiempo
     </script>
