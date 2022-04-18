@@ -24,6 +24,7 @@ class StudentTakeLesson extends Component
 
     public function mount($section_id,$content_id)
     {
+        
         $this->section_id = $section_id;
         $this->content_id = $content_id;
         $this->student = DB::table('people')->where('user_id', Auth::user()->id)->first()->id;  //obtener ID de persona
@@ -34,6 +35,7 @@ class StudentTakeLesson extends Component
     }
     public function render()
     {
+
         return view('academic::livewire.students.student-take-lesson', ['content' => $this->getContent()]);
     }
 

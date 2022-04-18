@@ -18,7 +18,7 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-  
+    <livewire:academic::contents.add-link-parts :section_id="$section_id" :content_id="$content_id" />
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>

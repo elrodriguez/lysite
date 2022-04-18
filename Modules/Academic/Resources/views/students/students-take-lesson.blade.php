@@ -17,6 +17,7 @@
     
                                 </a>
                             </div>
+                            @if($instruct)
                             <div class="media-body">
                                 <a href="student-take-course.html" class="card-title text-body mb-0">{{ $course->name }}</a>
                                 <p class="lh-1 d-flex align-items-center mb-0">
@@ -24,6 +25,7 @@
                                     <span class="text-50 small">{{ $instruct->email }}</span>
                                 </p>
                             </div>
+                            @endif
                         </div>
                         <ul>
                             <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">

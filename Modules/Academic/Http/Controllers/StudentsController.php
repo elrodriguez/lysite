@@ -115,6 +115,7 @@ class StudentsController extends Controller
             )
             ->where('course_id', $course_id)
             ->first();
+
         return view('academic::students.students-take-lesson')->with([
             'course_id' => $course_id,
             'section_id' => $section_id,
