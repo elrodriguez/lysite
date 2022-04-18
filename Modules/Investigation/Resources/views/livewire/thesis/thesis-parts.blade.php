@@ -28,20 +28,20 @@
                     <ul class="list-point-none">
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
-                            @if ($part['id']==$focus_id)
-                                <li class="alert alert-primary">
-                                    <a class="alert-link" href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
-                                        {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                    {!! $part['items'] !!}
-                                </li>
-                            @else
-                                <li>
-                                    <a href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
-                                        {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                    {!! $part['items'] !!}
-                                </li>
-                            @endif
-
+                                @if ($part['id'] == $focus_id)
+                                    <li class="alert alert-primary">
+                                        <a class="alert-link"
+                                            href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                            {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                        {!! $part['items'] !!}
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                            {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                        {!! $part['items'] !!}
+                                    </li>
+                                @endif
                             @endforeach
                         @endif
                     </ul>
@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-12 mb-3">
                                     <div wire:ignore>
-                                        <textarea class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
+                                        <textarea  class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
                                     </div>
                                     @error('content')
                                         <span class="invalid-feedback-2">{{ $message }}</span>
@@ -77,13 +77,23 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9">
-                                    <button type="button" class="btn-primary btn" wire:loading.attr="disabled"
-                                        onclick="saveThesisPartStudent()">{{ __('labels.Save') }}</button>
+                                <div class="form-group col-9">
+                                    <div class="custom-control">
+
+                                        <button type="button" class="btn-primary btn" wire:loading.attr="disabled"
+                                            onclick="saveThesisPartStudent()">{{ __('labels.Save') }}</button>
+                                    </div>
                                 </div>
-                                <div class="col-3">
-                                    Auto Guardar
-                                    <input type="checkbox" id="auto_save" name="auto_save" onclick="toggleSaving()">
+
+
+                                <div class="form-group col-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input wire:model="auto_save" class="custom-control-input" type="checkbox"
+                                            value="" id="invalidCheck01">
+                                        <label class="custom-control-label" for="invalidCheck01">
+                                            Auto Guardar
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         @else
@@ -148,6 +158,7 @@
         </div>
     </div>
     <script>
+        var data;
         function deletes(id) {
             cuteAlert({
                 type: "question",
@@ -204,26 +215,39 @@
             });
         }
 
-        function changeFocus(thesis_id, part_id) {
-            alert("Aquí falta validar que si no hubo cambio cambie de vista sin preguntar");
-            if (true) {
-                cuteAlert({
-                    type: "question",
-                    title: "¿Vas a cambiar de Sección y no has guardado tu contenido, deseas Guardarlo ahora?",
-                    message: "Advertencia:¡Esta acción no se puede deshacer!",
-                    confirmText: "Guardar",
-                    cancelText: "No Guardar"
-                }).then((e) => {
-                    if (e == ("confirm")) {
-                        var data = CKEDITOR.instances.editor.getData();
-                        @this.set('content', data);
-                        @this.savingThesisPartStudentBeforeChange(thesis_id, part_id);
-                    } else {
-                        @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
-                    }
-                });
-            } else {
-                @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+        function changeFocus(thesis_id, part_id) { //funcion para cambiar de sección y revisar cambios
+            let as = document.getElementById("invalidCheck01").checked;
+
+            if (!as) { //autosave desactivado
+                updateContent();
+                let old = document.getElementById("content_old").value;
+                let actual = data; //ahora el actual esta en data
+                if (old != actual) {
+                    cuteAlert({
+                        type: "question",
+                        title: "¿Vas a cambiar de Sección y no has guardado tu contenido, deseas Guardarlo ahora?",
+                        message: "Advertencia:¡Esta acción no se puede deshacer!",
+                        confirmText: "Guardar",
+                        cancelText: "No Guardar"
+                    }).then((e) => {
+                        if (e == ("confirm")) {
+                            @this.savingThesisPartStudentBeforeChange(thesis_id, part_id);
+                        } else {
+                            @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+                        }
+                    });
+                } else {
+                    @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+                }
+            } else { //autosave activado
+                updateContent();
+                let old = document.getElementById("content_old").value;
+                let actual = data; //ahora el actual esta en data
+                if (old != actual) {
+                    @this.savingThesisPartStudentBeforeChange(thesis_id, part_id);
+                } else {
+                    @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+                }
             }
 
         }
@@ -246,18 +270,17 @@
         })
 
         function saveThesisPartStudent() {
-            var data = CKEDITOR.instances.editor.getData();
-            @this.set('content', data);
-
+            updateContent();
             @this.saveThesisPartStudentN(true)
         }
     </script>
-
+    <input type="hidden" id="content_old" wire:model='content_old'>
     <script>
         //Codigo para el Intervalo de AutoGrabado
-        let TimeSave;
-        let autoSave = false;
-        let time = 3000;
+        var TimeSave;
+        var time = 30; //se configura el tiempo en segundos.
+        time = time * 1000; //se pasa a milisegundos
+
 
         function activarAutoGuardado() {
             TimeSave = setInterval(saving, time);
@@ -267,25 +290,21 @@
             clearInterval(TimeSave);
         }
 
-        function toggleSaving() {
-            if (autoSave) {
-                stopSaving();
-                autoSave = false;
-            } else {
-                activarAutoGuardado();
-                autoSave = true;
+        function saving() {
+            updateContent();
+            let old = document.getElementById("content_old").value;
+            let actual = data; //ahora el actual esta en data
+            let as = document.getElementById('invalidCheck01');
+            // revisa que autoguardado esté activado y que halla habido cambio en el contenido
+            if (as.checked && old != actual) {
+                @this.saveThesisPartStudentAutoSave(); // se guarda el contenido
             }
         }
 
-        function saving() {
-            var data = CKEDITOR.instances.editor.getData();
+        function updateContent(){
+            data = CKEDITOR.instances.editor.getData();
             @this.set('content', data);
-            @this.saveThesisPartStudentAutoSave(); // se graba
-            if(0){
-                alert("autosave true");
-            }else{
-                alert("autosave false");
-            }
         }
+        window.onload = activarAutoGuardado; //activa el intervalo de tiempo
     </script>
 </div>
