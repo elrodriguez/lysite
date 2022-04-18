@@ -9,13 +9,16 @@
         <div class="d-flex flex-wrap align-items-start mb-3">
             <div class="d-flex mr-24pt">
                 <div class="flex">
-                    <a class="text-body" href="{{ route('investigation_thesis_parts',$thesis_student->id) }}"><strong>{{ $thesis_student->title }}</strong></a><br>
+                    <a class="text-body"
+                        href="{{ route('investigation_thesis_parts', $thesis_student->id) }}"><strong>{{ $thesis_student->title }}</strong></a><br>
                 </div>
             </div>
             <div class="d-flex align-items-center py-4pt" style="white-space: nowrap;">
                 <div class="btn-group" role="group" aria-label="">
-                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn primary"><i class="fa fa-pencil-alt mr-1"></i></button>
-                    <button onclick="deleteThesisStudent({{ $thesis_student->id }})" type="button" class="btn btn primary"><i class="fa fa-trash-alt mr-1"></i></button>
+                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn primary"><i
+                            class="fa fa-pencil-alt mr-1"></i></button>
+                    <button onclick="deleteThesisStudent({{ $thesis_student->id }})" type="button"
+                        class="btn btn primary"><i class="fa fa-trash-alt mr-1"></i></button>
                 </div>
             </div>
         </div>
@@ -25,10 +28,20 @@
                     <ul class="list-point-none">
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
-                            <li>
-                                <a href="{{ route('investigation_thesis_parts',[$thesis_id, $part['id']]) }}"> {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                {!! $part['items'] !!}
-                            </li>
+                            @if ($part['id']==$focus_id)
+                                <li class="alert alert-primary">
+                                    <a class="alert-link" href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                        {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                    {!! $part['items'] !!}
+                                </li>
+                            @else
+                                <li>
+                                    <a href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                        {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                    {!! $part['items'] !!}
+                                </li>
+                            @endif
+
                             @endforeach
                         @endif
                     </ul>
@@ -51,7 +64,7 @@
                         </div>
                     </div>
                     <div class="flex">
-                        
+
                         @if ($focused_part->body == true)
                             <div class="row">
                                 <div class="col-12 mb-3">
@@ -59,13 +72,18 @@
                                         <textarea class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
                                     </div>
                                     @error('content')
-                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <button type="button" class="btn-primary btn" wire:loading.attr="disabled" onclick="saveThesisPartStudent()">{{ __('labels.Save') }}</button>
+                                <div class="col-9">
+                                    <button type="button" class="btn-primary btn" wire:loading.attr="disabled"
+                                        onclick="saveThesisPartStudent()">{{ __('labels.Save') }}</button>
+                                </div>
+                                <div class="col-3">
+                                    Auto Guardar
+                                    <input type="checkbox" id="auto_save" name="auto_save" onclick="toggleSaving()">
                                 </div>
                             </div>
                         @else
@@ -108,12 +126,10 @@
                                     <span class="material-icons">play_arrow</span>
                                 </a>
                             </div>
-                            
+
                             <div class="player__embed d-none">
                                 <!-- Aqui abajo va el Video -->
-                                <iframe class="embed-responsive-item"
-                                    id="iframeVideoPart"
-                                    allowfullscreen=""></iframe>
+                                <iframe class="embed-responsive-item" id="iframeVideoPart" allowfullscreen=""></iframe>
                             </div>
 
                         </div>
@@ -154,11 +170,12 @@
             });
         });
         window.addEventListener('inve-open-modal-video', event => {
-            if(event.detail.success){
-                let url = "https://player.vimeo.com/video/"+event.detail.video+"?title=0&amp;byline=0&amp;portrait=0"
-                document.getElementById("iframeVideoPart").src=url;
+            if (event.detail.success) {
+                let url = "https://player.vimeo.com/video/" + event.detail.video +
+                    "?title=0&amp;byline=0&amp;portrait=0"
+                document.getElementById("iframeVideoPart").src = url;
                 document.getElementById('video-flotante').style.display = 'block';
-            }else{
+            } else {
                 cuteAlert({
                     type: 'error',
                     title: 'Salió mal',
@@ -170,21 +187,45 @@
 
         function closeVideo() {
             document.getElementById('video-flotante').style.display = 'none';
-            document.getElementById("iframeVideoPart").src=null;
+            document.getElementById("iframeVideoPart").src = null;
         }
 
-        function deleteThesisStudent(id){
+        function deleteThesisStudent(id) {
             cuteAlert({
                 type: "question",
                 title: "¿Desea eliminar estos datos?",
                 message: "Advertencia:¡Esta acción no se puede deshacer!",
                 confirmText: "Okay",
                 cancelText: "Cancel"
-            }).then((e)=>{
-                if ( e == ("confirm")){
+            }).then((e) => {
+                if (e == ("confirm")) {
                     @this.deleteThesis(id)
                 }
             });
+        }
+
+        function changeFocus(thesis_id, part_id) {
+            alert("Aquí falta validar que si no hubo cambio cambie de vista sin preguntar");
+            if (true) {
+                cuteAlert({
+                    type: "question",
+                    title: "¿Vas a cambiar de Sección y no has guardado tu contenido, deseas Guardarlo ahora?",
+                    message: "Advertencia:¡Esta acción no se puede deshacer!",
+                    confirmText: "Guardar",
+                    cancelText: "No Guardar"
+                }).then((e) => {
+                    if (e == ("confirm")) {
+                        var data = CKEDITOR.instances.editor.getData();
+                        @this.set('content', data);
+                        @this.savingThesisPartStudentBeforeChange(thesis_id, part_id);
+                    } else {
+                        @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+                    }
+                });
+            } else {
+                @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
+            }
+
         }
 
         window.addEventListener('inve-thesis-delete', event => {
@@ -198,19 +239,53 @@
             });
         });
 
-        document.addEventListener('livewire:load', function () {
+        document.addEventListener('livewire:load', function() {
             if (document.getElementById("editor")) {
                 CKEDITOR.replace('editor');
             }
         })
 
-        function saveThesisPartStudent(){
+        function saveThesisPartStudent() {
             var data = CKEDITOR.instances.editor.getData();
-            @this.set('content',data);
-            
-            @this.saveThesisPartStudentN()
+            @this.set('content', data);
+
+            @this.saveThesisPartStudentN(true)
+        }
+    </script>
+
+    <script>
+        //Codigo para el Intervalo de AutoGrabado
+        let TimeSave;
+        let autoSave = false;
+        let time = 3000;
+
+        function activarAutoGuardado() {
+            TimeSave = setInterval(saving, time);
+        }
+
+        function stopSaving() {
+            clearInterval(TimeSave);
+        }
+
+        function toggleSaving() {
+            if (autoSave) {
+                stopSaving();
+                autoSave = false;
+            } else {
+                activarAutoGuardado();
+                autoSave = true;
+            }
+        }
+
+        function saving() {
+            var data = CKEDITOR.instances.editor.getData();
+            @this.set('content', data);
+            @this.saveThesisPartStudentAutoSave(); // se graba
+            if(0){
+                alert("autosave true");
+            }else{
+                alert("autosave false");
+            }
         }
     </script>
 </div>
-
-
