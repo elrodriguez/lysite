@@ -14,7 +14,7 @@ class AddColumnOrderByPart extends Migration
     public function up()
     {
         Schema::table('inve_thesis_format_parts', function (Blueprint $table) {
-            $table->string('index_order')->nullable();
+            $table->integer('index_order')->default(0);
         });
     }
 

@@ -86,24 +86,24 @@
                                 </div>
 
 
-                                <div class="form-group col-3">
-                                    <div class="custom-control custom-checkbox">
-                                        <input wire:model="auto_save" class="custom-control-input" type="checkbox"
-                                            value="" id="invalidCheck01">
-                                        <label class="custom-control-label" for="invalidCheck01" onclick="toggleSaving()">
-                                            Auto Guardar
-                                        </label>
-                                    </div>
-                                </div>
+                                
                             </div>
                         @else
                             <div>
                                 <h4>Esta Sección solo es un título o subtitulo sin contenido.</h4>
                             </div>
                         @endif
-
+                        <div class="form-group col-3">
+                            <div class="custom-control custom-checkbox">
+                                <input wire:model="auto_save" class="custom-control-input" type="checkbox"
+                                    value="" id="invalidCheck01">
+                                <label class="custom-control-label" for="invalidCheck01" onclick="toggleSaving()">
+                                    Auto Guardar
+                                </label>
+                            </div>
+                        </div>
                     </div>
-
+                    <input type="hidden" id="editor">
                 </div>
             </div>
         </div>
@@ -217,7 +217,8 @@
 
         function changeFocus(thesis_id, part_id) { //funcion para cambiar de sección y revisar cambios
             let as = document.getElementById("invalidCheck01").checked;
-
+            //let as = @js($auto_save);
+            console.log(as);
             if (!as) { //autosave desactivado
                 updateContent();
                 let old = document.getElementById("content_old").value;

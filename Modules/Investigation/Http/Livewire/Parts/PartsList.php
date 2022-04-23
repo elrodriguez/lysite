@@ -36,9 +36,9 @@ class PartsList extends Component
     public function getParts(){
         $parts = InveThesisFormatPart::where('thesis_format_id',$this->format_id)
             ->whereNull('belongs')
-            ->orderBy('number_order')
+            ->orderBy('index_order')
             ->get();
-
+        //dd($parts);
         foreach($parts as $k => $part){
             $this->parts[$k] = [
                 'id' => $part->id,
@@ -51,7 +51,7 @@ class PartsList extends Component
     }
     public function getSubParts($id){
         $subparts = InveThesisFormatPart::where('belongs',$id)
-            ->orderBy('number_order')
+            ->orderBy('index_order')
             ->get();
         $html = '';
 
