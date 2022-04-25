@@ -4,11 +4,11 @@
         .ventana_flotante {
             background: none repeat scroll 0 0 #FFFFFF;
             border: 1px solid #DDDDDD;
-            border-radius: 9px 9px 9px 9px;
-            bottom: 50px;
+            border-radius: 5px 5px 5px 5px;
+            bottom: 2px;
             left: auto;
             margin-left: -120px;
-            padding: 10px 0 0;
+            padding: 0px 0 0;
             position: fixed;
             text-align: center;
             width: 320px;

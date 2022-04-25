@@ -151,4 +151,5 @@ return [
     'School' => 'Escuela',
     'Normative' => 'Normativa',
     'Save' => 'Guardar',
+    'Automatic save' => 'Guardado Automático',
 ];

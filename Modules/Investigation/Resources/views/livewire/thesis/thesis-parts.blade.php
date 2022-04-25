@@ -24,6 +24,17 @@
         </div>
         <div class="card card-body mb-0">
             <div class="row">
+                <div class="form-group col-3">
+                    <div class="custom-control custom-checkbox">
+                        <input wire:model="auto_save" class="custom-control-input" type="checkbox" value=""
+                            id="invalidCheck01">
+                        <label class="custom-control-label" for="invalidCheck01" onclick="toggleSaving()">
+                            {{ __('labels.Automatic save') }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <ul class="list-point-none">
                         @if (count($parts) > 0)
@@ -69,7 +80,7 @@
                             <div class="row">
                                 <div class="col-12 mb-3">
                                     <div wire:ignore>
-                                        <textarea  class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
+                                        <textarea class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
                                     </div>
                                     @error('content')
                                         <span class="invalid-feedback-2">{{ $message }}</span>
@@ -86,24 +97,18 @@
                                 </div>
 
 
-                                
+
                             </div>
                         @else
                             <div>
-                                <h4>Esta Sección solo es un título o subtitulo sin contenido.</h4>
+                                <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
+                                <input type="hidden" name="" id="editor">
+
                             </div>
                         @endif
-                        <div class="form-group col-3">
-                            <div class="custom-control custom-checkbox">
-                                <input wire:model="auto_save" class="custom-control-input" type="checkbox"
-                                    value="" id="invalidCheck01">
-                                <label class="custom-control-label" for="invalidCheck01" onclick="toggleSaving()">
-                                    Auto Guardar
-                                </label>
-                            </div>
-                        </div>
+
                     </div>
-                    <input type="hidden" id="editor">
+
                 </div>
             </div>
         </div>
@@ -114,7 +119,7 @@
 
                 <div class="header">
 
-                    <h5 class="title" id="exampleModalLabel">ITUTLASOD ASD AS/</h5>
+
 
                     <button type="button" class="close" onclick="closeVideo()" aria-label="Close">
 
@@ -147,18 +152,15 @@
 
                 </div>
 
-                <div class="footer">
-                    <button type="button" onclick="closeVideo()" class="btn btn-secondary close-btn">
-                        {{ __('labels.Close') }}
-                    </button>
-                </div>
+                <!-- Footer desde aqui -->
 
             </div>
 
         </div>
     </div>
     <script>
-        var data;
+        var data="";
+
         function deletes(id) {
             cuteAlert({
                 type: "question",
@@ -217,8 +219,10 @@
 
         function changeFocus(thesis_id, part_id) { //funcion para cambiar de sección y revisar cambios
             let as = document.getElementById("invalidCheck01").checked;
-            //let as = @js($auto_save);
-            console.log(as);
+            var editor_textarea;
+            if(document.getElementById("editor").tagName=="TEXTAREA"){
+                editor_textarea = true;
+            }
             if (!as) { //autosave desactivado
                 updateContent();
                 let old = document.getElementById("content_old").value;
@@ -241,6 +245,7 @@
                     @this.withoutSavingThesisPartStudentBeforeChange(thesis_id, part_id);
                 }
             } else { //autosave activado
+
                 updateContent();
                 let old = document.getElementById("content_old").value;
                 let actual = data; //ahora el actual esta en data
@@ -265,7 +270,8 @@
         });
 
         document.addEventListener('livewire:load', function() {
-            if (document.getElementById("editor")) {
+
+            if (document.getElementById("editor").tagName == "TEXTAREA") {
                 CKEDITOR.replace('editor');
             }
         })
@@ -302,12 +308,14 @@
             }
         }
 
-        function updateContent(){
-            data = CKEDITOR.instances.editor.getData();
-            @this.set('content', data);
+        function updateContent() {
+            if (document.getElementById("editor").tagName == "TEXTAREA") {
+                data = CKEDITOR.instances.editor.getData();
+                @this.set('content', data);
+            }
         }
 
-        function toggleSaving(){
+        function toggleSaving() {
             @this.toggleSaving();
         }
         window.onload = activarAutoGuardado; //activa el intervalo de tiempo
