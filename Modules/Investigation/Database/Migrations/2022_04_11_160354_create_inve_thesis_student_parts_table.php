@@ -20,9 +20,10 @@ class CreateInveThesisStudentPartsTable extends Migration
             $table->unsignedBigInteger('inve_thesis_format_part_id');
             $table->text('content')->nullable();
             $table->integer('version')->default(0);
+            $table->boolean('state')->default(true);
             $table->timestamps();
-            $table->foreign('inve_thesis_student_id','tsp_thesis_id_fk')->references('id')->on('inve_thesis_students');
-            $table->foreign('inve_thesis_format_part_id','tsp_part_id_fk')->references('id')->on('inve_thesis_format_parts');
+            $table->foreign('inve_thesis_student_id', 'tsp_thesis_id_fk')->references('id')->on('inve_thesis_students');
+            $table->foreign('inve_thesis_format_part_id', 'tsp_part_id_fk')->references('id')->on('inve_thesis_format_parts');
         });
     }
 

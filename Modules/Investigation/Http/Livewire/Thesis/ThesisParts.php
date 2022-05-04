@@ -36,7 +36,7 @@ class ThesisParts extends Component
         $this->thesis_id = $thesis_id;
 
         $this->thesis_student = InveThesisStudent::find($thesis_id);
-        $this->auto_save= $this->thesis_student->autosave;
+        $this->auto_save = $this->thesis_student->autosave;
         $this->format_id = $this->thesis_student->format_id;
         $this->format == InveThesisFormat::find($thesis_id);
 
@@ -213,7 +213,7 @@ class ThesisParts extends Component
 
     public function toggleSaving()
     { //Actualiza en la base de datos el autosave
-        $this->thesis_student->autosave= $this->auto_save ? true:false;
+        $this->thesis_student->autosave = $this->auto_save ? true : false;
         $this->thesis_student->update();
     }
 
@@ -226,6 +226,10 @@ class ThesisParts extends Component
 
     public function save()
     {
+        InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+            ->where('inve_thesis_format_part_id', $this->focus_id)
+            ->update(['state' => false]);
+
         $max_version = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
             ->where('inve_thesis_format_part_id', $this->focus_id)
             ->max('version');

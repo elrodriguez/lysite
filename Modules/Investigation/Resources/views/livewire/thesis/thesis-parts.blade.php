@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="card card-body mb-0">
+        <div class="card card-body mb-3">
             <div class="row">
                 <div class="form-group col-3">
                     <div class="custom-control custom-checkbox">
@@ -56,6 +56,10 @@
                             @endforeach
                         @endif
                     </ul>
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
+                        class="btn btn-warning btn-block mt-3">
+                        Exportar PDF
+                    </a>
                 </div>
                 <div class="col-lg-8">
                     <div class="row justify-content-md-center">
@@ -159,7 +163,7 @@
         </div>
     </div>
     <script>
-        var data="";
+        var data = "";
 
         function deletes(id) {
             cuteAlert({
@@ -220,7 +224,7 @@
         function changeFocus(thesis_id, part_id) { //funcion para cambiar de sección y revisar cambios
             let as = document.getElementById("invalidCheck01").checked;
             var editor_textarea;
-            if(document.getElementById("editor").tagName=="TEXTAREA"){
+            if (document.getElementById("editor").tagName == "TEXTAREA") {
                 editor_textarea = true;
             }
             if (!as) { //autosave desactivado

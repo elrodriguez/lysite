@@ -3,6 +3,7 @@
 namespace Modules\Investigation\Http\Livewire\Thesis;
 
 use App\Models\Country;
+use App\Models\Person;
 use App\Models\Universities;
 use App\Models\UniversitiesSchools;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,17 @@ class ThesisCreate extends Component
     public $thesis_id;
     public $title;
 
-    public function mount(){
+    public function mount()
+    {
+        $person = Person::where('user_id', Auth::id())->first();
+        if ($person) {
+            $this->country_id = $person->country_id;
+            $this->university_id = $person->university_id;
+
+            if ($this->university_id) {
+                $this->getSchools();
+            }
+        }
         $this->countries = Country::all();
         $this->getUniversities();
     }
@@ -35,17 +46,21 @@ class ThesisCreate extends Component
         return view('investigation::livewire.thesis.thesis-create');
     }
 
-    public function getUniversities(){
-        $this->universities = Universities::where('country',$this->country_id)->get();
+    public function getUniversities()
+    {
+        $this->universities = Universities::where('country', $this->country_id)->get();
     }
-    public function getSchools(){
-        $this->schools = UniversitiesSchools::where('university_id',$this->university_id)->get();
+    public function getSchools()
+    {
+        $this->schools = UniversitiesSchools::where('university_id', $this->university_id)->get();
     }
-    public function getFormat(){
-        $this->formats = InveThesisFormat::where('school_id',$this->school_id)->get();
+    public function getFormat()
+    {
+        $this->formats = InveThesisFormat::where('school_id', $this->school_id)->get();
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->validate([
             'short_name' => 'required',
@@ -76,11 +91,12 @@ class ThesisCreate extends Component
         $this->state = null;
         $this->thesis_id = $thesis->id;
 
-        $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
+        $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
     }
 
-    public function parts(){
+    public function parts()
+    {
         //$this->emit('updateThesisList');
-        redirect()->route('investigation_thesis_parts',$this->thesis_id);
+        redirect()->route('investigation_thesis_parts', $this->thesis_id);
     }
 }

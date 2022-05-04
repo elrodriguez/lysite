@@ -14,6 +14,7 @@
                         <div class="col-sm-4">
                             <input wire:model.defer="index_order" type="text" class="form-control" id="index_order">
                             @error('index_order') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                            <span>Por este campo es el orden en el index</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -21,6 +22,7 @@
                         <div class="col-sm-4">
                             <input wire:model.defer="number_order" type="text" class="form-control" id="number_order">
                             @error('number_order') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                            <span>Este campo es el identificador en el index ejemplo: 1.1,1.2,1.3.....</span>
                         </div>
                     </div>
                     <div class="form-group row">
