@@ -57,7 +57,7 @@
                         @endif
                     </ul>
                     <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
-                        class="btn btn-warning btn-block mt-3">
+                        class="btn btn-warning btn-block mt-3" target="_blank">
                         Exportar PDF
                     </a>
                 </div>
