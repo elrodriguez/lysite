@@ -2,6 +2,8 @@
 
 namespace Modules\Investigation\Http\Livewire\Thesis;
 
+use App\Models\Person;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaContent;
@@ -34,21 +36,24 @@ class ThesisParts extends Component
     {
         $this->focus_id = $sub_part;
         $this->thesis_id = $thesis_id;
+        $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
+        if ($this->thesis_student) {
+            $this->auto_save = $this->thesis_student->autosave;
+            $this->format_id = $this->thesis_student->format_id;
+            $this->format == InveThesisFormat::find($thesis_id);
 
-        $this->thesis_student = InveThesisStudent::find($thesis_id);
-        $this->auto_save = $this->thesis_student->autosave;
-        $this->format_id = $this->thesis_student->format_id;
-        $this->format == InveThesisFormat::find($thesis_id);
+            $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+                ->where('inve_thesis_format_part_id', $this->focus_id)
+                ->orderBy('version', 'desc')
+                ->limit(1)
+                ->first();
 
-        $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-            ->where('inve_thesis_format_part_id', $this->focus_id)
-            ->orderBy('version', 'desc')
-            ->limit(1)
-            ->first();
-
-        if ($ThesisStudentPart) {
-            $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
-            $this->content = $this->content_old;
+            if ($ThesisStudentPart) {
+                $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
+                $this->content = $this->content_old;
+            }
+        } else {
+            redirect()->route('home');
         }
     }
 
