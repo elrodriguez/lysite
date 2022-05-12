@@ -154,4 +154,5 @@ return [
     'Automatic save' => 'Guardado Automático',
     'Homepage' => 'Página de Inicio',
     'Settings' => 'Configuraciones',
+    'Success Histories' => 'Historias de Éxito',
 ];
