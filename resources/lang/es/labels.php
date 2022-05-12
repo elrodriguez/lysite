@@ -152,4 +152,6 @@ return [
     'Normative' => 'Normativa',
     'Save' => 'Guardar',
     'Automatic save' => 'Guardado Automático',
+    'Homepage' => 'Página de Inicio',
+    'Settings' => 'Configuraciones',
 ];

@@ -26,6 +26,10 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
                         <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'users' ? 'active' : '' }}"
                             href="{{ route('setting_users') }}">Usuarios</a>
                     @endcan
+                    @can('configuraciones_modulos')
+                        <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'modules' ? 'active' : '' }}"
+                            href="{{ route('homepage_settings') }}">{{ __('labels.Homepage') }}</a>
+                    @endcan
                 </div>
             </li>
         @endcan
