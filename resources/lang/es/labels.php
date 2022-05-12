@@ -157,4 +157,6 @@ return [
     'Success Histories' => 'Historias de Éxito',
     'Institution' => 'Institución',
     'Author' => 'Autor',
+    'Success Histories' => 'Historias de Éxito',
+    'Histories' => 'Historias',
 ];

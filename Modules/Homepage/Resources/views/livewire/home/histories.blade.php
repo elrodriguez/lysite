@@ -2,7 +2,7 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('labels.Courses') }}</li>
+            <li class="breadcrumb-item active">{{ __('labels.Histories') }}</li>
         </ol>
     </div>
     <div class="container page__container">
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
-                        <p class="text-70">{{ __('labels.Instructors') }}</p>
+                        <p class="text-70">{{ __('labels.Success Histories') }}</p>
                         @can('configuraciones_modulos_nuevo')
                             <a href="{{ route('academic_courses_create') }}" type="button"
                                 class="btn btn-primary">Nuevo</a>
