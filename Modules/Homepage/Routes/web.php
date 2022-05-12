@@ -14,9 +14,15 @@
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('homepage')->group(function() {
     Route::group(['prefix' => 'settings'], function() {
-        Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('list', 'HomepageController@index')->name('homepage_settings');
-        Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('instructors', 'HomepageController@instructors')->name('homepage_instructors');
-        Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('histories', 'HomepageController@histories')->name('homepage_histories');
 
+        Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('list', 'HomepageController@index')->name('homepage_settings');
+
+        Route::group(['prefix' => 'instructors'], function() {
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('list', 'HomepageController@instructors')->name('homepage_instructors');
+        });
+
+        Route::group(['prefix' => 'histories'], function() {
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('list', 'HomepageController@histories')->name('homepage_histories');
+        });
     });
 });

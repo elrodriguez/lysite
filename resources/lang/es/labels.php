@@ -155,4 +155,6 @@ return [
     'Homepage' => 'Página de Inicio',
     'Settings' => 'Configuraciones',
     'Success Histories' => 'Historias de Éxito',
+    'Institution' => 'Institución',
+    'Author' => 'Autor',
 ];

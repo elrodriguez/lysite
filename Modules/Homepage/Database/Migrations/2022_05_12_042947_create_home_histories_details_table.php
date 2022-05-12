@@ -16,8 +16,8 @@ class CreateHomeHistoriesDetailsTable extends Migration
         Schema::create('home_histories_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('history_id');
-            $table->foreign('history_id')->references('id')->on('home_histories');
             $table->text('detail');
+            $table->foreign('history_id')->references('id')->on('home_histories');
             $table->timestamps();
         });
     }

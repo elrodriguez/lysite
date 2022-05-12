@@ -18,10 +18,11 @@ class CreateHomeHistoriesTable extends Migration
             $table->text('title');
             $table->text('author');
             $table->text('thesis_title');
-            $table->text('year');
+            $table->integer('year');
             $table->text('month');
             $table->text('career');
             $table->text('image_path');
+            $table->text('university');
             $table->timestamps();
         });
     }
