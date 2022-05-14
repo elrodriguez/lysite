@@ -28,4 +28,21 @@ class HomepageController extends Controller
    public function histories(){
          return view('homepage::home.histories');
    }
+
+   public function create_history(){
+         return view('homepage::home.history-create');
+   }
+
+   public function create_instructor(){
+    return view('homepage::home.instructor-create');
+}
+
+public function edit_history($id){
+    return view('homepage::home.history-edit',['id'=>$id]);
+}
+
+public function edit_instructor(){
+    return view('homepage::home.instructor-edit');
+}
+
 }
