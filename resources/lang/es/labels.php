@@ -183,4 +183,6 @@ return [
     'Write each detail separated by a comma, for example: detail 1, here detail 2, detail 3' => 'Escribe cada detalle separado por una coma, por ejemplo: detalle 1, aquí detalle 2, detalle 3',
     'Details' => 'Detalles',
     'Delete' => 'Eliminar',
+    'Image' => 'Imagen',
+    'Our Success Histories' => 'Nuestras Historias de Éxito',
 ];
