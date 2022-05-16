@@ -15,7 +15,9 @@ class InveThesisStudentPart extends Model
         'inve_thesis_format_part_id',
         'content',
         'version',
-        'state'
+        'state',
+        'commentary_user_id',
+        'commentary'
     ];
 
     protected static function newFactory()

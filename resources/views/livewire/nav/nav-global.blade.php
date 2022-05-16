@@ -65,13 +65,18 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">investigación</a>
                 <div class="dropdown-menu">
                     @can('universities')
-                        <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}"
+                        <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'universities' ? 'active' : '' }}"
                             href="{{ route('Investigation_universities_list') }}">{{ __('labels.Universities') }}</a>
                     @endcan
 
                     @can('investigacion_partes')
-                        <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}"
+                        <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'thesis_formats' ? 'active' : '' }}"
                             href="{{ route('Investigation_thesis_formats_list_complete') }}">{{ __('labels.Thesis Formats') }}</a>
+                    @endcan
+
+                    @can('investigacion_tesis')
+                        <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'thesis' ? 'active' : '' }}"
+                            href="{{ route('investigation_thesis_all') }}">{{ __('investigation::labels.all_thesis') }}</a>
                     @endcan
 
                 </div>

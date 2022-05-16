@@ -91,6 +91,14 @@
                                     @enderror
                                 </div>
                             </div>
+                            @if ($commentary)
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label>Nota:</label>
+                                        <div>{{ $commentary }}</div>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="form-group col-9">
                                     <div class="custom-control">

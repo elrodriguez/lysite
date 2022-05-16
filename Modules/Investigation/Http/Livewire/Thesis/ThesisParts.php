@@ -31,6 +31,7 @@ class ThesisParts extends Component
     public $content;
     public $content_old;
     public $auto_save = true;
+    public $commentary;
 
     public function mount($thesis_id, $sub_part)
     {
@@ -40,7 +41,7 @@ class ThesisParts extends Component
         if ($this->thesis_student) {
             $this->auto_save = $this->thesis_student->autosave;
             $this->format_id = $this->thesis_student->format_id;
-            $this->format == InveThesisFormat::find($thesis_id);
+            $this->format == InveThesisFormat::find($this->format_id);
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -51,6 +52,7 @@ class ThesisParts extends Component
             if ($ThesisStudentPart) {
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
+                $this->commentary = $ThesisStudentPart->commentary;
             }
         } else {
             redirect()->route('home');
@@ -231,21 +233,32 @@ class ThesisParts extends Component
 
     public function save()
     {
+        // InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+        //     ->where('inve_thesis_format_part_id', $this->focus_id)
+        //     ->update(['state' => false]);
+
+        // $max_version = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+        //     ->where('inve_thesis_format_part_id', $this->focus_id)
+        //     ->max('version');
+
+        // InveThesisStudentPart::create([
+        //     'student_id' => $this->thesis_student->student_id,
+        //     'inve_thesis_student_id' => $this->thesis_student->id,
+        //     'inve_thesis_format_part_id' => $this->focus_id,
+        //     'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+        //     'version' => ($max_version ? $max_version + 1 : 1)
+        // ]);
+
+
         InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
             ->where('inve_thesis_format_part_id', $this->focus_id)
-            ->update(['state' => false]);
+            ->update([
+                'student_id' => $this->thesis_student->student_id,
+                'inve_thesis_student_id' => $this->thesis_student->id,
+                'inve_thesis_format_part_id' => $this->focus_id,
+                'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
+            ]);
 
-        $max_version = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-            ->where('inve_thesis_format_part_id', $this->focus_id)
-            ->max('version');
-
-        InveThesisStudentPart::create([
-            'student_id' => $this->thesis_student->student_id,
-            'inve_thesis_student_id' => $this->thesis_student->id,
-            'inve_thesis_format_part_id' => $this->focus_id,
-            'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
-            'version' => ($max_version ? $max_version + 1 : 1)
-        ]);
         $this->content_old = $this->content;
     }
 }

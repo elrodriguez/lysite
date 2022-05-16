@@ -110,4 +110,15 @@ class ThesisController extends Controller
         }
         return $html;
     }
+
+    public function allthesis()
+    {
+        return view('investigation::thesis.thesis_all');
+    }
+    public function thesischeck($external_id, $part_id = null)
+    {
+        return view('investigation::thesis.thesis_parts_check')
+            ->with('external_id', $external_id)
+            ->with('part_id', $part_id);
+    }
 }

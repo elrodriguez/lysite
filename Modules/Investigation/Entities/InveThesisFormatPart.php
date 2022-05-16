@@ -19,6 +19,7 @@ class InveThesisFormatPart extends Model
         'state',
         'index_order',
         'body'
+
     ];
 
     protected static function newFactory()

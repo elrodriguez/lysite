@@ -9,5 +9,6 @@ return [
     'create_project' => 'Crear Proyecto',
     'schools' => 'Escuelas',
     'formats' => 'Formatos',
-    'parts_the_thesis' => 'Partes de la tesis'
+    'parts_the_thesis' => 'Partes de la tesis',
+    'all_thesis' => 'Todas las Tesis'
 ];
