@@ -41,8 +41,8 @@ public function edit_history($id){
     return view('homepage::home.history-edit',['id'=>$id]);
 }
 
-public function edit_instructor(){
-    return view('homepage::home.instructor-edit');
+public function edit_instructor($id){
+    return view('homepage::home.instructor-edit',['id'=>$id]);
 }
 
 }

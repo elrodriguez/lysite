@@ -13,7 +13,7 @@
             <div class="card card-body mb-32pt">
                 <div class="row">
                     <div class="col-lg-4">
-                        <h4 class="card-title">Registro de una Nueva Historia</h4>
+                        <h4 class="card-title">Edición de una Historia</h4>
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">

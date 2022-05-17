@@ -20,7 +20,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('homepage')->group(funct
         Route::group(['prefix' => 'instructors'], function() {
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('list', 'HomepageController@instructors')->name('homepage_instructors');
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('create', 'HomepageController@create_instructor')->name('homepage_instructors_create');
-            Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('edit', 'HomepageController@edit_instructor')->name('homepage_instructors_edit');
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('edit/{id}', 'HomepageController@edit_instructor')->name('homepage_instructors_edit');
         });
 
         Route::group(['prefix' => 'histories'], function() {

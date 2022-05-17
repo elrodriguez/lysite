@@ -4,7 +4,7 @@
             <div class="py-32pt">
                 <div class="container">
                     <h1 class="text-white mb-8pt">{{ __('labels.Homepage') }}</h1>
-                    <span class="text-white">{{ __('labels.Edit History') }}</span>
+                    <span class="text-white">{{ __('labels.Edit Instructor') }}</span>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="container page__container">
-        @livewire('homepage::home.history-edit',['id' => $id])
+        @livewire('homepage::home.instructor-edit',['id' => $id])
     </div>
 
     <x-slot name="navigation">

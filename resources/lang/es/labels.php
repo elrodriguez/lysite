@@ -185,4 +185,11 @@ return [
     'Delete' => 'Eliminar',
     'Image' => 'Imagen',
     'Our Success Histories' => 'Nuestras Historias de Éxito',
+    'Instructors of Homepage' => 'Instructores de Página de Inicio',
+    'New Instructor' => 'Nuevo Instructor',
+    'Our Instructors' => 'Nuestros Instructores',
+    'Instructor' => 'Instructor',
+    'Edit History' => 'Editar Historia',
+    'Add content about the instructors like achievements, courses, etc' => 'Agrega contenido sobre los instructores como logros, cursos, etc',
+    'Edit Instructor' => 'Editar Instructor',
 ];

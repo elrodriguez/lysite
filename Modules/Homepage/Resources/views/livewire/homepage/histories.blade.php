@@ -10,17 +10,17 @@
 
             <div class="row">
                 @foreach ($histories as $key => $history)
-                    <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-sm-6 col-md-4 col-lg-4">
 
                         <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal "
                             data-partial-height="40" data-toggle="popover" data-trigger="click">
 
 
 
-                            <img src="{{ env('APP_URL') }}/{{ $history->image_path }}" alt="course" height="170">
+                            <img src="{{ env('APP_URL') }}/{{ $history->image_path }}" alt="course" style="height: 170px;">
                             <span class="overlay__content">
                                 <span class="overlay__action d-flex flex-column text-center">
-                                    <i class="material-icons">play_circle_outline</i>
+                                    <i class="material-icons"><i class="fa fa-university" aria-hidden="true"></i></i>
                                 </span>
                             </span>
 
