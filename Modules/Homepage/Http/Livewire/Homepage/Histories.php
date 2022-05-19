@@ -23,7 +23,7 @@ class Histories extends Component
 
     public function getData()
     {
-        return HomeHistories::all();
+        return HomeHistories::inRandomOrder()->get();
 /*
         return HomeHistories::where('title', 'like', '%' . $this->search . '%')
             ->orwhere('university', 'like', '%' . $this->search . '%')

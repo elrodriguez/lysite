@@ -13,7 +13,7 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">{{ __('labels.Instructors') }}</p>
                         @can('configuraciones_modulos_nuevo')
-                            <a href="{{ route('homepage_histories_create') }}" type="button"
+                            <a href="{{ route('homepage_instructors_create') }}" type="button"
                                 class="btn btn-primary">{{ __('labels.New Instructor') }}</a>
                         @endcan
                     </div>

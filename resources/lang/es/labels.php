@@ -192,4 +192,6 @@ return [
     'Edit History' => 'Editar Historia',
     'Add content about the instructors like achievements, courses, etc' => 'Agrega contenido sobre los instructores como logros, cursos, etc',
     'Edit Instructor' => 'Editar Instructor',
+    'Preferably enter an image or photo with square format' => 'Preferiblemente ingresa una imagen o foto cuadrada',
+    'Instructor name' => 'Nombre del Instructor',
 ];
