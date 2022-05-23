@@ -11,9 +11,9 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
-                        <p class="text-70">Módulos del sistema</p>
+                        <p class="text-70">{{ __('labels.All Format Thesis') }}</p>
                         @can('investigacion_partes_nuevo')
-                        <a href="{{ route('Investigation_thesis_formats_create_complete') }}" type="button" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('Investigation_thesis_formats_create_complete') }}" type="button" class="btn btn-primary">Crear Nuevo Formato</a>
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
