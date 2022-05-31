@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
         Route::get('edit/{id}', 'ThesisController@edit')->name('investigation_thesis_edit');
         Route::get('parts/{thesis_id}/{sub_part?}', 'ThesisController@parts')->name('investigation_thesis_parts');
         Route::get('export/pdf/{thesis_id}', 'ThesisController@exportPDF')->name('investigation_thesis_export_pdf');
-
+        Route::get('export/word/{thesis_id}', 'ThesisController@exportWORD')->name('investigation_thesis_export_word');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_tesis'])->get('all', 'ThesisController@allthesis')->name('investigation_thesis_all');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_tesis'])->get('check/{id}/{part_id?}', 'ThesisController@thesischeck')->name('investigation_thesis_check');
     });

@@ -3,6 +3,7 @@
 namespace Modules\Investigation\Http\Controllers;
 
 use App\Models\Person;
+use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -120,5 +121,52 @@ class ThesisController extends Controller
         return view('investigation::thesis.thesis_parts_check')
             ->with('external_id', $external_id)
             ->with('part_id', $part_id);
+    }
+
+    public function exportWORD($thesis_id)
+    {
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        $thesis = $this->getThesis($thesis_id);
+
+        $section = $phpWord->addSection();
+
+        $content = '';
+
+        $title = '';
+        $multilevelNumberingStyleName = 'multilevel';
+
+        foreach ($thesis as $thesi) {
+            if ($title != $thesi['title']) {
+                $section->addText(
+                    $thesi['title'],
+                    array('name' => 'Tahoma', 'size' => 14)
+                );
+                $content .= "<ul>";
+                foreach ($thesis as $part) {
+                    $part_title = $part['number_order'] . ' ' . $part['description'];
+                    $content .= "<li style='list-style:none; font-size:12px;'>{$part_title}";
+                    $content .= $part['items'];
+                    $content .= "</li>";
+                }
+                $content .= "</ul>";
+            }
+            $title = $thesi['title'];
+        }
+        // Add HTML
+        \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
+        //$this->assertCount(7, $section->getElements());
+
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+
+
+        try {
+            $objWriter->save(storage_path('helloWorld.docx'));
+        } catch (Exception $e) {
+            dd($e);
+        }
+
+
+        return response()->download(storage_path('helloWorld.docx'));
     }
 }

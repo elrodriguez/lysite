@@ -62,11 +62,14 @@ class StudentsController extends Controller
 
     public function my_course($id)
     {
+        //dd($id);
+
         $course = AcaCourse::find($id);
         $this->video = 0;
+
         $video_url = $this->video_selector($course->main_video);
         $course->video_url = $video_url;
-        $course->video_type= $this->video;
+        $course->video_type = $this->video;
 
 
         $instruct = AcaInstructor::join('people', 'person_id', 'people.id')
@@ -107,7 +110,7 @@ class StudentsController extends Controller
         $this->video = 0;
         $video_url = $this->video_selector($course->main_video);
         $course->video_url = $video_url;
-        $course->video_type= $this->video;
+        $course->video_type = $this->video;
         $instruct = AcaInstructor::join('people', 'person_id', 'people.id')
             ->select(
                 'people.names',
@@ -134,7 +137,8 @@ class StudentsController extends Controller
         ]);
     }
 
-    public function discussions_ask_edit($course_id, $section_id, $content_id, $question_id){
+    public function discussions_ask_edit($course_id, $section_id, $content_id, $question_id)
+    {
         return view('academic::students.students_discussions_ask_edit')->with([
             'course_id' => $course_id,
             'section_id' => $section_id,

@@ -15,11 +15,11 @@ class CreateInveThesisStudentsTable extends Migration
     {
         Schema::create('inve_thesis_students', function (Blueprint $table) {
             $table->id();
-            $table->string('external_id',10)->nullable();
+            $table->string('external_id', 10)->nullable();
             $table->string('short_name')->nullable();
             $table->text('title');
             $table->boolean('autosave')->default(true);
-            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('university_id');

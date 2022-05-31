@@ -60,6 +60,10 @@
                         class="btn btn-warning btn-block mt-3" target="_blank">
                         Exportar PDF
                     </a>
+                    <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}"
+                        class="btn btn-info btn-block mt-3" target="_blank">
+                        Exportar WORD
+                    </a>
                 </div>
                 <div class="col-lg-8">
                     <div class="row justify-content-md-center">

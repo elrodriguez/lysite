@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Illuminate\Support\Str;
+use Modules\Academic\Http\Livewire\Students\Students;
 use Modules\Investigation\Entities\InveThesisStudent;
 
 class ThesisCreate extends Component
@@ -74,7 +75,6 @@ class ThesisCreate extends Component
             'external_id' => Str::random(10),
             'short_name' => $this->short_name,
             'title' => $this->title,
-            'student_id' => Auth::user()->person->student->id,
             'person_id' => Auth::user()->person->id,
             'user_id' => Auth::id(),
             'university_id' => $this->university_id,
@@ -82,6 +82,7 @@ class ThesisCreate extends Component
             'format_id' => $this->format_id,
             'state' => $this->state ? true : false
         ]);
+
         $this->short_name = null;
         $this->title = null;
         $this->country_id = 'PE';
