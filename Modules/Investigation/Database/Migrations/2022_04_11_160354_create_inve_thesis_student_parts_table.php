@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateInveThesisStudentPartsTable extends Migration
 {
@@ -18,13 +19,16 @@ class CreateInveThesisStudentPartsTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('inve_thesis_student_id');
             $table->unsignedBigInteger('inve_thesis_format_part_id');
-            $table->text('content')->nullable();
+            //$table->longText('content')->nullable();
             $table->integer('version')->default(0);
             $table->boolean('state')->default(true);
             $table->timestamps();
             $table->foreign('inve_thesis_student_id', 'tsp_thesis_id_fk')->references('id')->on('inve_thesis_students');
             $table->foreign('inve_thesis_format_part_id', 'tsp_part_id_fk')->references('id')->on('inve_thesis_format_parts');
         });
+
+        DB::statement("ALTER TABLE inve_thesis_student_parts ADD content MEDIUMBLOB NULL AFTER inve_thesis_format_part_id");
+
     }
 
     /**
