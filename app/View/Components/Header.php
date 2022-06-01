@@ -34,12 +34,19 @@ class Header extends Component
      */
     public function render()
     {
-       return view('components.header', ['courses' => $this->getCourses()]);
+        return view('components.header', ['courses' => $this->getCourses()]);
     }
     public function getCourses()
     {
-        $this->person_id=DB::table('people')->where('user_id', Auth::id())->value('id');
-        $this->courses = DB::table('aca_courses')->join('aca_students', 'aca_courses.id', '=', 'aca_students.course_id')->where('aca_students.person_id', $this->person_id)->get();
+        $this->person_id = DB::table('people')->where('user_id', Auth::id())->value('id');
+        $this->courses = DB::table('aca_courses')
+            ->select(
+                'aca_courses.id',
+                'aca_courses.name',
+                'aca_courses.course_image'
+            )
+            ->join('aca_students', 'aca_courses.id', '=', 'aca_students.course_id')
+            ->where('aca_students.person_id', $this->person_id)->get();
         //$this->courses=DB::table('Aca_courses')->get();
         return $this->courses;
     }
@@ -49,5 +56,4 @@ class Header extends Component
         $this->courses = DB::table('aca_courses')->get();
         return $this->courses;
     }
-
 }
