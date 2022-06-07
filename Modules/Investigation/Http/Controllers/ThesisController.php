@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use PDF;
 
@@ -59,6 +60,13 @@ class ThesisController extends Controller
                 'inve_thesis_format_parts.id',
                 'inve_thesis_students.id AS thesis_id'
             )
+            ->selectSub(function ($query) use ($thesis_id) {
+                $query->from('inve_thesis_student_parts')
+                    ->select('inve_thesis_student_parts.content')
+                    ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
+                    ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
+                    ->where('inve_thesis_student_parts.state', true);
+            }, 'content')
             ->whereRaw('IF(inve_thesis_format_parts.belongs IS NULL OR inve_thesis_format_parts.belongs = "",TRUE, FALSE)')
             ->where('inve_thesis_students.person_id', $person->id)
             ->where('inve_thesis_students.user_id', $person->user_id)
@@ -70,6 +78,7 @@ class ThesisController extends Controller
             $parts[$k] = [
                 'title' => $part->title,
                 'description' => $part->description,
+                'content' => html_entity_decode($part->content, ENT_QUOTES, "UTF-8"),
                 'number_order' => $part->number_order,
                 'items' => $this->getSubParts($part->id, $part->thesis_id),
             ];
@@ -101,7 +110,7 @@ class ThesisController extends Controller
         if (count($subparts) > 0) {
             $html .= '<ul>';
             foreach ($subparts as $k => $subpart) {
-                $html .= '<li>';
+                $html .= '<li class="list-style-type:none">';
                 $html .= $subpart->number_order . ' ' . $subpart->description;
                 $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
                 $html .= $this->getSubParts($subpart->id, $thesis_id);
@@ -127,14 +136,16 @@ class ThesisController extends Controller
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-        $thesis = $this->getThesis($thesis_id);
+        $thesis = $this->getThesisWord($thesis_id);
 
         $section = $phpWord->addSection();
 
         $content = '';
 
         $title = '';
-        $multilevelNumberingStyleName = 'multilevel';
+
+        // $view = View::make('investigation::thesis.thesis_export')->with('thesis', $thesis)->render();
+        // dd($view);
 
         foreach ($thesis as $thesi) {
             if ($title != $thesi['title']) {
@@ -142,21 +153,21 @@ class ThesisController extends Controller
                     $thesi['title'],
                     array('name' => 'Tahoma', 'size' => 14)
                 );
-                $content .= "<ul>";
+                $content .= "<ol>";
                 foreach ($thesis as $part) {
-                    $part_title = $part['number_order'] . ' ' . $part['description'];
-                    $content .= "<li style='list-style:none; font-size:12px;'>{$part_title}";
+                    $part_title = $part['description'];
+                    $content .= "<li data-liststyle='upperRoman' data-numId='" . $part['number_order'] . "'>{$part_title}";
+                    $content .= '<div>' . html_entity_decode($part['content'], ENT_QUOTES, "UTF-8") . '</div>';
                     $content .= $part['items'];
                     $content .= "</li>";
                 }
-                $content .= "</ul>";
+                $content .= "</ol>";
             }
             $title = $thesi['title'];
         }
         // Add HTML
-        \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
-        //$this->assertCount(7, $section->getElements());
 
+        \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
 
@@ -168,5 +179,81 @@ class ThesisController extends Controller
 
 
         return response()->download(storage_path('helloWorld.docx'));
+    }
+
+    public function getThesisWord($thesis_id)
+    {
+        $person = Person::where('user_id', Auth::id())->first();
+
+        $thesis = InveThesisFormatPart::join('inve_thesis_formats', 'inve_thesis_format_parts.thesis_format_id', 'inve_thesis_formats.id')
+            ->join('inve_thesis_students', 'inve_thesis_students.format_id', 'inve_thesis_formats.id')
+            ->select(
+                'inve_thesis_formats.name',
+                'inve_thesis_students.title',
+                'inve_thesis_format_parts.number_order',
+                'inve_thesis_format_parts.description',
+                'inve_thesis_format_parts.id',
+                'inve_thesis_students.id AS thesis_id'
+            )
+            ->selectSub(function ($query) use ($thesis_id) {
+                $query->from('inve_thesis_student_parts')
+                    ->select('inve_thesis_student_parts.content')
+                    ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
+                    ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
+                    ->where('inve_thesis_student_parts.state', true);
+            }, 'content')
+            ->whereRaw('IF(inve_thesis_format_parts.belongs IS NULL OR inve_thesis_format_parts.belongs = "",TRUE, FALSE)')
+            ->where('inve_thesis_students.person_id', $person->id)
+            ->where('inve_thesis_students.user_id', $person->user_id)
+            ->where('inve_thesis_students.id', $thesis_id)
+            ->get();
+
+        $parts = [];
+        foreach ($thesis as $k => $part) {
+            $parts[$k] = [
+                'title' => $part->title,
+                'description' => $part->description,
+                'content' => $part->content,
+                'number_order' => $part->number_order,
+                'items' => $this->getSubPartsWord($part->id, $part->thesis_id),
+            ];
+        }
+
+        return $parts;
+    }
+
+
+    public function getSubPartsWord($part_id, $thesis_id)
+    {
+        $subparts = InveThesisFormatPart::where('belongs', $part_id)
+            ->select(
+                'inve_thesis_format_parts.id',
+                'inve_thesis_format_parts.number_order',
+                'inve_thesis_format_parts.description'
+            )
+            ->selectSub(function ($query) use ($thesis_id) {
+                $query->from('inve_thesis_student_parts')
+                    ->select('inve_thesis_student_parts.content')
+                    ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
+                    ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
+                    ->where('inve_thesis_student_parts.state', true);
+            }, 'content')
+            ->orderBy('number_order')
+            ->get();
+        //dd($subparts);
+        $html = '';
+
+        if (count($subparts) > 0) {
+            $html .= '<ol>';
+            foreach ($subparts as $k => $subpart) {
+                $html .= '<li class="list-style-type:none">';
+                $html .= $subpart->number_order . ' ' . $subpart->description;
+                $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
+                $html .= $this->getSubPartsWord($subpart->id, $thesis_id);
+                $html .= '</li>';
+            }
+            $html .= '</ol>';
+        }
+        return $html;
     }
 }

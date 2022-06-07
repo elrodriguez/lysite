@@ -17,12 +17,15 @@
     @foreach ($thesis as $thesi)
         @if ($title != $thesi['title'])
             <h1>{{ $thesi['title'] }}</h1>
-            @foreach ($thesis as $part)
-                <li>
-                    {{ $part['number_order'] . ' ' . $part['description'] }}
-                    {!! $part['items'] !!}
-                </li>
-            @endforeach
+            <ul>
+                @foreach ($thesis as $part)
+                    <li>
+                        {{ $part['number_order'] . ' ' . $part['description'] }}
+                        <div>{{ html_entity_decode($part['content'], ENT_QUOTES, 'UTF-8') }}</div>
+                        {!! $part['items'] !!}
+                    </li>
+                @endforeach
+            </ul>
         @endif
         @php
             $title = $thesi['title'];
