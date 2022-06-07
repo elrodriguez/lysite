@@ -71,28 +71,37 @@ class ThesisCreate extends Component
             'format_id' => 'required'
         ]);
 
-        $thesis = InveThesisStudent::create([
-            'external_id' => Str::random(10),
-            'short_name' => $this->short_name,
-            'title' => $this->title,
-            'person_id' => Auth::user()->person->id,
-            'user_id' => Auth::id(),
-            'university_id' => $this->university_id,
-            'school_id' => $this->school_id,
-            'format_id' => $this->format_id,
-            'state' => $this->state ? true : false
-        ]);
+        $thesis_created = InveThesisStudent::where('person_id', Auth::user()->person->id)->where('deleted_at', NULL)->count();
+        $thesis_allowed = Person::where('id', Auth::user()->person->id)->first()->thesis_allowed;
 
-        $this->short_name = null;
-        $this->title = null;
-        $this->country_id = 'PE';
-        $this->university_id = null;
-        $this->school_id = null;
-        $this->format_id = null;
-        $this->state = null;
-        $this->thesis_id = $thesis->id;
+        //Condición que revisa si cuenta con permisos para crear una nueva tesis
 
-        $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
+        if ($thesis_created < $thesis_allowed) {
+            $thesis = InveThesisStudent::create([
+                'external_id' => Str::random(10),
+                'short_name' => $this->short_name,
+                'title' => $this->title,
+                'person_id' => Auth::user()->person->id,
+                'user_id' => Auth::id(),
+                'university_id' => $this->university_id,
+                'school_id' => $this->school_id,
+                'format_id' => $this->format_id,
+                'state' => $this->state ? true : false
+            ]);
+
+            $this->short_name = null;
+            $this->title = null;
+            $this->country_id = 'PE';
+            $this->university_id = null;
+            $this->school_id = null;
+            $this->format_id = null;
+            $this->state = null;
+            $this->thesis_id = $thesis->id;
+
+            $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
+        }else{
+            $this->dispatchBrowserEvent('inve-thesis-student-error', ['tit' => 'No tienes permisos', 'msg' => 'No cuentas con permisos para crear una o más tesis, si deseas crear otra tésis comunícate con tu coordinador, instructor o administrador del sistema']);
+        }
     }
 
     public function parts()

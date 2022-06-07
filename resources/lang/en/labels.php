@@ -194,4 +194,5 @@ return [
     'Edit Instructor' => 'Edit Instructor',
     'Preferably enter an image or photo with square format' => 'Preferably enter an image or photo with square format',
     'Instructor name' => 'Instructor name',
+    'Permissions to create thesis' => 'Permissions to create thesis',
 ];

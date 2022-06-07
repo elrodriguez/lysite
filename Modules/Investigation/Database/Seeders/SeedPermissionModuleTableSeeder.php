@@ -35,6 +35,7 @@ class SeedPermissionModuleTableSeeder extends Seeder
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_editar']));
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_sub']));
         array_push($permissions,Permission::create(['name' => 'investigacion_partes_eliminar']));
+        array_push($permissions,Permission::create(['name' => 'investigacion_thesis_allowed']));
         array_push($permissions,Permission::create(['name' => 'universities']));
         array_push($permissions,Permission::create(['name' => 'universities_list']));
         array_push($permissions,Permission::create(['name' => 'universities_create']));

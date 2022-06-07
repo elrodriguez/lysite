@@ -195,4 +195,5 @@ return [
     'Preferably enter an image or photo with square format' => 'Preferiblemente ingresa una imagen o foto cuadrada',
     'Instructor name' => 'Nombre del Instructor',
     'All Format Thesis' => 'Todos los Formatos de Tesis',
+    'Permissions to create thesis' => 'Permisos para crear tesis',
 ];

@@ -98,5 +98,16 @@
                 @this.parts();
             });
         })
+
+        window.addEventListener('inve-thesis-student-error', event => {
+            cuteAlert({
+                type: "error",
+                title: event.detail.tit,
+                message: event.detail.msg,
+                buttonText: "Okay"
+            }).then(() => {
+                //@this.parts();
+            });
+        })
     </script>
 </div>
