@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" id="IndexBar" style="display: inline;">
                     <ul class="list-point-none">
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
@@ -65,12 +65,15 @@
                         Exportar WORD
                     </a>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8" id="SuperEditor">
                     <div class="row justify-content-md-center">
+                        <div class="col col-lg-1">
+                            <button class="btn btn-primary btn-sm" onclick="ShowHide()" id="btnShowHide"><<</button>
+                        </div>
                         <div class="col col-lg-9">
                             <label class="form-label" for="content">{{ $focused_part->description }}</label>
                         </div>
-                        <div class="col col-lg-3">
+                        <div class="col col-lg-2">
                             <div class="btn-group mr-2">
                                 <button type="button" class="btn btn-secondary btn-sm" wire:click="showVideo">
                                     <i class="fa fa-video"></i>
@@ -334,6 +337,24 @@
         function toggleSaving() {
             @this.toggleSaving();
         }
+
+        function ShowHide(){
+            var index =document.getElementById("IndexBar").style.display;
+            if(index=="inline"){
+                document.getElementById("IndexBar").style.display="none";
+                document.getElementById("SuperEditor").className="col-md-12";
+                document.getElementById("btnShowHide").innerHTML=">>";
+            }else{
+                document.getElementById("IndexBar").style.display="inline";
+                document.getElementById("IndexBar").className="col-md-4";
+                document.getElementById("SuperEditor").className="col-lg-8";
+                document.getElementById("btnShowHide").innerHTML="<<";
+                //document.getElementById("SuperEditor").style.display="none";
+                //document.getElementById("SuperEditor").style.display="inline";
+            }
+
+        }
+
         window.onload = activarAutoGuardado; //activa el intervalo de tiempo
     </script>
 </div>

@@ -26,7 +26,8 @@ class Person extends Model
         'district_id',
         'user_id',
         'country_id',
-        'university_id'
+        'university_id',
+        'thesis_allowed'
     ];
 
     public function user()

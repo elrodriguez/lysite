@@ -23,7 +23,7 @@
         <div class="card">
             <h5 class="card-header">Historias de Éxito</h5>
             <div class="card-body">
-              <h5 class="card-title">{{ __('labels.Settings') }}</h5>
+              <h5 class="card-title"></h5>
               <p class="card-text">Agregar, editar o eliminar Historias de Éxito que se ven en la página de Inicio.</p>
               <a href="{{ route('homepage_histories') }}" class="btn btn-primary">Configurar</a>
             </div>
@@ -32,7 +32,7 @@
           <div class="card">
             <h5 class="card-header">Instructores</h5>
             <div class="card-body">
-              <h5 class="card-title">{{ __('labels.Settings') }}</h5>
+              <h5 class="card-title"></h5>
               <p class="card-text">Aquí se agrega, edita o elimina los instructores que se ven en la página de inicio.</p>
               <a href="{{ route('homepage_instructors') }}" class="btn btn-primary">Configurar</a>
             </div>

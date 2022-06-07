@@ -5,6 +5,7 @@ namespace Modules\Investigation\Http\Livewire\Thesis;
 use App\Models\Person;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Exists;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaContent;
 use Modules\Investigation\Entities\InveThesisFormat;
@@ -241,23 +242,29 @@ class ThesisParts extends Component
         //     ->where('inve_thesis_format_part_id', $this->focus_id)
         //     ->max('version');
 
-        // InveThesisStudentPart::create([
-        //     'student_id' => $this->thesis_student->student_id,
-        //     'inve_thesis_student_id' => $this->thesis_student->id,
-        //     'inve_thesis_format_part_id' => $this->focus_id,
-        //     'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
-        //     'version' => ($max_version ? $max_version + 1 : 1)
-        // ]);
 
 
-        InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-            ->where('inve_thesis_format_part_id', $this->focus_id)
-            ->update([
+
+        //primero se debe consultar si existe, sino se crea.
+
+        if (InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)->where('inve_thesis_format_part_id', $this->focus_id)->exists()) {
+            InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+                ->where('inve_thesis_format_part_id', $this->focus_id)
+                ->update([
+                    'student_id' => $this->thesis_student->student_id,
+                    'inve_thesis_student_id' => $this->thesis_student->id,
+                    'inve_thesis_format_part_id' => $this->focus_id,
+                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
+                ]);
+        } else {
+            InveThesisStudentPart::create([
                 'student_id' => $this->thesis_student->student_id,
                 'inve_thesis_student_id' => $this->thesis_student->id,
                 'inve_thesis_format_part_id' => $this->focus_id,
-                'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
+                'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                //     'version' => ($max_version ? $max_version + 1 : 1)
             ]);
+        }
 
         $this->content_old = $this->content;
     }

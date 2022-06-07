@@ -5,7 +5,7 @@ $title = '';
     @if ($title != $thesi['title'])
         <h1>{{ $thesi['title'] }}</h1>
         @foreach ($thesis as $part)
-            <li style="list-style-type: none">
+            <li>
                 {{ $part['number_order'] . ' ' . $part['description'] }}
                 {!! $part['items'] !!}
             </li>

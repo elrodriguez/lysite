@@ -30,6 +30,7 @@ class CreatePeopleTable extends Migration
             $table->char('province_id',4)->nullable();
             $table->char('district_id',6)->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->integer('thesis_allowed')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('identity_document_type_id')->references('id')->on('identity_document_types');
