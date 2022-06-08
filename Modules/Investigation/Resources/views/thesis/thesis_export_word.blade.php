@@ -1,7 +1,6 @@
 @php
 $title = '';
 @endphp
-
 @foreach ($thesis as $thesi)
     @if ($title != $thesi['title'])
         <h1>{{ $thesi['title'] }}</h1>
@@ -16,4 +15,3 @@ $title = '';
         $title = $thesi['title'];
     @endphp
 @endforeach
-
