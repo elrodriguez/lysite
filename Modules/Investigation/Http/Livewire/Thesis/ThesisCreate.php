@@ -72,11 +72,11 @@ class ThesisCreate extends Component
         ]);
 
         $thesis_created = InveThesisStudent::where('person_id', Auth::user()->person->id)->where('deleted_at', NULL)->count();
-        $thesis_allowed = Person::where('id', Auth::user()->person->id)->first()->thesis_allowed;
+        $allowed_thesis = Person::where('id', Auth::user()->person->id)->first()->allowed_thesis;
 
         //Condición que revisa si cuenta con permisos para crear una nueva tesis
 
-        if ($thesis_created < $thesis_allowed) {
+        if ($thesis_created < $allowed_thesis) {
             $thesis = InveThesisStudent::create([
                 'external_id' => Str::random(10),
                 'short_name' => $this->short_name,
@@ -99,7 +99,7 @@ class ThesisCreate extends Component
             $this->thesis_id = $thesis->id;
 
             $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
-        }else{
+        } else {
             $this->dispatchBrowserEvent('inve-thesis-student-error', ['tit' => 'No tienes permisos', 'msg' => 'No cuentas con permisos para crear una o más tesis, si deseas crear otra tésis comunícate con tu coordinador, instructor o administrador del sistema']);
         }
     }

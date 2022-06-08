@@ -143,7 +143,7 @@ class StudentsCreate extends Component
                 'department_id' => $this->department_id,
                 'province_id' => $this->province_id,
                 'district_id' => $this->district_id,
-                'thesis_allowed' => $this->person->thesis_allowed + 1,
+                'allowed_thesis' => $this->person->allowed_thesis + 1,
             ]);
         } else {
 
@@ -175,7 +175,7 @@ class StudentsCreate extends Component
                 'province_id' => $this->province_id,
                 'district_id' => $this->district_id,
                 'user_id' => $user->id,
-                'thesis_allowed' => 1
+                'allowed_thesis' => 1
             ]);
         }
 
