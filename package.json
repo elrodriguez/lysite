@@ -11,13 +11,13 @@
     },
     "devDependencies": {
         "axios": "^0.21",
-        "laravel-mix": "^6.0.44",
+        "laravel-echo": "^1.11.7",
+        "laravel-mix": "^6.0.48",
         "lodash": "^4.17.19",
-        "postcss": "^8.4.14"
+        "postcss": "^8.4.14",
+        "pusher-js": "^7.1.0-beta"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^33.0.0",
-        "laravel-echo": "^1.11.7",
-        "socket.io-client": "^4.5.1"
+        "@ckeditor/ckeditor5-build-classic": "^33.0.0"
     }
 }

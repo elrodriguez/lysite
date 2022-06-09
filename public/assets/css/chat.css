@@ -284,10 +284,10 @@ tr.ui-jqgrid-labels{background-color:#eee;background-image:-webkit-gradient(line
     margin-top:10px;
     float:left;
     clear:both;
-    white-space:pre-wrap;
+    /* white-space:pre-wrap;
     white-space:-moz-pre-wrap;
     white-space:-pre-wrap;
-    white-space:-o-pre-wrap;
+    white-space:-o-pre-wrap; */
     word-wrap:break-word;
     font-size: 0.8em;
 }

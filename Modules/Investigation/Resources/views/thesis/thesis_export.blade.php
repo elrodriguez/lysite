@@ -21,7 +21,7 @@
                 @foreach ($thesis as $part)
                     <li>
                         {{ $part['number_order'] . ' ' . $part['description'] }}
-                        <div>{{ html_entity_decode($part['content'], ENT_QUOTES, 'UTF-8') }}</div>
+                        {!! $part['content'] !!}
                         {!! $part['items'] !!}
                     </li>
                 @endforeach

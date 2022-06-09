@@ -18,10 +18,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Echo from 'laravel-echo';
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
-    broadcaster: 'socket.io',
-    host: `${window.location.hostname}:${window.laravelEchoPort}`,
-    transports: ['websocket']
+    broadcaster: 'pusher',
+    key: 'lySITE2022',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    encrypted: false,
+    disableStats: true,
 });
