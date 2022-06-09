@@ -256,4 +256,8 @@ class ThesisController extends Controller
         }
         return $html;
     }
+
+    public function permissions_thesis_allowed(){
+        return view('investigation::thesis.thesis_allowed');
+    }
 }

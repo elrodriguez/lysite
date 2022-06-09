@@ -13,10 +13,10 @@ class ThesisAll extends Component
 
     public function render()
     {
-        return view('investigation::livewire.thesis.thesis-all', ['thesis' => $this->getThesis()]);
+        return view('investigation::livewire.thesis.thesis-all', ['thesis' => $this->getSearch()]);
     }
 
-    public function getThesis()
+    public function getSearch()
     {
         return InveThesisStudent::join('people', 'person_id', 'people.id')
             ->select(
