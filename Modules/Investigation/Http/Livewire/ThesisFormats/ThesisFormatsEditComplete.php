@@ -16,8 +16,8 @@ class ThesisFormatsEditComplete extends Component
     public $normative_thesis;
     public $enum_types;
     public $enum_normatives;
-    public $universities=[];
-    public $schools=[];
+    public $universities = [];
+    public $schools = [];
     public $school;
     public $countries;
     public $country;
@@ -35,17 +35,17 @@ class ThesisFormatsEditComplete extends Component
         $this->enum_types = $this->getTypes();
         $this->enum_normatives = $this->getNormatives();
         $this->format = InveThesisFormat::find($thesis_format_id);
-        $this->name=$this->format->name;
-        $this->description=$this->format->description;
-        $this->type_thesis=$this->format->type_thesis;
-        $this->normative_thesis=$this->format->normative_thesis;
-        $this->school_id=$this->format->school_id;
-        $temp=$this->format->school_id;
-        $this->university_id=UniversitiesSchools::find($this->school_id)->university_id;
-        $this->country_id=Universities::find($this->university_id)->country;
+        $this->name = $this->format->name;
+        $this->description = $this->format->description;
+        $this->type_thesis = $this->format->type_thesis;
+        $this->normative_thesis = $this->format->normative_thesis;
+        $this->school_id = $this->format->school_id;
+        $temp = $this->format->school_id;
+        $this->university_id = UniversitiesSchools::find($this->school_id)->university_id;
+        $this->country_id = Universities::find($this->university_id)->country;
         $this->getUniversitiesFirstLoad();
         $this->getSchools();
-        $this->school_id=$temp;
+        $this->school_id = $temp;
     }
 
     public function getTypes()
@@ -85,6 +85,9 @@ class ThesisFormatsEditComplete extends Component
             'type_thesis' => trim($this->type_thesis),
             'normative_thesis' => trim($this->normative_thesis),
             'school_id' => $this->school_id,
+            'right_margin' => $this->right_margin,
+            'left_margin' => $this->left_margin,
+            'between_lines' => $this->between_lines
         ]);
 
 
@@ -96,21 +99,21 @@ class ThesisFormatsEditComplete extends Component
         redirect()->route('Investigation_thesis_formats_list_complete');
     }
 
-    public function getUniversities(){
+    public function getUniversities()
+    {
         $this->universities = Universities::where('country', $this->country_id)->orderBy('name', 'ASC')->get();
-        $this->school_id=null;
-        $this->university_id=null;
+        $this->school_id = null;
+        $this->university_id = null;
         $this->getSchools();
     }
 
-    public function getUniversitiesFirstLoad(){
+    public function getUniversitiesFirstLoad()
+    {
         $this->universities = Universities::where('country', $this->country_id)->orderBy('name', 'ASC')->get();
     }
 
     public function getSchools()
     {
-        $this->schools=UniversitiesSchools::where('university_id', $this->university_id)->orderBy('name', 'ASC')->get();
+        $this->schools = UniversitiesSchools::where('university_id', $this->university_id)->orderBy('name', 'ASC')->get();
     }
-
-
 }

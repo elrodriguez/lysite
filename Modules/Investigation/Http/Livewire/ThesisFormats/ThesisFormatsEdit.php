@@ -30,14 +30,14 @@ class ThesisFormatsEdit extends Component
         $this->enum_types = $this->getTypes();
         $this->enum_normatives = $this->getNormatives();
 
-        $this->school=UniversitiesSchoolsModel::find($school_id);
+        $this->school = UniversitiesSchoolsModel::find($school_id);
         $this->university = UniversitiesModel::where('id', $this->school->university_id)->first();
-        $this->format=InveThesisFormat::find($this->thesis_format_id);
+        $this->format = InveThesisFormat::find($this->thesis_format_id);
         $this->loadData();
-
     }
 
-    public function loadData(){
+    public function loadData()
+    {
         $this->name = $this->format->name;
         $this->description = $this->format->description;
         $this->type_thesis = $this->format->type_thesis;
@@ -80,6 +80,7 @@ class ThesisFormatsEdit extends Component
             'type_thesis' => trim($this->type_thesis),
             'normative_thesis' => trim($this->normative_thesis),
             'school_id' => $this->school_id,
+
         ]);
 
 

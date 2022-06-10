@@ -18,6 +18,9 @@ class ThesisFormatsCreate extends Component
     public $enum_normatives;
     public $university;
     public $school;
+    public $right_margin;
+    public $left_margin;
+    public $between_lines;
 
     public function mount($school_id)
     {
@@ -26,7 +29,7 @@ class ThesisFormatsCreate extends Component
         $this->enum_types = $this->getTypes();
         $this->enum_normatives = $this->getNormatives();
 
-        $this->school=UniversitiesSchoolsModel::find($school_id);
+        $this->school = UniversitiesSchoolsModel::find($school_id);
         $this->university = UniversitiesModel::where('id', $this->school->university_id)->first();
     }
 
@@ -63,13 +66,14 @@ class ThesisFormatsCreate extends Component
     {
 
         $this->validate();
-        //$this->course_image = 'storage/'.substr($this->course_image->store('public/uploads/academic/courses'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
-        $newUniversity = InveThesisFormat::create([
+
+        InveThesisFormat::create([
             'name' => trim($this->name),
             'description' => trim($this->description),
             'type_thesis' => trim($this->type_thesis),
             'normative_thesis' => trim($this->normative_thesis),
             'school_id' => $this->school_id,
+
         ]);
 
 

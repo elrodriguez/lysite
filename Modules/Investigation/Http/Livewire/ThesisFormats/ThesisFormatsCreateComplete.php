@@ -16,8 +16,8 @@ class ThesisFormatsCreateComplete extends Component
     public $normative_thesis;
     public $enum_types;
     public $enum_normatives;
-    public $universities=[];
-    public $schools=[];
+    public $universities = [];
+    public $schools = [];
     public $school;
     public $countries;
     public $country;
@@ -70,6 +70,9 @@ class ThesisFormatsCreateComplete extends Component
             'type_thesis' => trim($this->type_thesis),
             'normative_thesis' => trim($this->normative_thesis),
             'school_id' => $this->school_id,
+            'right_margin' => $this->right_margin,
+            'left_margin' => $this->left_margin,
+            'between_lines' => $this->between_lines
         ]);
 
 
@@ -81,13 +84,13 @@ class ThesisFormatsCreateComplete extends Component
         redirect()->route('Investigation_thesis_formats_list_complete');
     }
 
-    public function getUniversities(){
+    public function getUniversities()
+    {
         $this->universities = Universities::where('country', $this->country_id)->orderBy('name', 'ASC')->get();
     }
 
     public function getSchools()
     {
-        $this->schools=UniversitiesSchools::where('university_id', $this->university_id)->orderBy('name', 'ASC')->get();
+        $this->schools = UniversitiesSchools::where('university_id', $this->university_id)->orderBy('name', 'ASC')->get();
     }
-
 }
