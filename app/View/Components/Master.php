@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class navigation extends Component
+class Master extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class navigation extends Component
      */
     public function render()
     {
-        return view('components.navigation');
+        return view('layouts.master');
     }
 }
