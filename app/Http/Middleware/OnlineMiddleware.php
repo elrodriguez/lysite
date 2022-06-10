@@ -21,9 +21,11 @@ class OnlineMiddleware
     {
         $users_to_offline = User::where('chat_last_activity', '<', now());
         $users_to_online = User::where('chat_last_activity', '>=', now());
+
         if (isset($users_to_offline)) {
             $users_to_offline->update(['is_online' => false]);
-        }if (isset($users_to_online)) {
+        }
+        if (isset($users_to_online)) {
             $users_to_online->update(['is_online' => true]);
         }
         if (auth()->check()) {
@@ -32,14 +34,13 @@ class OnlineMiddleware
             $user->chat_last_activity = now()->addMinutes(5);
             $user->is_online = true;
             $user->save();
-        } elseif(!auth()->check() and filled(Cache::get('user-is-online'))) {
+        } elseif (!auth()->check() and filled(Cache::get('user-is-online'))) {
             $user = User::find(Cache::get('user-is-online'));
             if (isset($user)) {
                 $user->is_online = false;
                 $user->save();
             }
         }
-        
         return $next($request);
     }
 }
