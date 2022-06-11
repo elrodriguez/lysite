@@ -127,6 +127,7 @@
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label class="form-label" for="between_lines">Entre líneas *</label>
                                 <input wire:model="between_lines" type="text" class="form-control" id="between_lines">
@@ -136,11 +137,12 @@
                             </div>
 
                             <button type="submit" wire:loading.attr="disabled" wire:target="save"
-                                class="btn btn-primary">Guardar</button>
+                                class="btn btn-primary">Guardar
+                            </button>
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>s
         </div>
     </div>
     <script>

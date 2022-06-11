@@ -24,7 +24,9 @@ class ThesisFormatsCreateComplete extends Component
     public $university_id;
     public $country_id;
     public $school_id;
-
+    public $right_margin;
+    public $left_margin;
+    public $between_lines;
 
     public function mount()
     {

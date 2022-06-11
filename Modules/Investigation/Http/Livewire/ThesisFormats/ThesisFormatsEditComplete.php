@@ -26,7 +26,9 @@ class ThesisFormatsEditComplete extends Component
     public $country_id;
     public $school_id;
     public $format_id;
-
+    public $right_margin;
+    public $left_margin;
+    public $between_lines;
 
     public function mount($thesis_format_id)
     {
