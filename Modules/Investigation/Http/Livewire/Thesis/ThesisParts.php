@@ -73,7 +73,7 @@ class ThesisParts extends Component
 
     public function getParts()
     {
-        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('number_order')->first()->get();
+        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('index_order')->first()->get();
         if ($this->focus_id == 0) {
             $this->focus_id = $this->parts_all[0]->id;
         }
@@ -82,7 +82,7 @@ class ThesisParts extends Component
 
         $parts = InveThesisFormatPart::where('thesis_format_id', $this->format_id)
             ->whereNull('belongs')
-            ->orderBy('number_order')
+            ->orderBy('index_order')
             ->get();
 
         foreach ($parts as $k => $part) {
