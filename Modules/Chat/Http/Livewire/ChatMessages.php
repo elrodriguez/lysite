@@ -44,20 +44,22 @@ class ChatMessages extends Component
             'user_id'       => $id,
             'right'         => 0,
             'display'       => 'block',
-            'name'          => $user ? $user->full_name : 'User None',
+            'name'          => $user ? $user->names : 'User None',
             'message'       => null,
             'messages'      => []
         ];
 
-        $msg = ChatMessage::select(
-            'conversation_ids',
-            'message',
-            'user_id',
-            'receiver',
-            'is_seen',
-            'file',
-            'file_name'
-        )
+        $msg = ChatMessage::join('users', 'user_id', 'users.id')
+            ->select(
+                'chat_messages.conversation_ids',
+                'chat_messages.message',
+                'chat_messages.user_id',
+                'chat_messages.receiver',
+                'chat_messages.is_seen',
+                'chat_messages.file',
+                'chat_messages.file_name',
+                'users.name'
+            )
             ->where('conversation_ids', $id . '_' . Auth::id())
             ->get();
 
@@ -78,20 +80,22 @@ class ChatMessages extends Component
             'user_id'       => $id,
             'right'         => 0,
             'display'       => 'block',
-            'name'          => $user ? $user->full_name : 'User None',
+            'name'          => $user ? $user->names : 'User None',
             'message'       => null,
             'messages'      => []
         ];
 
-        $msg = ChatMessage::select(
-            'conversation_ids',
-            'message',
-            'user_id',
-            'receiver',
-            'is_seen',
-            'file',
-            'file_name'
-        )
+        $msg = ChatMessage::join('users', 'user_id', 'users.id')
+            ->select(
+                'chat_messages.conversation_ids',
+                'chat_messages.message',
+                'chat_messages.user_id',
+                'chat_messages.receiver',
+                'chat_messages.is_seen',
+                'chat_messages.file',
+                'chat_messages.file_name',
+                'users.name'
+            )
             ->where('conversation_ids', Auth::id() . '_' . $id)
             ->get();
 

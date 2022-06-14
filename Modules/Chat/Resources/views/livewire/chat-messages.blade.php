@@ -32,7 +32,7 @@
                     <div id="cha{{ $k }}" class="ui-widget-content ui-chatbox-log custom-scroll2">
                         @foreach ($chat['messages'] as $msg)
                             <div class="ui-chatbox-msg" style="max-width: 208px;">
-                                <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : 'DICE' }}:
+                                <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : $msg['name'] }}:
                                 </b><span>{{ $msg['message'] }}</span>
                             </div>
                         @endforeach
@@ -40,8 +40,7 @@
                     <div class="ui-widget-content ui-chatbox-input" wire:ignore.self>
                         <textarea id="message{{ $k }}" wire:click="focusTextArea('{{ $k }}')"
                             onkeyup="textareaWithoutEnter(event.keyCode, this.id,'{{ $k }}');"
-                            wire:model.defer="chats.{{ $k }}.message"
-                            class="ui-widget-content ui-chatbox-input-box"
+                            wire:model.defer="chats.{{ $k }}.message" class="ui-widget-content ui-chatbox-input-box"
                             style="width: 218px;font-size: 0.8em;"></textarea>
                     </div>
                 </div>
