@@ -30,7 +30,7 @@ class PartsCreate extends Component
         $this->format_id = $format_id;
         $this->part_id = $part_id;
         $title = 'Nueva Parte';
-        
+
         if($this->part_id){
             $this->part = InveThesisFormatPart::find($this->part_id);
             $title = 'Nueva SubParte :' . $this->part->description;
@@ -47,7 +47,7 @@ class PartsCreate extends Component
             'information' => 'required|string',
             'index_order' => 'required'
         ]);
-
+        if($this->number_order==null)$this->number_order="";
         InveThesisFormatPart::create([
             'description' => $this->description,
             'information' => $this->information,

@@ -16,7 +16,7 @@ class CreateInveThesisStudentPartsTable extends Migration
     {
         Schema::create('inve_thesis_student_parts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->unsignedBigInteger('inve_thesis_student_id');
             $table->unsignedBigInteger('inve_thesis_format_part_id');
             //$table->longText('content')->nullable();

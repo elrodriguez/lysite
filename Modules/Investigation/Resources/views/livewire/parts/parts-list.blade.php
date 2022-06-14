@@ -22,6 +22,7 @@
                                 @foreach($parts as $part)
                                     <li>
                                         <div class="btn-group mr-3">
+                                            <label style="opacity:0.4; color:blue" data-toggle="tooltip" data-placement="top" title="Esto no se mostrará en las tesis">{{ $part['index_order'].">>"}} </label>
                                             <button wire:click="$emit('openModalPartCreate',{{ $format_id }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
                                                 <i class="fa fa-plus"></i>
                                             </button>
@@ -32,6 +33,7 @@
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
                                         </div>
+
                                         {{ $part['number_order'].' '.$part['description'] }}
                                         {!! $part['items']  !!}
                                     </li>

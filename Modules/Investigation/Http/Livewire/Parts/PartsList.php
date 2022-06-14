@@ -44,10 +44,11 @@ class PartsList extends Component
                 'id' => $part->id,
                 'description' => $part->description,
                 'number_order' => $part->number_order,
+                'index_order' => $part->index_order,
                 'items' => $this->getSubParts($part->id),
             ];
         }
-        
+
     }
     public function getSubParts($id){
         $subparts = InveThesisFormatPart::where('belongs',$id)
@@ -60,6 +61,7 @@ class PartsList extends Component
             foreach($subparts as $k => $subpart){
                 $html .= '<li>';
                 $html .= '<div class="btn-group mr-3">
+                <label style="opacity:0.4; color:red" data-toggle="tooltip" data-placement="top" title="Esto no se mostrará en las tesis">'.$subpart->index_order.'-- </label>
                             <button wire:click="openModalTwo('.$subpart->id.')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-plus"></i>
                             </button>
