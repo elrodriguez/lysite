@@ -25,8 +25,6 @@ window.Echo = new Echo({
     key: 'lySITE2022',
     wsHost: window.location.hostname,
     wsPort: 6001,
-    wssHost: window.location.hostname,
-    wssPort: 443,
     forceTLS: false,
     encrypted: false,
     disableStats: true,
