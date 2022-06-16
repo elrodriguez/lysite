@@ -31,9 +31,12 @@
                     <span class="alert-msg">null</span>
                     <div id="cha{{ $k }}" class="ui-widget-content ui-chatbox-log custom-scroll2">
                         @foreach ($chat['messages'] as $msg)
-                            <div class="ui-chatbox-msg text-right" style="max-width: 208px;">
-                                <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : $msg['name'] }}:
-                                </b><span>{{ $msg['message'] }}</span>
+                            <div class="ui-chatbox-msg" style="max-width: 208px;">
+                                <div class="chat-segment chat-segment-sent chat-end">
+                                    <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : $msg['name'] }}:
+                                    </b><span>{{ $msg['message'] }}</span>
+                                </div>
+                                
                             </div>
                         @endforeach
                     </div>
