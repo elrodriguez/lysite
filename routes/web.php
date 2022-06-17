@@ -28,9 +28,9 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
-// Route::get('/home', function () {
-//     return view('home');
-// })->name('home');
+ Route::get('/home', function () {
+     return view('home');
+ })->name('home_page');
 
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 

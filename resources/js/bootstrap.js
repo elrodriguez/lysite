@@ -20,6 +20,7 @@ import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
 
+/*
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'lySITE2022',
@@ -28,4 +29,14 @@ window.Echo = new Echo({
     forceTLS: false,
     encrypted: false,
     disableStats: true,
+});
+*/
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'lySITE2022',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    disableStats: true,
+    forceTLS: true
 });

@@ -53,7 +53,7 @@ class ContentsCreate extends Component
             $this->content_url = $this->txturl;
         }
         if($this->content_type_id == 2){
-            $this->content_url = $this->txttexto;
+            $this->content_url = htmlentities($this->txttexto, ENT_QUOTES, "UTF-8");
         }
         if($this->content_type_id == 3){
             $this->content_url = $this->txtarchivo;

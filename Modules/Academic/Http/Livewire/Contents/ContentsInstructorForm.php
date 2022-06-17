@@ -76,7 +76,7 @@ class ContentsInstructorForm extends Component
         if($this->content_type_id == 1){
             $this->content_url = $this->link;
         }else if($this->content_type_id == 2){
-            $this->content_url = $this->text;
+            $this->content_url = htmlentities($this->text, ENT_QUOTES, "UTF-8");
         }else if ($this->content_type_id == 3 || $this->content_type_id == 4) {
             $original_name = $this->file->getClientOriginalName();
             $this->content_url = 'storage/'.substr($this->file->store('public/uploads/academic/contents'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
