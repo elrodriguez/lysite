@@ -281,7 +281,7 @@ tr.ui-jqgrid-labels{background-color:#eee;background-image:-webkit-gradient(line
     background-color:#fff!important
 }
 .ui-chatbox-msg{
-    margin-top:10px;
+    margin-top:5px;
     float:left;
     clear:both;
     /* white-space:pre-wrap;
@@ -290,6 +290,27 @@ tr.ui-jqgrid-labels{background-color:#eee;background-image:-webkit-gradient(line
     white-space:-o-pre-wrap; */
     word-wrap:break-word;
     font-size: 0.8em;
+    background: #f1f0f0;
+    color: rgba(0,0,0,.8);
+    text-align: left;
+    border-radius: 0.625rem;
+    padding: 5px;
+}
+.ui-chatbox-msg-right{
+    margin-top:5px;
+    float:right;
+    clear:both;
+    /* white-space:pre-wrap;
+    white-space:-moz-pre-wrap;
+    white-space:-pre-wrap;
+    white-space:-o-pre-wrap; */
+    word-wrap:break-word;
+    font-size: 0.8em;
+    background: #C0F5A3;
+    /* color: #fff; */
+    text-align: left;
+    border-radius: 0.625rem;
+    padding: 5px;
 }
 .chat-users li:before,.chat-users>ul:before{border:none}
 .chat-users .display-users{display:block;padding:0 15px}

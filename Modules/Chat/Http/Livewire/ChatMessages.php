@@ -39,7 +39,7 @@ class ChatMessages extends Component
 
         $user = Person::where('user_id', $id)->first();
 
-        $this->chats[$id . '_' . Auth::id()] = [
+        $this->chats[$id .  Auth::id()] = [
             'background'    => 'bg-ui-chatbox-titlebar',
             'user_id'       => $id,
             'right'         => 0,
@@ -60,12 +60,12 @@ class ChatMessages extends Component
                 'chat_messages.file_name',
                 'users.name'
             )
-            ->where('conversation_ids', $id . '_' . Auth::id())
+            ->where('conversation_ids', $id . Auth::id())
             ->get();
 
         if ($msg) {
-            $this->chats[$id . '_' . Auth::id()]['messages'] = $msg->toArray();
-            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => $id . '_' . Auth::id(), 'user_id' => $id]);
+            $this->chats[$id . Auth::id()]['messages'] = $msg->toArray();
+            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => $id . Auth::id(), 'user_id' => $id]);
         }
     }
     public function showChatInstructor($id)
@@ -75,7 +75,7 @@ class ChatMessages extends Component
 
         $user = Person::where('user_id', $id)->first();
 
-        $this->chats[Auth::id() . '_' . $id] = [
+        $this->chats[Auth::id() . $id] = [
             'background'    => 'bg-ui-chatbox-titlebar',
             'user_id'       => $id,
             'right'         => 0,
@@ -96,12 +96,12 @@ class ChatMessages extends Component
                 'chat_messages.file_name',
                 'users.name'
             )
-            ->where('conversation_ids', Auth::id() . '_' . $id)
+            ->where('conversation_ids', Auth::id() . $id)
             ->get();
 
         if ($msg) {
-            $this->chats[Auth::id() . '_' . $id]['messages'] = $msg->toArray();
-            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => Auth::id() . '_' . $id, 'user_id' => $id]);
+            $this->chats[Auth::id() . $id]['messages'] = $msg->toArray();
+            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => Auth::id() . $id, 'user_id' => $id]);
         }
     }
 
@@ -123,7 +123,6 @@ class ChatMessages extends Component
 
     public function sendMessage($index)
     {
-
 
         $this->chat = $this->chats[$index];
 
@@ -154,7 +153,8 @@ class ChatMessages extends Component
                 'receiver'          => $this->chat['user_id'],
                 'is_seen'           => false,
                 'file'              => $path,
-                'file_name'         => $file_name
+                'file_name'         => $file_name,
+                'name'              => Auth::user()->name
             ];
 
             array_push($this->chat['messages'], $new_message);
@@ -167,7 +167,7 @@ class ChatMessages extends Component
         event(new PrivateMessage($user, $new_message));
 
         $this->chats[$index] = $this->chat;
-
+        $this->chats[$index]['message'] = null;
         $this->dispatchBrowserEvent('textarea-null', ['success' => true, 'index' => $index]);
     }
 
