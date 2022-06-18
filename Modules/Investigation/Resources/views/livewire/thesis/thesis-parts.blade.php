@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4" id="IndexBar" style="display: inline;">
+                <div wire:ignore class="col-md-4" id="IndexBar" style="display: inline;">
                     <ul class="list-point-none">
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
@@ -65,7 +65,7 @@
                         Exportar WORD
                     </a>
                 </div>
-                <div class="col-lg-8" id="SuperEditor">
+                <div wire:ignore class="col-lg-8" id="SuperEditor">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-1">
                             <button class="btn btn-primary btn-sm" onclick="ShowHide()" id="btnShowHide"><<</button>
@@ -135,7 +135,7 @@
             </div>
         </div>
         {{-- modal video --}}
-        <div class="ventana_flotante" style="display: none" id="video-flotante">
+        <div wire:ignore class="ventana_flotante" style="display: none" id="video-flotante">
 
             <div class="content">
 
@@ -213,7 +213,7 @@
             } else {
                 cuteAlert({
                     type: 'error',
-                    title: 'Salió mal',
+                    title: 'Sin Video',
                     message: 'No tiene videos vinculados',
                     buttonText: "Okay"
                 });

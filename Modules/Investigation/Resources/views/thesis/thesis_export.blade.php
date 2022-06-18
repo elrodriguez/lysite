@@ -16,7 +16,7 @@
     @endphp
     @foreach ($thesis as $thesi)
         @if ($title != $thesi['title'])
-            <h1>{{ $thesi['title'] }}</h1>
+            {{-- <h1>{{ $thesi['title'] }}</h1> --}}
             <ul>
                 @foreach ($thesis as $part)
                     <li>

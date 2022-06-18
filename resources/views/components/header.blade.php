@@ -71,8 +71,6 @@ $path = explode('/', request()->path());
 
                         </style>
 
-                        <livewire:investigation::thesis.header-investigation />
-
                         <div class="nav-item">
                             <div class="dropdown">
                                 <a href="#" class="btn btn-black mr-16pt" data-toggle="dropdown" aria-expanded="false"
@@ -109,6 +107,9 @@ $path = explode('/', request()->path());
                                 </div>
                             </div>
                         </div>
+
+                        <livewire:investigation::thesis.header-investigation />
+
                     @endif
 
                     @if (Route::has('login'))
