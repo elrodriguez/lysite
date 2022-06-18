@@ -71,6 +71,7 @@ class ThesisController extends Controller
             ->where('inve_thesis_students.person_id', $person->id)
             ->where('inve_thesis_students.user_id', $person->user_id)
             ->where('inve_thesis_students.id', $thesis_id)
+            ->orderBy('index_order')
             ->get();
 
         $parts = [];
@@ -102,7 +103,7 @@ class ThesisController extends Controller
                     ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
                     ->where('inve_thesis_student_parts.state', true);
             }, 'content')
-            ->orderBy('number_order')
+            ->orderBy('index_order')
             ->get();
         //dd($subparts);
         $html = '';
