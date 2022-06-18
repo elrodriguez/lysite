@@ -15,7 +15,7 @@
                         data-placement="top" data-original-title="Hide" class="ui-chatbox-icon" role="button">
                         <i class="fa fa-times"></i>
                     </a>
-                    @if ($chat['display'] == 'block')
+                    {{-- @if ($chat['display'] == 'block')
                         <a wire:click="minimizeChat('{{ $k }}')" href="javascript:void(0);" rel="tooltip"
                             data-placement="top" data-original-title="Minimize" class="ui-chatbox-icon" role="button">
                             <i class="fa fa-minus"></i>
@@ -25,7 +25,7 @@
                             data-placement="top" data-original-title="Minimize" class="ui-chatbox-icon" role="button">
                             <i class="fa fa-window-maximize"></i>
                         </a>
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="false ui-widget-content ui-chatbox-content" style="display: {{ $chat['display'] }};">
                     <span class="alert-msg">null</span>
@@ -51,6 +51,7 @@
         @endforeach
     @endif
     <script>
+        console.log(window.location.hostname);
         window.addEventListener('scroll-button', event => {
             let index = event.detail.index;
             let user_id = event.detail.user_id

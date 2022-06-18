@@ -268,4 +268,8 @@ class ThesisParts extends Component
 
         $this->content_old = $this->content;
     }
+
+    public function goToTheCourse(){
+        $content_id = $this->focused_part->content_id;
+    }
 }

@@ -82,6 +82,9 @@
                                     data-placement="top" title="{{ $focused_part->information }}">
                                     <i class="fa fa-info-circle"></i>
                                 </button>
+                                <button type="button" class="btn btn-secondary btn-sm" wire:click="goToTheCourse">
+                                    <i class="fa fa-book"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
