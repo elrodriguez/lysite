@@ -31,12 +31,9 @@
                     <span class="alert-msg">null</span>
                     <div id="cha{{ $k }}" class="ui-widget-content ui-chatbox-log custom-scroll2">
                         @foreach ($chat['messages'] as $msg)
-                            <div class="ui-chatbox-msg" style="max-width: 208px;">
-                                <div class="chat-segment chat-segment-sent chat-end">
-                                    <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : $msg['name'] }}:
-                                    </b><span>{{ $msg['message'] }}</span>
-                                </div>
-                                
+                            <div class="{{ $msg['user_id'] == auth()->user()->id ? 'ui-chatbox-msg-right' : 'ui-chatbox-msg' }}" style="max-width: 208px;">
+                                {{-- <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : $msg['name'] }}: --}}
+                                </b><span>{{ $msg['message'] }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -103,7 +100,7 @@
             window.Echo.private('channel-message.' + {{ auth()->id() }}).listen('.MessageEvent', (data) => {
                 let $index = data.message.conversation_ids;
                 let $user_id = data.message.user_id;
-
+                
                 if (document.getElementById("inbox-chat" + $index)) {
                     let $message = data.message;
 
@@ -116,7 +113,8 @@
                     $('#user-list-chat').addClass('new-message-icon-animation');
                     $('#user' + $user_id).addClass('text-color-orange');
                 }
-
+                // const music = new Audio('{{ URL("assets/data/mp3/messagebox.mp3") }}');
+                // music.play();
             });
         </script>
     @endsection

@@ -115,16 +115,14 @@
                                         <td class="name align-middle">{{ $content->original_name }}</td>
                                         @else
                                             @if ($content->content_type_id == 2)
-                                                    @if (strlen($content->content_url) > 150)
-                                                    <td class="name align-middle"> {!! substr($content->content_url, 0, 150) !!}
+
+                                                    <td class="name align-middle">
                                                         @can('academico_contenido_editar')
                                                         <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
-                                                            title="Ver y editar Contenido Completo">...</a>
+                                                            title="Ver y editar Contenido Completo">Click para ver y editar</a>
                                                         @endcan
                                                     </td>
-                                                    @else
-                                                    <td class="name align-middle">{!! $content->content_url !!}</td>
-                                                    @endif
+
                                             @else
                                                 @if (strlen($content->content_url) > 120)
                                                 <td class="name align-middle">{{ substr($content->content_url, 0, 120) }}

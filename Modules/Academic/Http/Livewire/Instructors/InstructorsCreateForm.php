@@ -148,7 +148,7 @@ class InstructorsCreateForm extends Component
             $user = User::create([
                 'name' => $this->names,
                 'email' => $this->email,
-                'password' => $this->number
+                'password' => Hash::make('12345678')
             ]);
 
             $user->assignRole('instructor');

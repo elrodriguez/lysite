@@ -1,5 +1,5 @@
 <div>
-    
+
     <div class="bg-gradient-primary pb-lg-64pt py-32pt">
         <div class="container">
 
@@ -37,7 +37,7 @@
             @if ($content->content_type_id == 2)
                 <div class="card">
                     <div class="card-body">
-                        {!! $content->content_url  !!}
+                        {!! html_entity_decode($content->content_url, ENT_QUOTES, "UTF-8") !!}
                     </div>
                 </div>
             @endif
@@ -59,14 +59,14 @@
     </div>
     <div class="page-section bg-white">
         <div class="container page__container">
-    
+
             <div class="d-flex align-items-center mb-heading">
                 <h4 class="m-0">Preguntas</h4>
                 <a href="{{ route('academic_students_discussions_ask',[$course_id,$section_id,$content_id]) }}" class="text-underline ml-auto">Hacer una pregunta</a>
             </div>
-    
+
             <div class="border-top">
-    
+
                 <div class="list-group list-group-flush">
                     @foreach($questions as $question)
                         <div class="list-group-item p-3">
@@ -98,11 +98,11 @@
                         </div>
                     @endforeach
                 </div>
-    
+
             </div>
-    
+
             {{-- <a href="student-discussions.html" class="btn btn-outline-secondary">See all discussions for this lesson</a> --}}
-    
+
         </div>
     </div>
 </div>

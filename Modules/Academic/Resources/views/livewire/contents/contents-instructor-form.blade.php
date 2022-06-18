@@ -119,11 +119,8 @@
                                 <td>{{ $content->content_type_name }}</td>
                                 <td>{{ $content->content_name }}</td>
                                 @if ($content->content_type_name == "Texto")
-                                    @if (strlen($content->content_url) > 150)
-                                        <td>{!! substr($content->content_url, 0, 150) !!}...</td>
-                                    @else
-                                    <td>{!! substr($content->content_url, 0, 150) !!}</td>
-                                    @endif
+
+                                        <td>{!! html_entity_decode($content->content_url, ENT_QUOTES, "UTF-8") !!}</td>
                                 @else
                                 <td>{{ $content->content_url }}</td>
                                 @endif
