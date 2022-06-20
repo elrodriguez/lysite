@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Chat\Entities\ChatMessage;
+use League\Flysystem\Cached\Storage\Predis;
 
 class ChatMessages extends Component
 {
