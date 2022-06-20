@@ -40,6 +40,8 @@
                     <div class="ui-widget-content ui-chatbox-input" wire:ignore.self>
                         <textarea id="message{{ $k }}" wire:click="focusTextArea('{{ $k }}')"
                             onkeyup="textareaWithoutEnter(event.keyCode, this.id,'{{ $k }}');"
+                            {{-- onkeydown="textareaWithoutEnter(event);" --}}
+                            {{-- wire:keydown.enter="sendMessage('{{ $k }}')" --}}
                             wire:model.defer="chats.{{ $k }}.message" class="ui-widget-content ui-chatbox-input-box"
                             style="width: 218px;font-size: 0.8em;"></textarea>
                     </div>
@@ -77,11 +79,17 @@
         }
 
         //Valida que no sean ingresado ENTER dentro del textarea
-        function textareaWithoutEnter($char, $id, $index) {
+        function textareaWithoutEnter($char,$id,$index) {
 
-            $textarea = document.getElementById($id);
+            // $textarea = document.getElementById($id);
 
+            // if (e.which === 13 && !e.shiftKey) {
+            //     e.preventDefault();
+            //     console.log('prevented');
+            //     return false;
+            // }
             if ($char == 13) {
+                $textarea = document.getElementById($id);
                 $texto_escapado = escape($textarea.value);
                 if (navigator.appName == "Opera" || navigator.appName == "Microsoft Internet Explorer") $texto_sin_enter =
                     str_replace("%0D%0A", "", $texto_escapado);
