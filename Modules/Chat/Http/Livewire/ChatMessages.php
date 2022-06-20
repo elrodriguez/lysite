@@ -127,7 +127,12 @@ class ChatMessages extends Component
 
         $this->chat = $this->chats[$index];
 
-        if ($this->chat['message']) {
+        $new_message_text = $this->chat['message'];
+        $this->chat['message'] = null;
+        $this->chats[$index] = $this->chat;
+        $this->chats[$index]['message'] = null;
+
+        if ($new_message_text) {
 
             $file_name  = null;
             $path       = null;
@@ -140,7 +145,7 @@ class ChatMessages extends Component
 
             ChatMessage::create([
                 'conversation_ids'  => $index,
-                'message'           => $this->chat['message'],
+                'message'           => $new_message_text,
                 'user_id'           => Auth::id(),
                 'receiver'          => $this->chat['user_id'],
                 'file'              => $path,
@@ -149,7 +154,7 @@ class ChatMessages extends Component
 
             $new_message = [
                 'conversation_ids'  => $index,
-                'message'           => $this->chat['message'],
+                'message'           => $new_message_text,
                 'user_id'           => Auth::id(),
                 'receiver'          => $this->chat['user_id'],
                 'is_seen'           => false,
@@ -160,15 +165,13 @@ class ChatMessages extends Component
 
             array_push($this->chat['messages'], $new_message);
 
-            $this->chat['message'] = null;
+            
         }
 
         $user = User::find($this->chat['user_id']);
 
         event(new PrivateMessage($user, $new_message));
 
-        $this->chats[$index] = $this->chat;
-        $this->chats[$index]['message'] = null;
         $this->dispatchBrowserEvent('textarea-null', ['success' => true, 'index' => $index]);
     }
 
