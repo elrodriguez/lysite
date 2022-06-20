@@ -128,8 +128,6 @@ class ChatMessages extends Component
         $this->chat = $this->chats[$index];
 
         $new_message_text = $this->chat['message'];
-        $this->chat['message'] = null;
-        $this->chats[$index] = $this->chat;
         $this->chats[$index]['message'] = null;
 
         if ($new_message_text) {
@@ -165,7 +163,7 @@ class ChatMessages extends Component
 
             array_push($this->chat['messages'], $new_message);
 
-            
+            $this->chats[$index] = $this->chat;
         }
 
         $user = User::find($this->chat['user_id']);
