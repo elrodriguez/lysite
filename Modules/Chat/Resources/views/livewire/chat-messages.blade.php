@@ -51,7 +51,6 @@
         @endforeach
     @endif
     <script>
-        console.log(window.location.hostname);
         window.addEventListener('scroll-button', event => {
             let index = event.detail.index;
             let user_id = event.detail.user_id
@@ -114,8 +113,8 @@
                     $('#user-list-chat').addClass('new-message-icon-animation');
                     $('#user' + $user_id).addClass('text-color-orange');
                 }
-                // const music = new Audio('{{ URL("assets/data/mp3/messagebox.mp3") }}');
-                // music.play();
+                const music = new Audio('{{ URL("assets/data/mp3/messagebox.mp3") }}');
+                music.play();
             });
         </script>
     @endsection
