@@ -1,10 +1,13 @@
 <div class="">
     <div class="container page__container">
         <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('academic_courses') }}">{{ __('academic::labels.courses') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('academic_courses') }}">{{ __('academic::labels.courses') }}</a></li>
             <li class="breadcrumb-item">{{ $course->name }}</li>
-            <li class="breadcrumb-item active"><a href="{{ route('academic_sections',$course->id) }}">{{ __('academic::labels.sections') }}</a></li>
+            <li class="breadcrumb-item active"><a
+                    href="{{ route('academic_sections', $course->id) }}">{{ __('academic::labels.sections') }}</a>
+            </li>
             <li class="breadcrumb-item">{{ $section->title }}</li>
             <li class="breadcrumb-item active">{{ __('labels.Contents') }}</li>
 
@@ -18,8 +21,8 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Módulos del sistema</p>
                         @can('configuraciones_modulos_nuevo')
-                        <a href="{{ route('academico_contenido_create',$this->section_id) }}" type="button"
-                            class="btn btn-primary">Nuevo</a>
+                            <a href="{{ route('academico_contenido_create', $this->section_id) }}" type="button"
+                                class="btn btn-primary">Nuevo</a>
                         @endcan
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -45,99 +48,106 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach($contents as $key => $content)
-                                    <tr>
-                                        <td class="text-center align-middle">{{ $key + 1 }}</td>
-                                        <td class="text-center align-middle">
-                                            <div class="btn-group">
-                                                @can('academico_contenido_editar')
-                                                <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
-                                                    type="button" class="btn btn-info btn-sm"><i
-                                                        class="fa fa-pencil-alt" title="Ver/Editar Contenido"></i></a>
-                                                @endcan
-                                                @can('academico_contenido_enlazar')
-                                                <a href="{{ route('academico_contenido_enlazar',[$content->section_id, $content->id]) }}"
-                                                    type="button" class="btn btn-success btn-sm"><i
-                                                        class="fa fa-link" title="Enlazar"></i></a>
-                                                @endcan
-                                                @can('academico_contenido_eliminar')
-                                                <button onclick="deletes({{ $content->id }})" type="button"
-                                                    class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash-alt"></i></button>
-                                                @endcan
-                                            </div>
-                                        </td>
-                                        <!-- Sort -->
-                                        <td class="text-center align-middle">
-                                            @if ($content->count == 1 && $count>1)
-                                            <div role="group" aria-label="Group A">
-                                                <button
-                                                    wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
-                                                    type="button" class="btn btn-info btn-sm"
-                                                    title="{{ __('labels.Down') }}"><i
-                                                        class="fas fa-angle-down"></i></button>
-                                            </div>
-                                            @endif
-
-                                            @if ($content->count > 1 && $content->count < $contents->count())
-                                                <div role="group" aria-label="Group A">
-                                                    <button
-                                                        wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
-                                                        type="button" class="btn btn-info btn-sm"
-                                                        title="{{ __('labels.Down') }}"><i
-                                                            class="fas fa-angle-down"></i></button>
-                                                    <button
-                                                        wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'up')"
-                                                        type="button" class="btn btn-info btn-sm"
-                                                        title="{{ __('labels.Up') }}"><i
-                                                            class="fas fa-angle-up"></i></button>
+                                    @foreach ($contents as $key => $content)
+                                        <tr>
+                                            <td class="text-center align-middle">{{ $key + 1 }}</td>
+                                            <td class="text-center align-middle">
+                                                <div class="btn-group">
+                                                    @can('academico_contenido_editar')
+                                                        <a href="{{ route('academico_contenido_editar', [$content->section_id, $content->id]) }}"
+                                                            type="button" class="btn btn-info btn-sm"><i
+                                                                class="fa fa-pencil-alt"
+                                                                title="Ver/Editar Contenido"></i></a>
+                                                    @endcan
+                                                    @can('academico_contenido_enlazar')
+                                                        @if ($content->content_type_id == 1)
+                                                            <a href="{{ route('academico_contenido_enlazar', [$content->section_id, $content->id]) }}"
+                                                                type="button" class="btn btn-success btn-sm"><i
+                                                                    class="fa fa-link" title="Enlazar"></i></a>
+                                                        @else
+                                                                {{-- aquí si se enlaza parte del curso agregar código--}}
+                                                        @endif
+                                                    @endcan
+                                                    @can('academico_contenido_eliminar')
+                                                        <button onclick="deletes({{ $content->id }})" type="button"
+                                                            class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-trash-alt"></i></button>
+                                                    @endcan
                                                 </div>
+                                            </td>
+                                            <!-- Sort -->
+                                            <td class="text-center align-middle">
+                                                @if ($content->count == 1 && $count > 1)
+                                                    <div role="group" aria-label="Group A">
+                                                        <button
+                                                            wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
+                                                            type="button" class="btn btn-info btn-sm"
+                                                            title="{{ __('labels.Down') }}"><i
+                                                                class="fas fa-angle-down"></i></button>
+                                                    </div>
                                                 @endif
 
-                                                @if ($content->count == $contents->count() && $count>1)
-                                                <div role="group" aria-label="Group A">
-                                                    <button
-                                                        wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'up')"
-                                                        type="button" class="btn btn-info btn-sm"
-                                                        title="{{ __('labels.Up') }}"><i
-                                                            class="fas fa-angle-up"></i></button>
-                                                </div>
+                                                @if ($content->count > 1 && $content->count < $contents->count())
+                                                    <div role="group" aria-label="Group A">
+                                                        <button
+                                                            wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
+                                                            type="button" class="btn btn-info btn-sm"
+                                                            title="{{ __('labels.Down') }}"><i
+                                                                class="fas fa-angle-down"></i></button>
+                                                        <button
+                                                            wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'up')"
+                                                            type="button" class="btn btn-info btn-sm"
+                                                            title="{{ __('labels.Up') }}"><i
+                                                                class="fas fa-angle-up"></i></button>
+                                                    </div>
                                                 @endif
-                                        </td>
 
-                                        <!-- Name -->
-                                        <td class="name align-middle">{{ $content->name }}
-                                        </td>
+                                                @if ($content->count == $contents->count() && $count > 1)
+                                                    <div role="group" aria-label="Group A">
+                                                        <button
+                                                            wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'up')"
+                                                            type="button" class="btn btn-info btn-sm"
+                                                            title="{{ __('labels.Up') }}"><i
+                                                                class="fas fa-angle-up"></i></button>
+                                                    </div>
+                                                @endif
+                                            </td>
 
-                                        <td class="name align-middle">{{
-                                            $this->content_type_name($content->content_type_id) }}</td>
-                                        @if ($content->content_type_id > 2)
-                                        <td class="name align-middle">{{ $content->original_name }}</td>
-                                        @else
-                                            @if ($content->content_type_id == 2)
+                                            <!-- Name -->
+                                            <td class="name align-middle">{{ $content->name }}
+                                            </td>
 
+                                            <td class="name align-middle">
+                                                {{ $this->content_type_name($content->content_type_id) }}
+                                            </td>
+                                            @if ($content->content_type_id > 2)
+                                                <td class="name align-middle">{{ $content->original_name }}</td>
+                                            @else
+                                                @if ($content->content_type_id == 2)
                                                     <td class="name align-middle">
                                                         @can('academico_contenido_editar')
-                                                        <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
-                                                            title="Ver y editar Contenido Completo">Click para ver y editar</a>
+                                                            <a href="{{ route('academico_contenido_editar', [$content->section_id, $content->id]) }}"
+                                                                title="Ver y editar Contenido Completo">Click para ver y
+                                                                editar</a>
                                                         @endcan
                                                     </td>
-
-                                            @else
-                                                @if (strlen($content->content_url) > 120)
-                                                <td class="name align-middle">{{ substr($content->content_url, 0, 120) }}
-                                                    @can('academico_contenido_editar')
-                                                    <a href="{{ route('academico_contenido_editar',[$content->section_id, $content->id]) }}"
-                                                        title="Ver y editar Contenido Completo">...</a>
-                                                    @endcan
-                                                </td>
                                                 @else
-                                                <td class="name align-middle">{{ $content->content_url }}</td>
+                                                    @if (strlen($content->content_url) > 120)
+                                                        <td class="name align-middle">
+                                                            {{ substr($content->content_url, 0, 120) }}
+                                                            @can('academico_contenido_editar')
+                                                                <a href="{{ route('academico_contenido_editar', [$content->section_id, $content->id]) }}"
+                                                                    title="Ver y editar Contenido Completo">...</a>
+                                                            @endcan
+                                                        </td>
+                                                    @else
+                                                        <td class="name align-middle">{{ $content->content_url }}
+                                                        </td>
+                                                    @endif
                                                 @endif
                                             @endif
-                                        @endif
 
-                                    </tr>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
@@ -157,15 +167,15 @@
         </div>
     </div>
     <script>
-        function deletes(id){
+        function deletes(id) {
             cuteAlert({
                 type: "question",
                 title: "¿Desea eliminar estos datos?",
                 message: "Advertencia:¡Esta acción no se puede deshacer!",
                 confirmText: "Okay",
                 cancelText: "Cancel"
-            }).then((e)=>{
-                if ( e == ("confirm")){
+            }).then((e) => {
+                if (e == ("confirm")) {
                     @this.destroy(id)
                 }
             });
