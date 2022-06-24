@@ -24,7 +24,7 @@
             </form>
         </div>
     </div>
-    <div class="page-separator m-0">
+    {{-- <div class="page-separator m-0">
         <div class="page-separator__text">o inicia sesión con</div>
         <div class="page-separator__bg-top bg-white"></div>
     </div>
@@ -34,5 +34,5 @@
             <a href="student-dashboard.html" class="btn btn-lg btn-secondary btn-block-xs">Twitter</a>
             <a href="student-dashboard.html" class="btn btn-lg btn-secondary btn-block-xs">Google+</a>
         </div>
-    </div>
+    </div> --}}
 </div>
