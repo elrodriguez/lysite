@@ -8,7 +8,7 @@
     <title>{{ env('APP_NAME', 'Laravel') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Prevent the demo from appearing in search engines -->
-    <meta name="robots" content="noindex">
+    <meta name="thesis" content="index">
 
     <!-- Perfect Scrollbar -->
     <link type="text/css" href="{{ url('assets/vendor/perfect-scrollbar.css') }}" rel="stylesheet">
