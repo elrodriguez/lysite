@@ -78,7 +78,7 @@
 
         </div>
     </div>
-
+{{--
     <div class="page-section bg-white border-bottom-2">
         <div class="container page__container">
             <div class="page-headline text-center">
@@ -227,7 +227,7 @@
                 <a href="paths.html" class="btn btn-outline-secondary">Browse Learning Paths</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="page-section">
 
