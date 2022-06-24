@@ -5,7 +5,9 @@ use App\Events\PrivateMessage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\User\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +41,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_account', [UserC
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
-
 
 require __DIR__.'/auth.php';
