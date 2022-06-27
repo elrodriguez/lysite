@@ -195,4 +195,8 @@ return [
     'Preferably enter an image or photo with square format' => 'Preferably enter an image or photo with square format',
     'Instructor name' => 'Instructor name',
     'Permissions to create thesis' => 'Permissions to create thesis',
+    'Repeat password' => 'Repeat password',
+    'write your phone number if you want us to contact you' => 'write your phone number if you want us to contact you',
+    'Telephone' => 'Telephone',
+    'optional' => 'optional',
 ];

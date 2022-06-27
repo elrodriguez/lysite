@@ -196,4 +196,8 @@ return [
     'Instructor name' => 'Nombre del Instructor',
     'All Format Thesis' => 'Todos los Formatos de Tesis',
     'Permissions to create thesis' => 'Permisos para crear tesis',
+    'Repeat password' => 'Repite la Contraseña',
+    'write your phone number if you want us to contact you' => 'Escribe tu número de celular si deseas que te contactemos',
+    'Telephone' => 'Teléfono',
+    'optional' => 'opcional',
 ];

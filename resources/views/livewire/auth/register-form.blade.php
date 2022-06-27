@@ -49,9 +49,20 @@
                                 @error('password') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
+                            <div class="form-group mb-24pt">
+                                <label for="repeat_password">{{ __('labels.Repeat password') }}:</label>
+                                <input wire:model="repeat_password" id="repeat_password" type="password" class="form-control"
+                                    placeholder="{{ __('labels.Your Password') }} ...">
+                                @error('repeat_password') <span class="error">{{ $message }}</span> @enderror
+                            </div>
 
+                            <div class="form-group">
+                                <label for="telephone">{{ __('labels.Telephone') }}:({{ __('labels.optional') }})</label>
+                                <input wire:model="telephone" id="telephone" type="tel" class="form-control"
+                                    placeholder="{{ __('labels.write your phone number if you want us to contact you') }} ...">
+                            </div>
 
-                            <button class="btn btn-lg btn-accent">
+                            <button wire.loading@disabled(true) class="btn btn-lg btn-accent">
                                 {{ __('labels.signup') }}</button>
                         </form>
                     </div>
@@ -86,7 +97,7 @@
             </div>
         </div>
     </div>
-    <div class="page-separator m-0">
+    {{-- <div class="page-separator m-0">
         <div class="page-separator__text">or sign-in with</div>
         <div class="page-separator__bg-top bg-white"></div>
     </div>
@@ -96,5 +107,5 @@
             <a href="signup-payment.html" class="btn btn-lg btn-secondary btn-block-xs">Twitter</a>
             <a href="signup-payment.html" class="btn btn-lg btn-secondary btn-block-xs">Google+</a>
         </div>
-    </div>
+    </div> --}}
 </div>

@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
+use Modules\Investigation\Entities\InveThesisStudent;
 use PDF;
 
 class ThesisController extends Controller
@@ -32,6 +33,13 @@ class ThesisController extends Controller
 
     public function parts($thesis_id, $sub_part = 0)
     {
+        //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
+        if($sub_part==0){
+        $id = InveThesisStudent::where('id',$thesis_id)->get()->first()->format_id;
+        $id = InveThesisFormatPart::where('thesis_format_id', $id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first()->id;
+        $sub_part=$id;
+        }
+
         return view('investigation::thesis.thesis_parts')
             ->with('thesis_id', $thesis_id)
             ->with('sub_part', $sub_part);
