@@ -10,17 +10,6 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
   ),
-  'beyondcode/laravel-websockets' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'BeyondCode\\LaravelWebSockets\\WebSocketsServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'WebSocketRouter' => 'BeyondCode\\LaravelWebSockets\\Facades\\WebSocketRouter',
-    ),
-  ),
   'fruitcake/laravel-cors' => 
   array (
     'providers' => 

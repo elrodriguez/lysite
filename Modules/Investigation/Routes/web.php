@@ -45,6 +45,9 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
         Route::get('permissionsThesisAllowed', 'ThesisController@permissions_thesis_allowed')->name('investigation_thesis_permissions_thesis_allowed');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_tesis'])->get('all', 'ThesisController@allthesis')->name('investigation_thesis_all');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_tesis'])->get('check/{id}/{part_id?}', 'ThesisController@thesischeck')->name('investigation_thesis_check');
-
     });
 });
+
+Route::get('thesis_editor', function () {
+    return view('investigation::thesis.thesis_editor_sample');
+})->name('thesis_editor_sample');

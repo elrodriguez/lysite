@@ -53,6 +53,9 @@ class ThesisController extends Controller
         $thesis = InveThesisFormatPart::join('inve_thesis_formats', 'inve_thesis_format_parts.thesis_format_id', 'inve_thesis_formats.id')
             ->join('inve_thesis_students', 'inve_thesis_students.format_id', 'inve_thesis_formats.id')
             ->select(
+                'inve_thesis_formats.right_margin',
+                'inve_thesis_formats.left_margin',
+                'inve_thesis_formats.between_lines',
                 'inve_thesis_formats.name',
                 'inve_thesis_students.title',
                 'inve_thesis_format_parts.number_order',
@@ -77,6 +80,9 @@ class ThesisController extends Controller
         $parts = [];
         foreach ($thesis as $k => $part) {
             $parts[$k] = [
+                'right_margin' => $part->right_margin,
+                'left_margin' => $part->left_margin,
+                'between_lines' => $part->between_lines,
                 'title' => $part->title,
                 'description' => $part->description,
                 'content' => html_entity_decode($part->content, ENT_QUOTES, "UTF-8"),
@@ -109,7 +115,7 @@ class ThesisController extends Controller
         $html = '';
 
         if (count($subparts) > 0) {
-            $html .= '<ul>';
+            $html .= '<ol>';
             foreach ($subparts as $k => $subpart) {
                 $html .= '<li class="list-style-type:none">';
                 $html .= $subpart->number_order . ' ' . $subpart->description;
@@ -117,7 +123,7 @@ class ThesisController extends Controller
                 $html .= $this->getSubParts($subpart->id, $thesis_id);
                 $html .= '</li>';
             }
-            $html .= '</ul>';
+            $html .= '</ol>';
         }
         return $html;
     }
@@ -258,7 +264,8 @@ class ThesisController extends Controller
         return $html;
     }
 
-    public function permissions_thesis_allowed(){
+    public function permissions_thesis_allowed()
+    {
         return view('investigation::thesis.thesis_allowed');
     }
 }
