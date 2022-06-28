@@ -18,10 +18,34 @@
                     <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn primary"><i
                             class="fa fa-pencil-alt mr-1"></i></button>
                     <button onclick="deleteThesisStudent({{ $thesis_student->id }})" type="button"
-                        class="btn btn primary"><i class="fa fa-trash-alt mr-1"></i></button>
+                        class="btn btn-primary"><i class="fa fa-trash-alt mr-1"></i></button>
                 </div>
             </div>
         </div>
+
+           {{-- Notas de instructor --}}
+
+           @if ($commentary)
+           <div class="card card-body mb-3" style="background-color: rgb(181, 168, 255)">
+
+               <div class="row">
+                   <div class="col-3 mb-2">
+                       <button title="borra la nota o comentario cuando quieras." class="btn-warning btn"
+                           onclick="deleteCommentary()">
+                           Eliminar nota ->
+                       </button>
+                   </div>
+                   <div class="col-9 mb-3">
+                       <label>Nota:</label>
+                       <div>{{ $commentary }}</div>
+                   </div>
+
+               </div>
+
+           </div>
+       @endif
+
+       {{-- Contenido --}}
         <div class="card card-body mb-3">
             <div class="row">
                 <div class="form-group col-3">
@@ -68,7 +92,8 @@
                 <div wire:ignore class="col-lg-8" id="SuperEditor">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-1">
-                            <button class="btn btn-primary btn-sm" onclick="ShowHide()" id="btnShowHide"><<</button>
+                            <button class="btn btn-primary btn-sm" onclick="ShowHide()" id="btnShowHide">
+                                <<< </button>
                         </div>
                         <div class="col col-lg-9">
                             <label class="form-label" for="content">{{ $focused_part->description }}</label>
@@ -101,14 +126,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            @if ($commentary)
-                                <div class="row">
-                                    <div class="col-12 mb-3">
-                                        <label>Nota:</label>
-                                        <div>{{ $commentary }}</div>
-                                    </div>
-                                </div>
-                            @endif
+
                             <div class="row">
                                 <div class="form-group col-9">
                                     <div class="custom-control">
@@ -134,6 +152,9 @@
                 </div>
             </div>
         </div>
+
+
+
         {{-- modal video --}}
         <div wire:ignore class="ventana_flotante" style="display: none" id="video-flotante">
 
@@ -166,7 +187,8 @@
 
                             <div class="player__embed d-none">
                                 <!-- Aqui abajo va el Video -->
-                                <iframe class="embed-responsive-item" id="iframeVideoPart" allowfullscreen=""></iframe>
+                                <iframe class="embed-responsive-item" id="iframeVideoPart"
+                                    allowfullscreen=""></iframe>
                             </div>
 
                         </div>
@@ -193,6 +215,19 @@
             }).then((e) => {
                 if (e == ("confirm")) {
                     @this.destroy(id)
+                }
+            });
+        }
+        function deleteCommentary() {
+            cuteAlert({
+                type: "question",
+                title: "¿Desea eliminar esta Nota o Comentario?",
+                message: "Advertencia:¡Cerciorate de seguir todas las indicaciones de tu instructor antes de borrar las notas!",
+                confirmText: "Si, Borrar nota",
+                cancelText: "Cancelar"
+            }).then((e) => {
+                if (e == ("confirm")) {
+                    @this.deleteCommentary()
                 }
             });
         }
@@ -341,17 +376,17 @@
             @this.toggleSaving();
         }
 
-        function ShowHide(){
-            var index =document.getElementById("IndexBar").style.display;
-            if(index=="inline"){
-                document.getElementById("IndexBar").style.display="none";
-                document.getElementById("SuperEditor").className="col-md-12";
-                document.getElementById("btnShowHide").innerHTML=">>";
-            }else{
-                document.getElementById("IndexBar").style.display="inline";
-                document.getElementById("IndexBar").className="col-md-4";
-                document.getElementById("SuperEditor").className="col-lg-8";
-                document.getElementById("btnShowHide").innerHTML="<<";
+        function ShowHide() {
+            var index = document.getElementById("IndexBar").style.display;
+            if (index == "inline") {
+                document.getElementById("IndexBar").style.display = "none";
+                document.getElementById("SuperEditor").className = "col-md-12";
+                document.getElementById("btnShowHide").innerHTML = ">>";
+            } else {
+                document.getElementById("IndexBar").style.display = "inline";
+                document.getElementById("IndexBar").className = "col-md-4";
+                document.getElementById("SuperEditor").className = "col-lg-8";
+                document.getElementById("btnShowHide").innerHTML = "<<";
                 //document.getElementById("SuperEditor").style.display="none";
                 //document.getElementById("SuperEditor").style.display="inline";
             }
