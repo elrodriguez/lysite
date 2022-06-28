@@ -53,8 +53,10 @@ Route::get('thesis_editor', function () {
 })->name('thesis_editor_sample');
 
 Route::get('thesis_cadenas', function () {
-    $cadena = 'The substring to search for in the will always return true';
+    $cadena = 'The substring to search for https://web.facebook.com/?_rdc=1&_rdrin the will always return true';
     $reg_exUrl = "/.[http|https|ftp|ftps]*\:\/\/.[^$|\s]*/";
-    return preg_replace($reg_exUrl, "<a href='$0'>$0</a>", $cadena);
-    dd($cadena);
+    $reg_exUrl2 = "/www.[^$|\s]*/";
+    $cadena = preg_replace($reg_exUrl, "<a href='$0' target='_blank'>$0</a>", $cadena);
+    return  preg_replace($reg_exUrl2, "<a href='http://$0' target='_blank'>$0</a>", $cadena);
+    //dd($cadena);
 })->name('thesis_cadenas');
