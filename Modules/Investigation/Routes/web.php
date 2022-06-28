@@ -51,3 +51,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
 Route::get('thesis_editor', function () {
     return view('investigation::thesis.thesis_editor_sample');
 })->name('thesis_editor_sample');
+
+Route::get('thesis_cadenas', function () {
+    $cadena = 'The substring to search for in the https://www.php.net/manual/es/function.str-contains.php string will always return true';
+    $reg_exUrl = "/.[http|https|ftp|ftps]*\:\/\/.[^$|\s]*/";
+    return preg_replace($reg_exUrl, "<a href='$0'>$0</a>", $cadena);
+    dd($cadena);
+})->name('thesis_cadenas');

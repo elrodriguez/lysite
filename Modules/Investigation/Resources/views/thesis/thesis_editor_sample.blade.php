@@ -1,4 +1,7 @@
 <x-master>
+    @section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ url('ckeditor5/sample/styles.css') }}">
+    @stop
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary">
             <div class="py-32pt">
@@ -22,27 +25,44 @@
         </div>
     </div>
     <div>
-        <textarea name="editor" id="editor" cols="30" rows="10"></textarea>
+        <div class="centered">
+            <div class="row">
+                <div class="document-editor__toolbar"></div>
+            </div>
+            <div class="row row-editor">
+                <div class="editor-container">
+                    <div id="editor">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div> 
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
-    <script src="{{ url('ckeditor-5/src/ckeditor.js') }}"></script>
-    <script>
-        ClassicEditor.create( document.querySelector( '#editor' ), {
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            })
-            .catch( error => {
-                console.log( error );
-            } );
-    </script>
+    <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script>
+    <script>DecoupledDocumentEditor
+        .create( document.querySelector( '#editor' ), {
+            
+            licenseKey: '',
+            
+            
+            
+        } )
+        .then( editor => {
+            window.editor = editor;
+    
+            // Set a custom container for the toolbar.
+            document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
+            document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
+        } )
+        .catch( error => {
+            console.error( 'Oops, something went wrong!' );
+            console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+            console.warn( 'Build id: nqbbe5edhs9m-u9490jx48w7r' );
+            console.error( error );
+        } );
+</script>
     @stop
 </x-master>
