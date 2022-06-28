@@ -122,6 +122,7 @@ class ChatMessages extends Component
 
     public function addLink($cadena)
     {
+        //ndndndn
         $reg_exUrl = "/.[http|https|ftp|ftps]*\:\/\/.[^$|\s]*/";
         $reg_exUrl2 = "/www.[^$|\s]*/";
         $cadena = preg_replace($reg_exUrl, "<a href='$0' target='_blank'>$0</a>", $cadena);
