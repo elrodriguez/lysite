@@ -33,7 +33,7 @@
                         @foreach ($chat['messages'] as $msg)
                             <div class="{{ $msg['user_id'] == auth()->user()->id ? 'ui-chatbox-msg-right' : 'ui-chatbox-msg' }}" style="max-width: 208px;">
                                 {{-- <b>{{ $msg['user_id'] == auth()->user()->id ? 'YO' : $msg['name'] }}: --}}
-                                </b><span>{!! $msg['message'] !!}}</span>
+                                </b><span>{!! $msg['message'] !!}</span>
                             </div>
                         @endforeach
                     </div>
