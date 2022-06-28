@@ -115,7 +115,7 @@ class ChatMessages extends Component
                 ];
             }
 
-            $this->chats[Auth::id() . $id]['messages'] = $msg->toArray();
+            $this->chats[Auth::id() . $id]['messages'] = $xmsg;
             $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => Auth::id() . $id, 'user_id' => $id]);
         }
     }
