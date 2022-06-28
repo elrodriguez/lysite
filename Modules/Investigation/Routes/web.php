@@ -53,7 +53,7 @@ Route::get('thesis_editor', function () {
 })->name('thesis_editor_sample');
 
 Route::get('thesis_cadenas', function () {
-    $cadena = 'The substring to search for in the https://www.php.net/manual/es/function.str-contains.php string will always return true';
+    $cadena = 'The substring to search for in the will always return true';
     $reg_exUrl = "/.[http|https|ftp|ftps]*\:\/\/.[^$|\s]*/";
     return preg_replace($reg_exUrl, "<a href='$0'>$0</a>", $cadena);
     dd($cadena);

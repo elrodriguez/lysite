@@ -86,7 +86,7 @@ class ChatMessages extends Component
             'messages'      => []
         ];
 
-        $msg = ChatMessage::join('users', 'user_id', 'users.id')
+        $msgs = ChatMessage::join('users', 'user_id', 'users.id')
             ->select(
                 'chat_messages.conversation_ids',
                 'chat_messages.message',
@@ -100,12 +100,31 @@ class ChatMessages extends Component
             ->where('conversation_ids', Auth::id() . $id)
             ->get();
 
-        if ($msg) {
+        if ($msgs) {
+            $xmsg = [];
+            foreach ($msgs as $k => $msg) {
+                $xmsg[$k] = [
+                    'conversation_ids' => $msg->conversation_ids,
+                    'message' => $this->addLink($msg->message),
+                    'user_id' => $msg->user_id,
+                    'receiver' => $msg->receiver,
+                    'is_seen' => $msg->is_seen,
+                    'file' => $msg->file,
+                    'file_name' => $msg->file_name,
+                    'name' => $msg->name
+                ];
+            }
+
             $this->chats[Auth::id() . $id]['messages'] = $msg->toArray();
             $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => Auth::id() . $id, 'user_id' => $id]);
         }
     }
 
+    public function addLink($cadena)
+    {
+        $reg_exUrl = "/.[http|https|ftp|ftps]*\:\/\/.[^$|\s]*/";
+        return preg_replace($reg_exUrl, "<a href='$0'>$0</a>", $cadena);
+    }
     public function minimizeChat($index)
     {
         $this->chats[$index]['display'] = 'none';
@@ -152,7 +171,7 @@ class ChatMessages extends Component
 
             $new_message = [
                 'conversation_ids'  => $index,
-                'message'           => $new_message_text,
+                'message'           => $this->addLink($new_message_text),
                 'user_id'           => Auth::id(),
                 'receiver'          => $this->chat['user_id'],
                 'is_seen'           => false,
