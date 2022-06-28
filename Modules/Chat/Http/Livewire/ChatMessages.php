@@ -123,7 +123,7 @@ class ChatMessages extends Component
     public function addLink($cadena)
     {
         $reg_exUrl = "/.[http|https|ftp|ftps]*\:\/\/.[^$|\s]*/";
-        return preg_replace($reg_exUrl, "<a href='$0'>$0</a>", $cadena);
+        return preg_replace($reg_exUrl, "<a href='$0' target='_blank'>$0</a>", $cadena);
     }
     public function minimizeChat($index)
     {
