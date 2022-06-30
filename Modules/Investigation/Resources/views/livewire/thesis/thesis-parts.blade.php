@@ -67,7 +67,7 @@
                         <div class="index-modal-contenido">
                             <a href="#">X</a>
                             <h4>Index</h4>
-                            <ul class="list-point-none">
+                            <ul class="list-point-none" style="overflow-y:scroll">
                                 @if (count($parts) > 0)
                                     @foreach ($parts as $part)
                                         @if ($part['id'] == $focus_id)
