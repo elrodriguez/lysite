@@ -6,9 +6,9 @@
             background: none repeat scroll 0 0 #FFFFFF;
             border: 1px solid #DDDDDD;
             border-radius: 5px 5px 5px 5px;
-            bottom: 2px;
+            bottom: 10px;
             left: auto;
-            margin-left: -120px;
+            margin-left: 5px;
             padding: 0px 0 0;
             position: fixed;
             text-align: center;
@@ -70,7 +70,7 @@
         <script src="{{ asset('ckfinder/ckfinder.js') }}"></script> --}}
 
         <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script>
-        
+
     @endsection
 </x-master>
 

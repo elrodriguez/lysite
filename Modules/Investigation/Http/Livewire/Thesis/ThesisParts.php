@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Exists;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaContent;
+use Modules\Academic\Entities\AcaCourse;
+use Modules\Academic\Entities\AcaSection;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
@@ -36,7 +38,7 @@ class ThesisParts extends Component
 
     public function mount($thesis_id, $sub_part)
     {
-        $this->focus_id = $sub_part;
+        $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
         $this->thesis_id = $thesis_id;
         $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
         if ($this->thesis_student) {
@@ -46,7 +48,6 @@ class ThesisParts extends Component
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
-                ->orderBy('version', 'desc')
                 ->limit(1)
                 ->first();
 
@@ -271,6 +272,11 @@ class ThesisParts extends Component
 
     public function goToTheCourse(){
         $content_id = $this->focused_part->content_id;
+        $section_id = AcaContent::where('id', $content_id)->get()->first()->section_id;
+        $course_id = AcaSection::where('id', $section_id)->get()->first()->course_id;
+        //crea la URL al curso y a la #seccion donde se encuentra el video
+        $url = route('academic_students_my_course', ['id' => $course_id])."#".$section_id;
+        return $url;
     }
 
     public function deleteCommentary(){ //eliminar la nota del instructor
@@ -280,7 +286,5 @@ class ThesisParts extends Component
                 ->update([
                     'commentary' => null,
                 ]);
-
-        $this->render();
     }
 }

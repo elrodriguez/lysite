@@ -87,20 +87,20 @@
                                     @endforeach
                                 @endif
                             </ul>
-                        </div>  
+                        </div>
                     </div>
-                    
+
                 </div>
                 <div class="col">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-secondary" wire:click="showVideo">
+                        <button type="button" class="btn btn-secondary" wire:click="showVideo" title="{{ __('labels.Watch a Video about').": ".$focused_part->description }}">
                             <i class="fa fa-video"></i>
                         </button>
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip"
                             data-placement="top" title="{{ $focused_part->information }}">
                             <i class="fa fa-info-circle"></i>
                         </button>
-                        <button type="button" class="btn btn-secondary" wire:click="goToTheCourse">
+                        <button type="button" class="btn btn-secondary" onclick="watchSection()" title="{{ __('labels.Click here if you want to see this topic in the course') }}">
                             <i class="fa fa-book"></i>
                         </button>
                     </div>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             @endif
-        
+
             <div class="row">
                 <div class="col mb-2">
                     <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
@@ -422,6 +422,19 @@
                 console.error( error );
             } );
         }
+    </script>
+
+{{-- nueva pestaña para enviar a la sección del video --}}
+    <script>
+    async function watchSection(){
+        try {
+            let url = await @this.goToTheCourse();
+            window.open(url, '_blank');
+        } catch (e) {
+            console.log(e);
+            alert("No es posible mostrar el curso");
+        }
+    }
     </script>
 
 </div>
