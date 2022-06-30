@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Date;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaInstructor;
 use Modules\Academic\Entities\AcaStudent;
+use PhpParser\Node\Stmt\TryCatch;
 
 class StudentsController extends Controller
 {
@@ -67,12 +68,19 @@ class StudentsController extends Controller
     public function my_course($id)
     {
         $id_person = Person::where('user_id', Auth::id())->get()->first()->id;
-        $registered_until = AcaStudent::where('person_id', $id_person)->get()->first()->registered_until;
+
+
+
+        try {
+            $registered_until = AcaStudent::where('person_id', $id_person)->get()->first()->registered_until;
+        } catch (\Throwable $th) {
+            $registered_until = null;
+        }
         $hoy = new Date(now());
 
-        $fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+        $fecha_actual = strtotime(date("d-m-Y H:i:00", time()));
         $fecha_entrada = strtotime($registered_until);
-        if ($fecha_entrada > $fecha_actual || $registered_until != null){
+        if ($fecha_entrada > $fecha_actual || $registered_until != null) {
 
             $course = AcaCourse::find($id);
             $this->video = 0;
@@ -93,7 +101,7 @@ class StudentsController extends Controller
                 'course'    => $course,
                 'instruct'  => $instruct
             ]);
-        }else{
+        } else {
             return view('academic::students.students-plazo-vencido');
         }
     }
