@@ -72,7 +72,7 @@ class StudentsController extends Controller
 
         $fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
         $fecha_entrada = strtotime($registered_until);
-        if ($fecha_entrada > $fecha_actual){
+        if ($fecha_entrada > $fecha_actual || $registered_until != null){
 
             $course = AcaCourse::find($id);
             $this->video = 0;
