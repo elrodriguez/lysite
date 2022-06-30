@@ -175,7 +175,7 @@ class ThesisParts extends Component
             $this->save(); //guarda en la base de datos
         } else {
             $bool = false;
-            $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'warning', 'tit' => 'No hiciste cambios', 'msg' => 'X']);
+            $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
         }
 
         if ($bool) {
@@ -271,5 +271,16 @@ class ThesisParts extends Component
 
     public function goToTheCourse(){
         $content_id = $this->focused_part->content_id;
+    }
+
+    public function deleteCommentary(){ //eliminar la nota del instructor
+        $this->commentary=null;
+        InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+                ->where('inve_thesis_format_part_id', $this->focus_id)
+                ->update([
+                    'commentary' => null,
+                ]);
+
+        $this->render();
     }
 }

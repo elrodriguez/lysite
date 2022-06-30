@@ -123,14 +123,24 @@ class ThesisPartsCheck extends Component
 
     public function save()
     {
-        $this->validate([
-            'content' => 'required'
-        ]);
-        $this->thesisStudentPart->update([
-            'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
-            'commentary_user_id' => Auth::id(),
-            'commentary' => $this->commentary
-        ]);
+        if($this->thesisStudentPart!=null){ // si existe actualiza de lo contrario deberá crear con los datos del alumno
+            $this->thesisStudentPart->update([
+                'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                'commentary_user_id' => Auth::id(),
+                'commentary' => $this->commentary
+            ]);
+        }else{
+            InveThesisStudentPart::create([
+                'student_id' => $this->thesis_student->student_id,
+                'inve_thesis_student_id' => $this->thesis_student->id,
+                'inve_thesis_format_part_id' => $this->focus_id,
+                'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                'commentary_user_id' => Auth::id(),
+                'commentary' => $this->commentary,
+                //     'version' => ($max_version ? $max_version + 1 : 1)
+            ]);
+        }
+
 
         $this->dispatchBrowserEvent('inve-student-part-create', ['success' => true]);
     }

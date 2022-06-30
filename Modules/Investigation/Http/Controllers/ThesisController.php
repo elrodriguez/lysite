@@ -142,6 +142,12 @@ class ThesisController extends Controller
     }
     public function thesischeck($external_id, $part_id = null)
     {
+        //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
+        if($part_id==0){
+            $id = InveThesisStudent::where('external_id',$external_id)->get()->first()->format_id;
+            $id = InveThesisFormatPart::where('thesis_format_id', $id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first()->id;
+            $part_id=$id;
+            }
         return view('investigation::thesis.thesis_parts_check')
             ->with('external_id', $external_id)
             ->with('part_id', $part_id);

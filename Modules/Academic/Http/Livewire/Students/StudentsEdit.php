@@ -123,17 +123,28 @@ class StudentsEdit extends Component
             'district_id' => $this->district_id,
         ]);
 
-        AcaStudent::where('person_id', $this->person->id)->delete();
+        /* AcaStudent::where('person_id', $this->person->id)->delete(); */
 
         foreach ($this->student_courses as $student_course) {
             $aca_student = AcaStudent::where('person_id', $this->person->id)
                 ->where('course_id', $student_course['id'])
                 ->exists();
-            if (!$aca_student) {
+            if (!$aca_student) { //si no existe crea al estudiante
                 AcaStudent::create([
                     'person_id' => $this->person->id,
                     'course_id' => $student_course['id'],
                     'registered_until' => $student_course['registered_until'],
+                    'status' => $student_course['status']
+                ]);
+            }else{
+                $aca_student = AcaStudent::where('person_id', $this->person->id)
+                ->where('course_id', $student_course['id'])->get()->first()->id;
+                $aca_student = AcaStudent::find($aca_student);
+
+                $aca_student->update([
+                    'person_id' => $this->person->id,
+                    'course_id' => $student_course['id'],
+                    'registered_until' => new DateTime($student_course['registered_until']),
                     'status' => $student_course['status']
                 ]);
             }
