@@ -24,7 +24,7 @@
         </div>
         <div class="card card-body mb-3">
             <div class="row">
-                <div class="form-group col-3">
+                <div class="col-3">
                     <div class="custom-control custom-checkbox">
                         <input wire:model="auto_save" class="custom-control-input" type="checkbox" value=""
                             id="invalidCheck01">
@@ -33,107 +33,108 @@
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div wire:ignore class="col-md-4" id="IndexBar" style="display: inline;">
-                    <ul class="list-point-none">
-                        @if (count($parts) > 0)
-                            @foreach ($parts as $part)
-                                @if ($part['id'] == $focus_id)
-                                    <li class="alert alert-primary">
-                                        <a class="alert-link"
-                                            href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
-                                            {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                        {!! $part['items'] !!}
-                                    </li>
-                                @else
-                                    <li>
-                                        <a href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
-                                            {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                        {!! $part['items'] !!}
-                                    </li>
+                <div class="col">
+                    <a type="button" class="btn btn-primary" href="#modalIndexTesis">
+                        Ver Index
+                    </a>
+                    <div wire:ignore id="modalIndexTesis" class="index-modal">
+                        <div class="index-modal-contenido">
+                            <a href="#">X</a>
+                            <h4>Index</h4>
+                            <ul class="list-point-none">
+                                @if (count($parts) > 0)
+                                    @foreach ($parts as $part)
+                                        @if ($part['id'] == $focus_id)
+                                            <li class="alert alert-primary">
+                                                <a class="alert-link"
+                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                                {!! $part['items'] !!}
+                                            </li>
+                                        @else
+                                            <li>
+                                                <a href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                                {!! $part['items'] !!}
+                                            </li>
+                                        @endif
+                                    @endforeach
                                 @endif
-                            @endforeach
-                        @endif
-                    </ul>
-                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
-                        class="btn btn-warning btn-block mt-3" target="_blank">
-                        Exportar PDF
-                    </a>
-                    <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}"
-                        class="btn btn-info btn-block mt-3" target="_blank">
-                        Exportar WORD
-                    </a>
+                            </ul>
+                        </div>  
+                    </div>
+                    
                 </div>
-                <div wire:ignore class="col-lg-8" id="SuperEditor">
-                    <div class="row justify-content-md-center">
-                        <div class="col col-lg-1">
-                            <button class="btn btn-primary btn-sm" onclick="ShowHide()" id="btnShowHide"><<</button>
-                        </div>
-                        <div class="col col-lg-9">
-                            <label class="form-label" for="content">{{ $focused_part->description }}</label>
-                        </div>
-                        <div class="col col-lg-2">
-                            <div class="btn-group mr-2">
-                                <button type="button" class="btn btn-secondary btn-sm" wire:click="showVideo">
-                                    <i class="fa fa-video"></i>
-                                </button>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip"
-                                    data-placement="top" title="{{ $focused_part->information }}">
-                                    <i class="fa fa-info-circle"></i>
-                                </button>
-                                <button type="button" class="btn btn-secondary btn-sm" wire:click="goToTheCourse">
-                                    <i class="fa fa-book"></i>
-                                </button>
-                            </div>
-                        </div>
+                <div class="col">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-secondary btn-sm" wire:click="showVideo">
+                            <i class="fa fa-video"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                            data-placement="top" title="{{ $focused_part->information }}">
+                            <i class="fa fa-info-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" wire:click="goToTheCourse">
+                            <i class="fa fa-book"></i>
+                        </button>
                     </div>
-                    <div class="flex">
-
-                        @if ($focused_part->body == true)
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <div wire:ignore>
-                                        <textarea class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
-                                    </div>
-                                    @error('content')
-                                        <span class="invalid-feedback-2">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            @if ($commentary)
-                                <div class="row">
-                                    <div class="col-12 mb-3">
-                                        <label>Nota:</label>
-                                        <div>{{ $commentary }}</div>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="row">
-                                <div class="form-group col-9">
-                                    <div class="custom-control">
-
-                                        <button type="button" class="btn-primary btn" wire:loading.attr="disabled"
-                                            onclick="saveThesisPartStudent()">{{ __('labels.Save') }}</button>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                        @else
-                            <div>
-                                <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
-                                <input type="hidden" name="" id="editor">
-
-                            </div>
-                        @endif
-
-                    </div>
-
                 </div>
             </div>
         </div>
+    </div>
+    @if ($focused_part->body == true)
+        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
+            <div class="div-main">
+                <div class="centered" wire:ignore>
+                    <div class="row">
+                        <div class="document-editor__toolbar"></div>
+                    </div>
+                    <div class="row row-editor">
+                        <div class="editor-container">
+                            <div id="editor" class="editor">{!! $content_old !!}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @error('content')
+            <span class="invalid-feedback-2">{{ $message }}</span>
+        @enderror
+        <div class="container page__container">
+            @if ($commentary)
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label>Nota:</label>
+                        <div>{{ $commentary }}</div>
+                    </div>
+                </div>
+            @endif
+        
+            <div class="row">
+                <div class="col mb-2">
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
+                        class="btn btn-warning mt-3" target="_blank">
+                        Exportar PDF
+                    </a>
+                    <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}"
+                        class="btn btn-info mt-3" target="_blank">
+                        Exportar WORD
+                    </a>
+                    <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
+                        onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    @else
+        <div>
+            <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
+            <input type="hidden" name="" id="editor">
+
+        </div>
+    @endif
+    <div>
         {{-- modal video --}}
         <div wire:ignore class="ventana_flotante" style="display: none" id="video-flotante">
 
@@ -293,8 +294,9 @@
 
         document.addEventListener('livewire:load', function() {
 
-            if (document.getElementById("editor").tagName == "TEXTAREA") {
-                CKEDITOR.replace('editor');
+            if (document.getElementById("editor").tagName == "DIV") {
+                //CKEDITOR.replace('editor');
+                activeCkeditor5();
             }
         })
 
@@ -360,4 +362,26 @@
 
         window.onload = activarAutoGuardado; //activa el intervalo de tiempo
     </script>
+
+
+    <script>
+        function activeCkeditor5(){
+            DecoupledDocumentEditor.create( document.querySelector( '.editor' ), {
+                licenseKey: '',
+            } )
+            .then( editor => {
+                window.editor = editor;
+                // Set a custom container for the toolbar.
+                document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
+                document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
+            } )
+            .catch( error => {
+                console.error( 'Oops, something went wrong!' );
+                console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+                console.warn( 'Build id: nqbbe5edhs9m-u9490jx48w7r' );
+                console.error( error );
+            } );
+        }
+    </script>
+
 </div>
