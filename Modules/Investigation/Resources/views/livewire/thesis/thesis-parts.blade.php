@@ -14,18 +14,20 @@
                 </div>
             </div>
             <div class="d-flex align-items-center py-4pt" style="white-space: nowrap;">
-                <div class="btn-group" role="group" aria-label="">
-                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn primary"><i
-                            class="fa fa-pencil-alt mr-1"></i></button>
+                <div class="btn-group" role="group">
+                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn-primary">
+                        <i class="fa fa-pencil-alt mr-1"></i>
+                    </button>
                     <button onclick="deleteThesisStudent({{ $thesis_student->id }})" type="button"
-                        class="btn btn-primary"><i class="fa fa-trash-alt mr-1"></i></button>
+                        class="btn btn-primary"><i class="fa fa-trash-alt mr-1"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
            {{-- Notas de instructor --}}
 
-           @if ($commentary)
+        @if ($commentary)
            <div class="card card-body mb-3" style="background-color: rgb(181, 168, 255)">
 
                <div class="row">
@@ -91,14 +93,14 @@
                 </div>
                 <div class="col">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-secondary btn-sm" wire:click="showVideo">
+                        <button type="button" class="btn btn-secondary" wire:click="showVideo">
                             <i class="fa fa-video"></i>
                         </button>
-                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip"
                             data-placement="top" title="{{ $focused_part->information }}">
                             <i class="fa fa-info-circle"></i>
                         </button>
-                        <button type="button" class="btn btn-secondary btn-sm" wire:click="goToTheCourse">
+                        <button type="button" class="btn btn-secondary" wire:click="goToTheCourse">
                             <i class="fa fa-book"></i>
                         </button>
                     </div>
