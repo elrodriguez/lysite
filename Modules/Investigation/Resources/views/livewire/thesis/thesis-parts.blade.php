@@ -25,29 +25,29 @@
             </div>
         </div>
 
-           {{-- Notas de instructor --}}
+        {{-- Notas de instructor --}}
 
         @if ($commentary)
-           <div class="card card-body mb-3" style="background-color: rgb(181, 168, 255)">
+            <div class="card card-body mb-3" style="background-color: rgb(181, 168, 255)">
 
-               <div class="row">
-                   <div class="col-3 mb-2">
-                       <button title="borra la nota o comentario cuando quieras." class="btn-warning btn"
-                           onclick="deleteCommentary()">
-                           Eliminar nota ->
-                       </button>
-                   </div>
-                   <div class="col-9 mb-3">
-                       <label>Nota:</label>
-                       <div>{{ $commentary }}</div>
-                   </div>
+                <div class="row">
+                    <div class="col-3 mb-2">
+                        <button title="borra la nota o comentario cuando quieras." class="btn-warning btn"
+                            onclick="deleteCommentary()">
+                            Eliminar nota ->
+                        </button>
+                    </div>
+                    <div class="col-9 mb-3">
+                        <label>Nota:</label>
+                        <div>{{ $commentary }}</div>
+                    </div>
 
-               </div>
+                </div>
 
-           </div>
-       @endif
+            </div>
+        @endif
 
-       {{-- Contenido --}}
+        {{-- Contenido --}}
         <div class="card card-body mb-3">
             <div class="row">
                 <div class="col-3">
@@ -79,7 +79,8 @@
                                             </li>
                                         @else
                                             <li>
-                                                <a href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                <a
+                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
                                                     {{ $part['number_order'] . ' ' . $part['description'] }}</a>
                                                 {!! $part['items'] !!}
                                             </li>
@@ -93,23 +94,33 @@
                 </div>
                 <div class="col">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-secondary" wire:click="showVideo" title="{{ __('labels.Watch a Video about').": ".$focused_part->description }}">
+                        <button type="button" class="btn btn-secondary" wire:click="showVideo"
+                            title="{{ __('labels.Watch a Video about') . ': ' . $focused_part->description }}">
                             <i class="fa fa-video"></i>
                         </button>
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip"
-                            data-placement="top" title="{{ $focused_part->information }}">
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                            title="{{ $focused_part->information }}">
                             <i class="fa fa-info-circle"></i>
                         </button>
-                        <button type="button" class="btn btn-secondary" onclick="watchSection()" title="{{ __('labels.Click here if you want to see this topic in the course') }}">
-                            <i class="fa fa-book"></i>
-                        </button>
+                        @if ($focused_part->content_id != null)
+                            <button type="button" class="btn btn-secondary" onclick="watchSection()"
+                                title="{{ __('labels.Click here if you want to see this topic in the course') }}">
+                                <i class="fa fa-book"></i>
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-secondary" disabled onclick="watchSection()"
+                                title="{{ __('labels.Click here if you want to see this topic in the course') }}">
+                                <i class="fa fa-book"></i>
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @if ($focused_part->body == true)
-        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
+        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+            data-revision-history="false">
             <div class="div-main">
                 <div class="centered" wire:ignore>
                     <div class="row">
@@ -139,12 +150,12 @@
 
             <div class="row">
                 <div class="col mb-2">
-                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
-                        class="btn btn-warning mt-3" target="_blank">
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}" class="btn btn-warning mt-3"
+                        target="_blank">
                         Exportar PDF
                     </a>
-                    <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}"
-                        class="btn btn-info mt-3" target="_blank">
+                    <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
+                        target="_blank">
                         Exportar WORD
                     </a>
                     <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
@@ -224,6 +235,7 @@
                 }
             });
         }
+
         function deleteCommentary() {
             cuteAlert({
                 type: "question",
@@ -405,36 +417,38 @@
 
 
     <script>
-        function activeCkeditor5(){
-            DecoupledDocumentEditor.create( document.querySelector( '.editor' ), {
-                licenseKey: '',
-            } )
-            .then( editor => {
-                window.editor = editor;
-                // Set a custom container for the toolbar.
-                document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
-                document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
-            } )
-            .catch( error => {
-                console.error( 'Oops, something went wrong!' );
-                console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
-                console.warn( 'Build id: nqbbe5edhs9m-u9490jx48w7r' );
-                console.error( error );
-            } );
+        function activeCkeditor5() {
+            DecoupledDocumentEditor.create(document.querySelector('.editor'), {
+                    licenseKey: '',
+                })
+                .then(editor => {
+                    window.editor = editor;
+                    // Set a custom container for the toolbar.
+                    document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+                    document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+                })
+                .catch(error => {
+                    console.error('Oops, something went wrong!');
+                    console.error(
+                        'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                        );
+                    console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+                    console.error(error);
+                });
         }
     </script>
 
-{{-- nueva pestaña para enviar a la sección del video --}}
+    {{-- nueva pestaña para enviar a la sección del video --}}
     <script>
-    async function watchSection(){
-        try {
-            let url = await @this.goToTheCourse();
-            window.open(url, '_blank');
-        } catch (e) {
-            console.log(e);
-            alert("No es posible mostrar el curso");
+        async function watchSection() {
+            try {
+                let url = await @this.goToTheCourse();
+                window.open(url, '_blank');
+            } catch (e) {
+                console.log(e);
+                alert("No es posible mostrar el curso");
+            }
         }
-    }
     </script>
 
 </div>
