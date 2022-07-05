@@ -60,36 +60,79 @@
                     </div>
                 </div>
                 <div class="col">
-                    <a type="button" class="btn btn-primary" href="#modalIndexTesis">
-                        Ver Index
-                    </a>
-                    <div wire:ignore id="modalIndexTesis" class="index-modal">
-                        <div class="index-modal-contenido">
-                            <a href="#">X</a>
-                            <h4>Index</h4>
-                            <ul class="list-point-none" style="width: 270px; height: 400px; overflow: scroll;"> {{-- style="overflow-y:scroll" --}}
-                                @if (count($parts) > 0)
-                                    @foreach ($parts as $part)
-                                        @if ($part['id'] == $focus_id)
-                                            <li class="alert alert-primary">
-                                                <a class="alert-link"
-                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
-                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                                {!! $part['items'] !!}
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a
-                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
-                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
-                                                {!! $part['items'] !!}
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            </ul>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModalScrollable">
+                        Indice de Contenidos
+                    </button>
+
+                    @section('modales')
+                        <div>
+                            <!-- Modal -->
+                            <style>
+                                .modal.modal-left .modal-dialog {
+                                    max-width: 380px;
+                                    min-height: calc(100vh - 0)
+                                }
+
+                                .modal.modal-left.show .modal-dialog {
+                                    transform: translate(0, 0)
+                                }
+
+                                .modal.modal-left .modal-content {
+                                    height: calc(100vh - 0);
+                                    overflow-y: auto
+                                }
+
+                                .modal.modal-left .modal-dialog {
+                                    transform: translate(-100%, 0);
+                                    margin: 0 auto 0 0
+                                }
+                            </style>
+                            <div class="modal fade modal-left" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Indice de Contenidos
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="list-point-none">
+                                                @if (count($parts) > 0)
+                                                    @foreach ($parts as $part)
+                                                        @if ($part['id'] == $focus_id)
+                                                            <li class="alert alert-primary">
+                                                                <a class="alert-link"
+                                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                                                {!! $part['items'] !!}
+                                                            </li>
+                                                        @else
+                                                            <li>
+                                                                <a
+                                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                                                {!! $part['items'] !!}
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">{{ __('labels.Close') }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    @endsection
 
                 </div>
                 <div class="col">
@@ -150,8 +193,8 @@
 
             <div class="row">
                 <div class="col mb-2">
-                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}" class="btn btn-warning mt-3"
-                        target="_blank">
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
+                        class="btn btn-warning mt-3" target="_blank">
                         Exportar PDF
                     </a>
                     <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
@@ -431,7 +474,7 @@
                     console.error('Oops, something went wrong!');
                     console.error(
                         'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-                        );
+                    );
                     console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
                     console.error(error);
                 });
