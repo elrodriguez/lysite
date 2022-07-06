@@ -199,4 +199,6 @@ return [
     'write your phone number if you want us to contact you' => 'write your phone number if you want us to contact you',
     'Telephone' => 'Telephone',
     'optional' => 'optional',
+    'Click here if you want to see this topic in the course' => 'Click here if you want to see this topic in the course',
+    'Watch a Video about' => 'Watch a Video about',
 ];

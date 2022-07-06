@@ -68,7 +68,8 @@ class ThesisPartsCheck extends Component
 
     public function getParts()
     {
-        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('number_order')->get();
+        //debe ordenarse por "index_order" que en el formulario se muestra como "numero de orden"
+        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('index_order')->get();
 
         if ($this->focus_id == 0) {
             $this->focus_id = $this->parts_all[0]->id;
@@ -78,7 +79,7 @@ class ThesisPartsCheck extends Component
 
         $parts = InveThesisFormatPart::where('thesis_format_id', $this->format_id)
             ->whereNull('belongs')
-            ->orderBy('number_order')
+            ->orderBy('index_order')
             ->get();
 
         foreach ($parts as $k => $part) {

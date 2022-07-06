@@ -213,7 +213,7 @@
                                                 </td>
                                                 <td>{{ $student_course['name'] }}</td>
                                                 <td>
-                                                    <input type="date" name="registered_until" id="registered_until"
+                                                    <input type="date"  name="registered_until" id="registered_until"
                                                         value="{{ $student_course['registered_until'] }}">
                                                 </td>
                                                 @if ($student_course['status'] == 1)

@@ -18,7 +18,8 @@ class InveThesisFormatPart extends Model
         'belongs',
         'state',
         'index_order',
-        'body'
+        'body',
+        'show_description'
 
     ];
 

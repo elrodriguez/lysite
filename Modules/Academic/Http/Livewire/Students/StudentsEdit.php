@@ -133,7 +133,7 @@ class StudentsEdit extends Component
                 AcaStudent::create([
                     'person_id' => $this->person->id,
                     'course_id' => $student_course['id'],
-                    'registered_until' => $student_course['registered_until'],
+                    'registered_until' => date('Y-m-d H:i:s', strtotime('+125 day', strtotime($student_course['registered_until']))), //$student_course['registered_until']
                     'status' => $student_course['status']
                 ]);
             }else{

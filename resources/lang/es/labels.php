@@ -200,4 +200,6 @@ return [
     'write your phone number if you want us to contact you' => 'Escribe tu número de celular si deseas que te contactemos',
     'Telephone' => 'Teléfono',
     'optional' => 'opcional',
+    'Click here if you want to see this topic in the course' => 'Click aquí, si deseas ver este tema en el curso',
+    'Watch a Video about' => 'Ver un video sobre',
 ];

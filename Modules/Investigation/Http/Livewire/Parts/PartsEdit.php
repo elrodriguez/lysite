@@ -18,6 +18,7 @@ class PartsEdit extends Component
     public $state;
     public $index_order;
     public $body;
+    public $show_description;
 
     public function render()
     {
@@ -35,6 +36,7 @@ class PartsEdit extends Component
         $this->state = $this->part->state;
         $this->index_order = $this->part->index_order;
         $this->body = $this->part->body;
+        $this->show_description = $this->part->show_description;
         $this->dispatchBrowserEvent('open-modal-parts-edit', ['title' => $title]);
     }
 
@@ -52,7 +54,8 @@ class PartsEdit extends Component
             'number_order' => $this->number_order,
             'state' => $this->state ? true : false,
             'index_order' => $this->index_order,
-            'body' => $this->body ? true : false
+            'body' => $this->body ? true : false,
+            'show_description' => $this->show_description ? true : false
         ]);
 
         $this->emit('listParts');
