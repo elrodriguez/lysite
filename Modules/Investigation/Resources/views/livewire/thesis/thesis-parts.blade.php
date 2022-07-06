@@ -47,7 +47,7 @@
             </div>
         @endif
 
-        {{-- Contenido --}}
+        {{--Contenido --}}
         <div class="card card-body mb-3">
             <div class="row">
                 <div class="col-3">
@@ -66,7 +66,7 @@
                         data-target="#exampleModalScrollable">
                         Indice de Contenidos
                     </button>
-
+                    {{--Begin Modal Indice de Contenido --}}
                     @section('modales')
                         <div>
                             <!-- Modal -->
@@ -133,6 +133,7 @@
                             </div>
                         </div>
                     @endsection
+                    {{--End Modal Indice de Contenido --}}
 
                 </div>
                 <div class="col">
@@ -428,9 +429,10 @@
         }
 
         function updateContent() {
-            if (document.getElementById("editor").tagName == "TEXTAREA") {
-                data = CKEDITOR.instances.editor.getData();
+            if (document.getElementById("editor").tagName == "DIV") {
+                data = editor.getData();
                 @this.set('content', data);
+
             }
         }
 

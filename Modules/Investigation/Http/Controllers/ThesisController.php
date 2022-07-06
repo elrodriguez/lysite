@@ -69,6 +69,7 @@ class ThesisController extends Controller
                 'inve_thesis_format_parts.number_order',
                 'inve_thesis_format_parts.description',
                 'inve_thesis_format_parts.id',
+                'inve_thesis_format_parts.show_description',
                 'inve_thesis_students.id AS thesis_id'
             )
             ->selectSub(function ($query) use ($thesis_id) {
@@ -95,6 +96,7 @@ class ThesisController extends Controller
                 'description' => $part->description,
                 'content' => html_entity_decode($part->content, ENT_QUOTES, "UTF-8"),
                 'number_order' => $part->number_order,
+                'show_description' => html_entity_decode($part->show_description, ENT_QUOTES, "UTF-8"),
                 'items' => $this->getSubParts($part->id, $part->thesis_id),
             ];
         }
@@ -108,7 +110,8 @@ class ThesisController extends Controller
             ->select(
                 'inve_thesis_format_parts.id',
                 'inve_thesis_format_parts.number_order',
-                'inve_thesis_format_parts.description'
+                'inve_thesis_format_parts.description',
+                'inve_thesis_format_parts.show_description'
             )
             ->selectSub(function ($query) use ($thesis_id) {
                 $query->from('inve_thesis_student_parts')
@@ -126,7 +129,9 @@ class ThesisController extends Controller
             $html .= '<ol>';
             foreach ($subparts as $k => $subpart) {
                 $html .= '<li class="list-style-type:none">';
-                $html .= $subpart->number_order . ' ' . $subpart->description;
+                if ($subpart->show_description) {
+                    $html .= $subpart->number_order . ' ' . $subpart->description;  //solo se muestra si show_description es verdadero
+                }
                 $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
                 $html .= $this->getSubParts($subpart->id, $thesis_id);
                 $html .= '</li>';
@@ -214,6 +219,7 @@ class ThesisController extends Controller
                 'inve_thesis_format_parts.number_order',
                 'inve_thesis_format_parts.description',
                 'inve_thesis_format_parts.id',
+                'inve_thesis_format_parts.show_description',
                 'inve_thesis_students.id AS thesis_id'
             )
             ->selectSub(function ($query) use ($thesis_id) {
@@ -236,6 +242,7 @@ class ThesisController extends Controller
                 'description' => $part->description,
                 'content' => $part->content,
                 'number_order' => $part->number_order,
+                'show_description' => $part->show_description,
                 'items' => $this->getSubPartsWord($part->id, $part->thesis_id),
             ];
         }
@@ -250,7 +257,8 @@ class ThesisController extends Controller
             ->select(
                 'inve_thesis_format_parts.id',
                 'inve_thesis_format_parts.number_order',
-                'inve_thesis_format_parts.description'
+                'inve_thesis_format_parts.description',
+                'inve_thesis_format_parts.show_description'
             )
             ->selectSub(function ($query) use ($thesis_id) {
                 $query->from('inve_thesis_student_parts')
@@ -268,7 +276,9 @@ class ThesisController extends Controller
             $html .= '<ol>';
             foreach ($subparts as $k => $subpart) {
                 $html .= '<li class="list-style-type:none">';
-                $html .= $subpart->number_order . ' ' . $subpart->description;
+                if ($subpart->show_description) {
+                    $html .= $subpart->number_order . ' ' . $subpart->description;
+                }
                 $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
                 $html .= $this->getSubPartsWord($subpart->id, $thesis_id);
                 $html .= '</li>';

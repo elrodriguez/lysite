@@ -40,6 +40,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="information" class="col-sm-2 col-form-label">Mostrar/imprimir la Descripción</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input wire:model="show_description" class="form-check-input" type="checkbox" name="exampleRadios5"
+                                    id="exampleRadios5" title="si lo desactiva no se mostrará el subtítulo al exportar en PDF o WORD">
+                                <label class="form-check-label" for="exampleRadios5">Si</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="information" class="col-sm-2 col-form-label">Información</label>
                         <div class="col-sm-10">
                             <textarea wire:model.defer="information" class="form-control" id="information"></textarea>

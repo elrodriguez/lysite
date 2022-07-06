@@ -169,9 +169,7 @@ class ThesisParts extends Component
 
     public function saveThesisPartStudentN($bool)
     { // true para mostrar notificacion y false para no
-        $this->validate([
-            'content' => 'required'
-        ]);
+
         if ($this->content != $this->content_old) {
             $this->save(); //guarda en la base de datos
         } else {
