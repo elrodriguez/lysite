@@ -4,8 +4,6 @@ namespace Modules\Investigation\Http\Controllers;
 
 use App\Models\Person;
 use Exception;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -34,10 +32,10 @@ class ThesisController extends Controller
     public function parts($thesis_id, $sub_part = 0)
     {
         //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
-        if($sub_part==0){
-        $id = InveThesisStudent::where('id',$thesis_id)->get()->first()->format_id;
-        $id = InveThesisFormatPart::where('thesis_format_id', $id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first()->id;
-        $sub_part=$id;
+        if ($sub_part == 0) {
+            $id = InveThesisStudent::where('id', $thesis_id)->get()->first()->format_id;
+            $id = InveThesisFormatPart::where('thesis_format_id', $id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first()->id;
+            $sub_part = $id;
         }
 
         return view('investigation::thesis.thesis_parts')
@@ -143,11 +141,11 @@ class ThesisController extends Controller
     public function thesischeck($external_id, $part_id = null)
     {
         //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
-        if($part_id==0){
-            $id = InveThesisStudent::where('external_id',$external_id)->get()->first()->format_id;
+        if ($part_id == 0) {
+            $id = InveThesisStudent::where('external_id', $external_id)->get()->first()->format_id;
             $id = InveThesisFormatPart::where('thesis_format_id', $id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first()->id;
-            $part_id=$id;
-            }
+            $part_id = $id;
+        }
         return view('investigation::thesis.thesis_parts_check')
             ->with('external_id', $external_id)
             ->with('part_id', $part_id);
@@ -178,7 +176,9 @@ class ThesisController extends Controller
                 foreach ($thesis as $part) {
                     $part_title = $part['description'];
                     $content .= "<li data-liststyle='upperRoman' data-numId='" . $part['number_order'] . "'>{$part_title}";
-                    $content .= '<div>' . html_entity_decode($part['content'], ENT_QUOTES, "UTF-8") . '</div>';
+                    if ($part['content']) {
+                        $content .= '<div>' . html_entity_decode($part['content'], ENT_QUOTES, "UTF-8") . '</div>';
+                    }
                     $content .= $part['items'];
                     $content .= "</li>";
                 }
@@ -187,7 +187,13 @@ class ThesisController extends Controller
             $title = $thesi['title'];
         }
         // Add HTML
+        // First replace new lines by spaces
 
+        $content = str_replace(["\r\n", "\n", "\r"], '', $content);
+        // Extract UL from LI an place after
+
+        $content = preg_replace('/(<li.*?>.*?)(<ol>.*?<\/ol>)\s?(<\/li>)/i', '$1$3$2', $content);
+        //dd($content);
         \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
@@ -269,7 +275,9 @@ class ThesisController extends Controller
             foreach ($subparts as $k => $subpart) {
                 $html .= '<li class="list-style-type:none">';
                 $html .= $subpart->number_order . ' ' . $subpart->description;
-                $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
+                if ($subpart->content) {
+                    $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
+                }
                 $html .= $this->getSubPartsWord($subpart->id, $thesis_id);
                 $html .= '</li>';
             }

@@ -33,7 +33,7 @@
             </div>
             <div class="row row-editor">
                 <div class="editor-container">
-                    <div class="editor">
+                    <div id="editor" class="editor">
                         <h2>Bilingual Personality Disorder</h2>
                         <figure class="image image-style-side"><img src="https://c.cksource.com/a/1/img/docs/sample-image-bilingual-personality-disorder.jpg">
                             <figcaption>One language, one person.</figcaption>
@@ -100,8 +100,8 @@
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
-    <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script>
-    <script>DecoupledDocumentEditor
+    {{-- <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script> --}}
+    {{-- <script>DecoupledDocumentEditor
         .create( document.querySelector( '.editor' ), {
             
             licenseKey: '',
@@ -122,6 +122,11 @@
             console.warn( 'Build id: nqbbe5edhs9m-u9490jx48w7r' );
             console.error( error );
         } );
-</script>
+</script> --}}
+        <script src="{{ url('ckeditor-4/ckeditor.js') }}"></script>
+        <script src="{{ url('ckeditor-4/init.js') }}"></script>
+    <script>
+        initSample();
+    </script>
     @stop
 </x-master>

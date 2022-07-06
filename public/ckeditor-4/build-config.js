@@ -131,7 +131,8 @@ var CKBUILDER_CONFIG = {
 		'undo' : 1,
 		'uploadfile' : 1,
 		'uploadimage' : 1,
-		'wysiwygarea' : 1
+		'wysiwygarea' : 1,
+		'ruler' : 1
 	},
 	languages : {
 		'en' : 1,
