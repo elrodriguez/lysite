@@ -96,8 +96,8 @@
         function deletes(id){
             cuteAlert({
                 type: "question",
-                title: "¿Desea eliminar estos datos?",
-                message: "Advertencia:¡Esta acción no se puede deshacer!",
+                title: "¿Desea eliminar este Curso?",
+                message: "Advertencia:¡Esta acción no se puede deshacer! e incluye el rating y votos que obtuvo",
                 confirmText: "Okay",
                 cancelText: "Cancel"
             }).then((e)=>{

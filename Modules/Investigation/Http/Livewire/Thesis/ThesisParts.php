@@ -35,6 +35,7 @@ class ThesisParts extends Component
     public $content_old;
     public $auto_save = true;
     public $commentary;
+    public $description;
 
     public function mount($thesis_id, $sub_part)
     {
@@ -55,6 +56,7 @@ class ThesisParts extends Component
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
+                $this->description = InveThesisFormatPart::where('id',$this->focus_id)->get()->first()->description;
             }
         } else {
             redirect()->route('home');
