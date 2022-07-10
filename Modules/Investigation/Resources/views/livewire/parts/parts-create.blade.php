@@ -40,11 +40,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="information" class="col-sm-2 col-form-label">Mostrar/imprimir la Descripción</label>
+                        <label for="information" class="col-sm-2 col-form-label">Mostrar/imprimir Descripción</label>
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <input wire:model="show_description" class="form-check-input" type="checkbox" name="exampleRadios5"
                                     id="exampleRadios5" title="si lo desactiva no se mostrará el subtítulo al exportar en PDF o WORD">
+                                <label class="form-check-label" for="exampleRadios5">Si</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="information" class="col-sm-2 col-form-label">Iniciar en página nueva</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input wire:model="salto_de_pagina" class="form-check-input" type="checkbox" name="exampleRadios5"
+                                    id="exampleRadios5" title="active si desea que inicie en una página nueva">
                                 <label class="form-check-label" for="exampleRadios5">Si</label>
                             </div>
                         </div>

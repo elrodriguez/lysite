@@ -19,6 +19,7 @@ class PartsEdit extends Component
     public $index_order;
     public $body;
     public $show_description;
+    public $salto_de_pagina;
 
     public function render()
     {
@@ -37,6 +38,7 @@ class PartsEdit extends Component
         $this->index_order = $this->part->index_order;
         $this->body = $this->part->body;
         $this->show_description = $this->part->show_description;
+        $this->salto_de_pagina = $this->part->salto_de_pagina;
         $this->dispatchBrowserEvent('open-modal-parts-edit', ['title' => $title]);
     }
 
@@ -55,7 +57,8 @@ class PartsEdit extends Component
             'state' => $this->state ? true : false,
             'index_order' => $this->index_order,
             'body' => $this->body ? true : false,
-            'show_description' => $this->show_description ? true : false
+            'show_description' => $this->show_description ? true : false,
+            'salto_de_pagina' => $this->salto_de_pagina ? true : false
         ]);
 
         $this->emit('listParts');
