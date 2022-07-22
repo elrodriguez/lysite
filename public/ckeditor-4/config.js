@@ -22,5 +22,4 @@
 		{ name: 'about', groups: [ 'about' ] }
 	];
 	config.removeButtons = 'About,Source,NewPage';
-
 };

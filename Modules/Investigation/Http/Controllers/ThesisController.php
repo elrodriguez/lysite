@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
+use Illuminate\Http\Request;
 use PDF;
 
 class ThesisController extends Controller
@@ -169,20 +170,22 @@ class ThesisController extends Controller
         $title = '';
 
         // $view = View::make('investigation::thesis.thesis_export')->with('thesis', $thesis)->render();
-        // dd($view);
+        // dd($thesis);
 
         foreach ($thesis as $thesi) {
             if ($title != $thesi['title']) {
-                $section->addText(
-                    $thesi['title'],
-                    array('name' => 'Tahoma', 'size' => 14)
-                );
+                // $section->addText(
+                //     $thesi['title'],
+                //     array('name' => 'Tahoma', 'size' => 14)
+                // );
                 $content .= "<ol>";
                 foreach ($thesis as $part) {
                     $part_title = $part['description'];
-                    $content .= "<li data-liststyle='upperRoman' data-numId='" . $part['number_order'] . "'>{$part_title}";
+                    $content .= "<li>{$part_title}";
                     if ($part['content']) {
-                        $content .= '<div>' . html_entity_decode($part['content'], ENT_QUOTES, "UTF-8") . '</div>';
+                        $str = html_entity_decode($part['content'], ENT_QUOTES, "UTF-8");
+                        //$str = str_replace(["\r\n", "\n", "\r"], '', $str);
+                        $content .= "<br/><div>" . $str . "</div>";
                     }
                     $content .= $part['items'];
                     $content .= "</li>";
@@ -193,11 +196,11 @@ class ThesisController extends Controller
         }
         // Add HTML
         // First replace new lines by spaces
-
-        $content = str_replace(["\r\n", "\n", "\r"], '', $content);
+        //dd($content);
+        //$content = str_replace(["\r\n", "\n", "\r"], '', $content);
         // Extract UL from LI an place after
+        //dd($content);
 
-        $content = preg_replace('/(<li.*?>.*?)(<ol>.*?<\/ol>)\s?(<\/li>)/i', '$1$3$2', $content);
         //dd($content);
         \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
@@ -242,6 +245,7 @@ class ThesisController extends Controller
             ->get();
 
         $parts = [];
+
         foreach ($thesis as $k => $part) {
             $parts[$k] = [
                 'title' => $part->title,
@@ -279,19 +283,22 @@ class ThesisController extends Controller
         $html = '';
 
         if (count($subparts) > 0) {
-            $html .= '<ol>';
+            $html .= "<ol>";
             foreach ($subparts as $k => $subpart) {
-                $html .= '<li class="list-style-type:none">';
+                $html .= "<li>";
                 if ($subpart->show_description) {
                     $html .= $subpart->number_order . ' ' . $subpart->description;
                 }
                 if ($subpart->content) {
-                    $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
+                    $str = html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8");
+                    $str = str_replace(["\r\n", "\n", "\r"], '', $str);
+                    $html .= "<div>" . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . "</div>";
                 }
+
                 $html .= $this->getSubPartsWord($subpart->id, $thesis_id);
-                $html .= '</li>';
+                $html .= "</li>";
             }
-            $html .= '</ol>';
+            $html .= "</ol>";
         }
         return $html;
     }
@@ -299,5 +306,10 @@ class ThesisController extends Controller
     public function permissions_thesis_allowed()
     {
         return view('investigation::thesis.thesis_allowed');
+    }
+    public function uploadImage(Request $request)
+    {
+        $url =  'https://www.ciudadeducacion.com/wp-content/uploads/2015/04/10772_logo-ucv.jpg';
+        return json_encode(array('url' => $url));
     }
 }

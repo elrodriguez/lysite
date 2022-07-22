@@ -1,6 +1,8 @@
 <x-master>
     @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ url('ckeditor5/sample/styles.css') }}">
+    <link rel="stylesheet" href="{{ url('richtexteditor/rte_theme_default.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ url('richtexteditor/style.css') }}" /> --}}
     <style type="text/css">
         .ventana_flotante {
             background: none repeat scroll 0 0 #FFFFFF;
@@ -69,8 +71,9 @@
         <script src="{{ asset('ckeditor-4/config.js') }}"></script>
         <script src="{{ asset('ckfinder/ckfinder.js') }}"></script> --}}
 
-        <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script>
-
+        {{-- <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script> --}}
+        <script type="text/javascript" src="{{ url('richtexteditor/rte.js') }}"></script>
+        <script type="text/javascript" src="{{ url('richtexteditor/plugins/all_plugins.js') }}"></script>
     @endsection
 </x-master>
 

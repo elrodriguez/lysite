@@ -167,14 +167,14 @@
             data-revision-history="false">
             <div class="div-main">
                 <div class="centered" wire:ignore>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="document-editor__toolbar"></div>
-                    </div>
-                    <div class="row row-editor">
-                        <div class="editor-container">
-                            <div id="editor" class="editor">{!! $content_old !!}</div>
-                        </div>
-                    </div>
+                    </div> --}}
+                    {{-- <div class="row row-editor">
+                        <div class="editor-container"> --}}
+                            <div class="editor" id="editor">{!! $content_old !!}</div>
+                        {{-- </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -430,9 +430,9 @@
 
         function updateContent() {
             if (document.getElementById("editor").tagName == "DIV") {
-                data = editor.getData();
+                // data = editor.getData();
+                data = editor1.getHTMLCode();
                 @this.set('content', data);
-
             }
         }
 
@@ -463,23 +463,38 @@
 
     <script>
         function activeCkeditor5() {
-            DecoupledDocumentEditor.create(document.querySelector('.editor'), {
-                    licenseKey: '',
-                })
-                .then(editor => {
-                    window.editor = editor;
-                    // Set a custom container for the toolbar.
-                    document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
-                    document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-                })
-                .catch(error => {
-                    console.error('Oops, something went wrong!');
-                    console.error(
-                        'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-                    );
-                    console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
-                    console.error(error);
-                });
+            // DecoupledDocumentEditor.create(document.querySelector('.editor'), {
+            //         licenseKey: '',
+            //         simpleUpload: {
+            //             // The URL that the images are uploaded to.
+            //             uploadUrl: '{{ route("investigation_thesis_upload_image") }}',
+
+            //             // Enable the XMLHttpRequest.withCredentials property.
+            //             withCredentials: true,
+
+            //             // Headers sent along with the XMLHttpRequest to the upload server.
+            //             headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             }
+            //         }
+            //     })
+            //     .then(editor => {
+            //         window.editor = editor;
+            //         // Set a custom container for the toolbar.
+            //         document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+            //         document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+            //     })
+            //     .catch(error => {
+            //         console.error('Oops, something went wrong!');
+            //         console.error(
+            //             'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+            //         );
+            //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+            //         console.error(error);
+            //     });
+            window.editor1 = new RichTextEditor("#editor", { 
+                editorResizeMode: "none" ,
+            });
         }
     </script>
 

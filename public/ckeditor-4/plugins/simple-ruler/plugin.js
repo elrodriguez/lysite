@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright (c) 2016, LOVATA - Aleksandra Shinkevich (a.shinkevich@lovata.com). All rights reserved.
  * For licensing, see LICENSE.md
  *
