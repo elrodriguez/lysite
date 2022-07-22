@@ -2,10 +2,12 @@
 
 namespace Modules\Academic\Http\Livewire\Courses;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Academic\Entities\AcaCourse;
 use Illuminate\Support\Facades\Storage;
+use Modules\Academic\Entities\AcaCourseRating;
 
 class CoursesList extends Component
 {
@@ -32,18 +34,24 @@ class CoursesList extends Component
 
     public function destroy($id){
         try {
+        DB::beginTransaction();
             $course_image=AcaCourse::find($id)->course_image;
-            Storage::disk('public')->delete(substr($course_image, 8));
-            AcaCourse::find($id)->delete();
+            $course = AcaCourse::find($id);
+            DB::delete('delete from aca_course_rating_votes where course_id= ?',[$id]);
+            DB::delete('delete from aca_course_ratings where course_id = ?', [$id]);
+            $course->delete();
+            DB::commit();
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
+            Storage::disk('public')->delete(substr($course_image, 8));
         } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
             $res = 'error';
             $tit = 'Salió mal';
-            $msg = 'No se puede eliminar porque cuenta con registros asociados';
+            $msg = 'No se puede eliminar comunicate con los administradores del Sistema';
         }
 
-        $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+        $this->dispatchBrowserEvent('aca-course-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 }

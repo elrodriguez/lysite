@@ -19,8 +19,9 @@ class PartsCreate extends Component
     public $information;
     public $state = true;
     public $index_order = 0;
-    public $body = false;
+    public $body = true;
     public $show_description = true;
+    public $salto_de_pagina = false;
 
     public function render()
     {
@@ -58,7 +59,8 @@ class PartsCreate extends Component
             'state' => $this->state ? true : false,
             'index_order' => $this->index_order,
             'body' => $this->body ? true : false,
-            'show_description' => $this->show_description ? true : false
+            'show_description' => $this->show_description ? true : false,
+            'salto_de_pagina' => $this->salto_de_pagina ? true : false
         ]);
 
         if($this->part_id){
@@ -72,6 +74,7 @@ class PartsCreate extends Component
         $this->index_order = 0;
         $this->body = false;
         $this->show_description = true;
+        $this->salto_de_pagina = false;
         $this->emit('listParts');
         $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente','res' => 'success']);
     }

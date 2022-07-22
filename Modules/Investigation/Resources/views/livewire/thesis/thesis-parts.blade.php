@@ -161,6 +161,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{ $description }}</h5>
+            </div>
+          </div>
+
     </div>
     @if ($focused_part->body == true)
         <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"

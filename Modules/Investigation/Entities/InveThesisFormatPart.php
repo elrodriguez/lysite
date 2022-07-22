@@ -19,7 +19,8 @@ class InveThesisFormatPart extends Model
         'state',
         'index_order',
         'body',
-        'show_description'
+        'show_description',
+        'salto_de_pagina'
 
     ];
 

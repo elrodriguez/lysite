@@ -24,14 +24,16 @@ $title = '';
     </head>
 
     <body style="padding: 0">
-
         @if ($title != $thesi['title'])
             {{-- <h1>{{ $thesi['title'] }}</h1> --}}
             <ol>
-                @foreach ($thesis as $part)
+                @foreach ($thesis as $key => $part)
+                    @if ($key > 0 && $part['salto_de_pagina'])
+                        <div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>
+                    @endif
                     <li>
                         @if ($part['show_description'])
-                        {{ $part['number_order'] . ' ' . $part['description'] }}
+                            {{ $part['number_order'] . ' ' . $part['description'] }}
                         @endif
                         {!! $part['content'] !!}
                         {!! $part['items'] !!}
