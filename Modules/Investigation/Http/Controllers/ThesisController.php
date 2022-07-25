@@ -163,13 +163,17 @@ class ThesisController extends Controller
             ->with('external_id', $external_id)
             ->with('part_id', $part_id);
     }
-
+    public function exportWORDView($thesis_id)
+    {
+        $thesis = $this->getThesis($thesis_id);
+        return view('investigation::thesis.thesis_export_word')->with('thesis', $thesis);
+    }
     public function exportWORD($thesis_id)
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
 
-
+        dd('ddd');
         $section = $phpWord->addSection();
         $thesis = $this->getThesisWord($thesis_id);
         $content = '';
@@ -269,14 +273,11 @@ class ThesisController extends Controller
                 'salto_de_pagina' => $part->salto_de_pagina,
                 'items' => $this->getSubPartsWord($part->id, $part->thesis_id),
             ];
-<<<<<<< HEAD
+
             if ($parts[$k]['salto_de_pagina']) {
-                //$parts[$k]['content'] .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
-=======
-            if($parts[$k]['salto_de_pagina']){
                 $parts[$k]['content'] .= '<pagebreak></pagebreak>';
                 // $parts[$k]['content'] .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
->>>>>>> 02b7ba02335b1ec2039b41ea9aadfdc007e43282
+
             }
         }
 
