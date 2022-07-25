@@ -179,7 +179,7 @@ class ThesisController extends Controller
         // $view = View::make('investigation::thesis.thesis_export')->with('thesis', $thesis)->render();
         // dd($thesis);
 
-        foreach ($thesis as $thesi) {
+        foreach ($thesis as $k => $thesi) {
             if ($title != $thesi['title']) {
                 // $section->addText(
                 //     $thesi['title'],
@@ -264,6 +264,9 @@ class ThesisController extends Controller
                 'salto_de_pagina' => $part->salto_de_pagina,
                 'items' => $this->getSubPartsWord($part->id, $part->thesis_id),
             ];
+            if($parts[$k]['salto_de_pagina']){
+                $parts[$k]['content'] .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
+            }
         }
 
         return $parts;
