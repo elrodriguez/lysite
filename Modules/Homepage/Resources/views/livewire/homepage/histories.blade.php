@@ -1,5 +1,6 @@
 <div>
     <div class="page-headline text-center">
+
         <h2>{{ __('labels.Our Success Histories') }}</h2>
         <p class="lead text-black-70 measure-lead mx-auto">Proyectos de investigación, tesis para grado, maestrías, doctorados,
             te apoyamos en desarrollar tu proyecto, contamos con curso online de tesis junto a nuestro sistema de desarrollo asistido de tesis.</p>
@@ -23,6 +24,7 @@
                                     <span class="overlay__action d-flex flex-column text-center">
                                         <i class="material-icons"><i class="fa fa-university" aria-hidden="true"></i></i>
                                     </span>
+
                                 </span>
     
     
@@ -99,6 +101,7 @@
                                 </div>
                             </div>
                         </div>
+
                     @endforeach
     
                 </div>

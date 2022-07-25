@@ -269,8 +269,14 @@ class ThesisController extends Controller
                 'salto_de_pagina' => $part->salto_de_pagina,
                 'items' => $this->getSubPartsWord($part->id, $part->thesis_id),
             ];
+<<<<<<< HEAD
             if ($parts[$k]['salto_de_pagina']) {
                 //$parts[$k]['content'] .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
+=======
+            if($parts[$k]['salto_de_pagina']){
+                $parts[$k]['content'] .= '<pagebreak></pagebreak>';
+                // $parts[$k]['content'] .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
+>>>>>>> 02b7ba02335b1ec2039b41ea9aadfdc007e43282
             }
         }
 

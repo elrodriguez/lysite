@@ -15,7 +15,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laraveles/spanish": "^1.5",
-        "livewire/livewire": "^2.7",
+        "livewire/livewire": "^2.7.2",
         "mhmiton/laravel-modules-livewire": "^1.3",
         "nwidart/laravel-modules": "^8.2",
         "phpoffice/phpword": "^0.18.3",
