@@ -168,10 +168,10 @@ class ThesisController extends Controller
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-        $thesis = $this->getThesisWord($thesis_id);
+
 
         $section = $phpWord->addSection();
-
+        $thesis = $this->getThesisWord($thesis_id);
         $content = '';
 
         $title = '';
@@ -179,15 +179,17 @@ class ThesisController extends Controller
         // $view = View::make('investigation::thesis.thesis_export')->with('thesis', $thesis)->render();
         // dd($thesis);
         //$seccion->addPageBreak();
-        foreach ($thesis as $thesi) {
+
+        foreach ($thesis as $k => $thesi) {
+
             if ($title != $thesi['title']) {
-                // $section->addText(
-                //     $thesi['title'],
-                //     array('name' => 'Tahoma', 'size' => 14)
-                // );
                 $content .= "<ol>";
                 foreach ($thesis as $part) {
-                    $part_title = $part['description'];
+                    $part_title = null;
+                    if ($part['show_description']) {
+                        $part_title = $part['description'];
+                    }
+
                     $content .= "<li>{$part_title}";
                     if ($part['content']) {
                         $str = html_entity_decode($part['content'], ENT_QUOTES, "UTF-8");
@@ -231,6 +233,7 @@ class ThesisController extends Controller
             ->join('inve_thesis_students', 'inve_thesis_students.format_id', 'inve_thesis_formats.id')
             ->select(
                 'inve_thesis_formats.name',
+                'inve_thesis_students.short_name',
                 'inve_thesis_students.title',
                 'inve_thesis_format_parts.number_order',
                 'inve_thesis_format_parts.description',
@@ -250,12 +253,14 @@ class ThesisController extends Controller
             ->where('inve_thesis_students.person_id', $person->id)
             ->where('inve_thesis_students.user_id', $person->user_id)
             ->where('inve_thesis_students.id', $thesis_id)
+            ->orderBy('index_order')
             ->get();
 
         $parts = [];
 
         foreach ($thesis as $k => $part) {
             $parts[$k] = [
+                'short_name' => $part->short_name,
                 'title' => $part->title,
                 'description' => $part->description,
                 'content' => $part->content,
@@ -264,6 +269,9 @@ class ThesisController extends Controller
                 'salto_de_pagina' => $part->salto_de_pagina,
                 'items' => $this->getSubPartsWord($part->id, $part->thesis_id),
             ];
+            if ($parts[$k]['salto_de_pagina']) {
+                //$parts[$k]['content'] .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
+            }
         }
 
         return $parts;
@@ -287,7 +295,7 @@ class ThesisController extends Controller
                     ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
                     ->where('inve_thesis_student_parts.state', true);
             }, 'content')
-            ->orderBy('number_order')
+            ->orderBy('index_order')
             ->get();
         //dd($subparts);
         $html = '';

@@ -59,7 +59,7 @@
             {{ $jumbotron }}
 
             {{ $slot }}
-
+            {{-- @yield('main-body') --}}
             <x-footer></x-footer>
         </div>
         <!-- // END Header Layout Content -->
@@ -91,8 +91,8 @@
     <!-- Fix Footer -->
     <script src="{{ url('assets/vendor/fix-footer.js') }}"></script>
 
-    {{-- <!-- Chart.js -->
-    <script src="{{ url('assets/vendor/Chart.min.js') }}"></script> --}}
+    <!-- Chart.js -->
+    <script src="{{ url('assets/vendor/Chart.min.js') }}"></script>
 
     <!-- App JS -->
     <script src="{{ url('assets/js/app.js') }}"></script>
@@ -104,11 +104,12 @@
     <script src="{{ url('assets/js/app-settings.js') }}"></script>
 
     <script src="{{ url('assets/js/cute-alert/cute-alert.js') }}"></script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
     @yield('script')
     @yield('modales')
     <!-- Modal -->
-
-    <script src="{{ asset('js/app.js') }}"></script>
     @yield('script-chat')
 </body>
 
