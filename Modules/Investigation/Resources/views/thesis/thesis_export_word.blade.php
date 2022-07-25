@@ -4,7 +4,7 @@ $title = '';
 @endphp
 @foreach ($thesis as $thesi)
     @if ($title != $thesi['title'])
-        <h1>{{ $thesi['title'] }}</h1>
+        <ol>
         @foreach ($thesis as $key => $part)
             @if ($key > 0 && $part['salto_de_pagina'])
                 <div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>
@@ -17,6 +17,7 @@ $title = '';
                 {!! $part['items'] !!}
             </li>
         @endforeach
+        </ol>
     @endif
     @php
         $title = $thesi['title'];
