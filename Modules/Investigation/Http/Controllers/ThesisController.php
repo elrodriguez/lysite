@@ -134,7 +134,7 @@ class ThesisController extends Controller
                 if ($subpart->salto_de_pagina) {
                     $html .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
                 }
-                $html .= '<li class="list-style-type:none">';
+                $html .= '<li style="list-style:none">';
                 if ($subpart->show_description) {
                     $html .= $subpart->number_order . ' ' . $subpart->description;  //solo se muestra si show_description es verdadero
                 }
