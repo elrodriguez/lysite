@@ -178,7 +178,7 @@ class ThesisController extends Controller
 
         // $view = View::make('investigation::thesis.thesis_export')->with('thesis', $thesis)->render();
         // dd($thesis);
-
+        //$seccion->addPageBreak();
         foreach ($thesis as $thesi) {
             if ($title != $thesi['title']) {
                 // $section->addText(
