@@ -51,12 +51,12 @@ class ThesisParts extends Component
                 ->where('inve_thesis_format_part_id', $this->focus_id)
                 ->limit(1)
                 ->first();
-
             if (isset($ThesisStudentPart)) {
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
                 $this->description = InveThesisFormatPart::where('id',$this->focus_id)->get()->first()->description;
+                dd($ThesisStudentPart, $this->description);
             }
         } else {
             redirect()->route('home');
