@@ -164,7 +164,7 @@
 
         <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title">{{ $description }}</h5>
+              <h5 class="card-title">{{ $focused_part->description }}</h5>
             </div>
           </div>
 
@@ -499,7 +499,7 @@
             //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
             //         console.error(error);
             //     });
-            window.editor1 = new RichTextEditor("#editor", { 
+            window.editor1 = new RichTextEditor("#editor", {
                 editorResizeMode: "none" ,
             });
         }
@@ -517,5 +517,5 @@
             }
         }
     </script>
-    
+
 </div>
