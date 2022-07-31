@@ -166,29 +166,33 @@
             <div class="card-body">
               <h5 class="card-title">{{ $description }}</h5>
             </div>
-          </div>
+        </div>
 
     </div>
     @if ($focused_part->body == true)
-        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+        {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
             data-revision-history="false">
             <div class="div-main">
                 <div class="centered" wire:ignore>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="document-editor__toolbar"></div>
-                    </div> --}}
-                    {{-- <div class="row row-editor">
-                        <div class="editor-container"> --}}
+                    </div>
+                    <div class="row row-editor">
+                        <div class="editor-container">
                             <div class="editor" id="editor">{!! $content_old !!}</div>
-                        {{-- </div>
-                    </div> --}}
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div> --}}
+        <div class="container page__container">
+            <div wire:ignore>
+                <div class="editor" id="editor">{!! $content_old !!}</div>
+            </div>
+            @error('content')
+                <span class="invalid-feedback-2">{{ $message }}</span>
+            @enderror
         </div>
-
-        @error('content')
-            <span class="invalid-feedback-2">{{ $message }}</span>
-        @enderror
         <div class="container page__container">
             @if ($commentary)
                 <div class="row">
@@ -438,7 +442,8 @@
         function updateContent() {
             if (document.getElementById("editor").tagName == "DIV") {
                 // data = editor.getData();
-                data = editor1.getHTMLCode();
+                // data = editor1.getHTMLCode();
+                let data = window.editor1.getData();
                 @this.set('content', data);
             }
         }
@@ -499,9 +504,14 @@
             //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
             //         console.error(error);
             //     });
-            window.editor1 = new RichTextEditor("#editor", { 
-                editorResizeMode: "none" ,
+            // window.editor1 = new RichTextEditor("#editor", { 
+            //     editorResizeMode: "none" ,
+            // });
+
+            window.editor1 = CKEDITOR.replace('editor',{
+                'filebrowserUploadUrl' : '{{ route("investigation_thesis_upload_image") }}'
             });
+
         }
     </script>
 

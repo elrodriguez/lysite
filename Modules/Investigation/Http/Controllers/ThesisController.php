@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PDF;
 
 class ThesisController extends Controller
@@ -172,8 +173,6 @@ class ThesisController extends Controller
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-
-        dd('ddd');
         $section = $phpWord->addSection();
         $thesis = $this->getThesisWord($thesis_id);
         $content = '';
@@ -338,7 +337,20 @@ class ThesisController extends Controller
     }
     public function uploadImage(Request $request)
     {
-        $url =  'https://www.ciudadeducacion.com/wp-content/uploads/2015/04/10772_logo-ucv.jpg';
-        return json_encode(array('url' => $url));
+        $file = $request->file('upload');
+        //obtenemos el nombre del archivo
+        //$extension = $file->getClientOriginalExtension();
+        $file_name =  str_replace(' ', '_', $file->getClientOriginalName());
+
+        // //indicamos que queremos guardar un nuevo archivo en el disco local
+        $path = $request->file('upload')->storeAs(
+            'thesis',
+            $file_name,
+            'public'
+        );
+        $funcNum = 1;
+        $message = '';
+        $url =  asset('storage/' . $path);
+        echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
     }
 }

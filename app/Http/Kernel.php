@@ -45,6 +45,10 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'noToken' => [
+            'throttle:60,1',
+            \App\Http\Middleware\NoToken::class
+        ]
     ];
 
     /**
