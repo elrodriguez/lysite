@@ -3,7 +3,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url('ckeditor5/sample/styles.css') }}">
     {{-- <link rel="stylesheet" href="{{ url('richtexteditor/rte_theme_default.css') }}" /> --}}
     {{-- <link rel="stylesheet" href="{{ url('richtexteditor/style.css') }}" /> --}}
-    <link rel="stylesheet" type="text/css" href="{{ url('ckeditor/styles.css') }}">
     <style type="text/css">
         .ventana_flotante {
             background: none repeat scroll 0 0 #FFFFFF;

@@ -164,7 +164,7 @@
 
         <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title">{{ $description }}</h5>
+              <h5 class="card-title">{{ $focused_part->description }}</h5>
             </div>
         </div>
 
@@ -527,5 +527,5 @@
             }
         }
     </script>
-    
+
 </div>

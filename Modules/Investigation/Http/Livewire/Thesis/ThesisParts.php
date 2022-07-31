@@ -35,14 +35,13 @@ class ThesisParts extends Component
     public $content_old;
     public $auto_save = true;
     public $commentary;
-    public $description;
 
     public function mount($thesis_id, $sub_part)
     {
         $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
         $this->thesis_id = $thesis_id;
         $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
-        if ($this->thesis_student) {
+        if (isset($this->thesis_student)) {
             $this->auto_save = $this->thesis_student->autosave;
             $this->format_id = $this->thesis_student->format_id;
             $this->format == InveThesisFormat::find($this->format_id);
@@ -51,12 +50,10 @@ class ThesisParts extends Component
                 ->where('inve_thesis_format_part_id', $this->focus_id)
                 ->limit(1)
                 ->first();
-
-            if ($ThesisStudentPart) {
+            if (isset($ThesisStudentPart)) {
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
-                $this->description = InveThesisFormatPart::where('id',$this->focus_id)->get()->first()->description;
             }
         } else {
             redirect()->route('home');
