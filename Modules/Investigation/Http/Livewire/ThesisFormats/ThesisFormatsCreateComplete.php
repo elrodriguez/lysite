@@ -27,6 +27,8 @@ class ThesisFormatsCreateComplete extends Component
     public $right_margin;
     public $left_margin;
     public $between_lines;
+    public $top_margin;
+    public $bottom_margin;
 
     public function mount()
     {
@@ -59,6 +61,7 @@ class ThesisFormatsCreateComplete extends Component
 
     protected $rules = [
         'name' => 'required|max:255|',
+        'right_margin'=>'required|numeric|regex:/^[\d]{0,2}(\.[\d]{1,2})?$/',
     ];
 
     public function save()
@@ -74,7 +77,9 @@ class ThesisFormatsCreateComplete extends Component
             'school_id' => $this->school_id,
             'right_margin' => $this->right_margin,
             'left_margin' => $this->left_margin,
-            'between_lines' => $this->between_lines
+            'between_lines' => $this->between_lines,
+            'top_margin' => $this->top_margin,
+            'bottom_margin' => $this->bottom_margin
         ]);
 
 

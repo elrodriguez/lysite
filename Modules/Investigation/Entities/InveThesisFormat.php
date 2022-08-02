@@ -17,7 +17,9 @@ class InveThesisFormat extends Model
         'normative_thesis',
         'right_margin',
         'left_margin',
-        'between_lines'
+        'between_lines',
+        'top_margin',
+        'bottom_margin'
     ];
 
     protected static function newFactory()

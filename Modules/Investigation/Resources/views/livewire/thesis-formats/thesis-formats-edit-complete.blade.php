@@ -115,14 +115,14 @@
 
                             <div class="form-group">
                                 <label class="form-label" for="right_margin">Margen derecho *</label>
-                                <input wire:model="right_margin" type="text" class="form-control" id="right_margin">
+                                <input wire:model="right_margin" type="text" class="form-control" id="right_margin" title="ingrese numero en cm ejemplo &quot;2.50&quot;">
                                 @error('right_margin')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="left_margin">Margen izquierdo *</label>
-                                <input wire:model="left_margin" type="text" class="form-control" id="left_margin">
+                                <input wire:model="left_margin" type="text" class="form-control" id="left_margin" title="ingrese numero en cm ejemplo &quot;2.50&quot;">
                                 @error('left_margin')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
@@ -130,8 +130,23 @@
                             
                             <div class="form-group">
                                 <label class="form-label" for="between_lines">Entre líneas *</label>
-                                <input wire:model="between_lines" type="text" class="form-control" id="between_lines">
+                                <input wire:model="between_lines" type="text" class="form-control" id="between_lines" title="ingrese numero en cm ejemplo &quot;2.50&quot;">
                                 @error('between_lines')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="top_margin">Margen Superior *</label>
+                                <input wire:model="top_margin" type="text" class="form-control" id="top_margin" title="ingrese numero en cm ejemplo &quot;2.50&quot;">
+                                @error('top_margin')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="bottom_margin">Margen Inferior *</label>
+                                <input wire:model="bottom_margin" type="text" class="form-control" id="bottom_margin" title="ingrese numero en cm ejemplo &quot;2.50&quot;">
+                                @error('bottom_margin')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>

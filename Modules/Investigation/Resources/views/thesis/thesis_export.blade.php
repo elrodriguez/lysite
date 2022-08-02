@@ -7,6 +7,8 @@ $title = '';
         $d = $thesis[0]['right_margin'];
         $l = $thesis[0]['left_margin'];
         $m = $thesis[0]['between_lines'];
+        $t = $thesis[0]['top_margin'];
+        $b = $thesis[0]['bottom_margin'];
     @endphp
 
     <head>
@@ -19,6 +21,8 @@ $title = '';
             @page {
                 margin-left: {{ $l }}cm;
                 margin-right: {{ $d }}cm;
+                margin-top: {{ $t }}cm;
+                margin-bottom: {{ $b }}cm;
             }
         </style>
     </head>

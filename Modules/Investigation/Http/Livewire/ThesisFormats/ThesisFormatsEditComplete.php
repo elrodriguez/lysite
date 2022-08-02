@@ -29,6 +29,8 @@ class ThesisFormatsEditComplete extends Component
     public $right_margin;
     public $left_margin;
     public $between_lines;
+    public $top_margin;
+    public $bottom_margin;
 
     public function mount($thesis_format_id)
     {
@@ -42,12 +44,17 @@ class ThesisFormatsEditComplete extends Component
         $this->type_thesis = $this->format->type_thesis;
         $this->normative_thesis = $this->format->normative_thesis;
         $this->school_id = $this->format->school_id;
+        $this->right_margin = $this->format->right_margin;
+        $this->left_margin = $this->format->left_margin;
+        $this->between_lines = $this->format->between_lines;
+        $this->top_margin = $this->format->top_margin;
+        $this->bottom_margin = $this->format->bottom_margin;
         $temp = $this->format->school_id;
         $this->university_id = UniversitiesSchools::find($this->school_id)->university_id;
         $this->country_id = Universities::find($this->university_id)->country;
         $this->getUniversitiesFirstLoad();
         $this->getSchools();
-        $this->school_id = $temp;
+        $this->school_id = $temp;        
     }
 
     public function getTypes()
@@ -74,6 +81,7 @@ class ThesisFormatsEditComplete extends Component
 
     protected $rules = [
         'name' => 'required|max:255|',
+        'right_margin'=>'required|numeric|regex:/^[\d]{0,2}(\.[\d]{1,2})?$/',
     ];
 
     public function save()
@@ -89,7 +97,9 @@ class ThesisFormatsEditComplete extends Component
             'school_id' => $this->school_id,
             'right_margin' => $this->right_margin,
             'left_margin' => $this->left_margin,
-            'between_lines' => $this->between_lines
+            'between_lines' => $this->between_lines,
+            'top_margin' => $this->top_margin,
+            'bottom_margin' => $this->bottom_margin
         ]);
 
 
