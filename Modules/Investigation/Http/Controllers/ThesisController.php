@@ -64,6 +64,8 @@ class ThesisController extends Controller
                 'inve_thesis_formats.right_margin',
                 'inve_thesis_formats.left_margin',
                 'inve_thesis_formats.between_lines',
+                'inve_thesis_formats.top_margin',
+                'inve_thesis_formats.bottom_margin',
                 'inve_thesis_formats.name',
                 'inve_thesis_students.title',
                 'inve_thesis_format_parts.number_order',
@@ -92,6 +94,8 @@ class ThesisController extends Controller
             $parts[$k] = [
                 'right_margin' => $part->right_margin,
                 'left_margin' => $part->left_margin,
+                'top_margin' => $part->top_margin,
+                'bottom_margin' => $part->bottom_margin,
                 'between_lines' => $part->between_lines,
                 'title' => $part->title,
                 'description' => $part->description,
