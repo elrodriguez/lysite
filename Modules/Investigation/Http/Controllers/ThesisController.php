@@ -50,7 +50,7 @@ class ThesisController extends Controller
         $thesis = $this->getThesis($thesis_id);
         view()->share('thesis', $thesis);
         $pdf = PDF::loadView('investigation::thesis.thesis_export', $thesis);
-        return $pdf->download('archivo-pdf.pdf');
+        return $pdf->download('Mi_Tesis_Lysite-pdf.pdf');
         //return view('investigation::thesis.thesis_export')->with('thesis', $thesis);
     }
 
@@ -88,6 +88,16 @@ class ThesisController extends Controller
             ->where('inve_thesis_students.id', $thesis_id)
             ->orderBy('index_order')
             ->get();
+
+
+        // OBteniendo el margen de InveThesisStudents si fue modificado
+        $tesis_student = InveThesisStudent::where('id', $thesis_id)->get()->first();
+        if ($tesis_student->right_margin != null) {
+            $thesis[0]->right_margin = $tesis_student->right_margin;
+        }
+        if ($tesis_student->left_margin != null) {
+            $thesis[0]->left_margin = $tesis_student->left_margin;
+        }
 
         $parts = [];
         foreach ($thesis as $k => $part) {

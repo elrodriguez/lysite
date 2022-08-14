@@ -35,6 +35,8 @@ class ThesisParts extends Component
     public $content_old;
     public $auto_save = true;
     public $commentary;
+    public $left_margin;
+    public $right_margin;
 
     public function mount($thesis_id, $sub_part)
     {
@@ -44,7 +46,20 @@ class ThesisParts extends Component
         if (isset($this->thesis_student)) {
             $this->auto_save = $this->thesis_student->autosave;
             $this->format_id = $this->thesis_student->format_id;
-            $this->format == InveThesisFormat::find($this->format_id);
+            $this->format = InveThesisFormat::where('id', $this->format_id)->get()->first();
+
+            //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
+            if($this->thesis_student->left_margin == null){
+                $this->left_margin = $this->format->left_margin;
+            }else{
+                $this->left_margin = $this->thesis_student->left_margin;
+            }
+
+            if($this->thesis_student->right_margin == null){
+                $this->right_margin = $this->format->right_margin;
+            }else{
+                $this->right_margin = $this->thesis_student->right_margin;
+            }
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -174,6 +189,11 @@ class ThesisParts extends Component
         } else {
             $bool = false;
             $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
+            //Actualiza los margenes aunque el contenido no halla sido modificado
+            $this->thesis_student->update([
+                'right_margin' => $this->right_margin,
+                'left_margin' => $this->left_margin
+            ]);
         }
 
         if ($bool) {
@@ -263,6 +283,10 @@ class ThesisParts extends Component
                 //     'version' => ($max_version ? $max_version + 1 : 1)
             ]);
         }
+        $this->thesis_student->update([
+            'right_margin' => $this->right_margin,
+            'left_margin' => $this->left_margin
+        ]);
 
         $this->content_old = $this->content;
     }

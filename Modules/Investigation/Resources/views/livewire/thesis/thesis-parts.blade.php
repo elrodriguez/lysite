@@ -47,7 +47,7 @@
             </div>
         @endif
 
-        {{--Contenido --}}
+        {{-- Contenido --}}
         <div class="card card-body mb-3">
             <div class="row">
                 <div class="col-3">
@@ -66,7 +66,7 @@
                         data-target="#exampleModalScrollable">
                         Indice de Contenidos
                     </button>
-                    {{--Begin Modal Indice de Contenido --}}
+                    {{-- Begin Modal Indice de Contenido --}}
                     @section('modales')
                         <div>
                             <!-- Modal -->
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                     @endsection
-                    {{--End Modal Indice de Contenido --}}
+                    {{-- End Modal Indice de Contenido --}}
 
                 </div>
                 <div class="col">
@@ -164,7 +164,7 @@
 
         <div class="card text-center">
             <div class="card-body">
-              <h5 class="card-title">{{ $focused_part->description }}</h5>
+                <h5 class="card-title">{{ $focused_part->description }}</h5>
             </div>
         </div>
 
@@ -205,8 +205,8 @@
 
             <div class="row">
                 <div class="col mb-2">
-                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
-                        class="btn btn-warning mt-3" target="_blank">
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}" class="btn btn-warning mt-3"
+                        target="_blank">
                         Exportar PDF
                     </a>
                     <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
@@ -440,6 +440,9 @@
         }
 
         function updateContent() {
+            //el margen derecho debe descontarse de 21 cm
+            @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
+            @this.left_margin = CKEDITOR.config.ruler.sliders.left;
             if (document.getElementById("editor").tagName == "DIV") {
                 // data = editor.getData();
                 // data = editor1.getHTMLCode();
@@ -479,7 +482,7 @@
             //         licenseKey: '',
             //         simpleUpload: {
             //             // The URL that the images are uploaded to.
-            //             uploadUrl: '{{ route("investigation_thesis_upload_image") }}',
+            //             uploadUrl: '{{ route('investigation_thesis_upload_image') }}',
 
             //             // Enable the XMLHttpRequest.withCredentials property.
             //             withCredentials: true,
@@ -504,13 +507,26 @@
             //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
             //         console.error(error);
             //     });
-            // window.editor1 = new RichTextEditor("#editor", { 
+            // window.editor1 = new RichTextEditor("#editor", {
             //     editorResizeMode: "none" ,
             // });
 
-            window.editor1 = CKEDITOR.replace('editor',{
-                'filebrowserUploadUrl' : '{{ route("investigation_thesis_upload_image") }}'
+            window.editor1 = CKEDITOR.replace('editor', {
+                'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
             });
+
+            CKEDITOR.config.ruler = {
+                values: 21, // segment number of the ruler
+                step: 0.10, // accuracy of sliders
+                sliders: {
+                    left: @this.left_margin, // left slider value
+                    right: 21-@this.right_margin // right slider value (21-19 = 2)
+                },
+                padding: {
+                    top: 20, // top 'canvas' padding (px)
+                    bottom: 20 // bottom 'canvas' padding (px)
+                }
+            };
 
         }
     </script>

@@ -19,9 +19,11 @@ class InveThesisStudent extends Model
         'university_id',
         'school_id',
         'format_id',
-        'state'
+        'state',
+        'right_margin',
+        'left_margin',
     ];
-    
+
     protected static function newFactory()
     {
         return \Modules\Investigation\Database\factories\InveThesisStudentFactory::new();
