@@ -61,8 +61,6 @@ class ThesisController extends Controller
         $thesis = InveThesisFormatPart::join('inve_thesis_formats', 'inve_thesis_format_parts.thesis_format_id', 'inve_thesis_formats.id')
             ->join('inve_thesis_students', 'inve_thesis_students.format_id', 'inve_thesis_formats.id')
             ->select(
-                'inve_thesis_formats.right_margin',
-                'inve_thesis_formats.left_margin',
                 'inve_thesis_formats.between_lines',
                 'inve_thesis_formats.top_margin',
                 'inve_thesis_formats.bottom_margin',
@@ -82,6 +80,20 @@ class ThesisController extends Controller
                     ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
                     ->where('inve_thesis_student_parts.state', true);
             }, 'content')
+            ->selectSub(function ($query) use ($thesis_id) {
+                $query->from('inve_thesis_student_parts')
+                    ->select('inve_thesis_student_parts.right_margin')
+                    ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
+                    ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
+                    ->where('inve_thesis_student_parts.state', true);
+            }, 'right_margin')
+            ->selectSub(function ($query) use ($thesis_id) {
+                $query->from('inve_thesis_student_parts')
+                    ->select('inve_thesis_student_parts.left_margin')
+                    ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
+                    ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
+                    ->where('inve_thesis_student_parts.state', true);
+            }, 'left_margin')
             ->whereRaw('IF(inve_thesis_format_parts.belongs IS NULL OR inve_thesis_format_parts.belongs = "",TRUE, FALSE)')
             ->where('inve_thesis_students.person_id', $person->id)
             ->where('inve_thesis_students.user_id', $person->user_id)

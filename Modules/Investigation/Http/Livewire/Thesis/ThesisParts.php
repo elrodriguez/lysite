@@ -22,6 +22,7 @@ class ThesisParts extends Component
     public $school;
     public $thesis_format;
     public $thesis_student;
+    public $ThesisStudentPart;
 
     public $parts_all; //todas las partes sin filtrar solo ordenados por number order
 
@@ -48,18 +49,6 @@ class ThesisParts extends Component
             $this->format_id = $this->thesis_student->format_id;
             $this->format = InveThesisFormat::where('id', $this->format_id)->get()->first();
 
-            //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
-            if($this->thesis_student->left_margin == null){
-                $this->left_margin = $this->format->left_margin;
-            }else{
-                $this->left_margin = $this->thesis_student->left_margin;
-            }
-
-            if($this->thesis_student->right_margin == null){
-                $this->right_margin = $this->format->right_margin;
-            }else{
-                $this->right_margin = $this->thesis_student->right_margin;
-            }
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -70,6 +59,21 @@ class ThesisParts extends Component
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
             }
+
+            //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
+            if ($ThesisStudentPart->left_margin == null) {
+                $this->left_margin = $this->format->left_margin;
+            } else {
+                $this->left_margin = $ThesisStudentPart->left_margin;
+            }
+
+            if ($ThesisStudentPart->right_margin == null) {
+                $this->right_margin = $this->format->right_margin;
+            } else {
+                $this->right_margin = $ThesisStudentPart->right_margin;
+            }
+
+            $this->ThesisStudentPart = $ThesisStudentPart;
         } else {
             redirect()->route('home');
         }
@@ -190,7 +194,7 @@ class ThesisParts extends Component
             $bool = false;
             $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
             //Actualiza los margenes aunque el contenido no halla sido modificado
-            $this->thesis_student->update([
+            $this->ThesisStudentPart->update([
                 'right_margin' => $this->right_margin,
                 'left_margin' => $this->left_margin
             ]);
@@ -272,7 +276,9 @@ class ThesisParts extends Component
                     'student_id' => $this->thesis_student->student_id,
                     'inve_thesis_student_id' => $this->thesis_student->id,
                     'inve_thesis_format_part_id' => $this->focus_id,
-                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
+                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                    'right_margin' => $this->right_margin,
+                    'left_margin' => $this->left_margin
                 ]);
         } else {
             InveThesisStudentPart::create([
@@ -280,32 +286,32 @@ class ThesisParts extends Component
                 'inve_thesis_student_id' => $this->thesis_student->id,
                 'inve_thesis_format_part_id' => $this->focus_id,
                 'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                'right_margin' => $this->right_margin,
+                'left_margin' => $this->left_margin
                 //     'version' => ($max_version ? $max_version + 1 : 1)
             ]);
         }
-        $this->thesis_student->update([
-            'right_margin' => $this->right_margin,
-            'left_margin' => $this->left_margin
-        ]);
 
         $this->content_old = $this->content;
     }
 
-    public function goToTheCourse(){
+    public function goToTheCourse()
+    {
         $content_id = $this->focused_part->content_id;
         $section_id = AcaContent::where('id', $content_id)->get()->first()->section_id;
         $course_id = AcaSection::where('id', $section_id)->get()->first()->course_id;
         //crea la URL al curso y a la #seccion donde se encuentra el video
-        $url = route('academic_students_my_course', ['id' => $course_id])."#".$section_id;
+        $url = route('academic_students_my_course', ['id' => $course_id]) . "#" . $section_id;
         return $url;
     }
 
-    public function deleteCommentary(){ //eliminar la nota del instructor
-        $this->commentary=null;
+    public function deleteCommentary()
+    { //eliminar la nota del instructor
+        $this->commentary = null;
         InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-                ->where('inve_thesis_format_part_id', $this->focus_id)
-                ->update([
-                    'commentary' => null,
-                ]);
+            ->where('inve_thesis_format_part_id', $this->focus_id)
+            ->update([
+                'commentary' => null,
+            ]);
     }
 }
