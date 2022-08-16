@@ -36,9 +36,7 @@
     <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
     <link type="text/css" href="{{ url('assets/css/chat.css') }}" rel="stylesheet">
-    <style>
-        
-    </style>
+
     @yield('styles')
 
 </head>
@@ -114,6 +112,13 @@
     @yield('modales')
     <!-- Modal -->
     @yield('script-chat')
+    <script>
+        setTimeout(function(){
+            let b = document.getElementsByClassName('preloader')[0];
+            b.style.display = 'none';
+        },10000);
+        
+    </script>
 </body>
 
 </html>
