@@ -36,7 +36,9 @@
     <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
     <link type="text/css" href="{{ url('assets/css/chat.css') }}" rel="stylesheet">
-
+    <style>
+        
+    </style>
     @yield('styles')
 
 </head>

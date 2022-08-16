@@ -49,31 +49,34 @@ class ThesisParts extends Component
             $this->format_id = $this->thesis_student->format_id;
             $this->format = InveThesisFormat::where('id', $this->format_id)->get()->first();
 
+            $this->left_margin = $this->format->left_margin;
+            $this->right_margin = $this->format->right_margin;
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
                 ->limit(1)
                 ->first();
+
             if (isset($ThesisStudentPart)) {
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
-            }
 
-            //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
-            if ($ThesisStudentPart->left_margin == null) {
-                $this->left_margin = $this->format->left_margin;
-            } else {
-                $this->left_margin = $ThesisStudentPart->left_margin;
-            }
+                //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
+                if ($ThesisStudentPart->left_margin == null) {
+                    $this->left_margin = $this->format->left_margin;
+                } else {
+                    $this->left_margin = $ThesisStudentPart->left_margin;
+                }
 
-            if ($ThesisStudentPart->right_margin == null) {
-                $this->right_margin = $this->format->right_margin;
-            } else {
-                $this->right_margin = $ThesisStudentPart->right_margin;
-            }
+                if ($ThesisStudentPart->right_margin == null) {
+                    $this->right_margin = $this->format->right_margin;
+                } else {
+                    $this->right_margin = $ThesisStudentPart->right_margin;
+                }
 
-            $this->ThesisStudentPart = $ThesisStudentPart;
+                $this->ThesisStudentPart = $ThesisStudentPart;
+            }
         } else {
             redirect()->route('home');
         }
@@ -192,12 +195,14 @@ class ThesisParts extends Component
             $this->save(); //guarda en la base de datos
         } else {
             $bool = false;
-            $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
+
             //Actualiza los margenes aunque el contenido no halla sido modificado
             $this->ThesisStudentPart->update([
                 'right_margin' => $this->right_margin,
                 'left_margin' => $this->left_margin
             ]);
+
+            $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
         }
 
         if ($bool) {

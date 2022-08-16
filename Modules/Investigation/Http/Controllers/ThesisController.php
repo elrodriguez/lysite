@@ -161,11 +161,11 @@ class ThesisController extends Controller
                 if ($subpart->salto_de_pagina) {
                     $html .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>';
                 }
-                $html .= '<li style="list-style:none">';
+                $html .= '<li style="list-style:none;padding: 0;">';
                 if ($subpart->show_description) {
                     $html .= $subpart->number_order . ' ' . $subpart->description;  //solo se muestra si show_description es verdadero
                 }
-                $html .= '<div>' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
+                $html .= '<div style="padding: 0;margin:0">' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
                 $html .= $this->getSubParts($subpart->id, $thesis_id);
                 $html .= '</li>';
             }
