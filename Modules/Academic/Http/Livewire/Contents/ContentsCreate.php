@@ -101,7 +101,8 @@ class ContentsCreate extends Component
     }
 
     protected $rules = [
-        'content_url' => 'required'
+        'content_url' => 'required',
+        'name' => 'required'
     ];
 
     public function back(){

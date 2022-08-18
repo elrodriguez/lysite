@@ -19,8 +19,8 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
-                        <p class="text-70">Módulos del sistema</p>
-                        @can('configuraciones_modulos_nuevo')
+                        <p class="text-70">Contenidos de la Sección {{ $section->title }}</p>
+                        @can('academico_contenido_nuevo')
                             <a href="{{ route('academico_contenido_create', $this->section_id) }}" type="button"
                                 class="btn btn-primary">Nuevo</a>
                         @endcan
