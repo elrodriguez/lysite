@@ -29,7 +29,7 @@ class StudentsCourseContents extends Component
 
 
     public function getContents(){
-        $contents = AcaContent::where('section_id',$this->section_id)->get();
+        $contents = AcaContent::where('section_id',$this->section_id)->orderBy('count')->get();
         foreach($contents as $content){
             if(AcaStudentsSectionProgress::where('content_id',$content->id)->where('student_id',$this->student)->first()){
                 $content->completed = true;
