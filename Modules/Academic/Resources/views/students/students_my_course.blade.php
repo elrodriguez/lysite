@@ -7,7 +7,7 @@
                     <div class="container">
                         <h1 class="text-white">{{ $course->name }}</h1>
                         <p class="lead text-white-50 measure-hero-lead mb-24pt">{{ $course->description }}</p>
-                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#WelcomeVideo">
+                        <button type="button" class="btn btn-white" onclick="openModalWelcomeVideo()">
 
                             {{ __('labels.Welcome Video') }}
 
@@ -47,69 +47,80 @@
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
+    @section('modales')
+    <div wire:ignore.self class="modal fade" id="WelcomeVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $course->name }} - {{ __('labels.Welcome Video') }}</h5>
+                    <button type="button" class="close" onclick="closeModalWelcomeVideo()" aria-label="Close">
+                            <span aria-hidden="true close-btn">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
+                        <div class="player embed-responsive-item">
+                            <div class="player__content">
+                                <div class="player__image" style="--player-image: url(assets/images/illustration/player.svg)">
+                                </div>
+                                <a href="" class="player__play">
+                                    <span class="material-icons">play_arrow</span>
+                                </a>
+                            </div>
+                            <div class="player__embed d-none">
+                                <!-- Aqui abajo va el Video -->
+                                {{-- @if ($course->video_type==0)
+                                    <iframe id="frameWelcomeVideo" class="embed-responsive-item"
+                                    src="https://player.vimeo.com/video/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
+                                    allowfullscreen=""></iframe>
+                                @endif
+                                @if ($course->video_type==1)
+                                    <iframe id="frameWelcomeVideo" class="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
+                                    allowfullscreen=""></iframe>
+                                @endif --}}
+                                <iframe id="frameWelcomeVideo" class="embed-responsive-item"
+                                    src=""
+                                    allowfullscreen=""></iframe>
+                                <!-- Aqui arriba va el Video -->
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn" onclick="closeModalWelcomeVideo()">{{ __('labels.Close') }}</button>
+                </div>   
+            </div>
+        </div>
+    </div>
+    @endsection
+    @section('script')
+    <script>
+        var urlVideo = "{{ $course->video_url }}";
+        var typeVideo = "{{ $course->video_type }}";
+        var srcVideo = "";
+        function closeModalWelcomeVideo(){
+            document.getElementById("frameWelcomeVideo").src="";
+            $('#WelcomeVideo').modal('hide');
+        }
+        function openModalWelcomeVideo(){
+            if(typeVideo == '0'){
+                srcVideo = "https://player.vimeo.com/video/"+urlVideo+"?title=0&amp;byline=0&amp;portrait=0";
+                document.getElementById("frameWelcomeVideo").src=srcVideo;
+            }
+            if(typeVideo == '1'){
+                srcVideo = "https://www.youtube.com/embed/"+urlVideo+"?title=0&amp;byline=0&amp;portrait=0";
+                document.getElementById("frameWelcomeVideo").src=srcVideo;
+            }
+            $('#WelcomeVideo').modal('show');
+        }
+    </script>
+    @endsection
 </x-master>
 
 
-<div wire:ignore.self class="modal fade" id="WelcomeVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog" role="document">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-
-                <h5 class="modal-title" id="exampleModalLabel">{{ $course->name }} - {{ __('labels.Welcome Video') }}</h5>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                     <span aria-hidden="true close-btn">×</span>
-
-                </button>
-
-            </div>
-
-           <div class="modal-body">
-
-            <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
-                <div class="player embed-responsive-item">
-                    <div class="player__content">
-                        <div class="player__image" style="--player-image: url(assets/images/illustration/player.svg)">
-                        </div>
-                        <a href="" class="player__play">
-                            <span class="material-icons">play_arrow</span>
-                        </a>
-                    </div>
-                    <div class="player__embed d-none">
-                        <!-- Aqui abajo va el Video -->
-                        @if ($course->video_type==0)
-                        <iframe class="embed-responsive-item"
-                            src="https://player.vimeo.com/video/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
-                            allowfullscreen=""></iframe>
-                        @endif
-                        @if ($course->video_type==1)
-                        <iframe class="embed-responsive-item"
-                            src="https://www.youtube.com/embed/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
-                            allowfullscreen=""></iframe>
-                        @endif
-                        <!-- Aqui arriba va el Video -->
-                    </div>
-                </div>
-            </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">{{ __('labels.Close') }}</button>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 
 

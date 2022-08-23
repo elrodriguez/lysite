@@ -49,6 +49,7 @@
                                                 @can('investigacion_partes')
                                                 <a href="{{ route('investigation_parts',$format->id) }}" type="button" class="btn btn-success btn-sm" title="Partes"><i class="fa fa-newspaper"></i></a>
                                                 @endcan
+                                                <button wire:click="formatClone({{ $format->id }})" type="button" class="btn btn-warning btn-sm" title="Clonar"><i class="fa fa-clone"></i></button>
                                                 @can('investigacion_partes_eliminar')
                                                 <button onclick="deletes({{ $format->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan

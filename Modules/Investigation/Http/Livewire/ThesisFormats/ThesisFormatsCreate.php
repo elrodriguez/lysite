@@ -73,7 +73,6 @@ class ThesisFormatsCreate extends Component
             'type_thesis' => trim($this->type_thesis),
             'normative_thesis' => trim($this->normative_thesis),
             'school_id' => $this->school_id,
-
         ]);
 
 
