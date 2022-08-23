@@ -63,7 +63,6 @@ class ThesisFormatsListComplete extends Component
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
         }
-
         $this->dispatchBrowserEvent('inve-format-thesis-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
     public function formatClone($id)
