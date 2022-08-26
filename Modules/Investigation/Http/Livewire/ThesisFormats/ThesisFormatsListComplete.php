@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Modules\Investigation\Entities\InveThesisFormat;
 use App\Models\Universities as UniversitiesModel;
 use App\Models\UniversitiesSchools as UniversitiesSchoolsModel;
+use Modules\Investigation\Entities\InveThesisFormatPart;
 
 class ThesisFormatsListComplete extends Component
 {
@@ -68,7 +69,7 @@ class ThesisFormatsListComplete extends Component
     public function formatClone($id)
     {
         $format = InveThesisFormat::find($id);
-        InveThesisFormat::create([
+        $new_format =  InveThesisFormat::create([
             'name' => 'COPIA - ' . trim($format->name),
             'description' => 'COPIA - ' . trim($format->description),
             'type_thesis' => trim($format->type_thesis),
@@ -80,5 +81,47 @@ class ThesisFormatsListComplete extends Component
             'top_margin' => $format->top_margin,
             'bottom_margin' => $format->bottom_margin
         ]);
+
+        $parts = InveThesisFormatPart::where('thesis_format_id', $id)->get();
+
+        foreach ($parts as $part) {
+            $new_part = InveThesisFormatPart::create([
+                'description' => $part->description,
+                'information' => $part->information,
+                'number_order' => $part->number_order,
+                'content_id' => $part->content_id,
+                'thesis_format_id' => $new_format->id,
+                'body' => $part->body,
+                'state' => $part->state,
+                'index_order' => $part->index_order,
+                'show_description' => $part->show_description,
+                'salto_de_pagina' => $part->salto_de_pagina
+            ]);
+            $this->createSubParts($part->id, $new_part->id, $new_format->id);
+        }
+    }
+
+    public function createSubParts($id, $new_part_id, $new_format_id)
+    {
+        $subParts = InveThesisFormatPart::where('belongs', $id)->get();
+
+        if (count($subParts) > 0) {
+            foreach ($subParts as $subPart) {
+                $new_subPart = InveThesisFormatPart::create([
+                    'description' => $subPart->description,
+                    'information' => $subPart->information,
+                    'number_order' => $subPart->number_order,
+                    'content_id' => $subPart->content_id ? $subPart->content_id : null,
+                    'thesis_format_id' => $new_format_id,
+                    'belongs' => $new_part_id,
+                    'body' => $subPart->body,
+                    'state' => $subPart->state,
+                    'index_order' => $subPart->index_order,
+                    'show_description' => $subPart->show_description,
+                    'salto_de_pagina' => $subPart->salto_de_pagina
+                ]);
+                $this->createSubParts($subPart->id, $new_subPart->id, $new_format_id);
+            }
+        }
     }
 }
