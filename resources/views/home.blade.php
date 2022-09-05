@@ -10,10 +10,9 @@
                 <div class="container page__container py-64pt py-md-112pt">
                     <div class="row align-items-center text-center text-md-left">
                         <div class="col-md-6 col-lg-5 order-1 order-md-0">
-                            <h1 class="text-white">Lysite te apoyamos con: <span
+                            <h1 class="text-white">{{env('APP_NAME')}} te apoyamos con: <span
                                     class="d-block d-md-inline-block text-scramble js-text-scramble">Tesis</span></h1>
-                            <p class="lead mb-32pt mb-lg-48pt text-white">Business, Technology and Creative Skills taught
-                                by industry experts. Explore a wide range of skills with our professional tutorials.</p>
+                            <p class="lead mb-32pt mb-lg-48pt text-white">Aprende a hacer tu tesis, hacemos asesorías, simulacros de sustentación y más...</p>
                             <a href="library.html" class="btn btn-lg btn-white btn--raised mb-16pt">Browse Courses</a>
                             <p class="mb-0"><a href="" class="text-white-70 text-underline"><strong>Are you a
                                         teacher?</strong></a></p>
