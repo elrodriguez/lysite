@@ -56,7 +56,7 @@ class ThesisParts extends Component
                 ->where('inve_thesis_format_part_id', $this->focus_id)
                 ->limit(1)
                 ->first();
-            dd($ThesisStudentPart);
+
             if (isset($ThesisStudentPart)) {
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
@@ -197,6 +197,7 @@ class ThesisParts extends Component
             $bool = false;
 
             //Actualiza los margenes aunque el contenido no halla sido modificado
+            dd($this->ThesisStudentPart);
             $this->ThesisStudentPart->update([
                 'right_margin' => $this->right_margin,
                 'left_margin' => $this->left_margin
