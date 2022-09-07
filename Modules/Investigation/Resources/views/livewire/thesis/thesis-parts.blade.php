@@ -356,7 +356,7 @@
             if (!as) { //autosave desactivado
                 updateContent();
                 let old = document.getElementById("content_old").value;
-                let actual = window.editor1.getData();
+                let actual = data; //ahora el actual esta en data
                 if (old != actual) {
                     cuteAlert({
                         type: "question",
@@ -378,7 +378,7 @@
 
                 updateContent();
                 let old = document.getElementById("content_old").value;
-                let actual = window.editor1.getData();
+                let actual = data; //ahora el actual esta en data
                 if (old != actual) {
                     @this.savingThesisPartStudentBeforeChange(thesis_id, part_id);
                 } else {
@@ -418,6 +418,7 @@
         var TimeSave;
         var time = 30; //se configura el tiempo en segundos.
         time = time * 1000; //se pasa a milisegundos
+        var data;
 
 
         function activarAutoGuardado() {
@@ -446,7 +447,7 @@
             if (document.getElementById("editor").tagName == "DIV") {
                 // data = editor.getData();
                 // data = editor1.getHTMLCode();
-                let data = window.editor1.getData();
+                data = window.editor1.getData();
                 @this.set('content', data);
             }
         }
