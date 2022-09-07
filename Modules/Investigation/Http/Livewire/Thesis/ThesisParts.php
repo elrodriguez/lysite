@@ -197,7 +197,6 @@ class ThesisParts extends Component
             $bool = false;
 
             //Actualiza los margenes aunque el contenido no halla sido modificado
-            dd($this->ThesisStudentPart);
             $this->ThesisStudentPart->update([
                 'right_margin' => $this->right_margin,
                 'left_margin' => $this->left_margin
