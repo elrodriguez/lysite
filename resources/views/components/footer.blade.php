@@ -1,4 +1,4 @@
-<div class="js-fix-footer bg-white border-top-2">
+<div class="js-fix-footer bg-white border-top-2" hidden="true">
     <div class="container page-section py-lg-48pt">
         <div class="row">
             <div class="col-md-8">
