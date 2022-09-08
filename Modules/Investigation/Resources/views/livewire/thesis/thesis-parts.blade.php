@@ -53,8 +53,8 @@
                 <div class="col-3">
                     <div class="custom-control custom-checkbox">
                         <input wire:model="auto_save" class="custom-control-input" type="checkbox" value=""
-                            id="invalidCheck01">
-                        <label class="custom-control-label" for="invalidCheck01" onclick="toggleSaving()">
+                            id="auto-saveCheck">
+                        <label class="custom-control-label" for="auto-saveCheck" onclick="toggleSaving()">
                             {{ __('labels.Automatic save') }}
                         </label>
                     </div>
@@ -352,7 +352,7 @@
         }
 
         function changeFocus(thesis_id, part_id) { //funcion para cambiar de sección y revisar cambios
-            let as = document.getElementById("invalidCheck01").checked;
+            let as = document.getElementById("auto-saveCheck").checked;
             var editor_textarea;
             if (document.getElementById("editor").tagName == "TEXTAREA") {
                 editor_textarea = true;
@@ -422,6 +422,7 @@
         var TimeSave;
         var time = 30; //se configura el tiempo en segundos.
         time = time * 1000; //se pasa a milisegundos
+        var data;
 
 
         function activarAutoGuardado() {
@@ -436,7 +437,7 @@
             updateContent();
             let old = document.getElementById("content_old").value;
             let actual = data; //ahora el actual esta en data
-            let as = document.getElementById('invalidCheck01');
+            let as = document.getElementById('auto-saveCheck');
             // revisa que autoguardado esté activado y que haya habido cambio en el contenido
             if (as.checked && old != actual) {
                 @this.saveThesisPartStudentAutoSave(); // se guarda el contenido
@@ -450,7 +451,7 @@
             if (document.getElementById("editor").tagName == "DIV") {
                 // data = editor.getData();
                 // data = editor1.getHTMLCode();
-                let data = window.editor1.getData();
+                data = window.editor1.getData();
                 @this.set('content', data);
             }
         }

@@ -74,7 +74,6 @@ class ThesisParts extends Component
                 } else {
                     $this->right_margin = $ThesisStudentPart->right_margin;
                 }
-
                 $this->ThesisStudentPart = $ThesisStudentPart;
             }
         } else {
