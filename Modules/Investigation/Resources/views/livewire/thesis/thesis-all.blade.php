@@ -38,11 +38,11 @@
                                             <td class="text-center align-middle">{{ $key + 1 }}</td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group">
-                                                    @can('investigacion_partes_editar')
+                                                    {{-- @can('investigacion_partes_editar') --}}
                                                         <a href="{{ route('investigation_thesis_check', $thesi->external_id) }}"
                                                             type="button" class="btn btn-info btn-sm" title="check"><i
                                                                 class="fa fa-search-plus"></i></a>
-                                                    @endcan
+                                                    {{-- @endcan --}}
                                                 </div>
                                             </td>
                                             <td class="align-middle">{{ $thesi->full_name }}</td>

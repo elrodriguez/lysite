@@ -15,9 +15,9 @@
             </div>
             <div class="d-flex align-items-center py-4pt" style="white-space: nowrap;">
                 <div class="btn-group" role="group" aria-label="">
-                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn primary"><i
+                    {{-- <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn primary"><i
                             class="fa fa-pencil-alt mr-1"></i>
-                    </button>
+                    </button> --}}
                 </div>
             </div>
         </div>

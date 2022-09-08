@@ -35,9 +35,12 @@ class ThesisController extends Controller
     {
         //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
         if ($sub_part == 0) {
-            $id = InveThesisStudent::where('id', $thesis_id)->get()->first()->format_id;
-            $id = InveThesisFormatPart::where('thesis_format_id', $id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first()->id;
-            $sub_part = $id;
+            $format_id = InveThesisStudent::where('id', $thesis_id)->get()->first()->format_id;
+
+            $part = InveThesisFormatPart::where('thesis_format_id', $format_id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first();
+            if ($part) {
+                $sub_part = $part->id;
+            }
         }
 
         return view('investigation::thesis.thesis_parts')

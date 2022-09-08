@@ -95,9 +95,11 @@ class ThesisParts extends Component
 
     public function getParts()
     {
-        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('index_order')->first()->get();
+        $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('index_order')->first();
         if ($this->focus_id == 0) {
-            $this->focus_id = $this->parts_all[0]->id;
+            if ($this->parts_all) {
+                $this->focus_id = $this->parts_all->id;
+            }
         }
         $this->focused_part = InveThesisFormatPart::find($this->focus_id);
         //esta es la parte que se mostrará a la derecha de la vista

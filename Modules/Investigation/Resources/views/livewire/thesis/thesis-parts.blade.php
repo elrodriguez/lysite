@@ -136,6 +136,7 @@
                     {{-- End Modal Indice de Contenido --}}
 
                 </div>
+                @if($focused_part)
                 <div class="col">
                     <div class="btn-group mr-2">
                         <button type="button" class="btn btn-secondary" wire:click="showVideo"
@@ -159,16 +160,18 @@
                         @endif
                     </div>
                 </div>
+                @endif
             </div>
         </div>
-
+        @if($focused_part)
         <div class="card text-center">
             <div class="card-body">
                 <h5 class="card-title">{{ $focused_part->description }}</h5>
             </div>
         </div>
-
+        @endif
     </div>
+    @if($focused_part)
     @if ($focused_part->body == true)
         {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
             data-revision-history="false">
@@ -209,10 +212,10 @@
                         target="_blank">
                         Exportar PDF
                     </a>
-                    <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
+                    {{-- <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
                         target="_blank">
                         Exportar WORD
-                    </a>
+                    </a> --}}
                     <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
                         onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
                     </button>
@@ -225,6 +228,7 @@
             <input type="hidden" name="" id="editor">
 
         </div>
+    @endif
     @endif
     <div>
         {{-- modal video --}}
