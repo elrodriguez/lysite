@@ -43,6 +43,10 @@
                                     </li>
                                 @endif
                             @endforeach
+                        @else
+                            <div class="alert alert-info">
+                                Este formato un está pendiente de contenido. vuelve a intentarlo mas tarde o comunicarse con el administrador del sitio.
+                            </div>  
                         @endif
                     </ul>
                     {{-- <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"

@@ -71,8 +71,10 @@ class ThesisPartsCheck extends Component
         //debe ordenarse por "index_order" que en el formulario se muestra como "numero de orden"
         $this->parts_all = InveThesisFormatPart::where('thesis_format_id', $this->format_id)->orderBy('index_order')->get();
 
-        if ($this->focus_id == 0) {
-            $this->focus_id = $this->parts_all[0]->id;
+        if ($this->focus_id == 0 || $this->focus_id == null) {
+            if (count($this->parts_all) > 0) {
+                $this->focus_id = $this->parts_all[0]->id;
+            }
         }
         $this->focused_part = InveThesisFormatPart::find($this->focus_id);
         //esta es la parte que se mostrará a la derecha de la vista
@@ -124,13 +126,13 @@ class ThesisPartsCheck extends Component
 
     public function save()
     {
-        if($this->thesisStudentPart!=null){ // si existe actualiza de lo contrario deberá crear con los datos del alumno
+        if ($this->thesisStudentPart != null) { // si existe actualiza de lo contrario deberá crear con los datos del alumno
             $this->thesisStudentPart->update([
                 'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                 'commentary_user_id' => Auth::id(),
                 'commentary' => $this->commentary
             ]);
-        }else{
+        } else {
             InveThesisStudentPart::create([
                 'student_id' => $this->thesis_student->student_id,
                 'inve_thesis_student_id' => $this->thesis_student->id,

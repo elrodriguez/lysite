@@ -7,7 +7,7 @@
                     <div class="nav-item">
                         <div class="media flex-nowrap">
                             <div class="media-left mr-16pt">
-                                <a href="student-take-course.html">
+                                <a href="{{ route('academic_students_my_course',$course_id) }}">
     
                                     <div class="avatar avatar-4by3">
                                         <img src="{{ asset($course->course_image) }}" alt="Avatar"
@@ -19,7 +19,7 @@
                             </div>
                             @if($instruct)
                             <div class="media-body">
-                                <a href="student-take-course.html" class="card-title text-body mb-0">{{ $course->name }}</a>
+                                <a href="{{ route('academic_students_my_course',$course_id) }}" class="card-title text-body mb-0">{{ $course->name }}</a>
                                 <p class="lh-1 d-flex align-items-center mb-0">
                                     <span class="text-50 small font-weight-bold mr-8pt">{{ $instruct->names }}</span>
                                     <span class="text-50 small">{{ $instruct->email }}</span>
