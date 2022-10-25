@@ -62,7 +62,11 @@ class ContentsList extends Component
     public function destroy($id){
         try {
             $content_url=AcaContent::find($id)->content_url;
-            Storage::disk('public')->delete(substr($content_url, 8));
+            try {
+                Storage::disk('public')->delete(substr($content_url, 8));
+            } catch (\Throwable $th) {
+
+            }
             $conteo=AcaContent::find($id)->count;
             AcaContent::find($id)->delete();
             $res = 'success';

@@ -2,12 +2,15 @@
 
 namespace Modules\Academic\Http\Livewire\Students;
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaStudent;
 
 class StudentsReportTotal extends Component
 {
     public $students = [];
+    public $not_students = [];
 
     public function render()
     {
@@ -15,25 +18,67 @@ class StudentsReportTotal extends Component
         return view('academic::livewire.students.students-report-total');
     }
 
-    public function getData(){
-        $this->students = AcaStudent::join('people','person_id','people.id')
-                ->join('identity_document_types','people.identity_document_type_id','identity_document_types.id')
-                ->select(
-                    'people.id',
-                    'people.full_name',
-                    'people.number',
-                    'identity_document_types.description as document_type_name',
-                    'people.mobile_phone',
-                    'people.email',
-                )
-                ->groupBy([
-                    'people.id',
-                    'people.full_name',
-                    'people.number',
-                    'identity_document_types.description',
-                    'people.mobile_phone',
-                    'people.email',
-                ])
-                ->get();
+    public function getData()
+    {
+        $this->students = AcaStudent::join('people', 'person_id', 'people.id')
+            ->join('identity_document_types', 'people.identity_document_type_id', 'identity_document_types.id')
+            ->select(
+                'people.id',
+                'people.full_name',
+                'people.number',
+                'identity_document_types.description as document_type_name',
+                'people.mobile_phone',
+                'people.email',
+            )
+            ->groupBy([
+                'people.id',
+                'people.full_name',
+                'people.number',
+                'identity_document_types.description',
+                'people.mobile_phone',
+                'people.email',
+            ])
+            ->get();
+
+        $this->not_students = AcaStudent::RightJoin('people', 'person_id', 'people.id')
+            ->join('identity_document_types', 'people.identity_document_type_id', 'identity_document_types.id')
+            ->select(
+                'people.id',
+                'people.full_name',
+                'people.number',
+                'identity_document_types.description as document_type_name',
+                'people.mobile_phone',
+                'people.email',
+            )
+            ->groupBy([
+                'people.id',
+                'people.full_name',
+                'people.number',
+                'identity_document_types.description',
+                'people.mobile_phone',
+                'people.email',
+            ])->where('aca_students.person_id','=', null)
+            ->get();
+    }
+
+    public function destroy($id){
+        try {
+        DB::beginTransaction();
+            $user_id = DB::table('people')->where('id', $id)->select('user_id')->first();
+            $user_id = $user_id->user_id;
+            DB::delete('delete from people where id= ?',[$id]);
+            DB::delete('delete from users where id=?',[$user_id]);
+            DB::commit();
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se eliminó correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar comunicate con los administradores del Sistema';
+        }
+
+        $this->dispatchBrowserEvent('aca-person-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 }

@@ -47,16 +47,16 @@
                                     placeholder="{{ __('labels.Name') }}">
                                 @error('name') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
-                            <div wire:ignore>
+                            <div>
 
-                                <div class="form-group" style="display: none" id="txturl">
+                                <div class="form-group" style="display: none" id="txturl" wire:ignore>
                                     <label class="form-label" for="txturl">URL *</label>
                                     <input wire:model="txturl" type="text" class="form-control" id="content_url"
                                         placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
                                     @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                                 </div>
 
-                                <div class="form-group" style="display: none" id="txttexto">
+                                <div class="form-group" style="display: none" id="txttexto" wire:ignore>
                                     <label class="form-label" for="txttexto">Texto *</label>
                                     <div>
                                         <textarea wire:model="txttexto" class="form-control" id="editor"
@@ -65,20 +65,20 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" style="display: none" id="txtarchivo">
+                                <div class="form-group" style="display: none" id="txtarchivo" wire:ignore>
                                     <label class="form-label" for="txtarchivo">Archivo *</label>
                                     <input type="file" wire:model="txtarchivo"
                                         accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
                                     @error('content_url') <span class="error">{{ $message }}</span> @enderror
                                 </div>
 
-                                <div class="form-group" style="display: none" id="txtimage">
+                                <div class="form-group" style="display: none" id="txtimage" wire:ignore.self>
                                     <label class="form-label" for="txtimage">Imagen *</label>
-                                    @if ($content_url)
+                                    @if ($txtimage)
 
                                         {{ __('labels.Photo Preview') }}:
 
-                                        <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ $content_url->temporaryUrl() }}">
+                                        <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ $txtimage->temporaryUrl() }}">
 
                                     @endif
                                     <input type="file" wire:model="txtimage" accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">

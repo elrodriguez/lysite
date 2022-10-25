@@ -34,6 +34,7 @@ class ContentsEdit extends Component
 
     public $txturl;
     public $txtimage;
+    public $txtimage_last;
     public $txtarchivo;
     public $txttexto;
 
@@ -60,6 +61,7 @@ class ContentsEdit extends Component
         }
         if($this->content_type_id == 4){
             $this->txtimage = $this->content->content_url;
+            $this->txtimage_last = $this->txtimage;
         }
     }
 
