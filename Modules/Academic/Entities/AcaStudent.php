@@ -4,13 +4,14 @@ namespace Modules\Academic\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AcaStudent extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'person_id','course_id', 'status', 'registered_until'
+        'person_id', 'course_id', 'status', 'registered_until'
     ];
 
     protected static function newFactory()
@@ -20,6 +21,6 @@ class AcaStudent extends Model
 
     public function person()
     {
-        return $this->belongsTo(\App\Models\Person::class,'person_id');
+        return $this->belongsTo(\App\Models\Person::class, 'person_id');
     }
 }

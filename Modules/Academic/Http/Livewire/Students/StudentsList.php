@@ -16,27 +16,33 @@ class StudentsList extends Component
 
     public function render()
     {
-        return view('academic::livewire.students.students-list',['students' => $this->getData()]);
+        return view('academic::livewire.students.students-list', ['students' => $this->getData()]);
     }
 
-    public function getData(){
-        return AcaStudent::join('people','person_id','people.id')
-                ->join('identity_document_types','people.identity_document_type_id','identity_document_types.id')
-                ->join('aca_courses','aca_students.course_id','aca_courses.id')
-                ->select(
-                    'people.id',
-                    'people.full_name',
-                    'people.number',
-                    'identity_document_types.description as document_type_name',
-                    'people.mobile_phone',
-                    'people.email',
-                    'aca_courses.name'
-                )
-                ->where('people.full_name','LIKE','%'.$this->search.'%')
-                ->paginate(10);
+    public function getData()
+    {
+        return AcaStudent::join('people', 'person_id', 'people.id')
+            ->join('identity_document_types', 'people.identity_document_type_id', 'identity_document_types.id')
+            ->join('aca_courses', 'aca_students.course_id', 'aca_courses.id')
+            ->select(
+                'people.id',
+                'people.full_name',
+                'people.number',
+                'identity_document_types.description as document_type_name',
+                'people.mobile_phone',
+                'people.email',
+                'aca_courses.name'
+            )
+            ->where('people.full_name', 'LIKE', '%' . $this->search . '%')
+            ->paginate(10);
     }
 
-    public function getSearch(){
+    public function getSearch()
+    {
         $this->resetPage();
+    }
+    public function deleteStudent($id)
+    {
+        AcaStudent::first($id)->delete();
     }
 }
