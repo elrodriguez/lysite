@@ -28,6 +28,9 @@ class HistoryCreate extends Component
     }
 
     public function save(){
+        $this->validate([
+            'year' => 'numeric|min:2010',
+        ]);
         $history = new HomeHistories();
         $history->title = $this->title;
         $history->author = $this->author;
@@ -75,6 +78,5 @@ class HistoryCreate extends Component
         'university' => 'required',
         'details' => 'required'
     ];
-
 
 }
