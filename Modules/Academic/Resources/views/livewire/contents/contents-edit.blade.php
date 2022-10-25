@@ -47,16 +47,16 @@
                                 @error('name') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
-                            <div wire:ignore>
+                            <div>
 
-                                <div class="form-group" style="display: {{ $content_type_id == 1 ? 'block' : 'none' }}" id="txturl">
+                                <div class="form-group" style="display: {{ $content_type_id == 1 ? 'block' : 'none' }}" id="txturl" wire:ignore>
                                     <label class="form-label" for="txturl">URL *</label>
                                     <input wire:model="txturl" type="text" class="form-control" id="content_url"
                                         placeholder="{{ __('labels.enter the video link here (youtube, vimeo, etc)') }}">
                                     @error('content_url') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                                 </div>
 
-                                <div class="form-group" style="display: {{ $content_type_id == 2 ? 'block' : 'none' }}" id="txttexto">
+                                <div class="form-group" style="display: {{ $content_type_id == 2 ? 'block' : 'none' }}" id="txttexto" wire:ignore>
                                     <label class="form-label" for="txttexto">Texto *</label>
                                     <div>
                                         <textarea  class="form-control" id="editor"
@@ -65,16 +65,21 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" style="display: {{ $content_type_id == 3 ? 'block' : 'none' }}" id="txtarchivo">
+                                <div class="form-group" style="display: {{ $content_type_id == 3 ? 'block' : 'none' }}" id="txtarchivo" wire:ignore>
                                     <label class="form-label" for="txtarchivo">Archivo *</label>
                                     <input type="file" wire:model="txtarchivo"
                                         accept=".pdf,.doc ,.docx,.xls,.xlsx,.ppt,.pptx,.txt">
                                     @error('content_url') <span class="error">{{ $message }}</span> @enderror
                                 </div>
 
-                                <div class="form-group" style="display: {{ $content_type_id == 4 ? 'block' : 'none' }}" id="txtimage">
+                                <div class="form-group" style="display: {{ $content_type_id == 4 ? 'block' : 'none' }}" id="txtimage" wire:ignore.self>
                                     <label class="form-label" for="txtimage">Imagen *</label>
-                                    @if ($txtimage)
+                                    @if ($txtimage && ($this->txtimage_last != $this->txtimage))
+                                    {{ __('labels.Photo Preview') }}:
+
+                                <img class="img-fluid rounded float-right" alt="Responsive image"
+                                    src="{{ $txtimage->temporaryUrl() }}">
+                                    @else
                                         {{ __('labels.Photo Preview') }}:
                                         <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ env('APP_URL') }}/{{ $txtimage }}">
                                     @endif
