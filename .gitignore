@@ -14,4 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 storage/helloWorld.docx
-/Bootstrap/caché/services.php
+/bootstrap/cache/services.php
