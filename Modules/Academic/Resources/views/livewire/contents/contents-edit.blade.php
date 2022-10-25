@@ -76,7 +76,7 @@
                                     <label class="form-label" for="txtimage">Imagen *</label>
                                     @if ($txtimage)
                                         {{ __('labels.Photo Preview') }}:
-                                        <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ $txtimage }}">
+                                        <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ env('APP_URL') }}/{{ $txtimage }}">
                                     @endif
                                     <input type="file" wire:model="txtimage" accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
                                     @error('content_url') <span class="error">{{ $message }}</span> @enderror
