@@ -10,6 +10,10 @@
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="thesis" content="index">
 
+    <!-- Icono de la págona -->
+    <link rel="shortcut icon" type="image/png" href="{{ url('assets/images/logo/white-60.png') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ url('assets/images/logo/white-60.png') }}">
+
     <!-- Perfect Scrollbar -->
     <link type="text/css" href="{{ url('assets/vendor/perfect-scrollbar.css') }}" rel="stylesheet">
 
@@ -116,7 +120,7 @@
             let b = document.getElementsByClassName('preloader')[0];
             b.style.display = 'none';
         },10000);
-        
+
     </script>
 </body>
 
