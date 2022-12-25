@@ -12,6 +12,7 @@ use Modules\Academic\Entities\AcaSection;
 use Illuminate\Support\Facades\Storage;
 use Modules\Academic\Entities\AcaAnswer;
 use Modules\Academic\Entities\AcaQuestion;
+use Modules\Academic\Entities\AcaStudentsSectionProgress;
 use PhpParser\Node\Stmt\Label;
 use SebastianBergmann\Environment\Console;
 
@@ -75,6 +76,7 @@ class ContentsList extends Component
                 AcaAnswer::where('question_id', $ques->id)->delete();
             }
             AcaQuestion::where('content_id', $id)->delete();
+            AcaStudentsSectionProgress::where('content_id', $id)->delete();
             AcaContent::find($id)->delete();
             $res = 'success';
             $tit = 'Enhorabuena';
