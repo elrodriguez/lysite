@@ -10,6 +10,8 @@ use Modules\Academic\Entities\AcaContentType;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
 use Illuminate\Support\Facades\Storage;
+use Modules\Academic\Entities\AcaAnswer;
+use Modules\Academic\Entities\AcaQuestion;
 use PhpParser\Node\Stmt\Label;
 use SebastianBergmann\Environment\Console;
 
@@ -68,6 +70,11 @@ class ContentsList extends Component
 
             }
             $conteo=AcaContent::find($id)->count;
+            $questions = AcaQuestion::where('content_id', $id)->get();
+            foreach($questions as $ques){
+                AcaAnswer::where('question_id', $ques->id)->delete();
+            }
+            AcaQuestion::where('content_id', $id)->delete();
             AcaContent::find($id)->delete();
             $res = 'success';
             $tit = 'Enhorabuena';
