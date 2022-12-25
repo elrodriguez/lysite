@@ -166,9 +166,15 @@
             </div>
         </div>
     </div>
+    <div class="container page__container">
+        <input type="checkbox" wire:model="no_preguntar" name="no_preguntar" id=""><label for="no_preguntar" class="text-danger">Eliminar elementos sin preguntar</label>
+    </div>
     <script>
         function deletes(id) {
-            cuteAlert({
+            if(@this.no_preguntar){
+                @this.destroy(id)
+            }else{
+                cuteAlert({
                 type: "question",
                 title: "¿Desea eliminar estos datos?",
                 message: "Advertencia:¡Esta acción no se puede deshacer!",
@@ -179,6 +185,7 @@
                     @this.destroy(id)
                 }
             });
+            }
         }
         window.addEventListener('aca-content-delete', event => {
             cuteAlert({

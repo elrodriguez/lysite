@@ -24,6 +24,7 @@ class ContentsList extends Component
     public $course;
     public $section;
     public $count;
+    public $no_preguntar=false;
 
 
     use WithPagination;
