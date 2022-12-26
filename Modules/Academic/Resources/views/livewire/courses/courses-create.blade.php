@@ -23,40 +23,62 @@
                                 @error('name') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="name">Descripcion *</label>
+                                <label class="form-label" for="name">Descripción *</label>
                                 <textarea wire:model="description" class="form-control" id="description"></textarea>
                                 @error('description') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label" for="main_video">{{ __('labels.Url').' '.__('labels.Main Video') }} *</label>
+                                <label class="form-label" for="main_video">{{ __('labels.Url').' '.__('labels.Main
+                                    Video') }} *</label>
                                 <input wire:model="main_video" type="text" class="form-control" id="main_video">
                                 @error('main_video') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" x-data="{ isUploading: false, progress: 0 }"
+                                x-on:livewire-upload-start="isUploading = true"
+                                x-on:livewire-upload-finish="isUploading = false"
+                                x-on:livewire-upload-error="isUploading = false"
+                                x-on:livewire-upload-progress="progress = $event.detail.progress">
+
                                 <label class="form-label" for="name">{{ __('labels.Course Picture') }}</label>
                                 @if ($course_image)
 
                                 {{ __('labels.Photo Preview') }}:
 
-                                <img class="img-fluid rounded float-right" alt="Responsive image" src="{{ $course_image->temporaryUrl() }}">
+                                <img class="img-fluid rounded float-right" alt="Responsive image"
+                                    src="{{ $course_image->temporaryUrl() }}">
 
                                 @endif
                                 <input type="file" wire:model="course_image"
                                     accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
                                 @error('course_image') <span class="error">{{ $message }}</span> @enderror
+
+                                <!-- Progress Bar -->
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.5/cdn.min.js"
+                                integrity="sha512-y22y4rJ9d7NGoRLII5LVwUv0BfQKf6MpATy5ebVu/fbHdtJCxBpZRHZMHJv8VYl8scWjuwZcMPzwYk4sEoyL4A=="
+                                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                                <div x-show="isUploading">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="sr-only">Cargando...</span>
+                                      </div>
+                                    <progress max="100" x-bind:value="progress"></progress>
+
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input wire:model="status" class="custom-control-input" type="checkbox" value="" id="invalidCheck01" >
+                                    <input wire:model="status" class="custom-control-input" type="checkbox" value=""
+                                        id="invalidCheck01">
                                     <label class="custom-control-label" for="invalidCheck01">
                                         Estado
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar</button>
+                            <button type="submit" wire:loading.attr="disabled" wire:target="save"
+                                    class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -74,5 +96,5 @@
                 @this.back();
             });
         })
-        </script>
+    </script>
 </div>

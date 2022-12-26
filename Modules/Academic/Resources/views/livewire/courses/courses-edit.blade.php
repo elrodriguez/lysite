@@ -34,7 +34,11 @@
                                 @error('main_video') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" x-data="{ isUploading: false, progress: 0 }"
+                            x-on:livewire-upload-start="isUploading = true"
+                            x-on:livewire-upload-finish="isUploading = false"
+                            x-on:livewire-upload-error="isUploading = false"
+                            x-on:livewire-upload-progress="progress = $event.detail.progress">
                                 <label class="form-label" for="name">{{ __('labels.Course Picture') }}</label>
                                 @if ($course_image && ($this->course_image_last != $this->course_image))
 
@@ -50,6 +54,18 @@
                                 <input type="file" wire:model="course_image" id="course_image"
                                     accept="image/png, image/jpeg, image/jpg, image/bmp, image/gif">
                                 @error('course_image') <span class="error">{{ $message }}</span> @enderror
+                                <!-- Progress Bar -->
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.5/cdn.min.js"
+                                integrity="sha512-y22y4rJ9d7NGoRLII5LVwUv0BfQKf6MpATy5ebVu/fbHdtJCxBpZRHZMHJv8VYl8scWjuwZcMPzwYk4sEoyL4A=="
+                                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                                <div x-show="isUploading">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="sr-only">Cargando...</span>
+                                      </div>
+                                    <progress max="100" x-bind:value="progress"></progress>
+
+                                </div>
                             </div>
 
                             <div class="form-group">
