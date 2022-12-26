@@ -77,8 +77,10 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save"
+
+                                <button type="submit" wire:loading.attr="disabled" wire:target="save,course_image"
                                     class="btn btn-primary">Guardar</button>
+
                         </form>
                     </div>
                 </div>

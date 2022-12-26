@@ -32,36 +32,42 @@ class CoursesCreate extends Component
         'course_image' => 'required|max:20240|mimes:jpeg,jpg,png,gif',
     ];
 
-    public function save(){
+    public function save()
+    {
 
         $this->validate();
-        $this->course_image = 'storage/'.substr($this->course_image->store('public/uploads/academic/courses'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
-        $newCourse = AcaCourse::create([
-            'name' => trim($this->name),
-            'description' => trim($this->description),
-            'status' => $this->status ? true : false,
-            'course_image' => $this->course_image,
-            'main_video' => trim($this->main_video),
-            'created_by' => Auth::id()
-        ]);
+        if ($this->course_image) {
+            $this->course_image = 'storage/' . substr($this->course_image->store('public/uploads/academic/courses'), 7);    // <----------------------Solo para archivos e imagenes-------------------------------------------
+            $newCourse = AcaCourse::create([
+                'name' => trim($this->name),
+                'description' => trim($this->description),
+                'status' => $this->status ? true : false,
+                'course_image' => $this->course_image,
+                'main_video' => trim($this->main_video),
+                'created_by' => Auth::id()
+            ]);
 
-//Luego de crear el curso se crea un registro en la tabla aca_course_ratings para que se pueda calificar el curso
-        AcaCourseRating::create([
-            'course_id' => $newCourse->id,
-            'rating' => 5,
-            'voters' => 0
-        ]);
+            //Luego de crear el curso se crea un registro en la tabla aca_course_ratings para que se pueda calificar el curso
+            AcaCourseRating::create([
+                'course_id' => $newCourse->id,
+                'rating' => 5,
+                'voters' => 0
+            ]);
 
 
-        $this->name = null;
-        $this->description = null;
-        $this->status = true;
-        $this->course_image = null;
-        $this->main_video = null;
+            $this->name = null;
+            $this->description = null;
+            $this->status = true;
+            $this->course_image = null;
+            $this->main_video = null;
 
-        $this->dispatchBrowserEvent('aca-courses-create', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
+            $this->dispatchBrowserEvent('aca-courses-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
+        } else {
+            $this->dispatchBrowserEvent('aca-courses-create', ['tit' => 'Error', 'msg' => 'Elejir una imagen']);
+        }
     }
-    public function back(){
+    public function back()
+    {
         redirect()->route('academic_courses');
     }
 }
