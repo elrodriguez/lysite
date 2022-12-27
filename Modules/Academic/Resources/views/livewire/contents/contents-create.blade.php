@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" wire:loading.attr="disabled" wire:click='save'
+                            <button type="button" wire:loading.attr="disabled" wire:target="save,txtimage, txtarchivo" wire:click='save'
                                 class="btn btn-primary">Guardar</button>
 
                         </div>

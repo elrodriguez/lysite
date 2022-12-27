@@ -47,24 +47,28 @@ class ContentsList extends Component
 
     public function render()
     {
-        return view('academic::livewire.contents.contents-list', ['contents' => $this->getSections()]);  // ['contents' => es la variable que va a la vista
+        return view('academic::livewire.contents.contents-list', ['contents' => $this->getData()]);  // ['contents' => es la variable que va a la vista
 
     }
 
-    public function getSections()
-    {
-        //return AcaContent::where('section_id', $this->section_id)->paginate(10);
-        $contents = AcaContent::where('section_id', $this->section_id)
-            ->orderBy('count', 'asc');
-        return $contents->paginate(10);
-    }
     public function getData()
     {
-        return AcaContent::where('content_url', 'like', '%' . $this->search . '%')
-            ->paginate(10);
+        return AcaContent::where(function($query){
+            $query->where('section_id', $this->section_id);
+        })->where(function ($query){
+            $query->orWhere('content_url','like', '%' . $this->search . '%')
+            ->orWhere('original_name'   , 'like', '%' . $this->search . '%')
+            ->orWhere('name'            , 'like', '%' . $this->search . '%');
+        })->orderBy('count', 'asc')->paginate(10);
     }
     /*
-    ->whereColumn('membership.user_id', 'users.id')*/
+    Model::where(function ($query) {
+    $query->where('a', '=', 1)
+          ->orWhere('b', '=', 1);
+})->where(function ($query) {
+    $query->where('c', '=', 1)
+          ->orWhere('d', '=', 1);
+});*/
 
     public function destroy($id)
     {
@@ -113,18 +117,17 @@ class ContentsList extends Component
         $section = null;
         $next_section = null;
         if ($direction == 'down') {
-            $section = AcaContent::find($id)->where('count', $count)->first();
-            $next_section = AcaContent::find($id)->where('count', $count + 1)->first();
+            $section = AcaContent::where('id',$id)->first();
+            $next_section = AcaContent::where('section_id', $section->section_id)->where('count', $count + 1)->first();
             $next_count = $count;
             $count++;
         }
         if ($direction == 'up') {
-            $section = AcaContent::find($id)->where('count', $count)->first();
-            $next_section = AcaContent::find($id)->where('count', $count - 1)->first();
+            $section = AcaContent::where('id',$id)->first();
+            $next_section = AcaContent::where('section_id', $section->section_id)->where('count', $count - 1)->first();
             $next_count = $count;
             $count--;
         }
-
         $section->count = $count;
         $section->update();
         $next_section->count = $next_count;

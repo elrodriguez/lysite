@@ -77,7 +77,7 @@
                                             </td>
                                             <!-- Sort -->
                                             <td class="text-center align-middle">
-                                                @if ($content->count == 1 && $count > 1)
+                                                @if ($content->count <= 1 && $count > 1)
                                                     <div role="group" aria-label="Group A">
                                                         <button
                                                             wire:click="changeordernumber('{{ $content->count }}','{{ $content->id }}', 'down')"
