@@ -7,7 +7,7 @@
         @foreach($courses as $course)
         <div class="col-12 col-sm-6">
             <a class="card mb-0" href="{{ route('academic_students_my_course',$course->id) }}">
-                <img src="{{ url($course->course_image) }}" alt="Flinto" class="card-img" style="max-height: 100%; width: initial;">
+                <img src="{{ url($course->course_image) }}" alt="Flinto" class="card-img" style="max-height: 400px; width: initial;">
                 <div class="fullbleed bg-primary" style="opacity: .5;"></div>
                 <span class="card-body fullbleed">
                     <span class="row">
