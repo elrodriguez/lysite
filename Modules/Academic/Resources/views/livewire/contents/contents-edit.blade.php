@@ -87,7 +87,7 @@
                                     @error('content_url') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <button type="button" wire:loading.attr="disabled" wire:click="save"class="btn btn-primary">Guardar</button>
+                            <button type="button" wire:loading.attr="disabled" wire:target="save,txtimage, txtarchivo" wire:click="save"class="btn btn-primary">Guardar</button>
 
                         </div>
 

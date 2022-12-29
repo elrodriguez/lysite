@@ -62,14 +62,14 @@ class SectionsList extends Component
         $section = null;
         $next_section=null;
         if($direction == 'down'){
-            $section = AcaSection::find($id)->where('count', $count)->first();
-            $next_section=AcaSection::find($id)->where('count', $count+1)->first();
+            $section = AcaSection::where('id', $id)->where('count', $count)->first();
+            $next_section=AcaSection::where('course_id', $section->course_id)->where('count', $count+1)->first();
             $next_count=$count;
             $count++;
         }
         if($direction == 'up'){
-            $section = AcaSection::find($id)->where('count', $count)->first();
-            $next_section=AcaSection::find($id)->where('count', $count-1)->first();
+            $section = AcaSection::where('id', $id)->where('count', $count)->first();
+            $next_section=AcaSection::where('course_id', $section->course_id)->where('count', $count-1)->first();
             $next_count=$count;
             $count--;
         }

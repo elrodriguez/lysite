@@ -11,7 +11,7 @@
             </div>
         </div>
     </x-slot>
-    
+
     <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
         <div class="container page__container">
 
@@ -32,7 +32,7 @@
     </div>
     <x-slot name="navigation">
         <x-navigation></x-navigation>
-    </x-slot> 
+    </x-slot>
     @section('script')
     <!-- Global Settings -->
     <script src="{{ url('assets/js/settings.js') }}"></script>

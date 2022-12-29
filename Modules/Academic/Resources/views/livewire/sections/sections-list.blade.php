@@ -53,7 +53,7 @@
                                         </td>
 
                                         <td class="text-center align-middle">
-                                            @if ($section->count == 1 && $count>1)
+                                            @if ($section->count <= 1 && $count>1)
                                             <div  role="group" aria-label="Group A" >
                                                 <button wire:click="changeordernumber('{{ $section->count }}','{{ $section->id }}', 'down')" type="button" class="btn btn-info btn-sm" title="{{ __('labels.Down') }}"><i class="fas fa-angle-down"></i></button>
                                             </div>

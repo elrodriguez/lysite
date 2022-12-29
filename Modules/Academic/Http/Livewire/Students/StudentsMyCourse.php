@@ -3,7 +3,6 @@
 namespace Modules\Academic\Http\Livewire\Students;
 
 use Livewire\Component;
-use Modules\Academic\Entities\AcaStudent;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
 
@@ -19,7 +18,6 @@ class StudentsMyCourse extends Component
     {
         $this->course_id = $course_id;
         $this->course = AcaCourse::find($course_id);
-
     }
     public function render()
     {

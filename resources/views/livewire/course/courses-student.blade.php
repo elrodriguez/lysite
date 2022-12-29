@@ -5,9 +5,10 @@
 
     @if(count($courses)>0)
         @foreach($courses as $course)
-        <div class="col-12 col-sm-6">
-            <a class="card mb-0" href="{{ route('academic_students_my_course',$course->id) }}">
-                <img src="{{ url($course->course_image) }}" alt="Flinto" class="card-img" style="max-height: 100%; width: initial;">
+
+        <div class="col-sm-6" style="display:inline-table">
+            <a class="card mb-6" href="{{ route('academic_students_my_course',$course->id) }}">
+                <img src="{{ url($course->course_image) }}" alt="Flinto" class="card-img" style="max-height: auto; width: 350px;">
                 <div class="fullbleed bg-primary" style="opacity: .5;"></div>
                 <span class="card-body fullbleed">
                     <span class="row">
