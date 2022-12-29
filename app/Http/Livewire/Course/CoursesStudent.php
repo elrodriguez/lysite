@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Course;
 
 use App\Models\Person;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaStudent;
@@ -23,9 +24,10 @@ class CoursesStudent extends Component
                                 'aca_courses.main_video'
                             )
                             ->where('person_id',$person->id)
+                            ->where('aca_students.registered_until', '>=', Carbon::createFromFormat('Y-m-d', date('Y-m-d')))
                             ->get();
         }
-        
+
     }
 
     public function render()

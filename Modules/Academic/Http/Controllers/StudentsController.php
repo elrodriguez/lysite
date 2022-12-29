@@ -72,7 +72,7 @@ class StudentsController extends Controller
 
 
         try {
-            $registered_until = AcaStudent::where('person_id', $id_person)->get()->first()->registered_until;
+            $registered_until = AcaStudent::where('person_id', $id_person)->where('course_id', $id)->get()->first()->registered_until;
         } catch (\Throwable $th) {
             $registered_until = null;
         }
@@ -80,7 +80,7 @@ class StudentsController extends Controller
 
         $fecha_actual = strtotime(date("d-m-Y H:i:00", time()));
         $fecha_entrada = strtotime($registered_until);
-        if ($fecha_entrada > $fecha_actual || $registered_until != null) {
+        if ($fecha_entrada > $fecha_actual && $registered_until != null) {
 
             $course = AcaCourse::find($id);
             $this->video = 0;

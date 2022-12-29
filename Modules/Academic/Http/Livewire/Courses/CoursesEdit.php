@@ -45,6 +45,7 @@ class CoursesEdit extends Component
         'name' => 'required|max:255',
         'description' => 'required',
         'course_image' => 'required|max:10240|mimes:jpeg,jpg,png,gif',
+        'main_video' => 'required'
     ];
 
     public function update(){

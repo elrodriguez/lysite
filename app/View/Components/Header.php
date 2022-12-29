@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Carbon\Carbon;
 use Illuminate\View\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +47,9 @@ class Header extends Component
                 'aca_courses.course_image'
             )
             ->join('aca_students', 'aca_courses.id', '=', 'aca_students.course_id')
-            ->where('aca_students.person_id', $this->person_id)->get();
+            ->where('aca_students.person_id', $this->person_id)
+            ->where('aca_students.registered_until', '>=', Carbon::createFromFormat('Y-m-d', date('Y-m-d')))
+            ->get();
         //$this->courses=DB::table('Aca_courses')->get();
         return $this->courses;
     }
