@@ -48,7 +48,7 @@
                                                 <a href="{{ route('academic_students_edit',$student->id) }}" type="button" class="btn btn-info btn-sm" title="Editar"><i class="fa fa-pencil-alt"></i></a>
                                                 @endcan
                                                 @can('academico_alumnos_eliminar')
-                                                <button onclick="deletes({{ $student->id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
+                                                <button onclick="deletes({{ $student->student_id }})" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                 @endcan
                                             </div>
                                         </td>

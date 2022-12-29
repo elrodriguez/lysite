@@ -212,6 +212,8 @@
                 title: event.detail.tit,
                 message: event.detail.msg,
                 buttonText: "Okay"
+            }).then(() => {
+                @this.backStudents();
             });
         });
         window.addEventListener('aca-person-notnull', event => {

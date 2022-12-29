@@ -221,4 +221,8 @@ class StudentsCreate extends Component
 
         $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
+    public function backStudents()
+    {
+        redirect()->route('academic_students');
+    }
 }

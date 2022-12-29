@@ -2,6 +2,8 @@
 
 namespace Modules\Academic\Http\Livewire\Students;
 
+use App\Models\Person;
+use App\Models\User;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaStudent;
 use Livewire\WithPagination;
@@ -25,6 +27,7 @@ class StudentsList extends Component
             ->join('identity_document_types', 'people.identity_document_type_id', 'identity_document_types.id')
             ->join('aca_courses', 'aca_students.course_id', 'aca_courses.id')
             ->select(
+                'aca_students.id AS student_id',
                 'people.id',
                 'people.full_name',
                 'people.number',
@@ -33,6 +36,7 @@ class StudentsList extends Component
                 'people.email',
                 'aca_courses.name'
             )
+            ->where('people.deleted_at', null)
             ->where('people.full_name', 'LIKE', '%' . $this->search . '%')
             ->paginate(10);
     }
@@ -43,6 +47,18 @@ class StudentsList extends Component
     }
     public function deleteStudent($id)
     {
-        AcaStudent::first($id)->delete();
+        //dd($id);
+        $student = AcaStudent::find($id);
+        //dd($student);
+        if ($student) {
+            if ($student->person_id <> 1) {
+                $person = Person::find($student->person_id);
+                AcaStudent::find($id)->delete();
+                if ($person) {
+                    Person::find($student->person_id)->delete();
+                    User::find($person->user_id)->delete();
+                }
+            }
+        }
     }
 }
