@@ -8,13 +8,13 @@
                         <div class="media flex-nowrap">
                             <div class="media-left mr-16pt">
                                 <a href="{{ route('academic_students_my_course',$course_id) }}">
-    
+
                                     <div class="avatar avatar-4by3">
                                         <img src="{{ asset($course->course_image) }}" alt="Avatar"
                                             class="avatar-img rounded">
                                     </div>
 
-    
+
                                 </a>
                             </div>
                             @if($instruct)
@@ -40,7 +40,7 @@
                         <a href="" class="nav-link">Contenido</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Preguntas</a>
+                        <a href="#preguntas" class="nav-link">Preguntas</a>
                     </li>
                 </ul>
             </div>

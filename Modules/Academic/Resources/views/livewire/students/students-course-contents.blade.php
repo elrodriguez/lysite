@@ -56,8 +56,8 @@
     @if (substr($content->original_name, -4) =='.pdf')
     <li class="accordion__menu-link">
         <span class="icon-16pt icon--left text-body"><i class="fa fa-file-pdf"></i></span>
-        <a class="flex" href="{{ route('download_file', [$content->id, $student]) }}">{{ $content->name }}</a>
-        @if ($content->completed)
+        <a class="flex" href="{{ route('academic_students_take_lesson', [$course_id, $section_id, $content->id]) }}"">{{ $content->name }}</a>
+         @if ($content->completed)
         <span class="badge badge-success">{{ __('labels.Viewed') }}</span>
         <span class="icon-16pt icon--right text-body"><i class="fa fa-check"></i></span>
         @endif

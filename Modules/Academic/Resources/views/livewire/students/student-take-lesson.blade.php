@@ -42,6 +42,11 @@
                 </div>
             @endif
 
+            @if ($content->content_type_id == 3)
+                <div class="card">
+                    <iframe src = "/ViewerJS/#{{ route('download_file', [$content->id, $student]) }}" width='724' height='1024' allowfullscreen webkitallowfullscreen></iframe>
+                </div>
+            @endif
 
             @if ($content->content_type_id == 4)
                 <div class="card">
@@ -61,7 +66,7 @@
         <div class="container page__container">
 
             <div class="d-flex align-items-center mb-heading">
-                <h4 class="m-0">Preguntas</h4>
+                <h4 class="m-0" id="preguntas">Preguntas</h4>
                 <a href="{{ route('academic_students_discussions_ask',[$course_id,$section_id,$content_id]) }}" class="text-underline ml-auto">Hacer una pregunta</a>
             </div>
 
