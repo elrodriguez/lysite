@@ -2,10 +2,7 @@
 
 namespace Modules\Academic\Http\Livewire\Students;
 
-use App\Models\Person;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Modules\Academic\Entities\AcaStudent;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
 
@@ -21,9 +18,6 @@ class StudentsMyCourse extends Component
     {
         $this->course_id = $course_id;
         $this->course = AcaCourse::find($course_id);
-        $person= Person::where('user_id', Auth()->id)->get();
-        $this->student = AcaStudent::where('course_id', $course_id)->where('person_id', $person->id);
-
     }
     public function render()
     {
