@@ -44,7 +44,7 @@
 
             @if ($content->content_type_id == 3)
                 <div class="card">
-                    <iframe src = "/ViewerJS/#{{ route('download_file', [$content->id, $student]) }}" width='724' height='1024' allowfullscreen webkitallowfullscreen></iframe>
+                    <iframe src = "/ViewerJS/#{{ route('download_file', [$content->id, $student]) }}" width='auto' height='850vh' allowfullscreen webkitallowfullscreen></iframe>
                 </div>
             @endif
 
