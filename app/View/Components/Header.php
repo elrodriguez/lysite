@@ -49,14 +49,10 @@ class Header extends Component
             ->join('aca_students', 'aca_courses.id', '=', 'aca_students.course_id')
             ->where('aca_students.person_id', $this->person_id)
             ->where('aca_students.registered_until', '>=', Carbon::createFromFormat('Y-m-d', date('Y-m-d')))
+            ->distinct()
             ->get();
         //$this->courses=DB::table('Aca_courses')->get();
         return $this->courses;
     }
 
-    public function getAvailableCourses() // para mostrar todos los cursos disponibles, pero aun no esta en uso
-    {
-        $this->courses = DB::table('aca_courses')->get();
-        return $this->courses;
-    }
 }
