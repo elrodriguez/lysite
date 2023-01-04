@@ -43,8 +43,16 @@
             @endif
 
             @if ($content->content_type_id == 3)
-            <div class="card" id="viewer">
-                <iframe src="/ViewerJS/#{{ route('download_file', [$content->id, $student]) }}" width='auto'
+            <div class="card" id="loader">
+                <div class="card-body">
+                    <p class="text-70 m-0">El archivo está cargando espera un momento...</p>
+                </div>
+                <div class="card-body p-24pt is-loading is-loading-lg">
+                    Descargando datos del servidor
+                </div>
+            </div>
+            <div class="card" id="viewer"  style="display:none" >
+                <iframe src="/ViewerJS/#{{ route('download_file', [$content->id, $student]) }}" onload="downloadFile('{{ route('download_file', [$content->id, $student]) }}')" width='auto'
                     height='850vh' allowfullscreen webkitallowfullscreen></iframe>
             </div>
             @endif
@@ -119,7 +127,23 @@
         </div>
     </div>
     <script>
-        var document.getElementById('viewer');
-        alert(a);
+        function downloadFile(url) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'blob';
+
+  xhr.onload = function(e) {
+    if (this.status == 200) {
+      // La descarga ha finalizado con éxito
+      console.log('File downloaded successfully');
+      document.getElementById('loader').style.display="none";
+      document.getElementById('viewer').style.display="";
+    }
+  };
+
+  xhr.send();
+}
+
+
     </script>
 </div>
