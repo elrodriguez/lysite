@@ -213,7 +213,7 @@
                                                 </td>
                                                 <td>{{ $student_course['name'] }}</td>
                                                 <td>
-                                                    <input type="date"  name="registered_until" id="registered_until"
+                                                    <input type="date"  name="registered_until" id="registered_until" onchange="uploadDates({{ $key }}, this.value)"
                                                         value="{{ $student_course['registered_until'] }}">
                                                 </td>
                                                 @if ($student_course['status'] == 1)
@@ -248,6 +248,9 @@
         </div>
     </div>
     <script>
+        function uploadDates(key, date){
+            @this.updateDate(key, date);
+        }
         function deletes(index,id){
             cuteAlert({
                 type: "question",

@@ -39,6 +39,7 @@ class StudentsEdit extends Component
     public $student_courses = [];
     public $registered_until = null;
     public $status_student = 1;
+    public $full_name;
 
     public function mount($student_id)
     {
@@ -133,7 +134,7 @@ class StudentsEdit extends Component
                 AcaStudent::create([
                     'person_id' => $this->person->id,
                     'course_id' => $student_course['id'],
-                    'registered_until' => date('Y-m-d H:i:s', strtotime('+125 day', strtotime($student_course['registered_until']))), //$student_course['registered_until']
+                    'registered_until' => date('Y-m-d H:i:s', strtotime('+0 day', strtotime($student_course['registered_until']))), //$student_course['registered_until']
                     'status' => $student_course['status']
                 ]);
             }else{
@@ -183,7 +184,7 @@ class StudentsEdit extends Component
 
         $this->dispatchBrowserEvent('set-module-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
-    public function update(){
-
+    public function updateDate($index, $date){ //actualiza las fechas cuando se cambia en el elemento de la vista.
+        $this->student_courses[$index]['registered_until']=date('Y-m-d', strtotime($date));
     }
 }

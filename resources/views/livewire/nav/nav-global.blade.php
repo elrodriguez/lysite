@@ -51,7 +51,7 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
                     @endcan
                     @can('academico_alumnos')
                         <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'students' ? 'active' : '' }}"
-                            href="{{ route('academic_students') }}">Alumnos</a>
+                            href="{{ route('academic_students') }}">Alumnos y sus cursos</a>
                     @endcan
                     @can('academico_cursos_instructor')
                         <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'instructor' && $path[2] == 'courses' ? 'active' : '' }}"

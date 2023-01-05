@@ -11,7 +11,6 @@
             </div>
         </div>
     </x-slot>
-
     <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
         <div class="container page__container">
 

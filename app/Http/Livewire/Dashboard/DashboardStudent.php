@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Person;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaCourse;
@@ -25,8 +26,12 @@ class DashboardStudent extends Component
             $this->date_end = null;
             $this->course = AcaStudent::where('person_id', $this->person_id)->orderBy('registered_until', 'asc')->first(); //temporalmente es AcaStudent
                 //->min('registered_until');  //obtiene la fecha mas cercana a vencer de subscripción
-            $this->registered_until = $this->course->registered_until;
-            $this->course = AcaCourse::find($this->course->course_id);
+            try{
+                $this->registered_until = $this->course->registered_until;
+                $this->course = AcaCourse::find($this->course->course_id);
+            }catch(Exception $e){
+            }
+
         }
         $this->expire_soon=$this->getExpire_soon();
     }
