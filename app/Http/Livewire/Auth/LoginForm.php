@@ -12,6 +12,11 @@ class LoginForm extends Component
     public $password;
     public $rememberme;
 
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
+
     public function render()
     {
         return view('livewire.auth.login-form');
@@ -23,8 +28,10 @@ class LoginForm extends Component
             'email' => 'required',
             'password' => 'required',
         ]);
-        
-        if(Auth::attempt(array('email' => $this->email, 'password' => $this->password),$this->rememberme)){
+
+        //Auth::logoutOtherDevices($this->password);
+
+        if (Auth::attempt(array('email' => $this->email, 'password' => $this->password), $this->rememberme)) {
 
             request()->session()->regenerate();
             User::find(Auth::id())->update([
@@ -32,14 +39,14 @@ class LoginForm extends Component
                 'chat_last_activity'    => now()->addMinutes(5)
             ]);
             return redirect()->intended('dashboard');
-
-        }else{
+        } else {
             $this->resetInput();
             session()->flash('message', 'Las credenciales proporcionadas no coinciden con nuestros registros.');
         }
     }
 
-    public function resetInput(){
+    public function resetInput()
+    {
         $this->email = null;
         $this->password = null;
         $this->rememberme = null;
