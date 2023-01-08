@@ -15,8 +15,9 @@ use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use Modules\Investigation\Entities\InveThesisStudentPart;
 
-class ThesisParts extends Component
+class ThesisPartsTest extends Component
 {
+
     public $thesis_id;
     public $university;
     public $school;
@@ -33,15 +34,17 @@ class ThesisParts extends Component
     public $parts = [];
 
     public $content;
-    public $content_old;
+    public $content_old="";
     public $auto_save = true;
     public $commentary;
     public $left_margin;
     public $right_margin;
     public $format_id;
+    public $borrame;
 
     public function mount($thesis_id, $sub_part)
     {
+        $this->content_old="";
         $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
         $this->thesis_id = $thesis_id;
         $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
@@ -54,28 +57,32 @@ class ThesisParts extends Component
             $this->right_margin = $this->format->right_margin;
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-                ->where('inve_thesis_format_part_id', $this->focus_id)
-                ->limit(1)
-                ->first();
-
+                ->get();
+            $key=0;
             if (isset($ThesisStudentPart)) {
-                $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
+                $this->borrame=html_entity_decode($ThesisStudentPart[0]->content, ENT_QUOTES, "UTF-8");
+                foreach ($ThesisStudentPart as $k => $part) {
+                    $this->content_old .= '<div style="display:none" id="'.($k+1).'"></div>'.html_entity_decode($part->content, ENT_QUOTES, "UTF-8").'<div style="display:none"><p>-*-</p></div>';
+                    if(isset($part->commentary)){
+                        $this->commentary .= ($key++).".-".$part->description."".$part->commentary."-*-";
+                    }
+                }
                 $this->content = $this->content_old;
-                $this->commentary = $ThesisStudentPart->commentary;
+
 
                 //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
-                if ($ThesisStudentPart->left_margin == null) {
-                    $this->left_margin = $this->format->left_margin;
-                } else {
-                    $this->left_margin = $ThesisStudentPart->left_margin;
-                }
+                // if ($ThesisStudentPart->left_margin == null) {
+                //     $this->left_margin = $this->format->left_margin;
+                // } else {
+                //     $this->left_margin = $ThesisStudentPart->left_margin;
+                // }
 
-                if ($ThesisStudentPart->right_margin == null) {
-                    $this->right_margin = $this->format->right_margin;
-                } else {
-                    $this->right_margin = $ThesisStudentPart->right_margin;
-                }
-                $this->ThesisStudentPart = $ThesisStudentPart;
+                // if ($ThesisStudentPart->right_margin == null) {
+                //     $this->right_margin = $this->format->right_margin;
+                // } else {
+                //     $this->right_margin = $ThesisStudentPart->right_margin;
+                // }
+                // $this->ThesisStudentPart = $ThesisStudentPart;
             }
         } else {
             redirect()->route('home');
@@ -85,7 +92,7 @@ class ThesisParts extends Component
     public function render()
     {
         $this->getParts();
-        return view('investigation::livewire.thesis.thesis-parts');
+        return view('investigation::livewire.thesis.thesis-parts-test');
     }
 
     public function updatingListParts()
@@ -192,6 +199,15 @@ class ThesisParts extends Component
 
     public function saveThesisPartStudentN($bool)
     { // true para mostrar notificacion y false para no
+        /*PRUEBA TEST */
+        $porciones = explode('<div style="display:none">'.chr(10).'<p>-*-</p>'.chr(10).'</div>'.chr(10), $this->content);
+        // foreach($porciones as $porcion){
+        //     $porcion = trim($porcion);
+        //     $porcion = trim($porcion, chr(10));
+        //     $porcion = trim($porcion);
+        // }
+        //dd($porciones[0] ,$this->borrame);
+        dd($porciones);
 
         if ($this->content != $this->content_old) {
             $this->save(); //guarda en la base de datos
@@ -256,9 +272,9 @@ class ThesisParts extends Component
 
     public function saveThesisPartStudentAutoSave()
     { // true para mostrar notificacion y false para no
-        if ($this->content != $this->content_old && $this->auto_save) {
-            $this->save(); //guarda en la base de datos
-        }
+        // if ($this->content != $this->content_old && $this->auto_save) {
+        //     $this->save(); //guarda en la base de datos
+        // }
     }
 
     public function save()
@@ -275,6 +291,7 @@ class ThesisParts extends Component
 
 
         //primero se debe consultar si existe, sino se crea.
+
 
         if (InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)->where('inve_thesis_format_part_id', $this->focus_id)->exists()) {
             InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
