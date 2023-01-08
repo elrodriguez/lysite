@@ -10,7 +10,7 @@ class LoginForm extends Component
 {
     public $email;
     public $password;
-    public $rememberme;
+    public $rememberme=false;
 
     public function render()
     {
@@ -23,10 +23,9 @@ class LoginForm extends Component
             'email' => 'required',
             'password' => 'required',
         ]);
-        
+        //Auth::logoutOtherDevices($this->password);
         if(Auth::attempt(array('email' => $this->email, 'password' => $this->password),$this->rememberme)){
-
-            request()->session()->regenerate();
+          request()->session()->regenerate();
             User::find(Auth::id())->update([
                 'is_online'             => true,
                 'chat_last_activity'    => now()->addMinutes(5)

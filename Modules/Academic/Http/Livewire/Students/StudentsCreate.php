@@ -37,6 +37,7 @@ class StudentsCreate extends Component
     public $courses = [];
     public $course_id = null;
     public $student_courses = [];
+    public $full_name;
 
     public function mount()
     {

@@ -102,6 +102,13 @@
       'Module' => 'Nwidart\\Modules\\Facades\\Module',
     ),
   ),
+  'openai-php/laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'OpenAI\\Laravel\\ServiceProvider',
+    ),
+  ),
   'spatie/laravel-ignition' => 
   array (
     'providers' => 

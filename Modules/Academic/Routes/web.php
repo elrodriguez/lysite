@@ -74,6 +74,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
         Route::middleware(['middleware' => 'role_or_permission:academico_reporte_total_alumnos'])->get('students_total', 'ReportStudentController@studentTotal')->name('academic_reports_students_total');
     });
 
+    Route::middleware(['middleware' => 'role_or_permission:academico_cursos_instructor'])->get('openai', 'StudentsController@openai')->name('openai');
 });
 
 
