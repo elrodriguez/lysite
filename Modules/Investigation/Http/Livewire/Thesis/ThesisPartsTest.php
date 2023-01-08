@@ -57,6 +57,8 @@ class ThesisPartsTest extends Component
             $this->right_margin = $this->format->right_margin;
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+            ->join('inve_thesis_format_parts', 'inve_thesis_format_parts.id', 'inve_thesis_student_parts.inve_thesis_format_part_id')
+            ->orderBy('inve_thesis_format_parts.index_order', 'asc')
                 ->get();
             $key=0;
             if (isset($ThesisStudentPart)) {
