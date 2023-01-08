@@ -21,7 +21,7 @@
         <button class="button-large flex-center" type="submit" wire:loading.attr="disabled" wire:target="save" wire:click.prevent="save" >Consultar</button>
 
     </form>
-    <p><h1>{{ $result_text }}</h1></p><br>
+    <p class="text-facebook">{{ $result_text }}</p><br>
     <hr>
     <label class="alert-success">Tokens Consumidos en la consulta</label>
     <p>{{ $query_tokens }}</p><br><hr>
