@@ -15,6 +15,8 @@ class Openaiview extends Component
     public $consumed_tokens=0;
     public $parafrasear=false;
     public $modelo="text-ada-001";
+    public $temperature=50;
+
     public function render()
     {
         return view('academic::livewire.students.openaiview');
@@ -36,6 +38,7 @@ class Openaiview extends Component
                 'model' => $this->modelo,
                 'prompt' => $consulta,
                 'max_tokens' => $max_tokens,
+                'temperature' => $this->temperature/100
             ]);
             $this->result_text = $result['choices'][0]['text'];
             $this->query_tokens = $result['usage']['prompt_tokens'];

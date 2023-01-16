@@ -19,8 +19,11 @@
         <textarea class="input text-primary text-justify form-controls" style="height: 150px" type="text" name="frase_text" id="frase_text" wire:model="frase_text" cols="30" rows="30" height="250px"></textarea>
 
         <button class="button-large flex-center" type="submit" wire:loading.attr="disabled" wire:target="save" wire:click.prevent="save" >Consultar</button>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="100" value="50" wire:model="temperature" class="slider" id="myRange" style="width: 50%"><label class="form-label" tittle="% de variación de la respuesta"><b>{{ $temperature }}</b>% de variación de la respuesta, mas alto dará respuestas más diversas</label>
 
-    </form>
+          </div>
+    </form><hr>
     <p class="text-facebook">{{ $result_text }}</p><br>
     <hr>
     <label class="alert-success">Tokens Consumidos en la consulta</label>
