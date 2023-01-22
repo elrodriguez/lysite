@@ -3,6 +3,7 @@
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
             <li class="breadcrumb-item active">{{ __('investigation::labels.thesis_parts') }}</li>
+            <li class="breadcrumb-item active">{{ $student_name }}</li>
         </ol>
     </div>
     <div class="container page__container">
@@ -46,7 +47,7 @@
                         @else
                             <div class="alert alert-info">
                                 Este formato un está pendiente de contenido. vuelve a intentarlo mas tarde o comunicarse con el administrador del sitio.
-                            </div>  
+                            </div>
                         @endif
                     </ul>
                     {{-- <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}"
