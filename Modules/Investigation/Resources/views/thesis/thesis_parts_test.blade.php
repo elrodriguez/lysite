@@ -74,7 +74,6 @@
         {{-- <script src="{{ url('ckeditor5/build/ckeditor.js') }}"></script> --}}
         {{-- <script type="text/javascript" src="{{ url('richtexteditor/rte.js') }}"></script>
         <script type="text/javascript" src="{{ url('richtexteditor/plugins/all_plugins.js') }}"></script> --}}
-        <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     @endsection
 </x-master>
 

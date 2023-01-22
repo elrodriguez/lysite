@@ -1,4 +1,20 @@
 <div>
+    <style>
+        #container {
+            width: 1000px;
+            margin: 20px auto;
+        }
+        .ck-editor__editable[role="textbox"] {
+            /* editing area */
+            min-height: 200px;
+        }
+        .ck-content .image {
+            /* block images */
+            max-width: 80%;
+            margin: 20px auto;
+        }
+    </style>
+
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
@@ -189,7 +205,7 @@
             </div>
         </div> --}}
         <div class="container page__container">
-            <div wire:ignore>
+            <div wire:ignore class="editor-container">
                 <div class="editor" id="editor">{!! $content_old !!}</div>
             </div>
             @error('content')
@@ -481,60 +497,30 @@
     </script>
 
 
-    <script>
-        function activeCkeditor5() {
-            // DecoupledDocumentEditor.create(document.querySelector('.editor'), {
-            //         licenseKey: '',
-            //         simpleUpload: {
-            //             // The URL that the images are uploaded to.
-            //             uploadUrl: '{{ route('investigation_thesis_upload_image') }}',
+<script src="{{ url("ckeditor5/build/ckeditor.js") }}"></script>
+<script>
+DecoupledDocumentEditor
+    .create( document.querySelector( '.editor' ), {
 
-            //             // Enable the XMLHttpRequest.withCredentials property.
-            //             withCredentials: true,
+        licenseKey: '',
 
-            //             // Headers sent along with the XMLHttpRequest to the upload server.
-            //             headers: {
-            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //             }
-            //         }
-            //     })
-            //     .then(editor => {
-            //         window.editor = editor;
-            //         // Set a custom container for the toolbar.
-            //         document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
-            //         document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-            //     })
-            //     .catch(error => {
-            //         console.error('Oops, something went wrong!');
-            //         console.error(
-            //             'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-            //         );
-            //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
-            //         console.error(error);
-            //     });
-            // window.editor1 = new RichTextEditor("#editor", {
-            //     editorResizeMode: "none" ,
-            // });
 
-            window.editor1 = CKEDITOR.replace('editor', {
-                'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
-            });
 
-            CKEDITOR.config.ruler = {
-                values: 21, // segment number of the ruler
-                step: 0.10, // accuracy of sliders
-                sliders: {
-                    left: @this.left_margin, // left slider value
-                    right: 21-@this.right_margin // right slider value (21-19 = 2)
-                },
-                padding: {
-                    top: 20, // top 'canvas' padding (px)
-                    bottom: 20 // bottom 'canvas' padding (px)
-                }
-            };
+    } )
+    .then( editor => {
+        window.editor = editor;
 
-        }
-    </script>
+        // Set a custom container for the toolbar.
+        document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
+        document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
+    } )
+    .catch( error => {
+        console.error( 'Oops, something went wrong!' );
+        console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+        console.warn( 'Build id: 2naelthjaj8v-iq1331jui4do' );
+        console.error( error );
+    } );
+</script>
 
     {{-- nueva pestaña para enviar a la sección del video --}}
     <script>
