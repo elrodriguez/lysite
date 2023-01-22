@@ -142,7 +142,7 @@
                                                     style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
                                                     <p
                                                         style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 14px;">
-                                                        Si tienes problemas para ver el correo dale click al siguiente enlace para dirigirte a {{ env('APP_NAME') }} y ver tu pregunta en tu Navegador.
+                                                        Si tienes problemas para ver el correo dale click al siguiente enlace para dirigirte a {{ env('APP_NAME') }} y ver tu tesis en tu Navegador.
                                                         <span class="break-all"
                                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; word-break: break-all;"><a
                                                             href="{{ route('investigation_thesis_parts', [$a, $b]) }}"
