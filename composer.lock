@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "7566c38227e478105b30da35cb057f21",
+=======
+    "content-hash": "c6baba95722b4832274ad1a7ffb3a753",
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -367,6 +371,7 @@
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-data/issues",
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
+<<<<<<< HEAD
             },
             "time": "2022-10-27T11:44:00+00:00"
         },
@@ -411,6 +416,52 @@
                 "issues": "https://github.com/doctrine/deprecations/issues",
                 "source": "https://github.com/doctrine/deprecations/tree/v1.0.0"
             },
+=======
+            },
+            "time": "2022-10-27T11:44:00+00:00"
+        },
+        {
+            "name": "doctrine/deprecations",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/deprecations.git",
+                "reference": "0e2a4f1f8cdfc7a92ec3b01c9334898c806b30de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/0e2a4f1f8cdfc7a92ec3b01c9334898c806b30de",
+                "reference": "0e2a4f1f8cdfc7a92ec3b01c9334898c806b30de",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9",
+                "phpunit/phpunit": "^7.5|^8.5|^9.5",
+                "psr/log": "^1|^2|^3"
+            },
+            "suggest": {
+                "psr/log": "Allows logging deprecations via PSR-3 logger implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Deprecations\\": "lib/Doctrine/Deprecations"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.",
+            "homepage": "https://www.doctrine-project.org/",
+            "support": {
+                "issues": "https://github.com/doctrine/deprecations/issues",
+                "source": "https://github.com/doctrine/deprecations/tree/v1.0.0"
+            },
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
             "time": "2022-05-02T15:47:09+00:00"
         },
         {
@@ -2082,6 +2133,7 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
             "version": "3.12.0",
             "source": {
                 "type": "git",
@@ -2092,6 +2144,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2aef65a47e44f2d6f9938f720f6dd697e7ba7b76",
                 "reference": "2aef65a47e44f2d6f9938f720f6dd697e7ba7b76",
+=======
+            "version": "3.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "b934123c1f11ada6363d057d691e3065fa6d6d49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b934123c1f11ada6363d057d691e3065fa6d6d49",
+                "reference": "b934123c1f11ada6363d057d691e3065fa6d6d49",
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
                 "shasum": ""
             },
             "require": {
@@ -2108,7 +2172,11 @@
             "require-dev": {
                 "async-aws/s3": "^1.5",
                 "async-aws/simple-s3": "^1.1",
+<<<<<<< HEAD
                 "aws/aws-sdk-php": "^3.198.1",
+=======
+                "aws/aws-sdk-php": "^3.220.0",
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
                 "composer/semver": "^3.0",
                 "ext-fileinfo": "*",
                 "ext-ftp": "*",
@@ -2153,7 +2221,11 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/thephpleague/flysystem/tree/3.12.0"
+=======
+                "source": "https://github.com/thephpleague/flysystem/tree/3.12.1"
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
             },
             "funding": [
                 {
@@ -2169,7 +2241,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-20T20:21:10+00:00"
+=======
+            "time": "2023-01-06T16:34:48+00:00"
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
         },
         {
             "name": "league/mime-type-detection",

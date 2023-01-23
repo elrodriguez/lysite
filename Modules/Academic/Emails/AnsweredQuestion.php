@@ -17,7 +17,8 @@ class AnsweredQuestion extends Mailable
     public $subject="Tu pregunta ha sido respondida";
     public $answer="respuesta";
     public $by="JOSH";
-    //////////// variables para la ruta
+    public $question_id;
+    // variables para la ruta
     public $a, $b, $c, $d;
     public $Year;
 

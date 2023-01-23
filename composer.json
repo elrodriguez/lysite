@@ -12,8 +12,13 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.8",
         "laravel/framework": "^9.19",
+<<<<<<< HEAD
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+=======
+        "laravel/sanctum": "^2.11",
+        "laravel/tinker": "^2.5",
+>>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
         "laraveles/spanish": "^1.5",
         "livewire/livewire": "^2.7.2",
         "mhmiton/laravel-modules-livewire": "^1.3",

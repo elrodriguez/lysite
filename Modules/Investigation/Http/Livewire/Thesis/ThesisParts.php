@@ -38,6 +38,7 @@ class ThesisParts extends Component
     public $commentary;
     public $left_margin;
     public $right_margin;
+    public $format_id;
 
     public function mount($thesis_id, $sub_part)
     {

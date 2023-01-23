@@ -177,4 +177,8 @@ class StudentsController extends Controller
             'question_id' => $question_id
         ]);
     }
+
+    public function openai(){
+        return view('academic::students.openaiview');
+    }
 }

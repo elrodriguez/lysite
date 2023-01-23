@@ -3,7 +3,10 @@
 namespace Modules\Investigation\Http\Livewire\Thesis;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use Modules\Academic\Emails\NotificationCheckThesisEmail;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
@@ -16,6 +19,7 @@ class ThesisPartsCheck extends Component
     public $school;
     public $thesis_format;
     public $thesis_student;
+    public $student_name;
 
     public $parts_all; //todas las partes sin filtrar solo ordenados por number order
 
@@ -23,13 +27,14 @@ class ThesisPartsCheck extends Component
     public $focused_part;
 
     public $format;
+    public $format_id;
     public $parts = [];
 
     public $content;
     public $content_old;
     public $auto_save = true;
     public $thesisStudentPart;
-    public $commentary;
+    public $commentary = "no ha dejado comentario";
 
     public $notes;
 
@@ -55,6 +60,11 @@ class ThesisPartsCheck extends Component
                 $this->content = $this->content_old;
                 $this->commentary = $this->thesisStudentPart->commentary;
             }
+            $this->student_name = DB::table('people')
+            ->select('people.full_name')
+            ->join('users', 'users.id', 'people.user_id')
+            ->join('inve_thesis_students', 'inve_thesis_students.user_id', '=', 'users.id')
+            ->where('inve_thesis_students.external_id', $this->thesis_id)->first()->full_name;
         } else {
             redirect()->route('home');
         }
@@ -130,7 +140,7 @@ class ThesisPartsCheck extends Component
             $this->thesisStudentPart->update([
                 'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                 'commentary_user_id' => Auth::id(),
-                'commentary' => $this->commentary
+                'commentary' => $this->commentary,
             ]);
         } else {
             InveThesisStudentPart::create([
@@ -143,8 +153,27 @@ class ThesisPartsCheck extends Component
                 //     'version' => ($max_version ? $max_version + 1 : 1)
             ]);
         }
-
+        $this->sendEmailNotification();
 
         $this->dispatchBrowserEvent('inve-student-part-create', ['success' => true]);
+    }
+
+    public function sendEmailNotification()
+    {
+        // __construct($instructor, $student, $thesis_id, $thesis_part_id, $commmentary, $avatar_url)
+        $instructor = DB::table('users')->where('id', Auth::id())->first()->name;
+        $name_student = DB::table('inve_thesis_students')->select('people.names')
+            ->join('users', 'users.id', '=', 'inve_thesis_students.user_id')
+            ->join('people', 'people.user_id', '=', 'users.id')
+            ->where('inve_thesis_students.id', $this->thesis_student->id)
+            ->first()->names;
+        $avatar_url = env('APP_URL') . '/storage/' . Auth::user()->avatar;
+        $correo = new NotificationCheckThesisEmail($instructor, $name_student, $this->thesis_id, $this->focus_id, $this->commentary, $avatar_url); //$this->question->question_text, $this->answer_text, DB::table('users')->where('id', Auth::id())->first()->name, $this->question_id);
+        $correo->subject = 'Tesis Revisada';
+        $email = DB::table('users')
+            ->join('inve_thesis_students', 'inve_thesis_students.user_id', '=', 'users.id')
+            ->where('inve_thesis_students.external_id', $this->thesis_id)->value('email');
+
+        Mail::to($email)->send($correo);
     }
 }

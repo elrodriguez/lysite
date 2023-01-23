@@ -5,6 +5,7 @@ namespace Modules\Academic\Http\Livewire\Students;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Modules\Academic\Entities\AcaSection;
 use Modules\Academic\Entities\AcaContent;
 use Modules\Academic\Entities\AcaStudentsSectionProgress;
@@ -21,10 +22,11 @@ class StudentTakeLesson extends Component
     public $course;
     public $content_url;
     public $questions = [];
+    public $token;
 
     public function mount($section_id,$content_id)
     {
-
+        $this->token = Session::token();
         $this->section_id = $section_id;
         $this->content_id = $content_id;
         $this->student = DB::table('people')->where('user_id', Auth::user()->id)->first()->id;  //obtener ID de persona
@@ -93,4 +95,8 @@ class StudentTakeLesson extends Component
             ->where('content_id',$this->content_id)
             ->get();
     }
+    public function getCurrentlyToken(){
+        $this->token = Session::token();
+    }
+
 }
