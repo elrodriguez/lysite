@@ -438,12 +438,12 @@
 
         function updateContent() {
             //el margen derecho debe descontarse de 21 cm
-            @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
-            @this.left_margin = CKEDITOR.config.ruler.sliders.left;
+            // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
+            // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
             if (document.getElementById("editor").tagName == "DIV") {
-                // data = editor.getData();
+                data = editor.getData();
                 // data = editor1.getHTMLCode();
-                data = window.editor1.getData();
+                // data = window.editor1.getData();
                 @this.set('content', data);
             }
         }
@@ -478,13 +478,8 @@
             DecoupledDocumentEditor.create(document.querySelector('.editor'), {
                     licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
                     simpleUpload: {
-                        // The URL that the images are uploaded to.
-                        uploadUrl: '{{ route('investigation_thesis_upload_image') }}',
-
-                        // Enable the XMLHttpRequest.withCredentials property.
+                        uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
                         withCredentials: true,
-
-                        // Headers sent along with the XMLHttpRequest to the upload server.
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
@@ -492,7 +487,6 @@
                 })
                 .then(editor => {
                     window.editor = editor;
-                    // Set a custom container for the toolbar.
                     document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
                     document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
                 })

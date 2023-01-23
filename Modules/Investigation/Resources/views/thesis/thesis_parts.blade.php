@@ -1,7 +1,7 @@
 <x-master>
     @section('styles')
     {{-- <link rel="stylesheet" type="text/css" href="{{ url('ckeditor/nouislider.css') }}"> --}}
-    <link rel="stylesheet" type="text/css" href="{{ url('ckeditor5/sample/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/ckeditor-docs.css') }}">
     <style type="text/css">
         .ventana_flotante {
             background: none repeat scroll 0 0 #FFFFFF;
