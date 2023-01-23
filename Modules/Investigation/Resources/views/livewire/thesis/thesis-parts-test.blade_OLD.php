@@ -188,55 +188,63 @@
         @endif
     </div>
     @if($focused_part)
-        @if ($focused_part->body == true)
-            {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
-                data-revision-history="false">
-                <div class="div-main">
-                    <div class="centered" wire:ignore>
-                        <div class="row">
-                            <div class="document-editor__toolbar"></div>
-                        </div>
-                        <div class="row row-editor">
-                            <div class="editor-container">
-                                <div class="editor" id="editor">{!! $content_old !!}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <div class="">
-                <div wire:ignore class="editor-container">
-                    <div class="editor" id="editor">{!! $content_old !!}</div>
-                </div>
-                @error('content')
-                    <span class="invalid-feedback-2">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="container page__container">
-                @if ($commentary)
+    @if ($focused_part->body == true)
+        {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+            data-revision-history="false">
+            <div class="div-main">
+                <div class="centered" wire:ignore>
                     <div class="row">
-                        <div class="col-12 mb-3">
-                            <label>Nota:</label>
-                            <div>{{ $commentary }}</div>
-                        </div>
+                        <div class="document-editor__toolbar"></div>
                     </div>
-                @endif
-
-                <div class="row">
-                    <div class="col mb-2">
-                        <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
-                            onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
-                        </button>
+                    <div class="row row-editor">
+                        <div class="editor-container">
+                            <div class="editor" id="editor">{!! $content_old !!}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        @else
-            <div>
-                <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
-                <input type="hidden" name="" id="editor">
-
+        </div> --}}
+        <div class="container page__container">
+            <div wire:ignore class="editor-container">
+                <div class="editor" id="editor">{!! $content_old !!}</div>
             </div>
-        @endif
+            @error('content')
+                <span class="invalid-feedback-2">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="container page__container">
+            @if ($commentary)
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label>Nota:</label>
+                        <div>{{ $commentary }}</div>
+                    </div>
+                </div>
+            @endif
+
+            <div class="row">
+                <div class="col mb-2">
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}" class="btn btn-warning mt-3"
+                        target="_blank">
+                        Exportar PDF
+                    </a>
+                    {{-- <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
+                        target="_blank">
+                        Exportar WORD
+                    </a> --}}
+                    <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
+                        onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    @else
+        <div>
+            <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
+            <input type="hidden" name="" id="editor">
+
+        </div>
+    @endif
     @endif
     <div>
         {{-- modal video --}}

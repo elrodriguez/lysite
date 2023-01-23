@@ -18,7 +18,7 @@
 
 .editor__editable,
 /* Classic build. */
-.div-main .ck-editor[role='application'] .ck.ck-content,
+main .ck-editor[role='application'] .ck.ck-content,
 /* Decoupled document build. */
 .ck.editor__editable[role='textbox'],
 .ck.ck-editor__editable[role='textbox'],
@@ -54,12 +54,12 @@
 }
 
 /* --------- DECOUPLED (DOCUMENT) BUILD. ---------------------------------------------*/
-.div-body[data-editor='DecoupledDocumentEditor'] .document-editor__toolbar {
+body[data-editor='DecoupledDocumentEditor'] .document-editor__toolbar {
 	width: 100%;
 }
 
-.div-body[data-editor='DecoupledDocumentEditor'] .collaboration-demo__editable,
-.div-body[data-editor='DecoupledDocumentEditor'] .row-editor .editor {
+body[data-editor='DecoupledDocumentEditor'] .collaboration-demo__editable,
+body[data-editor='DecoupledDocumentEditor'] .row-editor .editor {
 	/* A pixel is added for each of the border. */
 	width: calc(21cm + 2px);
 	min-height: calc(29.7cm + 2px);
@@ -73,7 +73,7 @@
 	box-sizing: border-box;
 }
 
-.div-body[data-editor='DecoupledDocumentEditor'] .row-editor {
+body[data-editor='DecoupledDocumentEditor'] .row-editor {
 	display: flex;
 	position: relative;
 	justify-content: center;
@@ -84,7 +84,7 @@
 	max-height: 700px;
 }
 
-.div-body[data-editor='DecoupledDocumentEditor'] .sidebar {
+body[data-editor='DecoupledDocumentEditor'] .sidebar {
 	background: transparent;
 	border: 0;
 	box-shadow: none;
@@ -188,7 +188,7 @@
 	border: 1px solid hsl(0, 0%, 77%);
 }
 
-.div-body[data-editor='InlineEditor'] .collaboration-demo__row {
+body[data-editor='InlineEditor'] .collaboration-demo__row {
 	border: 0;
 }
 
@@ -337,14 +337,14 @@
 
 /* A case when Pagination and Revision History features are enabled in the editor. */
 /* Move the square with page number from the Pagination plugin to the left side, so that it does not cover the RH sidebar. */
-.div-body[data-revision-history='true'] .ck.ck-pagination-view-line::after {
+body[data-revision-history='true'] .ck.ck-pagination-view-line::after {
 	transform: translateX(-100%) !important;
 	left: -1px !important;
 	right: unset !important;
 }
 
 /* --------- SAMPLE GENERIC STYLES (not related to CKEditor) ------------------------------------------------------- */
-.div-body, html {
+body, html {
 	padding: 0;
 	margin: 0;
 
@@ -353,26 +353,71 @@
 	line-height: 1.5;
 }
 
-.div-body {
+body {
 	height: 100%;
 	color: #2D3A4A;
 }
 
-.div-body * {
+body * {
 	box-sizing: border-box;
 }
 
-.div-body a {
+a {
 	color: #38A5EE;
 }
 
-.div-main .message {
+header .centered {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 8em;
+}
+
+header h1 a {
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	color: #2D3A4A;
+	text-decoration: none;
+}
+
+header h1 img {
+	display: block;
+	height: 64px;
+}
+
+header nav ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+header nav ul li {
+	display: inline-block;
+}
+
+header nav ul li + li {
+	margin-left: 1em;
+}
+
+header nav ul li a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #2D3A4A;
+}
+
+header nav ul li a:hover {
+	text-decoration: underline;
+}
+
+main .message {
 	padding: 0 0 var(--ck-sample-base-spacing);
 	background: var(--ck-sample-color-green);
 	color: var(--ck-sample-color-white);
 }
 
-.div-main .message::after {
+main .message::after {
 	content: "";
 	z-index: -1;
 	display: block;
@@ -383,7 +428,7 @@
 	left: 0;
 }
 
-.div-main .message h2 {
+main .message h2 {
 	position: relative;
 	padding-top: 1em;
 	font-size: 2em;
@@ -397,14 +442,55 @@
 	padding: 0 var(--ck-sample-base-spacing);
 }
 
+.row {
+	display: flex;
+	position: relative;
+}
 
+.btn {
+	cursor: pointer;
+	padding: 8px 16px;
+	font-size: 1rem;
+	user-select: none;
+	border-radius: 4px;
+	transition: color .2s ease-in-out,background-color .2s ease-in-out,border-color .2s ease-in-out,opacity .2s ease-in-out;
+	background-color: var(--ck-sample-color-button-blue);
+	border-color: var(--ck-sample-color-button-blue);
+	color: var(--ck-sample-color-white);
+	display: inline-block;
+}
+
+.btn--tiny {
+	padding: 6px 12px;
+	font-size: .8rem;
+}
+
+footer {
+	margin: calc(2*var(--ck-sample-base-spacing)) var(--ck-sample-base-spacing);
+	font-size: .8em;
+	text-align: center;
+	color: rgba(0,0,0,.4);
+}
 
 /* --------- RWD --------------------------------------------------------------------------------------------------- */
 @media screen and ( max-width: 800px ) {
 	:root {
 		--ck-sample-base-spacing: 1em;
 	}
-	.div-main .message h2 {
+
+	header h1 {
+		width: 100%;
+	}
+
+	header h1 img {
+		height: 40px;
+	}
+
+	header nav ul {
+		text-align: right;
+	}
+
+	main .message h2 {
 		font-size: 1.5em;
 	}
 }

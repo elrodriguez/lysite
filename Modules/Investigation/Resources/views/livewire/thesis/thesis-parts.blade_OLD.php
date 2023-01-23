@@ -1,20 +1,4 @@
 <div>
-    <style>
-        #container {
-            width: 1000px;
-            margin: 20px auto;
-        }
-        .ck-editor__editable[role="textbox"] {
-            /* editing area */
-            min-height: 200px;
-        }
-        .ck-content .image {
-            /* block images */
-            max-width: 80%;
-            margin: 20px auto;
-        }
-    </style>
-
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
@@ -188,55 +172,63 @@
         @endif
     </div>
     @if($focused_part)
-        @if ($focused_part->body == true)
-            {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
-                data-revision-history="false">
-                <div class="div-main">
-                    <div class="centered" wire:ignore>
-                        <div class="row">
-                            <div class="document-editor__toolbar"></div>
-                        </div>
-                        <div class="row row-editor">
-                            <div class="editor-container">
-                                <div class="editor" id="editor">{!! $content_old !!}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <div class="">
-                <div wire:ignore class="editor-container">
-                    <div class="editor" id="editor">{!! $content_old !!}</div>
-                </div>
-                @error('content')
-                    <span class="invalid-feedback-2">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="container page__container">
-                @if ($commentary)
+    @if ($focused_part->body == true)
+        {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+            data-revision-history="false">
+            <div class="div-main">
+                <div class="centered" wire:ignore>
                     <div class="row">
-                        <div class="col-12 mb-3">
-                            <label>Nota:</label>
-                            <div>{{ $commentary }}</div>
-                        </div>
+                        <div class="document-editor__toolbar"></div>
                     </div>
-                @endif
-
-                <div class="row">
-                    <div class="col mb-2">
-                        <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
-                            onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
-                        </button>
+                    <div class="row row-editor">
+                        <div class="editor-container">
+                            <div class="editor" id="editor">{!! $content_old !!}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        @else
-            <div>
-                <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
-                <input type="hidden" name="" id="editor">
-
+        </div> --}}
+        <div class="container page__container">
+            <div wire:ignore>
+                <div class="editor" id="editor">{!! $content_old !!}</div>
             </div>
-        @endif
+            @error('content')
+                <span class="invalid-feedback-2">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="container page__container">
+            @if ($commentary)
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label>Nota:</label>
+                        <div>{{ $commentary }}</div>
+                    </div>
+                </div>
+            @endif
+
+            <div class="row">
+                <div class="col mb-2">
+                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}" class="btn btn-warning mt-3"
+                        target="_blank">
+                        Exportar PDF
+                    </a>
+                    {{-- <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
+                        target="_blank">
+                        Exportar WORD
+                    </a> --}}
+                    <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
+                        onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    @else
+        <div>
+            <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
+            <input type="hidden" name="" id="editor">
+
+        </div>
+    @endif
     @endif
     <div>
         {{-- modal video --}}
@@ -489,30 +481,60 @@
     </script>
 
 
-<script src="{{ url("ckeditor5/build/ckeditor.js") }}"></script>
-<script>
-DecoupledDocumentEditor
-    .create( document.querySelector( '.editor' ), {
+    <script>
+        function activeCkeditor5() {
+            // DecoupledDocumentEditor.create(document.querySelector('.editor'), {
+            //         licenseKey: '',
+            //         simpleUpload: {
+            //             // The URL that the images are uploaded to.
+            //             uploadUrl: '{{ route('investigation_thesis_upload_image') }}',
 
-        licenseKey: '',
+            //             // Enable the XMLHttpRequest.withCredentials property.
+            //             withCredentials: true,
 
+            //             // Headers sent along with the XMLHttpRequest to the upload server.
+            //             headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             }
+            //         }
+            //     })
+            //     .then(editor => {
+            //         window.editor = editor;
+            //         // Set a custom container for the toolbar.
+            //         document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+            //         document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+            //     })
+            //     .catch(error => {
+            //         console.error('Oops, something went wrong!');
+            //         console.error(
+            //             'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+            //         );
+            //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+            //         console.error(error);
+            //     });
+            // window.editor1 = new RichTextEditor("#editor", {
+            //     editorResizeMode: "none" ,
+            // });
 
+            window.editor1 = CKEDITOR.replace('editor', {
+                'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
+            });
 
-    } )
-    .then( editor => {
-        window.editor = editor;
+            CKEDITOR.config.ruler = {
+                values: 21, // segment number of the ruler
+                step: 0.10, // accuracy of sliders
+                sliders: {
+                    left: @this.left_margin, // left slider value
+                    right: 21-@this.right_margin // right slider value (21-19 = 2)
+                },
+                padding: {
+                    top: 20, // top 'canvas' padding (px)
+                    bottom: 20 // bottom 'canvas' padding (px)
+                }
+            };
 
-        // Set a custom container for the toolbar.
-        document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
-        document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
-    } )
-    .catch( error => {
-        console.error( 'Oops, something went wrong!' );
-        console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
-        console.warn( 'Build id: 2naelthjaj8v-iq1331jui4do' );
-        console.error( error );
-    } );
-</script>
+        }
+    </script>
 
     {{-- nueva pestaña para enviar a la sección del video --}}
     <script>
@@ -526,4 +548,5 @@ DecoupledDocumentEditor
             }
         }
     </script>
+
 </div>
