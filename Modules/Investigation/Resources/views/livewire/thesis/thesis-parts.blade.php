@@ -173,7 +173,7 @@
     </div>
     @if($focused_part)
     @if ($focused_part->body == true)
-        {{-- <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
             data-revision-history="false">
             <div class="div-main">
                 <div class="centered" wire:ignore>
@@ -187,15 +187,15 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
-        <div class="container page__container">
+        </div>
+        {{-- <div class="container page__container">
             <div wire:ignore>
                 <div class="editor" id="editor">{!! $content_old !!}</div>
             </div>
             @error('content')
                 <span class="invalid-feedback-2">{{ $message }}</span>
             @enderror
-        </div>
+        </div> --}}
         <div class="container page__container">
             @if ($commentary)
                 <div class="row">
@@ -208,14 +208,6 @@
 
             <div class="row">
                 <div class="col mb-2">
-                    <a href="{{ route('investigation_thesis_export_pdf', $thesis_id) }}" class="btn btn-warning mt-3"
-                        target="_blank">
-                        Exportar PDF
-                    </a>
-                    {{-- <a href="{{ route('investigation_thesis_export_word', $thesis_id) }}" class="btn btn-info mt-3"
-                        target="_blank">
-                        Exportar WORD
-                    </a> --}}
                     <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
                         onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
                     </button>
@@ -446,12 +438,12 @@
 
         function updateContent() {
             //el margen derecho debe descontarse de 21 cm
-            @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
-            @this.left_margin = CKEDITOR.config.ruler.sliders.left;
+            // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
+            // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
             if (document.getElementById("editor").tagName == "DIV") {
-                // data = editor.getData();
+                data = editor.getData();
                 // data = editor1.getHTMLCode();
-                data = window.editor1.getData();
+                // data = window.editor1.getData();
                 @this.set('content', data);
             }
         }
@@ -483,55 +475,47 @@
 
     <script>
         function activeCkeditor5() {
-            // DecoupledDocumentEditor.create(document.querySelector('.editor'), {
-            //         licenseKey: '',
-            //         simpleUpload: {
-            //             // The URL that the images are uploaded to.
-            //             uploadUrl: '{{ route('investigation_thesis_upload_image') }}',
+            DecoupledDocumentEditor.create(document.querySelector('.editor'), {
+                    licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
+                    simpleUpload: {
+                        uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
+                        withCredentials: true,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    }
+                })
+                .then(editor => {
+                    window.editor = editor;
+                    document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+                    document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+                })
+                .catch(error => {
+                    console.error('Oops, something went wrong!');
+                    console.error(
+                        'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                    );
+                    console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+                    console.error(error);
+                });
+            
 
-            //             // Enable the XMLHttpRequest.withCredentials property.
-            //             withCredentials: true,
-
-            //             // Headers sent along with the XMLHttpRequest to the upload server.
-            //             headers: {
-            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //             }
-            //         }
-            //     })
-            //     .then(editor => {
-            //         window.editor = editor;
-            //         // Set a custom container for the toolbar.
-            //         document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
-            //         document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-            //     })
-            //     .catch(error => {
-            //         console.error('Oops, something went wrong!');
-            //         console.error(
-            //             'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-            //         );
-            //         console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
-            //         console.error(error);
-            //     });
-            // window.editor1 = new RichTextEditor("#editor", {
-            //     editorResizeMode: "none" ,
+            // window.editor1 = CKEDITOR.replace('editor', {
+            //     'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
             // });
 
-            window.editor1 = CKEDITOR.replace('editor', {
-                'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
-            });
-
-            CKEDITOR.config.ruler = {
-                values: 21, // segment number of the ruler
-                step: 0.10, // accuracy of sliders
-                sliders: {
-                    left: @this.left_margin, // left slider value
-                    right: 21-@this.right_margin // right slider value (21-19 = 2)
-                },
-                padding: {
-                    top: 20, // top 'canvas' padding (px)
-                    bottom: 20 // bottom 'canvas' padding (px)
-                }
-            };
+            // CKEDITOR.config.ruler = {
+            //     values: 21, // segment number of the ruler
+            //     step: 0.10, // accuracy of sliders
+            //     sliders: {
+            //         left: @this.left_margin, // left slider value
+            //         right: 21-@this.right_margin // right slider value (21-19 = 2)
+            //     },
+            //     padding: {
+            //         top: 20, // top 'canvas' padding (px)
+            //         bottom: 20 // bottom 'canvas' padding (px)
+            //     }
+            // };
 
         }
     </script>

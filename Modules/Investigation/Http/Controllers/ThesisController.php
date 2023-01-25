@@ -48,7 +48,8 @@ class ThesisController extends Controller
             ->with('sub_part', $sub_part);
     }
 
-    public function parts_test($thesis_id, $sub_part = 0){
+    public function parts_test($thesis_id, $sub_part = 0)
+    {
         //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
         if ($sub_part == 0) {
             $format_id = InveThesisStudent::where('id', $thesis_id)->get()->first()->format_id;
@@ -400,6 +401,8 @@ class ThesisController extends Controller
         $funcNum = 1;
         $message = '';
         $url =  asset('storage/' . $path);
-        echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
+        //dd($url);
+        //echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
+        return response()->json(['fileName' => $file_name, 'uploaded' => 1, 'url' => $url]);
     }
 }

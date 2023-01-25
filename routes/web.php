@@ -45,10 +45,11 @@ Route::get('/home', function () {
 
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
+//Route::middleware(['auth', 'auth.session'])->group(function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_account', [UserController::class, 'account'])->name('user_edit_account');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
 Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
-
+//});
 require __DIR__ . '/auth.php';
