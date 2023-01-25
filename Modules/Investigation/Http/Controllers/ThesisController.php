@@ -391,7 +391,7 @@ class ThesisController extends Controller
         //$extension = $file->getClientOriginalExtension();
         $file_name =  str_replace(' ', '_', $file->getClientOriginalName());
 
-        // //indicamos que queremos guardar un nuevo archivo en el disco local
+        //indicamos que queremos guardar un nuevo archivo en el disco local
         $path = $request->file('upload')->storeAs(
             'thesis',
             $file_name,
