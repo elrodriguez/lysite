@@ -1,7 +1,7 @@
 <div class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full">
     <button id="user-list-chat" class="nav-link btn-flush dropdown-toggle " type="button" data-toggle="dropdown"
         data-dropdown-disable-document-scroll data-caret="false">
-        <i class="material-icons ">group</i>
+        <i id="alert-message" class="material-icons ">group</i>
     </button>
 
     @if(!$is_instructor)

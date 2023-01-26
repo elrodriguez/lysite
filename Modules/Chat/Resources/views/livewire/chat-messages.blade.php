@@ -128,6 +128,7 @@ $i++;
                 scrollTop: $('#cha' + index)[0].scrollHeight
             }, 10);
             $('#user-list-chat').removeClass('new-message-icon-animation');
+                    document.getElementById("alert-message").innerHTML="group";
             $('#user' + user_id).removeClass('text-color-orange');
             document.getElementById("message" + index).focus();
         });
@@ -202,6 +203,7 @@ $i++;
                     }, 1000);
                 } else {
                     $('#user-list-chat').addClass('new-message-icon-animation');
+                    document.getElementById("alert-message").innerHTML="markunreadchat";
                     $('#user' + $user_id).addClass('text-color-orange');
                 }
                 const music = new Audio('{{ URL("assets/data/mp3/messagebox.mp3") }}');
