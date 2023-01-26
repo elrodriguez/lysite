@@ -74,21 +74,24 @@
     <!-- ----------------------------------------------------------------------------------------------------------------------------------------------
     --------------------------------------------------------------------------- INSTRUCTORES -------------------------------------------------------- !-->
 
-    <div class="dropdown-menu dropdown-menu-right" style="width:650px">
+    <div class="dropdown-menu dropdown-menu-right" style="width: 25vw">
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
         <div class="container">
             <div class="row clearfix">
                 <div class="col-lg-12">
-                    <div class="card chat-app overflow-auto">
+                    <div class="overflow-auto chat sticky-top">
                         <div id="plist" class="people-list overflow-auto">
-                            <div class="input-group">
+                            @if (count($students)+count($instructors)>6)
+                            <div class="input-group p-2">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-search"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" wire:keydown.enter="getSearch" wire:model.defer="search" placeholder="Buscar...">
                             </div>
+                            @endif
+                            <div class="overflujo" style="max-height:80vh; min-height:auto">
                             <ul class="list-unstyled chat-list mt-2 mb-0">
                                 @if(count($instructors) > 0)
                                 @foreach($instructors as $instructor)
@@ -103,11 +106,11 @@
                                     <div class="about">
                                         <div class="name">Instructor: {{ $instructor->full_name }}</div>
                                         @if ($instructor->is_online)
-                                        <div class="status"> <i class="fa fa-circle online"></i> {{
-                                            $instructor->chat_last_activity }}</div>
+                                        <div class="status"> <i class="fa fa-user-clock online"></i> {{
+                                            $this->getLastActivity($instructor->chat_last_activity)}}</div>
                                         @else
-                                        <div class="status"> <i class="fa fa-circle offline"></i> {{
-                                            $instructor->chat_last_activity }}</div>
+                                        <div class="status"> <i class="fa fa-user-clock offline"></i> {{
+                                             $this->getLastActivity($instructor->chat_last_activity) }}</div>
                                         @endif
                                     </div>
                                 </a>
@@ -129,11 +132,11 @@
                                     <div class="about">
                                         <div class="name">{{ $student->full_name }}</div>
                                         @if ($student->is_online)
-                                        <div class="status"> <i class="fa fa-circle online"></i> {{
-                                            substr($student->chat_last_activity,0 ,-8) }}</div>
+                                        <div id="activity" valor="{{ $student->chat_last_activity }}" class="status"> <i class="fa fa-circle online"></i> {{
+                                            $this->getLastActivity($student->chat_last_activity) }}</div>
                                         @else
-                                        <div class="status"> <i class="fa fa-circle offline"></i> {{
-                                            substr($student->chat_last_activity,0 ,-8) }}</div>
+                                        <div id="activity" valor="{{ $student->chat_last_activity }}" class="status"> <i class="fa fa-circle offline"></i> {{
+                                            $this->getLastActivity($student->chat_last_activity) }}</div>
                                         @endif
                                     </div>
                                     </a>
@@ -141,46 +144,9 @@
 
                                 @endforeach
                                 @endif
-                            </ul>
+                            </ul></div>
                         </div>
-                        <div class="chat sticky-top">
-                            <div class="chat-header clearfix">
 
-                            </div>
-                            <div class="chat-history">
-                                <ul class="m-b-0">
-                                    <li class="clearfix">
-                                        <div class="message-data text-right">
-                                            <span class="message-data-time">10:10 AM, Today</span>
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                        </div>
-                                        <div class="message other-message float-right"> Hi Aiden, how are you? How is
-                                            the project coming along? </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <div class="message-data">
-                                            <span class="message-data-time">10:12 AM, Today</span>
-                                        </div>
-                                        <div class="message my-message">Are we meeting today?</div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <div class="message-data">
-                                            <span class="message-data-time">10:15 AM, Today</span>
-                                        </div>
-                                        <div class="message my-message">Project has been already finished and I have
-                                            results to show you.</div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="chat-message clearfix">
-                                <div class="input-group mb-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-send"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Enter text here...">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -450,9 +416,60 @@
                     overflow-x: auto
                 }
             }
+            .overflujo{
+                overflow-y: scroll !important
+            }
+            .overflujo::-webkit-scrollbar {
+ display: none;
+}
         </style>
+
     </div>
     @endif
 
+    <script>
+        window.onload = timerChat;
+        function timerChat(){
+            //temporizador2 = setInterval(activity, 2000); // 20 segundos
+            identificadorDeTemporizador = setInterval(reloadChat, 400000); // 400segundos
+        }
 
+function reloadChat() {
+  @this.loadData();
+}
+function activity() {
+
+    // var objects = $("#activity");
+    // for (var obj of objects) {
+    //     obj.innerHtml = getLastActivity(obj.getAttribute("valor"));
+    //     console.log(getLastActivity(obj.getAttribute("valor"));
+    // }
+}
+function getLastActivity(date) {
+
+    var dif = new Date() - Date.parse(date);
+    dif_s=dif/1000;
+    dif_m=dif/1000*60;
+    dif_h=dif/1000*60*60;
+    dif_d=dif/1000*60*60*24;
+    dif_meses=dif/1000*60*60*24*30;
+    if(dif_meses>=1){
+        return dif_meses==1 ? "hace "+dif_meses+" mes" : "hace "+dif_meses+" meses";
+    }else{
+        if(dif_d>=1){
+            return dif_d==1 ? "hace "+dif_d+" día" : "hace "+dif_d+" días";
+        }else{
+            if(dif_h>=1){
+                return dif_h==1 ? "hace "+dif_h+" hora" : "hace "+dif_h+" horas";
+            }else{
+                if(dif_m>=1){
+                    return dif_m==1 ? "hace "+dif_m+" minuto" : "hace "+dif_m+" minutos";
+                }else{
+                    return dif_s<17 ? "hace un momento" : "hace "+dif_s+" segundos";
+                }
+            }
+        }
+    }
+}
+    </script>
 </div>

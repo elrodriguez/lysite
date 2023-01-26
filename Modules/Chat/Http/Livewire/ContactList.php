@@ -16,6 +16,7 @@ class ContactList extends Component
     public $students = [];
     public $instructors = [];
     public $is_instructor = false;
+    public $search="";
 
     public function mount()
     {
@@ -26,6 +27,11 @@ class ContactList extends Component
     {
 
         return view('chat::livewire.contact-list');
+    }
+
+    public function getSearch()
+    {
+        $this->loadData();
     }
 
     public function loadData()
@@ -66,6 +72,9 @@ class ContactList extends Component
             )
             ->whereIn('course_id', $course_iids)
             ->where('people.id', '<>', $person_id)
+            ->where(function ($query){
+                $query->orWhere('full_name','like', '%' . $this->search . '%');
+            })
             ->groupBy([
                 'users.id',
                 'users.is_online',
@@ -87,6 +96,9 @@ class ContactList extends Component
             )
             ->whereIn('course_id', $course_sids)
             ->where('people.id', '<>', $person_id)
+            ->where(function ($query){
+                $query->orWhere('full_name','like', '%' . $this->search . '%');
+            })
             ->groupBy([
                 'users.id',
                 'users.is_online',
@@ -102,8 +114,28 @@ class ContactList extends Component
         }
     }
 
-    public function reloadData()
+    public function getLastActivity($date)
     {
-        echo 'dddddd';
+        $difference = now()->diff($date);
+        //dd($difference, $difference->format('%s'), $difference->i, $difference->h, $difference->d);
+
+        if($difference->m>=1){
+            return $difference->m = 1 ? "hace " . $difference->m . " mes" : "hace ".$difference->m. " meses";
+        }else{
+            if ($difference->d >= 1) {
+                return "hace " . $difference->d . " días";
+            } else {
+                if ($difference->h >= 1) {
+                    return "hace " . $difference->h . " horas";
+                } else {
+                    if ($difference->i >= 2) {
+                        return "hace " . $difference->i . " minuto/s";
+                    } else {
+                        return "hace un momento";
+                    }
+                }
+            }
+            }
+
     }
 }
