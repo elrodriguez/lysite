@@ -26,9 +26,12 @@
 
 
                 @php
+               try {
                 $x=0;
                 $i=$chat['messages'][0]['user_id'];
                 $first=true;
+               } catch (\Throwable $th) {
+               }
                 @endphp
                 @while ($x < count($chat['messages']))
                         @if ($i !=$chat['messages'][$x]['user_id'] || $first)
@@ -127,9 +130,10 @@ $i++;
             $('#cha' + index).animate({
                 scrollTop: $('#cha' + index)[0].scrollHeight
             }, 10);
+            @this.is_seen_checked(index);
             $('#user-list-chat').removeClass('new-message-icon-animation');
                     document.getElementById("alert-message").innerHTML="group";
-            $('#user' + user_id).removeClass('text-color-orange');
+            $('#user' + user_id).removeClass('text-primary');
             document.getElementById("message" + index).focus();
         });
 
@@ -204,7 +208,7 @@ $i++;
                 } else {
                     $('#user-list-chat').addClass('new-message-icon-animation');
                     document.getElementById("alert-message").innerHTML="markunreadchat";
-                    $('#user' + $user_id).addClass('text-color-orange');
+                    $('#user' + $user_id).addClass('text-primary');
                 }
                 const music = new Audio('{{ URL("assets/data/mp3/messagebox.mp3") }}');
                 music.play();

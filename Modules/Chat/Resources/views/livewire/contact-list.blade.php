@@ -1,7 +1,9 @@
 <div class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full">
-    <button id="user-list-chat" class="nav-link btn-flush dropdown-toggle " type="button" data-toggle="dropdown"
+    <button id="user-list-chat" class="nav-link btn-flush dropdown-toggle {{ $alert_message ? "new-message-icon-animation":"" }}" type="button" data-toggle="dropdown"
         data-dropdown-disable-document-scroll data-caret="false">
-        <i id="alert-message" class="material-icons ">group</i>
+
+        <i id="alert-message" class="material-icons ">{{ $alert_message ? "markunreadchat":"group" }}</i>
+
     </button>
 
     @if(!$is_instructor)
@@ -30,8 +32,8 @@
                                 class="avatar-img rounded-circle">
                             @endif
                         </span>
-                        <span id="user{{ $instructor->id }}" class="flex d-flex flex-column ">
-                            <strong>{{ $instructor->full_name }}</strong>
+                        <span id="user{{ $instructor->id }}" class="flex d-flex flex-column {{ ($instructor->is_seen == 1 || is_null($instructor->is_seen)) ? '':'text-primary' }}">
+                            <strong>Instructor: {{ $instructor->full_name }}</strong>
                             <span class="text-black-70">{{ $instructor->email }}</span>
                         </span>
                     </span>
@@ -58,7 +60,7 @@
                                 class="avatar-img rounded-circle">
                             @endif
                         </span>
-                        <span id="user{{ $student->id }}" class="flex d-flex flex-column ">
+                        <span id="user{{ $student->id }}" class="flex d-flex flex-column {{ ($student->is_seen == 1 || is_null($student->is_seen)) ? '':'text-primary' }}">
                             <strong>{{ $student->full_name }}</strong>
                             <span class="text-black-70">{{ $student->email }}</span>
                         </span>
@@ -104,7 +106,7 @@
                                     <img src="{{ ui_avatars_url($instructor->full_name,26,'none') }}" alt="avatar">
                                     @endif
                                     <div class="about">
-                                        <div class="name">Instructor: {{ $instructor->full_name }}</div>
+                                        <div id="user{{ $instructor->id }}"  class="name {{ ($instructor->is_seen == 1 || is_null($instructor->is_seen)) ? '':'text-primary' }}">Instructor: {{ $instructor->full_name }}</div>
                                         @if ($instructor->is_online)
                                         <div class="status"> <i class="fa fa-user-clock online"></i> {{
                                             $this->getLastActivity($instructor->chat_last_activity)}}</div>
@@ -130,7 +132,7 @@
                                     <img src="{{ ui_avatars_url($student->full_name,26,'none') }}" alt="avatar">
                                     @endif
                                     <div class="about">
-                                        <div class="name">{{ $student->full_name }}</div>
+                                        <div id="user{{ $student->id }}" class="name {{ ($student->is_seen == 1 || is_null($student->is_seen)) ? '':'text-primary' }}">{{ $student->full_name }}</div>
                                         @if ($student->is_online)
                                         <div id="activity" valor="{{ $student->chat_last_activity }}" class="status"> <i class="fa fa-circle online"></i> {{
                                             $this->getLastActivity($student->chat_last_activity) }}</div>

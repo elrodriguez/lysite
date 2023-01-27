@@ -17,6 +17,7 @@ class ContactList extends Component
     public $instructors = [];
     public $is_instructor = false;
     public $search="";
+    public $alert_message=false;
 
     public function mount()
     {
@@ -62,13 +63,15 @@ class ContactList extends Component
 
         $this->students = AcaStudent::join('people', 'person_id', 'people.id')
             ->join('users', 'user_id', 'users.id')
+            ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
             ->select(
                 'users.id',
                 'users.is_online',
                 'users.avatar',
                 'people.full_name',
                 'people.email',
-                'users.chat_last_activity'
+                'users.chat_last_activity',
+                DB::raw('MIN(chat_messages.is_seen) as is_seen')
             )
             ->whereIn('course_id', $course_iids)
             ->where('people.id', '<>', $person_id)
@@ -86,13 +89,15 @@ class ContactList extends Component
 
         $this->instructors = AcaInstructor::join('people', 'person_id', 'people.id')
             ->join('users', 'user_id', 'users.id')
+            ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
             ->select(
                 'users.id',
                 'users.is_online',
                 'users.avatar',
                 'people.full_name',
                 'people.email',
-                'users.chat_last_activity'
+                'users.chat_last_activity',
+                DB::raw('MIN(chat_messages.is_seen) as is_seen')
             )
             ->whereIn('course_id', $course_sids)
             ->where('people.id', '<>', $person_id)
@@ -104,9 +109,23 @@ class ContactList extends Component
                 'users.is_online',
                 'users.avatar',
                 'people.full_name',
-                'people.email',
+                'people.email'
             ])
             ->get();
+
+            foreach ($this->students as $student){
+                if($student->is_seen==0){
+                    $this->alert_message=true;
+                    break;
+                }
+            }
+            foreach ($this->instructors as $instructor){
+                if($instructor->is_seen==0){
+                    $this->alert_message=true;
+                    break;
+                }
+            }
+
 
         $role_id = DB::table('model_has_roles')->where('model_type', User::class)->where('model_id', Auth::user()->id)->first()->role_id;
         if (Role::find($role_id)->name == "Instructor"){
