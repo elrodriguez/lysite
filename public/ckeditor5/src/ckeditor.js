@@ -50,6 +50,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
+import Paraphrase from '@ckeditor/ckeditor5-paraphrase/paraphrase';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -101,7 +102,8 @@ Editor.builtinPlugins = [
 	TableToolbar,
 	TextTransformation,
 	TodoList,
-	Underline
+	Underline,
+	Paraphrase
 ];
 
 // Editor configuration.
@@ -142,7 +144,8 @@ Editor.defaultConfig = {
 			'specialCharacters',
 			'horizontalLine',
 			'-',
-			'heading'
+			'heading',
+			'paraphrase'
 		],
 		shouldNotGroupWhenFull: true
 	},

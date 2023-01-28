@@ -173,16 +173,37 @@
     </div>
     @if($focused_part)
     @if ($focused_part->body == true)
-        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
-            data-revision-history="false">
-            <div class="div-main">
-                <div class="centered" wire:ignore>
-                    <div class="row">
-                        <div class="document-editor__toolbar"></div>
+        <div class="m-5">
+            <div class="row" id="worksheet">
+                <div class="col-3" id="paraphrase" style="display: none">
+                    <div class="card p-2">
+                        <form>
+                            <div class="form-group">
+                            <label for="text1">Escribe aquí lo que desee parafrasear</label>
+                            <textarea class="form-control" name="text1" id="text1"></textarea>
+                            </div>
+                            <div class="form-group">
+                            <label for="text2">Aquí verá el resultado</label>
+                            <textarea class="form-control" name="text2" id="text2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Procesar</button>
+                        </form>
                     </div>
-                    <div class="row row-editor">
-                        <div class="editor-container">
-                            <div class="editor" id="editor">{!! $content_old !!}</div>
+                </div>
+                <div class="col-12" id="documentsheet">
+                    <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+                        data-revision-history="false">
+                        <div class="div-main">
+                            <div class="centered" wire:ignore>
+                                <div class="row">
+                                    <div class="document-editor__toolbar"></div>
+                                </div>
+                                <div class="row row-editor">
+                                    <div class="editor-container">
+                                        <div class="editor" id="editor">{!! $content_old !!}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -476,29 +497,29 @@
     <script>
         function activeCkeditor5() {
             DecoupledDocumentEditor.create(document.querySelector('.editor'), {
-                    licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
-                    simpleUpload: {
-                        uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
-                        withCredentials: true,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
+                licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
+                simpleUpload: {
+                    uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                })
-                .then(editor => {
-                    window.editor = editor;
-                    document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
-                    document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-                })
-                .catch(error => {
-                    console.error('Oops, something went wrong!');
-                    console.error(
-                        'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-                    );
-                    console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
-                    console.error(error);
-                });
-            
+                }
+            })
+            .then(editor => {
+                window.editor = editor;
+                document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+                document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error(
+                    'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                );
+                console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+                console.error(error);
+            });
+        
 
             // window.editor1 = CKEDITOR.replace('editor', {
             //     'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
