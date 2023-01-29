@@ -430,15 +430,16 @@
     @endif
 
     <script>
-        window.onload = timerChat;
-        function timerChat(){
-            //temporizador2 = setInterval(activity, 2000); // 20 segundos
-            identificadorDeTemporizador = setInterval(reloadChat, 400000); // 400segundos
-        }
+        //reload chat está fallando
+//         window.onload = timerChat;
+//         function timerChat(){
+//             //temporizador2 = setInterval(activity, 2000); // 20 segundos
+//             identificadorDeTemporizador = setInterval(reloadChat, 4000); // 400segundos
+//         }
 
-function reloadChat() {
-  @this.loadData();
-}
+// function reloadChat() {
+//   @this.loadData();
+// }
 function activity() {
 
     // var objects = $("#activity");

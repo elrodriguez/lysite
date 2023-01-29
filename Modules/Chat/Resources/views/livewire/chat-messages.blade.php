@@ -201,10 +201,10 @@ $i++;
                     let $message = data.message;
 
                     @this.addMessages($index, $message);
-
                     $("#cha" + $index).animate({
                         scrollTop: $('#cha' + $index)[0].scrollHeight
                     }, 1000);
+                    @this.is_seen_checked($index);
                 } else {
                     $('#user-list-chat').addClass('new-message-icon-animation');
                     document.getElementById("alert-message").innerHTML="markunreadchat";
