@@ -173,24 +173,26 @@
     </div>
     @if($focused_part)
     @if ($focused_part->body == true)
-        <div class="m-5">
+        <div class="m-5" >
             <div class="row" id="worksheet">
-                <div class="col-3" id="paraphrase" style="display: none">
+                <div wire:ignore class="col-3" id="paraphrase" style="display: none">
                     <div class="card p-2">
-                        <form>
+                        <form >
                             <div class="form-group">
-                            <label for="text1">Escribe aquí lo que desee parafrasear</label>
-                            <textarea class="form-control" name="text1" id="text1"></textarea>
+                                <label for="text1">Escribe aquí lo que desee parafrasear</label>
+                                <textarea rows="8" class="form-control" name="text1" id="text1"></textarea>
                             </div>
                             <div class="form-group">
-                            <label for="text2">Aquí verá el resultado</label>
-                            <textarea class="form-control" name="text2" id="text2"></textarea>
+                                <label for="text2">Aquí verá el resultado</label>
+                                <textarea  rows="8" class="form-control" name="text2" id="text2"></textarea>
                             </div>
+                            <button onclick="closeParahrase()" type="button" class="btn btn-success">Cancelar</button>
+                            {{-- <button onclick="copyToClipboard()" type="button" class="btn btn-warning">Copiar</button> --}}
                             <button type="submit" class="btn btn-primary">Procesar</button>
                         </form>
                     </div>
                 </div>
-                <div class="col-12" id="documentsheet">
+                <div wire:ignore class="col-12" id="documentsheet">
                     <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
                         data-revision-history="false">
                         <div class="div-main">
@@ -206,6 +208,22 @@
                             </div>
                         </div>
                     </div>
+                    @if ($commentary)
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label>Nota:</label>
+                                <div>{{ $commentary }}</div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col mb-2">
+                            <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
+                                onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -217,7 +235,7 @@
                 <span class="invalid-feedback-2">{{ $message }}</span>
             @enderror
         </div> --}}
-        <div class="container page__container">
+        {{-- <div class="container page__container">
             @if ($commentary)
                 <div class="row">
                     <div class="col-12 mb-3">
@@ -234,7 +252,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> --}}
     @else
         <div>
             <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
@@ -552,6 +570,26 @@
                 alert("No es posible mostrar el curso");
             }
         }
+        async function closeParahrase() {
+            try {
+                let cparaphrase = document.getElementById('paraphrase');
+                let cdocumentsheet = document.getElementById('documentsheet');
+                cparaphrase.style.display = 'none';
+
+                cdocumentsheet.classList.remove("col-9");
+                cdocumentsheet.classList.add("col-12");
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        // async function copyToClipboard() {
+        //     var $temp = $("<input>")
+        //     $("body").append($temp);
+        //     $temp.val($('#text2').text()).select();
+        //     document.execCommand("copy");
+        //     $temp.remove();
+        // }
     </script>
 
 </div>
