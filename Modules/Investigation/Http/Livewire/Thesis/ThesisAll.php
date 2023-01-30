@@ -44,4 +44,22 @@ class ThesisAll extends Component
     {
         return UniversitiesSchools::where('id', $id_school)->first()->name;
     }
+
+
+    public function destroy($id)
+    {
+        try {
+            InveThesisStudent::where('external_id', $id)->delete();
+            $res = 'success';
+            $tit = 'Exito';
+            $msg = 'Se elimino correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            //DB::rollBack();
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar comunicate con los administradores del Sistema';
+        }
+
+        $this->dispatchBrowserEvent('aca-course-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
+    }
 }

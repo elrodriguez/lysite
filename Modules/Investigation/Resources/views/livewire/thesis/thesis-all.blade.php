@@ -41,8 +41,12 @@
                                                     {{-- @can('investigacion_partes_editar') --}}
                                                         <a href="{{ route('investigation_thesis_check', $thesi->external_id) }}"
                                                             type="button" class="btn btn-info btn-sm" title="check"><i
-                                                                class="fa fa-search-plus"></i></a>
+                                                                class="fa fa-search-plus"></i>
+                                                            </a>
                                                     {{-- @endcan --}}
+                                                    @can('investigacion_tesis_admin_eliminar')
+                                                        <button onclick="deletes('{{ $thesi->external_id }}')" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
+                                                    @endcan
                                                 </div>
                                             </td>
                                             <td class="align-middle">{{ $thesi->full_name }}</td>

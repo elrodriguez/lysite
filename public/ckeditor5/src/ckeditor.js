@@ -10,12 +10,12 @@ import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import ExportWord from '@ckeditor/ckeditor5-export-word/src/exportword.js';
+import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace.js';
 import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor.js';
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor.js';
 import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily.js';
 import FontSize from '@ckeditor/ckeditor5-font/src/fontsize.js';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
-import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline.js';
 import Image from '@ckeditor/ckeditor5-image/src/image.js';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption.js';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize.js';
@@ -42,9 +42,7 @@ import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-character
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough.js';
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
-import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption.js';
 import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize.js';
 import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
@@ -63,12 +61,12 @@ Editor.builtinPlugins = [
 	CloudServices,
 	Essentials,
 	ExportWord,
+	FindAndReplace,
 	FontBackgroundColor,
 	FontColor,
 	FontFamily,
 	FontSize,
 	Heading,
-	HorizontalLine,
 	Image,
 	ImageCaption,
 	ImageResize,
@@ -95,9 +93,7 @@ Editor.builtinPlugins = [
 	SpecialCharactersText,
 	Strikethrough,
 	Table,
-	TableCaption,
 	TableCellProperties,
-	TableColumnResize,
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
@@ -110,7 +106,7 @@ Editor.builtinPlugins = [
 Editor.defaultConfig = {
 	toolbar: {
 		items: [
-			'exportWord',
+			'heading',
 			'|',
 			'fontSize',
 			'fontFamily',
@@ -141,13 +137,12 @@ Editor.defaultConfig = {
 			'undo',
 			'redo',
 			'pageBreak',
+			'|',
 			'specialCharacters',
-			'horizontalLine',
-			'-',
-			'heading',
+			'exportWord',
+			'findAndReplace',
 			'paraphrase'
-		],
-		shouldNotGroupWhenFull: true
+		]
 	},
 	language: 'es',
 	image: {
