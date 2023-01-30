@@ -537,7 +537,7 @@
                 console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
                 console.error(error);
             });
-        
+
 
             // window.editor1 = CKEDITOR.replace('editor', {
             //     'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
