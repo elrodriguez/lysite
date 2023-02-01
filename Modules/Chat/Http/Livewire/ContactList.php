@@ -84,7 +84,7 @@ class ContactList extends Component
                 'users.avatar',
                 'people.full_name',
                 'people.email',
-                'users.chat_last_activity',
+                'users.chat_last_activity'
             ])
             ->get();
 
