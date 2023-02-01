@@ -81,20 +81,7 @@ class DownloadsController extends Controller
     }
     public function downloadFile($content_id, $student_id)
     {
-<<<<<<< HEAD
-        $content = AcaContent::find($content_id);
-        $file = $content->content_url;
-        $pathtoFile = public_path() . "/" . $file;
-        if (AcaStudentsSectionProgress::where('content_id', $content_id)->where('student_id', $student_id)->count() == 0) {
-            AcaStudentsSectionProgress::create([
-                'student_id' => $student_id,
-                'section_id' => $content->section_id,
-                'content_id' => $content->id,
-            ]);
-        }
-        return response()->download($pathtoFile, $content->original_name);
-=======
-/*
+            /*
         $currentToken = trim((string) Session::token());
         $token = trim((string) $token);
         if ($currentToken== $token) { */
@@ -115,6 +102,5 @@ class DownloadsController extends Controller
             //Session::regenerateToken();
            return "Usted no tiene permisos para descargar este archivo.";
         } */
->>>>>>> e05afaf2500039796e6047aea78b7c1850d4be77
     }
 }
