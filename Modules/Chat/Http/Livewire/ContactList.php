@@ -110,21 +110,20 @@ class ContactList extends Component
                 'users.is_online',
                 'users.avatar',
                 'people.full_name',
-                'people.email'
+                'people.email',
+                'users.chat_last_activity'
             ])
             ->get();
 
             foreach ($this->students as $student){
                 if($student->is_seen==0 && !is_null($student->is_seen)){
                     $this->alert_message=true;
-                    echo "<script>alert(1);</script>";
                     break;
                 }
             }
             foreach ($this->instructors as $instructor){
                 if($instructor->is_seen==0 && !is_null($instructor->is_seen)){
                     $this->alert_message=true;
-                    echo "<script>console.log(".$instructor.");</script>";
                     break;
                 }
             }
