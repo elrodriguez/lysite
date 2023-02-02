@@ -480,9 +480,9 @@
             // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
             // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
             if (document.getElementById("editor").tagName == "DIV") {
-                data = editor.getData();
+                //data = editor.getData();
                 // data = editor1.getHTMLCode();
-                // data = window.editor1.getData();
+                data = window.editor1.getData();
                 @this.set('content', data);
             }
         }
