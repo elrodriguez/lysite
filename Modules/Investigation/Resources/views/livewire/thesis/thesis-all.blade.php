@@ -38,12 +38,12 @@
                                             <td class="text-center align-middle">{{ $key + 1 }}</td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group">
-                                                    {{-- @can('investigacion_partes_editar') --}}
+                                                    @can('investigacion_partes_editar')
                                                         <a href="{{ route('investigation_thesis_check', $thesi->external_id) }}"
                                                             type="button" class="btn btn-info btn-sm" title="check"><i
                                                                 class="fa fa-search-plus"></i>
                                                             </a>
-                                                    {{-- @endcan --}}
+                                                    @endcan
                                                     @can('investigacion_tesis_admin_eliminar')
                                                         <button onclick="deletes('{{ $thesi->external_id }}')" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
                                                     @endcan
