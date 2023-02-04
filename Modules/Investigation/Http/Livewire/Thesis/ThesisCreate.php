@@ -100,7 +100,7 @@ class ThesisCreate extends Component
 
             $this->dispatchBrowserEvent('inve-thesis-student-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
         } else {
-            $this->dispatchBrowserEvent('inve-thesis-student-error', ['tit' => 'No tienes permisos', 'msg' => 'No cuentas con permisos para crear una o más tesis, si deseas crear otra tésis comunícate con tu coordinador, instructor o administrador del sistema']);
+            $this->dispatchBrowserEvent('inve-thesis-student-error', ['tit' => 'No tienes permisos', 'msg' => 'No cuentas con permisos para crear una o más tesis, si deseas crear otra tesis comunícate con tu coordinador, instructor o administrador del sistema']);
         }
     }
 

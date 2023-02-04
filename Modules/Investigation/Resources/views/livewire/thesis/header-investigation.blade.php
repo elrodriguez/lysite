@@ -6,7 +6,7 @@
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
             @if (Auth::user()->hasrole('Admin') || Auth::user()->hasrole('Instructor'))
-            <li><a class="dropdown-item" href="{{ route('investigation_thesis_all') }}">Ver todas las tésis</a></li>
+            <li><a class="dropdown-item" href="{{ route('investigation_thesis_all') }}">Ver todas las tesis</a></li>
             @endif
             <li><a class="dropdown-item" href="{{ route('investigation_thesis_create') }}">Crear Proyecto</a></li>
             <li><hr class="dropdown-divider"></li>
