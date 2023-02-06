@@ -3,17 +3,18 @@
 namespace Modules\Investigation\Http\Livewire\Thesis;
 
 use App\Models\Person;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Exists;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaContent;
-use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaSection;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use Modules\Investigation\Entities\InveThesisStudentPart;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class ThesisParts extends Component
 {
@@ -39,9 +40,14 @@ class ThesisParts extends Component
     public $left_margin;
     public $right_margin;
     public $format_id;
+    public $consulta;
+    public $resultado;
+    public $paraphrase_left;
 
     public function mount($thesis_id, $sub_part)
     {
+        $permisos = Person::where('user_id', Auth::user()->id)->first();
+        $this->paraphrase_left = $permisos->paraphrase_allowed - $permisos->paraphrase_used;
         $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
         $this->thesis_id = $thesis_id;
         $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
@@ -166,7 +172,7 @@ class ThesisParts extends Component
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException$e) {
             $res = 'error';
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
@@ -174,8 +180,6 @@ class ThesisParts extends Component
 
         $this->dispatchBrowserEvent('inve-part-delete', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
-
-
 
     // para cuando cambian de sección y no grabaron ------
     public function withoutSavingThesisPartStudentBeforeChange($thesis_id, $part_id)
@@ -189,7 +193,6 @@ class ThesisParts extends Component
     }
     /////////////////////////////////////////////
 
-
     public function saveThesisPartStudentN($bool)
     { // true para mostrar notificacion y false para no
 
@@ -201,7 +204,7 @@ class ThesisParts extends Component
             //Actualiza los margenes aunque el contenido no halla sido modificado
             $this->ThesisStudentPart->update([
                 'right_margin' => $this->right_margin,
-                'left_margin' => $this->left_margin
+                'left_margin' => $this->left_margin,
             ]);
 
             $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
@@ -223,7 +226,7 @@ class ThesisParts extends Component
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException$e) {
             $res = 'error';
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
@@ -271,9 +274,6 @@ class ThesisParts extends Component
         //     ->where('inve_thesis_format_part_id', $this->focus_id)
         //     ->max('version');
 
-
-
-
         //primero se debe consultar si existe, sino se crea.
 
         if (InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)->where('inve_thesis_format_part_id', $this->focus_id)->exists()) {
@@ -285,7 +285,7 @@ class ThesisParts extends Component
                     'inve_thesis_format_part_id' => $this->focus_id,
                     'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                     'right_margin' => $this->right_margin,
-                    'left_margin' => $this->left_margin
+                    'left_margin' => $this->left_margin,
                 ]);
         } else {
             InveThesisStudentPart::create([
@@ -294,7 +294,7 @@ class ThesisParts extends Component
                 'inve_thesis_format_part_id' => $this->focus_id,
                 'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                 'right_margin' => $this->right_margin,
-                'left_margin' => $this->left_margin
+                'left_margin' => $this->left_margin,
                 //     'version' => ($max_version ? $max_version + 1 : 1)
             ]);
         }
@@ -320,5 +320,46 @@ class ThesisParts extends Component
             ->update([
                 'commentary' => null,
             ]);
+    }
+
+    public function paraphrasing()
+    {
+        $this->resultado = "espera un momento...";
+        $permisos = Person::where('user_id', Auth::user()->id)->first();
+        $p_allowed = $permisos->paraphrase_allowed;
+        $p_used = $permisos->paraphrase_used;
+
+        if ($p_allowed > $p_used) {
+            $max_tokens = 1500;
+            $max_tokens = 3300;
+            $temperature = 0.6;
+
+            $result_text = "hubo un problema, intenta mas tarde";
+
+            $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
+
+            try {
+                $permisos->paraphrase_used = $p_used+1;
+                $permisos->save();
+                $this->paraphrase_left--;
+                // mover permisos justo antes del catch para no hacer modificaciones a menos que la consulta sea exitosa
+                $result = OpenAI::completions()->create([
+                    'model' => 'text-davinci-003',
+                    'prompt' => $consulta,
+                    'max_tokens' => $max_tokens,
+                    'temperature' => $temperature,
+                ]);
+                $result_text = $result['choices'][0]['text'];
+                $query_tokens = $result['usage']['prompt_tokens'];
+                $result_tokens = $result['usage']['completion_tokens'];
+                $consumed_tokens = $result['usage']['total_tokens'];
+
+            } catch (Exception $e) {
+                $result_text = $e->getMessage();
+            }
+            $this->resultado = $result_text;
+        }else{
+            $this->resultado = "Has sobrepasado tu límite para parafrasear, comunicate con los administradores para aumentar el límite";
+        }
     }
 }
