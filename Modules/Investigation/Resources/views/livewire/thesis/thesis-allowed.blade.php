@@ -26,6 +26,8 @@
                                         <th class="text-center">#</th>
                                         <th class="text-center">Tesis Permitidas</th>
                                         <th class="text-center">Tesis Creadas</th>
+                                        <th class="text-center">Parafraseos Permitidos</th>
+                                        <th class="text-center">Parafraseos realizados</th>
                                         <th class="">Estudiante</th>
                                         <th class="">Documento de Identidad</th>
                                     </tr>
@@ -43,6 +45,16 @@
                                                     @endcan
                                             </td>
                                             <td class="align-middle" align="center">{{ $person->created_thesis }}</td>
+
+                                            <td class="align-middle col-md-2">
+                                                @can('investigacion_thesis_allowed')
+                                                    <input class="form-control" type="number" name=""
+                                                    min="0" max="1000" step="10" maxlength="4"
+                                                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                                                    onchange="changeAllowedParaphrase({{ $person->id }})" id="{{ "para".$person->id }}" value="{{ $person->paraphrase_allowed }}">
+                                                @endcan
+                                        </td>
+                                        <td class="align-middle" align="center">{{ $person->paraphrase_used>0 ? $person->paraphrase_used : 0 }}</td>
                                             <td class="align-middle">{{ $person->full_name }}</td>
                                             <td class="align-middle">{{ $person->number }}</td>
 
@@ -91,6 +103,11 @@
         function changeAllowedThesis(id){
             valor = document.getElementById("p"+id).value;
             @this.changeAllowedThesis(id, valor);
+        }
+
+        function changeAllowedParaphrase(id){
+            valor = document.getElementById("para"+id).value;
+            @this.changeAllowedParaphrase(id, valor);
         }
     </script>
 </div>

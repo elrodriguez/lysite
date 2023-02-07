@@ -324,6 +324,7 @@ class ThesisParts extends Component
 
     public function paraphrasing()
     {
+        if(strlen($this->consulta)>10){
         $this->resultado = "espera un momento...";
         $permisos = Person::where('user_id', Auth::user()->id)->first();
         $p_allowed = $permisos->paraphrase_allowed;
@@ -359,7 +360,10 @@ class ThesisParts extends Component
             }
             $this->resultado = $result_text;
         }else{
-            $this->resultado = "Has sobrepasado tu límite para parafrasear, comunicate con los administradores para aumentar el límite";
+            $this->resultado = "Lo siento, pero parece que has superado tu límite de parafraseo. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
         }
+    }else{
+        $this->resultado =Auth::user()->name ." aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
+    }
     }
 }
