@@ -91,7 +91,7 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
                         <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'thesis' ? 'active' : '' }}"
                             href="{{ route('investigation_thesis_permissions_thesis_allowed') }}" data-toggle="tooltip" data-placement="right"
                             title="permite indicar cuantas tesis puede crear una persona">
-                            {{ __('labels.Permissions to create thesis') }}</a>
+                            {{ __('labels.Permissions to create thesis and paraphrase') }}</a>
                     @endcan
 
                 </div>

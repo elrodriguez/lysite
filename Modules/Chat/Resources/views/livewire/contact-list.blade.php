@@ -6,7 +6,7 @@
 
     </button>
 
-    @if(!$is_instructor)
+    @if(!$is_instructor && 0>1)
 
     <div class="dropdown-menu dropdown-menu-right">
         <div data-perfect-scrollbar class="position-relative">

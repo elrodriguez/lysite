@@ -195,7 +195,7 @@ return [
     'Preferably enter an image or photo with square format' => 'Preferiblemente ingresa una imagen o foto cuadrada',
     'Instructor name' => 'Nombre del Instructor',
     'All Format Thesis' => 'Todos los Formatos de Tesis',
-    'Permissions to create thesis' => 'Permisos para crear tesis',
+    'Permissions to create thesis and paraphrase' => 'Permisos para crear tesis y parafraseos',
     'Repeat password' => 'Repite la Contraseña',
     'write your phone number if you want us to contact you' => 'Escribe tu número de celular si deseas que te contactemos',
     'Telephone' => 'Teléfono',

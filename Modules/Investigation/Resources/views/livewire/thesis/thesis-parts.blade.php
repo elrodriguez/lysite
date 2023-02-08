@@ -25,6 +25,11 @@
             </div>
         </div>
 
+
+        <div class="form-group">
+            <label class="text-danger" id="paraphrase_left">Tienes {{ $paraphrase_left }} oportunidades para parafrasear.</label>
+        </div>
+
         {{-- Notas de instructor --}}
 
         @if ($commentary)
@@ -177,21 +182,22 @@
             <div class="row" id="worksheet">
                 <div wire:ignore class="col-3" id="paraphrase" style="display: none">
                     <div class="card p-2">
-                        <form >
+                        <div>
                             <div class="form-group">
                                 <label for="text1">Escribe aquí lo que desee parafrasear</label>
-                                <textarea rows="8" class="form-control" name="text1" id="text1"></textarea>
+                                <textarea rows="8" class="form-control" wire:model='consulta' name="text1" id="text1"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="text2">Aquí verá el resultado</label>
-                                <textarea  rows="8" class="form-control" name="text2" id="text2"></textarea>
+                                <textarea  rows="8" class="form-control" wire:model='resultado' name="text2" id="text2" readonly placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio."></textarea>
                             </div>
                             <button onclick="closeParahrase()" type="button" class="btn btn-success">Cancelar</button>
-                            {{-- <button onclick="copyToClipboard()" type="button" class="btn btn-warning">Copiar</button> --}}
-                            <button type="submit" class="btn btn-primary">Procesar</button>
-                        </form>
+                            <button type="button" class="btn btn-warning" id="paraphrasing">Copiar</button>
+                            <button class="btn btn-primary" wire:click="paraphrasing">Procesar</button>
+                        </div>
                     </div>
                 </div>
+
                 <div wire:ignore class="col-12" id="documentsheet">
                     <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
                         data-revision-history="false">
@@ -311,6 +317,15 @@
     </div>
     <script>
         var data = "";
+
+
+        const textarea = document.getElementById('text2');
+        const button = document.getElementById("paraphrasing");
+
+button.addEventListener("click", function() {
+  textarea.select();
+  document.execCommand("copy");
+});
 
         function deletes(id) {
             cuteAlert({
@@ -582,6 +597,7 @@
                 console.log(e);
             }
         }
+
 
         // async function copyToClipboard() {
         //     var $temp = $("<input>")
