@@ -49,6 +49,7 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import Paraphrase from '@ckeditor/ckeditor5-paraphrase/paraphrase';
+import Completethesis from '@ckeditor/ckeditor5-complete-thesis/completethesis';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -99,7 +100,8 @@ Editor.builtinPlugins = [
 	TextTransformation,
 	TodoList,
 	Underline,
-	Paraphrase
+	Paraphrase,
+	Completethesis
 ];
 
 // Editor configuration.
@@ -141,7 +143,8 @@ Editor.defaultConfig = {
 			'specialCharacters',
 			'exportWord',
 			'findAndReplace',
-			'paraphrase'
+			'paraphrase',
+			'completethesis'
 		]
 	},
 	language: 'es',

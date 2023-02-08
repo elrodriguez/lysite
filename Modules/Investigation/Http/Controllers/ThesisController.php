@@ -405,4 +405,8 @@ class ThesisController extends Controller
         //echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
         return response()->json(['fileName' => $file_name, 'uploaded' => 1, 'url' => $url]);
     }
+    public function completethesis($thesis)
+    {
+        return view('investigation::thesis.thesis_export_complete');
+    }
 }
