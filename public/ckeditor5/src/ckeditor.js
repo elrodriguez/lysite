@@ -50,6 +50,7 @@ import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import Paraphrase from '@ckeditor/ckeditor5-paraphrase/paraphrase';
 import Completethesis from '@ckeditor/ckeditor5-complete-thesis/completethesis';
+import Margins from '@ckeditor/ckeditor5-margins/margins';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -101,7 +102,8 @@ Editor.builtinPlugins = [
 	TodoList,
 	Underline,
 	Paraphrase,
-	Completethesis
+	Completethesis,
+	Margins
 ];
 
 // Editor configuration.
@@ -144,7 +146,8 @@ Editor.defaultConfig = {
 			'exportWord',
 			'findAndReplace',
 			'paraphrase',
-			'completethesis'
+			'completethesis',
+			'margins'
 		]
 	},
 	language: 'es',

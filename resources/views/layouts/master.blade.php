@@ -110,7 +110,7 @@
     <script src="{{ url('assets/js/cute-alert/cute-alert.js') }}"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
-
+    
     @yield('script')
     @yield('modales')
     <!-- Modal -->
@@ -122,6 +122,7 @@
         },10000);
 
     </script>
+    <div id="global-modal"></div>
 </body>
 
 </html>

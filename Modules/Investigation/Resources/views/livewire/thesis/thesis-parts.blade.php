@@ -497,7 +497,7 @@ button.addEventListener("click", function() {
             if (document.getElementById("editor").tagName == "DIV") {
                 //data = editor.getData();
                 // data = editor1.getHTMLCode();
-                data = window.editor1.getData();
+                data = window.editor.getData();
                 @this.set('content', data);
             }
         }
@@ -530,6 +530,48 @@ button.addEventListener("click", function() {
     <script>
         function activeCkeditor5() {
             DecoupledDocumentEditor.create(document.querySelector('.editor'), {
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'fontSize',
+                        'fontFamily',
+                        '|',
+                        'fontColor',
+                        'fontBackgroundColor',
+                        '|',
+                        'bold',
+                        'italic',
+                        'underline',
+                        'strikethrough',
+                        '|',
+                        'alignment',
+                        '|',
+                        'numberedList',
+                        'bulletedList',
+                        '|',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'todoList',
+                        'link',
+                        'blockQuote',
+                        'imageUpload',
+                        '|',
+                        'paraphrase',
+                        'completethesis',
+                        'margins',
+                        '|',
+                        'undo',
+                        'redo',
+                        'pageBreak',
+                        '|',
+                        'specialCharacters',
+                        'findAndReplace',
+                        'mediaEmbed',
+                        'insertTable'
+                    ]
+                },
                 licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
                 simpleUpload: {
                     uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
@@ -543,6 +585,8 @@ button.addEventListener("click", function() {
                 window.editor = editor;
                 document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
                 document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+
+
             })
             .catch(error => {
                 console.error('Oops, something went wrong!');
@@ -554,7 +598,7 @@ button.addEventListener("click", function() {
             });
 
 
-            // window.editor1 = CKEDITOR.replace('editor', {
+            // window.editor = CKEDITOR.replace('editor', {
             //     'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
             // });
 

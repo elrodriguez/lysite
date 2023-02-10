@@ -7,3 +7,35 @@
 .list-point-none li{
     list-style:none;
 }
+/* Estilos del modal */
+.ckmodal {
+    display: none; /* Por defecto, ocultar el modal */
+    position: fixed; /* Fijar la posición del modal */
+    z-index: 1; /* Asegurarse de que esté por encima del contenido de la página */
+    left: 50%; /* Centrar el modal horizontalmente */
+    top: 50%; /* Centrar el modal verticalmente */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+    width: 250px; /* Ancho de 250px */
+    height: 250px; /* Alto de 250px */
+    background-color: white; /* Fondo blanco */
+
+  }
+  
+  /* Contenido del modal */
+  .ckmodal-content {
+    position: relative; /* Hacer que el contenido sea relativo al modal */
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #d9534f;
+  }
+  
+  /* Botón para cerrar el modal */
+  .ckcloseBtn {
+    position: absolute; /* Posicionar el botón en la esquina superior derecha */
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
