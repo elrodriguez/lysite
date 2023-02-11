@@ -282,7 +282,7 @@ class ThesisParts extends Component
         //     ->max('version');
 
         //primero se debe consultar si existe, sino se crea.
-
+        dd($this->top_margin);
         if (InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)->where('inve_thesis_format_part_id', $this->focus_id)->exists()) {
             InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
