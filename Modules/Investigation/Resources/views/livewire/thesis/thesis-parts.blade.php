@@ -312,7 +312,10 @@
                 <!-- Footer desde aqui -->
 
             </div>
-
+            <input id="xleft-margin" type="hidden" value="{{ $left_margin }}">
+            <input id="xright-margin" type="hidden" value="{{ $right_margin }}">
+            <input id="xtop-margin" type="hidden" value="{{ $top_margin }}"> 
+            <input id="xbottom-margin" type="hidden" value="{{ $bottom_margin }}"> 
         </div>
     </div>
     <script>
@@ -322,10 +325,10 @@
         const textarea = document.getElementById('text2');
         const button = document.getElementById("paraphrasing");
 
-button.addEventListener("click", function() {
-  textarea.select();
-  document.execCommand("copy");
-});
+        button.addEventListener("click", function() {
+            textarea.select();
+            document.execCommand("copy");
+        });
 
         function deletes(id) {
             cuteAlert({
@@ -498,7 +501,17 @@ button.addEventListener("click", function() {
                 //data = editor.getData();
                 // data = editor1.getHTMLCode();
                 data = window.editor.getData();
+
+                leftMargin = document.getElementById('xleft-margin').value;
+                rightMargin = document.getElementById('xright-margin' ).value;
+                topMargin = document.getElementById('xtop-margin').value;
+                bottomMargin = document.getElementById('xbottom-margin').value;
+
                 @this.set('content', data);
+                @this.set('left_margin', leftMargin);
+                @this.set('top_margin', topMargin);
+                @this.set('bottom_margin', bottomMargin);
+                @this.set('right_margin', rightMargin);
             }
         }
 
@@ -579,6 +592,12 @@ button.addEventListener("click", function() {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                },
+                marginAdjustment: {
+                    marginLeft: '20px',
+                    marginRight: '20px',
+                    marginTop: '20px',
+                    marginBottom: '20px'
                 }
             })
             .then(editor => {
@@ -586,7 +605,10 @@ button.addEventListener("click", function() {
                 document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
                 document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
 
-
+                editor.editing.view.getDomRoot().style.paddingLeft = {{ $left_margin }} + 'mm';
+                editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
+                editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
+                editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
             })
             .catch(error => {
                 console.error('Oops, something went wrong!');

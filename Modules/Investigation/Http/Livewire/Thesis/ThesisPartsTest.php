@@ -34,7 +34,7 @@ class ThesisPartsTest extends Component
     public $parts = [];
 
     public $content;
-    public $content_old="";
+    public $content_old = "";
     public $auto_save = true;
     public $commentary;
     public $left_margin;
@@ -44,7 +44,7 @@ class ThesisPartsTest extends Component
 
     public function mount($thesis_id, $sub_part)
     {
-        $this->content_old="";
+        $this->content_old = "";
         $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
         $this->thesis_id = $thesis_id;
         $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
@@ -55,20 +55,23 @@ class ThesisPartsTest extends Component
 
             $this->left_margin = $this->format->left_margin;
             $this->right_margin = $this->format->right_margin;
+            $this->bottom_margin = $this->format->bottom_margin ? $this->format->bottom_margin : 2.5;
+            $this->top_margin = $this->format->top_margin ? $this->format->top_margin : 2.5;
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-            ->join('inve_thesis_format_parts', 'inve_thesis_format_parts.id', 'inve_thesis_student_parts.inve_thesis_format_part_id')
-            ->orderBy('inve_thesis_format_parts.index_order', 'asc')
+                ->join('inve_thesis_format_parts', 'inve_thesis_format_parts.id', 'inve_thesis_student_parts.inve_thesis_format_part_id')
+                ->orderBy('inve_thesis_format_parts.index_order', 'asc')
                 ->get();
-            $key=0;
+            $key = 0;
             if (isset($ThesisStudentPart)) {
-                $this->borrame=html_entity_decode($ThesisStudentPart[0]->content, ENT_QUOTES, "UTF-8");
+                $this->borrame = html_entity_decode($ThesisStudentPart[0]->content, ENT_QUOTES, "UTF-8");
                 foreach ($ThesisStudentPart as $k => $part) {
-                    $this->content_old .= '<div style="display:none" id="'.($k+1).'"></div>'.html_entity_decode($part->content, ENT_QUOTES, "UTF-8").'<div style="display:none"><p>-*-</p></div>';
-                    if(isset($part->commentary)){
-                        $this->commentary .= ($key++).".-".$part->description."".$part->commentary."-*-";
+                    $this->content_old .= '<div style="display:none" id="' . ($k + 1) . '"></div>' . html_entity_decode($part->content, ENT_QUOTES, "UTF-8") . '<div style="display:none"><p>-*-</p></div>';
+                    if (isset($part->commentary)) {
+                        $this->commentary .= ($key++) . ".-" . $part->description . "" . $part->commentary . "-*-";
                     }
                 }
+
                 $this->content = $this->content_old;
 
 
@@ -202,7 +205,7 @@ class ThesisPartsTest extends Component
     public function saveThesisPartStudentN($bool)
     { // true para mostrar notificacion y false para no
         /*PRUEBA TEST */
-        $porciones = explode('<div style="display:none">'.chr(10).'<p>-*-</p>'.chr(10).'</div>'.chr(10), $this->content);
+        $porciones = explode('<div style="display:none">' . chr(10) . '<p>-*-</p>' . chr(10) . '</div>' . chr(10), $this->content);
         // foreach($porciones as $porcion){
         //     $porcion = trim($porcion);
         //     $porcion = trim($porcion, chr(10));
@@ -304,7 +307,9 @@ class ThesisPartsTest extends Component
                     'inve_thesis_format_part_id' => $this->focus_id,
                     'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                     'right_margin' => $this->right_margin,
-                    'left_margin' => $this->left_margin
+                    'left_margin' => $this->left_margin,
+                    'top_margin' => $this->top_margin,
+                    'bottom_margin' => $this->bottom_margin
                 ]);
         } else {
             InveThesisStudentPart::create([
@@ -313,8 +318,10 @@ class ThesisPartsTest extends Component
                 'inve_thesis_format_part_id' => $this->focus_id,
                 'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                 'right_margin' => $this->right_margin,
-                'left_margin' => $this->left_margin
-                //     'version' => ($max_version ? $max_version + 1 : 1)
+                'left_margin' => $this->left_margin,
+                'top_margin' => $this->top_margin,
+                'bottom_margin' => $this->bottom_margin
+                //'version' => ($max_version ? $max_version + 1 : 1)
             ]);
         }
 

@@ -43,6 +43,8 @@ class ThesisParts extends Component
     public $consulta;
     public $resultado;
     public $paraphrase_left;
+    public $top_margin;
+    public $bottom_margin;
 
     public function mount($thesis_id, $sub_part)
     {
@@ -68,6 +70,11 @@ class ThesisParts extends Component
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
+
+                $this->left_margin = $ThesisStudentPart->left_margin;
+                $this->right_margin = $ThesisStudentPart->right_margin;
+                $this->bottom_margin = $ThesisStudentPart->bottom_margin;
+                $this->top_margin = $ThesisStudentPart->top_margin;
 
                 //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
                 if ($ThesisStudentPart->left_margin == null) {
@@ -172,7 +179,7 @@ class ThesisParts extends Component
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
-        } catch (\Illuminate\Database\QueryException$e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             $res = 'error';
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
@@ -226,7 +233,7 @@ class ThesisParts extends Component
             $res = 'success';
             $tit = 'Enhorabuena';
             $msg = 'Se eliminó correctamente';
-        } catch (\Illuminate\Database\QueryException$e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             $res = 'error';
             $tit = 'Salió mal';
             $msg = 'No se puede eliminar porque cuenta con registros asociados';
@@ -286,6 +293,8 @@ class ThesisParts extends Component
                     'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                     'right_margin' => $this->right_margin,
                     'left_margin' => $this->left_margin,
+                    'top_margin' => $this->top_margin,
+                    'bottom_margin' => $this->bottom_margin
                 ]);
         } else {
             InveThesisStudentPart::create([
@@ -295,6 +304,8 @@ class ThesisParts extends Component
                 'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
                 'right_margin' => $this->right_margin,
                 'left_margin' => $this->left_margin,
+                'top_margin' => $this->top_margin,
+                'bottom_margin' => $this->bottom_margin
                 //     'version' => ($max_version ? $max_version + 1 : 1)
             ]);
         }
@@ -324,46 +335,45 @@ class ThesisParts extends Component
 
     public function paraphrasing()
     {
-        if(strlen($this->consulta)>10){
-        $this->resultado = "espera un momento...";
-        $permisos = Person::where('user_id', Auth::user()->id)->first();
-        $p_allowed = $permisos->paraphrase_allowed;
-        $p_used = $permisos->paraphrase_used;
+        if (strlen($this->consulta) > 10) {
+            $this->resultado = "espera un momento...";
+            $permisos = Person::where('user_id', Auth::user()->id)->first();
+            $p_allowed = $permisos->paraphrase_allowed;
+            $p_used = $permisos->paraphrase_used;
 
-        if ($p_allowed > $p_used) {
-            $max_tokens = 1500;
-            $max_tokens = 3300;
-            $temperature = 0.6;
+            if ($p_allowed > $p_used) {
+                $max_tokens = 1500;
+                $max_tokens = 3300;
+                $temperature = 0.6;
 
-            $result_text = "hubo un problema, intenta mas tarde";
+                $result_text = "hubo un problema, intenta mas tarde";
 
-            $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
+                $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
 
-            try {
-                $permisos->paraphrase_used = $p_used+1;
-                $permisos->save();
-                $this->paraphrase_left--;
-                // mover permisos justo antes del catch para no hacer modificaciones a menos que la consulta sea exitosa
-                $result = OpenAI::completions()->create([
-                    'model' => 'text-davinci-003',
-                    'prompt' => $consulta,
-                    'max_tokens' => $max_tokens,
-                    'temperature' => $temperature,
-                ]);
-                $result_text = $result['choices'][0]['text'];
-                $query_tokens = $result['usage']['prompt_tokens'];
-                $result_tokens = $result['usage']['completion_tokens'];
-                $consumed_tokens = $result['usage']['total_tokens'];
-
-            } catch (Exception $e) {
-                $result_text = $e->getMessage();
+                try {
+                    $permisos->paraphrase_used = $p_used + 1;
+                    $permisos->save();
+                    $this->paraphrase_left--;
+                    // mover permisos justo antes del catch para no hacer modificaciones a menos que la consulta sea exitosa
+                    $result = OpenAI::completions()->create([
+                        'model' => 'text-davinci-003',
+                        'prompt' => $consulta,
+                        'max_tokens' => $max_tokens,
+                        'temperature' => $temperature,
+                    ]);
+                    $result_text = $result['choices'][0]['text'];
+                    $query_tokens = $result['usage']['prompt_tokens'];
+                    $result_tokens = $result['usage']['completion_tokens'];
+                    $consumed_tokens = $result['usage']['total_tokens'];
+                } catch (Exception $e) {
+                    $result_text = $e->getMessage();
+                }
+                $this->resultado = $result_text;
+            } else {
+                $this->resultado = "Lo siento, pero parece que has superado tu límite de parafraseo. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
             }
-            $this->resultado = $result_text;
-        }else{
-            $this->resultado = "Lo siento, pero parece que has superado tu límite de parafraseo. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
+        } else {
+            $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
         }
-    }else{
-        $this->resultado =Auth::user()->name ." aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
-    }
     }
 }

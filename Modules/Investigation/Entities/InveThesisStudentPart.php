@@ -20,6 +20,8 @@ class InveThesisStudentPart extends Model
         'commentary',
         'right_margin',
         'left_margin',
+        'top_margin',
+        'bottom_margin'
     ];
 
     protected static function newFactory()
