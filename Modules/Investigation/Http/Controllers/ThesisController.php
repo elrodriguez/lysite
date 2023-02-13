@@ -4,14 +4,12 @@ namespace Modules\Investigation\Http\Controllers;
 
 use App\Models\Person;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Modules\Investigation\Entities\InveThesisStudentPart;
 use PDF;
 
 class ThesisController extends Controller
@@ -122,7 +120,6 @@ class ThesisController extends Controller
             ->orderBy('index_order')
             ->get();
 
-
         // OBteniendo el margen de InveThesisStudents si fue modificado
         $tesis_student = InveThesisStudent::where('id', $thesis_id)->get()->first();
         if ($tesis_student->right_margin != null) {
@@ -145,7 +142,7 @@ class ThesisController extends Controller
                 'content' => html_entity_decode($part->content, ENT_QUOTES, "UTF-8"),
                 'number_order' => $part->number_order,
                 'show_description' => $part->show_description,
-                'salto_de_pagina'    => $part->salto_de_pagina,
+                'salto_de_pagina' => $part->salto_de_pagina,
                 'items' => $this->getSubParts($part->id, $part->thesis_id),
             ];
         }
@@ -184,7 +181,7 @@ class ThesisController extends Controller
                 }
                 $html .= '<li style="list-style:none;padding: 0;">';
                 if ($subpart->show_description) {
-                    $html .= $subpart->number_order . ' ' . $subpart->description;  //solo se muestra si show_description es verdadero
+                    $html .= $subpart->number_order . ' ' . $subpart->description; //solo se muestra si show_description es verdadero
                 }
                 $html .= '<div style="padding: 0;margin:0">' . html_entity_decode($subpart->content, ENT_QUOTES, "UTF-8") . '</div>';
                 $html .= $this->getSubParts($subpart->id, $thesis_id);
@@ -268,13 +265,11 @@ class ThesisController extends Controller
         \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
-
         try {
             $objWriter->save(storage_path('helloWorld.docx'));
         } catch (Exception $e) {
             dd($e);
         }
-
 
         return response()->download(storage_path('helloWorld.docx'));
     }
@@ -334,7 +329,6 @@ class ThesisController extends Controller
         return $parts;
     }
 
-
     public function getSubPartsWord($part_id, $thesis_id)
     {
         $subparts = InveThesisFormatPart::where('belongs', $part_id)
@@ -391,7 +385,7 @@ class ThesisController extends Controller
         $file = $request->file('upload');
         //obtenemos el nombre del archivo
         //$extension = $file->getClientOriginalExtension();
-        $file_name =  str_replace(' ', '_', $file->getClientOriginalName());
+        $file_name = str_replace(' ', '_', $file->getClientOriginalName());
 
         //indicamos que queremos guardar un nuevo archivo en el disco local
         $path = $request->file('upload')->storeAs(
@@ -401,31 +395,26 @@ class ThesisController extends Controller
         );
         $funcNum = 1;
         $message = '';
-        $url =  asset('storage/' . $path);
+        $url = asset('storage/' . $path);
         //dd($url);
         //echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
         return response()->json(['fileName' => $file_name, 'uploaded' => 1, 'url' => $url]);
     }
-    public function completethesis($thesis){
-        $content_old="";
-
-        $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $thesis)
-                ->join('inve_thesis_format_parts', 'inve_thesis_format_parts.id', 'inve_thesis_student_parts.inve_thesis_format_part_id')
-                ->orderBy('inve_thesis_format_parts.index_order', 'asc')
-                ->get();
-            $key = 0;
-            if (isset($ThesisStudentPart)) {
-                //$this->borrame = html_entity_decode($ThesisStudentPart[0]->content, ENT_QUOTES, "UTF-8");
-                foreach ($ThesisStudentPart as $k => $part) {
-                    if($part->salto_de_pagina){
-                        $content_old .='<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>'; //agrega pageBreak
-                    }
-                    $content_old .= html_entity_decode($part->content, ENT_QUOTES, "UTF-8");
-                    // if (isset($part->commentary)) {
-                    //     $this->commentary .= ($key++) . ".-" . $part->description . "" . $part->commentary . "-*-";
-                    // }
-                }
+    public function completethesis($thesis)
+    {
+        $thesis = $this->getThesis($thesis);
+        $content_old = "";
+        foreach ($thesis as $key => $part) {
+            if ($part['salto_de_pagina']) {
+                $content_old .= '<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>'; //agrega pageBreak
             }
+            if ($part['show_description']) {
+                $content_old .= $part['number_order'] . ' ' . $part['description'];
+            }
+            $content_old .= $part['content'];
+            $content_old .= $part['items'];
+        }
+
         return view('investigation::thesis.thesis_export_complete')->with('content_old', $content_old);
     }
 }
