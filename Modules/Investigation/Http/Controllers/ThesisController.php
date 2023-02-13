@@ -11,6 +11,7 @@ use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Modules\Investigation\Entities\InveThesisStudentPart;
 use PDF;
 
 class ThesisController extends Controller
@@ -405,8 +406,26 @@ class ThesisController extends Controller
         //echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
         return response()->json(['fileName' => $file_name, 'uploaded' => 1, 'url' => $url]);
     }
-    public function completethesis($thesis)
-    {
-        return view('investigation::thesis.thesis_export_complete');
+    public function completethesis($thesis){
+        $content_old="";
+
+        $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $thesis)
+                ->join('inve_thesis_format_parts', 'inve_thesis_format_parts.id', 'inve_thesis_student_parts.inve_thesis_format_part_id')
+                ->orderBy('inve_thesis_format_parts.index_order', 'asc')
+                ->get();
+            $key = 0;
+            if (isset($ThesisStudentPart)) {
+                //$this->borrame = html_entity_decode($ThesisStudentPart[0]->content, ENT_QUOTES, "UTF-8");
+                foreach ($ThesisStudentPart as $k => $part) {
+                    if($part->salto_de_pagina){
+                        $content_old .='<div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div>'; //agrega pageBreak
+                    }
+                    $content_old .= html_entity_decode($part->content, ENT_QUOTES, "UTF-8");
+                    // if (isset($part->commentary)) {
+                    //     $this->commentary .= ($key++) . ".-" . $part->description . "" . $part->commentary . "-*-";
+                    // }
+                }
+            }
+        return view('investigation::thesis.thesis_export_complete')->with('content_old', $content_old);
     }
 }

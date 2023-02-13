@@ -71,22 +71,33 @@ class ThesisParts extends Component
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
 
-                $this->left_margin = $ThesisStudentPart->left_margin;
-                $this->right_margin = $ThesisStudentPart->right_margin;
-                $this->bottom_margin = $ThesisStudentPart->bottom_margin;
-                $this->top_margin = $ThesisStudentPart->top_margin;
+                $this->left_margin = $this->thesis_student->left_margin;
+                $this->right_margin = $this->thesis_student->right_margin;
+                $this->bottom_margin = $this->thesis_student->bottom_margin;
+                $this->top_margin = $this->thesis_student->top_margin;
 
                 //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
-                if ($ThesisStudentPart->left_margin == null) {
+                if ($this->thesis_student->left_margin == null) {
                     $this->left_margin = $this->format->left_margin;
                 } else {
-                    $this->left_margin = $ThesisStudentPart->left_margin;
+                    $this->left_margin = $this->thesis_student->left_margin;
                 }
 
-                if ($ThesisStudentPart->right_margin == null) {
+                if ($this->thesis_student->right_margin == null) {
                     $this->right_margin = $this->format->right_margin;
                 } else {
-                    $this->right_margin = $ThesisStudentPart->right_margin;
+                    $this->right_margin = $this->thesis_student->right_margin;
+                }
+                if ($this->thesis_student->top_margin == null) {
+                    $this->top_margin = $this->format->top_margin;
+                } else {
+                    $this->top_margin = $this->thesis_student->top_margin;
+                }
+
+                if ($this->thesis_student->bottom_margin == null) {
+                    $this->bottom_margin = $this->format->bottom_margin;
+                } else {
+                    $this->bottom_margin = $this->thesis_student->bottom_margin;
                 }
                 $this->ThesisStudentPart = $ThesisStudentPart;
             }
@@ -209,9 +220,12 @@ class ThesisParts extends Component
             $bool = false;
 
             //Actualiza los margenes aunque el contenido no halla sido modificado
-            $this->ThesisStudentPart->update([
+            //dd($this->thesis_student->id,$this->top_margin, $this->left_margin, $this->right_margin);
+            InveThesisStudent::where('id', $this->thesis_student->id)->update([
                 'right_margin' => $this->right_margin,
                 'left_margin' => $this->left_margin,
+                'top_margin' => $this->top_margin,
+                'bottom_margin' => $this->bottom_margin,
             ]);
 
             $this->dispatchBrowserEvent('inve-student-part-create', ['res' => 'success', 'tit' => 'Enhorabuena', 'msg' => 'Contenido Registrado Satisfactoriamente']);
@@ -282,7 +296,7 @@ class ThesisParts extends Component
         //     ->max('version');
 
         //primero se debe consultar si existe, sino se crea.
-        dd($this->top_margin);
+        //dd($this->top_margin, $this->left_margin, $this->right_margin);
         if (InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)->where('inve_thesis_format_part_id', $this->focus_id)->exists()) {
             InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -290,7 +304,9 @@ class ThesisParts extends Component
                     'student_id' => $this->thesis_student->student_id,
                     'inve_thesis_student_id' => $this->thesis_student->id,
                     'inve_thesis_format_part_id' => $this->focus_id,
-                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
+                ]);
+                InveThesisStudent::where('id', $this->thesis_student->id)->update([
                     'right_margin' => $this->right_margin,
                     'left_margin' => $this->left_margin,
                     'top_margin' => $this->top_margin,
@@ -307,6 +323,12 @@ class ThesisParts extends Component
                 'top_margin' => $this->top_margin,
                 'bottom_margin' => $this->bottom_margin
                 //     'version' => ($max_version ? $max_version + 1 : 1)
+            ]);
+            InveThesisStudent::where('id', $this->thesis_student->id)->update([
+                'right_margin' => $this->right_margin,
+                'left_margin' => $this->left_margin,
+                'top_margin' => $this->top_margin,
+                'bottom_margin' => $this->bottom_margin
             ]);
         }
 
@@ -343,7 +365,7 @@ class ThesisParts extends Component
 
             if ($p_allowed > $p_used) {
                 $max_tokens = 1500;
-                $max_tokens = 3300;
+                $max_tokens = 3400;
                 $temperature = 0.6;
 
                 $result_text = "hubo un problema, intenta mas tarde";
@@ -351,10 +373,6 @@ class ThesisParts extends Component
                 $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
 
                 try {
-                    $permisos->paraphrase_used = $p_used + 1;
-                    $permisos->save();
-                    $this->paraphrase_left--;
-                    // mover permisos justo antes del catch para no hacer modificaciones a menos que la consulta sea exitosa
                     $result = OpenAI::completions()->create([
                         'model' => 'text-davinci-003',
                         'prompt' => $consulta,
@@ -365,6 +383,9 @@ class ThesisParts extends Component
                     $query_tokens = $result['usage']['prompt_tokens'];
                     $result_tokens = $result['usage']['completion_tokens'];
                     $consumed_tokens = $result['usage']['total_tokens'];
+                    $permisos->paraphrase_used = $p_used + 1;
+                    $permisos->save();
+                    $this->paraphrase_left--;
                 } catch (Exception $e) {
                     $result_text = $e->getMessage();
                 }
