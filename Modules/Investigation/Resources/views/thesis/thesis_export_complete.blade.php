@@ -57,9 +57,19 @@
 		<script>DecoupledDocumentEditor
 				.create( document.querySelector( '.editor' ), {
 					
-					licenseKey: '',
+					licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
 					
-					
+					exportWord: {
+						tokenUrl: 'https://95003.cke-cs.com/token/dev/deef23ee76d3e57a9b8590e70cef52a187724c3781598bd7e08e2cfad5f1?limit=10',
+						fileName: 'my-file.docx',
+						converterOptions: {
+							format: 'A4', // Default value, you don't need to specify it explicitly for A4.
+							margin_top: '20mm',
+							margin_bottom: '20mm',
+							margin_right: '12mm',
+							margin_left: '12mm'
+						}
+					}
 					
 				} )
 				.then( editor => {
@@ -68,6 +78,7 @@
 					// Set a custom container for the toolbar.
 					document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
 					document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
+
 				} )
 				.catch( error => {
 					console.error( 'Oops, something went wrong!' );
