@@ -39,6 +39,8 @@ class ThesisPartsTest extends Component
     public $commentary;
     public $left_margin;
     public $right_margin;
+    public $top_margin;
+    public $bottom_margin;
     public $format_id;
     public $borrame;
 

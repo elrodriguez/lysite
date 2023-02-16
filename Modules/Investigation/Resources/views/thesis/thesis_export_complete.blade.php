@@ -41,7 +41,7 @@
 				<div class="row row-editor">
 					<div class="editor-container">
 						<div class="editor">
-							
+                            {!! $content_old !!}
 						</div>
 					</div>
 				</div></div>
@@ -49,7 +49,7 @@
 		</main>
 		<footer>
 			<p>Copyright © 2003-2023,
-				<a href="https://cksource.com/" target="_blank" rel="noopener">{{ env('APP_NAME', 'Laravel') }}</a>
+				<a href="{{ env('APP_URL') }}" target="_blank" rel="noopener">{{ env('APP_NAME', 'Laravel') }}</a>
 				Reservados todos los derechos.
 			</p>
 		</footer>
@@ -74,7 +74,7 @@
 				} )
 				.then( editor => {
 					window.editor = editor;
-			
+
 					// Set a custom container for the toolbar.
 					document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
 					document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );

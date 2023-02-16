@@ -61,15 +61,13 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-    <input type="hidden" id="xthesis_id" value="{{ $thesis_id }}">
+    <input type="hidden" id="xurl_thesis" value="{{ route('investigation_thesis_export_word_ckeditor',[$thesis_id]) }}">
     @livewire('investigation::thesis.thesis-parts',['thesis_id' => $thesis_id, 'sub_part' => $sub_part])
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
         <script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
-
-        {{-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script> --}}
     @endsection
 </x-master>
 

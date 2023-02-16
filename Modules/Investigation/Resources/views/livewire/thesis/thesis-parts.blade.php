@@ -314,8 +314,8 @@
             </div>
             <input id="xleft-margin" type="hidden" value="{{ $left_margin }}">
             <input id="xright-margin" type="hidden" value="{{ $right_margin }}">
-            <input id="xtop-margin" type="hidden" value="{{ $top_margin }}"> 
-            <input id="xbottom-margin" type="hidden" value="{{ $bottom_margin }}"> 
+            <input id="xtop-margin" type="hidden" value="{{ $top_margin }}">
+            <input id="xbottom-margin" type="hidden" value="{{ $bottom_margin }}">
         </div>
     </div>
     <script>

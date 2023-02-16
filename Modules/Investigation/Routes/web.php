@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
         Route::middleware(['middleware' => 'role_or_permission:investigacion_tesis'])->get('all', 'ThesisController@allthesis')->name('investigation_thesis_all');
         Route::middleware(['middleware' => 'role_or_permission:investigacion_tesis'])->get('check/{id}/{part_id?}', 'ThesisController@thesischeck')->name('investigation_thesis_check');
         Route::post('ckeditor/upload_image', 'ThesisController@uploadImage')->name('investigation_thesis_upload_image');
-        Route::get('export/complete/{thesis_id}', 'ThesisController@completethesis')->name('investigation_thesis_export_word');
+        Route::get('export/complete/{thesis_id}', 'ThesisController@completethesis')->name('investigation_thesis_export_word_ckeditor');
     });
 });
 
