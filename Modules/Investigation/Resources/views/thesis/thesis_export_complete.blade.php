@@ -56,21 +56,21 @@
 		<script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
 		<script>DecoupledDocumentEditor
 				.create( document.querySelector( '.editor' ), {
-					
+
 					licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
-					
+
 					exportWord: {
 						tokenUrl: 'https://95003.cke-cs.com/token/dev/deef23ee76d3e57a9b8590e70cef52a187724c3781598bd7e08e2cfad5f1?limit=10',
-						fileName: 'my-file.docx',
+						fileName: 'MiTesis_con_Lyonteach.docx',
 						converterOptions: {
 							format: 'A4', // Default value, you don't need to specify it explicitly for A4.
-							margin_top: '20mm',
-							margin_bottom: '20mm',
-							margin_right: '12mm',
-							margin_left: '12mm'
+							margin_top: '{{ $margins->top_margin }}mm',
+							margin_bottom: '{{ $margins->bottom_margin }}mm',
+							margin_right: '{{ $margins->right_margin }}mm',
+							margin_left: '{{ $margins->left_margin }}mm'
 						}
 					}
-					
+
 				} )
 				.then( editor => {
 					window.editor = editor;
