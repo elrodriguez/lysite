@@ -11,7 +11,7 @@
 .ckmodal {
     display: none; /* Por defecto, ocultar el modal */
     position: fixed; /* Fijar la posición del modal */
-    z-index: 1; /* Asegurarse de que esté por encima del contenido de la página */
+    z-index: 1000000; /* Asegurarse de que esté por encima del contenido de la página */
     left: 50%; /* Centrar el modal horizontalmente */
     top: 50%; /* Centrar el modal verticalmente */
     transform: translate(-50%, -50%); /* Centrar el modal */

@@ -10,6 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/png" href="{{ url('assets/images/logo/white-60.png') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('ckeditor5/sample/styles.css') }}">
+		<link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
 	</head>
 	<body data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
 		<header>
@@ -56,6 +57,47 @@
 		<script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
 		<script>DecoupledDocumentEditor
 				.create( document.querySelector( '.editor' ), {
+					toolbar: {
+						items: [
+							'heading',
+							'|',
+							'fontSize',
+							'fontFamily',
+							'|',
+							'fontColor',
+							'fontBackgroundColor',
+							'|',
+							'bold',
+							'italic',
+							'underline',
+							'strikethrough',
+							'|',
+							'alignment',
+							'|',
+							'numberedList',
+							'bulletedList',
+							'|',
+							'outdent',
+							'indent',
+							'|',
+							'todoList',
+							'link',
+							'blockQuote',
+							'imageUpload',
+							'|',
+							'margins',
+							'exportWord',
+							'|',
+							'undo',
+							'redo',
+							'pageBreak',
+							'|',
+							'specialCharacters',
+							'findAndReplace',
+							'mediaEmbed',
+							'insertTable'
+						]
+					},
 
 					licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
 
@@ -79,6 +121,10 @@
 					document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
 					document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
 
+					editor.editing.view.getDomRoot().style.paddingLeft = {{ $margins->left_margin }} + 'mm';
+					editor.editing.view.getDomRoot().style.paddingRight = {{ $margins->right_margin }} + 'mm';
+					editor.editing.view.getDomRoot().style.paddingTop = {{  $margins->top_margin }} + 'mm';
+					editor.editing.view.getDomRoot().style.paddingBottom = {{ $margins->bottom_margin }} + 'mm';
 				} )
 				.catch( error => {
 					console.error( 'Oops, something went wrong!' );
@@ -87,5 +133,6 @@
 					console.error( error );
 				} );
 		</script>
+		<div id="global-modal"></div>
 	</body>
 </html>
