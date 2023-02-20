@@ -14,10 +14,10 @@ class AddColumnsThesisStudentsTable extends Migration
     public function up()
     {
         Schema::table('inve_thesis_students', function (Blueprint $table) {
-            $table->decimal('top_margin')->nullable();
-            $table->decimal('bottom_margin')->nullable();
-            $table->decimal('left_margin')->nullable();
-            $table->decimal('right_margin')->nullable();
+            $table->tinyInteger('top_margin')->nullable();
+            $table->tinyInteger('bottom_margin')->nullable();
+            $table->tinyInteger('left_margin')->nullable();
+            $table->tinyInteger('right_margin')->nullable();
         });
     }
 

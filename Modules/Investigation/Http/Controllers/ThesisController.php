@@ -402,6 +402,7 @@ class ThesisController extends Controller
     }
     public function completethesis($thesis)
     {
+        $margins = InveThesisStudent::where('id', $thesis)->select('top_margin', 'bottom_margin', 'left_margin', 'right_margin')->get()->first();
         $thesis = $this->getThesis($thesis);
         $content_old = "";
         foreach ($thesis as $key => $part) {
@@ -415,6 +416,6 @@ class ThesisController extends Controller
             $content_old .= $part['items'];
         }
 
-        return view('investigation::thesis.thesis_export_complete')->with('content_old', $content_old);
+        return view('investigation::thesis.thesis_export_complete')->with('content_old', $content_old)->with('margins', $margins);
     }
 }
