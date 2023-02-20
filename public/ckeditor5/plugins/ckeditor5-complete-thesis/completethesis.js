@@ -16,8 +16,8 @@ export default class completethesis extends Plugin {
             } );
 
             button.on( 'execute', () => {
-                let thesis = document.getElementById('xthesis_id').value;
-                window.open(`../../../investigation/thesis/export/complete/`+thesis, '_blank');
+                let urlThesis = document.getElementById('xurl_thesis').value;
+                window.open(urlThesis, '_blank');
             } );
 
             return button;

@@ -1,79 +1,100 @@
-// Archivo margenes-plugin.js
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import ModalView from '@ckeditor/ckeditor5-ui/src/modal/modalview';
-import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
 
 export default class margins extends Plugin {
     init() {
         const editor = this.editor;
-        const t = editor.t;
+		// Función para arrastrar el modal
+		var isDragging = false;
+		var currentX;
+		var currentY;
+		var initialX;
+		var initialY;
+		var xOffset = 0;
+		var yOffset = 0;
 
-        editor.ui.componentFactory.add( 'margins', locale => {
+        editor.ui.componentFactory.add('margins', locale => {
             const view = new ButtonView( locale );
+
             view.set( {
-                label: t( 'Agregar margenes' ),
-                withText: true
+                label: 'Márgenes',
+                withText: true,
+                tooltip: true
             } );
 
             view.on( 'execute', () => {
-                const modal = new ModalView( locale );
-                const derechoInput = new InputTextView( locale );
-                const izquierdoInput = new InputTextView( locale );
-                const arribaInput = new InputTextView( locale );
-                const abajoInput = new InputTextView( locale );
+                const form = `
+					<div id="ckmodal" class="ckmodal">
+						<div class="ckmodal-content">
+							<span id="ckcloseBtn" class="ckcloseBtn">&times;</span>
+							<form>
+								<label for="left-margin">Margen Izquierdo en mm:</label>
+								<input type="number" id="left-margin" name="left-margin">
 
-                derechoInput.label = t( 'Margen derecho' );
-                izquierdoInput.label = t( 'Margen izquierdo' );
-                arribaInput.label = t( 'Margen arriba' );
-                abajoInput.label = t( 'Margen abajo' );
+								<label for="right-margin">Margen Derecho en mm:</label>
+								<input type="number" id="right-margin" name="right-margin">
 
-                modal.children.add( derechoInput );
-                modal.children.add( izquierdoInput );
-                modal.children.add( arribaInput );
-                modal.children.add( abajoInput );
+								<label for="top-margin">Margen Arriba en mm:</label>
+								<input type="number" id="top-margin" name="top-margin">
 
-                modal.header = t( 'Agregar margenes' );
-                modal.content = `
-                    <form>
-                        <div class="ck-form-group">
-                            ${ derechoInput.element.outerHTML }
-                        </div>
-                        <div class="ck-form-group">
-                            ${ izquierdoInput.element.outerHTML }
-                        </div>
-                        <div class="ck-form-group">
-                            ${ arribaInput.element.outerHTML }
-                        </div>
-                        <div class="ck-form-group">
-                            ${ abajoInput.element.outerHTML }
-                        </div>
-                    </form>
+								<label for="bottom-margin">Margen Abajo en mm:</label>
+								<input type="number" id="bottom-margin" name="bottom-margin">
+
+								<button type="button" id="submit-margins">
+									<span class="fa fa-check"></span>
+								</button>
+							</form>
+						</div>
+					</div>
+                    
                 `;
 
-                modal.footer = `
-                    <button type="button" class="ck-button ck-button-primary">${ t( 'Agregar' ) }</button>
-                    <button type="button" class="ck-button ck-button-default">${ t( 'Cancelar' ) }</button>
-                `;
 
-                modal.show();
-                modal.listenTo( modal, 'submit', evt => {
-                    evt.preventDefault();
+				document.getElementById('global-modal').innerHTML = form;
+                //editor.editing.view.getDomRoot().innerHTML += form;
 
-                    const derecho = derechoInput.value;
-                    const izquierdo = izquierdoInput.value;
-                    const arriba = arribaInput.value;
-                    const abajo = abajoInput.value;
+                const submitButton = document.querySelector( '#submit-margins' );
 
-                    editor.model.change( writer => {
-                        writer.setSelectionAttribute( 'style', `margin-right: ${ derecho }px; margin-left: ${ izquierdo }px; margin-top: ${ arriba }px; margin-bottom: ${ abajo }px;` );
-                    } );
+                submitButton.addEventListener( 'click', () => {
+                    const leftMargin = document.querySelector( '#left-margin' ).value;
+                    const rightMargin = document.querySelector( '#right-margin' ).value;
+                    const topMargin = document.querySelector( '#top-margin' ).value;
+                    const bottomMargin = document.querySelector( '#bottom-margin' ).value;
 
-                    modal.hide();
+					document.getElementById('xleft-margin').value = leftMargin;
+					document.getElementById('xright-margin').value = rightMargin;
+					document.getElementById('xtop-margin').value = topMargin;
+					document.getElementById('xbottom-margin').value = bottomMargin;
+					
+                    editor.editing.view.getDomRoot().style.paddingLeft = leftMargin + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingRight = rightMargin + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingTop = topMargin + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingBottom = bottomMargin + 'mm';
                 } );
+
+				opemModalMargin();
+				closeModalMargin();
             } );
 
             return view;
         } );
+
+		function opemModalMargin(){
+			const modal = document.querySelector( '#ckmodal' );
+			modal.style.display = "block";
+		}
+
+		function closeModalMargin(){
+			const ckcloseBtn = document.querySelector( '#ckcloseBtn' );
+
+			ckcloseBtn.addEventListener( 'click', () => {
+
+				const modal = document.querySelector( '#ckmodal' );
+				modal.style.display = "none";
+			});
+			
+		}
+
     }
+	
 }
