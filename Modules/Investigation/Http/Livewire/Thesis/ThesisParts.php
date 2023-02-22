@@ -355,6 +355,15 @@ class ThesisParts extends Component
             ]);
     }
 
+    public function updateMargins(){
+        InveThesisStudent::where('id', $this->thesis_id)->update([
+            'top_margin' => $this->top_margin,
+            'bottom_margin' => $this->bottom_margin,
+            'left_margin' => $this->left_margin,
+            'right_margin' => $this->right_margin
+        ]);
+    }
+
     public function paraphrasing()
     {
         if (strlen($this->consulta) > 10) {
