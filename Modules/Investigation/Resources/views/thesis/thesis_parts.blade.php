@@ -39,6 +39,7 @@
             opacity:1;
             pointer-events:auto;
         }
+
     </style>
     @stop
     <x-slot name="jumbotron">
