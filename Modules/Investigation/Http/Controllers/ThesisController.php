@@ -407,7 +407,8 @@ class ThesisController extends Controller
     }
     public function completethesisDatos(Request $request)
     {
-
+        set_time_limit(1200);
+        ini_set('memory_limit', '512M');
         // Mostrar el loading
         sleep(2);
 
