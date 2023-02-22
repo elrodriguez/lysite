@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="row row-editor">
                                     <div class="editor-container">
-                                        <div wire:model class="editor" id="editor">{!! $content_old !!}</div>
+                                        <div class="editor" id="editor">{!! $content_old !!}</div>
                                     </div>
                                 </div>
                             </div>
