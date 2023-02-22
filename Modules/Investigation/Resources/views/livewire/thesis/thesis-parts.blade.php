@@ -497,21 +497,23 @@
             //el margen derecho debe descontarse de 21 cm
             // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
             // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
-            if (document.getElementById("editor").tagName == "DIV") {
-                //data = editor.getData();
-                // data = editor1.getHTMLCode();
-                data = window.editor.getData();
 
                 leftMargin = document.getElementById('xleft-margin').value;
                 rightMargin = document.getElementById('xright-margin' ).value;
                 topMargin = document.getElementById('xtop-margin').value;
                 bottomMargin = document.getElementById('xbottom-margin').value;
-
-                @this.set('content', data);
                 @this.set('left_margin', leftMargin);
                 @this.set('top_margin', topMargin);
                 @this.set('bottom_margin', bottomMargin);
                 @this.set('right_margin', rightMargin);
+                @this.updateMargins();
+
+            if (document.getElementById("editor").tagName == "DIV") {
+                //data = editor.getData();
+                // data = editor1.getHTMLCode();
+                data = window.editor.getData();
+
+                @this.set('content', data);
             }
         }
 
@@ -673,5 +675,10 @@
         //     $temp.remove();
         // }
     </script>
+    <style>
+        #editor{
+            padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
+        }
+    </style>
 
 </div>

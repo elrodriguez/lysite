@@ -40,13 +40,13 @@ export default class margins extends Plugin {
 								<label for="bottom-margin">Margen Abajo en mm:</label>
 								<input type="number" id="bottom-margin" name="bottom-margin">
 
-								<button type="button" id="submit-margins">
+								<button type="button" id="submit-margins" onclick="saving()">
 									<span class="fa fa-check"></span>
 								</button>
 							</form>
 						</div>
 					</div>
-                    
+
                 `;
 
 
@@ -65,7 +65,7 @@ export default class margins extends Plugin {
 					document.getElementById('xright-margin').value = rightMargin;
 					document.getElementById('xtop-margin').value = topMargin;
 					document.getElementById('xbottom-margin').value = bottomMargin;
-					
+
                     editor.editing.view.getDomRoot().style.paddingLeft = leftMargin + 'mm';
                     editor.editing.view.getDomRoot().style.paddingRight = rightMargin + 'mm';
                     editor.editing.view.getDomRoot().style.paddingTop = topMargin + 'mm';
@@ -92,9 +92,9 @@ export default class margins extends Plugin {
 				const modal = document.querySelector( '#ckmodal' );
 				modal.style.display = "none";
 			});
-			
+
 		}
 
     }
-	
+
 }
