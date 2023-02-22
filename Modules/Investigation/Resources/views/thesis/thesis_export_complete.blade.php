@@ -11,6 +11,8 @@
 		<link rel="icon" type="image/png" href="{{ url('assets/images/logo/white-60.png') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('ckeditor5/sample/styles.css') }}">
 		<link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	</head>
 	<body data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
 		<header>
@@ -42,7 +44,7 @@
 				<div class="row row-editor">
 					<div class="editor-container">
 						<div class="editor">
-                            {!! $content_old !!}
+                            {{-- {!! $content_old !!} --}}
 						</div>
 					</div>
 				</div></div>
@@ -54,9 +56,53 @@
 				Reservados todos los derechos.
 			</p>
 		</footer>
+		<div class="loading-overlay" id="loading-overlay">
+			<div class="loading-spinner">
+				<i class="fa fa-spinner fa-spin fa-3x"></i>
+			</div>
+		</div>
 		<script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
-		<script>DecoupledDocumentEditor
-				.create( document.querySelector( '.editor' ), {
+		<script>
+			function showLoading() {
+				Swal.fire({
+					title: 'Cargando',
+					text: 'Por favor espera...',
+					allowOutsideClick: false,
+					allowEscapeKey: false,
+					allowEnterKey: false,
+					showConfirmButton: false,
+					onOpen: () => {
+						Swal.showLoading();
+					}
+				});
+			}
+		
+			function hideLoading() {
+				Swal.close();
+			}
+		</script>
+		<script>
+			window.onload = function() {
+				showLoading();
+				var thesis = {{ $thesis }}
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						hideLoading();
+						let data = JSON.parse(this.responseText);
+						
+						createEditor(data);
+					}
+				};
+				xhttp.open("POST", "{{ route('investigation_thesis_export_word_datos') }}", true);
+				xhttp.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("thesis="+thesis);
+			};
+		</script>
+		<script>
+			function createEditor(data){
+				DecoupledDocumentEditor.create( document.querySelector( '.editor' ), {
 					toolbar: {
 						items: [
 							'heading',
@@ -106,25 +152,25 @@
 						fileName: 'MiTesis_con_Lyonteach.docx',
 						converterOptions: {
 							format: 'A4', // Default value, you don't need to specify it explicitly for A4.
-							margin_top: '{{ $margins->top_margin }}mm',
-							margin_bottom: '{{ $margins->bottom_margin }}mm',
-							margin_right: '{{ $margins->right_margin }}mm',
-							margin_left: '{{ $margins->left_margin }}mm'
+							margin_top: data.margins.top_margin + 'mm',
+							margin_bottom: data.margins.bottom_margin + 'mm',
+							margin_right: data.margins.right_margin + 'mm',
+							margin_left: data.margins.left_margin + 'mm'
 						}
 					}
 
 				} )
 				.then( editor => {
 					window.editor = editor;
-
+					editor.setData( data.content );
 					// Set a custom container for the toolbar.
 					document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
 					document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
 
-					editor.editing.view.getDomRoot().style.paddingLeft = {{ $margins->left_margin }} + 'mm';
-					editor.editing.view.getDomRoot().style.paddingRight = {{ $margins->right_margin }} + 'mm';
-					editor.editing.view.getDomRoot().style.paddingTop = {{  $margins->top_margin }} + 'mm';
-					editor.editing.view.getDomRoot().style.paddingBottom = {{ $margins->bottom_margin }} + 'mm';
+					editor.editing.view.getDomRoot().style.paddingLeft = data.margins.left_margin + 'mm';
+					editor.editing.view.getDomRoot().style.paddingRight = data.margins.right_margin + 'mm';
+					editor.editing.view.getDomRoot().style.paddingTop = data.margins.top_margin + 'mm';
+					editor.editing.view.getDomRoot().style.paddingBottom = data.margins.bottom_margin + 'mm';
 				} )
 				.catch( error => {
 					console.error( 'Oops, something went wrong!' );
@@ -132,7 +178,11 @@
 					console.warn( 'Build id: kehfuamz5tol-66hszd8qikx0' );
 					console.error( error );
 				} );
+			}
 		</script>
 		<div id="global-modal"></div>
+		
+		
+		
 	</body>
 </html>

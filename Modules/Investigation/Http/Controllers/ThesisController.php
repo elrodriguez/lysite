@@ -402,6 +402,17 @@ class ThesisController extends Controller
     }
     public function completethesis($thesis)
     {
+
+        return view('investigation::thesis.thesis_export_complete')->with('thesis', $thesis);
+    }
+    public function completethesisDatos(Request $request)
+    {
+
+        // Mostrar el loading
+        sleep(2);
+
+        // Realizar la consulta a la base de datos
+        $thesis = $request->input('thesis');
         $margins = InveThesisStudent::where('id', $thesis)->select('top_margin', 'bottom_margin', 'left_margin', 'right_margin')->get()->first();
         $thesis = $this->getThesis($thesis);
         $content_old = "";
@@ -416,6 +427,11 @@ class ThesisController extends Controller
             $content_old .= $part['items'];
         }
 
-        return view('investigation::thesis.thesis_export_complete')->with('content_old', $content_old)->with('margins', $margins);
+
+        // Enviar los datos en formato JSON
+        return response()->json([
+            'content' => $content_old,
+            'margins' => $margins
+        ]);
     }
 }
