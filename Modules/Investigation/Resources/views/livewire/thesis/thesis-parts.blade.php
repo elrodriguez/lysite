@@ -676,9 +676,14 @@
         // }
     </script>
     <style>
-        #editor{
+        #editor {
             padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
         }
+        strong {
+            font-style: normal;
+            font-weight: bold;
+        }
+
     </style>
 
 </div>

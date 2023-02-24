@@ -43,7 +43,7 @@
 				</div>
 				<div class="row row-editor">
 					<div class="editor-container">
-						<div class="editor">
+						<div class="editor" id="editor">
                             {{-- {!! $content_old !!} --}}
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 					}
 				});
 			}
-		
+
 			function hideLoading() {
 				Swal.close();
 			}
@@ -90,7 +90,7 @@
 					if (this.readyState == 4 && this.status == 200) {
 						hideLoading();
 						let data = JSON.parse(this.responseText);
-						
+
 						createEditor(data);
 					}
 				};
@@ -181,8 +181,12 @@
 			}
 		</script>
 		<div id="global-modal"></div>
-		
-		
-		
+        <style>
+            #editor {
+                padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
+            }
+        </style>
+
+
 	</body>
 </html>
