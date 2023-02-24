@@ -223,9 +223,9 @@
                         </div>
                     @endif
 
-                    <div class="row">
-                        <div class="col mb-2">
-                            <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
+                    <div class="row" >
+                        <div class="col mb-2" style="display: flex; align-items: center; justify-content: center;">
+                            <button type="button" class="btn-primary btn  mt-0" wire:loading.attr="disabled"
                                 onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
                             </button>
                         </div>
