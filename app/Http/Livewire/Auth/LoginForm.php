@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Session;
+use App\Models\SessionHistory;
+use Illuminate\Support\Facades\Hash;
 
 class LoginForm extends Component
 {
@@ -22,6 +25,7 @@ class LoginForm extends Component
         return view('livewire.auth.login-form');
     }
 
+
     public function login()
     {
         $this->validate([
@@ -29,8 +33,6 @@ class LoginForm extends Component
             'password' => 'required',
         ]);
 
-
-        //Auth::logoutOtherDevices($this->password);
 
         if (Auth::attempt(array('email' => $this->email, 'password' => $this->password), $this->rememberme)) {
 
@@ -40,6 +42,15 @@ class LoginForm extends Component
                 'is_online'             => true,
                 'chat_last_activity'    => now()->addMinutes(5)
             ]);
+
+            SessionHistory::create([
+                'session_id' => Session::getId(),
+                'user_id' => Auth::id(),
+                'ip_address' => request()->ip(),
+                'login_time' => now(),
+                'logout_time' => null
+            ]);
+
             return redirect()->intended('dashboard');
         } else {
             $this->resetInput();

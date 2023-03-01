@@ -51,6 +51,7 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import Paraphrase from '@ckeditor/ckeditor5-paraphrase/paraphrase';
 import Completethesis from '@ckeditor/ckeditor5-complete-thesis/completethesis';
 import Margins from '@ckeditor/ckeditor5-margins/margins';
+//import LineHeight from 'ckeditor5-line-height-plugin/src/lineheight';
 
 class Editor extends DecoupledDocumentEditor {}
 

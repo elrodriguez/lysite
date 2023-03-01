@@ -6,10 +6,14 @@ use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Models\SessionHistory;
+use Illuminate\Support\Facades\Hash;
 
 class LogoutController extends Controller
 {
-    public function logout(){
+    public function logout()
+    {
         if (auth()->check()) {
             $date = new DateTime();
             $date->modify('-5 minute');
@@ -19,6 +23,12 @@ class LogoutController extends Controller
                 'is_online' => false,
                 'chat_last_activity' => $new_date
             ]);
+
+            $sessionId = Session::getId();
+
+            SessionHistory::where('session_id', $sessionId)
+                ->where('user_id', Auth::id())
+                ->delete();
         }
         return redirect('login')->with(Auth::logout());
     }

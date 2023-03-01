@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^36.0.1",
-    "@ckeditor/ckeditor5-ui": "^36.0.1"
+    "@ckeditor/ckeditor5-ui": "^36.0.1",
+    "ckeditor5-line-height-plugin": "^0.1.6"
   }
 }
