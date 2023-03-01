@@ -1,4 +1,13 @@
 <div>
+    <style>
+        #editor {
+            padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
+        }
+        strong {
+            font-weight: bold;
+        }
+
+    </style>
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
@@ -223,9 +232,9 @@
                         </div>
                     @endif
 
-                    <div class="row">
-                        <div class="col mb-2">
-                            <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
+                    <div class="row" >
+                        <div class="col mb-2" style="display: flex; align-items: center; justify-content: center;">
+                            <button type="button" class="btn-primary btn  mt-0" wire:loading.attr="disabled"
                                 onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
                             </button>
                         </div>
@@ -675,10 +684,42 @@
         //     $temp.remove();
         // }
     </script>
-    <style>
-        #editor{
-            padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
-        }
-    </style>
+    <script>
+// Agrega un evento de escucha al cargar la página
+ window.addEventListener('load', function() {
+			// Encuentra todos los elementos strong en la página
+ 			var strongElements = document.getElementsByTagName('strong');
+
+ 			// Itera sobre todos los elementos strong y cambia sus estilos
+		for (var i = 0; i < strongElements.length; i++) {
+				strongElements[i].style.fontWeight = 'bold';
+			}
+		});
+//funcion que buscará cuando se cree un strong para modificar su etilo
+function cambiarEstilos(strongElement) {
+			strongElement.style.fontWeight = 'bold';
+		}
+
+		// Crea un nuevo MutationObserver
+		const observer = new MutationObserver(function(mutations) {
+			// Itera sobre todas las mutaciones observadas
+			mutations.forEach(function(mutation) {
+				// Itera sobre los nodos agregados en cada mutación
+				mutation.addedNodes.forEach(function(addedNode) {
+					// Si el nodo agregado es un elemento strong, cambia sus estilos
+					if (addedNode.nodeName === 'STRONG') {
+						cambiarEstilos(addedNode);
+					}
+				});
+			});
+		});
+
+		// Configuración del MutationObserver
+		const config = { childList: true, subtree: true };
+
+		// Observa cambios en el body de la página
+		observer.observe(document.body, config);
+    </script>
+
 
 </div>

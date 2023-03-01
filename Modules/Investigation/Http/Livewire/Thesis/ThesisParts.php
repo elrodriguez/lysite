@@ -37,14 +37,14 @@ class ThesisParts extends Component
     public $content_old;
     public $auto_save = true;
     public $commentary;
-    public $left_margin;
-    public $right_margin;
     public $format_id;
     public $consulta;
     public $resultado;
     public $paraphrase_left;
     public $top_margin;
     public $bottom_margin;
+    public $left_margin;
+    public $right_margin;
 
     public function mount($thesis_id, $sub_part)
     {
