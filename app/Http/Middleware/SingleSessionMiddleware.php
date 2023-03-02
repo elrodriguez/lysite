@@ -25,13 +25,11 @@ class SingleSessionMiddleware
             ->first();
 
         if ($activeSession) {
+            SessionHistory::where('session_id',  $sessionId)
+                ->where('user_id', Auth::id())
+                ->delete();
             return redirect()->route('logout');
         }
-
-        // Si no hay una sesión activa con el mismo token de sesión,
-        // se permite que el middleware continúe y se actualiza la tabla
-        // session_histories con el nuevo token de sesión para la sesión actual.
-
 
         return $next($request);
     }
