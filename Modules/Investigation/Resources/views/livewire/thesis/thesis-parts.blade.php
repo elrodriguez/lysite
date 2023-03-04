@@ -225,7 +225,7 @@
                     </div>
                     @if ($commentary)
                         <div class="row">
-                            <div class="col-12 mb-3">
+                            <div class="col-12 mb-3" style="display: flex; align-items: center; justify-content: center;>
                                 <label>Nota:</label>
                                 <div>{{ $commentary }}</div>
                             </div>

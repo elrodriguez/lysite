@@ -35,7 +35,7 @@ class ThesisParts extends Component
 
     public $content;
     public $content_old;
-    public $auto_save = true;
+    public $auto_save = false;
     public $commentary;
     public $format_id;
     public $consulta;
