@@ -356,6 +356,10 @@ class ThesisParts extends Component
     }
 
     public function updateMargins(){
+        if($this->top_margin==null)$this->top_margin=0;
+        if($this->bottom_margin==null)$this->bottom_margin=0;
+        if($this->left_margin==null)$this->left_margin=0;
+        if($this->right_margin==null)$this->right_margin=0;
         InveThesisStudent::where('id', $this->thesis_id)->update([
             'top_margin' => $this->top_margin,
             'bottom_margin' => $this->bottom_margin,
