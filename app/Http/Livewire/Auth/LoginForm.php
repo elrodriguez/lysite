@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 use App\Models\SessionHistory;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class LoginForm extends Component
@@ -50,6 +51,13 @@ class LoginForm extends Component
                 'login_time' => now(),
                 'logout_time' => null
             ]);
+
+            SessionHistory::where('user_id', Auth::id())
+                ->where('session_id', '<>', Session::getId())
+                ->whereNull('logout_time')
+                ->update([
+                    'logout_time' => Carbon::now()
+                ]);
 
             return redirect()->intended('dashboard');
         } else {

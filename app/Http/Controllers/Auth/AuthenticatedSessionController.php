@@ -7,6 +7,9 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Models\SessionHistory;
+use Carbon\Carbon;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -43,6 +46,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $activeSession = SessionHistory::where('user_id', Auth::id())
+            //->where('session_id', '<>', $sessionId)
+            ->whereNull('logout_time')
+            ->first();
+        $activeSession->update(['logout_time' => Carbon::now()->format('Y-m-d')]);
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

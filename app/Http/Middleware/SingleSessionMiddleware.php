@@ -25,10 +25,13 @@ class SingleSessionMiddleware
             ->first();
 
         if ($activeSession) {
+            //dd($sessionId);
             SessionHistory::where('session_id',  $sessionId)
                 ->where('user_id', Auth::id())
                 ->delete();
-            return redirect()->route('logout');
+            //
+            // return redirect()->route('logout');
+            $this->logout();
         }
 
         return $next($request);
@@ -40,6 +43,7 @@ class SingleSessionMiddleware
     public function logout()
     {
         if (auth()->check()) {
+
             $date = new DateTime();
             $date->modify('-5 minute');
             $new_date = $date->format('Y-m-d H:i:s');
@@ -50,12 +54,11 @@ class SingleSessionMiddleware
             ]);
 
             $sessionId = Session::getId();
-
-            SessionHistory::where('session_id', $sessionId)
-                ->where('user_id', Auth::id())
+            //dd($sessionId);
+            SessionHistory::where('user_id', Auth::id())
                 ->delete();
         }
-        // dd(Auth::user());
-        return redirect('login')->with(Auth::logout());
+        // return redirect('login')->with(Auth::logout());
+        return redirect()->route('logout');
     }
 }
