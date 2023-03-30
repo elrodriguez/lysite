@@ -5,7 +5,7 @@
     @endphp
     @foreach ($chats as $k => $chat)
     <div id="inbox-chat{{ $k }}" class="ui-widget ui-chatbox" outline="0"
-        style="width: 350px; right: {{ $i == 0 ? '0' : 350 * $i + 7 * $i }}px; display: block;">
+        style="width: 350px; right: {{ $i == 0 ? '0' : 350 * $i + 7 * $i }}px; display: block; padding-bottom:40px">
 
 
         <div class="card card-bordered" id="bg-chat{{ $k }}">

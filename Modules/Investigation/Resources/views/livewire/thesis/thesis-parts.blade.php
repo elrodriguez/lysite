@@ -223,15 +223,6 @@
                             </div>
                         </div>
                     </div>
-                    @if ($commentary)
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <label>Nota:</label>
-                                <div>{{ $commentary }}</div>
-                            </div>
-                        </div>
-                    @endif
-
                     <div class="row" >
                         <div class="col mb-2" style="display: flex; align-items: center; justify-content: center;">
                             <button type="button" class="btn-primary btn  mt-0" wire:loading.attr="disabled"
