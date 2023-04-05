@@ -14,7 +14,7 @@
             </li>
             @can('configuraciones')
                 <li class="nav-item dropup {{ $path[0] == 'setting' ? 'active' : '' }}">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Configuracíon</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Configuración</a>
                     <div class="dropdown-menu">
                         @can('configuraciones_modulos')
                         <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'modules' ? 'active' : '' }}" href="{{ route('setting_modules') }}">Modulos</a>
@@ -30,7 +30,7 @@
             @endcan
             @can('academico')
             <li class="nav-item dropup {{ $path[0] == 'academic' ? 'active' : '' }}">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Academico</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Académico</a>
                 <div class="dropdown-menu">
                     @can('academico_tipo_contenido')
                     <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}" href="{{ route('academic_content_types') }}">{{ __('labels.Content Types') }}</a>
