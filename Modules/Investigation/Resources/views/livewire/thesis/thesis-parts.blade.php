@@ -8,6 +8,7 @@
         }
 
     </style>
+    
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
@@ -576,6 +577,8 @@
                         'paraphrase',
                         'completethesis',
                         'margins',
+                        'referenciar',
+                        'comments',
                         '|',
                         'undo',
                         'redo',
@@ -596,10 +599,10 @@
                     }
                 },
                 marginAdjustment: {
-                    marginLeft: '20px',
-                    marginRight: '20px',
-                    marginTop: '20px',
-                    marginBottom: '20px'
+                    marginLeft: '20mm',
+                    marginRight: '20mm',
+                    marginTop: '20mm',
+                    marginBottom: '20mm'
                 }
             })
             .then(editor => {
@@ -611,6 +614,7 @@
                 editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
                 editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
                 editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
+                
             })
             .catch(error => {
                 console.error('Oops, something went wrong!');
@@ -712,5 +716,5 @@ function cambiarEstilos(strongElement) {
 		observer.observe(document.body, config);
     </script>
 
-
+    <div id="dialog-ckeditor"></div>
 </div>

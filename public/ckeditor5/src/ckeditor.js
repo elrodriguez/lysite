@@ -51,7 +51,8 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import Paraphrase from '@ckeditor/ckeditor5-paraphrase/paraphrase';
 import Completethesis from '@ckeditor/ckeditor5-complete-thesis/completethesis';
 import Margins from '@ckeditor/ckeditor5-margins/margins';
-//import LineHeight from 'ckeditor5-line-height-plugin/src/lineheight';
+import Referenciar from '@ckeditor/ckeditor5-referenciar/referenciar';
+import Comments from '@ckeditor/ckeditor5-comments/comments';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -104,10 +105,13 @@ Editor.builtinPlugins = [
 	Underline,
 	Paraphrase,
 	Completethesis,
-	Margins
+	Margins,
+	Referenciar,
+	Comments
 ];
 
 // Editor configuration.
+
 Editor.defaultConfig = {
 	toolbar: {
 		items: [
@@ -148,7 +152,9 @@ Editor.defaultConfig = {
 			'findAndReplace',
 			'paraphrase',
 			'completethesis',
-			'margins'
+			'margins',
+			'referenciar',
+			'comments'
 		]
 	},
 	language: 'es',

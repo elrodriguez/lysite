@@ -121,8 +121,17 @@
             b.style.display = 'none';
         },10000);
 
+        // Verifica si la variable "user" existe en el localStorage
+        if (localStorage.getItem("user_name")) {
+            // Si existe, elimina la variable "user"
+            localStorage.removeItem("user_name");
+        }
+
+        // Crea la variable "user" y asigna un valor
+        localStorage.setItem("user_name", '{{ auth()->user()->name }}');
+
     </script>
-    <div id="global-modal"></div>
+
 </body>
 
 </html>
