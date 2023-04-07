@@ -12,7 +12,7 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
                 <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item dropdown {{ $path[0] == 'setting' ? 'active' : '' }}">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Configuracíon</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Configuración</a>
                 <div class="dropdown-menu">
                     @can('configuraciones_modulos')
                         <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'modules' ? 'active' : '' }}"
@@ -39,7 +39,7 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
         @endcan
         @can('academico')
             <li class="nav-item dropdown {{ $path[0] == 'academic' ? 'active' : '' }}">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Academico</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Académico</a>
                 <div class="dropdown-menu">
                     @can('academico_tipo_contenido')
                         <a class="dropdown-item {{ $path[0] == 'academic' && $path[1] == 'content_types' ? 'active' : '' }}"
@@ -70,7 +70,7 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
         @endcan
         @can('investigacion')
             <li class="nav-item dropdown {{ $path[0] == 'investigation' ? 'active' : '' }}">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">investigación</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Investigación</a>
                 <div class="dropdown-menu">
                     @can('universities')
                         <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'universities' ? 'active' : '' }}"
