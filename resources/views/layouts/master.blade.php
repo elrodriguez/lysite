@@ -120,17 +120,20 @@
             let b = document.getElementsByClassName('preloader')[0];
             b.style.display = 'none';
         },10000);
-
-        // Verifica si la variable "user" existe en el localStorage
-        if (localStorage.getItem("user_name")) {
-            // Si existe, elimina la variable "user"
-            localStorage.removeItem("user_name");
-        }
-
-        // Crea la variable "user" y asigna un valor
-        localStorage.setItem("user_name", '{{ auth()->user()->name }}');
-
     </script>
+    @if(auth()->check())
+        <script>
+            // Verifica si la variable "user" existe en el localStorage
+            if (localStorage.getItem("user_name")) {
+                // Si existe, elimina la variable "user"
+                localStorage.removeItem("user_name");
+            }
+
+            // Crea la variable "user" y asigna un valor
+            localStorage.setItem("user_name", '{{ auth()->user()->name }}');
+
+        </script>
+    @endif
 
 </body>
 

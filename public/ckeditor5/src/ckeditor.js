@@ -25,7 +25,6 @@ import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload.js';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent.js';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
-import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import List from '@ckeditor/ckeditor5-list/src/list.js';
 import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties.js';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed.js';
@@ -53,6 +52,7 @@ import Completethesis from '@ckeditor/ckeditor5-complete-thesis/completethesis';
 import Margins from '@ckeditor/ckeditor5-margins/margins';
 import Referenciar from '@ckeditor/ckeditor5-referenciar/referenciar';
 import Comments from '@ckeditor/ckeditor5-comments/comments';
+//import Comment from '@ckeditor/ckeditor5-comments/src/comment.js';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -80,7 +80,7 @@ Editor.builtinPlugins = [
 	Indent,
 	IndentBlock,
 	Italic,
-	Link,
+	Comments,
 	List,
 	ListProperties,
 	MediaEmbed,
@@ -107,7 +107,7 @@ Editor.builtinPlugins = [
 	Completethesis,
 	Margins,
 	Referenciar,
-	Comments
+	//Comments,
 ];
 
 // Editor configuration.
@@ -137,7 +137,7 @@ Editor.defaultConfig = {
 			'indent',
 			'|',
 			'todoList',
-			'link',
+			'comments',
 			'blockQuote',
 			'imageUpload',
 			'insertTable',
@@ -154,7 +154,7 @@ Editor.defaultConfig = {
 			'completethesis',
 			'margins',
 			'referenciar',
-			'comments'
+			//'comments',
 		]
 	},
 	language: 'es',
