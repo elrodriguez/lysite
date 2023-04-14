@@ -134,7 +134,7 @@
 
         </script>
     @endif
-
+    @yield('global-modal')
 </body>
 
 </html>

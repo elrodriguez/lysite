@@ -603,6 +603,16 @@
                     marginRight: '20mm',
                     marginTop: '20mm',
                     marginBottom: '20mm'
+                },
+                comments: {
+                    ajax:{
+                        url:'http://myValue',
+                        data:{
+                            tesis_id: '',
+                            part_id:''
+                        },
+                        method:'POST'
+                    }
                 }
             })
             .then(editor => {

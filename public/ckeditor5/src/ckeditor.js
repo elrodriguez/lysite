@@ -52,7 +52,7 @@ import Completethesis from '@ckeditor/ckeditor5-complete-thesis/completethesis';
 import Margins from '@ckeditor/ckeditor5-margins/margins';
 import Referenciar from '@ckeditor/ckeditor5-referenciar/referenciar';
 import Comments from '@ckeditor/ckeditor5-comments/comments';
-//import Comment from '@ckeditor/ckeditor5-comments/src/comment.js';
+import Link from '@ckeditor/ckeditor5-link/src/link.js';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -80,7 +80,7 @@ Editor.builtinPlugins = [
 	Indent,
 	IndentBlock,
 	Italic,
-	Comments,
+	Link,
 	List,
 	ListProperties,
 	MediaEmbed,
@@ -107,7 +107,7 @@ Editor.builtinPlugins = [
 	Completethesis,
 	Margins,
 	Referenciar,
-	//Comments,
+	Comments,
 ];
 
 // Editor configuration.
@@ -137,7 +137,7 @@ Editor.defaultConfig = {
 			'indent',
 			'|',
 			'todoList',
-			'comments',
+			'link',
 			'blockQuote',
 			'imageUpload',
 			'insertTable',
@@ -154,7 +154,7 @@ Editor.defaultConfig = {
 			'completethesis',
 			'margins',
 			'referenciar',
-			//'comments',
+			'comments',
 		]
 	},
 	language: 'es',
