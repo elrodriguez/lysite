@@ -47,8 +47,8 @@
 .editor-container {
 	display: flex;
 	flex-direction: row;
-    flex-wrap: nowrap;
-    position: relative;
+	flex-wrap: nowrap;
+	position: relative;
 	width: 100%;
 	justify-content: center;
 }
@@ -67,9 +67,9 @@
 	height: fit-content;
 	padding: 2cm 1.2cm;
 	margin: 2.5rem;
-	border: 1px hsl( 0, 0%, 82.7% ) solid;
+	border: 1px hsl(0, 0%, 82.7%) solid;
 	background-color: var(--ck-sample-color-white);
-	box-shadow: 0 0 5px hsla( 0, 0%, 0%, .1 );
+	box-shadow: 0 0 5px hsla(0, 0%, 0%, .1);
 	box-sizing: border-box;
 }
 
@@ -133,13 +133,13 @@
 	top: 30px;
 	border: 0;
 	padding: 0;
-	color: hsl( 0, 0%, 50% );
+	color: hsl(0, 0%, 50%);
 	transition: 250ms ease color;
 	background-color: transparent;
 }
 
 #sidebar-display-toggle:hover {
-	color: hsl( 0, 0%, 30% );
+	color: hsl(0, 0%, 30%);
 	cursor: pointer;
 }
 
@@ -169,8 +169,8 @@
 }
 
 .ck.ck-presence-list {
-    flex: 1;
-    padding: 1.25rem .75rem;
+	flex: 1;
+	padding: 1.25rem .75rem;
 }
 
 .presence .ck.ck-presence-list__counter {
@@ -198,30 +198,31 @@
 	padding: 1.25rem;
 }
 
-.presence, .collaboration-demo__row {
+.presence,
+.collaboration-demo__row {
 	transition: .2s opacity;
 }
 
 .collaboration-demo__topbar {
 	background: #fff;
 	border: 1px solid var(--ck-color-toolbar-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 0;
-    border-radius: 4px 4px 0 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 0;
+	border-radius: 4px 4px 0 0;
 }
 
 .collaboration-demo__topbar .btn {
 	margin-right: 1em;
 	outline-offset: 2px;
 	outline-width: 2px;
-	background-color: var( --ck-sample-color-blue );
+	background-color: var(--ck-sample-color-blue);
 }
 
 .collaboration-demo__topbar .btn:focus,
 .collaboration-demo__topbar .btn:hover {
-	border-color: var( --ck-sample-color-blue );
+	border-color: var(--ck-sample-color-blue);
 }
 
 .collaboration-demo__share {
@@ -262,44 +263,44 @@
 .collaboration-demo__share button[data-tooltip]::before,
 .collaboration-demo__share button[data-tooltip]::after {
 	position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: all .15s cubic-bezier(.5,1,.25,1);
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	transition: all .15s cubic-bezier(.5, 1, .25, 1);
 	z-index: 1;
 }
 
 .collaboration-demo__share button[data-tooltip]::before {
 	content: attr(data-tooltip);
-    padding: 5px 15px;
-    border-radius: 3px;
-    background: #111;
-    color: #fff;
-    text-align: center;
-    font-size: 11px;
+	padding: 5px 15px;
+	border-radius: 3px;
+	background: #111;
+	color: #fff;
+	text-align: center;
+	font-size: 11px;
 	top: 100%;
-    left: 50%;
-    margin-top: 5px;
-    transform: translateX(-50%);
+	left: 50%;
+	margin-top: 5px;
+	transform: translateX(-50%);
 }
 
 .collaboration-demo__share button[data-tooltip]::after {
-    content: '';
+	content: '';
 	border: 5px solid transparent;
-    width: 0;
-    font-size: 0;
-    line-height: 0;
+	width: 0;
+	font-size: 0;
+	line-height: 0;
 	top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom: 5px solid #111;
+	left: 50%;
+	transform: translateX(-50%);
+	border-bottom: 5px solid #111;
 	border-top: none;
 }
 
 .collaboration-demo__share button[data-tooltip]:hover:before,
 .collaboration-demo__share button[data-tooltip]:hover:after {
 	visibility: visible;
-    opacity: 1;
+	opacity: 1;
 }
 
 .collaboration-demo--ready {
@@ -323,16 +324,16 @@
 /* --------- REVISION HISTORY FEATURE ------------------------------------------------------------------------------ */
 
 .revision-viewer-container {
-    display: none;
+	display: none;
 }
 
 .revision-viewer-sidebar {
-    position: relative;
-    min-width: 310px;
-    overflow: hidden;
-    background: var(--ck-color-toolbar-background);
-    border: 1px solid var(--ck-color-toolbar-border);
-    margin-left: -1px;
+	position: relative;
+	min-width: 310px;
+	overflow: hidden;
+	background: var(--ck-color-toolbar-background);
+	border: 1px solid var(--ck-color-toolbar-border);
+	margin-left: -1px;
 }
 
 /* A case when Pagination and Revision History features are enabled in the editor. */
@@ -344,7 +345,8 @@
 }
 
 /* --------- SAMPLE GENERIC STYLES (not related to CKEditor) ------------------------------------------------------- */
-.div-body, html {
+.div-body,
+html {
 	padding: 0;
 	margin: 0;
 
@@ -400,18 +402,75 @@
 
 
 /* --------- RWD --------------------------------------------------------------------------------------------------- */
-@media screen and ( max-width: 800px ) {
+@media screen and (max-width: 800px) {
 	:root {
 		--ck-sample-base-spacing: 1em;
 	}
+
 	.div-main .message h2 {
 		font-size: 1.5em;
 	}
 }
 
-.div_comments {
+ 
+  /* Botón para cerrar el modal */
+  .ckcloseBtn {
+    position: absolute; /* Posicionar el botón en la esquina superior derecha */
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+.div-form-comments {
 	position: fixed;
 	right: 20px;
 	top: 50%;
 	transform: translateY(-50%);
+}
+.ly-suggestion-marker-deletion {
+    background: rgba(229,102,134,.35);
+    border-bottom: 3px solid rgba(174,30,66,.35);
+    border-top: 3px solid rgba(174,30,66,.35);
+    text-decoration: line-through;
+    text-decoration-color: rgba(87,15,33,.5);
+    text-decoration-thickness: 3px;
+}
+
+
+.ly-comment-marker {
+    background: #fef7a9;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid transparent;
+}
+
+
+.ly-sidebar-comment {
+	width: 237.333px;
+	position: fixed;
+	right: 1.5rem;
+	bottom: 4.3125rem;
+	z-index: 931;
+}
+.ly-sidebar-item {
+    padding: 4px
+	box-shadow .3s ease;
+    width: 100%;
+}
+.ly-annotation-wrapper {
+	width: 100%;
+	padding: 6px;
+    box-shadow: 0 1px 1px 1px #e6e6e6;
+    outline: 0;
+	background-color: #fff; /* fondo blanco */
+	border-radius: 2px; /* bordes redondeados */
+	border-left: 4px solid rgba(174,30,66,.35); /* borde izquierdo de 4px de color #fef7a9 */
+	position: relative; /* para alinear el icono de eliminar */
+}
+.ly-remove-comment {
+	position: absolute; /* posición absoluta */
+	top: 0; /* alinear en la parte superior */
+	right: 0; /* alinear en la parte derecha */
+	width: 20px; /* ancho de 20px */
+	height: 20px; /* altura de 20px */
 }

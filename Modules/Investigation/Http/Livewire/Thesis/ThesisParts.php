@@ -48,6 +48,7 @@ class ThesisParts extends Component
 
     public function mount($thesis_id, $sub_part)
     {
+
         $permisos = Person::where('user_id', Auth::user()->id)->first();
         $this->paraphrase_left = $permisos->paraphrase_allowed - $permisos->paraphrase_used;
         $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
@@ -68,6 +69,7 @@ class ThesisParts extends Component
 
             if (isset($ThesisStudentPart)) {
                 $this->content_old = html_entity_decode($ThesisStudentPart->content, ENT_QUOTES, "UTF-8");
+
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
 
@@ -306,12 +308,12 @@ class ThesisParts extends Component
                     'inve_thesis_format_part_id' => $this->focus_id,
                     'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
                 ]);
-                InveThesisStudent::where('id', $this->thesis_student->id)->update([
-                    'right_margin' => $this->right_margin,
-                    'left_margin' => $this->left_margin,
-                    'top_margin' => $this->top_margin,
-                    'bottom_margin' => $this->bottom_margin
-                ]);
+            InveThesisStudent::where('id', $this->thesis_student->id)->update([
+                'right_margin' => $this->right_margin,
+                'left_margin' => $this->left_margin,
+                'top_margin' => $this->top_margin,
+                'bottom_margin' => $this->bottom_margin
+            ]);
         } else {
             InveThesisStudentPart::create([
                 'student_id' => $this->thesis_student->student_id,
@@ -355,11 +357,12 @@ class ThesisParts extends Component
             ]);
     }
 
-    public function updateMargins(){
-        if($this->top_margin==null)$this->top_margin=0;
-        if($this->bottom_margin==null)$this->bottom_margin=0;
-        if($this->left_margin==null)$this->left_margin=0;
-        if($this->right_margin==null)$this->right_margin=0;
+    public function updateMargins()
+    {
+        if ($this->top_margin == null) $this->top_margin = 0;
+        if ($this->bottom_margin == null) $this->bottom_margin = 0;
+        if ($this->left_margin == null) $this->left_margin = 0;
+        if ($this->right_margin == null) $this->right_margin = 0;
         InveThesisStudent::where('id', $this->thesis_id)->update([
             'top_margin' => $this->top_margin,
             'bottom_margin' => $this->bottom_margin,

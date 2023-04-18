@@ -52,6 +52,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
             Route::post('ckeditor/upload_image', 'ThesisController@uploadImage')->name('investigation_thesis_upload_image');
             Route::get('export/complete/{thesis_id}', 'ThesisController@completethesis')->name('investigation_thesis_export_word_ckeditor');
             Route::post('export/completedatos', 'ThesisController@completethesisDatos')->name('investigation_thesis_export_word_datos');
+            Route::post('comentary/thesis/selecction', 'ThesisStudentPartCommentaryController@createComenntarySelection')->name('investigation_thesis_selection_comments');
         });
     });
 });

@@ -49,9 +49,9 @@ export default class margins extends Plugin {
 
                 `;
 
-
-				document.getElementById('global-modal').innerHTML = form;
-                //editor.editing.view.getDomRoot().innerHTML += form;
+				var modalMargins = document.createElement("div");
+				modalMargins.innerHTML = form;
+				document.body.appendChild(modalMargins);
 
                 const submitButton = document.querySelector( '#submit-margins' );
 
@@ -72,28 +72,18 @@ export default class margins extends Plugin {
                     editor.editing.view.getDomRoot().style.paddingBottom = bottomMargin + 'mm';
                 } );
 
-				opemModalMargin();
-				closeModalMargin();
+				const modal = document.querySelector( '#ckmodal' );
+				modal.style.display = "block";
+
+				const ckcloseBtn = document.querySelector( '#ckcloseBtn' );
+
+				ckcloseBtn.addEventListener( 'click', () => {
+					modalMargins.remove();
+				});
             } );
 
             return view;
-        } );
-
-		function opemModalMargin(){
-			const modal = document.querySelector( '#ckmodal' );
-			modal.style.display = "block";
-		}
-
-		function closeModalMargin(){
-			const ckcloseBtn = document.querySelector( '#ckcloseBtn' );
-
-			ckcloseBtn.addEventListener( 'click', () => {
-
-				const modal = document.querySelector( '#ckmodal' );
-				modal.style.display = "none";
-			});
-
-		}
+        });
 
     }
 

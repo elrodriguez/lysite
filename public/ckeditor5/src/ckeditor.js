@@ -107,7 +107,7 @@ Editor.builtinPlugins = [
 	Completethesis,
 	Margins,
 	Referenciar,
-	Comments,
+	Comments
 ];
 
 // Editor configuration.

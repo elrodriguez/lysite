@@ -233,6 +233,7 @@
                     </div>
                 </div>
             </div>
+            {!! $content_old !!}
         </div>
         {{-- <div class="container page__container">
             <div wire:ignore>
@@ -606,13 +607,27 @@
                 },
                 comments: {
                     ajax:{
-                        url:'http://myValue',
+                        url: "{{ route('investigation_thesis_selection_comments') }}",
                         data:{
-                            tesis_id: '',
-                            part_id:''
+                            thesi_student_part_id: {{ $ThesisStudentPart->id }},
+                            thesi_student_id: {{ $thesis_id }},
+                            thesi_format_part_id: {{ $focus_id }}
                         },
-                        method:'POST'
+                        method:'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
                     }
+                },
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
                 }
             })
             .then(editor => {
@@ -624,7 +639,7 @@
                 editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
                 editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
                 editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
-                
+                editor.setData('{!! $content_old !!}');
             })
             .catch(error => {
                 console.error('Oops, something went wrong!');
@@ -634,24 +649,6 @@
                 console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
                 console.error(error);
             });
-
-
-            // window.editor = CKEDITOR.replace('editor', {
-            //     'filebrowserUploadUrl': '{{ route('investigation_thesis_upload_image') }}'
-            // });
-
-            // CKEDITOR.config.ruler = {
-            //     values: 21, // segment number of the ruler
-            //     step: 0.10, // accuracy of sliders
-            //     sliders: {
-            //         left: @this.left_margin, // left slider value
-            //         right: 21-@this.right_margin // right slider value (21-19 = 2)
-            //     },
-            //     padding: {
-            //         top: 20, // top 'canvas' padding (px)
-            //         bottom: 20 // bottom 'canvas' padding (px)
-            //     }
-            // };
 
         }
     </script>
@@ -690,8 +687,8 @@
         // }
     </script>
     <script>
-// Agrega un evento de escucha al cargar la página
- window.addEventListener('load', function() {
+        // Agrega un evento de escucha al cargar la página
+        window.addEventListener('load', function() {
 			// Encuentra todos los elementos strong en la página
  			var strongElements = document.getElementsByTagName('strong');
 
@@ -700,8 +697,8 @@
 				strongElements[i].style.fontWeight = 'bold';
 			}
 		});
-//funcion que buscará cuando se cree un strong para modificar su etilo
-function cambiarEstilos(strongElement) {
+        //funcion que buscará cuando se cree un strong para modificar su etilo
+        function cambiarEstilos(strongElement) {
 			strongElement.style.fontWeight = 'bold';
 		}
 
