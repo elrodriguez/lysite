@@ -233,7 +233,7 @@
                     </div>
                 </div>
             </div>
-            {!! $content_old !!}
+            
         </div>
         {{-- <div class="container page__container">
             <div wire:ignore>
