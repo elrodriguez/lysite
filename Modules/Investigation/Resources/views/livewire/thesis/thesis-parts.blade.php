@@ -639,7 +639,8 @@
                 editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
                 editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
                 editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
-                editor.setData('{!! $content_old !!}');
+
+
             })
             .catch(error => {
                 console.error('Oops, something went wrong!');
