@@ -2,6 +2,7 @@ import { Plugin } from 'ckeditor5/src/core';
 import { ButtonView } from 'ckeditor5/src/ui';
 import addComment from './theme/icons/add-comment.svg';
 import removeComment from './theme/icons/remove-comment.svg';
+import './theme/annotation.css';
 
 const confComment = {
     element: 'lyComment'
@@ -36,7 +37,40 @@ export default class comments extends Plugin {
             allowWhere: '$block',
             allowContentOf: '$root',
         });
+        editor.model.schema.extend( '$text', { allowAttributes: confComment.element } );
 
+        editor.conversion.for('downcast').elementToElement({
+            model: {
+                name: confComment.element,
+                attributes: [ 'id' ]
+            },
+            view: ( modelElement, { writer } ) => {
+                return writer.createContainerElement(
+                    'label', 
+                        { 
+                            id: modelElement.getAttribute('id'),
+                            class: 'ly-suggestion-marker-deletion'
+                        }
+                );
+            }
+        });
+
+        editor.conversion.for('upcast').elementToElement({
+            view: {
+                name: 'label',
+                classes: 'ly-suggestion-marker-deletion',
+                attributes: {
+                    id: true
+                }
+            },
+            model: (viewElement, { writer: modelWriter }) => {
+                return modelWriter.createElement(confComment.element, {
+                    id: viewElement.getAttribute('id')
+                });
+                
+            }
+
+        });
     }
     
     _createDialog() { 
@@ -55,7 +89,8 @@ export default class comments extends Plugin {
                                 </div>
                               </div>
                         </div>`;
-                        ckFormComment.innerHTML = divComment;
+
+        ckFormComment.innerHTML = divComment;
         document.body.appendChild(ckFormComment);
 
         var buttons = document.getElementsByClassName("dialogClose");
@@ -89,21 +124,20 @@ export default class comments extends Plugin {
                         selectedText += selectedArray[i]._data;
                     }
                     const randomNum = Math.random().toString();
+                    
                     editor.conversion.for('downcast').elementToElement({
                         model: confComment.element,
-                        view: ( modelElement, { writer } ) => {
-                            return writer.createContainerElement(
-                                'span', 
-                                    { 
-                                        id: 'lyc-' + randomNum,
-                                        style: 'background: rgba(229,102,134,.35);border-bottom: 3px solid rgba(174,30,66,.35);border-top: 3px solid rgba(174,30,66,.35);text-decoration: line-through;text-decoration-color: rgba(87,15,33,.5);text-decoration-thickness: 3px;' 
-                                    }
-                            );
+                        view: {
+                            name: 'label',
+                            classes: 'ly-suggestion-marker-deletion',
+                            attributes: {
+                                id: `lyc-${randomNum}`
+                            }
                         }
                     });
 
                     editor.model.change( writer => {
-                        const commentElement =  writer.createElement(confComment.element, { id:'122'} )
+                        const commentElement =  writer.createElement(confComment.element, {id: `lyc-${randomNum}`})
                         writer.insertText(selectedText, commentElement)
                         editor.model.insertContent(commentElement);
                     } );

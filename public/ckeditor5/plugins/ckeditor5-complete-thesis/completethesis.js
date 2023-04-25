@@ -1,5 +1,6 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { ButtonView } from 'ckeditor5/src/ui';
+import iconOjo from './icons/ojo.svg';
 
 export default class completethesis extends Plugin {
     init() {
@@ -12,7 +13,8 @@ export default class completethesis extends Plugin {
 
             button.set( {
                 label: 'Ver Tesis Completa',
-                withText: true
+                icon: iconOjo,
+                tooltip: true
             } );
 
             button.on( 'execute', () => {

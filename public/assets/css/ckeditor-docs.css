@@ -474,3 +474,106 @@ html {
 	width: 20px; /* ancho de 20px */
 	height: 20px; /* altura de 20px */
 }
+.div-form-center {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.ly-ck-dialog {
+	background-color: #ffffff;
+	box-shadow: 0px 0px 10px #8e8e8e;
+	border-radius: 4px;
+	overflow: hidden;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+}
+
+.ly-ck-dialog-800{
+	width: 800px;
+}
+
+.ly-ck-dialog-300{
+	width: 300px;
+}
+
+.ly-ck-dialog-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px; /* Ajustar a la altura deseada */
+	line-height: 40px; /* Ajustar a la altura deseada */
+	padding: 0 8px;
+	background-color: #ececec;
+	border-bottom: 1px solid #d1d1d1;
+}
+  
+.ly-ck-dialog-close-icon {
+	font-size: 24px; /* Ajustar al tamaño deseado */
+	height: 40px; /* Ajustar a la altura deseada */
+	line-height: 40px; /* Ajustar a la altura deseada */
+	cursor: pointer;
+}
+  
+.ly-ck-dialog-close-icon:hover {
+	color: #333333;
+}
+  
+.ly-ck-dialog-form {
+	padding: 0px;
+}
+
+.ly-ck-dialog-group-control {
+	padding: 10px;
+}
+
+.ly-ck-dialog-label {
+	display: block;
+	margin-bottom: 4px;
+}
+  
+.ly-ck-dialog-input {
+	width: 100%;
+	padding: 4px;
+	border: 1px solid #d1d1d1;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+  
+.ly-ck-dialog-select {
+	width: 100%;
+	padding: 4px;
+	border: 1px solid #d1d1d1;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+  
+.ly-ck-dialog-buttons {
+	display: flex;
+	justify-content: flex-end;
+	padding: 8px;
+	background-color: #f2f2f2;
+	margin: 0px;
+}
+  
+.ly-ck-dialog-button {
+	background-color: #4caf50;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	padding: 4px 16px;
+	margin-left: 8px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+  
+.ly-ck-dialog-button:hover {
+	background-color: #3e8e41;
+}
+  
+.ly-ck-dialog-button i {
+	margin-right: 4px;
+}
+  
