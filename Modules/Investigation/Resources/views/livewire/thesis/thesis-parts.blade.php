@@ -579,6 +579,7 @@
                         'completethesis',
                         'margins',
                         'referenciar',
+                        'helpkeywords',
                         'comments',
                         '|',
                         'undo',

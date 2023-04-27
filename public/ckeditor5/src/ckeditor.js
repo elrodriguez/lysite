@@ -53,6 +53,7 @@ import Margins from '@ckeditor/ckeditor5-margins/margins';
 import Referenciar from '@ckeditor/ckeditor5-referenciar/referenciar';
 import Comments from '@ckeditor/ckeditor5-comments/comments';
 import Link from '@ckeditor/ckeditor5-link/src/link.js';
+import HelpKeywords from '@ckeditor/ckeditor5-help-keywords/helpkeywords';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -107,7 +108,8 @@ Editor.builtinPlugins = [
 	Completethesis,
 	Margins,
 	Referenciar,
-	Comments
+	Comments,
+	HelpKeywords
 ];
 
 // Editor configuration.
@@ -155,6 +157,7 @@ Editor.defaultConfig = {
 			'margins',
 			'referenciar',
 			'comments',
+			'helpkeywords'
 		]
 	},
 	language: 'es',
