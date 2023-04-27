@@ -15,9 +15,11 @@ use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use Modules\Investigation\Entities\InveThesisStudentPart;
 use OpenAI\Laravel\Facades\OpenAI;
+use GuzzleHttp\Client;
 
 class ThesisParts extends Component
 {
+    protected $client;
     public $thesis_id;
     public $university;
     public $school;
@@ -372,7 +374,8 @@ class ThesisParts extends Component
     }
 
     public function paraphrasing()
-    {
+    {       
+        
         if (strlen($this->consulta) > 10) {
             $this->resultado = "espera un momento...";
             $permisos = Person::where('user_id', Auth::user()->id)->first();
@@ -412,5 +415,299 @@ class ThesisParts extends Component
         } else {
             $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
         }
+    }
+
+    public function getReference(){
+        $this->client = new \GuzzleHttp\Client();
+        /////primero nos autenticamos
+
+        $doi = $this->consulta; 
+        $is_doi=true;
+        if(strpos($doi, '/')){
+            $doi = str_replace("https://dx.doi.org/", "", $doi); // ES DOI
+            $doi = str_replace("https://doi.org/", "", $doi); // ES DOI
+            $doi = str_replace("http://dx.doi.org/", "", $doi); // ES DOI
+            $doi = str_replace("http://doi.org/", "", $doi); // ES DOI
+        }else{
+            $doi = str_replace("-", "", $doi);
+            $is_doi =false;         //es ISBN
+        }
+        
+
+        $normativa = 'vancouver'; //$request->input('normativa');
+        
+        $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'client_credentials',
+                'client_id' => '14971',
+                'client_secret' => '1ppN5HZmu5rswviU',
+                'scope' => 'all'
+            ]
+        ]);
+
+        $body = $response->getBody();
+
+        $accessToken = json_decode($body)->access_token;
+
+        /////////////luego buscamos el documento para optener el id/////////////////
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $accessToken,
+            'Accept' => 'application/vnd.mendeley-document.1+json'
+        ];
+
+        if($is_doi){
+            $search_url = "https://api.mendeley.com/catalog?doi=" . urlencode($doi);
+        }else{
+            $search_url = "https://api.mendeley.com/catalog?isbn=" . $doi;
+        }
+
+        $response = $this->client->request('GET', $search_url, [
+            'headers' => $headers
+        ]);
+
+        $document = json_decode($response->getBody()->getContents());
+        $cita = $this->generar_cita($document, $normativa);
+        $this->resultado = "MIERDA".$cita;
+        //dd($cita);
+        return response()->json(['cita' => $cita]);
+    }
+
+    public function generar_cita($document, $normativa)
+    {
+        switch ($normativa) {
+            case 'apa':
+                return $this->generate_apa($document[0]);            
+            case 'iso690':
+                return $this->generate_iso690($document[0]);
+            case 'vancouver':
+                return $this->generate_vancouver($document[0]);
+            default:
+                return 'Formato de cita no válido';
+        }
+    }
+
+    public function generate_apa($document)
+    {
+        $authors = array();
+
+        //Obtener el nombre de los autores
+        foreach ($document->authors as $author) { //solo la inicial del primer nombre
+            if($document->type=="book"){
+                array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1).".");
+            }else{
+                array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1).".");
+            }
+        }
+
+        $citation = '<p>';
+        //Añadir los apellidos de los autores
+        if (count($authors) == 1) {
+            $citation .= $authors[0] . " ";
+        } elseif (count($authors) == 2) {
+            $citation .= $authors[0] . " y " . $authors[1] . " ";
+        } elseif (count($authors) == 3) {
+            $citation .= $authors[0] . ", " . $authors[1] . ", y " . $authors[2] . " ";
+        } elseif (count($authors) > 3) {
+            $citation .= $authors[0] . " et al. ";
+        }
+
+        //Añadir el año de publicación y el título del artículo
+        $citation .= "(" . substr($document->year, 0, 4) . "). " . $document->title . ". ";
+
+        //Añadir el nombre de la revista
+        if (isset($document->source)) {
+            $citation .= "<i>" . $document->source . "</i>";
+        }
+
+        //Añadir el volumen y el número (si están disponibles)
+        if (isset($document->volume)) {
+            $citation .= ", " . $document->volume;
+        }
+        if (isset($document->issue)) {
+            $citation .= "(" . $document->issue . ")";
+        }
+
+        //Añadir las páginas
+        if (isset($document->pages)) {
+            $citation .= ", " . $document->pages;
+        }
+
+        //Añadir el DOI
+        if (isset($document->identifiers->doi)) {
+            $citation .= ' <a href="https://doi.org/' . $document->identifiers->doi . '">' ."https://doi.org/".$document->identifiers->doi . '</a>';
+        }
+
+        $citation .= "</p>";
+
+        return $citation;
+    }
+
+    public function generate_iso690($document)
+    {
+        $authors = array();
+
+        //Obtener el nombre de los autores
+        foreach ($document->authors as $author) {
+            $last_name = explode(" ",$author->last_name);
+            $last_name = mb_strtoupper($last_name[0], 'UTF-8');
+            $name = $last_name . ', ' . $author->first_name;
+            array_push($authors, $name);
+        }
+
+        $citation = '<p>';
+
+        //Añadir los nombres de los autores
+        if (count($authors) == 1) {
+            $citation .= $authors[0] . '. ';
+        } elseif (count($authors) == 2) {
+            $citation .= $authors[0] . ' a ' . $authors[1] . '. ';
+        } else {
+            for ($i = 0; $i < count($authors) - 1; $i++) {
+                $citation .= $authors[$i] . ', ';
+            }
+            $citation .= 'a ' . $authors[count($authors) - 1] . '. ';
+        }
+
+        //Añadir el título del artículo
+        $citation .= $document->title . '. [en línea]. ';
+
+        //Añadir el nombre de la revista
+        if (isset($document->source)) {
+            $citation .= '<em>' . $document->source . '</em>, ';
+        }
+
+        //Añadir el volumen
+        if (isset($document->volume)) {
+            $citation .= $document->volume . ', ';
+        }
+
+        //Añadir el número
+        if (isset($document->issue)) {
+            $citation .= '(' . $document->issue . '), ';
+        }
+
+        //Añadir el año de publicación
+        $citation .= $document->year . ', ';
+
+        //Añadir las páginas
+        if (isset($document->pages)) {
+            $citation .= 's. ' . $document->pages . '. ';
+        }
+
+        //Fecha de consulta
+        $month=date('n');
+        switch ($month) {
+            case '1':
+                $month = "enero";
+                break;
+            case '2':
+                $month = "febrero";
+                break;
+            case '3':
+                $month = "marzo";
+                break;
+            case '4':
+                $month = "abril";
+                break;
+            case '5':
+                $month = "mayo";
+                break;
+            case '6':
+                $month = "junio";
+                break;
+            case '7':
+                $month = "julio";
+                break;
+            case '8':
+                $month = "agosto";
+                break;
+            case '9':
+                $month = "septiembre";
+                break;
+            case '10':
+                $month = "octubre";
+                break;
+            case '11':
+                $month = "noviembre";
+                break;
+            case '12':
+                $month = "diciembre";
+                break;
+        }
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $fecha_actual = Carbon::now()->formatLocalized('%e de '.$month.' de %Y');
+        $string_fecha = " [Fecha de consulta: " . $fecha_actual."] ";
+        $citation .= $string_fecha;
+
+
+        //Añadir el DOI
+        //dd($document->identifiers->doi);
+        if (isset($document->identifiers->doi)) {
+            $citation .= 'Disponible en: <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>.';
+        }
+
+        $citation .= '</p>';
+
+        return $citation;
+    }
+
+    public function generate_vancouver($document)
+    {
+        $authors = array();
+
+        //Obtener el nombre de los autores
+        foreach ($document->authors as $author) { 
+            $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
+            array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1)."."); // inicial de nombre
+        }
+
+        $citation = '<p>';
+
+        //Añadir los apellidos y las iniciales de los nombres de los autores
+        foreach ($authors as $key => $author) {
+            $name_parts = explode(" ", $author);
+            $initials = "";
+
+            foreach ($name_parts as $part) {
+                $initials .= substr($part, 0, 1) . ".";
+            }
+
+            if ($key === count($authors) - 1){
+                $citation .= $author ." ";
+            }else{
+                $citation .= $author .", ";
+            }
+            
+        }
+
+        //Añadir el título del artículo
+        if($document->type=="book"){
+            $citation .= $document->title . " [Internet]. ";
+        }else{
+            $citation .= $document->title . ". ";
+        }        
+
+        //Añadir el nombre de la revista
+        if (isset($document->source) && $document->title != $document->source) {
+            $citation .= "<em>" . $document->source . "</em>. ";
+        }
+
+        //Añadir el año de publicación
+        $citation .= $document->year . ";";
+
+        //Añadir el volumen
+        if (isset($document->volume)) {
+            $citation .= $document->volume . ":";
+        }
+
+        //Añadir las páginas
+        if (isset($document->pages)) {
+            $citation .= $document->pages . ".";
+        }
+
+        $citation .= '</p>';
+
+        return $citation;
     }
 }
