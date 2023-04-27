@@ -374,7 +374,7 @@ class ThesisParts extends Component
     }
 
     public function paraphrasing()
-    {
+    {       
         
         if (strlen($this->consulta) > 10) {
             $this->resultado = "espera un momento...";
@@ -434,7 +434,7 @@ class ThesisParts extends Component
         }
         
 
-        $normativa = 'Vancouver'; //$request->input('normativa');
+        $normativa = 'vancouver'; //$request->input('normativa');
         
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
             'form_params' => [
@@ -468,7 +468,8 @@ class ThesisParts extends Component
 
         $document = json_decode($response->getBody()->getContents());
         $cita = $this->generar_cita($document, $normativa);
-        
+        $this->resultado = "MIERDA".$cita;
+        //dd($cita);
         return response()->json(['cita' => $cita]);
     }
 
@@ -706,7 +707,6 @@ class ThesisParts extends Component
         }
 
         $citation .= '</p>';
- 
 
         return $citation;
     }
