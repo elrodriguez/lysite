@@ -199,7 +199,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="text2">Aquí verá el resultado</label>
-                                <textarea  rows="8" class="form-control" wire:model='resultado' name="text2" id="text2" readonly placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio."></textarea>
+                                <textarea rows="8" class="form-control" wire:model='resultado' name="text2" id="text2" readonly placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio.">{!! $resultado !!}</textarea>
                             </div>
                             <button onclick="closeParahrase()" type="button" class="btn btn-success">Cancelar</button>
                             <button type="button" class="btn btn-warning" id="paraphrasing">Copiar</button>
