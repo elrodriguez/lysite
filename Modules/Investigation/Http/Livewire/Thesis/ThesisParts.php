@@ -375,46 +375,46 @@ class ThesisParts extends Component
 
     public function paraphrasing()
     {       
-        
-        if (strlen($this->consulta) > 10) {
-            $this->resultado = "espera un momento...";
-            $permisos = Person::where('user_id', Auth::user()->id)->first();
-            $p_allowed = $permisos->paraphrase_allowed;
-            $p_used = $permisos->paraphrase_used;
+        $this->getReference();
+        // if (strlen($this->consulta) > 10) {
+        //     $this->resultado = "espera un momento...";
+        //     $permisos = Person::where('user_id', Auth::user()->id)->first();
+        //     $p_allowed = $permisos->paraphrase_allowed;
+        //     $p_used = $permisos->paraphrase_used;
 
-            if ($p_allowed > $p_used) {
-                $max_tokens = 1500;
-                $max_tokens = 3400;
-                $temperature = 0.6;
+        //     if ($p_allowed > $p_used) {
+        //         $max_tokens = 1500;
+        //         $max_tokens = 3400;
+        //         $temperature = 0.6;
 
-                $result_text = "hubo un problema, intenta mas tarde";
+        //         $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
+        //         $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
 
-                try {
-                    $result = OpenAI::completions()->create([
-                        'model' => 'text-davinci-003',
-                        'prompt' => $consulta,
-                        'max_tokens' => $max_tokens,
-                        'temperature' => $temperature,
-                    ]);
-                    $result_text = $result['choices'][0]['text'];
-                    $query_tokens = $result['usage']['prompt_tokens'];
-                    $result_tokens = $result['usage']['completion_tokens'];
-                    $consumed_tokens = $result['usage']['total_tokens'];
-                    $permisos->paraphrase_used = $p_used + 1;
-                    $permisos->save();
-                    $this->paraphrase_left--;
-                } catch (Exception $e) {
-                    $result_text = $e->getMessage();
-                }
-                $this->resultado = $result_text;
-            } else {
-                $this->resultado = "Lo siento, pero parece que has superado tu límite de parafraseo. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
-            }
-        } else {
-            $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
-        }
+        //         try {
+        //             $result = OpenAI::completions()->create([
+        //                 'model' => 'text-davinci-003',
+        //                 'prompt' => $consulta,
+        //                 'max_tokens' => $max_tokens,
+        //                 'temperature' => $temperature,
+        //             ]);
+        //             $result_text = $result['choices'][0]['text'];
+        //             $query_tokens = $result['usage']['prompt_tokens'];
+        //             $result_tokens = $result['usage']['completion_tokens'];
+        //             $consumed_tokens = $result['usage']['total_tokens'];
+        //             $permisos->paraphrase_used = $p_used + 1;
+        //             $permisos->save();
+        //             $this->paraphrase_left--;
+        //         } catch (Exception $e) {
+        //             $result_text = $e->getMessage();
+        //         }
+        //         $this->resultado = $result_text;
+        //     } else {
+        //         $this->resultado = "Lo siento, pero parece que has superado tu límite de parafraseo. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
+        //     }
+        // } else {
+        //     $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
+        // }
     }
 
     public function getReference(){
@@ -468,7 +468,7 @@ class ThesisParts extends Component
 
         $document = json_decode($response->getBody()->getContents());
         $cita = $this->generar_cita($document, $normativa);
-        $this->resultado = "MIERDA".$cita;
+        $this->resultado = $cita;
         //dd($cita);
         return response()->json(['cita' => $cita]);
     }
@@ -540,7 +540,7 @@ class ThesisParts extends Component
 
         $citation .= "</p>";
 
-        return $citation;
+        return html_entity_decode($citation);
     }
 
     public function generate_iso690($document)
