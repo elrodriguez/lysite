@@ -620,6 +620,9 @@
                         }
                     }
                 },
+                references:{
+                    url:"{{ route('investigation_thesis_references') }}"
+                },
                 htmlSupport: {
                     allow: [
                         {
