@@ -54,6 +54,7 @@ import Referenciar from '@ckeditor/ckeditor5-referenciar/referenciar';
 import Comments from '@ckeditor/ckeditor5-comments/comments';
 import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import HelpKeywords from '@ckeditor/ckeditor5-help-keywords/helpkeywords';
+import Recommendation from '@ckeditor/ckeditor5-recommendation/recommendation';
 
 class Editor extends DecoupledDocumentEditor {}
 
@@ -109,7 +110,8 @@ Editor.builtinPlugins = [
 	Margins,
 	Referenciar,
 	Comments,
-	HelpKeywords
+	HelpKeywords,
+	Recommendation
 ];
 
 // Editor configuration.
@@ -157,7 +159,8 @@ Editor.defaultConfig = {
 			'margins',
 			'referenciar',
 			'comments',
-			'helpkeywords'
+			'helpkeywords',
+			'recommendation'
 		]
 	},
 	language: 'es',

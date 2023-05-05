@@ -581,6 +581,7 @@
                         'referenciar',
                         'helpkeywords',
                         'comments',
+                        'recommendation',
                         '|',
                         'undo',
                         'redo',
