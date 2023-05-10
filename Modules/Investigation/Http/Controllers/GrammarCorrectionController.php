@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class GetArticlesRecommendationController extends Controller
+class GrammarCorrectionController extends Controller
 {
-    public function getArticles(Request $request)
+    
+    public function grammarCorrection(Request $request)
     {
         $consulta = $request->get('consulta');
         
@@ -26,7 +27,7 @@ class GetArticlesRecommendationController extends Controller
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "recomiendame articulos relacionados a mi tesis: {" . $consulta . "}";
+                $consulta = "Corrige la gramática y ortografía de este parrafo y dale un tono mas profesional: {" . $consulta . "}";
 
                 try {
                     $result = OpenAI::completions()->create([
