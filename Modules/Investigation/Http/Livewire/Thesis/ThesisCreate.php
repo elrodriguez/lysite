@@ -109,4 +109,5 @@ class ThesisCreate extends Component
         //$this->emit('updateThesisList');
         redirect()->route('investigation_thesis_parts', $this->thesis_id);
     }
+
 }

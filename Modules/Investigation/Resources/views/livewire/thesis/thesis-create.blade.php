@@ -87,7 +87,9 @@
             </div>
         </div>
     </div>
+
     <script>
+  
         window.addEventListener('inve-thesis-student-create', event => {
             cuteAlert({
                 type: "success",
