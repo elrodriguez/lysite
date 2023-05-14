@@ -25,4 +25,7 @@
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
+    @section('modales')
+    @livewire('investigation::modals.help-with-title')
+@endsection
 </x-master>
