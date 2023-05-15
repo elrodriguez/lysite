@@ -119,8 +119,14 @@ class GetReferencesController extends Controller
             $citation .= $authors[0] . " y " . $authors[1] . " ";
         } elseif (count($authors) == 3) {
             $citation .= $authors[0] . ", " . $authors[1] . ", y " . $authors[2] . " ";
-        } elseif (count($authors) > 3) {
-            $citation .= $authors[0] . " et al. ";
+        } elseif (count($authors) == 4) {
+            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", y " . $authors[3] . " ";
+        } elseif (count($authors) == 5) {
+            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", y " . $authors[4] . " ";
+        } elseif (count($authors) == 5) {
+            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", y " . $authors[5] . " ";
+        } elseif (count($authors) > 5) {
+            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", y " . $authors[6] . " ";
         }
 
         //Añadir el año de publicación y el título del artículo
