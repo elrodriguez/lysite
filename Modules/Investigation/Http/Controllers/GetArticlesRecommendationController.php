@@ -41,7 +41,7 @@ class GetArticlesRecommendationController extends Controller
                     $consumed_tokens = $result['usage']['total_tokens'];
                     $permisos->paraphrase_used = $p_used + 1;
                     $permisos->save();
-                    $this->paraphrase_left--;
+                    
                 } catch (Exception $e) {
                     $result_text = $e->getMessage();
                 }

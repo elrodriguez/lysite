@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class GrammarCorrectionController extends Controller
+class HelpWithTitleController extends Controller
 {
-    
-    public function grammarCorrection(Request $request)
-    {
+    public function helpwithtitle(Request $request)
+    { 
         $consulta = $request->get('consulta');
-        
-        if (strlen($consulta) > 6) {
+        $thesisType = $request->get('thesisType'); //descriptiva, experimental, etc.
+        $school = $request->get('school'); //escuela: ingenieria de sistemas, enfermería, medicina, etc
+        if (strlen($consulta) > 4) {
             $resultado = "espera un momento...";
             $permisos = Person::where('user_id', Auth::user()->id)->first();
             $p_allowed = $permisos->paraphrase_allowed;
@@ -27,7 +27,7 @@ class GrammarCorrectionController extends Controller
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Corrige la gramática y ortografía de este parrafo y dale un tono mas profesional: {" . $consulta . "}";
+                $consulta = "recomiendame 10 títulos para una tesis ".$thesisType.", para la carrera de". $school ."con los siguientes temas: ". $consulta;
 
                 try {
                     $result = OpenAI::completions()->create([
@@ -42,19 +42,16 @@ class GrammarCorrectionController extends Controller
                     $consumed_tokens = $result['usage']['total_tokens'];
                     $permisos->paraphrase_used = $p_used + 1;
                     $permisos->save();
-                    
                 } catch (Exception $e) {
                     $result_text = $e->getMessage();
                 }
                 $resultado = $result_text;
             } else {
                 $resultado = "Lo siento, pero parece que has superado tu límite de consultas. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
-
             }
             return $resultado;
         } else {
-            $resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
-            return $resultado;
+            return $resultado = Auth::user()->name . " aprovecha este servicio escribiendo palabras claves, esta consulta no será tomada en cuenta";
         }
     }
 }
