@@ -37,6 +37,7 @@ export default class comments extends Plugin {
             allowWhere: '$block',
             allowContentOf: '$root',
         });
+        
         editor.model.schema.extend( '$text', { allowAttributes: confComment.element } );
 
         editor.conversion.for('downcast').elementToElement({

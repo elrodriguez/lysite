@@ -627,6 +627,12 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 },
+                helpkeywords:{
+                    url:"{{ route('investigation_thesis_grammar_correction') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
                 htmlSupport: {
                     allow: [
                         {
