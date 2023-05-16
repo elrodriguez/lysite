@@ -39,6 +39,8 @@ class GetReferencesController extends Controller
 
         $normativa = $request->get('select-normativa');
 
+        
+
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
             'form_params' => [
                 'grant_type' => 'client_credentials',
