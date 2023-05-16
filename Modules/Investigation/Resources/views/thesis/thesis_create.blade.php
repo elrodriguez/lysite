@@ -26,6 +26,6 @@
         <x-navigation></x-navigation>
     </x-slot>
     @section('modales')
-    @livewire('investigation::modals.help-with-title')
-@endsection
+        <livewire:investigation::thesis.thesis-help-create-titles />
+    @endsection
 </x-master>
