@@ -33,6 +33,16 @@
                         <input wire:model="keywords" type="text" class="form-control" id="keywords" placeholder="palabras relacionadas a tu investigación y carrera">
                         @error('keywords') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                     </div>
+                    <div class="form-group">
+                        <label class="form-label" for="name" title="Tu Carrera o especialidad">Carrera/Profesión*</label>
+                        <input wire:model="career" type="text" class="form-control" id="career" placeholder="Ingeniería Civil, Medicina, Enfermería, Odontología, etc...">
+                        @error('career') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="name" title="Tipo de Tésis">Tipo de Tésis*</label>
+                        <input wire:model="type_thesis" type="text" class="form-control" id="type_thesis" placeholder="dinos si será, analítica, descriptiva, experimental, etc...">
+                        @error('type_thesis') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                    </div>
 
                     <div class="form-group">
                         <label class="form-label" for="name">Respuesta</label>

@@ -13,6 +13,8 @@ class ThesisHelpCreateTitles extends Component
     public $resultado;
     public $keywords;
     public $paraphrase_left;
+    public $career;
+    public $type_thesis;
 
     public function render()
     {
@@ -25,8 +27,10 @@ class ThesisHelpCreateTitles extends Component
 
         $this->validate([
             'keywords' => 'required|max:255',
+            'career' => 'required|max:255',
+            'type_thesis' => 'required|max:255',
         ]);
-
+dd($this->keywords, $this->career, $this->type_thesis);
         if (strlen($this->keywords) > 4) {
             $this->resultado = "espera un momento...";
             $permisos = Person::where('user_id', Auth::user()->id)->first();
@@ -40,7 +44,7 @@ class ThesisHelpCreateTitles extends Component
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "recomiendame 10 títulos para una tesis " . $this->formats[$this->format_id] . ", para la carrera de" . $this->schools[$this->school_id] . "con los siguientes temas: " . $this->keywords;
+                $consulta = "recomiendame 10 títulos para una tesis " . $this->type_thesis . ", para la carrera de" . $this->career . "con los siguientes temas: " . $this->keywords;
 
                 try {
                     $result = OpenAI::completions()->create([
