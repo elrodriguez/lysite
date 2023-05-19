@@ -14,7 +14,7 @@ class GetArticlesRecommendationController extends Controller
 {
     public function getArticles(Request $request)
     {
-        $consulta = $request->get('consulta');
+        $consulta = $request->get('re-input-text');
         $resultado = "espera un momento...";
 
         if (strlen($consulta) > 6) {
