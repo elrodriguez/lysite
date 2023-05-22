@@ -5,7 +5,7 @@
     @endphp
     @foreach ($chats as $k => $chat)
     <div id="inbox-chat{{ $k }}" class="ui-widget ui-chatbox" outline="0"
-        style="width: 350px; right: {{ $i == 0 ? '0' : 350 * $i + 7 * $i }}px; display: block; padding-bottom:40px">
+        style="width: 350px; right: {{ $i == 0 ? '0' : 350 * $i + 7 * $i }}px; display: block; padding-bottom: 0px; z-index: 9999;">
 
 
         <div class="card card-bordered" id="bg-chat{{ $k }}">
@@ -72,29 +72,11 @@
                 @endwhile
 
 
-            {{-- @foreach ($chat['messages'] as $msg)
-            <div
-                class="{{ $msg['user_id'] == auth()->user()->id ? 'media media-chat media-chat-reverse' : 'media media-chat' }}">
-                <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                <div class="media-body">
-                    <p>{!! $msg['message'] !!}</p>
-                    <p class="meta"><time datetime="2018">23:58</time></p>
-                </div>
-            </div>
-            @endforeach --}}
 
 
 
 
 
-
-
-
-
-
-
-
-            {{-- <div class="media media-meta-day">Today</div> --}}
         </div>
 
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">

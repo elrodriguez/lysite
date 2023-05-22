@@ -27,7 +27,7 @@ class HelpWithTitleController extends Controller
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "recomiendame 10 títulos para una tesis ".$thesisType.", para la carrera de". $school ."con los siguientes temas: ". $consulta;
+                $consulta = "recomiendame 10 títulos para una tesis ".$thesisType.", para la carrera de". $school ."con los siguientes temas: ". $consulta . " y cada título con sus respectivas palabras Claves";
 
                 try {
                     $result = OpenAI::completions()->create([
