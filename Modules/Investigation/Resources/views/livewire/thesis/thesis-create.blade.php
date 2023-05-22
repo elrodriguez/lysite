@@ -81,14 +81,21 @@
 
                             <div class="form-group">
                                 <label class="form-label">{{ __('investigation::labels.formats') }}</label>
-                                <select wire:model="format_id" class="form-control" id="format_id">
-                                    <option value="">Seleccionar</option>
-                                    @foreach($formats as $format)
-                                        <option value="{{ $format->id }}">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</option>
-                                    @endforeach
-                                </select>
+                                
+                                <div class="input-group mb-3">
+                                    <select wire:model="format_id" class="form-control" id="format_id">
+                                        <option value="">Seleccionar</option>
+                                        @foreach($formats as $format)
+                                            <option value="{{ $format->id }}">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button id="btn-new-format-modal-student" class="btn btn-secondary" type="button" id="button-addon2">Crear Formato</button>
+                                    </div>
+                                </div>
                                 @error('format_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
+
 
                             <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar</button>
                         </form>
@@ -122,6 +129,9 @@
             });
         })
 
-
+        const btnModalFormat = document.getElementById('btn-new-format-modal-student');
+        btnModalFormat.addEventListener('click', () => {
+            $('#modalFormatStudent').modal('show');
+        });
     </script>
 </div>
