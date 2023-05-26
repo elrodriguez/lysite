@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="main_video">{{ __('labels.Url').' '.__('labels.Main
                                     Video') }} *</label>
-                                <input wire:model="main_video" type="text" class="form-control" id="main_video">
+                                <input wire:model="main_video" type="text" class="form-control" id="main_video" required>
                                 @error('main_video') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
