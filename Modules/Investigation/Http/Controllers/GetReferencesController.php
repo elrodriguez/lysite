@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class GetReferencesController extends Controller
 {
     protected $client;
+    public $code_consulta;
+    public $is_doi;
 
     public function __construct()
     {
@@ -35,7 +38,8 @@ class GetReferencesController extends Controller
             $doi = str_replace("-", "", $doi);
             $is_doi = false;         //es ISBN
         }
-
+        $this->code_consulta=$doi;
+        $this->is_doi=true;
 
         $normativa = $request->get('select-normativa');
 
@@ -62,7 +66,29 @@ class GetReferencesController extends Controller
         ];
 
         if ($is_doi) {
-            $search_url = "https://api.mendeley.com/catalog?doi=" . urlencode($doi);
+           $search_url = "https://api.mendeley.com/catalog?doi=" . urlencode($doi);
+
+    
+                                        //             // Make a request to the link
+                                        // $response = Http::get('https://www.mendeley.com/catalogue/1152eea5-ed0e-3f81-88bf-be4f34aecabf/');
+
+                                        // // Get the body of the response
+                                        // $body = $response->body();
+
+                                        // // Convert the body to a string
+                                        // $html = (string)$body;
+                                        // $partes = explode('data-name="citation"', $html);
+                                        // $len=count($partes);
+                                        // $partes=$partes[$len-1];
+                                        // //</div>
+                                        // $partes = explode('</div>', $partes);
+
+                                        // $parte_despues = strstr($partes[0], '>');
+                                        // if ($parte_despues !== false) {
+                                        //     $parte_despues = substr($parte_despues, 1);
+                                        // }
+                                        // dd("<p>".$parte_despues);
+
         } else {
             $search_url = "https://api.mendeley.com/catalog?isbn=" . $doi;
         }
@@ -80,84 +106,110 @@ class GetReferencesController extends Controller
 
     public function generar_cita($document, $normativa)
     {
-        switch ($normativa) {
-            case 'apa':
-                return $this->generate_apa($document[0]);
-            case 'chicago':
-                return $this->generate_chicago($document[0]);
-            case 'mla':
-                return $this->generate_mla($document[0]);
-            case 'harvard':
-                return $this->generate_harvard($document[0]);
-            case 'iso690':
-                return $this->generate_iso690($document[0]);
-            case 'ieee':
-                return $this->generate_ieee($document[0]);
-            case 'vancouver':
-                return $this->generate_vancouver($document[0]);
-            default:
-                return 'Formato de cita no válido';
-        }
+        if(count($document)>0){
+            switch ($normativa) {
+                case 'apa':
+                    return $this->generate_apa($document[0]);
+                case 'chicago':
+                    return $this->generate_chicago($document[0]);
+                case 'mla':
+                    return $this->generate_mla($document[0]);
+                case 'harvard':
+                    return $this->generate_harvard($document[0]);
+                case 'iso690':
+                    return $this->generate_iso690($document[0]);
+                case 'ieee':
+                    return $this->generate_ieee($document[0]);
+                case 'vancouver':
+                    return $this->generate_vancouver($document[0]);
+                default:
+                    return 'Formato de cita no válido';
+            }
+        }else{
+            return "Lo sentimos, No hemos podido encontrar el codigo que has brindado";
+        }       
+    
     }
 
     public function generate_apa($document)
     {
-        $authors = array();
 
-        //Obtener el nombre de los autores
-        foreach ($document->authors as $author) { //solo la inicial del primer nombre
-            if ($document->type == "book") {
-                array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
-            } else {
-                array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1) . ".");
-            }
-        }
+                                        // Consultando la WEB de mendeley según el ID
+                                        $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
 
-        $citation = '<p>';
-        //Añadir los apellidos de los autores
-        if (count($authors) == 1) {
-            $citation .= $authors[0] . " ";
-        } elseif (count($authors) == 2) {
-            $citation .= $authors[0] . " y " . $authors[1] . " ";
-        } elseif (count($authors) == 3) {
-            $citation .= $authors[0] . ", " . $authors[1] . ", y " . $authors[2] . " ";
-        } elseif (count($authors) == 4) {
-            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", y " . $authors[3] . " ";
-        } elseif (count($authors) == 5) {
-            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", y " . $authors[4] . " ";
-        } elseif (count($authors) == 5) {
-            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", y " . $authors[5] . " ";
-        } elseif (count($authors) > 5) {
-            $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", y " . $authors[6] . " ";
-        }
+                                        // Get the body of the response
+                                        $body = $response->body();
 
-        //Añadir el año de publicación y el título del artículo
-        $citation .= "(" . substr($document->year, 0, 4) . "). " . $document->title . ". ";
+                                        // Convert the body to a string
+                                        $html = (string)$body;
+                                        $partes = explode('data-name="citation"', $html);
+                                        $len=count($partes);
+                                        $partes=$partes[$len-1];
+                                        //</div>
+                                        $partes = explode('</div>', $partes);
 
-        //Añadir el nombre de la revista
-        if (isset($document->source)) {
-            $citation .= "<i>" . $document->source . "</i>";
-        }
+                                        $parte_despues = strstr($partes[0], '>');
+                                        if ($parte_despues !== false) {
+                                            $parte_despues = substr($parte_despues, 1);
+                                        }
+                                        $citation ="<p>".$parte_despues;
 
-        //Añadir el volumen y el número (si están disponibles)
-        if (isset($document->volume)) {
-            $citation .= ", " . $document->volume;
-        }
-        if (isset($document->issue)) {
-            $citation .= "(" . $document->issue . ")";
-        }
+        // $authors = array();
 
-        //Añadir las páginas
-        if (isset($document->pages)) {
-            $citation .= ", " . $document->pages;
-        }
+        // //Obtener el nombre de los autores
+        // foreach ($document->authors as $author) { //solo la inicial del primer nombre
+        //     if ($document->type == "book") {
+        //         array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
+        //     } else {
+        //         array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1) . ".");
+        //     }
+        // }
 
-        //Añadir el DOI
-        if (isset($document->identifiers->doi)) {
-            $citation .= ' <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>';
-        }
+        // $citation = '<p>';
+        // //Añadir los apellidos de los autores
+        // if (count($authors) == 1) {
+        //     $citation .= $authors[0] . " ";
+        // } elseif (count($authors) == 2) {
+        //     $citation .= $authors[0] . " y " . $authors[1] . " ";
+        // } elseif (count($authors) == 3) {
+        //     $citation .= $authors[0] . ", " . $authors[1] . ", y " . $authors[2] . " ";
+        // } elseif (count($authors) == 4) {
+        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", y " . $authors[3] . " ";
+        // } elseif (count($authors) == 5) {
+        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", y " . $authors[4] . " ";
+        // } elseif (count($authors) == 5) {
+        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", y " . $authors[5] . " ";
+        // } elseif (count($authors) > 5) {
+        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", y " . $authors[6] . " ";
+        // }
 
-        $citation .= "</p>";
+        // //Añadir el año de publicación y el título del artículo
+        // $citation .= "(" . substr($document->year, 0, 4) . "). " . $document->title . ". ";
+
+        // //Añadir el nombre de la revista
+        // if (isset($document->source)) {
+        //     $citation .= "<i>" . $document->source . "</i>";
+        // }
+
+        // //Añadir el volumen y el número (si están disponibles)
+        // if (isset($document->volume)) {
+        //     $citation .= ", " . $document->volume;
+        // }
+        // if (isset($document->issue)) {
+        //     $citation .= "(" . $document->issue . ")";
+        // }
+
+        // //Añadir las páginas
+        // if (isset($document->pages)) {
+        //     $citation .= ", " . $document->pages;
+        // }
+
+        // //Añadir el DOI
+        // if (isset($document->identifiers->doi)) {
+        //     $citation .= ' <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>';
+        // }
+
+        // $citation .= "</p>";
 
         return $citation;
     }
@@ -548,8 +600,12 @@ class GetReferencesController extends Controller
         if (isset($document->pages)) {
             $citation .= $document->pages . ".";
         }
-
-        $citation .= '</p>';
+        if($this->is_doi){
+            $citation .= ' Disponible en: '.'https://dx.doi.org/'.$this->code_consulta.'.</p>';
+        }else{
+            $citation .= '.</p>';
+        }
+        
 
         return $citation;
     }
