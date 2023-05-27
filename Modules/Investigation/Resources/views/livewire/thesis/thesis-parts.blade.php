@@ -611,7 +611,7 @@
                     ajax:{
                         url: "{{ route('investigation_thesis_selection_comments') }}",
                         data:{
-                            thesi_student_part_id: {{ $ThesisStudentPart->id }},
+                            thesi_student_part_id: {{ $ThesisStudentPart->id ? $ThesisStudentPart->id : null }},
                             thesi_student_id: {{ $thesis_id }},
                             thesi_format_part_id: {{ $focus_id }}
                         },
