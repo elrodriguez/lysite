@@ -413,25 +413,16 @@ class GetReferencesController extends Controller
         }
 
         //Añadir el título del artículo
-        $citation .= $document->title . '. [en línea]. ';
+        $citation .= $document->title . '. ';
 
         //Añadir el nombre de la revista
         if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em>, ';
+            $citation .= '<em>' . $document->source . '</em> '. ' [en línea] ';
         }
 
-        //Añadir el volumen
-        if (isset($document->volume)) {
-            $citation .= $document->volume . ', ';
-        }
-
-        //Añadir el número
-        if (isset($document->issue)) {
-            $citation .= '(' . $document->issue . '), ';
-        }
-
+        $volumen_and_pages = $this->getVolumen_and_pages($document);
         //Añadir el año de publicación
-        $citation .= $document->year . ', ';
+        $citation .= $document->year . ', ' . $volumen_and_pages;
 
         //Añadir las páginas
         if (isset($document->pages)) {
@@ -488,6 +479,10 @@ class GetReferencesController extends Controller
         //dd($document->identifiers->doi);
         if (isset($document->identifiers->doi)) {
             $citation .= 'Disponible en: <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>.';
+        }
+
+        if(isset($document->identifiers->issn)) {
+            $citation .= ' ISSN: ' . $document->identifiers->issn;
         }
 
         $citation .= '</p>';
@@ -613,6 +608,20 @@ class GetReferencesController extends Controller
             $citation .= '</p>';
         }
 
+        // $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
+        // $explotado = explode("https://doi", $apa_citation);
+        // $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
+        // $volumen_and_pages="";
+        // if( count($explotado) > 1 ){
+        //     $volumen_and_pages = $explotado[1];
+        // }
+        $volumen_and_pages = $this->getVolumen_and_pages($document);
+        $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
+        $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
+        return $citation;
+    }
+
+    public function getVolumen_and_pages($document){
         $year = $document->year;
         $source = $document->source;
         $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
@@ -622,9 +631,6 @@ class GetReferencesController extends Controller
         if( count($explotado) > 1 ){
             $volumen_and_pages = $explotado[1];
         }
-        
-        $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
-        $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
-        return $citation;
+        return $volumen_and_pages;
     }
 }
