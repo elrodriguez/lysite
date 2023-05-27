@@ -48,8 +48,8 @@ class GetReferencesController extends Controller
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
             'form_params' => [
                 'grant_type' => 'client_credentials',
-                'client_id' => '14971',
-                'client_secret' => '1ppN5HZmu5rswviU',
+                'client_id' => env('MENDELEY_CLIENT_ID'),
+                'client_secret' => env('MENDELEY_CLIENT_SECRET'),
                 'scope' => 'all'
             ]
         ]);
