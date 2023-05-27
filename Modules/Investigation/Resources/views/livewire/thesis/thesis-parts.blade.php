@@ -607,20 +607,7 @@
                     marginTop: '20mm',
                     marginBottom: '20mm'
                 },
-                comments: {
-                    ajax:{
-                        url: "{{ route('investigation_thesis_selection_comments') }}",
-                        data:{
-                            thesi_student_part_id: {{ $ThesisStudentPart->id ? $ThesisStudentPart->id : null }},
-                            thesi_student_id: {{ $thesis_id }},
-                            thesi_format_part_id: {{ $focus_id }}
-                        },
-                        method:'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    }
-                },
+
                 references:{
                     url:"{{ route('investigation_thesis_references') }}",
                     headers: {
