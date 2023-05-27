@@ -133,7 +133,7 @@ class GetReferencesController extends Controller
 
     public function generate_apa($document)
     {
-
+        
                                         // Consultando la WEB de mendeley según el ID
                                         $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
 
@@ -152,7 +152,14 @@ class GetReferencesController extends Controller
                                         if ($parte_despues !== false) {
                                             $parte_despues = substr($parte_despues, 1);
                                         }
-                                        $citation ="<p>".$parte_despues;
+                                        $citation ="<p>".$parte_despues;                                        
+
+                                        $citation = str_replace('Elsevier B.V.', '', $citation);
+                                        $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
+                                        $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
+                                        $citation = str_replace(' (Vol. ', ', ', $citation);                                       
+                                        $citation = str_replace('. In ', '. ', $citation);
+                                        $citation = str_replace('pp.', '', $citation);
 
         // $authors = array();
 
@@ -601,12 +608,23 @@ class GetReferencesController extends Controller
             $citation .= $document->pages . ".";
         }
         if($this->is_doi){
-            $citation .= ' Disponible en: '.'https://dx.doi.org/'.$this->code_consulta.'.</p>';
+            $citation .= ' https://dx.doi.org/'.$this->code_consulta.'.</p>';
         }else{
-            $citation .= '.</p>';
+            $citation .= '</p>';
+        }
+
+        $year = $document->year;
+        $source = $document->source;
+        $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
+        $explotado = explode("https://doi", $apa_citation);
+        $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
+        $volumen_and_pages="";
+        if( count($explotado) > 1 ){
+            $volumen_and_pages = $explotado[1];
         }
         
-
+        $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
+        $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
         return $citation;
     }
 }
