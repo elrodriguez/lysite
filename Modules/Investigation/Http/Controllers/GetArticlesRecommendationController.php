@@ -29,7 +29,7 @@ class GetArticlesRecommendationController extends Controller
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "recomiendame una lista de 5 articulos relacionados a mi tesis: {" . $consulta . "} y luego presenta las listas en idioma ingles y portugues. además usa etiquetas html para mostrar las listas";
+                $consulta = "recomiendame una lista de 5 articulos relacionados a mi tesis: {" . $consulta . "} y luego presenta las listas en idioma Español, ingles y portugues. además usa etiquetas html para mostrar las listas";
 
                 try {
                     $result = OpenAI::completions()->create([
