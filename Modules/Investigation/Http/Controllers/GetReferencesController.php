@@ -223,8 +223,10 @@ class GetReferencesController extends Controller
             
     public function generate_iso690($document)
     {
+        //en test no sale aún obtener solo el mes de los articulos
+        // $this->getMonthforISO($document->link);
         
-        $authors = array();
+       $authors = array();
 
         //Obtener el nombre de los autores
         foreach ($document->authors as $author) {
@@ -411,5 +413,52 @@ class GetReferencesController extends Controller
             $volumen_and_pages = $explotado[1];
         }
         return $volumen_and_pages;
+    }
+
+    public function getMonthforISO($link){
+
+                // Consultando la WEB de mendeley según el ID
+                $response = Http::get($link);
+
+                // Get the body of the response
+                $body = $response->body();
+
+                // Convert the body to a string
+                $html = (string)$body;
+                ////hora debo obtener otro enlace donde aparece el MES
+                $explotado = explode('data-name="open-full-text" href="', $html);
+                if(isset($explotado[1])){
+                    $explotado = explode('" target="_blank"', $explotado[1]);
+                    if(isset($explotado[0])){
+                        $link = "https:" . $explotado[0];
+                    }
+                    $response = Http::get($link);
+    
+                    // Get the body of the response
+                    $body = $response->body();
+    
+                    // Convert the body to a string
+                    $html = (string)$body;
+    
+                    ////hora debo obtener el link donde está el mes en ingles
+                    $explotado = explode('identifierValue', $html);
+                    if(isset($explotado[1]))$explotado = explode("'", $explotado[1]);  
+                    if(isset($explotado[1])){
+                        $link = "https://www.sciencedirect.com/science/article/abs/pii/".$explotado[1];
+
+                        $response = Http::get($link);
+
+                        // Get the body of the response
+                        $body = $response->body();
+
+                        // Convert the body to a string
+                        $html = (string)$body;
+                        dd($html);
+                        ////hora debo obtener otro enlace donde aparece el MES
+                        $explotado = explode('class="anchor anchor-default" href="', $html);
+                        dd($explotado);  
+                    }
+                }
+              
     }
 }
