@@ -1,6 +1,7 @@
 <x-master>
     @section('styles')
     <link href="{{ asset('x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet"/>
+   
     @stop
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary">
@@ -31,8 +32,10 @@
     @section('modales')
         <livewire:investigation::thesis.thesis-help-create-titles />
         <livewire:investigation::thesis.thesis-format-modal />
+        <livewire:investigation::thesis.thesis-format-modal-edit />
     @endsection
     @section('script')
     <script src="{{ asset('x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
+
     @stop
 </x-master>

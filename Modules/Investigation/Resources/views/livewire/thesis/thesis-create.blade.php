@@ -15,7 +15,7 @@
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <form wire:submit.prevent="save" class="flex">
+                        <form  class="flex">
 
                             <div class="form-group">
                                 <label class="form-label" for="name">Nombre Corto*</label>
@@ -83,12 +83,16 @@
                                 <label class="form-label">{{ __('investigation::labels.formats') }}</label>
                                 
                                 <div class="input-group mb-3">
-                                    <select wire:model="format_id" class="form-control" id="format_id">
-                                        <option value="">Seleccionar</option>
-                                        @foreach($formats as $format)
-                                            <option value="{{ $format->id }}">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Seleccionar Formato
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @foreach($formats as $format)
+                                                <div class="dropdown-item"><button onclick="selectionFormat({{ $format->id }})" type="button" class="btn btn-link">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</button> <button class="btn btn-sm btn-primary ml-2" onclick="openModalEditFormat({{ $format->id }})">Editar</button></div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     <div class="input-group-append">
                                         <button id="btn-new-format-modal-student" class="btn btn-secondary" type="button" id="button-addon2">Crear Formato</button>
                                     </div>
@@ -97,7 +101,7 @@
                             </div>
 
 
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar</button>
+                            <button type="button" wire:click="save" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -106,7 +110,10 @@
     </div>
 
     <script>
-  
+        function selectionFormat(id){
+            @this.set('format_id', id);
+        }
+
         window.addEventListener('inve-thesis-student-create', event => {
             cuteAlert({
                 type: "success",
@@ -133,5 +140,7 @@
         btnModalFormat.addEventListener('click', () => {
             $('#modalFormatStudent').modal('show');
         });
+
+        
     </script>
 </div>

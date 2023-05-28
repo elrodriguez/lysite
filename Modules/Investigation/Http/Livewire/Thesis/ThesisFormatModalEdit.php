@@ -2,62 +2,63 @@
 
 namespace Modules\Investigation\Http\Livewire\Thesis;
 
-use App\Models\Country;
 use App\Models\Person;
-use App\Models\Universities;
-use App\Models\UniversitiesSchools;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 
-class ThesisFormatModal extends Component
+class ThesisFormatModalEdit extends Component
 {
-    public $xparts = [];
-    public $xpart_id;
-    public $xformat_id;
-    public $number_order;
-    public $xdescription;
-    public $xschool_id;
-    public $xname;
-    public $xtype_thesis;
-    public $xnormative_thesis;
-    public $xenum_types;
-    public $xenum_normatives;
-    public $xuniversity_id;
-    public $xcountry_id;
+    public $parts = [];
+    public $part_id;
+    public $format_idx;
+    public $format;
+    public $part = [];
+    public $number_order_old;
+    public $number_orderx;
+    public $descriptionx;
+    public $information;
+    public $index_order = 0;
+    public $school_id;
+    public $namex;
+    public $description_format;
+    public $type_thesisx;
+    public $normative_thesisx;
+    public $enum_types;
+    public $enum_normatives;
+    public $university_id;
+    public $country_id;
 
     public function mount()
     {
         $person = Person::where('user_id', Auth::id())->first();
-        $this->xcountry_id = $person->country_id;
-        $this->xuniversity_id = $person->university_id;
+        $this->country_id = $person->country_id;
+        $this->university_id = $person->university_id;
 
-        $this->xenum_types = $this->getTypes();
-        $this->xenum_normatives = $this->getNormatives();
+        $this->enum_types = $this->getTypes();
+        $this->enum_normatives = $this->getNormatives();
     }
-    public function getNormatives()
+
+    public function getAllData($id)
     {
-        return ['APA', 'Vancouver', 'Otros'];
+        $format = InveThesisFormat::find($id);
+        $this->format_idx = $id;
+        $this->normative_thesisx = $format->normative_thesis;
+        $this->type_thesisx = $format->type_thesis;
+        $this->namex = $format->name;
     }
-    public function getTypes()
+
+    public function getParts()
     {
-        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
-    }
-    public function render()
-    {
-        return view('investigation::livewire.thesis.thesis-format-modal');
-    }
-    public function getPartsNew()
-    {
-        $this->xparts = [];
-        $parts = InveThesisFormatPart::where('thesis_format_id', $this->xformat_id)
+        $this->parts = [];
+        $parts = InveThesisFormatPart::where('thesis_format_id', $this->format_idx)
             ->whereNull('belongs')
             ->orderBy('index_order')
             ->get();
 
         foreach ($parts as $k => $part) {
-            $this->xparts[$k] = [
+            $this->parts[$k] = [
                 'id' => $part->id,
                 'description' => $part->description,
                 'number_order' => $part->number_order,
@@ -65,10 +66,9 @@ class ThesisFormatModal extends Component
                 'items' => $this->getSubParts($part->id),
             ];
         }
-
         $this->dispatchBrowserEvent('inve-thesis-student-format-add-load', ['class' => true]);
     }
-    public function getSubPartsNew($id)
+    public function getSubParts($id)
     {
         $subparts = InveThesisFormatPart::where('belongs', $id)
             ->orderBy('index_order')
@@ -101,59 +101,65 @@ class ThesisFormatModal extends Component
         return $html;
     }
 
-    public function addTitlePartNew()
+    public function getNormatives()
     {
-
-        array_push($this->xparts, [
+        return ['APA', 'Vancouver', 'Otros'];
+    }
+    public function getTypes()
+    {
+        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+    }
+    public function render()
+    {
+        return view('investigation::livewire.thesis.thesis-format-modal-edit');
+    }
+    public function addTitlePartEdit()
+    {
+        array_push($this->parts, [
             'id'            => '',
             'description'   => '',
             'number_order'  => '',
             'index_order'   => '',
             'items'         => []
         ]);
-        $index = count($this->xparts) - 1;
-
-        $this->dispatchBrowserEvent('inve-thesis-student-format-add', ['keytitle' => $index]);
+        $index = count($this->parts) - 1;
+        $this->dispatchBrowserEvent('inve-thesis-student-format-add-update', ['keytitle' => $index]);
     }
-
-    public function saveFormatStudentNew()
+    public function savePartEstudentEdit()
     {
-
-        $this->validate([
-            'xname'          => 'required|max:255',
-            'xtype_thesis'   => 'required',
-            'xnormative_thesis'   => 'required'
-        ]);
-
-        $this->xformat_id = InveThesisFormat::create([
-            'name' => trim($this->xname),
-            'description' => 'Formato Creado por el alumno',
-            'type_thesis' => trim($this->xtype_thesis),
-            'normative_thesis' => trim($this->xnormative_thesis),
-            'school_id' => $this->xschool_id,
-        ])->id;
-
-
-        $this->dispatchBrowserEvent('thesis-format-create-estudent', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
-    }
-    public function savePartEstudentNew()
-    {
-        $this->validate([
-            'xdescription' => 'required|string|max:255'
-        ]);
 
         InveThesisFormatPart::create([
-            'description' => $this->xdescription,
+            'description' => $this->descriptionx,
             'information' => 'No hay informacion',
-            'number_order' => $this->xnumber_order,
-            'thesis_format_id' => $this->xformat_id,
-            'belongs' => $this->xpart_id,
+            'number_order' => $this->number_orderx,
+            'thesis_format_id' => $this->format_idx,
+            'belongs' => $this->part_id,
             'state' => true,
             'index_order' => 1,
             'body' => true,
             'show_description' => true,
             'salto_de_pagina' => true
         ]);
-        $this->getPartsNew();
+
+        $this->getParts();
+    }
+
+    public function savePartEstudentEditUpdate($id)
+    {
+        $this->validate([
+            'descriptionx' => 'required|string|max:255'
+        ]);
+
+        InveThesisFormatPart::find($id)->update([
+            'description' => $this->descriptionx
+        ]);
+
+        $this->getParts();
+    }
+
+    public function deletePartStudent($id)
+    {
+        InveThesisFormatPart::find($id)->delete();
+        $this->getParts();
     }
 }
