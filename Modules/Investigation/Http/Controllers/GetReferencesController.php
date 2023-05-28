@@ -152,36 +152,45 @@ class GetReferencesController extends Controller
                                         $citation = str_replace(' (Vol. ', ', ', $citation);                                       
                                         $citation = str_replace('. In ', '. ', $citation);
                                         $citation = str_replace('pp.', '', $citation);
+                                        $citation = preg_replace('/\((\d{4,5})\./', '($1)', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
+                                        $nxplodes = explode('('.$document->year.')', $citation);                                        
+                                        $nxplodes[0] = $this->getAutorforAPA($document);
+                                        $citation = implode('('.$document->year.')', $nxplodes);      
 
-        // $authors = array();
 
-        // //Obtener el nombre de los autores
-        // foreach ($document->authors as $author) { //solo la inicial del primer nombre
-        //     if ($document->type == "book") {
-        //         array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
-        //     } else {
-        //         array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1) . ".");
-        //     }
-        // }
+                                        return $citation;
+    }
 
-        // $citation = '<p>';
-        // //Añadir los apellidos de los autores
-        // if (count($authors) == 1) {
-        //     $citation .= $authors[0] . " ";
-        // } elseif (count($authors) == 2) {
-        //     $citation .= $authors[0] . " y " . $authors[1] . " ";
-        // } elseif (count($authors) == 3) {
-        //     $citation .= $authors[0] . ", " . $authors[1] . ", y " . $authors[2] . " ";
-        // } elseif (count($authors) == 4) {
-        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", y " . $authors[3] . " ";
-        // } elseif (count($authors) == 5) {
-        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", y " . $authors[4] . " ";
-        // } elseif (count($authors) == 5) {
-        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", y " . $authors[5] . " ";
-        // } elseif (count($authors) > 5) {
-        //     $citation .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", y " . $authors[6] . " ";
-        // }
+    public function getAutorforAPA($document){
+        $authors = array();
 
+        //Obtener el nombre de los autores
+        foreach ($document->authors as $author) { //solo la inicial del primer nombre
+            if ($document->type == "book") {
+                array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
+            } else {
+                array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1) . ".");
+            }
+        }
+
+        $citation2 = "";
+        //Añadir los apellidos de los autores
+        if (count($authors) == 1) {
+            $citation2 .= $authors[0] . " ";
+        } elseif (count($authors) == 2) {
+            $citation2 .= $authors[0] . " & " . $authors[1] . " ";
+        } elseif (count($authors) == 3) {
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", & " . $authors[2] . " ";
+        } elseif (count($authors) == 4) {
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", & " . $authors[3] . " ";
+        } elseif (count($authors) == 5) {
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", & " . $authors[4] . " ";
+        } elseif (count($authors) == 5) {
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", & " . $authors[5] . " ";
+        } elseif (count($authors) > 5) {
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", & " . $authors[6] . " ";
+        }
+        
         // //Añadir el año de publicación y el título del artículo
         // $citation .= "(" . substr($document->year, 0, 4) . "). " . $document->title . ". ";
 
@@ -209,20 +218,21 @@ class GetReferencesController extends Controller
         // }
 
         // $citation .= "</p>";
-
-        return $citation;
+        return $citation2;
     }
-
             
     public function generate_iso690($document)
     {
+        
         $authors = array();
 
         //Obtener el nombre de los autores
         foreach ($document->authors as $author) {
             $last_name = explode(" ", $author->last_name);
             $last_name = mb_strtoupper($last_name[0], 'UTF-8');
-            $name = $last_name . ', ' . $author->first_name;
+            $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
+            $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
+            $name = $last_name . ', ' . $nombre;
             array_push($authors, $name);
         }
 
@@ -232,12 +242,12 @@ class GetReferencesController extends Controller
         if (count($authors) == 1) {
             $citation .= $authors[0] . '. ';
         } elseif (count($authors) == 2) {
-            $citation .= $authors[0] . ' a ' . $authors[1] . '. ';
+            $citation .= $authors[0] . ' y ' . $authors[1] . '. ';
         } else {
             for ($i = 0; $i < count($authors) - 1; $i++) {
-                $citation .= $authors[$i] . ', ';
+                $citation .= $authors[$i] . '; ';
             }
-            $citation .= 'a ' . $authors[count($authors) - 1] . '. ';
+            $citation .= 'y ' . $authors[count($authors) - 1] . '. ';
         }
 
         //Añadir el título del artículo
@@ -356,7 +366,7 @@ class GetReferencesController extends Controller
 
         //Añadir el nombre de la revista
         if (isset($document->source) && $document->title != $document->source) {
-            $citation .= "<em>" . $document->source . "</em>. ";
+            $citation .= "" . $document->source . ". ";
         }
 
         //Añadir el año de publicación
