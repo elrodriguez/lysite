@@ -382,7 +382,6 @@ class ThesisParts extends Component
             $p_used = $permisos->paraphrase_used;
 
             if ($p_allowed > $p_used) {
-                $max_tokens = 1500;
                 $max_tokens = 3400;
                 $temperature = 0.6;
 

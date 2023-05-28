@@ -48,8 +48,8 @@ class GetReferencesController extends Controller
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
             'form_params' => [
                 'grant_type' => 'client_credentials',
-                'client_id' => '14971',
-                'client_secret' => '1ppN5HZmu5rswviU',
+                'client_id' => env('MENDELEY_CLIENT_ID'),
+                'client_secret' => env('MENDELEY_CLIENT_SECRET'),
                 'scope' => 'all'
             ]
         ]);
@@ -109,17 +109,9 @@ class GetReferencesController extends Controller
         if(count($document)>0){
             switch ($normativa) {
                 case 'apa':
-                    return $this->generate_apa($document[0]);
-                case 'chicago':
-                    return $this->generate_chicago($document[0]);
-                case 'mla':
-                    return $this->generate_mla($document[0]);
-                case 'harvard':
-                    return $this->generate_harvard($document[0]);
+                    return $this->generate_apa($document[0]); 
                 case 'iso690':
-                    return $this->generate_iso690($document[0]);
-                case 'ieee':
-                    return $this->generate_ieee($document[0]);
+                    return $this->generate_iso690($document[0]);               
                 case 'vancouver':
                     return $this->generate_vancouver($document[0]);
                 default:
@@ -133,7 +125,7 @@ class GetReferencesController extends Controller
 
     public function generate_apa($document)
     {
-
+        
                                         // Consultando la WEB de mendeley según el ID
                                         $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
 
@@ -152,7 +144,14 @@ class GetReferencesController extends Controller
                                         if ($parte_despues !== false) {
                                             $parte_despues = substr($parte_despues, 1);
                                         }
-                                        $citation ="<p>".$parte_despues;
+                                        $citation ="<p>".$parte_despues;                                        
+
+                                        $citation = str_replace('Elsevier B.V.', '', $citation);
+                                        $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
+                                        $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
+                                        $citation = str_replace(' (Vol. ', ', ', $citation);                                       
+                                        $citation = str_replace('. In ', '. ', $citation);
+                                        $citation = str_replace('pp.', '', $citation);
 
         // $authors = array();
 
@@ -214,171 +213,7 @@ class GetReferencesController extends Controller
         return $citation;
     }
 
-    public function generate_chicago($document)
-    {
-        $authors = array();
-
-        //Obtener el nombre de los autores
-        foreach ($document->authors as $author) {
-            $name = $author->last_name . ", " . $author->first_name;
-            array_push($authors, $name);
-        }
-
-        $citation = '<p>';
-
-        //Añadir los nombres de los autores
-        if (count($authors) == 1) {
-            $citation .= $authors[0] . ". ";
-        } elseif (count($authors) == 2) {
-            $citation .= $authors[0] . " and " . $authors[1] . ". ";
-        } else {
-            for ($i = 0; $i < count($authors) - 1; $i++) {
-                $citation .= $authors[$i] . ", ";
-            }
-            $citation .= "and " . $authors[count($authors) - 1] . ". ";
-        }
-
-        //Añadir el título del artículo
-        $citation .= '"' . $document->title . '," ';
-
-        //Añadir el nombre de la revista
-        if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em> ';
-        }
-
-        //Añadir el volumen
-        if (isset($document->volume)) {
-            $citation .= $document->volume;
-        }
-
-        //Añadir el número
-        if (isset($document->issue)) {
-            $citation .= ', no. ' . $document->issue;
-        }
-
-        //Añadir el año de publicación
-        $citation .= ' (' . $document->year . '): ';
-
-        //Añadir las páginas
-        if (isset($document->pages)) {
-            $citation .= $document->pages . '.';
-        }
-
-        $citation .= '</p>';
-
-        return $citation;
-    }
-
-    public function generate_mla($document)
-    {
-        $authors = array();
-
-        //Obtener el nombre de los autores
-        foreach ($document->authors as $author) {
-            $name = $author->first_name . " " . $author->last_name;
-            array_push($authors, $name);
-        }
-
-        $citation = '<p>';
-
-        //Añadir los nombres de los autores
-        if (count($authors) == 1) {
-            $citation .= $authors[0] . ". ";
-        } elseif (count($authors) == 2) {
-            $citation .= $authors[0] . " and " . $authors[1] . ". ";
-        } else {
-            for ($i = 0; $i < count($authors) - 1; $i++) {
-                $citation .= $authors[$i] . ", ";
-            }
-            $citation .= "and " . $authors[count($authors) - 1] . ". ";
-        }
-
-        //Añadir el título del artículo
-        $citation .= '"' . $document->title . '." ';
-
-        //Añadir el nombre de la revista
-        if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em>, ';
-        }
-
-        //Añadir el volumen
-        if (isset($document->volume)) {
-            $citation .= 'vol. ' . $document->volume . ', ';
-        }
-
-        //Añadir el número
-        if (isset($document->issue)) {
-            $citation .= 'no. ' . $document->issue . ', ';
-        }
-
-        //Añadir el año de publicación
-        $citation .= $document->year . ', ';
-
-        //Añadir las páginas
-        if (isset($document->pages)) {
-            $citation .= 'pp. ' . $document->pages . '.';
-        }
-
-        $citation .= '</p>';
-
-        return $citation;
-    }
-
-    public function generate_harvard($document)
-    {
-        $authors = array();
-
-        //Obtener el nombre de los autores
-        foreach ($document->authors as $author) {
-            $name = $author->first_name . ' ' . $author->last_name;
-            array_push($authors, $name);
-        }
-
-        $citation = '<p>';
-
-        //Añadir los nombres de los autores
-        if (count($authors) == 1) {
-            $citation .= $authors[0] . '. ';
-        } elseif (count($authors) == 2) {
-            $citation .= $authors[0] . ' &amp; ' . $authors[1] . '. ';
-        } else {
-            for ($i = 0; $i < count($authors) - 1; $i++) {
-                $citation .= $authors[$i] . ', ';
-            }
-            $citation .= 'and ' . $authors[count($authors) - 1] . '. ';
-        }
-
-        //Añadir el año de publicación
-        $citation .= '(' . $document->year . ') ';
-
-        //Añadir el título del artículo
-        $citation .= '"' . $document->title . '." ';
-
-        //Añadir el nombre de la revista
-        if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em> ';
-        }
-
-        //Añadir el volumen
-        if (isset($document->volume)) {
-            $citation .= $document->volume . ', ';
-        }
-
-        //Añadir el número
-        if (isset($document->issue)) {
-            $citation .= '(' . $document->issue . '), ';
-        }
-
-        //Añadir las páginas
-        if (isset($document->pages)) {
-            $citation .= 'pp. ' . $document->pages . '.';
-        }
-
-        $citation .= '</p>';
-
-        return $citation;
-    }
-
+            
     public function generate_iso690($document)
     {
         $authors = array();
@@ -406,25 +241,16 @@ class GetReferencesController extends Controller
         }
 
         //Añadir el título del artículo
-        $citation .= $document->title . '. [en línea]. ';
+        $citation .= $document->title . '. ';
 
         //Añadir el nombre de la revista
         if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em>, ';
+            $citation .= '<em>' . $document->source . '</em> '. ' [en línea] ';
         }
 
-        //Añadir el volumen
-        if (isset($document->volume)) {
-            $citation .= $document->volume . ', ';
-        }
-
-        //Añadir el número
-        if (isset($document->issue)) {
-            $citation .= '(' . $document->issue . '), ';
-        }
-
+        $volumen_and_pages = $this->getVolumen_and_pages($document);
         //Añadir el año de publicación
-        $citation .= $document->year . ', ';
+        $citation .= $document->year . ', ' . $volumen_and_pages;
 
         //Añadir las páginas
         if (isset($document->pages)) {
@@ -483,64 +309,8 @@ class GetReferencesController extends Controller
             $citation .= 'Disponible en: <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>.';
         }
 
-        $citation .= '</p>';
-
-        return $citation;
-    }
-
-    public function generate_ieee($document)
-    {
-        $authors = array();
-
-        //Obtener el nombre de los autores
-        foreach ($document->authors as $author) {
-            $name = $author->last_name . ', ' . $author->first_name;
-            array_push($authors, $name);
-        }
-
-        $citation = '<p>';
-
-        //Añadir los nombres de los autores
-        if (count($authors) == 1) {
-            $citation .= $authors[0] . ', ';
-        } elseif (count($authors) == 2) {
-            $citation .= $authors[0] . ' y ' . $authors[1] . ', ';
-        } else {
-            for ($i = 0; $i < count($authors) - 1; $i++) {
-                $citation .= $authors[$i] . ', ';
-            }
-            $citation .= 'y ' . $authors[count($authors) - 1] . ', ';
-        }
-
-        //Añadir el título del artículo
-        $citation .= '"' . $document->title . '," ';
-
-        //Añadir el nombre de la revista
-        if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em>, ';
-        }
-
-        //Añadir el volumen
-        if (isset($document->volume)) {
-            $citation .= 'vol. ' . $document->volume . ', ';
-        }
-
-        //Añadir el número
-        if (isset($document->issue)) {
-            $citation .= 'no. ' . $document->issue . ', ';
-        }
-
-        //Añadir las páginas
-        if (isset($document->pages)) {
-            $citation .= 'pp. ' . $document->pages . ', ';
-        }
-
-        //Añadir el año de publicación
-        $citation .= $document->year . '. ';
-
-        //Añadir el DOI
-        if (isset($document->doi)) {
-            $citation .= '[Online]. Available: https://doi.org/' . $document->doi . '.';
+        if(isset($document->identifiers->issn)) {
+            $citation .= ' ISSN: ' . $document->identifiers->issn;
         }
 
         $citation .= '</p>';
@@ -548,6 +318,7 @@ class GetReferencesController extends Controller
         return $citation;
     }
 
+    
     public function generate_vancouver($document)
     {
         $authors = array();
@@ -601,12 +372,34 @@ class GetReferencesController extends Controller
             $citation .= $document->pages . ".";
         }
         if($this->is_doi){
-            $citation .= ' Disponible en: '.'https://dx.doi.org/'.$this->code_consulta.'.</p>';
+            $citation .= ' https://dx.doi.org/'.$this->code_consulta.'.</p>';
         }else{
-            $citation .= '.</p>';
+            $citation .= '</p>';
         }
-        
 
+        // $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
+        // $explotado = explode("https://doi", $apa_citation);
+        // $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
+        // $volumen_and_pages="";
+        // if( count($explotado) > 1 ){
+        //     $volumen_and_pages = $explotado[1];
+        // }
+        $volumen_and_pages = $this->getVolumen_and_pages($document);
+        $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
+        $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
         return $citation;
+    }
+
+    public function getVolumen_and_pages($document){
+        $year = $document->year;
+        $source = $document->source;
+        $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
+        $explotado = explode("https://doi", $apa_citation);
+        $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
+        $volumen_and_pages="";
+        if( count($explotado) > 1 ){
+            $volumen_and_pages = $explotado[1];
+        }
+        return $volumen_and_pages;
     }
 }

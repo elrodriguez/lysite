@@ -12,7 +12,7 @@ export default class recommendation extends Plugin {
             const button = new ButtonView();
 
             button.set( {
-                label: 'Recomendación de Articulos',
+                label: 'Recomendación de búsqueda',
                 icon: iconrecommendation,
                 tooltip: true
             } );

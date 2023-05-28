@@ -44,11 +44,7 @@ function openModalReference(editor){
                 <label class="ly-ck-dialog-label" for="select-normativa">Normativa:</label>
                 <select class="ly-ck-dialog-select" id="select-normativa" name="select-normativa">
                     <option value="apa">APA</option>
-                    <option value="mla">MLA</option>
-                    <option value="harvard">Harvard</option>
-                    <option value="iso690">ISO690</option>
-                    <option value="ieee">IEEE</option>
-                    <option value="chicago">Chicago</option>
+                    <option value="iso690">ISO</option>
                     <option value="vancouver">Vancouver</option>
                 </select>
             </div>

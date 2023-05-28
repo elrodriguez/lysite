@@ -37,7 +37,7 @@
 
 
         <div class="form-group">
-            <label class="text-danger" id="paraphrase_left">Tienes {{ $paraphrase_left }} oportunidades para parafrasear.</label>
+            <label class="text-danger" id="paraphrase_left">Tienes {{ $paraphrase_left }} oportunidades de ayudas asistidas por Lyonteach(parafrasear, corregir, recomendar y proponer).</label>
         </div>
 
         {{-- Notas de instructor --}}
