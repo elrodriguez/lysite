@@ -152,7 +152,8 @@ class GetReferencesController extends Controller
                                         $citation = str_replace(' (Vol. ', ', ', $citation);                                       
                                         $citation = str_replace('. In ', '. ', $citation);
                                         $citation = str_replace('pp.', '', $citation);
-                                        $citation = preg_replace('/\((\d{4,5})\./', '($1)', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
+                                        //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
+                                        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
                                         $nxplodes = explode('('.$document->year.')', $citation);                                        
                                         $nxplodes[0] = $this->getAutorforAPA($document);
                                         $citation = implode('('.$document->year.')', $nxplodes);      
@@ -399,8 +400,12 @@ class GetReferencesController extends Controller
         $volumen_and_pages = $this->getVolumen_and_pages($document);
         $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
         $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
+        //borrando tag <i> en vancouver no debe ir
+        $citation = str_replace("<i>", "", $citation);        
+        $citation = str_replace('</i>', "", $citation);
         return $citation;
     }
+
 
     public function getVolumen_and_pages($document){
         $year = $document->year;
