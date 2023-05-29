@@ -20,7 +20,8 @@ class InveThesisFormat extends Model
         'left_margin',
         'between_lines',
         'top_margin',
-        'bottom_margin'
+        'bottom_margin',
+        'user_id'
     ];
 
     protected static function newFactory()

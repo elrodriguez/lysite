@@ -21,8 +21,8 @@ class InveThesisFormatPart extends Model
         'index_order',
         'body',
         'show_description',
-        'salto_de_pagina'
-
+        'salto_de_pagina',
+        'user_id'
     ];
 
     protected static function newFactory()

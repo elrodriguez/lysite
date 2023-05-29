@@ -92,7 +92,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
                         data-dismiss="modal">{{ __('labels.Close') }}</button>
-                    <button wire:click="savePart" type="button"
+                    <button wire:click="savePartNew" type="button"
                         class="btn btn-primary">{{ __('labels.Add') }}</button>
                 </div>
             </div>

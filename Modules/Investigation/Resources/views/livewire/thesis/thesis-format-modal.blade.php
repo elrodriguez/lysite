@@ -58,29 +58,35 @@
                     <button onclick="saveNewFormatStudentJS()" type="button" class="btn btn-primary btn-sm mb-4"><i class="fa fa-check mr-1"></i>Crear Formato</button>
                 @endif
                 @if($this->xformat_id)
-                    <button onclick="addTitlePartNewJS()" type="button" class="btn btn-primary btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
+                    <button onclick="addTitlePartNewJS()" type="button" class="btn btn-success btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
                 @endif
                 <ul class="list-point-none">
                     @if(count($xparts) > 0)
                         @foreach($xparts as $k => $part)
                             <li>
-                                <div class="btn-group mr-3">
-                                    <button wire:click="" type="button" class="btn btn-secondary btn-sm">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                    <button onclick="" type="button" class="btn btn-secondary btn-sm">
-                                        <i class="fa fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                                <a href="#" id="formattitle{{ $k }}" data-type="text" data-pk="{{ $part['id'] }}" data-title="Escriba Titulo">{{ $part['description'] }}</a>
+                                @if($part['id'])
+                                    <div class="btn-group mr-3">
+                                        <button onclick="addSubPartFormatNewJS({{ $k }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                        <button onclick="deletePartStudentNewJS({{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                @endif
+                                <a class="formattitlereload" href="#" id="formattitle{{ $k }}" data-type="text" data-pk="{{ $part['id'] }}" data-title="Escriba Titulo">{{ $part['description'] }}</a>
+                                <ul id="ULsubpartFormatNew{{ $k . $part['id'] }}">
+                                    @if($part['items'])
+                                        {!! $part['items']  !!}
+                                    @endif
+                                </ul>
                             </li>
                         @endforeach
                     @endif
                 </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -102,8 +108,22 @@
             }
         });
     });
+    window.addEventListener('inve-thesis-student-format-add-reload', event => {
+        $('.formattitlereload').editable({
+            url: function(params) {
+                var d = new $.Deferred();
+                if(params.value === 'abc') {
+                    return d.reject('error message');
+                } else {
+                    @this.set('descriptionx', params.value);
+                    @this.savePartEstudentNewUpdate(params.pk);
+                }
+            }
+        });
+    });
     window.addEventListener('thesis-format-create-estudent', event => {
-        alert('Se registro correctamente.')
+        alert('Se registro correctamente.');
+        reloadFormatStudent();
     });
     function saveNewFormatStudentJS(){
         let selectElement = document.getElementById('school_id');
@@ -120,5 +140,35 @@
     function addTitlePartNewJS(){
         @this.addTitlePartNew();
     }
+    function openModalFormatStudentNew(){
+        $('#modalFormatStudent').modal('show');
+    }
+    function deletePartStudentNewJS(id){
+        @this.deletePartStudentNew(id);
+    }
+    function addSubPartFormatNewJS(k,id){
+        var ulsubpartFormat = document.getElementById('ULsubpartFormatNew'+k+id);
+
+        var newLi = document.createElement('li');
+        newLi.innerHTML = '<a class="formattitlereload" href="#" id="subformattitleNew'+ k + id + '" data-type="text" data-pk="'+ id + '"></a>';
+
+        // Agregar el nuevo elemento li al final del ul
+        ulsubpartFormat.appendChild(newLi);
+
+        $('#subformattitleNew'+ k + id ).editable({
+            url: function(params) {
+                var d = new $.Deferred();
+                if(params.value === 'abc') {
+                    return d.reject('error message');
+                } else {
+                    @this.set('xpart_id', params.pk);
+                    @this.set('xdescription', params.value);
+                    @this.set('xnumber_order', 1);
+                    @this.savePartEstudentNew();
+                }
+            }
+        });
+    }
+    
 </script>
 </div>

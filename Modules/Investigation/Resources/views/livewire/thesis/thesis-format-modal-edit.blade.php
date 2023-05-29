@@ -55,22 +55,26 @@
                     </div>
                 </div>
                 <button wire:click="addTitlePartEdit" type="button" class="btn btn-primary btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
-                <ul wire:ignore.self class="list-point-none">
+                <ul class="list-point-none">
                     @if(count($parts) > 0)
                         @foreach($parts as $k => $part)
                             <li>
-                                <div class="btn-group mr-3">
-                                    <button wire:click="" type="button" class="btn btn-secondary btn-sm">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                    <button onclick="deletePartStudentJS({{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
-                                        <i class="fa fa-trash-alt"></i>
-                                    </button>
-                                </div>
+                                @if($part['id'])
+                                    <div class="btn-group mr-3">
+                                        <button onclick="addSubPartFormatJS({{ $k }},{{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                        <button onclick="deletePartStudentJS({{ $part['id'] }})" type="button" class="btn btn-secondary btn-sm">
+                                            <i class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                @endif
                                 <a class="formattitleload" href="#" id="xformattitle{{ $k }}" data-type="text" data-pk="{{ $part['id'] }}" data-title="Escriba Titulo">{{ $part['description'] }}</a>
+                                <ul id="ULsubpartFormat{{ $k . $part['id'] }}">
                                 @if($part['items'])
                                     {!! $part['items']  !!}
                                 @endif
+                                </ul>
                             </li>
                         @endforeach
                     @endif
@@ -78,7 +82,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button wire:click="updateFormatStudent" type="button" class="btn btn-primary">Guardar Cambios</button>
             </div>
         </div>
     </div>
@@ -88,6 +93,7 @@
         @this.set('format_idx',id);
         @this.getAllData(id);
         @this.getParts();
+
         $('#modalEditFormatStudent').modal('show');
     }
     $.fn.editable.defaults.mode = 'inline';
@@ -134,5 +140,33 @@
     function deletePartStudentJS(id){
         @this.deletePartStudent(id);
     }
+    function addSubPartFormatJS(k,id){
+        var ulsubpartFormat = document.getElementById('ULsubpartFormat'+k+id);
+
+        var newLi = document.createElement('li');
+        newLi.innerHTML = '<a class="formattitleload" href="#" id="xsubformattitle'+ k + id + '" data-type="text" data-pk="'+ id + '"></a>';
+
+        // Agregar el nuevo elemento li al final del ul
+        ulsubpartFormat.appendChild(newLi);
+
+        $('#xsubformattitle'+ k + id ).editable({
+            url: function(params) {
+                var d = new $.Deferred();
+                if(params.value === 'abc') {
+                    return d.reject('error message');
+                } else {
+                    @this.set('part_idx', params.pk);
+                    @this.set('descriptionx', params.value);
+                    @this.set('number_orderx', 1);
+                    @this.savePartEstudentEdit();
+                }
+            }
+        });
+    }
+    window.addEventListener('thesis-format-create-estudent-edit', event => {
+        alert('Se Actualizo correctamente.');
+        $('#modalEditFormatStudent').modal('hide');
+        reloadFormatStudent();
+    });
 </script>
 </div>

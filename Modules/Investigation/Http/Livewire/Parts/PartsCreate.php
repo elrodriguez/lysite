@@ -28,28 +28,30 @@ class PartsCreate extends Component
         return view('investigation::livewire.parts.parts-create');
     }
 
-    public function openModalPart($format_id, $part_id = null){
+    public function openModalPart($format_id, $part_id = null)
+    {
         $this->format_id = $format_id;
         $this->part_id = $part_id;
         $title = 'Nueva Parte';
 
-        if($this->part_id){
+        if ($this->part_id) {
             $this->part = InveThesisFormatPart::find($this->part_id);
             $title = 'Nueva SubParte :' . $this->part->description;
-            $this->number_order = $this->part->number_order.'.';
-            $this->number_order_old = $this->part->number_order.'.';
+            $this->number_order = $this->part->number_order . '.';
+            $this->number_order_old = $this->part->number_order . '.';
         }
         $this->dispatchBrowserEvent('open-modal-parts', ['title' => $title]);
     }
 
-    public function savePart(){
+    public function savePartNew()
+    {
         $this->validate([
             //'number_order' => 'required|unique:inve_thesis_format_parts,number_order',
             'description' => 'required|string|max:255',
             'information' => 'required|string',
             'index_order' => 'required'
         ]);
-        if($this->number_order==null)$this->number_order="";
+        if ($this->number_order == null) $this->number_order = "";
         InveThesisFormatPart::create([
             'description' => $this->description,
             'information' => $this->information,
@@ -63,9 +65,9 @@ class PartsCreate extends Component
             'salto_de_pagina' => $this->salto_de_pagina ? true : false
         ]);
 
-        if($this->part_id){
+        if ($this->part_id) {
             $this->number_order = $this->number_order_old;
-        }else{
+        } else {
             $this->number_order = null;
         }
         $this->description = null;
@@ -76,6 +78,6 @@ class PartsCreate extends Component
         $this->show_description = true;
         $this->salto_de_pagina = false;
         $this->emit('listParts');
-        $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente','res' => 'success']);
+        $this->dispatchBrowserEvent('inve-parts-save', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente', 'res' => 'success']);
     }
 }

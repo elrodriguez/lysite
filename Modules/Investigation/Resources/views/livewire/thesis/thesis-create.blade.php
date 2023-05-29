@@ -15,7 +15,7 @@
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <form  class="flex">
+                        <div  class="flex">
 
                             <div class="form-group">
                                 <label class="form-label" for="name">Nombre Corto*</label>
@@ -89,20 +89,26 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             @foreach($formats as $format)
-                                                <div class="dropdown-item"><button onclick="selectionFormat({{ $format->id }})" type="button" class="btn btn-link">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</button> <button class="btn btn-sm btn-primary ml-2" onclick="openModalEditFormat({{ $format->id }})">Editar</button></div>
+                                                <div class="dropdown-item">
+                                                    <button onclick="selectionFormat({{ $format->id }})" type="button" class="btn btn-link">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</button>
+                                                    @if($format->user_id == auth()->user()->id)
+                                                    <button class="btn btn-sm btn-primary ml-2" onclick="openModalEditFormat({{ $format->id }})">Editar</button>
+                                                    <button class="btn btn-sm btn-danger ml-2" onclick="deletesFormatStudent({{ $format->id }})">Eliminar</button>
+                                                    @endif
+                                                </div>
                                             @endforeach
                                         </div>
                                     </div>
                                     <div class="input-group-append">
-                                        <button id="btn-new-format-modal-student" class="btn btn-secondary" type="button" id="button-addon2">Crear Formato</button>
+                                        <button onclick="openModalFormatStudentNew()" class="btn btn-secondary" type="button" id="button-addon2">Crear Formato</button>
                                     </div>
                                 </div>
                                 @error('format_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
 
-                            <button type="button" wire:click="save" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Guardar</button>
-                        </form>
+                            <button type="button" wire:click="saveThesisStudent" wire:loading.attr="disabled" wire:target="saveThesisStudent" class="btn btn-primary">Guardar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,12 +141,31 @@
                 //@this.parts();
             });
         })
-
-        const btnModalFormat = document.getElementById('btn-new-format-modal-student');
-        btnModalFormat.addEventListener('click', () => {
-            $('#modalFormatStudent').modal('show');
+        function deletesFormatStudent(id){
+            cuteAlert({
+                type: "question",
+                title: "¿Desea eliminar estos datos?",
+                message: "Advertencia:¡Esta acción no se puede deshacer!",
+                confirmText: "Okay",
+                cancelText: "Cancel"
+            }).then((e)=>{
+                if ( e == ("confirm")){
+                    @this.destroyFormatStudent(id)
+                }
+            });
+        }
+        window.addEventListener('inve-part-delete-format-student', event => {
+            cuteAlert({
+                type: event.detail.res,
+                title: event.detail.tit,
+                message: event.detail.msg,
+                buttonText: "Okay"
+            }).then(() => {
+                @this.getFormat();
+            });
         });
-
-        
+        function reloadFormatStudent(){
+            @this.getFormat();
+        }
     </script>
 </div>

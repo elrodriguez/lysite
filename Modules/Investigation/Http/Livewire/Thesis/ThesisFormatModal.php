@@ -16,7 +16,7 @@ class ThesisFormatModal extends Component
     public $xparts = [];
     public $xpart_id;
     public $xformat_id;
-    public $number_order;
+    public $xnumber_order;
     public $xdescription;
     public $xschool_id;
     public $xname;
@@ -62,11 +62,11 @@ class ThesisFormatModal extends Component
                 'description' => $part->description,
                 'number_order' => $part->number_order,
                 'index_order' => $part->index_order,
-                'items' => $this->getSubParts($part->id),
+                'items' => $this->getSubPartsNew($part->id),
             ];
         }
 
-        $this->dispatchBrowserEvent('inve-thesis-student-format-add-load', ['class' => true]);
+        $this->dispatchBrowserEvent('inve-thesis-student-format-add-reload', ['class' => true]);
     }
     public function getSubPartsNew($id)
     {
@@ -76,27 +76,25 @@ class ThesisFormatModal extends Component
         $html = '';
 
         if (count($subparts) > 0) {
-            $html .= '<ul>';
+
             foreach ($subparts as $k => $subpart) {
                 $html .= '<li>';
                 $html .= '<div class="btn-group mr-3">
-                            <label style="opacity:0.4; color:red" data-toggle="tooltip" data-placement="top" title="Esto no se mostrará en las tesis">' . $subpart->index_order . '-- </label>
-                            <button wire:click="openModalTwo(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
+                           
+                            <button onclick="addSubPartFormatNewJS(' . $k . ',' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-plus"></i>
                             </button>
-                            <button wire:click="openModalEditTwo(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-pencil-alt"></i>
-                            </button>
-                            <button onclick="deletes(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
+                            <button onclick="deletePartStudentNewJS(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-trash-alt"></i>
                             </button>
                             
                         </div>';
-                $html .= '<a class="formattitleload" href="#" id="xformattitle' . $subpart->id . '" data-type="text" data-pk="' . $k . '" data-title="Escriba Titulo">' . $subpart->description . '</a>';
-                $html .= $this->getSubParts($subpart->id);
+                $html .= '<a class="formattitlereload" href="#" id="subformattitle' . $subpart->id . '" data-type="text" data-pk="' . $k . '" data-title="Escriba Titulo">' . $subpart->description . '</a>';
+                $html .= '<ul id="ULsubpartFormatNew' . $k . $subpart->id . '">';
+                $html .= $this->getSubPartsNew($subpart->id);
+                $html .= '</ul>';
                 $html .= '</li>';
             }
-            $html .= '</ul>';
         }
         return $html;
     }
@@ -126,11 +124,12 @@ class ThesisFormatModal extends Component
         ]);
 
         $this->xformat_id = InveThesisFormat::create([
-            'name' => trim($this->xname),
-            'description' => 'Formato Creado por el alumno',
-            'type_thesis' => trim($this->xtype_thesis),
-            'normative_thesis' => trim($this->xnormative_thesis),
-            'school_id' => $this->xschool_id,
+            'name'              => trim($this->xname),
+            'description'       => 'Formato Creado por el alumno',
+            'type_thesis'       => trim($this->xtype_thesis),
+            'normative_thesis'  => trim($this->xnormative_thesis),
+            'school_id'         => $this->xschool_id,
+            'user_id'           => Auth::id()
         ])->id;
 
 
@@ -143,17 +142,36 @@ class ThesisFormatModal extends Component
         ]);
 
         InveThesisFormatPart::create([
-            'description' => $this->xdescription,
-            'information' => 'No hay informacion',
-            'number_order' => $this->xnumber_order,
-            'thesis_format_id' => $this->xformat_id,
-            'belongs' => $this->xpart_id,
-            'state' => true,
-            'index_order' => 1,
-            'body' => true,
-            'show_description' => true,
-            'salto_de_pagina' => true
+            'description'       => $this->xdescription,
+            'information'       => 'No hay informacion',
+            'number_order'      => $this->xnumber_order,
+            'thesis_format_id'  => $this->xformat_id,
+            'belongs'           => $this->xpart_id,
+            'state'             => true,
+            'index_order'       => 1,
+            'body'              => true,
+            'show_description'  => true,
+            'salto_de_pagina'   => true,
+            'user_id'           => Auth::id()
         ]);
+        $this->xpart_id = null;
+        $this->getPartsNew();
+    }
+    public function deletePartStudentNew($id)
+    {
+        InveThesisFormatPart::find($id)->delete();
+        $this->getPartsNew();
+    }
+    public function savePartEstudentNewUpdate($id)
+    {
+        $this->validate([
+            'xdescription' => 'required|string|max:255'
+        ]);
+
+        InveThesisFormatPart::find($id)->update([
+            'description' => $this->xdescription
+        ]);
+
         $this->getPartsNew();
     }
 }

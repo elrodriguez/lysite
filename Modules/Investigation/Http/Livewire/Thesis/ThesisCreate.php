@@ -68,7 +68,7 @@ class ThesisCreate extends Component
         $this->formats = InveThesisFormat::where('school_id', $this->school_id)->get();
     }
 
-    public function save()
+    public function saveThesisStudent()
     {
 
         $this->validate([
@@ -115,5 +115,21 @@ class ThesisCreate extends Component
     public function parts()
     {
         redirect()->route('investigation_thesis_parts', $this->thesis_id);
+    }
+
+    public function destroyFormatStudent($id)
+    {
+        try {
+            InveThesisFormat::find($id)->delete();
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se eliminó correctamente';
+        } catch (\Illuminate\Database\QueryException $e) {
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puede eliminar porque cuenta con registros asociados';
+        }
+
+        $this->dispatchBrowserEvent('inve-part-delete-format-student', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 }

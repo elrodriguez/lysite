@@ -11,7 +11,7 @@ use Modules\Investigation\Entities\InveThesisFormatPart;
 class ThesisFormatModalEdit extends Component
 {
     public $parts = [];
-    public $part_id;
+    public $part_idx;
     public $format_idx;
     public $format;
     public $part = [];
@@ -51,6 +51,7 @@ class ThesisFormatModalEdit extends Component
 
     public function getParts()
     {
+
         $this->parts = [];
         $parts = InveThesisFormatPart::where('thesis_format_id', $this->format_idx)
             ->whereNull('belongs')
@@ -76,27 +77,25 @@ class ThesisFormatModalEdit extends Component
         $html = '';
 
         if (count($subparts) > 0) {
-            $html .= '<ul>';
+
             foreach ($subparts as $k => $subpart) {
                 $html .= '<li>';
                 $html .= '<div class="btn-group mr-3">
-                            <label style="opacity:0.4; color:red" data-toggle="tooltip" data-placement="top" title="Esto no se mostrará en las tesis">' . $subpart->index_order . '-- </label>
-                            <button wire:click="openModalTwo(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
+                           
+                            <button onclick="addSubPartFormatJS(' . $k . ',' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-plus"></i>
                             </button>
-                            <button wire:click="openModalEditTwo(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
-                                <i class="fa fa-pencil-alt"></i>
-                            </button>
-                            <button onclick="deletes(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
+                            <button onclick="deletePartStudentJS(' . $subpart->id . ')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-trash-alt"></i>
                             </button>
                             
                         </div>';
-                $html .= '<a class="formattitleload" href="#" id="xformattitle' . $subpart->id . '" data-type="text" data-pk="' . $k . '" data-title="Escriba Titulo">' . $subpart->description . '</a>';
+                $html .= '<a class="formattitleload" href="#" id="xsubformattitle' . $subpart->id . '" data-type="text" data-pk="' . $k . '" data-title="Escriba Titulo">' . $subpart->description . '</a>';
+                $html .= '<ul id="ULsubpartFormat' . $k . $subpart->id . '">';
                 $html .= $this->getSubParts($subpart->id);
+                $html .= '</ul>';
                 $html .= '</li>';
             }
-            $html .= '</ul>';
         }
         return $html;
     }
@@ -129,18 +128,19 @@ class ThesisFormatModalEdit extends Component
     {
 
         InveThesisFormatPart::create([
-            'description' => $this->descriptionx,
-            'information' => 'No hay informacion',
-            'number_order' => $this->number_orderx,
-            'thesis_format_id' => $this->format_idx,
-            'belongs' => $this->part_id,
-            'state' => true,
-            'index_order' => 1,
-            'body' => true,
-            'show_description' => true,
-            'salto_de_pagina' => true
+            'description'       => $this->descriptionx,
+            'information'       => 'No hay informacion',
+            'number_order'      => $this->number_orderx,
+            'thesis_format_id'  => $this->format_idx,
+            'belongs'           => $this->part_idx,
+            'state'             => true,
+            'index_order'       => 1,
+            'body'              => true,
+            'show_description'  => true,
+            'salto_de_pagina'   => true,
+            'user_id'           => Auth::id()
         ]);
-
+        $this->part_idx = null;
         $this->getParts();
     }
 
@@ -161,5 +161,22 @@ class ThesisFormatModalEdit extends Component
     {
         InveThesisFormatPart::find($id)->delete();
         $this->getParts();
+    }
+
+    public function updateFormatStudent()
+    {
+        $this->validate([
+            'xname'          => 'required|max:255',
+            'xtype_thesis'   => 'required',
+            'xnormative_thesis'   => 'required'
+        ]);
+
+        InveThesisFormat::find($this->format_idx)->update([
+            'name'              => trim($this->xname),
+            'type_thesis'       => trim($this->xtype_thesis),
+            'normative_thesis'  => trim($this->xnormative_thesis)
+        ])->id;
+
+        $this->dispatchBrowserEvent('thesis-format-create-estudent-edit', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
     }
 }
