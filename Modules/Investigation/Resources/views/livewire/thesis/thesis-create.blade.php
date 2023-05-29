@@ -42,6 +42,7 @@
                                 <label class="form-label" for="country_id">{{ __('labels.Country') }}
                                     *</label>
                                 <select
+                                    onclick="deSelectNormative()" 
                                     wire:model.defer="country_id"
                                     class="form-control"
                                     id="country_id"
@@ -59,7 +60,7 @@
 
                             <div class="form-group">
                                 <label class="form-label">{{ __('labels.University') }}</label>
-                                <select wire:change="getSchools" wire:model="university_id" class="form-control" id="university_id">
+                                <select onclick="deSelectNormative()" wire:change="getSchools" wire:model="university_id" class="form-control" id="university_id">
                                     <option value="">Seleccionar</option>
                                     @foreach($universities as $university)
                                         <option value="{{ $university->id }}">{{ $university->name }}</option>
@@ -70,7 +71,7 @@
 
                             <div class="form-group">
                                 <label class="form-label">{{ __('investigation::labels.schools') }}</label>
-                                <select wire:change="getFormat" wire:model="school_id" class="form-control" id="school_id">
+                                <select onclick="deSelectNormative()" wire:change="getFormat" wire:model="school_id" class="form-control" id="school_id">
                                     <option value="">Seleccionar</option>
                                     @foreach($schools as $school)
                                         <option value="{{ $school->id }}">{{ $school->name }}</option>
@@ -84,13 +85,13 @@
                                 
                                 <div class="input-group mb-3">
                                     <div class="dropdown">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button wire:ignore class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                           Seleccionar Formato
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             @foreach($formats as $format)
                                                 <div class="dropdown-item">
-                                                    <button onclick="selectionFormat({{ $format->id }})" type="button" class="btn btn-link">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</button>
+                                                    <button onclick="selectionFormat({{ $format }})" type="button" class="btn btn-link">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</button>
                                                     @if($format->user_id == auth()->user()->id)
                                                     <button class="btn btn-sm btn-primary ml-2" onclick="openModalEditFormat({{ $format->id }})">Editar</button>
                                                     <button class="btn btn-sm btn-danger ml-2" onclick="deletesFormatStudent({{ $format->id }})">Eliminar</button>
@@ -116,9 +117,15 @@
     </div>
 
     <script>
-        function selectionFormat(id){
-            @this.set('format_id', id);
-            //aca agregas para cambiar el texto seleccionar formato
+        function deSelectNormative(){
+            var btn = document.querySelector('.btn.btn-outline-primary.dropdown-toggle');
+            btn.innerHTML = "Seleccionar Formato";
+            @this.set('format_id', null);
+        }
+        function selectionFormat(format){
+            var btn = document.querySelector('.btn.btn-outline-primary.dropdown-toggle');
+            btn.innerHTML = format.type_thesis+" - "+format.normative_thesis+" - "+format.name;
+            @this.set('format_id', format.id);
         }
 
         window.addEventListener('inve-thesis-student-create', event => {
