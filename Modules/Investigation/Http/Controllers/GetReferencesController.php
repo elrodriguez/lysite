@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
-use Spatie\Browsershot\Browsershot;
+//use Spatie\Browsershot\Browsershot;
 use DateTime;
 
 class GetReferencesController extends Controller
@@ -163,16 +163,17 @@ class GetReferencesController extends Controller
     public function generate_apa($document)
     {
         
-                                        // // Consultando la WEB de mendeley según el ID
-                                        // $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
+                                        // Consultando la WEB de mendeley según el ID
+                                        $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
 
-                                        // // Get the body of the response
-                                        // $body = $response->body();
+                                        // Get the body of the response
+                                        $body = $response->body();
+                                        $html = $body;
 
-                                        $browsershot = new Browsershot();
-                                        $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
-                                                            ->waitUntilNetworkIdle()
-                                                            ->bodyHtml();    
+                                        // $browsershot = new Browsershot();
+                                        // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
+                                        //                     ->waitUntilNetworkIdle()
+                                        //                     ->bodyHtml();    
 
                                         // Convert the body to a string
                                         $html = (string)$html;
@@ -481,12 +482,12 @@ class GetReferencesController extends Controller
 
     public function getMonthforISO($link){
                
-                        $browsershot = new Browsershot();
-                        $html = $browsershot->setURL($link)
-                                            ->waitUntilNetworkIdle()
-                                            ->bodyHtml();                        
-                        // $html ahora contiene el código HTML completo de la página web
-                        dd((string)$html);
+                        // $browsershot = new Browsershot();
+                        // $html = $browsershot->setURL($link)
+                        //                     ->waitUntilNetworkIdle()
+                        //                     ->bodyHtml();                        
+                        // // $html ahora contiene el código HTML completo de la página web
+                        // dd((string)$html);
               
     }
 
