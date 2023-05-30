@@ -152,14 +152,19 @@ class GetReferencesController extends Controller
     public function generate_apa($document)
     {
         
-                                        // Consultando la WEB de mendeley según el ID
-                                        $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
+                                        // // Consultando la WEB de mendeley según el ID
+                                        // $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
 
-                                        // Get the body of the response
-                                        $body = $response->body();
+                                        // // Get the body of the response
+                                        // $body = $response->body();
+
+                                        $browsershot = new Browsershot();
+                                        $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
+                                                            ->waitUntilNetworkIdle()
+                                                            ->bodyHtml();    
 
                                         // Convert the body to a string
-                                        $html = (string)$body;
+                                        $html = (string)$html;
                                         $partes = explode('data-name="citation"', $html);
                                         $len=count($partes);
                                         $partes=$partes[$len-1];
@@ -182,9 +187,23 @@ class GetReferencesController extends Controller
                                         $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
                                         $nxplodes = explode('('.$document->year.')', $citation);                                        
                                         $nxplodes[0] = $this->getAutorforAPA($document);
-                                        $citation = implode('('.$document->year.')', $nxplodes);      
+                                        $citation = implode('('.$document->year.')', $nxplodes);
 
-
+                                        $year = $document->year;
+                                        $source = $document->source;
+                                        $explotado = explode("https://doi", $citation);
+                                        $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
+                                        $volumen_and_pages_no_k="";
+                                        $volumen_and_pages="";
+                                        if( isset($explotado[1])){
+                                            $volumen_and_pages = $explotado[1];
+                                            $volumen_and_pages_no_k = $volumen_and_pages;
+                                            $volumen_and_pages = explode(",", $volumen_and_pages);
+                                            $volumen_and_pages[0] = "<em>" . $volumen_and_pages[0] . "</em>";
+                                            $volumen_and_pages  = implode(",", $volumen_and_pages);
+                                            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
+                                        }
+                                        
                                         return $citation;
     }
 
@@ -428,8 +447,10 @@ class GetReferencesController extends Controller
         $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
         $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
          //borrando tag <i> en vancouver no debe ir
-        $citation = str_replace("<i>", "", $citation);        
-        $citation = str_replace('</i>', "", $citation);
+         $citation = str_replace("<i>", "", $citation);        
+         $citation = str_replace('</i>', "", $citation);
+         $citation = str_replace("<em>", "", $citation);        
+         $citation = str_replace('</em>', "", $citation);
         return $citation;
     }
 
@@ -441,7 +462,7 @@ class GetReferencesController extends Controller
         $explotado = explode("https://doi", $apa_citation);
         $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
         $volumen_and_pages="";
-        if( count($explotado) > 1 ){
+        if( isset($explotado[1])){
             $volumen_and_pages = $explotado[1];
         }
         return $volumen_and_pages;
@@ -497,8 +518,24 @@ class GetReferencesController extends Controller
                 $citation = $site_name . " " . $fecha_publicacion . " " . $site_title . " " . $site_name . ". " . $url;
                 return $citation;
             }elseif($normativa == "iso690"){
+                $citation = $site_name . " " . $site_title . " Disponible en: " . $url; 
+                return $citation;
+                /*
+                CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021. 
+                Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
+                Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
+*/
 
             }elseif($normativa == "vancouver"){
+                $citation = $site_name . " " . $site_title . " [Internet]. " . " Disponible en: " . $url; 
+                return $citation;                
+
+                /*
+                Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021. 
+                Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
+                Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
+
+                */
                 
             }
     }
