@@ -124,10 +124,21 @@ class GetReferencesController extends Controller
             'headers' => $headers
         ]);
 
-        $document = json_decode($response->getBody()->getContents());
-        $cita = $this->generar_cita($document, $normativa);
+        $status_code = $response->getStatusCode();
 
-        return response()->json(['cita' => $cita]);
+        if ($status_code == 200) {
+
+                    $document = json_decode($response->getBody()->getContents());
+                    $cita = $this->generar_cita($document, $normativa);
+            
+                    return response()->json(['cita' => $cita]);
+        }else{
+
+                    return 'Intenta Nuevamente, Hubo un error en el servidor';
+
+        }
+
+
     }
 
     public function generar_cita($document, $normativa)
