@@ -731,5 +731,27 @@
 		observer.observe(document.body, config);
     </script>
 
+    <script> 
+        function manual_citation(){
+                    // var autors, title, grade, editor, editorial, volumen, university, country, entity, issn, isbn, uri;
+        var editor      = document.getElementById("input-editor")       .value;
+        var autors      = document.getElementById("input-autor")        .value;
+        var title       = document.getElementById("input-titulo")       .value;
+        var grade       = document.getElementById("input-grado")        .value;
+        var editorial   = document.getElementById("input-editorial")    .value;
+        var volumen     = document.getElementById("input-volumen")      .value;
+        var university  = document.getElementById("input-universidad")  .value;
+        var country     = document.getElementById("input-pais")         .value;
+        var entity      = document.getElementById("input-institucion")  .value;
+        var issn        = document.getElementById("input-issn")         .value;
+        var isbn        = document.getElementById("input-isbn")         .value;
+        var uri         = document.getElementById("input-enlace")       .value;
+
+        var concatenado = editor + ";" + autors + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + country + ";" + entity + ";" + issn + ";" + isbn + ";" + uri;
+        
+        document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
+        }
+    </script>
+
     <div id="dialog-ckeditor"></div>
 </div>

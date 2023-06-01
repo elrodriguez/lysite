@@ -192,7 +192,7 @@ class GetReferencesController extends Controller
         $citation = str_replace('. In ', '. ', $citation);
         $citation = str_replace('pp.', '', $citation);
         //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
-        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
+        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; 
         $nxplodes = explode('(' . $document->year . ')', $citation);
         $nxplodes[0] = $this->getAutorforAPA($document);
         $citation = implode('(' . $document->year . ')', $nxplodes);
