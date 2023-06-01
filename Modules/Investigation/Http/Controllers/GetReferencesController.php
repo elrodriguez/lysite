@@ -29,24 +29,25 @@ class GetReferencesController extends Controller
 
     public function citar(Request $request)
     {
+        //dd($request->all());
         $doi = $request->get('input-doi');
         $is_doi = false;
         if (strpos($doi, "http") !== false) {
-            if(strpos($doi, 'doi.org')!== false){
+            if (strpos($doi, 'doi.org') !== false) {
                 $doi = str_replace("https://dx.doi.org/", "", $doi); // ES DOI
                 $doi = str_replace("https://doi.org/", "", $doi); // ES DOI
                 $doi = str_replace("http://dx.doi.org/", "", $doi); // ES DOI
                 $doi = str_replace("http://doi.org/", "", $doi); // ES DOI
-                $is_doi=true;
-            }else{
+                $is_doi = true;
+            } else {
                 $is_doi = false;
             }
         } else {
-            if(strpos($doi, '/')!== false)$is_doi = true;
+            if (strpos($doi, '/') !== false) $is_doi = true;
         }
-        $this->code_consulta=$doi;
+        $this->code_consulta = $doi;
         $normativa = $request->get('select-normativa');
-        
+
 
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
             'form_params' => [
@@ -69,55 +70,54 @@ class GetReferencesController extends Controller
         ];
 
         if ($is_doi) {
-           $search_url = "https://api.mendeley.com/catalog?doi=" . urlencode($doi);
+            $search_url = "https://api.mendeley.com/catalog?doi=" . urlencode($doi);
 
-    
-                                        //             // Make a request to the link
-                                        // $response = Http::get('https://www.mendeley.com/catalogue/1152eea5-ed0e-3f81-88bf-be4f34aecabf/');
 
-                                        // // Get the body of the response
-                                        // $body = $response->body();
+            //             // Make a request to the link
+            // $response = Http::get('https://www.mendeley.com/catalogue/1152eea5-ed0e-3f81-88bf-be4f34aecabf/');
 
-                                        // // Convert the body to a string
-                                        // $html = (string)$body;
-                                        // $partes = explode('data-name="citation"', $html);
-                                        // $len=count($partes);
-                                        // $partes=$partes[$len-1];
-                                        // //</div>
-                                        // $partes = explode('</div>', $partes);
+            // // Get the body of the response
+            // $body = $response->body();
 
-                                        // $parte_despues = strstr($partes[0], '>');
-                                        // if ($parte_despues !== false) {
-                                        //     $parte_despues = substr($parte_despues, 1);
-                                        // }
-                                        // dd("<p>".$parte_despues);
+            // // Convert the body to a string
+            // $html = (string)$body;
+            // $partes = explode('data-name="citation"', $html);
+            // $len=count($partes);
+            // $partes=$partes[$len-1];
+            // //</div>
+            // $partes = explode('</div>', $partes);
+
+            // $parte_despues = strstr($partes[0], '>');
+            // if ($parte_despues !== false) {
+            //     $parte_despues = substr($parte_despues, 1);
+            // }
+            // dd("<p>".$parte_despues);
 
         } else {  //Por AQUI SI ES UNA PAGINA WEB
-                          
-                    //$search_url = "https://api.mendeley.com/catalog?link=" . urlencode($doi);
-                    $api_opengraph = env('OPEN_GRAPH_IO_API');
-                    $url = 'https://opengraph.io/api/1.1/site/'.urlencode($doi).'?app_id='.$api_opengraph;
 
-                    $curl = curl_init($url);
+            //$search_url = "https://api.mendeley.com/catalog?link=" . urlencode($doi);
+            $api_opengraph = env('OPEN_GRAPH_IO_API');
+            $url = 'https://opengraph.io/api/1.1/site/' . urlencode($doi) . '?app_id=' . $api_opengraph;
 
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    $response = curl_exec($curl);
+            $curl = curl_init($url);
 
-                    $data = json_decode($response, true);
-                    switch ($normativa) {
-                        case 'apa':
-                            $cita = $this->generar_cita_de_web($data, "apa");
-                            return response()->json(['cita' => $cita]);
-                        case 'iso690':
-                            $cita = $this->generar_cita_de_web($data, "iso690"); 
-                            return response()->json(['cita' => $cita]);             
-                        case 'vancouver':
-                            $cita = $this->generar_cita_de_web($data, "vancouver");
-                            return response()->json(['cita' => $cita]);
-                        default:
-                            return 'Formato de cita no válido';
-                    }               
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($curl);
 
+            $data = json_decode($response, true);
+            switch ($normativa) {
+                case 'apa':
+                    $cita = $this->generar_cita_de_web($data, "apa");
+                    return response()->json(['cita' => $cita]);
+                case 'iso690':
+                    $cita = $this->generar_cita_de_web($data, "iso690");
+                    return response()->json(['cita' => $cita]);
+                case 'vancouver':
+                    $cita = $this->generar_cita_de_web($data, "vancouver");
+                    return response()->json(['cita' => $cita]);
+                default:
+                    return 'Formato de cita no válido';
+            }
         }
 
         $response = $this->client->request('GET', $search_url, [
@@ -128,98 +128,95 @@ class GetReferencesController extends Controller
 
         if ($status_code == 200) {
 
-                    $document = json_decode($response->getBody()->getContents());
-                    $cita = $this->generar_cita($document, $normativa);
-            
-                    return response()->json(['cita' => $cita]);
-        }else{
+            $document = json_decode($response->getBody()->getContents());
+            $cita = $this->generar_cita($document, $normativa);
 
-                    return 'Intenta Nuevamente, Hubo un error en el servidor';
+            return response()->json(['cita' => $cita]);
+        } else {
 
+            return 'Intenta Nuevamente, Hubo un error en el servidor';
         }
-
-
     }
 
     public function generar_cita($document, $normativa)
     {
-        if(count($document)>0){
+        if (count($document) > 0) {
             switch ($normativa) {
                 case 'apa':
-                    return $this->generate_apa($document[0]); 
+                    return $this->generate_apa($document[0]);
                 case 'iso690':
-                    return $this->generate_iso690($document[0]);               
+                    return $this->generate_iso690($document[0]);
                 case 'vancouver':
                     return $this->generate_vancouver($document[0]);
                 default:
                     return 'Formato de cita no válido';
             }
-        }else{
+        } else {
             return "Lo sentimos, No hemos podido encontrar el codigo que has brindado";
-        }       
-    
+        }
     }
 
     public function generate_apa($document)
     {
-        
-                                        // Consultando la WEB de mendeley según el ID
-                                        $response = Http::get('https://www.mendeley.com/catalogue/'.$document->id.'/');
 
-                                        // Get the body of the response
-                                        $body = $response->body();
-                                        $html = $body;
+        // Consultando la WEB de mendeley según el ID
+        $response = Http::get('https://www.mendeley.com/catalogue/' . $document->id . '/');
 
-                                        // $browsershot = new Browsershot();
-                                        // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
-                                        //                     ->waitUntilNetworkIdle()
-                                        //                     ->bodyHtml();    
+        // Get the body of the response
+        $body = $response->body();
+        $html = $body;
 
-                                        // Convert the body to a string
-                                        $html = (string)$html;
-                                        $partes = explode('data-name="citation"', $html);
-                                        $len=count($partes);
-                                        $partes=$partes[$len-1];
-                                        //</div>
-                                        $partes = explode('</div>', $partes);
+        // $browsershot = new Browsershot();
+        // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
+        //                     ->waitUntilNetworkIdle()
+        //                     ->bodyHtml();    
 
-                                        $parte_despues = strstr($partes[0], '>');
-                                        if ($parte_despues !== false) {
-                                            $parte_despues = substr($parte_despues, 1);
-                                        }
-                                        $citation ="<p>".$parte_despues;                                        
+        // Convert the body to a string
+        $html = (string)$html;
+        $partes = explode('data-name="citation"', $html);
+        $len = count($partes);
+        $partes = $partes[$len - 1];
+        //</div>
+        $partes = explode('</div>', $partes);
 
-                                        $citation = str_replace('Elsevier B.V.', '', $citation);
-                                        $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
-                                        $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
-                                        $citation = str_replace(' (Vol. ', ', ', $citation);                                       
-                                        $citation = str_replace('. In ', '. ', $citation);
-                                        $citation = str_replace('pp.', '', $citation);
-                                        //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
-                                        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
-                                        $nxplodes = explode('('.$document->year.')', $citation);                                        
-                                        $nxplodes[0] = $this->getAutorforAPA($document);
-                                        $citation = implode('('.$document->year.')', $nxplodes);
+        $parte_despues = strstr($partes[0], '>');
+        if ($parte_despues !== false) {
+            $parte_despues = substr($parte_despues, 1);
+        }
+        $citation = "<p>" . $parte_despues;
 
-                                        $year = $document->year;
-                                        $source = $document->source;
-                                        $explotado = explode("https://doi", $citation);
-                                        $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
-                                        $volumen_and_pages_no_k="";
-                                        $volumen_and_pages="";
-                                        if( isset($explotado[1])){
-                                            $volumen_and_pages = $explotado[1];
-                                            $volumen_and_pages_no_k = $volumen_and_pages;
-                                            $volumen_and_pages = explode(",", $volumen_and_pages);
-                                            $volumen_and_pages[0] = "<em>" . $volumen_and_pages[0] . "</em>";
-                                            $volumen_and_pages  = implode(",", $volumen_and_pages);
-                                            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
-                                        }
-                                        
-                                        return $citation;
+        $citation = str_replace('Elsevier B.V.', '', $citation);
+        $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
+        $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
+        $citation = str_replace(' (Vol. ', ', ', $citation);
+        $citation = str_replace('. In ', '. ', $citation);
+        $citation = str_replace('pp.', '', $citation);
+        //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
+        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
+        $nxplodes = explode('(' . $document->year . ')', $citation);
+        $nxplodes[0] = $this->getAutorforAPA($document);
+        $citation = implode('(' . $document->year . ')', $nxplodes);
+
+        $year = $document->year;
+        $source = $document->source;
+        $explotado = explode("https://doi", $citation);
+        $explotado = explode('<i>' . $source . '</i>,', $explotado[0]);
+        $volumen_and_pages_no_k = "";
+        $volumen_and_pages = "";
+        if (isset($explotado[1])) {
+            $volumen_and_pages = $explotado[1];
+            $volumen_and_pages_no_k = $volumen_and_pages;
+            $volumen_and_pages = explode(",", $volumen_and_pages);
+            $volumen_and_pages[0] = "<em>" . $volumen_and_pages[0] . "</em>";
+            $volumen_and_pages  = implode(",", $volumen_and_pages);
+            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
+        }
+
+        return $citation;
     }
 
-    public function getAutorforAPA($document){
+    public function getAutorforAPA($document)
+    {
         $authors = array();
 
         //Obtener el nombre de los autores
@@ -248,7 +245,7 @@ class GetReferencesController extends Controller
         } elseif (count($authors) > 5) {
             $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", & " . $authors[6] . " ";
         }
-        
+
         // //Añadir el año de publicación y el título del artículo
         // $citation .= "(" . substr($document->year, 0, 4) . "). " . $document->title . ". ";
 
@@ -278,13 +275,13 @@ class GetReferencesController extends Controller
         // $citation .= "</p>";
         return $citation2;
     }
-            
+
     public function generate_iso690($document)
     {
         //en test no sale aún obtener solo el mes de los articulos
         //$this->getMonthforISO($document->link);
-        
-       $authors = array();
+
+        $authors = array();
 
         //Obtener el nombre de los autores
         foreach ($document->authors as $author) {
@@ -315,7 +312,7 @@ class GetReferencesController extends Controller
 
         //Añadir el nombre de la revista
         if (isset($document->source)) {
-            $citation .= '<em>' . $document->source . '</em> '. ' [en línea] ';
+            $citation .= '<em>' . $document->source . '</em> ' . ' [en línea] ';
         }
 
         $volumen_and_pages = $this->getVolumen_and_pages($document);
@@ -379,7 +376,7 @@ class GetReferencesController extends Controller
             $citation .= 'Disponible en: <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>.';
         }
 
-        if(isset($document->identifiers->issn)) {
+        if (isset($document->identifiers->issn)) {
             $citation .= ' ISSN: ' . $document->identifiers->issn;
         }
 
@@ -388,7 +385,7 @@ class GetReferencesController extends Controller
         return $citation;
     }
 
-    
+
     public function generate_vancouver($document)
     {
         $authors = array();
@@ -441,10 +438,10 @@ class GetReferencesController extends Controller
         if (isset($document->pages)) {
             $citation .= $document->pages . ".";
         }
-        
-        if(isset($document->identifiers->doi)){
-            $citation .= ' https://dx.doi.org/'.$this->code_consulta.'.</p>';
-        }else{
+
+        if (isset($document->identifiers->doi)) {
+            $citation .= ' https://dx.doi.org/' . $this->code_consulta . '.</p>';
+        } else {
             $citation .= '</p>';
         }
 
@@ -456,54 +453,57 @@ class GetReferencesController extends Controller
         //     $volumen_and_pages = $explotado[1];
         // }
         $volumen_and_pages = $this->getVolumen_and_pages($document);
-        $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
-        $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
-         //borrando tag <i> en vancouver no debe ir
-         $citation = str_replace("<i>", "", $citation);        
-         $citation = str_replace('</i>', "", $citation);
-         $citation = str_replace("<em>", "", $citation);        
-         $citation = str_replace('</em>', "", $citation);
+        $citation = str_replace('https://dx.doi.org/', $volumen_and_pages . 'https://dx.doi.org/', $citation);
+        $citation = str_replace('https://dx.doi.org/' . $this->code_consulta, '<a href="' . 'https://dx.doi.org/' . $this->code_consulta . '" target="_blank">' . 'https://dx.doi.org/' . $this->code_consulta . '</a>', $citation);
+        //borrando tag <i> en vancouver no debe ir
+        $citation = str_replace("<i>", "", $citation);
+        $citation = str_replace('</i>', "", $citation);
+        $citation = str_replace("<em>", "", $citation);
+        $citation = str_replace('</em>', "", $citation);
         return $citation;
     }
 
 
-    public function getVolumen_and_pages($document){
+    public function getVolumen_and_pages($document)
+    {
         $year = $document->year;
         $source = $document->source;
         $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
         $explotado = explode("https://doi", $apa_citation);
-        $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
-        $volumen_and_pages="";
-        if( isset($explotado[1])){
+        $explotado = explode('<i>' . $source . '</i>,', $explotado[0]);
+        $volumen_and_pages = "";
+        if (isset($explotado[1])) {
             $volumen_and_pages = $explotado[1];
         }
         return $volumen_and_pages;
     }
 
-    public function getMonthforISO($link){
-               
-                        // $browsershot = new Browsershot();
-                        // $html = $browsershot->setURL($link)
-                        //                     ->waitUntilNetworkIdle()
-                        //                     ->bodyHtml();                        
-                        // // $html ahora contiene el código HTML completo de la página web
-                        // dd((string)$html);
-              
+    public function getMonthforISO($link)
+    {
+
+        // $browsershot = new Browsershot();
+        // $html = $browsershot->setURL($link)
+        //                     ->waitUntilNetworkIdle()
+        //                     ->bodyHtml();                        
+        // // $html ahora contiene el código HTML completo de la página web
+        // dd((string)$html);
+
     }
 
 
-    public function generar_cita_de_web($data, $normativa){
-        
-       $site_name = $data['hybridGraph']['site_name'];
+    public function generar_cita_de_web($data, $normativa)
+    {
 
-       $site_title = $data['hybridGraph']['title'];
-       $url = $data['hybridGraph']['url'];
+        $site_name = $data['hybridGraph']['site_name'];
 
-       //revisa si tiene fecha de publicación
-       $fecha_publicacion = "";
-        if(isset($data['hybridGraph']['articlePublishedTime'])){
+        $site_title = $data['hybridGraph']['title'];
+        $url = $data['hybridGraph']['url'];
+
+        //revisa si tiene fecha de publicación
+        $fecha_publicacion = "";
+        if (isset($data['hybridGraph']['articlePublishedTime'])) {
             $articlePublishedTime = $data['hybridGraph']['articlePublishedTime'];
-            $fecha_obj = new DateTime($articlePublishedTime); 
+            $fecha_obj = new DateTime($articlePublishedTime);
             // Dar formato a la fecha de salida
             $fecha_publicacion = $fecha_obj->format('j \d\e F \d\e\l Y');
             $meses = array(
@@ -520,35 +520,33 @@ class GetReferencesController extends Controller
                 'November' => 'noviembre',
                 'December' => 'diciembre'
             );
-            
+
             // Reemplazar cada nombre de mes en inglés con su equivalente en español en la cadena de fecha
             $fecha_publicacion = str_replace(array_keys($meses), array_values($meses), $fecha_publicacion);
-            $fecha_publicacion = "(". $fecha_publicacion . ").";
-        }       
+            $fecha_publicacion = "(" . $fecha_publicacion . ").";
+        }
 
-            if($normativa == "apa"){
-                $citation = $site_name . " " . $fecha_publicacion . " " . $site_title . " " . $site_name . ". " . $url;
-                return $citation;
-            }elseif($normativa == "iso690"){
-                $citation = $site_name . " " . $site_title . " Disponible en: " . $url; 
-                return $citation;
-                /*
+        if ($normativa == "apa") {
+            $citation = $site_name . " " . $fecha_publicacion . " " . $site_title . " " . $site_name . ". " . $url;
+            return $citation;
+        } elseif ($normativa == "iso690") {
+            $citation = $site_name . " " . $site_title . " Disponible en: " . $url;
+            return $citation;
+            /*
                 CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021. 
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
 */
+        } elseif ($normativa == "vancouver") {
+            $citation = $site_name . " " . $site_title . " [Internet]. " . " Disponible en: " . $url;
+            return $citation;
 
-            }elseif($normativa == "vancouver"){
-                $citation = $site_name . " " . $site_title . " [Internet]. " . " Disponible en: " . $url; 
-                return $citation;                
-
-                /*
+            /*
                 Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021. 
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
 
                 */
-                
-            }
+        }
     }
 }
