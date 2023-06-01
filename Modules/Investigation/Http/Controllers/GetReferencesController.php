@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+//use Spatie\Browsershot\Browsershot;
+use DateTime;
 
 class GetReferencesController extends Controller
 {
@@ -28,21 +30,22 @@ class GetReferencesController extends Controller
     public function citar(Request $request)
     {
         $doi = $request->get('input-doi');
-        $is_doi = true;
-        if (strpos($doi, '/')) {
-            $doi = str_replace("https://dx.doi.org/", "", $doi); // ES DOI
-            $doi = str_replace("https://doi.org/", "", $doi); // ES DOI
-            $doi = str_replace("http://dx.doi.org/", "", $doi); // ES DOI
-            $doi = str_replace("http://doi.org/", "", $doi); // ES DOI
+        $is_doi = false;
+        if (strpos($doi, "http") !== false) {
+            if(strpos($doi, 'doi.org')!== false){
+                $doi = str_replace("https://dx.doi.org/", "", $doi); // ES DOI
+                $doi = str_replace("https://doi.org/", "", $doi); // ES DOI
+                $doi = str_replace("http://dx.doi.org/", "", $doi); // ES DOI
+                $doi = str_replace("http://doi.org/", "", $doi); // ES DOI
+                $is_doi=true;
+            }else{
+                $is_doi = false;
+            }
         } else {
-            $doi = str_replace("-", "", $doi);
-            $is_doi = false;         //es ISBN
+            if(strpos($doi, '/')!== false)$is_doi = true;
         }
         $this->code_consulta=$doi;
-        $this->is_doi=true;
-
         $normativa = $request->get('select-normativa');
-
         
 
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
@@ -89,19 +92,53 @@ class GetReferencesController extends Controller
                                         // }
                                         // dd("<p>".$parte_despues);
 
-        } else {
-            $search_url = "https://api.mendeley.com/catalog?isbn=" . $doi;
+        } else {  //Por AQUI SI ES UNA PAGINA WEB
+                          
+                    //$search_url = "https://api.mendeley.com/catalog?link=" . urlencode($doi);
+                    $api_opengraph = env('OPEN_GRAPH_IO_API');
+                    $url = 'https://opengraph.io/api/1.1/site/'.urlencode($doi).'?app_id='.$api_opengraph;
+
+                    $curl = curl_init($url);
+
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($curl);
+
+                    $data = json_decode($response, true);
+                    switch ($normativa) {
+                        case 'apa':
+                            $cita = $this->generar_cita_de_web($data, "apa");
+                            return response()->json(['cita' => $cita]);
+                        case 'iso690':
+                            $cita = $this->generar_cita_de_web($data, "iso690"); 
+                            return response()->json(['cita' => $cita]);             
+                        case 'vancouver':
+                            $cita = $this->generar_cita_de_web($data, "vancouver");
+                            return response()->json(['cita' => $cita]);
+                        default:
+                            return 'Formato de cita no válido';
+                    }               
+
         }
 
         $response = $this->client->request('GET', $search_url, [
             'headers' => $headers
         ]);
 
-        $document = json_decode($response->getBody()->getContents());
+        $status_code = $response->getStatusCode();
 
-        $cita = $this->generar_cita($document, $normativa);
+        if ($status_code == 200) {
 
-        return response()->json(['cita' => $cita]);
+                    $document = json_decode($response->getBody()->getContents());
+                    $cita = $this->generar_cita($document, $normativa);
+            
+                    return response()->json(['cita' => $cita]);
+        }else{
+
+                    return 'Intenta Nuevamente, Hubo un error en el servidor';
+
+        }
+
+
     }
 
     public function generar_cita($document, $normativa)
@@ -131,9 +168,15 @@ class GetReferencesController extends Controller
 
                                         // Get the body of the response
                                         $body = $response->body();
+                                        $html = $body;
+
+                                        // $browsershot = new Browsershot();
+                                        // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
+                                        //                     ->waitUntilNetworkIdle()
+                                        //                     ->bodyHtml();    
 
                                         // Convert the body to a string
-                                        $html = (string)$body;
+                                        $html = (string)$html;
                                         $partes = explode('data-name="citation"', $html);
                                         $len=count($partes);
                                         $partes=$partes[$len-1];
@@ -156,9 +199,23 @@ class GetReferencesController extends Controller
                                         $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; // imprimir la cadena modificada
                                         $nxplodes = explode('('.$document->year.')', $citation);                                        
                                         $nxplodes[0] = $this->getAutorforAPA($document);
-                                        $citation = implode('('.$document->year.')', $nxplodes);      
+                                        $citation = implode('('.$document->year.')', $nxplodes);
 
-
+                                        $year = $document->year;
+                                        $source = $document->source;
+                                        $explotado = explode("https://doi", $citation);
+                                        $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
+                                        $volumen_and_pages_no_k="";
+                                        $volumen_and_pages="";
+                                        if( isset($explotado[1])){
+                                            $volumen_and_pages = $explotado[1];
+                                            $volumen_and_pages_no_k = $volumen_and_pages;
+                                            $volumen_and_pages = explode(",", $volumen_and_pages);
+                                            $volumen_and_pages[0] = "<em>" . $volumen_and_pages[0] . "</em>";
+                                            $volumen_and_pages  = implode(",", $volumen_and_pages);
+                                            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
+                                        }
+                                        
                                         return $citation;
     }
 
@@ -225,7 +282,7 @@ class GetReferencesController extends Controller
     public function generate_iso690($document)
     {
         //en test no sale aún obtener solo el mes de los articulos
-        // $this->getMonthforISO($document->link);
+        //$this->getMonthforISO($document->link);
         
        $authors = array();
 
@@ -384,7 +441,8 @@ class GetReferencesController extends Controller
         if (isset($document->pages)) {
             $citation .= $document->pages . ".";
         }
-        if($this->is_doi){
+        
+        if(isset($document->identifiers->doi)){
             $citation .= ' https://dx.doi.org/'.$this->code_consulta.'.</p>';
         }else{
             $citation .= '</p>';
@@ -400,9 +458,11 @@ class GetReferencesController extends Controller
         $volumen_and_pages = $this->getVolumen_and_pages($document);
         $citation = str_replace('https://dx.doi.org/', $volumen_and_pages.'https://dx.doi.org/', $citation);
         $citation = str_replace('https://dx.doi.org/'.$this->code_consulta, '<a href="'.'https://dx.doi.org/'.$this->code_consulta.'" target="_blank">'.'https://dx.doi.org/'.$this->code_consulta.'</a>', $citation);
-        //borrando tag <i> en vancouver no debe ir
-        $citation = str_replace("<i>", "", $citation);        
-        $citation = str_replace('</i>', "", $citation);
+         //borrando tag <i> en vancouver no debe ir
+         $citation = str_replace("<i>", "", $citation);        
+         $citation = str_replace('</i>', "", $citation);
+         $citation = str_replace("<em>", "", $citation);        
+         $citation = str_replace('</em>', "", $citation);
         return $citation;
     }
 
@@ -414,56 +474,81 @@ class GetReferencesController extends Controller
         $explotado = explode("https://doi", $apa_citation);
         $explotado = explode('<i>'.$source.'</i>,', $explotado[0]);
         $volumen_and_pages="";
-        if( count($explotado) > 1 ){
+        if( isset($explotado[1])){
             $volumen_and_pages = $explotado[1];
         }
         return $volumen_and_pages;
     }
 
     public function getMonthforISO($link){
-
-                // Consultando la WEB de mendeley según el ID
-                $response = Http::get($link);
-
-                // Get the body of the response
-                $body = $response->body();
-
-                // Convert the body to a string
-                $html = (string)$body;
-                ////hora debo obtener otro enlace donde aparece el MES
-                $explotado = explode('data-name="open-full-text" href="', $html);
-                if(isset($explotado[1])){
-                    $explotado = explode('" target="_blank"', $explotado[1]);
-                    if(isset($explotado[0])){
-                        $link = "https:" . $explotado[0];
-                    }
-                    $response = Http::get($link);
-    
-                    // Get the body of the response
-                    $body = $response->body();
-    
-                    // Convert the body to a string
-                    $html = (string)$body;
-    
-                    ////hora debo obtener el link donde está el mes en ingles
-                    $explotado = explode('identifierValue', $html);
-                    if(isset($explotado[1]))$explotado = explode("'", $explotado[1]);  
-                    if(isset($explotado[1])){
-                        $link = "https://www.sciencedirect.com/science/article/abs/pii/".$explotado[1];
-
-                        $response = Http::get($link);
-
-                        // Get the body of the response
-                        $body = $response->body();
-
-                        // Convert the body to a string
-                        $html = (string)$body;
-                        dd($html);
-                        ////hora debo obtener otro enlace donde aparece el MES
-                        $explotado = explode('class="anchor anchor-default" href="', $html);
-                        dd($explotado);  
-                    }
-                }
+               
+                        // $browsershot = new Browsershot();
+                        // $html = $browsershot->setURL($link)
+                        //                     ->waitUntilNetworkIdle()
+                        //                     ->bodyHtml();                        
+                        // // $html ahora contiene el código HTML completo de la página web
+                        // dd((string)$html);
               
+    }
+
+
+    public function generar_cita_de_web($data, $normativa){
+        
+       $site_name = $data['hybridGraph']['site_name'];
+
+       $site_title = $data['hybridGraph']['title'];
+       $url = $data['hybridGraph']['url'];
+
+       //revisa si tiene fecha de publicación
+       $fecha_publicacion = "";
+        if(isset($data['hybridGraph']['articlePublishedTime'])){
+            $articlePublishedTime = $data['hybridGraph']['articlePublishedTime'];
+            $fecha_obj = new DateTime($articlePublishedTime); 
+            // Dar formato a la fecha de salida
+            $fecha_publicacion = $fecha_obj->format('j \d\e F \d\e\l Y');
+            $meses = array(
+                'January' => 'enero',
+                'February' => 'febrero',
+                'March' => 'marzo',
+                'April' => 'abril',
+                'May' => 'mayo',
+                'June' => 'junio',
+                'July' => 'julio',
+                'August' => 'agosto',
+                'September' => 'septiembre',
+                'October' => 'octubre',
+                'November' => 'noviembre',
+                'December' => 'diciembre'
+            );
+            
+            // Reemplazar cada nombre de mes en inglés con su equivalente en español en la cadena de fecha
+            $fecha_publicacion = str_replace(array_keys($meses), array_values($meses), $fecha_publicacion);
+            $fecha_publicacion = "(". $fecha_publicacion . ").";
+        }       
+
+            if($normativa == "apa"){
+                $citation = $site_name . " " . $fecha_publicacion . " " . $site_title . " " . $site_name . ". " . $url;
+                return $citation;
+            }elseif($normativa == "iso690"){
+                $citation = $site_name . " " . $site_title . " Disponible en: " . $url; 
+                return $citation;
+                /*
+                CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021. 
+                Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
+                Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
+*/
+
+            }elseif($normativa == "vancouver"){
+                $citation = $site_name . " " . $site_title . " [Internet]. " . " Disponible en: " . $url; 
+                return $citation;                
+
+                /*
+                Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021. 
+                Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
+                Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
+
+                */
+                
+            }
     }
 }
