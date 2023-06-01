@@ -119,6 +119,7 @@
         function selectionFormat(id){
             @this.set('format_id', id);
             //aca agregas para cambiar el texto seleccionar formato
+            
         }
 
         window.addEventListener('inve-thesis-student-create', event => {
