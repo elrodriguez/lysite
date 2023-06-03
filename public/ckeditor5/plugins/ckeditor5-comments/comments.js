@@ -68,11 +68,16 @@ export default class comments extends Plugin {
                 return modelWriter.createElement(confComment.element, {
                     id: viewElement.getAttribute('id')
                 });
-                
             }
-
         });
+
+        const urlData = editor.config.get('comments.urlData') || null;
+        if (urlData) {
+            __getDataComments(urlData)
+        }
     }
+
+
     
     _createDialog() { 
         var ckFormComment = document.createElement("div");
@@ -236,5 +241,27 @@ function _createSidebarComments(text,id) {
     button.onclick = function() {
         comment.remove();
     };
+}
+
+function __getDataComments(url){
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', url, true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            _createSidebarComments(response.commentary,response.selecction_id)
+        } else {
+            console.log('Error: ' + xhr.status);
+        }
+    };
+
+    xhr.onerror = function() {
+    console.log('Error de red.');
+    };
+
+    xhr.send();
+
 }
 
