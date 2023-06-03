@@ -16,6 +16,7 @@ use Modules\Investigation\Entities\InveThesisStudent;
 use Modules\Investigation\Entities\InveThesisStudentPart;
 use OpenAI\Laravel\Facades\OpenAI;
 use GuzzleHttp\Client;
+use Modules\Investigation\Entities\InveThesisStudentPartSelectionComment;
 
 class ThesisParts extends Component
 {
@@ -47,6 +48,7 @@ class ThesisParts extends Component
     public $bottom_margin;
     public $left_margin;
     public $right_margin;
+    public $comments;
 
     public function mount($thesis_id, $sub_part)
     {
@@ -55,6 +57,7 @@ class ThesisParts extends Component
         $this->paraphrase_left = $permisos->paraphrase_allowed - $permisos->paraphrase_used;
         $this->focus_id = $sub_part; //la parte "subparte que se desea ver ejem. carátula, dedicatoria, conclusiones, etc
         $this->thesis_id = $thesis_id;
+
         $this->thesis_student = InveThesisStudent::where('id', $thesis_id)->where('user_id', Auth::id())->first();
         if (isset($this->thesis_student)) {
             $this->auto_save = $this->thesis_student->autosave;
@@ -414,5 +417,4 @@ class ThesisParts extends Component
             $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
         }
     }
-
 }

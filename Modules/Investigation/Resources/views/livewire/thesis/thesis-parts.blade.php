@@ -455,7 +455,6 @@
         });
 
         document.addEventListener('livewire:load', function() {
-
             if (document.getElementById("editor").tagName == "DIV") {
                 //CKEDITOR.replace('editor');
                 activeCkeditor5();
@@ -545,6 +544,7 @@
 
 
     <script>
+        
         function activeCkeditor5() {
             DecoupledDocumentEditor.create(document.querySelector('.editor'), {
                 toolbar: {
@@ -607,7 +607,9 @@
                     marginTop: '20mm',
                     marginBottom: '20mm'
                 },
-
+                comments: {
+                    urlData: "{{ route('investigation_thesis_references',$this->thesis_id) }}"
+                },
                 references:{
                     url:"{{ route('investigation_thesis_references') }}",
                     headers: {

@@ -37,4 +37,13 @@ class ThesisStudentPartCommentaryController extends Controller
             'message' => 'Los datos se han procesado correctamente',
         ]);
     }
+
+    public function getCommetsByThesis($id){
+        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_id', $thesis_id)->get();
+        if (count($comments) > 0) {
+            $comments = $comments->toArray();
+        }
+
+        return response()->json($comments)
+    }
 }
