@@ -38,12 +38,13 @@ class ThesisStudentPartCommentaryController extends Controller
         ]);
     }
 
-    public function getCommetsByThesis($id){
-        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_id', $thesis_id)->get();
+    public function getCommetsByThesis($id)
+    {
+        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_id', $id)->get();
         if (count($comments) > 0) {
             $comments = $comments->toArray();
         }
 
-        return response()->json($comments)
+        return response()->json($comments);
     }
 }

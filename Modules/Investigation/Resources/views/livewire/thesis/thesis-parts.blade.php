@@ -608,7 +608,7 @@
                     marginBottom: '20mm'
                 },
                 comments: {
-                    urlData: "{{ route('investigation_thesis_references',$this->thesis_id) }}"
+                    urlData: "{{ route('investigation_thesis_get_comments',$this->thesis_id) }}"
                 },
                 references:{
                     url:"{{ route('investigation_thesis_references') }}",

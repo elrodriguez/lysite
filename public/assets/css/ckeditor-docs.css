@@ -576,4 +576,14 @@ html {
 .ly-ck-dialog-button i {
 	margin-right: 4px;
 }
+#lyc-ck-sidebar-list-comments{
+	position: fixed;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+	z-index: 100000;
+	width: 250px;
+	height: 350px;
+	overflow-y: auto;
+}
   
