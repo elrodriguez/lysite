@@ -41,6 +41,16 @@ function openModalReference(editor){
                     <input class="ly-ck-dialog-input" type="text" id="input-doi" name="input-doi" placeholder="Escriba aquí...">
                     <spam id="input-doi-error"></span>
                 </div> 
+                <div class="ly-ck-dialog-group-control mb-2">
+                    <label class="ly-ck-dialog-label" for="select-normativa">Normativa:</label>
+                    <select class="ly-ck-dialog-select" id="select-normativa" name="select-normativa">
+                        <option value="apa">APA</option>
+                        <option value="iso690">ISO690</option>
+                        <option value="vancouver">Vancouver</option>
+                    </select>
+                </div>
+                <div class="collapse width" id="collapseWidthExample1" >
+                
                 <div class="ly-ck-dialog-group-control">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="input-type" id="inlineRadioArticle" value="article" checked>
@@ -64,77 +74,65 @@ function openModalReference(editor){
                         <label class="form-check-label" for="inlineRadioPage">Pagina</label>
                     </div>
                 </div>
-                <div class="ly-ck-dialog-group-control mb-2">
-                    <label class="ly-ck-dialog-label" for="select-normativa">Normativa:</label>
-                    <select class="ly-ck-dialog-select" id="select-normativa" name="select-normativa">
-                        <option value="apa">APA</option>
-                        <option value="mla">MLA</option>
-                        <option value="harvard">Harvard</option>
-                        <option value="iso690">ISO690</option>
-                        <option value="ieee">IEEE</option>
-                        <option value="chicago">Chicago</option>
-                        <option value="vancouver">Vancouver</option>
-                    </select>
-                </div>
-                <div class="collapse width" id="collapseWidthExample1" >
+
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-doi">Autor/es:</label>
-                        <textarea class="ly-ck-dialog-input" rows="4" id="input-autor" name="input-autor" placeholder="Escriba aquí, autor1| autor2| autor3| etc|"></textarea>
+                        <textarea onkeyup="manual_citation()" class="ly-ck-dialog-input" rows="4" id="input-autor" name="input-autor" placeholder="Escriba aquí, autor1| autor2| autor3| etc|"></textarea>
                         <spam id="input-autor-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-titulo">Título:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-titulo" name="input-titulo" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-titulo" name="input-titulo" placeholder="Escriba aquí...">
                         <spam id="input-titulo-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-grado">Grado Académico:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-grado" name="input-grado" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-grado" name="input-grado" placeholder="Escriba aquí...">
                         <spam id="input-grado-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-universidad">Universidad:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-universidad" name="input-universidad" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-universidad" name="input-universidad" placeholder="Escriba aquí...">
                         <spam id="input-universidad-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-pais">País:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-pais" name="input-pais" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-pais" name="input-pais" placeholder="Escriba aquí...">
                         <spam id="input-pais-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-institucion">Institución o entidad:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-institucion" name="input-institucion" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-institucion" name="input-institucion" placeholder="Escriba aquí...">
                         <spam id="input-institucion-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-issn">ISSN:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-issn" name="input-issn" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-issn" name="input-issn" placeholder="Escriba aquí...">
                         <spam id="input-issn-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-isbn">ISBN:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-isbn" name="input-isbn" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-isbn" name="input-isbn" placeholder="Escriba aquí...">
                         <spam id="input-isbn-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-volumen">Volumen:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-volumen" name="input-volumen" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-volumen" name="input-volumen" placeholder="Escriba aquí...">
                         <spam id="input-volumen-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-editor">Editor:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-editor" name="input-editor" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-editor" name="input-editor" placeholder="Escriba aquí...">
                         <spam id="input-editor-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-editorial">Editorial:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-editorial" name="input-editorial" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-editorial" name="input-editorial" placeholder="Escriba aquí...">
                         <spam id="input-editorial-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-enlace">Enlace URL:</label>
-                        <input class="ly-ck-dialog-input" type="text" id="input-enlace" name="input-enlace" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-enlace" name="input-enlace" placeholder="Escriba aquí...">
                         <spam id="input-enlace-error"></span>
                     </div> 
                     
