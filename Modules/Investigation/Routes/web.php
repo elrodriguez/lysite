@@ -57,6 +57,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
             Route::post('helpkeywords/thesis', 'GrammarCorrectionController@grammarCorrection')->name('investigation_thesis_grammar_correction');
             Route::post('recommendation/thesis', 'GetArticlesRecommendationController@getArticles')->name('investigation_thesis_recommendation');
             Route::get('comentary/thesis/data/{id}', 'ThesisStudentPartCommentaryController@getCommetsByThesis')->name('investigation_thesis_get_comments');
+            Route::get('comentary/thesis/destroy/{id}', 'ThesisStudentPartCommentaryController@destroyCommetsById')->name('investigation_thesis_destroy_comments');
         });
     });
 });

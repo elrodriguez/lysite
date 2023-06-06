@@ -753,6 +753,29 @@
         
         document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
         }
+        function __getDestroyComments(id,index){
+            var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
+
+            if (confirmacion) {
+
+                const xhr = new XMLHttpRequest();
+                var url = '/investigation/thesis/comentary/thesis/destroy/'+id;
+                xhr.open('GET', url, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        document.getElementById("ly-list-item-"+index).remove();
+                    } else {
+                        console.log('Error: ' + xhr.status);
+                    }
+                };
+
+                xhr.onerror = function() {
+                console.log('Error de red.');
+                };
+
+                xhr.send();
+            }
+        }
     </script>
 
     <div id="dialog-ckeditor"></div>

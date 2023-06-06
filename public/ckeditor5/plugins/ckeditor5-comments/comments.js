@@ -13,64 +13,66 @@ export default class comments extends Plugin {
         const editor = this.editor;
         // The button must be registered among the UI components of the editor
         // to be displayed in the toolbar.
-        editor.ui.componentFactory.add('comments', () => {
-            // The button will be an instance of ButtonView.
-            const button = new ButtonView();
+        const ajaxData = editor.config.get('comments.ajax') || [];
+        //if (Object.keys(ajaxData).length > 0) {
+            editor.ui.componentFactory.add('comments', () => {
+                // The button will be an instance of ButtonView.
+                const button = new ButtonView();
 
-            button.set( {
-                label: 'Comentarios',
-                icon:addComment,
-                //withText: true,
-                tooltip: true,
-                //isEnabled: false // Deshabilitamos el botón por defecto
-            } );
+                button.set( {
+                    label: 'Comentarios',
+                    icon:addComment,
+                    //withText: true,
+                    tooltip: true,
+                    //isEnabled: false // Deshabilitamos el botón por defecto
+                } );
 
-            button.on( 'execute', () => {
-                this._createDialog();
-            } );
+                button.on( 'execute', () => {
+                    this._createDialog();
+                } );
 
-            return button;
-        });
-        
-        editor.model.schema.register(confComment.element, {
-            isObject: true,
-            allowWhere: '$block',
-            allowContentOf: '$root',
-        });
-        
-        editor.model.schema.extend( '$text', { allowAttributes: confComment.element } );
+                return button;
+            });
+            
+            editor.model.schema.register(confComment.element, {
+                isObject: true,
+                allowWhere: '$block',
+                allowContentOf: '$root',
+            });
+            
+            editor.model.schema.extend( '$text', { allowAttributes: confComment.element } );
 
-        editor.conversion.for('downcast').elementToElement({
-            model: {
-                name: confComment.element,
-                attributes: [ 'id' ]
-            },
-            view: ( modelElement, { writer } ) => {
-                return writer.createContainerElement(
-                    'label', 
-                        { 
-                            id: modelElement.getAttribute('id'),
-                            class: 'ly-suggestion-marker-deletion'
-                        }
-                );
-            }
-        });
-
-        editor.conversion.for('upcast').elementToElement({
-            view: {
-                name: 'label',
-                classes: 'ly-suggestion-marker-deletion',
-                attributes: {
-                    id: true
+            editor.conversion.for('downcast').elementToElement({
+                model: {
+                    name: confComment.element,
+                    attributes: [ 'id' ]
+                },
+                view: ( modelElement, { writer } ) => {
+                    return writer.createContainerElement(
+                        'label', 
+                            { 
+                                id: modelElement.getAttribute('id'),
+                                class: 'ly-suggestion-marker-deletion'
+                            }
+                    );
                 }
-            },
-            model: (viewElement, { writer: modelWriter }) => {
-                return modelWriter.createElement(confComment.element, {
-                    id: viewElement.getAttribute('id')
-                });
-            }
-        });
+            });
 
+            editor.conversion.for('upcast').elementToElement({
+                view: {
+                    name: 'label',
+                    classes: 'ly-suggestion-marker-deletion',
+                    attributes: {
+                        id: true
+                    }
+                },
+                model: (viewElement, { writer: modelWriter }) => {
+                    return modelWriter.createElement(confComment.element, {
+                        id: viewElement.getAttribute('id')
+                    });
+                }
+            });
+        //}
         const urlData = editor.config.get('comments.urlData') || null;
         if (urlData) {
             __getDataComments(urlData)
@@ -154,7 +156,7 @@ export default class comments extends Plugin {
                        __runAjax(parameters, randomNum, textarea.value, selectedText);
                     }
                     _createSidebarComments(textarea.value,randomNum);
-                    console.log(editor.getData())
+   
                 } else {
                     alert("El textarea está vacío");
                 }
@@ -251,17 +253,55 @@ function __getDataComments(url){
     xhr.onload = function() {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
-            _createSidebarComments(response.commentary,response.selecction_id)
+            if (Object.keys(response).length > 0) {
+                var cksidebarListComments = document.createElement("div");
+                cksidebarListComments.id = 'lyc-ck-sidebar-list-comments';
+                var htmlUl = `<div class="card">`;
+                htmlUl += `<div class="card-body list-comments-scroll">`;
+                response.forEach(function(obj) {
+                    var getElapsedTime  = obtenerTiempoTranscurrido(obj.created_at)
+                    // Realiza las operaciones necesarias con cada elemento del array
+                    htmlUl += `<div class="alert alert-warning alert-dismissible fade show" role="alert" id="ly-list-item-${obj.selecction_id}">
+                                    <small>${getElapsedTime}</small> 
+                                    <button onclick="__getDestroyComments(${obj.id},${obj.selecction_id})" type="button" class="close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <hr>
+                                    <a href="/investigation/thesis/parts/${obj.thesis_student_id}/${obj.thesis_format_part_id}" style="text-decoration: none; color: black;">${obj.commentary}</a>
+                                </div>`;
+                    
+                });
+                htmlUl += `</div>`;
+                htmlUl += `</div>`;
+                cksidebarListComments.innerHTML = htmlUl;
+        
+                document.body.appendChild(cksidebarListComments);
+            }
         } else {
             console.log('Error: ' + xhr.status);
         }
     };
 
     xhr.onerror = function() {
-    console.log('Error de red.');
+        console.log('Error de red.');
     };
 
     xhr.send();
 
+}
+
+function obtenerTiempoTranscurrido(fecha) {
+    const fechaActual = new Date();
+    const fechaComparar = new Date(fecha);
+    const diferenciaTiempo = fechaActual - fechaComparar;
+    const diferenciaDias = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
+  
+    if (diferenciaDias > 7) {
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const formatoFecha = fechaComparar.toLocaleString('es-ES', options);
+      return formatoFecha;
+    } else {
+      return `Hace ${diferenciaDias} días`;
+    }
 }
 

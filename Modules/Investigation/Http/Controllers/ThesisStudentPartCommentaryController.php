@@ -47,4 +47,10 @@ class ThesisStudentPartCommentaryController extends Controller
 
         return response()->json($comments);
     }
+
+    public function destroyCommetsById($id)
+    {
+        InveThesisStudentPartSelectionComment::find($id)->delete();
+        return response()->json(['success' => true]);
+    }
 }
