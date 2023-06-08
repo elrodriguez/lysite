@@ -14,65 +14,69 @@ export default class comments extends Plugin {
         // The button must be registered among the UI components of the editor
         // to be displayed in the toolbar.
         const ajaxData = editor.config.get('comments.ajax') || [];
-        //if (Object.keys(ajaxData).length > 0) {
-            editor.ui.componentFactory.add('comments', () => {
-                // The button will be an instance of ButtonView.
-                const button = new ButtonView();
+        
+        editor.ui.componentFactory.add('comments', () => {
+            // The button will be an instance of ButtonView.
+            const button = new ButtonView();
 
-                button.set( {
-                    label: 'Comentarios',
-                    icon:addComment,
-                    //withText: true,
-                    tooltip: true,
-                    //isEnabled: false // Deshabilitamos el botón por defecto
-                } );
+            button.set( {
+                label: 'Comentarios',
+                icon:addComment,
+                //withText: true,
+                tooltip: true,
+                //isEnabled: false // Deshabilitamos el botón por defecto
+            } );
 
-                button.on( 'execute', () => {
+            button.on( 'execute', () => {
+                if (Object.keys(ajaxData).length > 0) {
                     this._createDialog();
-                } );
-
-                return button;
-            });
-            
-            editor.model.schema.register(confComment.element, {
-                isObject: true,
-                allowWhere: '$block',
-                allowContentOf: '$root',
-            });
-            
-            editor.model.schema.extend( '$text', { allowAttributes: confComment.element } );
-
-            editor.conversion.for('downcast').elementToElement({
-                model: {
-                    name: confComment.element,
-                    attributes: [ 'id' ]
-                },
-                view: ( modelElement, { writer } ) => {
-                    return writer.createContainerElement(
-                        'label', 
-                            { 
-                                id: modelElement.getAttribute('id'),
-                                class: 'ly-suggestion-marker-deletion'
-                            }
-                    );
+                }else{
+                    alert('No puede acceder a esta función, solo para tutores')
                 }
-            });
+            } );
 
-            editor.conversion.for('upcast').elementToElement({
-                view: {
-                    name: 'label',
-                    classes: 'ly-suggestion-marker-deletion',
-                    attributes: {
-                        id: true
-                    }
-                },
-                model: (viewElement, { writer: modelWriter }) => {
-                    return modelWriter.createElement(confComment.element, {
-                        id: viewElement.getAttribute('id')
-                    });
+            return button;
+        });
+            
+        editor.model.schema.register(confComment.element, {
+            isObject: true,
+            allowWhere: '$block',
+            allowContentOf: '$root',
+        });
+            
+        editor.model.schema.extend( '$text', { allowAttributes: confComment.element } );
+
+        editor.conversion.for('downcast').elementToElement({
+            model: {
+                name: confComment.element,
+                attributes: [ 'id' ]
+            },
+            view: ( modelElement, { writer } ) => {
+                return writer.createContainerElement(
+                    'label', 
+                        { 
+                            id: modelElement.getAttribute('id'),
+                            class: 'ly-suggestion-marker-deletion'
+                        }
+                );
+            }
+        });
+
+        editor.conversion.for('upcast').elementToElement({
+            view: {
+                name: 'label',
+                classes: 'ly-suggestion-marker-deletion',
+                attributes: {
+                    id: true
                 }
-            });
-        //}
+            },
+            model: (viewElement, { writer: modelWriter }) => {
+                return modelWriter.createElement(confComment.element, {
+                    id: viewElement.getAttribute('id')
+                });
+            }
+        });
+        
         const urlData = editor.config.get('comments.urlData') || null;
         if (urlData) {
             __getDataComments(urlData)

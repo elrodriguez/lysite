@@ -154,7 +154,8 @@
 
         // Agregar el nuevo elemento li al final del ul
         ulsubpartFormat.appendChild(newLi);
-
+        var ulElemento = document.getElementById('ULsubpartFormatNew'+k+id);
+        var cantidadLi = ulElemento.childElementCount;
         $('#subformattitleNew'+ k + id ).editable({
             url: function(params) {
                 var d = new $.Deferred();
@@ -163,7 +164,7 @@
                 } else {
                     @this.set('xpart_id', params.pk);
                     @this.set('xdescription', params.value);
-                    @this.set('xnumber_order', 1);
+                    @this.set('xnumber_order', cantidadLi);
                     @this.savePartEstudentNew();
                 }
             }
