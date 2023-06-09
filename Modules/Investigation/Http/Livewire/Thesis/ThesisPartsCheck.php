@@ -52,7 +52,6 @@ class ThesisPartsCheck extends Component
             $this->thesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
                 ->orderBy('version', 'desc')
-                ->limit(1)
                 ->first();
 
             if ($this->thesisStudentPart) {
@@ -61,10 +60,10 @@ class ThesisPartsCheck extends Component
                 $this->commentary = $this->thesisStudentPart->commentary;
             }
             $this->student_name = DB::table('people')
-            ->select('people.full_name')
-            ->join('users', 'users.id', 'people.user_id')
-            ->join('inve_thesis_students', 'inve_thesis_students.user_id', '=', 'users.id')
-            ->where('inve_thesis_students.external_id', $this->thesis_id)->first()->full_name;
+                ->select('people.full_name')
+                ->join('users', 'users.id', 'people.user_id')
+                ->join('inve_thesis_students', 'inve_thesis_students.user_id', '=', 'users.id')
+                ->where('inve_thesis_students.external_id', $this->thesis_id)->first()->full_name;
         } else {
             redirect()->route('home');
         }

@@ -1,4 +1,7 @@
 <x-master>
+    @section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/ckeditor-docs.css') }}">
+    @endsection
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary">
             <div class="py-32pt">
@@ -24,8 +27,6 @@
         <x-navigation></x-navigation>
     </x-slot>
     @section('script')
-        <script src="{{ asset('ckeditor-4/ckeditor.js') }}"></script>
-        <script src="{{ asset('ckeditor-4/config.js') }}"></script>
-        <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
+    <script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
     @endsection
 </x-master>

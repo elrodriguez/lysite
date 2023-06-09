@@ -117,17 +117,151 @@
 
         document.addEventListener('livewire:load', function() {
             if (document.getElementById("editor").tagName == "TEXTAREA") {
-                CKEDITOR.replace('editor');
+                //CKEDITOR.replace('editor');
+                activeCkeditor5TUTOR();
             }
         });
 
         function savePart() {
             if (document.getElementById("editor").tagName == "TEXTAREA") {
-                data = CKEDITOR.instances.editor.getData();
+                //data = CKEDITOR.instances.editor.getData();
+                data = window.editor.getData();
                 @this.set('content', data);
                 @this.save();
             }
         }
     </script>
+    <script>
+        
+        function activeCkeditor5TUTOR() {
+            DecoupledDocumentEditor.create(document.querySelector('#editor'), {
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'fontSize',
+                        'fontFamily',
+                        '|',
+                        'fontColor',
+                        'fontBackgroundColor',
+                        '|',
+                        'bold',
+                        'italic',
+                        'underline',
+                        'strikethrough',
+                        '|',
+                        'alignment',
+                        '|',
+                        'numberedList',
+                        'bulletedList',
+                        '|',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'todoList',
+                        'link',
+                        'blockQuote',
+                        'imageUpload',
+                        '|',
+                        'paraphrase',
+                        'completethesis',
+                        'margins',
+                        'referenciar',
+                        'helpkeywords',
+                        'comments',
+                        'recommendation',
+                        '|',
+                        'undo',
+                        'redo',
+                        'pageBreak',
+                        '|',
+                        'specialCharacters',
+                        'findAndReplace',
+                        'mediaEmbed',
+                        'insertTable'
+                    ]
+                },
+                licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
+                simpleUpload: {
+                    uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
+                comments: {
+                    ajax:{
+                        url: "{{ route('investigation_thesis_selection_comments') }}",
+                        data:{
+                            thesi_student_part_id: {{ $thesisStudentPart->id ? $thesisStudentPart->id : null }},
+                            thesi_student_id: {{ $thesisStudentPart->inve_thesis_student_id }},
+                            thesi_format_part_id: {{ $thesisStudentPart->inve_thesis_format_part_id }}
+                        },
+                        method:'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    }
+                },
+                marginAdjustment: {
+                    marginLeft: '20mm',
+                    marginRight: '20mm',
+                    marginTop: '20mm',
+                    marginBottom: '20mm'
+                },
+                comments: {
+                    urlData: "{{ route('investigation_thesis_get_comments',$this->thesis_id) }}"
+                },
+                references:{
+                    url:"{{ route('investigation_thesis_references') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
+                recommendation:{
+                    url:"{{ route('investigation_thesis_recommendation') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
+                helpkeywords:{
+                    url:"{{ route('investigation_thesis_grammar_correction') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
+                }
+            })
+            .then(editor => {
+                window.editor = editor;
+                document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+                document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
 
+                editor.editing.view.getDomRoot().style.paddingLeft = {{ $left_margin }} + 'mm';
+                editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
+                editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
+                editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
+
+
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error(
+                    'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                );
+                console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+                console.error(error);
+            });
+
+        }
+    </script>
 </div>
