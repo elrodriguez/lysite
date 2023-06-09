@@ -734,25 +734,165 @@
     </script>
 
     <script> 
-        function manual_citation(){
-                    // var autors, title, grade, editor, editorial, volumen, university, country, entity, issn, isbn, uri;
-        var editor      = document.getElementById("input-editor")       .value;
-        var autors      = document.getElementById("input-autor")        .value;
-        var title       = document.getElementById("input-titulo")       .value;
-        var grade       = document.getElementById("input-grado")        .value;
-        var editorial   = document.getElementById("input-editorial")    .value;
-        var volumen     = document.getElementById("input-volumen")      .value;
-        var university  = document.getElementById("input-universidad")  .value;
-        var country     = document.getElementById("input-pais")         .value;
-        var entity      = document.getElementById("input-institucion")  .value;
-        var issn        = document.getElementById("input-issn")         .value;
-        var isbn        = document.getElementById("input-isbn")         .value;
-        var uri         = document.getElementById("input-enlace")       .value;
 
-        var concatenado = editor + ";" + autors + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + country + ";" + entity + ";" + issn + ";" + isbn + ";" + uri;
+        var autors;
+        var title;
+        var grade;
+        var editorial;
+        var volumen;
+        var university;
+        var country;
+        var entity;
+        var issn;
+        var isbn;
+        var uri;
+        var date;
+        var namepage;
+        var normativa;
+
+    function refresh_values(){
+        normativa   = document.getElementById('select-normativa')   .value;
+        editor      = document.getElementById("input-editor")       .value;
+        autors      = document.getElementById("input-autor")        .value;
+        title       = document.getElementById("input-titulo")       .value;
+        grade       = document.getElementById("input-grado")        .value;
+        editorial   = document.getElementById("input-editorial")    .value;
+        volumen     = document.getElementById("input-volumen")      .value;
+        university  = document.getElementById("input-universidad")  .value;
+        country     = document.getElementById("input-pais")         .value;
+        entity      = document.getElementById("input-institucion")  .value;
+        issn        = document.getElementById("input-issn")         .value;
+        isbn        = document.getElementById("input-isbn")         .value;
+        uri         = document.getElementById("input-enlace")       .value;
+        namepage    = document.getElementById("input-namepage")     .value;
+        date        = document.getElementById("input-date")         .value;
+        date = new Date(date + 'T00:00:00');
+        date.setMinutes(date.getTimezoneOffset());
+    }
+
+        function manual_citation(){ 
+            
+            var cita_autores="";
+
+            refresh_values();
+            // obtiene el elemento HTML del botón de opción seleccionado
+            const selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
+            var concatenado;
+
+            // verificar si la cadena termina con ";"
+            if (autors.endsWith(";") || autors.endsWith(".") || autors.endsWith(",")) {
+            // si termina con ";", eliminar el último carácter
+            autors = autors.slice(0, -1);
+            }
+            // separar el string en cada persona usando ";"
+            const personas = autors.split(";");
+
+            // matriz para almacenar los nombres y apellidos separados
+            const nombresApellidos = [];
+
+            // para cada persona, separar el nombre y los apellidos usando ","
+            personas.forEach(persona => {
+            const nombreApellido = persona.trim().split(",");
+            const nombres = nombreApellido[0].trim().split(" ");
+            const apellidos = nombreApellido[1].trim().split(" ");
+            
+            const primerNombre = nombres[0] ? nombres[0] : "";
+            const segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
+            const primerApellido = apellidos[0] ? apellidos[0] : "";
+            const segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
+            
+            nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
+            });
+            autors = nombresApellidos;
+            
+            if(selectedRadioButton=="article"){
+                
+            }
+            if(selectedRadioButton=="book"){
+                
+            }
+            if(selectedRadioButton=="thesis"){
+                
+            }
+            if(selectedRadioButton=="document"){
+                
+            }
+            if(selectedRadioButton=="page"){
+                let fecha = new Date(date);
+                /*
+                Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
+                */
+
+
+
+
+                if(normativa=="apa"){
+                // Obtener el día y el mes de la fecha, y utilizarlos para crear la nueva cadena
+                let dia = fecha.getDate();
+                let mes = fecha.toLocaleString('default', { month: 'long' });
+                let año = fecha.getFullYear();
+
+                date = `${dia} de ${mes} de ${año}`;
+
+                autors.forEach((autor, index) => {
+                    var espacio = " ";
+                    if (!autor.segundoApellido)espacio = "";
+                    
+                    cita_autores += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                    if (index === autors.length - 1){
+                        cita_autores += " ";
+                    } else {
+                        cita_autores += ", ";
+                    }
+                });      
+                concatenado = cita_autores + "(" +date+ "). <em>"+ title.trim() + ".</em> " + namepage.trim() + ". " + uri.trim();       
+                }
+
+
+
+
+                if(normativa=="iso690"){
+                    let anio = fecha.getFullYear();
+                    autors.forEach((autor, index) => {
+                    autor.primerApellido = autor.primerApellido.toUpperCase();
+                    cita_autores += autor.primerApellido+", "+autor.primerNombre;
+                    if (index === autors.length - 1){
+                        cita_autores += " ";
+                    } else {
+                        cita_autores += ", ";
+                    }
+                });  
+                concatenado = cita_autores + "<em>"+ title.trim() + ",</em> " + anio + ". Disponible en: " + uri.trim();
+                } 
+
+
+
+                if(normativa=="vancouver"){
+                    let anio = fecha.getFullYear();
+                    autors.forEach((autor, index) => {
+                    autor.primerApellido = autor.primerApellido;
+                    cita_autores += autor.primerApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                    if (index === autors.length - 1){
+                        cita_autores += " ";
+                    } else {
+                        cita_autores += ", ";
+                    }
+                });  
+                concatenado = cita_autores +  title.trim() + " [Internet]. " + country + ": "+ editor + "; " + anio + ". Disponible en: " + uri.trim();
+                }
+
+            }
+
+        //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + country + ";" + entity + ";" + issn + ";" + isbn + ";" + uri;
         
         document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
         }
+
+        function select_citation(){
+            manual_citation();
+        }
+
+
         function __getDestroyComments(id,index){
             var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
 
