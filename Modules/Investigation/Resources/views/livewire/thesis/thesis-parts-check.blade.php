@@ -201,15 +201,7 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
-                    }
-                },
-                marginAdjustment: {
-                    marginLeft: '20mm',
-                    marginRight: '20mm',
-                    marginTop: '20mm',
-                    marginBottom: '20mm'
-                },
-                comments: {
+                    },
                     urlData: "{{ route('investigation_thesis_get_comments',$this->thesis_id) }}"
                 },
                 references:{
@@ -245,11 +237,6 @@
                 window.editor = editor;
                 document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
                 document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-
-                editor.editing.view.getDomRoot().style.paddingLeft = {{ $left_margin }} + 'mm';
-                editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
-                editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
-                editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
 
 
             })
