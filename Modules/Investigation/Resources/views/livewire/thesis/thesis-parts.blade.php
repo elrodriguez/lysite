@@ -772,12 +772,11 @@
 
         function manual_citation(){ 
             
-            var cita_autores="";
-
-            refresh_values();
+            let cita_autores="";
+            refresh_values();            
             // obtiene el elemento HTML del botón de opción seleccionado
-            const selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
-            var concatenado;
+            let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
+            let concatenado;
 
             // verificar si la cadena termina con ";"
             if (autors.endsWith(";") || autors.endsWith(".") || autors.endsWith(",")) {
@@ -785,21 +784,21 @@
             autors = autors.slice(0, -1);
             }
             // separar el string en cada persona usando ";"
-            const personas = autors.split(";");
+            let personas = autors.split(";");
 
             // matriz para almacenar los nombres y apellidos separados
-            const nombresApellidos = [];
+            let nombresApellidos = [];
 
             // para cada persona, separar el nombre y los apellidos usando ","
             personas.forEach(persona => {
-            const nombreApellido = persona.trim().split(",");
-            const nombres = nombreApellido[0].trim().split(" ");
-            const apellidos = nombreApellido[1].trim().split(" ");
+                let nombreApellido = persona.trim().split(",");
+                let nombres = nombreApellido[0].trim().split(" ");
+                let apellidos = nombreApellido[1].trim().split(" ");
             
-            const primerNombre = nombres[0] ? nombres[0] : "";
-            const segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
-            const primerApellido = apellidos[0] ? apellidos[0] : "";
-            const segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
+                let primerNombre = nombres[0] ? nombres[0] : "";
+                let segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
+                let primerApellido = apellidos[0] ? apellidos[0] : "";
+                let segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
             
             nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
             });
@@ -888,10 +887,176 @@
         document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
         }
 
-        function select_citation(){
-            manual_citation();
+        function select_citation(){  
+            
+            refresh_values();                      
+            try {
+                manual_citation();
+            } catch (error) {
+                console.log("Falta llenar formulario");
+            }
+            hide_all_inputs();
+            show_selected_inputs();
         }
 
+
+        function hide_all_inputs(){
+            function hide_input(id){
+                let input = document.getElementById(id);// Obtener los inputs por su id
+                console.log(input);
+                let div = input.parentElement;// Obtener el div que contiene cada input
+                console.log(div);
+                div.style.display = 'none';// Ocultar el div utilizando la propiedad display
+            }                    
+                    hide_input('input-autor');
+                    hide_input('input-doi-a');
+                    hide_input('input-titulo');
+                    hide_input('input-namepage');
+                    hide_input('input-date');               //fecha de publicacion
+                    hide_input('input-date-consulta');      //fecha de consulta
+                    hide_input('input-grado');
+                    hide_input('input-universidad');
+                    hide_input('input-pais');
+                    hide_input('input-institucion');
+                    hide_input('input-issn');
+                    hide_input('input-isbn');
+                    hide_input('input-volumen');
+                    hide_input('input-paginas');
+                    hide_input('input-editor');
+                    hide_input('input-editorial');
+                    hide_input('input-enlace');
+                    hide_input('input-numero');
+                    hide_input('input-edicion');
+        }
+
+
+        function show_selected_inputs(){
+
+            let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
+
+                    //NORMATIVA APA
+
+            if(normativa=="apa"){
+                //page
+                if(selectedRadioButton=="page"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-namepage');
+                    show_input('input-date');                    
+                    show_input('input-enlace');
+                }
+                //article
+                if(selectedRadioButton=="article"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-institucion'); //institucion, entidad o revista
+                    show_input('input-volumen');
+                    show_input('input-numero');
+                    show_input('input-paginas');
+                    show_input('input-date');           //fecha publicacion         
+                    show_input('input-doi-a');
+                }
+                //libro
+                if(selectedRadioButton=="book"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-date');           //fecha publicacion         
+                    show_input('input-editorial');
+                    show_input('input-enlace');
+                }
+                
+            }
+
+
+
+
+
+
+                    //NORMATIVA ISO690
+
+            if(normativa=="iso690"){
+                //page
+                if(selectedRadioButton=="page"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-namepage');
+                    show_input('input-date');                    
+                    show_input('input-enlace');
+                }
+                  //article
+                if(selectedRadioButton=="article"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-institucion'); //institucion, entidad o revista
+                    show_input('input-volumen');
+                    show_input('input-numero');
+                    show_input('input-paginas');
+                    show_input('input-date');                    //fecha publicacion                 
+                    show_input('input-date-consulta');          //fecha consulta      
+                    show_input('input-doi-a');
+                    show_input('input-issn');
+                }
+                //libro
+                if(selectedRadioButton=="book"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-date');           //fecha publicacion       
+                    show_input('input-date-consulta');      //fecha consulta            
+                    show_input('input-edicion');
+                    show_input('input-editorial');
+                    show_input('input-pais');
+                    show_input('input-isbn');
+                    show_input('input-enlace');
+                }
+            }
+
+
+
+
+
+
+                    //NORMATIVA VANCOUVER
+
+            if(normativa=="vancouver"){
+                //page
+                if(selectedRadioButton=="page"){
+                    show_input('input-autor');
+                    show_input('input-pais');
+                    show_input('input-titulo');
+                    show_input('input-editor');
+                    show_input('input-date');                    
+                    show_input('input-enlace');
+                }
+                //article
+                if(selectedRadioButton=="article"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-institucion'); //institucion, entidad o revista
+                    show_input('input-volumen');
+                    show_input('input-numero');
+                    show_input('input-paginas');
+                    show_input('input-date');                    //fecha publicacion     
+                    show_input('input-doi-a');
+                }
+                //libro
+                if(selectedRadioButton=="book"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-date');           //fecha publicacion   
+                    show_input('input-editorial');
+                    show_input('input-pais');
+                    show_input('input-enlace');
+                }
+            }
+
+        }
+
+
+        function show_input(id){
+            const input = document.getElementById(id);
+            const div = input.parentElement;
+            div.style.display = 'block';
+        }
 
         function __getDestroyComments(id,index){
             var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
@@ -899,7 +1064,7 @@
             if (confirmacion) {
 
                 const xhr = new XMLHttpRequest();
-                var url = '/investigation/thesis/comentary/thesis/destroy/'+id;
+                let url = '/investigation/thesis/comentary/thesis/destroy/'+id;
                 xhr.open('GET', url, true);
                 xhr.onload = function() {
                     if (xhr.status === 200) {
