@@ -903,9 +903,9 @@
         function hide_all_inputs(){
             function hide_input(id){
                 let input = document.getElementById(id);// Obtener los inputs por su id
-                console.log(input);
+                
                 let div = input.parentElement;// Obtener el div que contiene cada input
-                console.log(div);
+                
                 div.style.display = 'none';// Ocultar el div utilizando la propiedad display
             }                    
                     hide_input('input-autor');
@@ -927,6 +927,16 @@
                     hide_input('input-enlace');
                     hide_input('input-numero');
                     hide_input('input-edicion');
+                    hide_input('input-siglas');
+                    hide_input('input-repositorio');
+                    let label = document.querySelector("label[for='input-autor']");
+                    label.textContent = "Autor/es:";
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Pais o Ciudad:";
+                    label = document.querySelector("label[for='input-institucion']");
+                    label.textContent = "Institución, Entidad o Revista:";
+                    let input = document.getElementById("input-grado");
+                    input.placeholder = "Bachiller, Maestría, Doctorado";
         }
 
 
@@ -956,13 +966,50 @@
                     show_input('input-date');           //fecha publicacion         
                     show_input('input-doi-a');
                 }
-                //libro
+                //libro virtual
                 if(selectedRadioButton=="book"){
                     show_input('input-autor');
                     show_input('input-titulo');
                     show_input('input-date');           //fecha publicacion         
                     show_input('input-editorial');
                     show_input('input-enlace');
+                }
+                //libro físico
+                if(selectedRadioButton=="book-fisico"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-date');           //fecha publicacion         
+                    show_input('input-editorial');
+                    show_input('input-edicion');
+                    show_input('input-pais');
+                }
+                //documento gubernamental
+                if(selectedRadioButton=="document-gubernamental"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-pais');
+                    show_input('input-institucion');
+                    let label = document.querySelector("label[for='input-institucion']");
+                    label.textContent = "ó Autor Entidad:";
+                    label = document.querySelector("label[for='input-autor']");
+                    label.innerHTML ="Autor Persona";
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad:";
+                    show_input('input-siglas');         //Siglas de entidad
+                    show_input('input-date');           //fecha publicacion 
+                    show_input('input-enlace');   
+                }
+                 //TESIS
+                if(selectedRadioButton=="thesis"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-date');           //fecha publicacion         
+                    show_input('input-grado');
+                    show_input('input-institucion');
+                    label = document.querySelector("label[for='input-institucion']");
+                    label.textContent = "Universidad:";
+                    show_input('input-enlace');
+
                 }
                 
             }
@@ -1008,6 +1055,47 @@
                     show_input('input-isbn');
                     show_input('input-enlace');
                 }
+                //libro físico
+                if(selectedRadioButton=="book-fisico"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-edicion');
+                    show_input('input-pais');
+                    show_input('input-editorial');
+                    show_input('input-date');           //fecha publicacion                                
+                    show_input('input-isbn');
+                }
+                //documento gubernamental
+                if(selectedRadioButton=="document-gubernamental"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-pais');
+                    let label = document.querySelector("label[for='input-autor']");
+                    label.textContent = "Autor o Entidad:";
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad:";
+                    show_input('input-siglas');         //Siglas de entidad
+                    show_input('input-date');           //fecha publicacion 
+                    show_input('input-enlace');   
+                }
+                //TESIS
+                if(selectedRadioButton=="thesis"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-institucion');
+                    show_input('input-grado');
+                    let label = document.querySelector("label[for='input-grado']");
+                    label.textContent = "Titulación en que especialidad o carrera:";
+                    let input = document.getElementById("input-grado");
+                    input.placeholder = "titulación en Ingeniería Industrial, Titulación en Maestría o Doctorado";
+                    label = document.querySelector("label[for='input-institucion']");
+                    label.textContent = "Universidad:";
+                    show_input('input-pais');
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "País:";
+                    show_input('input-date');           //fecha publicacion                                
+                    show_input('input-enlace');
+                }
             }
 
 
@@ -1038,13 +1126,48 @@
                     show_input('input-date');                    //fecha publicacion     
                     show_input('input-doi-a');
                 }
-                //libro
+                //libro virtual
                 if(selectedRadioButton=="book"){
                     show_input('input-autor');
                     show_input('input-titulo');
                     show_input('input-date');           //fecha publicacion   
                     show_input('input-editorial');
                     show_input('input-pais');
+                    show_input('input-enlace');
+                }
+                 //libro físico
+                if(selectedRadioButton=="book-fisico"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-pais');
+                    show_input('input-editorial');
+                    show_input('input-date');           //fecha publicacion  
+                }
+                //documento gubernamental
+                if(selectedRadioButton=="document-gubernamental"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-pais');
+                    let label = document.querySelector("label[for='input-autor']");
+                    label.textContent = "Autor o Entidad:";
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad:";
+                    show_input('input-siglas');         //Siglas de entidad
+                    show_input('input-date');           //fecha publicacion 
+                    show_input('input-enlace');   
+                }
+                //Tesis
+                if(selectedRadioButton=="thesis"){
+                    show_input('input-autor');
+                    show_input('input-titulo');
+                    show_input('input-date');           //fecha publicacion   
+                    show_input('input-grado');
+                    let label = document.querySelector("input[id='input-grado']");
+                    label.placeholder = "Tesis de pregrado ó Tesis de posgrado:";
+                    show_input('input-pais');
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Sede:";
+                    show_input('input-repositorio');
                     show_input('input-enlace');
                 }
             }
