@@ -66,8 +66,24 @@
                             @if ($focused_part->body == true)
                                 <div class="row">
                                     <div class="col-12 mb-3">
-                                        <div wire:ignore>
+                                        {{-- <div wire:ignore>
                                             <textarea class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
+                                        </div> --}}
+                                        <div wire:ignore class="col-12" id="documentsheet">
+                                            <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
+                                                <div class="div-main">
+                                                    <div class="centered" wire:ignore>
+                                                        <div class="row">
+                                                            <div class="document-editor__toolbar"></div>
+                                                        </div>
+                                                        <div class="row row-editor">
+                                                            <div class="editor-container">
+                                                                <div class="editor" id="editor">{!! $content_old !!}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         @error('content')
                                             <span class="invalid-feedback-2">{{ $message }}</span>
@@ -92,7 +108,6 @@
                                 <div>
                                     <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
                                     <input type="hidden" name="" id="editor">
-
                                 </div>
                             @endif
 
@@ -116,14 +131,14 @@
         });
 
         document.addEventListener('livewire:load', function() {
-            if (document.getElementById("editor").tagName == "TEXTAREA") {
+            if (document.getElementById("editor").tagName == "DIV") {
                 //CKEDITOR.replace('editor');
                 activeCkeditor5TUTOR();
             }
         });
 
         function savePart() {
-            if (document.getElementById("editor").tagName == "TEXTAREA") {
+            if (document.getElementById("editor").tagName == "DIV") {
                 //data = CKEDITOR.instances.editor.getData();
                 data = window.editor.getData();
                 @this.set('content', data);
@@ -132,7 +147,6 @@
         }
     </script>
     <script>
-        
         function activeCkeditor5TUTOR() {
             DecoupledDocumentEditor.create(document.querySelector('#editor'), {
                 toolbar: {
@@ -232,15 +246,11 @@
                         }
                     ]
                 }
-            })
-            .then(editor => {
+            }).then(editor => {
                 window.editor = editor;
                 document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
                 document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-
-
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('Oops, something went wrong!');
                 console.error(
                     'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
