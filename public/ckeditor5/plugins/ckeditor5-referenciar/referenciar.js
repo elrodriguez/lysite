@@ -46,7 +46,7 @@ function openModalReference(editor){
                     <label class="ly-ck-dialog-label" for="select-normativa">Normativa:</label>
                     <select onchange="select_citation()" class="ly-ck-dialog-select" id="select-normativa" name="select-normativa">
                         <option value="apa">APA</option>
-                        <option value="iso690">ISO690</option>
+                        <option value="iso690">ISO</option>
                         <option value="vancouver">Vancouver</option>
                     </select>
                 </div>
@@ -60,15 +60,23 @@ function openModalReference(editor){
                     
                     <div class="form-check form-check-inline">
                         <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioBook" value="book">
-                        <label class="form-check-label" for="inlineRadioBook">Libro</label>
+                        <label class="form-check-label" for="inlineRadioBook">Libro Virtual</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioBookFisico" value="book-fisico">
+                        <label class="form-check-label" for="inlineRadioBookFisico">Libro Físico</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioThesis" value="thesis">
                         <label class="form-check-label" for="inlineRadioThesis">Tesis</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioDocument" value="document">
-                        <label class="form-check-label" for="inlineRadioDocument">Documento</label>
+                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioDocumentGubernamental" value="document-gubernamental" title="Documento Gubernamental">
+                        <label class="form-check-label" for="inlineRadioDocumentGubernamental">Documento Gub.</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioDocumentLegal" value="document-legal">
+                        <label class="form-check-label" for="inlineRadioDocumentLegal">Documento Legal</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioPage" value="page">
@@ -77,9 +85,14 @@ function openModalReference(editor){
                 </div>
 
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-doi">Autor/es:</label>
+                        <label class="ly-ck-dialog-label" for="input-autor">Autor/es:</label>
                         <textarea onkeyup="manual_citation()" class="ly-ck-dialog-input" rows="4" id="input-autor" name="input-autor" placeholder="John Miguel, Gutierrez Sosa; Carmen María, Mendoza Villa"></textarea>
                         <spam id="input-autor-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-institucion">Institución, Entidad o Revista:</label>
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-institucion" name="input-institucion" placeholder="Escriba aquí...">
+                        <spam id="input-institucion-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-titulo">Título:</label>
@@ -92,9 +105,14 @@ function openModalReference(editor){
                     <spam id="input-namepage-error"></span>
                 </div> 
                     <div class="ly-ck-dialog-group-control">
-                    <label class="ly-ck-dialog-label" for="input-titulo">Fecha:</label>
-                    <input onchange="manual_citation()" class="ly-ck-dialog-input" type="date" id="input-date" name="input-date">
-                    <spam id="input-date-error"></span>
+                        <label class="ly-ck-dialog-label" for="input-date">Fecha de publicación:</label>
+                        <input onchange="manual_citation()" class="ly-ck-dialog-input" type="date" id="input-date" name="input-date">
+                        <spam id="input-date-error"></span>
+                    </div> 
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-date-consulta">Fecha de Consulta:</label>
+                        <input onchange="manual_citation()" class="ly-ck-dialog-input" type="date" id="input-date-consulta" name="input-date-consulta">
+                        <spam id="input-date-consulta-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-grado">Grado Académico:</label>
@@ -107,14 +125,19 @@ function openModalReference(editor){
                         <spam id="input-universidad-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-pais">País:</label>
+                        <label class="ly-ck-dialog-label" for="input-pais">País o Ciudad:</label>
                         <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-pais" name="input-pais" placeholder="Escriba aquí...">
                         <spam id="input-pais-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-institucion">Institución o entidad:</label>
-                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-institucion" name="input-institucion" placeholder="Escriba aquí...">
-                        <spam id="input-institucion-error"></span>
+                        <label class="ly-ck-dialog-label" for="input-institucion">Siglas Entidad/Nombre del Emisor:</label>
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-siglas" name="input-siglas" placeholder="Siglas de la entidad emisora o el nombre del emisor">
+                        <spam id="input-siglas-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-repositorio">Repositorio:</label>
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-repositorio" name="input-repositorio" placeholder="Repositorio de la Univer....">
+                        <spam id="input-repositorio-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-issn">ISSN:</label>
@@ -132,7 +155,12 @@ function openModalReference(editor){
                         <spam id="input-volumen-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-volumen">Páginas:</label>
+                        <label class="ly-ck-dialog-label" for="input-numero">Número:</label>
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-numero" name="input-numero" placeholder="Escriba aquí...">
+                        <spam id="input-numero-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-paginas">Páginas:</label>
                         <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-paginas" name="input-paginas" placeholder="Escriba aquí...">
                         <spam id="input-paginas-error"></span>
                     </div>
@@ -147,9 +175,19 @@ function openModalReference(editor){
                         <spam id="input-editorial-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-enlace">Enlace URL:</label>
+                        <label class="ly-ck-dialog-label" for="input-edicion">Número de Edición:</label>
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-edicion" name="input-edicion" placeholder="Escriba aquí...">
+                        <spam id="input-edicion-error"></span>
+                    </div> 
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-enlace">Enlace URL o URI:</label>
                         <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-enlace" name="input-enlace" placeholder="Escriba aquí...">
                         <spam id="input-enlace-error"></span>
+                    </div> 
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-doi-a">Código DOI:</label>
+                        <input onkeyup="manual_citation()" class="ly-ck-dialog-input" type="text" id="input-doi-a" name="input-doi-a" placeholder="Escriba aquí...">
+                        <spam id="input-doi-a-error"></span>
                     </div> 
                     
                 </div>
@@ -159,7 +197,7 @@ function openModalReference(editor){
             </div>
             <div class="ly-ck-dialog-buttons">
                 <button class="ly-ck-dialog-button btn-info mr-2" type="button" data-toggle="collapse" data-target="#collapseWidthExample1" aria-expanded="false" aria-controls="collapseWidthExample1">
-                    Configuración Avanzada
+                    Cita Manual
                 </button>
                 <button id="ckgetBtnReference" class="ly-ck-dialog-button mr-2" type="submit"><i class="fas fa-search"></i>Buscar</button>
                 <button id="ckcloseBtnReference" class="ly-ck-dialog-button" type="button"><i class="fas fa-times"></i>Cancelar</button>
