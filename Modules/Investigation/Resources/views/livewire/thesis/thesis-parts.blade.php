@@ -735,20 +735,23 @@
 
     <script> 
 
-        var autors;
-        var title;
-        var grade;
-        var editorial;
-        var volumen;
-        var university;
-        var country;
-        var entity;
-        var issn;
-        var isbn;
-        var uri;
-        var date;
-        var namepage;
-        var normativa;
+        let autors;
+        let title;
+        let grade;
+        let editorial;
+        let volumen;
+        let university;
+        let country;
+        let entity;
+        let issn;
+        let isbn;
+        let uri;
+        let date;
+        let namepage;
+        let normativa;
+        let edicion;
+        let doi;
+        let repositorio;
 
     function refresh_values(){
         normativa   = document.getElementById('select-normativa')   .value;
@@ -757,6 +760,7 @@
         title       = document.getElementById("input-titulo")       .value;
         grade       = document.getElementById("input-grado")        .value;
         editorial   = document.getElementById("input-editorial")    .value;
+        edicion     = document.getElementById("input-edicion")      .value;
         volumen     = document.getElementById("input-volumen")      .value;
         university  = document.getElementById("input-universidad")  .value;
         country     = document.getElementById("input-pais")         .value;
@@ -766,12 +770,14 @@
         uri         = document.getElementById("input-enlace")       .value;
         namepage    = document.getElementById("input-namepage")     .value;
         date        = document.getElementById("input-date")         .value;
+        doi         = document.getElementById("input-doi-a")        .value;
+        repositorio = document.getElementById("input-repositorio")  .value;
         date = new Date(date + 'T00:00:00');
         date.setMinutes(date.getTimezoneOffset());
     }
 
-        function manual_citation(){ 
-            
+        function manual_citation(event){ 
+            entidad_autor_swap(event);            
             let cita_autores="";
             refresh_values();            
             // obtiene el elemento HTML del botón de opción seleccionado
@@ -802,7 +808,13 @@
             
             nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
             });
+
             autors = nombresApellidos;
+            let fecha = new Date(date);
+                // Obtener el día y el mes de la fecha, y utilizarlos para crear la nueva cadena
+                let dia = fecha.getDate();
+                let mes = fecha.toLocaleString('default', { month: 'long' });
+                let anio = fecha.getFullYear();
             
             if(selectedRadioButton=="article"){
                 
@@ -810,28 +822,71 @@
             if(selectedRadioButton=="book"){
                 
             }
+            if(selectedRadioButton=="book-fisico"){
+                if(normativa=="apa"){
+                    /*
+                    Apellido-Apellido, Inicial Nombre., Apellido-Apellido, 
+                    Inicial Nombre. y Apellido-Apellido, Inicial Nombre. (año). Título del libro 
+                    (N° edición). Lugar de publicación: Nombre de la Editorial. 
+                    */
+                    autors.forEach((autor, index) => {
+                    var espacio = " ";
+                    if (!autor.segundoApellido)espacio = "";
+                    
+                    cita_autores += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                    if (index === autors.length - 1){
+                        cita_autores += " ";
+                    } else {
+                        cita_autores += ", ";
+                    }
+                }); 
+                if(edicion<2){
+                    edicion = "";
+                }else{
+                    edicion = "("+edicion+"° edición).";
+                }
+                concatenado = cita_autores + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + edicion.trim() + " " + country.trim() + ": " + editorial.trim()+ ".";                
+                }  
+
+                if(normativa=="iso690"){
+                    autors.forEach((autor, index) => {
+                        autor.primerApellido = autor.primerApellido.toUpperCase();
+                        cita_autores += autor.primerApellido+", "+autor.primerNombre;
+                        if (index === autors.length - 1){
+                            cita_autores += " ";
+                        } else {
+                            cita_autores += ", ";
+                        }
+                    }); 
+                    if(edicion<2){
+                    edicion = " ";
+                    }else{
+                        edicion = edicion+"° edición. ";
+                    }
+                    if(isbn.length<1){
+                        isbn = " ";
+                    }else{
+                        isbn = "ISBN: "+isbn;
+                    }
+                    concatenado = cita_autores + ". <em>"+ title.trim() + ".</em> " + edicion.trim() + country.trim() + ": " + editorial.trim()+ ", " + anio +". " + isbn;        
+
+                }         
+                if(normativa=="vancouver"){
+                    
+                }           
+            }
             if(selectedRadioButton=="thesis"){
                 
             }
-            if(selectedRadioButton=="document"){
+            if(selectedRadioButton=="document-gubernamental"){
                 
             }
-            if(selectedRadioButton=="page"){
-                let fecha = new Date(date);
+            if(selectedRadioButton=="page"){                
                 /*
                 Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
                 */
-
-
-
-
                 if(normativa=="apa"){
-                // Obtener el día y el mes de la fecha, y utilizarlos para crear la nueva cadena
-                let dia = fecha.getDate();
-                let mes = fecha.toLocaleString('default', { month: 'long' });
-                let año = fecha.getFullYear();
-
-                date = `${dia} de ${mes} de ${año}`;
+                date = `${dia} de ${mes} de ${anio}`;
 
                 autors.forEach((autor, index) => {
                     var espacio = " ";
@@ -851,7 +906,6 @@
 
 
                 if(normativa=="iso690"){
-                    let anio = fecha.getFullYear();
                     autors.forEach((autor, index) => {
                     autor.primerApellido = autor.primerApellido.toUpperCase();
                     cita_autores += autor.primerApellido+", "+autor.primerNombre;
@@ -867,7 +921,6 @@
 
 
                 if(normativa=="vancouver"){
-                    let anio = fecha.getFullYear();
                     autors.forEach((autor, index) => {
                     autor.primerApellido = autor.primerApellido;
                     cita_autores += autor.primerApellido+", "+autor.primerNombre[0].toUpperCase()+".";
@@ -937,6 +990,7 @@
                     label.textContent = "Institución, Entidad o Revista:";
                     let input = document.getElementById("input-grado");
                     input.placeholder = "Bachiller, Maestría, Doctorado";
+                    document.querySelector('input#input-institucion').value="";
         }
 
 
@@ -1203,6 +1257,21 @@
 
                 xhr.send();
             }
+        }
+
+        function entidad_autor_swap(event){
+            let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
+            if(selectedRadioButton=="document-gubernamental"){
+                console.log(event.target.id);
+                let id = event.target.id; 
+                if(id == "input-autor"){
+                        document.querySelector('input#input-institucion').value="";
+                }
+                if(id == "input-institucion"){
+                        document.querySelector('textarea#input-autor').value="";
+                }
+            }
+
         }
     </script>
 

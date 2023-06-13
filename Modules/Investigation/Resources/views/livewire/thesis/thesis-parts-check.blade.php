@@ -260,5 +260,7 @@
             });
 
         }
+        let vart = @this.getComments();
+        console.log(vart);
     </script>
 </div>

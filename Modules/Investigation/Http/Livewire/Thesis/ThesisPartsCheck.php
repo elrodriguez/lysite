@@ -10,7 +10,8 @@ use Modules\Academic\Emails\NotificationCheckThesisEmail;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
-use Modules\Investigation\Entities\InveThesisStudentPart;
+use Modules\Investigation\Entities\InveThesisStudentPart; 
+use Modules\Investigation\Entities\InveThesisStudentPartSelectionComment;
 
 class ThesisPartsCheck extends Component
 {
@@ -155,6 +156,12 @@ class ThesisPartsCheck extends Component
         $this->sendEmailNotification();
 
         $this->dispatchBrowserEvent('inve-student-part-create', ['success' => true]);
+    }
+
+    public function getComments(){
+        return "CARAJO";
+        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_part_id', $thesis_student->id); 
+        return $comments;
     }
 
     public function sendEmailNotification()
