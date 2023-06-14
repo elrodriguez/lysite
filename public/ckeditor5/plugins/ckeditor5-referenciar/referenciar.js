@@ -44,7 +44,7 @@ function openModalReference(editor){
                 
                 <div class="ly-ck-dialog-group-control mb-2">
                     <label class="ly-ck-dialog-label" for="select-normativa">Normativa:</label>
-                    <select onchange="select_citation()" class="ly-ck-dialog-select" id="select-normativa" name="select-normativa">
+                    <select onchange="select_citation('changenormative')" class="ly-ck-dialog-select" id="select-normativa" name="select-normativa">
                         <option value="apa">APA</option>
                         <option value="iso690">ISO</option>
                         <option value="vancouver">Vancouver</option>
@@ -55,55 +55,25 @@ function openModalReference(editor){
                 <div class="ly-ck-dialog-group-control">
 
                     <div class="btn-group btn-group-sm" role="group" aria-label="">
-                        <button onclick="select_citation()" type="button" class="btn btn-secondary">Articulo</button>
-                        <button onclick="select_citation()" type="button" class="btn btn-secondary">1Libro Virtual/button>
-                        <button onclick="select_citation()" type="button" class="btn btn-secondary">Libro Físico</button>
-                        <button onclick="select_citation()" type="button" class="btn btn-secondary">1</button>
+                        <button onclick="select_citation('article')" type="button" class="btn btn-primary">Artículo</button>
+                        <button onclick="select_citation('page')" type="button" class="btn btn-primary">Página Web</button>
+                        <button onclick="select_citation('book')" type="button" class="btn btn-primary">Libro Virtual</button>
+                        <button onclick="select_citation('book-fisico')" type="button" class="btn btn-primary">Libro Físico</button>
+                        <button onclick="select_citation('document-gubernamental')" type="button" class="btn btn-primary">Documento Gub.</button>
                         
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Documento Legal
                             </button>
                             <div class="dropdown-menu">
-                                <a onclick="select_citation()" class="dropdown-item" href="#">Dropdown link</a>
-                                <a onclick="select_citation()" class="dropdown-item" href="#">Dropdown link</a>
+                                <a onclick="select_citation('document-legal')" class="dropdown-item" href="#">Tipo 1</a>
+                                <a onclick="select_citation('document-legal')" class="dropdown-item" href="#">Tipo 2</a>
                             </div>
                         </div>
-
-                        <button onclick="select_citation()" type="button" class="btn btn-secondary">1</button>
-
                     </div>
-
-
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioArticle" value="article" checked>
-                        <label class="form-check-label" for="inlineRadioArticle">Articulo</label>
-                    </div>
-                    
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioBook" value="book">
-                        <label class="form-check-label" for="inlineRadioBook">Libro Virtual</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioBookFisico" value="book-fisico">
-                        <label class="form-check-label" for="inlineRadioBookFisico">Libro Físico</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioThesis" value="thesis">
-                        <label class="form-check-label" for="inlineRadioThesis">Tesis</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioDocumentGubernamental" value="document-gubernamental" title="Documento Gubernamental">
-                        <label class="form-check-label" for="inlineRadioDocumentGubernamental">Documento Gub.</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioDocumentLegal" value="document-legal">
-                        <label class="form-check-label" for="inlineRadioDocumentLegal">Documento Legal</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioPage" value="page">
-                        <label class="form-check-label" for="inlineRadioPage">Pagina</label>
-                    </div>
+                </div>
+                <div class="ly-ck-dialog-group-control">
+                <h3 class="col-6 mx-auto" id="tipo-referencia"></h3>
                 </div>
 
                     <div class="ly-ck-dialog-group-control">
@@ -162,28 +132,23 @@ function openModalReference(editor){
                         <spam id="input-repositorio-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-issn">ISSN:</label>
-                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-issn" name="input-issn" placeholder="Escriba aquí...">
-                        <spam id="input-issn-error"></span>
-                    </div>
-                    <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-isbn">ISBN:</label>
                         <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-isbn" name="input-isbn" placeholder="Escriba aquí...">
                         <spam id="input-isbn-error"></span>
                     </div> 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-volumen">Volumen:</label>
-                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-volumen" name="input-volumen" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="number" id="input-volumen" name="input-volumen" placeholder="Escriba aquí...">
                         <spam id="input-volumen-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-numero">Número:</label>
-                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-numero" name="input-numero" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="number" id="input-numero" name="input-numero" placeholder="Escriba aquí...">
                         <spam id="input-numero-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-paginas">Páginas:</label>
-                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-paginas" name="input-paginas" placeholder="Escriba aquí...">
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-paginas" name="input-paginas" placeholder="Ejem. 20-32">
                         <spam id="input-paginas-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
@@ -211,6 +176,11 @@ function openModalReference(editor){
                         <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-doi-a" name="input-doi-a" placeholder="Escriba aquí...">
                         <spam id="input-doi-a-error"></span>
                     </div> 
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-issn">ISSN:</label>
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-issn" name="input-issn" placeholder="Escriba aquí...">
+                        <spam id="input-issn-error"></span>
+                    </div>
                     
                 </div>
                 <div id="ly-ck-dialog-references-result" class="ly-ck-dialog-group-control mb-2">

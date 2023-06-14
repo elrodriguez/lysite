@@ -742,16 +742,20 @@
         let volumen;
         let university;
         let country;
-        let entity;
+        let institucion;
         let issn;
         let isbn;
         let uri;
         let date;
+        let date_consulta;
         let namepage;
         let normativa;
         let edicion;
         let doi;
         let repositorio;
+        let selectedRadioButton;
+        let numero;
+        let paginas;
 
     function refresh_values(){
         normativa   = document.getElementById('select-normativa')   .value;
@@ -764,7 +768,7 @@
         volumen     = document.getElementById("input-volumen")      .value;
         university  = document.getElementById("input-universidad")  .value;
         country     = document.getElementById("input-pais")         .value;
-        entity      = document.getElementById("input-institucion")  .value;
+        institucion = document.getElementById("input-institucion")  .value;
         issn        = document.getElementById("input-issn")         .value;
         isbn        = document.getElementById("input-isbn")         .value;
         uri         = document.getElementById("input-enlace")       .value;
@@ -772,6 +776,9 @@
         date        = document.getElementById("input-date")         .value;
         doi         = document.getElementById("input-doi-a")        .value;
         repositorio = document.getElementById("input-repositorio")  .value;
+        numero      = document.getElementById("input-numero")       .value;
+        paginas     = document.getElementById("input-paginas")      .value;
+        date_consulta= document.getElementById("input-date-consulta").value;
         date = new Date(date + 'T00:00:00');
         date.setMinutes(date.getTimezoneOffset());
     }
@@ -781,7 +788,7 @@
             let cita_autores="";
             refresh_values();            
             // obtiene el elemento HTML del botón de opción seleccionado
-            let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
+            //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
             let concatenado;
 
             // verificar si la cadena termina con ";"
@@ -817,7 +824,45 @@
                 let anio = fecha.getFullYear();
             
             if(selectedRadioButton=="article"){
-                
+                if(normativa=="apa"){
+                    /*
+                    Apellido-Apellido, Inicial Nombre., Apellido-Apellido, 
+                    Inicial Nombre. y Apellido-Apellido, Inicial Nombre. (año). Título del libro 
+                    (N° edición). Lugar de publicación: Nombre de la Editorial. 
+                    */
+                    autors.forEach((autor, index) => {
+                    var espacio = " ";
+                    if (!autor.segundoApellido)espacio = "";
+                    
+                    cita_autores += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                    if (index === autors.length - 1){
+                        cita_autores += " ";
+                    } else {
+                        cita_autores += ", ";
+                    }
+                    });  
+                    concatenado = cita_autores + "(" +anio+ "). <em>"+ title.trim() + ",</em> - " + institucion.trim() + ", " + volumen.trim() + "(" + numero.trim()+ "), " + paginas + ". " + doi;                
+                }  
+
+                if(normativa=="iso690"){
+                    autors.forEach((autor, index) => {
+                        autor.primerApellido = autor.primerApellido.toUpperCase();
+                        cita_autores += autor.primerApellido+", "+autor.primerNombre;
+                        if (index === autors.length - 1){
+                            cita_autores += " ";
+                        } else {
+                            cita_autores += ", ";
+                        }
+                    }); 
+                    
+                    if(issn.length<1){
+                        issn = " ";
+                    }else{
+                        issn = "ISSN: "+issn;
+                    }
+                    concatenado = cita_autores + ". <em>"+ title.trim() + "</em> - " + institucion.trim() + "-[en línea] "+ mes + " " + anio + ", " + volumen.trim() + "(" + numero.trim()+ "): "+ paginas.trim() + " [Fecha de consulta:" + dia + " de " + mes + " de " + anio + "]. Disponible en: " + doi + " " + issn;        
+
+                }  
             }
             if(selectedRadioButton=="book"){
                 
@@ -935,13 +980,42 @@
 
             }
 
-        //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + country + ";" + entity + ";" + issn + ";" + isbn + ";" + uri;
+        //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + country + ";" + institucion + ";" + issn + ";" + isbn + ";" + uri;
         
         document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
         }
 
-        function select_citation(){  
+        function select_citation(tipoInput){  
+            if(tipoInput!="changenormative"){
+                selectedRadioButton = tipoInput;
+            }
             
+            switch (selectedRadioButton) {
+                    case "article":
+                        document.getElementById('tipo-referencia').innerHTML="Artículo";                        
+                        break;
+                    case "page":
+                        document.getElementById('tipo-referencia').innerHTML="Página Web";                       
+                    break;
+                    case "book":
+                        document.getElementById('tipo-referencia').innerHTML="Libro Virtual";                       
+                    break;
+                    case "book-fisico":
+                        document.getElementById('tipo-referencia').innerHTML="Libro en Físico";                       
+                    break;
+                    case "document-gubernamental":
+                        document.getElementById('tipo-referencia').innerHTML="Documento Gubernamental";                       
+                    break;
+                    case "document-legal":
+                        document.getElementById('tipo-referencia').innerHTML="Documento Legal";                       
+                    break;
+                    case "thesis":
+                        document.getElementById('tipo-referencia').innerHTML="Tésis";                       
+                    break;
+            
+                default:
+                    break;
+            }
             refresh_values();                      
             try {
                 manual_citation();
@@ -981,13 +1055,17 @@
                     hide_input('input-numero');
                     hide_input('input-edicion');
                     hide_input('input-siglas');
-                    hide_input('input-repositorio');
+                    hide_input('input-repositorio'); //
                     let label = document.querySelector("label[for='input-autor']");
                     label.textContent = "Autor/es:";
+                    label = document.getElementById("input-autor");
+                    label.placeholder = "John Miguel, Gutierrez Sosa; Carmen María, Mendoza Villa";
                     label = document.querySelector("label[for='input-pais']");
                     label.textContent = "Pais o Ciudad:";
                     label = document.querySelector("label[for='input-institucion']");
                     label.textContent = "Institución, Entidad o Revista:";
+                    label = document.getElementById("input-institucion");
+                    label.placeholder = "Escriba aquí...";
                     let input = document.getElementById("input-grado");
                     input.placeholder = "Bachiller, Maestría, Doctorado";
                     document.querySelector('input#input-institucion').value="";
@@ -995,8 +1073,6 @@
 
 
         function show_selected_inputs(){
-
-            let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
 
                     //NORMATIVA APA
 
@@ -1046,7 +1122,7 @@
                     let label = document.querySelector("label[for='input-institucion']");
                     label.textContent = "ó Autor Entidad:";
                     label = document.querySelector("label[for='input-autor']");
-                    label.innerHTML ="Autor Persona";
+                    label.innerHTML ="Autor Persona:";
                     label = document.querySelector("label[for='input-pais']");
                     label.textContent = "Ciudad:";
                     show_input('input-siglas');         //Siglas de entidad
@@ -1260,15 +1336,17 @@
         }
 
         function entidad_autor_swap(event){
-            let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
+            
             if(selectedRadioButton=="document-gubernamental"){
                 console.log(event.target.id);
                 let id = event.target.id; 
                 if(id == "input-autor"){
                         document.querySelector('input#input-institucion').value="";
+                        document.querySelector('input#input-institucion').placeholder="Solo llene o Autor o Entidad";
                 }
                 if(id == "input-institucion"){
                         document.querySelector('textarea#input-autor').value="";
+                        document.querySelector('textarea#input-autor').placeholder="Solo llene o Autor o Entidad";
                 }
             }
 
