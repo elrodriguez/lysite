@@ -36,9 +36,9 @@ function openModalRecommendation(editor){
         </div>
         <form id="ly-ck-form-recommendation" class="ly-ck-dialog-form">
             <div class="ly-ck-dialog-group-control">
-                <label class="ly-ck-dialog-label" for="input-doi">Descripción:</label>
+                <label class="ly-ck-dialog-label" for="re-input-text">Descripción:</label>
                 <input class="ly-ck-dialog-input" type="text" id="re-input-text" name="re-input-text" placeholder="Escriba aquí...">
-                <spam id="input-doi-error"></span>
+                <spam id="input-recomendation-error"></span>
             </div> 
 
             <div id="ly-ck-dialog-references-result" class="ly-ck-dialog-group-control mb-2">
@@ -73,8 +73,8 @@ function openModalRecommendation(editor){
     formSubmit.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const input = document.getElementById('input-doi');
-        const error = document.getElementById('input-doi-error');
+        const input = document.getElementById('re-input-text');
+        const error = document.getElementById('input-recomendation-error');
 
         if (input.value.length === 0) {
             error.textContent = 'Este campo no puede estar vacío';

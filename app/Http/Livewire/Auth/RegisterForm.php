@@ -30,7 +30,7 @@ class RegisterForm extends Component
 
             'password' => 'required|min:8',
             'repeat_password' => 'required|same:password',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
 
         ]);
 
