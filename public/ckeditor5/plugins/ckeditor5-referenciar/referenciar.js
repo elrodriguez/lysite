@@ -53,6 +53,28 @@ function openModalReference(editor){
                 <div class="collapse width" id="collapseWidthExample1" >
 
                 <div class="ly-ck-dialog-group-control">
+
+                    <div class="btn-group btn-group-sm" role="group" aria-label="">
+                        <button onclick="select_citation()" type="button" class="btn btn-secondary">Articulo</button>
+                        <button onclick="select_citation()" type="button" class="btn btn-secondary">1Libro Virtual/button>
+                        <button onclick="select_citation()" type="button" class="btn btn-secondary">Libro Físico</button>
+                        <button onclick="select_citation()" type="button" class="btn btn-secondary">1</button>
+                        
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </button>
+                            <div class="dropdown-menu">
+                                <a onclick="select_citation()" class="dropdown-item" href="#">Dropdown link</a>
+                                <a onclick="select_citation()" class="dropdown-item" href="#">Dropdown link</a>
+                            </div>
+                        </div>
+
+                        <button onclick="select_citation()" type="button" class="btn btn-secondary">1</button>
+
+                    </div>
+
+
                     <div class="form-check form-check-inline">
                         <input onclick="select_citation()" class="form-check-input" type="radio" name="input-type" id="inlineRadioArticle" value="article" checked>
                         <label class="form-check-label" for="inlineRadioArticle">Articulo</label>
