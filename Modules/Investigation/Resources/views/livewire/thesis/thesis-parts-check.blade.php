@@ -1,4 +1,7 @@
 <div>
+    @push('scripts')
+    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
+    @endpush
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
@@ -262,4 +265,5 @@
         }
 
     </script>
+    @stack('scripts')
 </div>
