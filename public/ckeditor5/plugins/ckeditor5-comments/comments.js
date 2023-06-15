@@ -14,7 +14,7 @@ export default class comments extends Plugin {
         // The button must be registered among the UI components of the editor
         // to be displayed in the toolbar.
         const ajaxData = editor.config.get('comments.ajax') || [];
-        
+        const partId = ajaxData.data.thesi_student_part_id;
         editor.ui.componentFactory.add('comments', () => {
             // The button will be an instance of ButtonView.
             const button = new ButtonView();
@@ -29,9 +29,14 @@ export default class comments extends Plugin {
 
             button.on( 'execute', () => {
                 if (Object.keys(ajaxData).length > 0) {
-                    this._createDialog();
+                    if(partId != 0){
+                        this._createDialog();
+                    }else{
+                        alert('No puede comentar, aun no hay contenido');
+                    }
+                    
                 }else{
-                    alert('No puede acceder a esta función, solo para tutores')
+                    alert('No puede acceder a esta función, solo para tutores');
                 }
             } );
 
@@ -159,8 +164,11 @@ export default class comments extends Plugin {
                     if(parameters != 'empty'){
                        __runAjax(parameters, randomNum, textarea.value, selectedText);
                     }
-                    _createSidebarComments(textarea.value,randomNum);
-   
+                    //_createSidebarComments(textarea.value,randomNum);
+                    const urlData2 = editor.config.get('comments.urlData') || null;
+                    if (urlData2) {
+                        __getDataComments(urlData2)
+                    }
                 } else {
                     alert("El textarea está vacío");
                 }

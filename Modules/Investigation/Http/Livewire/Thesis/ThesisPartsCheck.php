@@ -10,7 +10,7 @@ use Modules\Academic\Emails\NotificationCheckThesisEmail;
 use Modules\Investigation\Entities\InveThesisFormat;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
-use Modules\Investigation\Entities\InveThesisStudentPart; 
+use Modules\Investigation\Entities\InveThesisStudentPart;
 use Modules\Investigation\Entities\InveThesisStudentPartSelectionComment;
 
 class ThesisPartsCheck extends Component
@@ -36,7 +36,7 @@ class ThesisPartsCheck extends Component
     public $auto_save = true;
     public $thesisStudentPart;
     public $commentary = "no ha dejado comentario";
-
+    public $xpart_id = 0;
     public $notes;
 
     public function mount($external_id, $part_id)
@@ -59,6 +59,7 @@ class ThesisPartsCheck extends Component
                 $this->content_old = html_entity_decode($this->thesisStudentPart->content, ENT_QUOTES, "UTF-8");
                 $this->content = $this->content_old;
                 $this->commentary = $this->thesisStudentPart->commentary;
+                $this->xpart_id = $this->thesisStudentPart->id;
             }
             $this->student_name = DB::table('people')
                 ->select('people.full_name')
@@ -158,9 +159,10 @@ class ThesisPartsCheck extends Component
         $this->dispatchBrowserEvent('inve-student-part-create', ['success' => true]);
     }
 
-    public function getComments(){
+    public function getComments()
+    {
         return "CARAJO";
-        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_part_id', $thesis_student->id); 
+        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_part_id', $thesis_student->id);
         return $comments;
     }
 

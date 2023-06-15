@@ -207,16 +207,16 @@
                     ajax:{
                         url: "{{ route('investigation_thesis_selection_comments') }}",
                         data:{
-                            thesi_student_part_id: {{ $thesisStudentPart->id ? $thesisStudentPart->id : null }},
-                            thesi_student_id: {{ $thesisStudentPart->inve_thesis_student_id }},
-                            thesi_format_part_id: {{ $thesisStudentPart->inve_thesis_format_part_id }}
+                            thesi_student_part_id: {{ $xpart_id }},
+                            thesi_student_id: {{ $thesis_student->id }},
+                            thesi_format_part_id: {{ $focus_id}}
                         },
                         method:'POST',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     },
-                    urlData: "{{ route('investigation_thesis_get_comments',$this->thesis_id) }}"
+                    urlData: "{{ route('investigation_thesis_get_comments',$thesis_student->id) }}"
                 },
                 references:{
                     url:"{{ route('investigation_thesis_references') }}",
