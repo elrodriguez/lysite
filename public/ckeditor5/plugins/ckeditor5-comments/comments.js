@@ -14,7 +14,7 @@ export default class comments extends Plugin {
         // The button must be registered among the UI components of the editor
         // to be displayed in the toolbar.
         const ajaxData = editor.config.get('comments.ajax') || [];
-        const partId = ajaxData.data.thesi_student_part_id;
+        
         editor.ui.componentFactory.add('comments', () => {
             // The button will be an instance of ButtonView.
             const button = new ButtonView();
@@ -29,6 +29,7 @@ export default class comments extends Plugin {
 
             button.on( 'execute', () => {
                 if (Object.keys(ajaxData).length > 0) {
+                    const partId = ajaxData.data.thesi_student_part_id;
                     if(partId != 0){
                         this._createDialog();
                     }else{

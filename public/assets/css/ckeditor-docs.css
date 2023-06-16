@@ -427,6 +427,7 @@ html {
 	right: 20px;
 	top: 50%;
 	transform: translateY(-50%);
+	z-index: 9999999999;
 }
 .ly-suggestion-marker-deletion {
     background: rgba(229,102,134,.35) !important;
@@ -578,13 +579,13 @@ html {
 }
 #lyc-ck-sidebar-list-comments{
 	position: fixed;
-	top: 50%;
+	top: 70%;
 	right: 0;
 	transform: translateY(-50%);
-	z-index: 100000;
-	width: 250px;
+	z-index: 10;
+	width: 350px;
 }
 .list-comments-scroll{
 	overflow-y: auto;
-	max-height: 350px;
+	max-height: 280px;
 }
