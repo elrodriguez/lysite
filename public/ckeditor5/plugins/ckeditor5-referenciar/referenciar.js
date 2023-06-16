@@ -55,6 +55,7 @@ function openModalReference(editor){
                 <div class="ly-ck-dialog-group-control">
 
                     <div class="btn-group btn-group-sm" role="group" aria-label="">
+                        <button onclick="select_citation('thesis')" type="button" class="btn btn-primary">Tésis</button>
                         <button onclick="select_citation('article')" type="button" class="btn btn-primary">Artículo</button>
                         <button onclick="select_citation('page')" type="button" class="btn btn-primary">Página Web</button>
                         <button onclick="select_citation('book')" type="button" class="btn btn-primary">Libro Virtual</button>
@@ -63,7 +64,7 @@ function openModalReference(editor){
                         
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            Documento Legal
+                            Doc. Legal
                             </button>
                             <div class="dropdown-menu">
                                 <a onclick="select_citation('document-legal')" class="dropdown-item" href="#">Tipo 1</a>
@@ -128,7 +129,7 @@ function openModalReference(editor){
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-repositorio">Repositorio:</label>
-                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-repositorio" name="input-repositorio" placeholder="Repositorio de la Univer....">
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-repositorio" name="input-repositorio" placeholder="Repositorio de la Universidad Nacional de Ingeniería, Repositorio de la Universidad Cayetano...">
                         <spam id="input-repositorio-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
