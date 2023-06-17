@@ -36,7 +36,7 @@ function openModalReference(editor){
         </div>
         <form id="ly-ck-form-referenciar" class="ly-ck-dialog-form">
             <div style="max-height: 300px;overflow-x: none;overflow-y: auto;">
-                <div class="ly-ck-dialog-group-control">
+                <div id="input-doi-buscar-id" class="ly-ck-dialog-group-control">
                     <label class="ly-ck-dialog-label" for="input-doi">DOI*:</label>
                     <input class="ly-ck-dialog-input" type="text" id="input-doi" name="input-doi" placeholder="Escriba aquí...">
                     <spam id="input-doi-error"></span>
@@ -189,8 +189,12 @@ function openModalReference(editor){
                 </div>
             </div>
             <div class="ly-ck-dialog-buttons">
-                <button class="ly-ck-dialog-button btn-info mr-2" type="button" data-toggle="collapse" data-target="#collapseWidthExample1" aria-expanded="false" aria-controls="collapseWidthExample1">
-                    Cita Manual
+                <button onclick="copyCitation()" class="ly-ck-dialog-button btn-info mr-2" type="button">
+                <i class="fa fa-files-o" aria-hidden="true"></i>Copiar Cita
+                </button>
+
+                <button onclick="hideBuscar()" id="cita-manual-id" class="ly-ck-dialog-button btn-info mr-5" type="button" data-toggle="collapse" data-target="#collapseWidthExample1" aria-expanded="false" aria-controls="collapseWidthExample1">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Cita Manual
                 </button>
                 <button id="ckgetBtnReference" class="ly-ck-dialog-button mr-2" type="submit"><i class="fas fa-search"></i>Buscar</button>
                 <button id="ckcloseBtnReference" class="ly-ck-dialog-button" type="button"><i class="fas fa-times"></i>Cancelar</button>
@@ -241,7 +245,7 @@ function openModalReference(editor){
             
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    content.innerHTML = `<div class="alert alert-primary" role="alert">
+                    content.innerHTML = `<div class="alert alert-primary" id="citation-id" role="alert">
                                             ${JSON.parse(xhr.responseText).cita}
                                         </div>`;
                 }

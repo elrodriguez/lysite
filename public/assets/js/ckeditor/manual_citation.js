@@ -19,6 +19,7 @@ let repositorio;
 let selectedRadioButton; 
 let numero;
 let paginas;
+let concatenado;
 
 function refresh_values(){
 normativa   = document.getElementById('select-normativa')   .value;
@@ -56,8 +57,7 @@ function manual_citation(event){
     let cita_autores="";
     refresh_values();            
     // obtiene el elemento HTML del botón de opción seleccionado
-    //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
-    let concatenado;
+    //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;    
 
     // verificar si la cadena termina con ";"
     if (autors.endsWith(";") || autors.endsWith(".") || autors.endsWith(",")) {
@@ -418,7 +418,7 @@ function manual_citation(event){
 
 //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + pais + ";" + institucion + ";" + issn + ";" + isbn + ";" + enlace;
 
-document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
+document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="" id="citation-id" role="alert">'+concatenado+'</div>';        
 }
 
 function select_citation(tipoInput){  
@@ -766,4 +766,41 @@ function entidad_autor_swap(event){
         }
     }
 
+}
+
+function copyCitation (){
+for (let index = 0; index < 4; index++) { // no sé por qué, pero si no lo ejecuto mas de una vez a veces no copia el texto.
+    
+        // Seleccionar el contenido del <div>
+    const div = document.getElementById("citation-id");
+    const range = document.createRange();
+    range.selectNode(div);
+    window.getSelection().addRange(range);
+
+    // Copiar el contenido seleccionado
+    document.execCommand("copy");
+
+    // Desmarcar la selección
+    window.getSelection().removeAllRanges();
+    
+}
+
+}
+
+function hideBuscar(){
+    // Seleccionar el botón
+let btnBuscar = document.getElementById("ckgetBtnReference");
+
+// Agregar un evento al botón para alternar su visibilidad
+
+  if (btnBuscar.style.display === "none") {
+    // Si el botón está oculto, se muestra
+    btnBuscar.style.display = "block";
+    document.getElementById("input-doi-buscar-id").style.display = "block";
+  } else {
+    // Si el botón está visible, se oculta
+    btnBuscar.style.display = "none";
+    document.getElementById("input-doi-buscar-id").style.display = "none";
+
+  }
 }
