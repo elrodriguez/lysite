@@ -123,7 +123,7 @@ function openModalReference(editor){
                         <spam id="input-pais-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-institucion">Siglas Entidad/Nombre del Emisor:</label>
+                        <label class="ly-ck-dialog-label" for="input-siglas">Siglas Entidad/Nombre del Emisor:</label>
                         <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-siglas" name="input-siglas" placeholder="Siglas de la entidad emisora o el nombre del emisor">
                         <spam id="input-siglas-error"></span>
                     </div>

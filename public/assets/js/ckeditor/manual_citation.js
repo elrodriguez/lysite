@@ -20,6 +20,7 @@ let selectedRadioButton;
 let numero;
 let paginas;
 let concatenado;
+let siglas;
 
 function refresh_values(){
 normativa   = document.getElementById('select-normativa')   .value;
@@ -43,6 +44,8 @@ repositorio = document.getElementById("input-repositorio")  .value;
 numero      = document.getElementById("input-numero")       .value;
 paginas     = document.getElementById("input-paginas")      .value;
 date_consulta= document.getElementById("input-date-consulta").value;
+siglas      = document.getElementById("input-siglas")       .value;
+
 date = new Date(date + 'T00:00:00');
 date.setMinutes(date.getTimezoneOffset());
 date_consulta = new Date(date_consulta + 'T00:00:00');
@@ -359,7 +362,143 @@ function manual_citation(event){
                             }   
         
     }
+    
     if(selectedRadioButton=="document-gubernamental"){
+        
+                        let emisor=""; 
+                            if(normativa=="apa"){                                
+                                
+                                if(institucion.length < 1){ //si se escribió nombre de una persona
+                                    autors.forEach((autor, index) => {
+                                        var espacio = " ";
+                                        if (!autor.segundoApellido)espacio = "";
+                                        
+                                        cita_autores += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                        if (index === autors.length - 1){
+                                            cita_autores += " ";
+                                        } else {
+                                            cita_autores += ", ";
+                                        }
+                                    });
+                                    
+                                    nombresApellidos=[];
+                                            if(siglas.split(",").length>1){
+                                                try {                                                    
+                                                    personas = siglas.split(";");
+                                                    personas.forEach(persona => {
+                                                        let nombreApellido = persona.trim().split(",");
+                                                        let nombres = nombreApellido[0].trim().split(" ");
+                                                        let apellidos = nombreApellido[1].trim().split(" ");
+                                                    
+                                                        let primerNombre = nombres[0] ? nombres[0] : "";
+                                                        let segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
+                                                        let primerApellido = apellidos[0] ? apellidos[0] : "";
+                                                        let segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
+                                                    
+                                                    nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
+                                                    });   
+                                                } catch (error) {
+                                                }
+                                                
+                                                nombresApellidos.forEach((autor, index) => {
+                                                    espacio = " ";
+                                                    if (!autor.segundoApellido)espacio = "";
+                                                    
+                                                    emisor += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                                    if (index === autors.length - 1){
+                                                        emisor += " ";
+                                                    } else {
+                                                        emisor += ", ";
+                                                    }
+                                                });
+                                                
+                                                concatenado = cita_autores + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + pais + ": " + emisor + " " + enlace;
+                                            } else{
+                                                concatenado = cita_autores + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + pais + ": " + siglas + ". " + enlace;
+                                            }   
+                                    
+                                }else{
+                                    concatenado = institucion + "[" +siglas + "] " + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + pais + ": " + siglas + ". " + enlace;
+                                }     
+                            }  
+
+
+                            if(normativa=="iso690"){
+
+                                if(institucion.length < 1){  //si se escribió nombre de una persona
+                                    autors.forEach((autor, index) => {
+                                        autor.primerApellido = autor.primerApellido.toUpperCase();
+                                        cita_autores += autor.primerApellido+", "+autor.primerNombre;
+                                        if (index === autors.length - 1){
+                                            cita_autores += " ";
+                                        } else {
+                                            cita_autores += ", ";
+                                        }
+                                    }); 
+
+                                    concatenado = cita_autores + ". <em>"+ title.trim() + ".</em> " + pais.trim() + ": " + siglas.trim()+ ", " + anio +". Disponible en: " + enlace;  
+                                }else{
+                                    institucion[0] = institucion[0].toUpperCase();
+                                    concatenado = institucion + " [" + siglas.trim().toUpperCase() + "]. " + "<em>"+ title.trim() + ".</em> " + pais.trim() + ": " + siglas.trim().toUpperCase()+ ", " + anio +". Disponible en: " + enlace;
+                                }
+                            }  
+
+
+                            if(normativa=="vancouver"){
+
+                                let emisor=""; 
+
+                                if(institucion.length < 1){  //si se escribió nombre de una persona
+                                    autors.forEach((autor, index) => {
+                                        autor.primerApellido = autor.primerApellido;
+                                        cita_autores += autor.primerApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                        if (index === autors.length - 1){
+                                            cita_autores += " ";
+                                        } else {
+                                            cita_autores += ", ";
+                                        }
+                                        }); 
+                                        nombresApellidos=[];
+                                        if(siglas.split(",").length>1){
+                                            try {                                                    
+                                                personas = siglas.split(";");
+                                                personas.forEach(persona => {
+                                                    let nombreApellido = persona.trim().split(",");
+                                                    let nombres = nombreApellido[0].trim().split(" ");
+                                                    let apellidos = nombreApellido[1].trim().split(" ");
+                                                
+                                                    let primerNombre = nombres[0] ? nombres[0] : "";
+                                                    let segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
+                                                    let primerApellido = apellidos[0] ? apellidos[0] : "";
+                                                    let segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
+                                                
+                                                nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
+                                                });   
+                                            } catch (error) {
+                                            }
+                                            
+                                            nombresApellidos.forEach((autor, index) => {
+                                                espacio = " ";
+                                                if (!autor.segundoApellido)espacio = "";
+                                                
+                                                emisor += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                                if (index === autors.length - 1){
+                                                    emisor += " ";
+                                                } else {
+                                                    emisor += " ";
+                                                }
+                                            });
+                                            concatenado = cita_autores +  title.trim() + " [Internet]. " + pais.trim() + ": "+ emisor + "; " + anio + ". Disponible en: "+ enlace.trim();
+                                        }else{
+                                            concatenado = cita_autores +  title.trim() + " [Internet]. " + pais.trim() + ": "+ siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: "+ enlace.trim();
+                                        }
+                                }else{ //si se escribio nombre de institucion
+                                    concatenado = institucion +  title.trim() + " [Internet]. " + pais.trim() + ": "+ siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: "+ enlace.trim();
+                                }
+
+                            }   
+
+
         
     }
     if(selectedRadioButton=="page"){                
@@ -456,6 +595,7 @@ function select_citation(tipoInput){
     try {
         manual_citation();
     } catch (error) {
+        
         console.log("Falta llenar formulario");
     }
     hide_all_inputs();
@@ -564,6 +704,7 @@ function show_selected_inputs(){
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-date');           //fecha publicacion 
             show_input('input-enlace');   
+            document.getElementById("input-siglas").placeholder="Siglas de la entidad emisosa o nombres y apellidos del emisor ejem: María José, Perez Miñano";
         }
          //TESIS
         if(selectedRadioButton=="thesis"){
@@ -640,12 +781,19 @@ function show_selected_inputs(){
             show_input('input-autor');
             show_input('input-titulo');
             show_input('input-pais');
-            let label = document.querySelector("label[for='input-autor']");
-            label.textContent = "Autor o Entidad:";
+            show_input('input-institucion');
+            let label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "ó Autor Entidad:";
+            label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Autor Persona:";
             label = document.querySelector("label[for='input-pais']");
-            label.textContent = "Ciudad:";
+            label.textContent = "País/Ciudad:";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Nombre de la Institución o Entidad:";
+            show_input('input-siglas');         //Siglas de entidad
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-date');           //fecha publicacion 
+            document.getElementById("input-siglas").placeholder="Nombre de la Institución";
             show_input('input-enlace');   
         }
         //TESIS
@@ -719,10 +867,13 @@ function show_selected_inputs(){
             show_input('input-autor');
             show_input('input-titulo');
             show_input('input-pais');
-            let label = document.querySelector("label[for='input-autor']");
-            label.textContent = "Autor o Entidad:";
+            let label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "ó Autor Entidad:";
+            label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Autor Persona:";
             label = document.querySelector("label[for='input-pais']");
             label.textContent = "Ciudad:";
+            show_input('input-institucion');
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-date');           //fecha publicacion 
             show_input('input-enlace');   
@@ -759,10 +910,23 @@ function entidad_autor_swap(event){
         if(id == "input-autor"){
                 document.querySelector('input#input-institucion').value="";
                 document.querySelector('input#input-institucion').placeholder="Solo llene o Autor o Entidad";
+                if(normativa=="iso690"){
+                    document.getElementById('input-siglas').placeholder = "Nombre de la institución o entidad"
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Nombre de la Institución:";
+                }
+                
         }
         if(id == "input-institucion"){
                 document.querySelector('textarea#input-autor').value="";
                 document.querySelector('textarea#input-autor').placeholder="Solo llene o Autor o Entidad";
+                label = document.querySelector("label[for='input-siglas']");
+                label.textContent = "Siglas de la institución:";
+                if(normativa=="iso690"){
+                    document.getElementById('input-siglas').placeholder = "Sigla de la institución o entidad"
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Sigla de la Institución:";
+                }
         }
     }
 
