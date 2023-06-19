@@ -67,8 +67,11 @@ function openModalReference(editor){
                             Doc. Legal
                             </button>
                             <div class="dropdown-menu">
-                                <a onclick="select_citation('document-legal')" class="dropdown-item" href="#">Tipo 1</a>
-                                <a onclick="select_citation('document-legal')" class="dropdown-item" href="#">Tipo 2</a>
+                                <a onclick="select_citation('document-legal-codigo-general')" class="dropdown-item" href="#">Código general</a>
+                                <a onclick="select_citation('document-legal-codigo-explicito')" class="dropdown-item" href="#">Código explícito</a>
+                                <a onclick="select_citation('document-legal-expedido-sala-penal')" class="dropdown-item" href="#">Expedido por Salas penales</a>
+                                <a onclick="select_citation('document-legal-expedido-sala-corte-suprema')" class="dropdown-item" href="#">Sala Penal perm. de Corte Suprema</a>
+                                <a onclick="select_citation('document-legal-reglamento-notarial')" class="dropdown-item" href="#">Reglamento Notarial</a>
                             </div>
                         </div>
                     </div>
@@ -86,6 +89,26 @@ function openModalReference(editor){
                         <label class="ly-ck-dialog-label" for="input-institucion">Institución, Entidad o Revista:</label>
                         <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-institucion" name="input-institucion" placeholder="Escriba aquí...">
                         <spam id="input-institucion-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-libro">N° de Libro:</label>
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-libro" name="input-libro" placeholder="Ejem. Libro segundo">
+                        <spam id="input-libro-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-n-titulo">N° de Título:</label>
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-n-titulo" name="input-n-titulo" placeholder="Ejem. Título Noveno">
+                        <spam id="input-n-titulo-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-capitulo">Capítulo N°:</label>
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-capitulo" name="input-capitulo" placeholder="Ejem. XII, I, IV, etc.">
+                        <spam id="input-capitulo-error"></span>
+                    </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <label class="ly-ck-dialog-label" for="input-capitulo-nombre">Nombre del Capítulo:</label>
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-capitulo-nombre" name="input-capitulo-nombre" placeholder="Ejem. Peculado">
+                        <spam id="input-capitulo-nombre-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-titulo">Título:</label>

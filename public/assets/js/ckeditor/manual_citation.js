@@ -21,30 +21,38 @@ let numero;
 let paginas;
 let concatenado;
 let siglas;
+let libro;
+let n_titulo;
+let capitulo;
+let capitulo_nombre;
 
 function refresh_values(){
-normativa   = document.getElementById('select-normativa')   .value;
-editor      = document.getElementById("input-editor")       .value;
-autors      = document.getElementById("input-autor")        .value;
-title       = document.getElementById("input-titulo")       .value;
-grade       = document.getElementById("input-grado")        .value;
-editorial   = document.getElementById("input-editorial")    .value;
-edicion     = document.getElementById("input-edicion")      .value;
-volumen     = document.getElementById("input-volumen")      .value;
-university  = document.getElementById("input-universidad")  .value;
-pais        = document.getElementById("input-pais")         .value;
-institucion = document.getElementById("input-institucion")  .value;
-issn        = document.getElementById("input-issn")         .value;
-isbn        = document.getElementById("input-isbn")         .value;
-enlace         = document.getElementById("input-enlace")       .value;
-namepage    = document.getElementById("input-namepage")     .value;
-date        = document.getElementById("input-date")         .value;
-doi         = document.getElementById("input-doi-a")        .value;
-repositorio = document.getElementById("input-repositorio")  .value;
-numero      = document.getElementById("input-numero")       .value;
-paginas     = document.getElementById("input-paginas")      .value;
-date_consulta= document.getElementById("input-date-consulta").value;
-siglas      = document.getElementById("input-siglas")       .value;
+normativa       = document.getElementById('select-normativa')       .value;
+editor          = document.getElementById("input-editor")           .value;
+autors          = document.getElementById("input-autor")            .value;
+title           = document.getElementById("input-titulo")           .value;
+grade           = document.getElementById("input-grado")            .value;
+editorial       = document.getElementById("input-editorial")        .value;
+edicion         = document.getElementById("input-edicion")          .value;
+volumen         = document.getElementById("input-volumen")          .value;
+university      = document.getElementById("input-universidad")      .value;
+pais            = document.getElementById("input-pais")             .value;
+institucion     = document.getElementById("input-institucion")      .value;
+issn            = document.getElementById("input-issn")             .value;
+isbn            = document.getElementById("input-isbn")             .value;
+enlace          = document.getElementById("input-enlace")           .value;
+namepage        = document.getElementById("input-namepage")         .value;
+date            = document.getElementById("input-date")             .value;
+doi             = document.getElementById("input-doi-a")            .value;
+repositorio     = document.getElementById("input-repositorio")      .value;
+numero          = document.getElementById("input-numero")           .value;
+paginas         = document.getElementById("input-paginas")          .value;
+date_consulta   = document.getElementById("input-date-consulta")    .value;
+siglas          = document.getElementById("input-siglas")           .value;
+libro           = document.getElementById("input-libro")            .value;
+n_titulo        = document.getElementById("input-n-titulo")         .value;
+capitulo        = document.getElementById("input-capitulo")         .value;
+capitulo_nombre = document.getElementById("input-capitulo-nombre")  .value;
 
 date = new Date(date + 'T00:00:00');
 date.setMinutes(date.getTimezoneOffset());
@@ -587,6 +595,21 @@ function select_citation(tipoInput){
             case "thesis":
                 document.getElementById('tipo-referencia').innerHTML="Tésis";                       
             break;
+            case "document-legal-codigo-general":
+                document.getElementById('tipo-referencia').innerHTML="Código general";                       
+            break;
+            case "document-legal-codigo-explicito":
+                document.getElementById('tipo-referencia').innerHTML="Código explícito";                       
+            break;
+            case "document-legal-expedido-sala-penal":
+                document.getElementById('tipo-referencia').innerHTML="Documento Expedido por Salas penales";                       
+            break;
+            case "document-legal-expedido-sala-corte-suprema":
+                document.getElementById('tipo-referencia').innerHTML="Documento expedido de Sala Penal permanente de la Corte Suprema";                       
+            break;
+            case "document-legal-reglamento-notarial":
+                document.getElementById('tipo-referencia').innerHTML="Reglamento Notarial";                       
+            break;
     
         default:
             break;
@@ -631,7 +654,12 @@ function hide_all_inputs(){
             hide_input('input-numero');
             hide_input('input-edicion');
             hide_input('input-siglas');
-            hide_input('input-repositorio'); //
+            hide_input('input-repositorio');
+            hide_input('input-libro');
+            hide_input('input-n-titulo');
+            hide_input('input-capitulo');
+            hide_input('input-capitulo-nombre');
+
             let label = document.querySelector("label[for='input-autor']");
             label.textContent = "Autor/es:";
             label = document.getElementById("input-autor");
@@ -722,6 +750,101 @@ function show_selected_inputs(){
             show_input('input-enlace');
 
         }
+
+        //Doc LEGAL Codigo general
+        if(selectedRadioButton=="document-legal-codigo-general"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal";
+            show_input('input-institucion');
+            label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "Número del decreto documento:";
+            document.getElementById('input-institucion').placeholder = "Ejem. Decreto Legislativo N° 343";
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-date');           //fecha publicacion 
+            show_input('input-enlace'); 
+            
+        }
+
+                //Doc legal explícito 
+                if(selectedRadioButton=="document-legal-codigo-explicito"){
+                    show_input('input-autor');
+                    let label = document.querySelector("label[for='input-autor']");
+                    label.innerHTML ="Tipo de Documento:";
+                    document.getElementById('input-autor').placeholder = "Ejem. Código Penal Federal";
+                    label = document.querySelector("label[for='input-libro']");
+                    label.innerHTML ="N° de Libro:";
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora:";
+                    document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+                    show_input('input-libro');
+                    show_input('input-titulo'); 
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Nombre del título:";
+                    document.getElementById('input-titulo').placeholder = "Escribe aquí...";
+                    show_input('input-n-titulo');    
+                    show_input('input-capitulo');      
+                    show_input('input-enlace');  
+                    show_input('input-capitulo-nombre');                                       
+                }
+
+
+                //Doc legal Expedido por pleno jurisdiccional de salas penales
+                if(selectedRadioButton=="document-legal-expedido-sala-penal"){                  
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora:";
+                    document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+                    show_input('input-titulo');
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Número del acuerdo plenario:";
+                    document.getElementById('input-titulo').placeholder = "Ejem. 3-2011/CJ-116";   
+                    show_input('input-enlace');                                     
+                }
+
+                
+                //Doc legal Expedido por Sala Penal permanente de la corte suprema
+                if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){                  
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    show_input('input-pais');
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad o Distrito:";
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora/Lugar de expedición:";
+                    document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+                    show_input('input-titulo');
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Número y año de Casación:";
+                    document.getElementById('input-titulo').placeholder = "Ejem. 634-2015";   
+                    show_input('input-enlace');                                     
+                }
+
+
+                    //Doc legal Reglamento Notarial
+                if(selectedRadioButton=="document-legal-reglamento-notarial"){                  
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    show_input('input-pais');
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad o Distrito:";
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora/Lugar de expedición:";
+                    document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+                    show_input('input-titulo');
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Número de Reglamento Notarial:";
+                    document.getElementById('input-titulo').placeholder = "Ejem. 1527-2016";   
+                    show_input('input-enlace');                                     
+                }
+
         
     }
 
