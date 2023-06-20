@@ -1,6 +1,7 @@
 let autors;
 let title;
 let grade;
+let editor;
 let editorial;
 let volumen;
 let university;
@@ -26,10 +27,12 @@ let n_titulo;
 let titulo;
 let capitulo;
 let capitulo_nombre;
+let tipoDoc;
 
 function refresh_values(){
-normativa       = document.getElementById('select-normativa')       .value;
-editor          = document.getElementById("input-editor")           .value;
+    
+normativa       = document.getElementById("select-normativa")       .value;
+editor          = document.getElementById("input-editorr")          .value;
 autors          = document.getElementById("input-autor")            .value;
 tipoDoc = autors;
 title           = document.getElementById("input-titulo")           .value;
@@ -64,6 +67,7 @@ date_consulta.setMinutes(date_consulta.getTimezoneOffset());
 if(!doi.startsWith("http://dx.doi.org/")){
     doi = "http://dx.doi.org/" + doi;
     }
+    
 }
 
 function manual_citation(event){ 
@@ -734,7 +738,7 @@ function select_citation(tipoInput){
         default:
             break;
     }
-    refresh_values();                      
+        refresh_values();                      
     try {
         manual_citation();
     } catch (error) {
@@ -768,7 +772,7 @@ function hide_all_inputs(){
             hide_input('input-isbn');
             hide_input('input-volumen');
             hide_input('input-paginas');
-            hide_input('input-editor');
+            hide_input('input-editorr');
             hide_input('input-editorial');
             hide_input('input-enlace');
             hide_input('input-numero');
@@ -1171,7 +1175,7 @@ function show_selected_inputs(){
             show_input('input-autor');
             show_input('input-pais');
             show_input('input-titulo');
-            show_input('input-editor');
+            show_input('input-editorr');
             show_input('input-date');                    
             show_input('input-enlace');
         }

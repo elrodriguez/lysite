@@ -176,9 +176,9 @@ function openModalReference(editor){
                         <spam id="input-paginas-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
-                        <label class="ly-ck-dialog-label" for="input-editor">Editor:</label>
-                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-editor" name="input-editor" placeholder="Escriba aquí...">
-                        <spam id="input-editor-error"></span>
+                        <label class="ly-ck-dialog-label" for="input-editorr">Editor:</label>
+                        <input onkeyup="manual_citation(event)" class="ly-ck-dialog-input" type="text" id="input-editorr" name="input-editorr" placeholder="Escriba aquí...">
+                        <spam id="input-editorr-error"></span>
                     </div>
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-editorial">Editorial:</label>
