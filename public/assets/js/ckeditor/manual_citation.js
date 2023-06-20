@@ -23,6 +23,7 @@ let concatenado;
 let siglas;
 let libro;
 let n_titulo;
+let titulo;
 let capitulo;
 let capitulo_nombre;
 
@@ -30,6 +31,7 @@ function refresh_values(){
 normativa       = document.getElementById('select-normativa')       .value;
 editor          = document.getElementById("input-editor")           .value;
 autors          = document.getElementById("input-autor")            .value;
+tipoDoc = autors;
 title           = document.getElementById("input-titulo")           .value;
 grade           = document.getElementById("input-grado")            .value;
 editorial       = document.getElementById("input-editorial")        .value;
@@ -51,6 +53,7 @@ date_consulta   = document.getElementById("input-date-consulta")    .value;
 siglas          = document.getElementById("input-siglas")           .value;
 libro           = document.getElementById("input-libro")            .value;
 n_titulo        = document.getElementById("input-n-titulo")         .value;
+titulo          = document.getElementById("input-titulo")           .value;
 capitulo        = document.getElementById("input-capitulo")         .value;
 capitulo_nombre = document.getElementById("input-capitulo-nombre")  .value;
 
@@ -563,6 +566,123 @@ function manual_citation(event){
 
     }
 
+
+    if(selectedRadioButton=="document-legal-codigo-general"){
+        if(normativa=="apa"){
+            mes = mes.toLowerCase();
+            
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + institucion + "(" +anio+ ", " + mes + " " + dia + "). <em>"+ siglas.trim() + ".</em> " + enlace.trim();       
+            }
+
+        if(normativa=="iso690"){
+            mes = mes.toLowerCase();
+            
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + institucion + ". " + siglas + ", " + pais + ", " + dia + " de "+ mes + " de " + anio +". Disponible en: "  + enlace.trim();       
+        }
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+            
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + institucion + ". " + siglas + ", " + pais + ", " + dia + " de "+ mes + " de " + anio +". Disponible en: "  + enlace.trim();   
+        }
+    }
+
+
+    if(selectedRadioButton=="document-legal-codigo-explicito"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + libro + " " + n_titulo + " - " + titulo + " - " + capitulo + " - " + capitulo_nombre + " (" + anio+ ", " + mes + " " + dia + "). "+ siglas.trim() + ". " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + libro + " " + n_titulo + " - " + titulo + " - " + capitulo + " - " + capitulo_nombre + " (" + anio+ ", " + mes + " " + dia + "). <em>"+ siglas.trim() + ".</em> " + enlace.trim();    
+        }
+
+    }
+
+    if(selectedRadioButton=="document-legal-expedido-sala-penal"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = titulo.trim() + ", " + siglas.trim() + " (" + anio + "). " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = titulo.trim() + ", " + siglas.trim() + " (" + anio + "). " + enlace.trim();      
+        }
+
+    }
+
+
+    if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = "Casación N° " + titulo.trim() + ", " + pais.trim() + ", " + siglas.trim() + ", (" + anio + "). " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = "Casación N° " + titulo.trim() + ", " + pais.trim() + ", " + siglas.trim() + ", (" + anio + "). " + enlace.trim();      
+        }
+
+    }
+
+    if(selectedRadioButton=="document-legal-reglamento-notarial"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = "R.N. N° " + titulo.trim() + " " + pais.trim() + ` (${dia} de ${mes} de ${anio}). ` + siglas.trim() + ". " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+
+            concatenado = "R.N. N° " + titulo.trim() + " " + pais.trim() + ` (${dia} de ${mes} de ${anio}). ` + siglas.trim() + ". " + enlace.trim();
+     
+        }
+
+    }
+
 //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + pais + ";" + institucion + ";" + issn + ";" + isbn + ";" + enlace;
 
 document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="" id="citation-id" role="alert">'+concatenado+'</div>';        
@@ -835,6 +955,7 @@ function show_selected_inputs(){
                     show_input('input-pais');
                     label = document.querySelector("label[for='input-pais']");
                     label.textContent = "Ciudad o Distrito:";
+                    document.getElementById("input-pais").placeholder = "Ejem. del Santa, de Lima, de Apurimac";
                     label = document.querySelector("label[for='input-siglas']");
                     label.textContent = "Entidad Emisora/Lugar de expedición:";
                     document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
@@ -937,6 +1058,104 @@ function show_selected_inputs(){
             show_input('input-date');           //fecha publicacion                                
             show_input('input-enlace');
         }
+
+                //Doc LEGAL Codigo general
+        if(selectedRadioButton=="document-legal-codigo-general"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal";
+            show_input('input-institucion');
+            label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "Número o código:";
+            document.getElementById('input-institucion').placeholder = "Ejem. Decreto Legislativo N° 343";
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Poder Ejecutivo del Perú";
+            show_input('input-date');           //fecha publicacion 
+            show_input('input-enlace'); 
+            show_input('input-pais'); 
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o País:";
+            
+        }
+
+        //Doc legal explícito 
+        if(selectedRadioButton=="document-legal-codigo-explicito"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal Federal";
+            label = document.querySelector("label[for='input-libro']");
+            label.innerHTML ="N° de Libro:";
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-libro');
+            show_input('input-titulo'); 
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Nombre del título:";
+            document.getElementById('input-titulo').placeholder = "Escribe aquí...";
+            show_input('input-n-titulo');    
+            show_input('input-capitulo');      
+            show_input('input-enlace');  
+            show_input('input-capitulo-nombre');                                       
+        }
+
+
+        //Doc legal Expedido por pleno jurisdiccional de salas penales
+        if(selectedRadioButton=="document-legal-expedido-sala-penal"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número del acuerdo plenario:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 3-2011/CJ-116";   
+            show_input('input-enlace');                                     
+        }
+
+        
+        //Doc legal Expedido por Sala Penal permanente de la corte suprema
+        if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número y año de Casación:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 634-2015";   
+            show_input('input-enlace');                                     
+        }
+
+
+            //Doc legal Reglamento Notarial
+        if(selectedRadioButton=="document-legal-reglamento-notarial"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            document.getElementById("input-pais").placeholder = "Ejem. del Santa, de Lima, de Apurimac";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número de Reglamento Notarial:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 1527-2016";   
+            show_input('input-enlace');                                     
+        }
     }
 
 
@@ -1014,6 +1233,104 @@ function show_selected_inputs(){
             label.textContent = "Sede:";
             show_input('input-repositorio');
             show_input('input-enlace');
+        }
+
+                        //Doc LEGAL Codigo general
+        if(selectedRadioButton=="document-legal-codigo-general"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal";
+            show_input('input-institucion');
+            label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "Número o código:";
+            document.getElementById('input-institucion').placeholder = "Ejem. Decreto Legislativo N° 343";
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Poder Ejecutivo del Perú";
+            show_input('input-date');           //fecha publicacion 
+            show_input('input-enlace'); 
+            show_input('input-pais'); 
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o País:";
+            
+        }
+
+        //Doc legal explícito 
+        if(selectedRadioButton=="document-legal-codigo-explicito"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal Federal";
+            label = document.querySelector("label[for='input-libro']");
+            label.innerHTML ="N° de Libro:";
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-libro');
+            show_input('input-titulo'); 
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Nombre del título:";
+            document.getElementById('input-titulo').placeholder = "Escribe aquí...";
+            show_input('input-n-titulo');    
+            show_input('input-capitulo');      
+            show_input('input-enlace');  
+            show_input('input-capitulo-nombre');                                       
+        }
+
+
+        //Doc legal Expedido por pleno jurisdiccional de salas penales
+        if(selectedRadioButton=="document-legal-expedido-sala-penal"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número del acuerdo plenario:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 3-2011/CJ-116";   
+            show_input('input-enlace');                                     
+        }
+
+        
+        //Doc legal Expedido por Sala Penal permanente de la corte suprema
+        if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número y año de Casación:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 634-2015";   
+            show_input('input-enlace');                                     
+        }
+
+
+            //Doc legal Reglamento Notarial
+        if(selectedRadioButton=="document-legal-reglamento-notarial"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            document.getElementById("input-pais").placeholder = "Ejem. del Santa, de Lima, de Apurimac";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número de Reglamento Notarial:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 1527-2016";   
+            show_input('input-enlace');                                     
         }
     }
 
