@@ -55,7 +55,7 @@ function openModalReference(editor){
                 <div class="ly-ck-dialog-group-control">
 
                     <div class="btn-group btn-group-sm" role="group" aria-label="">
-                        <button onclick="select_citation('thesis')" type="button" class="btn btn-primary">Tésis</button>
+                        <button onclick="select_citation('thesis')" type="button" class="btn btn-primary">Tesis</button>
                         <button onclick="select_citation('article')" type="button" class="btn btn-primary">Artículo</button>
                         <button onclick="select_citation('page')" type="button" class="btn btn-primary">Página Web</button>
                         <button onclick="select_citation('book')" type="button" class="btn btn-primary">Libro Virtual</button>
