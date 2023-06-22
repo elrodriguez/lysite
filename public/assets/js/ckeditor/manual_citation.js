@@ -1,6 +1,7 @@
 let autors;
 let title;
 let grade;
+let editor;
 let editorial;
 let volumen;
 let university;
@@ -19,29 +20,46 @@ let repositorio;
 let selectedRadioButton; 
 let numero;
 let paginas;
+let concatenado;
+let siglas;
+let libro;
+let n_titulo;
+let titulo;
+let capitulo;
+let capitulo_nombre;
+let tipoDoc;
 
 function refresh_values(){
-normativa   = document.getElementById('select-normativa')   .value;
-editor      = document.getElementById("input-editor")       .value;
-autors      = document.getElementById("input-autor")        .value;
-title       = document.getElementById("input-titulo")       .value;
-grade       = document.getElementById("input-grado")        .value;
-editorial   = document.getElementById("input-editorial")    .value;
-edicion     = document.getElementById("input-edicion")      .value;
-volumen     = document.getElementById("input-volumen")      .value;
-university  = document.getElementById("input-universidad")  .value;
-pais        = document.getElementById("input-pais")         .value;
-institucion = document.getElementById("input-institucion")  .value;
-issn        = document.getElementById("input-issn")         .value;
-isbn        = document.getElementById("input-isbn")         .value;
-enlace         = document.getElementById("input-enlace")       .value;
-namepage    = document.getElementById("input-namepage")     .value;
-date        = document.getElementById("input-date")         .value;
-doi         = document.getElementById("input-doi-a")        .value;
-repositorio = document.getElementById("input-repositorio")  .value;
-numero      = document.getElementById("input-numero")       .value;
-paginas     = document.getElementById("input-paginas")      .value;
-date_consulta= document.getElementById("input-date-consulta").value;
+    
+normativa       = document.getElementById("select-normativa")       .value;
+editor          = document.getElementById("input-editorr")          .value;
+autors          = document.getElementById("input-autor")            .value;
+tipoDoc = autors;
+title           = document.getElementById("input-titulo")           .value;
+grade           = document.getElementById("input-grado")            .value;
+editorial       = document.getElementById("input-editorial")        .value;
+edicion         = document.getElementById("input-edicion")          .value;
+volumen         = document.getElementById("input-volumen")          .value;
+university      = document.getElementById("input-universidad")      .value;
+pais            = document.getElementById("input-pais")             .value;
+institucion     = document.getElementById("input-institucion")      .value;
+issn            = document.getElementById("input-issn")             .value;
+isbn            = document.getElementById("input-isbn")             .value;
+enlace          = document.getElementById("input-enlace")           .value;
+namepage        = document.getElementById("input-namepage")         .value;
+date            = document.getElementById("input-date")             .value;
+doi             = document.getElementById("input-doi-a")            .value;
+repositorio     = document.getElementById("input-repositorio")      .value;
+numero          = document.getElementById("input-numero")           .value;
+paginas         = document.getElementById("input-paginas")          .value;
+date_consulta   = document.getElementById("input-date-consulta")    .value;
+siglas          = document.getElementById("input-siglas")           .value;
+libro           = document.getElementById("input-libro")            .value;
+n_titulo        = document.getElementById("input-n-titulo")         .value;
+titulo          = document.getElementById("input-titulo")           .value;
+capitulo        = document.getElementById("input-capitulo")         .value;
+capitulo_nombre = document.getElementById("input-capitulo-nombre")  .value;
+
 date = new Date(date + 'T00:00:00');
 date.setMinutes(date.getTimezoneOffset());
 date_consulta = new Date(date_consulta + 'T00:00:00');
@@ -49,6 +67,7 @@ date_consulta.setMinutes(date_consulta.getTimezoneOffset());
 if(!doi.startsWith("http://dx.doi.org/")){
     doi = "http://dx.doi.org/" + doi;
     }
+    
 }
 
 function manual_citation(event){ 
@@ -56,8 +75,7 @@ function manual_citation(event){
     let cita_autores="";
     refresh_values();            
     // obtiene el elemento HTML del botón de opción seleccionado
-    //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
-    let concatenado;
+    //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;    
 
     // verificar si la cadena termina con ";"
     if (autors.endsWith(";") || autors.endsWith(".") || autors.endsWith(",")) {
@@ -359,7 +377,143 @@ function manual_citation(event){
                             }   
         
     }
+    
     if(selectedRadioButton=="document-gubernamental"){
+        
+                        let emisor=""; 
+                            if(normativa=="apa"){                                
+                                
+                                if(institucion.length < 1){ //si se escribió nombre de una persona
+                                    autors.forEach((autor, index) => {
+                                        var espacio = " ";
+                                        if (!autor.segundoApellido)espacio = "";
+                                        
+                                        cita_autores += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                        if (index === autors.length - 1){
+                                            cita_autores += " ";
+                                        } else {
+                                            cita_autores += ", ";
+                                        }
+                                    });
+                                    
+                                    nombresApellidos=[];
+                                            if(siglas.split(",").length>1){
+                                                try {                                                    
+                                                    personas = siglas.split(";");
+                                                    personas.forEach(persona => {
+                                                        let nombreApellido = persona.trim().split(",");
+                                                        let nombres = nombreApellido[0].trim().split(" ");
+                                                        let apellidos = nombreApellido[1].trim().split(" ");
+                                                    
+                                                        let primerNombre = nombres[0] ? nombres[0] : "";
+                                                        let segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
+                                                        let primerApellido = apellidos[0] ? apellidos[0] : "";
+                                                        let segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
+                                                    
+                                                    nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
+                                                    });   
+                                                } catch (error) {
+                                                }
+                                                
+                                                nombresApellidos.forEach((autor, index) => {
+                                                    espacio = " ";
+                                                    if (!autor.segundoApellido)espacio = "";
+                                                    
+                                                    emisor += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                                    if (index === autors.length - 1){
+                                                        emisor += " ";
+                                                    } else {
+                                                        emisor += ", ";
+                                                    }
+                                                });
+                                                
+                                                concatenado = cita_autores + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + pais + ": " + emisor + " " + enlace;
+                                            } else{
+                                                concatenado = cita_autores + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + pais + ": " + siglas + ". " + enlace;
+                                            }   
+                                    
+                                }else{
+                                    concatenado = institucion + "[" +siglas + "] " + "(" +anio+ "). <em>"+ title.trim() + ".</em> " + pais + ": " + siglas + ". " + enlace;
+                                }     
+                            }  
+
+
+                            if(normativa=="iso690"){
+
+                                if(institucion.length < 1){  //si se escribió nombre de una persona
+                                    autors.forEach((autor, index) => {
+                                        autor.primerApellido = autor.primerApellido.toUpperCase();
+                                        cita_autores += autor.primerApellido+", "+autor.primerNombre;
+                                        if (index === autors.length - 1){
+                                            cita_autores += " ";
+                                        } else {
+                                            cita_autores += ", ";
+                                        }
+                                    }); 
+
+                                    concatenado = cita_autores + ". <em>"+ title.trim() + ".</em> " + pais.trim() + ": " + siglas.trim()+ ", " + anio +". Disponible en: " + enlace;  
+                                }else{
+                                    institucion[0] = institucion[0].toUpperCase();
+                                    concatenado = institucion + " [" + siglas.trim().toUpperCase() + "]. " + "<em>"+ title.trim() + ".</em> " + pais.trim() + ": " + siglas.trim().toUpperCase()+ ", " + anio +". Disponible en: " + enlace;
+                                }
+                            }  
+
+
+                            if(normativa=="vancouver"){
+
+                                let emisor=""; 
+
+                                if(institucion.length < 1){  //si se escribió nombre de una persona
+                                    autors.forEach((autor, index) => {
+                                        autor.primerApellido = autor.primerApellido;
+                                        cita_autores += autor.primerApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                        if (index === autors.length - 1){
+                                            cita_autores += " ";
+                                        } else {
+                                            cita_autores += ", ";
+                                        }
+                                        }); 
+                                        nombresApellidos=[];
+                                        if(siglas.split(",").length>1){
+                                            try {                                                    
+                                                personas = siglas.split(";");
+                                                personas.forEach(persona => {
+                                                    let nombreApellido = persona.trim().split(",");
+                                                    let nombres = nombreApellido[0].trim().split(" ");
+                                                    let apellidos = nombreApellido[1].trim().split(" ");
+                                                
+                                                    let primerNombre = nombres[0] ? nombres[0] : "";
+                                                    let segundoNombre = nombres[1] ? nombres.slice(1).join(" ") : "";
+                                                    let primerApellido = apellidos[0] ? apellidos[0] : "";
+                                                    let segundoApellido = apellidos[1] ? apellidos.slice(1).join(" ") : "";
+                                                
+                                                nombresApellidos.push({ primerNombre, segundoNombre, primerApellido, segundoApellido });
+                                                });   
+                                            } catch (error) {
+                                            }
+                                            
+                                            nombresApellidos.forEach((autor, index) => {
+                                                espacio = " ";
+                                                if (!autor.segundoApellido)espacio = "";
+                                                
+                                                emisor += autor.primerApellido+espacio+autor.segundoApellido+", "+autor.primerNombre[0].toUpperCase()+".";
+                                                if (index === autors.length - 1){
+                                                    emisor += " ";
+                                                } else {
+                                                    emisor += " ";
+                                                }
+                                            });
+                                            concatenado = cita_autores +  title.trim() + " [Internet]. " + pais.trim() + ": "+ emisor + "; " + anio + ". Disponible en: "+ enlace.trim();
+                                        }else{
+                                            concatenado = cita_autores +  title.trim() + " [Internet]. " + pais.trim() + ": "+ siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: "+ enlace.trim();
+                                        }
+                                }else{ //si se escribio nombre de institucion
+                                    concatenado = institucion +  title.trim() + " [Internet]. " + pais.trim() + ": "+ siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: "+ enlace.trim();
+                                }
+
+                            }   
+
+
         
     }
     if(selectedRadioButton=="page"){                
@@ -416,9 +570,126 @@ function manual_citation(event){
 
     }
 
+
+    if(selectedRadioButton=="document-legal-codigo-general"){
+        if(normativa=="apa"){
+            mes = mes.toLowerCase();
+            
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + institucion + "(" +anio+ ", " + mes + " " + dia + "). <em>"+ siglas.trim() + ".</em> " + enlace.trim();       
+            }
+
+        if(normativa=="iso690"){
+            mes = mes.toLowerCase();
+            
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + institucion + ". " + siglas + ", " + pais + ", " + dia + " de "+ mes + " de " + anio +". Disponible en: "  + enlace.trim();       
+        }
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+            
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + institucion + ". " + siglas + ", " + pais + ", " + dia + " de "+ mes + " de " + anio +". Disponible en: "  + enlace.trim();   
+        }
+    }
+
+
+    if(selectedRadioButton=="document-legal-codigo-explicito"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + libro + " " + n_titulo + " - " + titulo + " - " + capitulo + " - " + capitulo_nombre + " (" + anio+ ", " + mes + " " + dia + "). "+ siglas.trim() + ". " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = tipoDoc + " - " + libro + " " + n_titulo + " - " + titulo + " - " + capitulo + " - " + capitulo_nombre + " (" + anio+ ", " + mes + " " + dia + "). <em>"+ siglas.trim() + ".</em> " + enlace.trim();    
+        }
+
+    }
+
+    if(selectedRadioButton=="document-legal-expedido-sala-penal"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = titulo.trim() + ", " + siglas.trim() + " (" + anio + "). " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = titulo.trim() + ", " + siglas.trim() + " (" + anio + "). " + enlace.trim();      
+        }
+
+    }
+
+
+    if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = "Casación N° " + titulo.trim() + ", " + pais.trim() + ", " + siglas.trim() + ", (" + anio + "). " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = "Casación N° " + titulo.trim() + ", " + pais.trim() + ", " + siglas.trim() + ", (" + anio + "). " + enlace.trim();      
+        }
+
+    }
+
+    if(selectedRadioButton=="document-legal-reglamento-notarial"){
+
+        if(normativa=="vancouver"){
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+     
+            concatenado = "R.N. N° " + titulo.trim() + " " + pais.trim() + ` (${dia} de ${mes} de ${anio}). ` + siglas.trim() + ". " + enlace.trim();    
+
+        }else{
+            mes = mes.toLowerCase();
+
+            date = `${dia} de ${mes} de ${anio}`;
+            if(dia<10)dia="0"+dia;
+
+            concatenado = "R.N. N° " + titulo.trim() + " " + pais.trim() + ` (${dia} de ${mes} de ${anio}). ` + siglas.trim() + ". " + enlace.trim();
+     
+        }
+
+    }
+
 //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + pais + ";" + institucion + ";" + issn + ";" + isbn + ";" + enlace;
 
-document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" role="alert">'+concatenado+'</div>';        
+document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" id="citation-id" role="alert">'+concatenado+'</div>';        
 }
 
 function select_citation(tipoInput){  
@@ -446,16 +717,32 @@ function select_citation(tipoInput){
                 document.getElementById('tipo-referencia').innerHTML="Documento Legal";                       
             break;
             case "thesis":
-                document.getElementById('tipo-referencia').innerHTML="Tésis";                       
+                document.getElementById('tipo-referencia').innerHTML="Tesis";                       
+            break;
+            case "document-legal-codigo-general":
+                document.getElementById('tipo-referencia').innerHTML="Código general";                       
+            break;
+            case "document-legal-codigo-explicito":
+                document.getElementById('tipo-referencia').innerHTML="Código explícito";                       
+            break;
+            case "document-legal-expedido-sala-penal":
+                document.getElementById('tipo-referencia').innerHTML="Documento Expedido por Salas penales";                       
+            break;
+            case "document-legal-expedido-sala-corte-suprema":
+                document.getElementById('tipo-referencia').innerHTML="Documento expedido de Sala Penal permanente de la Corte Suprema";                       
+            break;
+            case "document-legal-reglamento-notarial":
+                document.getElementById('tipo-referencia').innerHTML="Reglamento Notarial";                       
             break;
     
         default:
             break;
     }
-    refresh_values();                      
+        refresh_values();                      
     try {
         manual_citation();
     } catch (error) {
+        
         console.log("Falta llenar formulario");
     }
     hide_all_inputs();
@@ -485,13 +772,18 @@ function hide_all_inputs(){
             hide_input('input-isbn');
             hide_input('input-volumen');
             hide_input('input-paginas');
-            hide_input('input-editor');
+            hide_input('input-editorr');
             hide_input('input-editorial');
             hide_input('input-enlace');
             hide_input('input-numero');
             hide_input('input-edicion');
             hide_input('input-siglas');
-            hide_input('input-repositorio'); //
+            hide_input('input-repositorio');
+            hide_input('input-libro');
+            hide_input('input-n-titulo');
+            hide_input('input-capitulo');
+            hide_input('input-capitulo-nombre');
+
             let label = document.querySelector("label[for='input-autor']");
             label.textContent = "Autor/es:";
             label = document.getElementById("input-autor");
@@ -564,6 +856,7 @@ function show_selected_inputs(){
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-date');           //fecha publicacion 
             show_input('input-enlace');   
+            document.getElementById("input-siglas").placeholder="Siglas de la entidad emisosa o nombres y apellidos del emisor ejem: María José, Perez Miñano";
         }
          //TESIS
         if(selectedRadioButton=="thesis"){
@@ -581,6 +874,102 @@ function show_selected_inputs(){
             show_input('input-enlace');
 
         }
+
+        //Doc LEGAL Codigo general
+        if(selectedRadioButton=="document-legal-codigo-general"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal";
+            show_input('input-institucion');
+            label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "Número del decreto documento:";
+            document.getElementById('input-institucion').placeholder = "Ejem. Decreto Legislativo N° 343";
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-date');           //fecha publicacion 
+            show_input('input-enlace'); 
+            
+        }
+
+                //Doc legal explícito 
+                if(selectedRadioButton=="document-legal-codigo-explicito"){
+                    show_input('input-autor');
+                    let label = document.querySelector("label[for='input-autor']");
+                    label.innerHTML ="Tipo de Documento:";
+                    document.getElementById('input-autor').placeholder = "Ejem. Código Penal Federal";
+                    label = document.querySelector("label[for='input-libro']");
+                    label.innerHTML ="N° de Libro:";
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora:";
+                    document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+                    show_input('input-libro');
+                    show_input('input-titulo'); 
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Nombre del título:";
+                    document.getElementById('input-titulo').placeholder = "Escribe aquí...";
+                    show_input('input-n-titulo');    
+                    show_input('input-capitulo');      
+                    show_input('input-enlace');  
+                    show_input('input-capitulo-nombre');                                       
+                }
+
+
+                //Doc legal Expedido por pleno jurisdiccional de salas penales
+                if(selectedRadioButton=="document-legal-expedido-sala-penal"){                  
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora:";
+                    document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+                    show_input('input-titulo');
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Número del acuerdo plenario:";
+                    document.getElementById('input-titulo').placeholder = "Ejem. 3-2011/CJ-116";   
+                    show_input('input-enlace');                                     
+                }
+
+                
+                //Doc legal Expedido por Sala Penal permanente de la corte suprema
+                if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){                  
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    show_input('input-pais');
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad o Distrito:";
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora/Lugar de expedición:";
+                    document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+                    show_input('input-titulo');
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Número y año de Casación:";
+                    document.getElementById('input-titulo').placeholder = "Ejem. 634-2015";   
+                    show_input('input-enlace');                                     
+                }
+
+
+                    //Doc legal Reglamento Notarial
+                if(selectedRadioButton=="document-legal-reglamento-notarial"){                  
+                    show_input('input-date');
+                    show_input('input-siglas');
+                    show_input('input-pais');
+                    label = document.querySelector("label[for='input-pais']");
+                    label.textContent = "Ciudad o Distrito:";
+                    document.getElementById("input-pais").placeholder = "Ejem. del Santa, de Lima, de Apurimac";
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Entidad Emisora/Lugar de expedición:";
+                    document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+                    show_input('input-titulo');
+                    label = document.querySelector("label[for='input-titulo']");
+                    label.textContent = "Número de Reglamento Notarial:";
+                    document.getElementById('input-titulo').placeholder = "Ejem. 1527-2016";   
+                    show_input('input-enlace');                                     
+                }
+
         
     }
 
@@ -640,12 +1029,19 @@ function show_selected_inputs(){
             show_input('input-autor');
             show_input('input-titulo');
             show_input('input-pais');
-            let label = document.querySelector("label[for='input-autor']");
-            label.textContent = "Autor o Entidad:";
+            show_input('input-institucion');
+            let label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "ó Autor Entidad:";
+            label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Autor Persona:";
             label = document.querySelector("label[for='input-pais']");
-            label.textContent = "Ciudad:";
+            label.textContent = "País/Ciudad:";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Nombre de la Institución o Entidad:";
+            show_input('input-siglas');         //Siglas de entidad
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-date');           //fecha publicacion 
+            document.getElementById("input-siglas").placeholder="Nombre de la Institución";
             show_input('input-enlace');   
         }
         //TESIS
@@ -666,6 +1062,104 @@ function show_selected_inputs(){
             show_input('input-date');           //fecha publicacion                                
             show_input('input-enlace');
         }
+
+                //Doc LEGAL Codigo general
+        if(selectedRadioButton=="document-legal-codigo-general"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal";
+            show_input('input-institucion');
+            label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "Número o código:";
+            document.getElementById('input-institucion').placeholder = "Ejem. Decreto Legislativo N° 343";
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Poder Ejecutivo del Perú";
+            show_input('input-date');           //fecha publicacion 
+            show_input('input-enlace'); 
+            show_input('input-pais'); 
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o País:";
+            
+        }
+
+        //Doc legal explícito 
+        if(selectedRadioButton=="document-legal-codigo-explicito"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal Federal";
+            label = document.querySelector("label[for='input-libro']");
+            label.innerHTML ="N° de Libro:";
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-libro');
+            show_input('input-titulo'); 
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Nombre del título:";
+            document.getElementById('input-titulo').placeholder = "Escribe aquí...";
+            show_input('input-n-titulo');    
+            show_input('input-capitulo');      
+            show_input('input-enlace');  
+            show_input('input-capitulo-nombre');                                       
+        }
+
+
+        //Doc legal Expedido por pleno jurisdiccional de salas penales
+        if(selectedRadioButton=="document-legal-expedido-sala-penal"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número del acuerdo plenario:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 3-2011/CJ-116";   
+            show_input('input-enlace');                                     
+        }
+
+        
+        //Doc legal Expedido por Sala Penal permanente de la corte suprema
+        if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número y año de Casación:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 634-2015";   
+            show_input('input-enlace');                                     
+        }
+
+
+            //Doc legal Reglamento Notarial
+        if(selectedRadioButton=="document-legal-reglamento-notarial"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            document.getElementById("input-pais").placeholder = "Ejem. del Santa, de Lima, de Apurimac";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número de Reglamento Notarial:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 1527-2016";   
+            show_input('input-enlace');                                     
+        }
     }
 
 
@@ -681,7 +1175,7 @@ function show_selected_inputs(){
             show_input('input-autor');
             show_input('input-pais');
             show_input('input-titulo');
-            show_input('input-editor');
+            show_input('input-editorr');
             show_input('input-date');                    
             show_input('input-enlace');
         }
@@ -719,10 +1213,13 @@ function show_selected_inputs(){
             show_input('input-autor');
             show_input('input-titulo');
             show_input('input-pais');
-            let label = document.querySelector("label[for='input-autor']");
-            label.textContent = "Autor o Entidad:";
+            let label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "ó Autor Entidad:";
+            label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Autor Persona:";
             label = document.querySelector("label[for='input-pais']");
             label.textContent = "Ciudad:";
+            show_input('input-institucion');
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-date');           //fecha publicacion 
             show_input('input-enlace');   
@@ -740,6 +1237,104 @@ function show_selected_inputs(){
             label.textContent = "Sede:";
             show_input('input-repositorio');
             show_input('input-enlace');
+        }
+
+                        //Doc LEGAL Codigo general
+        if(selectedRadioButton=="document-legal-codigo-general"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal";
+            show_input('input-institucion');
+            label = document.querySelector("label[for='input-institucion']");
+            label.textContent = "Número o código:";
+            document.getElementById('input-institucion').placeholder = "Ejem. Decreto Legislativo N° 343";
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Poder Ejecutivo del Perú";
+            show_input('input-date');           //fecha publicacion 
+            show_input('input-enlace'); 
+            show_input('input-pais'); 
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o País:";
+            
+        }
+
+        //Doc legal explícito 
+        if(selectedRadioButton=="document-legal-codigo-explicito"){
+            show_input('input-autor');
+            let label = document.querySelector("label[for='input-autor']");
+            label.innerHTML ="Tipo de Documento:";
+            document.getElementById('input-autor').placeholder = "Ejem. Código Penal Federal";
+            label = document.querySelector("label[for='input-libro']");
+            label.innerHTML ="N° de Libro:";
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-libro');
+            show_input('input-titulo'); 
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Nombre del título:";
+            document.getElementById('input-titulo').placeholder = "Escribe aquí...";
+            show_input('input-n-titulo');    
+            show_input('input-capitulo');      
+            show_input('input-enlace');  
+            show_input('input-capitulo-nombre');                                       
+        }
+
+
+        //Doc legal Expedido por pleno jurisdiccional de salas penales
+        if(selectedRadioButton=="document-legal-expedido-sala-penal"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora:";
+            document.getElementById('input-siglas').placeholder = "Escribe aquí...";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número del acuerdo plenario:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 3-2011/CJ-116";   
+            show_input('input-enlace');                                     
+        }
+
+        
+        //Doc legal Expedido por Sala Penal permanente de la corte suprema
+        if(selectedRadioButton=="document-legal-expedido-sala-corte-suprema"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número y año de Casación:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 634-2015";   
+            show_input('input-enlace');                                     
+        }
+
+
+            //Doc legal Reglamento Notarial
+        if(selectedRadioButton=="document-legal-reglamento-notarial"){                  
+            show_input('input-date');
+            show_input('input-siglas');
+            show_input('input-pais');
+            label = document.querySelector("label[for='input-pais']");
+            label.textContent = "Ciudad o Distrito:";
+            document.getElementById("input-pais").placeholder = "Ejem. del Santa, de Lima, de Apurimac";
+            label = document.querySelector("label[for='input-siglas']");
+            label.textContent = "Entidad Emisora/Lugar de expedición:";
+            document.getElementById('input-siglas').placeholder = "Ejem. Sala Penal Transitoria";
+            show_input('input-titulo');
+            label = document.querySelector("label[for='input-titulo']");
+            label.textContent = "Número de Reglamento Notarial:";
+            document.getElementById('input-titulo').placeholder = "Ejem. 1527-2016";   
+            show_input('input-enlace');                                     
         }
     }
 
@@ -759,11 +1354,63 @@ function entidad_autor_swap(event){
         if(id == "input-autor"){
                 document.querySelector('input#input-institucion').value="";
                 document.querySelector('input#input-institucion').placeholder="Solo llene o Autor o Entidad";
+                if(normativa=="iso690"){
+                    document.getElementById('input-siglas').placeholder = "Nombre de la institución o entidad"
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Nombre de la Institución:";
+                }
+                
         }
         if(id == "input-institucion"){
                 document.querySelector('textarea#input-autor').value="";
                 document.querySelector('textarea#input-autor').placeholder="Solo llene o Autor o Entidad";
+                label = document.querySelector("label[for='input-siglas']");
+                label.textContent = "Siglas de la institución:";
+                if(normativa=="iso690"){
+                    document.getElementById('input-siglas').placeholder = "Sigla de la institución o entidad"
+                    label = document.querySelector("label[for='input-siglas']");
+                    label.textContent = "Sigla de la Institución:";
+                }
         }
     }
 
+}
+
+function copyCitation (){
+for (let index = 0; index < 4; index++) { // no sé por qué, pero si no lo ejecuto mas de una vez a veces no copia el texto.
+    
+        // Seleccionar el contenido del <div>
+    const div = document.getElementById("citation-id");
+    const father = document.getElementById("ly-ck-dialog-references-result");
+    div.className = "";
+    const range = document.createRange();
+    range.selectNode(div);
+    window.getSelection().addRange(range);
+
+    // Copiar el contenido seleccionado
+    document.execCommand("copy");
+
+    // Desmarcar la selección
+    window.getSelection().removeAllRanges();
+    div.className = "alert alert-primary";    
+}
+
+}
+
+function hideBuscar(){
+    // Seleccionar el botón
+let btnBuscar = document.getElementById("ckgetBtnReference");
+
+// Agregar un evento al botón para alternar su visibilidad
+
+  if (btnBuscar.style.display === "none") {
+    // Si el botón está oculto, se muestra
+    btnBuscar.style.display = "block";
+    document.getElementById("input-doi-buscar-id").style.display = "block";
+  } else {
+    // Si el botón está visible, se oculta
+    btnBuscar.style.display = "none";
+    document.getElementById("input-doi-buscar-id").style.display = "none";
+
+  }
 }
