@@ -25,9 +25,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="m-5">
         <div class="card card-body mb-3">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <ul class="list-point-none">
                         @if (count($parts) > 0)
                             @foreach ($parts as $part)
@@ -58,7 +60,7 @@
                         Exportar PDF
                     </a> --}}
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     @if ($focused_part)
                         <div class="row justify-content-md-center">
                             <div class="col col-lg-12">
