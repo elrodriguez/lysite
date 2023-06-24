@@ -18,7 +18,7 @@ export default class helpkeywords extends Plugin {
             } );
 
             button.on( 'execute', () => {
-                openModalHelpKeywords();
+                openModalHelpKeywords(editor);
             } );
 
             return button;
@@ -27,7 +27,8 @@ export default class helpkeywords extends Plugin {
     }
 }
 
-function openModalHelpKeywords(){
+function openModalHelpKeywords(editor){
+
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
