@@ -268,6 +268,9 @@ function __getDataComments(url){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (Object.keys(response).length > 0) {
+                ////llENA LA VARIABLE GLOBAL 
+                console.log(response)
+                setGlobolComments(response);
                 var cksidebarListComments = document.createElement("div");
                 cksidebarListComments.id = 'lyc-ck-sidebar-list-comments';
                 var htmlUl = `<div class="card">`;

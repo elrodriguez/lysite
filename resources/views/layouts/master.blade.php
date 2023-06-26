@@ -135,6 +135,13 @@
         </script>
     @endif
     @yield('global-modal')
+    <script>
+        var globalComments = null;
+        function setGlobolComments(data){
+            globalComments = data;
+            console.log(globalComments)
+        }
+    </script>
 </body>
 
 </html>
