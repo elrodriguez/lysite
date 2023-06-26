@@ -32,7 +32,7 @@ function openModalHelpKeywords(){
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
             <div><strong>Corrección de gramática</strong></div>
-            <div class="ly-ck-dialog-close-icon">&#10005;</div>
+            <div id="btn-dialog-close-iconHelpKeywords" class="ly-ck-dialog-close-icon">&#10005;</div>
         </div>
         <form id="ly-ck-formGrammarCorrection" class="ly-ck-dialog-form">
             <div class="ly-ck-dialog-group-control">
@@ -55,14 +55,17 @@ function openModalHelpKeywords(){
     modalHelpKeywords.innerHTML = form;
     document.body.appendChild(modalHelpKeywords);
 
+    const ckcloseBtnIconHelpKeywords = document.querySelector( '#btn-dialog-close-iconHelpKeywords' );
     const ckcloseBtnHelpKeywords = document.querySelector( '#ckcloseBtnHelpKeywords' );
-    
+
+    ckcloseBtnIconHelpKeywords.addEventListener( 'click', () => {
+        modalHelpKeywords.remove();
+    });
 
     ckcloseBtnHelpKeywords.addEventListener( 'click', () => {
         modalHelpKeywords.remove();
     });
 
-    
     const formSubmit = document.getElementById('ly-ck-formGrammarCorrection');
     const xhr = new XMLHttpRequest();
 

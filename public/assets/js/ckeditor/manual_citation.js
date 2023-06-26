@@ -717,7 +717,7 @@ function select_citation(tipoInput){
                 document.getElementById('tipo-referencia').innerHTML="Documento Legal";                       
             break;
             case "thesis":
-                document.getElementById('tipo-referencia').innerHTML="Tesis";                       
+                document.getElementById('tipo-referencia').innerHTML="Tésis";                       
             break;
             case "document-legal-codigo-general":
                 document.getElementById('tipo-referencia').innerHTML="Código general";                       
@@ -1381,7 +1381,6 @@ for (let index = 0; index < 4; index++) { // no sé por qué, pero si no lo ejec
     
         // Seleccionar el contenido del <div>
     const div = document.getElementById("citation-id");
-    const father = document.getElementById("ly-ck-dialog-references-result");
     div.className = "";
     const range = document.createRange();
     range.selectNode(div);
@@ -1392,7 +1391,8 @@ for (let index = 0; index < 4; index++) { // no sé por qué, pero si no lo ejec
 
     // Desmarcar la selección
     window.getSelection().removeAllRanges();
-    div.className = "alert alert-primary";    
+    div.className = "alert alert-primary";
+    
 }
 
 }

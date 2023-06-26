@@ -292,4 +292,3 @@ function openModalReference(editor){
 
     
 }
-

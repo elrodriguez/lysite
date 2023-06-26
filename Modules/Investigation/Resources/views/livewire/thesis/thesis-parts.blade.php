@@ -583,7 +583,6 @@
                         'margins',
                         'referenciar',
                         'helpkeywords',
-                        'comments',
                         'recommendation',
                         '|',
                         'undo',

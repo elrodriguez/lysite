@@ -28,6 +28,7 @@ export default class recommendation extends Plugin {
 }
 
 function openModalRecommendation(editor){
+
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">

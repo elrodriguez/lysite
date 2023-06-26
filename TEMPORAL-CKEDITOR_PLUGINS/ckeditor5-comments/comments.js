@@ -92,6 +92,7 @@ export default class comments extends Plugin {
 
     
     _createDialog() { 
+        const editor = this.editor;
         var ckFormComment = document.createElement("div");
         ckFormComment.id = "div_comments";
         ckFormComment.className = "div-form-comments";
@@ -219,7 +220,7 @@ function     __runAjax(parameters, selecction_id, comment_text,selectedText) {
         if (xhr.status === 200) {
             // Manejar respuesta exitosa
             console.log('Petición exitosa:', xhr.response);
-            updateContent();
+            //updateContent();
         } else {
             // Manejar error
             console.error('Error en la petición:', xhr.status, xhr.statusText);
