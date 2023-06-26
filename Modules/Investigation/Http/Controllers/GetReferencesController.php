@@ -507,6 +507,8 @@ class GetReferencesController extends Controller
         try {
             if (is_numeric(trim($subca[1]))){
                 $volumen_and_pages = str_replace($subca[1]."</em>,", $subca[1]."</em>:", $volumen_and_pages);
+            }else{
+                $volumen_and_pages = str_replace(",", ":", $volumen_and_pages);
             }
         } catch (\Throwable $th) {
             //throw $th;
