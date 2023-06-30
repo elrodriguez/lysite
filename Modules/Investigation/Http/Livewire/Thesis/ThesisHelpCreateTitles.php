@@ -15,6 +15,7 @@ class ThesisHelpCreateTitles extends Component
     public $paraphrase_left;
     public $career;
     public $type_thesis;
+    public $procesando = false;
 
     public function render()
     {
@@ -30,9 +31,10 @@ class ThesisHelpCreateTitles extends Component
             'career' => 'required|max:255',
             'type_thesis' => 'required|max:255',
         ]);
-dd($this->keywords, $this->career, $this->type_thesis);
+
         if (strlen($this->keywords) > 4) {
             $this->resultado = "espera un momento...";
+            $this->procesando = true;
             $permisos = Person::where('user_id', Auth::user()->id)->first();
             $p_allowed = $permisos->paraphrase_allowed;
             $p_used = $permisos->paraphrase_used;
@@ -44,7 +46,7 @@ dd($this->keywords, $this->career, $this->type_thesis);
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "recomiendame 10 títulos para una tesis " . $this->type_thesis . ", para la carrera de" . $this->career . "con los siguientes temas: " . $this->keywords;
+                $consulta = "recomiendame 10 títulos para una tesis " . $this->type_thesis . ", para la carrera de" . $this->career . "sobre los siguientes temas: " . $this->keywords;
 
                 try {
                     $result = OpenAI::completions()->create([
@@ -63,11 +65,14 @@ dd($this->keywords, $this->career, $this->type_thesis);
                 } catch (Exception $e) {
                     $result_text = $e->getMessage();
                 }
+                $this->procesando = false;
                 $this->resultado = $result_text;
             } else {
+                $this->procesando = false;
                 $this->resultado = "Lo siento, pero parece que has superado tu límite de consultas. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
             }
         } else {
+            $this->procesando = false;
             $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo palabras claves, esta consulta no será tomada en cuenta";
         }
     }

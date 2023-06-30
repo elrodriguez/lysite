@@ -1,6 +1,7 @@
 <div>
     @push('scripts')
-    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
+    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>    
+    <script src="{{ asset('assets/js/ckeditor/comments.js') }}"></script>
     @endpush
     <div class="container page__container">
         <ol class="breadcrumb m-0">
