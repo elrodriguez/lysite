@@ -689,7 +689,7 @@ function manual_citation(event){
 
 //concatenado = editor + ";" + cita_autores + ";" + title + ";" + grade + ";" + editorial + ";" + volumen + ";" + university + ";" + pais + ";" + institucion + ";" + issn + ";" + isbn + ";" + enlace;
 
-document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="" id="citation-id" role="alert">'+concatenado+'</div>';        
+document.getElementById("ly-ck-dialog-references-result").innerHTML = '<div class="alert alert-primary" id="citation-id" role="alert">'+concatenado+'</div>';        
 }
 
 function select_citation(tipoInput){  
@@ -1381,6 +1381,7 @@ for (let index = 0; index < 4; index++) { // no sé por qué, pero si no lo ejec
     
         // Seleccionar el contenido del <div>
     const div = document.getElementById("citation-id");
+    div.className = "";
     const range = document.createRange();
     range.selectNode(div);
     window.getSelection().addRange(range);
@@ -1390,6 +1391,7 @@ for (let index = 0; index < 4; index++) { // no sé por qué, pero si no lo ejec
 
     // Desmarcar la selección
     window.getSelection().removeAllRanges();
+    div.className = "alert alert-primary";
     
 }
 

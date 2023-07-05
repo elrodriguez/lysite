@@ -142,7 +142,7 @@ export default class comments extends Plugin {
                     for (let i = 0; i < selectedArray.length; i++) {
                         selectedText += selectedArray[i]._data;
                     }
-                    const randomNum = Math.random().toString();
+                    const randomNum = Math.floor(Math.random() * 9999999998) + 1;
                     
                     editor.conversion.for('downcast').elementToElement({
                         model: confComment.element,
@@ -150,13 +150,13 @@ export default class comments extends Plugin {
                             name: 'label',
                             classes: 'ly-suggestion-marker-deletion',
                             attributes: {
-                                id: `lyc-${randomNum}`
+                                id: '"'+randomNum+'"'
                             }
                         }
                     });
 
                     editor.model.change( writer => {
-                        const commentElement =  writer.createElement(confComment.element, {id: `lyc-${randomNum}`})
+                        const commentElement =  writer.createElement(confComment.element, {id: randomNum})
                         writer.insertText(selectedText, commentElement)
                         editor.model.insertContent(commentElement);
                     } );
@@ -268,6 +268,12 @@ function __getDataComments(url){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if (Object.keys(response).length > 0) {
+                ////llENA LA VARIABLE GLOBAL 
+                console.log(response);
+                try {                    
+                setGlobolComments(response);
+                } catch (error) {                    
+                }
                 var cksidebarListComments = document.createElement("div");
                 cksidebarListComments.id = 'lyc-ck-sidebar-list-comments';
                 var htmlUl = `<div class="card">`;
@@ -281,10 +287,11 @@ function __getDataComments(url){
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     <hr>
-                                    <a href="/investigation/thesis/parts/${obj.thesis_student_id}/${obj.thesis_format_part_id}" style="text-decoration: none; color: black;">${obj.commentary}</a>
+                                    <a onclick="focusComment(${obj.thesis_student_id},${obj.thesis_format_part_id}, ${obj.selecction_id}, '${obj.selecction_text}')" style="text-decoration: none; color: black;">${obj.commentary}</a>
                                 </div>`;
                     
                 });
+                //EL ENLACE <a href="/investigation/thesis/parts/${obj.thesis_student_id}/${obj.thesis_format_part_id}" style="text-decoration: none; color: black;">${obj.commentary}</a>
                 htmlUl += `</div>`;
                 htmlUl += `</div>`;
                 cksidebarListComments.innerHTML = htmlUl;

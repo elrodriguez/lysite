@@ -211,7 +211,7 @@ class GetReferencesController extends Controller
             $volumen_and_pages  = implode(",", $volumen_and_pages);
             $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
         }
-
+        $citation = str_replace("Elsevier Ltd.", "", $citation);
         return $citation;
     }
 
@@ -219,13 +219,25 @@ class GetReferencesController extends Controller
     {
         $authors = array();
 
-        //Obtener el nombre de los autores
-        foreach ($document->authors as $author) { //solo la inicial del primer nombre
-            if ($document->type == "book") {
-                array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
-            } else {
-                array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1) . ".");
+                //Obtener el nombre de los autores
+        try {
+            foreach ($document->authors as $author) { //solo la inicial del primer nombre
+                if ($document->type == "book") {
+                    try {
+                        array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
+                    } catch (\Throwable $th) {
+                        //throw $th;
+                    }
+                } else {
+                    try {
+                        array_push($authors, $author->last_name . ", " . substr($author->first_name, 0, 1) . ".");
+                    } catch (\Throwable $th) {
+                        //throw $th;
+                    }
+                }
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         $citation2 = "";
@@ -235,15 +247,15 @@ class GetReferencesController extends Controller
         } elseif (count($authors) == 2) {
             $citation2 .= $authors[0] . " & " . $authors[1] . " ";
         } elseif (count($authors) == 3) {
-            $citation2 .= $authors[0] . ", " . $authors[1] . ", & " . $authors[2] . " ";
+            $citation2 .= $authors[0] . ", " . $authors[1] . " & " . $authors[2] . " ";
         } elseif (count($authors) == 4) {
-            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", & " . $authors[3] . " ";
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . " & " . $authors[3] . " ";
         } elseif (count($authors) == 5) {
-            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", & " . $authors[4] . " ";
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . " & " . $authors[4] . " ";
         } elseif (count($authors) == 5) {
-            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", & " . $authors[5] . " ";
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . " & " . $authors[5] . " ";
         } elseif (count($authors) > 5) {
-            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . ", & " . $authors[6] . " ";
+            $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . " & " . $authors[6] . " ";
         }
 
         // //Añadir el año de publicación y el título del artículo
@@ -285,12 +297,16 @@ class GetReferencesController extends Controller
 
         //Obtener el nombre de los autores
         foreach ($document->authors as $author) {
-            $last_name = explode(" ", $author->last_name);
-            $last_name = mb_strtoupper($last_name[0], 'UTF-8');
-            $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
-            $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
-            $name = $last_name . ', ' . $nombre;
-            array_push($authors, $name);
+            try {
+                $last_name = explode(" ", $author->last_name);
+                $last_name = mb_strtoupper($last_name[0], 'UTF-8');
+                $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
+                $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
+                $name = $last_name . ', ' . $nombre;
+                array_push($authors, $name);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         }
 
         $citation = '<p>';
@@ -302,7 +318,11 @@ class GetReferencesController extends Controller
             $citation .= $authors[0] . ' y ' . $authors[1] . '. ';
         } else {
             for ($i = 0; $i < count($authors) - 1; $i++) {
-                $citation .= $authors[$i] . '; ';
+                if($i==count($authors)-2){                    
+                    $citation .= $authors[$i] . ' ';
+                }else{                    
+                    $citation .= $authors[$i] . '; ';
+                }
             }
             $citation .= 'y ' . $authors[count($authors) - 1] . '. ';
         }
@@ -381,7 +401,7 @@ class GetReferencesController extends Controller
         }
 
         $citation .= '</p>';
-
+        $citation = str_replace("Elsevier Ltd.", "", $citation);
         return $citation;
     }
 
@@ -391,9 +411,14 @@ class GetReferencesController extends Controller
         $authors = array();
 
         //Obtener el nombre de los autores
+        //dd($document);
         foreach ($document->authors as $author) {
-            $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
-            array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1) . "."); // inicial de nombre
+            try {
+                $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
+                array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1) . "."); // inicial de nombre
+            } catch (\Throwable $th) {
+                //dd($th);
+            }
         }
 
         $citation = '<p>';
@@ -460,6 +485,7 @@ class GetReferencesController extends Controller
         $citation = str_replace('</i>', "", $citation);
         $citation = str_replace("<em>", "", $citation);
         $citation = str_replace('</em>', "", $citation);
+        $citation = str_replace("Elsevier Ltd.", "", $citation);
         return $citation;
     }
 
@@ -475,6 +501,21 @@ class GetReferencesController extends Controller
         if (isset($explotado[1])) {
             $volumen_and_pages = $explotado[1];
         }
+        //quitar la coma si hay volumen pero no numero y cambiar por dos puntos
+        $subcadenas = explode("</em>", $volumen_and_pages);
+        $subca = explode('<em>', $subcadenas[0]);
+        try {
+            if (is_numeric(trim($subca[1]))){
+                $volumen_and_pages = str_replace($subca[1]."</em>,", $subca[1]."</em>:", $volumen_and_pages);
+            }else{
+                $volumen_and_pages = str_replace(",", ":", $volumen_and_pages);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
+             
+        
         return $volumen_and_pages;
     }
 
@@ -494,10 +535,25 @@ class GetReferencesController extends Controller
     public function generar_cita_de_web($data, $normativa)
     {
 
-        $site_name = $data['hybridGraph']['site_name'];
+        try {
+            $site_name="";
+            $site_name = $data['hybridGraph']['site_name'];
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
-        $site_title = $data['hybridGraph']['title'];
-        $url = $data['hybridGraph']['url'];
+        try {
+            $site_title="";
+            $site_title = $data['hybridGraph']['title'];
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        try {
+            $url="";
+            $url = $data['hybridGraph']['url'];
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
         //revisa si tiene fecha de publicación
         $fecha_publicacion = "";
@@ -528,9 +584,11 @@ class GetReferencesController extends Controller
 
         if ($normativa == "apa") {
             $citation = $site_name . " " . $fecha_publicacion . " " . $site_title . " " . $site_name . ". " . $url;
+            $citation = str_replace("Elsevier Ltd.", "", $citation);
             return $citation;
         } elseif ($normativa == "iso690") {
             $citation = $site_name . " " . $site_title . " Disponible en: " . $url;
+            $citation = str_replace("Elsevier Ltd.", "", $citation);
             return $citation;
             /*
                 CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021. 
@@ -539,13 +597,13 @@ class GetReferencesController extends Controller
 */
         } elseif ($normativa == "vancouver") {
             $citation = $site_name . " " . $site_title . " [Internet]. " . " Disponible en: " . $url;
+            $citation = str_replace("Elsevier Ltd.", "", $citation);
             return $citation;
 
             /*
                 Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021. 
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
-
                 */
         }
     }

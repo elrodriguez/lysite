@@ -46,14 +46,20 @@
 
                     <div class="form-group">
                         <label class="form-label" for="name">Respuesta</label>
-                        <textarea rows="8" class="form-control" wire:model='resultado' name="text1" id="text1">{{ $resultado }}</textarea>
+                        <textarea rows="8" class="form-control" wire:model='resultado' name="text1" id="text1" disabled>{{  $resultado  }}</textarea>
                         @error('resultado') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"  wire:click="helpwithtitle" >Procesar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('labels.Close') }}</button>
+                    <span wire:loading.style='display:block' style="display: none">Se paciente...</span>
+                    <button type="button" class="btn btn-primary"  wire:click="helpwithtitle" wire:target="helpwithtitle" wire:loading.attr="disabled">
+                            <span wire:loading.remove>Procesar</span>
+                            <span wire:loading.style='display:block' style="display: none">
+                                <i class="fas fa-spinner fa-spin"></i> Cargando...
+                            </span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:loading.attr="disabled">{{ __('labels.Close') }}</button>
                 </div>
             </div>
         </div>
