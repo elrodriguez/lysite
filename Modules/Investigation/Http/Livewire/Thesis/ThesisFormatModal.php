@@ -42,7 +42,7 @@ class ThesisFormatModal extends Component
     }
     public function getTypes()
     {
-        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'Cuantitativo', 'Cualitativo', 'Mixto', 'otra'];
     }
     public function render()
     {

@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label class="form-label" for="xtype_thesis">{{ __('labels.Type Thesis') }}
+                            <label class="form-label" for="xtype_thesis">Enfoque de tesis
                                 *</label>
                             <select wire:model.defer="xtype_thesis" type="select" class="form-control"
                                 id="xtype_thesis">

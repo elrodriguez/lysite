@@ -166,16 +166,16 @@ class ThesisFormatModalEdit extends Component
     public function updateFormatStudent()
     {
         $this->validate([
-            'xname'          => 'required|max:255',
-            'xtype_thesis'   => 'required',
-            'xnormative_thesis'   => 'required'
+            'namex'          => 'required|max:255',
+            'type_thesisx'   => 'required',
+            'normative_thesisx'   => 'required'
         ]);
 
         InveThesisFormat::find($this->format_idx)->update([
-            'name'              => trim($this->xname),
-            'type_thesis'       => trim($this->xtype_thesis),
-            'normative_thesis'  => trim($this->xnormative_thesis)
-        ])->id;
+            'name'              => trim($this->namex),
+            'type_thesis'       => trim($this->type_thesisx),
+            'normative_thesis'  => trim($this->normative_thesisx)
+        ]);
 
         $this->dispatchBrowserEvent('thesis-format-create-estudent-edit', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
     }
