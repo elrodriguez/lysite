@@ -77,7 +77,7 @@ function focusComment(thesis_student_id, thesis_format_part_id, selecction_id, s
     let enlace= '/investigation/thesis/parts/'+thesis_student_id+'/'+thesis_format_part_id;
         enlace = new URL(decodeURIComponent(window.location.href)).origin+enlace;
         const urlActual = window.location.href;
-        console.log(enlace, urlActual);
+        //console.log(enlace, urlActual);
     if (urlActual.includes(enlace)) {
                     // Crear un objeto Range que cubra todo el contenido del cuerpo de la página
                     var range = document.createRange();
