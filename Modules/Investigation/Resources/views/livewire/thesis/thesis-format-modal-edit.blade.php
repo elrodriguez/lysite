@@ -53,6 +53,44 @@
                             @enderror
                         </div>
                     </div>
+                    {{-- Inicio Margenes generales para la tesis --}}
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label class="form-label" for="xleft">{{ __('Margen Izquierda en mm') }} *</label>
+                            <input wire:model="xleft" type="number" class="form-control" id="xleft">
+                            @error('xleft')
+                                <span class="invalid-feedback-2">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label class="form-label" for="xright">{{ __('Margen Derecha en mm') }} *</label>
+                            <input wire:model="xright" type="number" class="form-control" id="xright">
+                            @error('xright')
+                                <span class="invalid-feedback-2">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label class="form-label" for="xtop">{{ __('Margen Arriba en mm') }} *</label>
+                            <input wire:model="xtop" type="number" class="form-control" id="xtop">
+                            @error('xtop')
+                                <span class="invalid-feedback-2">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label class="form-label" for="xbottom">{{ __('Margen Abajo en mm') }} *</label>
+                            <input wire:model="xbottom" type="number" class="form-control" id="xbottom">
+                            @error('xbottom')
+                                <span class="invalid-feedback-2">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- Fin Margenes generales para la tesis --}}
                 </div>
                 <button wire:click="addTitlePartEdit" type="button" class="btn btn-primary btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
                 <ul class="list-point-none">

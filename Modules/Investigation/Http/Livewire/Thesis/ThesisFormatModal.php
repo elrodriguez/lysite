@@ -27,6 +27,11 @@ class ThesisFormatModal extends Component
     public $xuniversity_id;
     public $xcountry_id;
 
+    public $xbottom;
+    public $xtop;
+    public $xright;
+    public $xleft;
+
     public function mount()
     {
         $person = Person::where('user_id', Auth::id())->first();
@@ -120,7 +125,11 @@ class ThesisFormatModal extends Component
         $this->validate([
             'xname'          => 'required|max:255',
             'xtype_thesis'   => 'required',
-            'xnormative_thesis'   => 'required'
+            'xnormative_thesis'   => 'required',
+            'xright'              => 'required|numeric',
+            'xleft'              => 'required|numeric',
+            'xtop'              => 'required|numeric',
+            'xbottom'              => 'required|numeric',
         ]);
 
         $this->xformat_id = InveThesisFormat::create([
@@ -129,7 +138,11 @@ class ThesisFormatModal extends Component
             'type_thesis'       => trim($this->xtype_thesis),
             'normative_thesis'  => trim($this->xnormative_thesis),
             'school_id'         => $this->xschool_id,
-            'user_id'           => Auth::id()
+            'user_id'           => Auth::id(),
+            'right_margin' => $this->xright,
+            'left_margin' => $this->xleft,
+            'top_margin' => $this->xtop,
+            'bottom_margin' => $this->xbottom
         ])->id;
 
 

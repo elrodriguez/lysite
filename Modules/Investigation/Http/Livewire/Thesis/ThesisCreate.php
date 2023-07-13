@@ -81,20 +81,25 @@ class ThesisCreate extends Component
 
         $thesis_created = InveThesisStudent::where('person_id', Auth::user()->person->id)->where('deleted_at', NULL)->count();
         $allowed_thesis = Person::where('id', Auth::user()->person->id)->first()->allowed_thesis;
+        $format = InveThesisFormat::find($this->format_id);
 
         //Condición que revisa si cuenta con permisos para crear una nueva tesis
 
         if ($thesis_created < $allowed_thesis) {
             $thesis = InveThesisStudent::create([
-                'external_id' => Str::random(10),
-                'short_name' => $this->short_name,
-                'title' => $this->title,
-                'person_id' => Auth::user()->person->id,
-                'user_id' => Auth::id(),
-                'university_id' => $this->university_id,
-                'school_id' => $this->school_id,
-                'format_id' => $this->format_id,
-                'state' => $this->state ? true : false
+                'external_id'       => Str::random(10),
+                'short_name'        => $this->short_name,
+                'title'             => $this->title,
+                'person_id'         => Auth::user()->person->id,
+                'user_id'           => Auth::id(),
+                'university_id'     => $this->university_id,
+                'school_id'         => $this->school_id,
+                'format_id'         => $this->format_id,
+                'state'             => $this->state ? true : false,
+                'top_margin'        => $format->top_margin,
+                'bottom_margin'     => $format->bottom_margin,
+                'left_margin'       => $format->left_margin,
+                'right_margin'      => $format->right_margin
             ]);
 
             $this->short_name = null;

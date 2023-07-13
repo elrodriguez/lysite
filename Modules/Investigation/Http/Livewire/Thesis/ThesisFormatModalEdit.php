@@ -30,6 +30,11 @@ class ThesisFormatModalEdit extends Component
     public $university_id;
     public $country_id;
 
+    public $xbottom;
+    public $xtop;
+    public $xright;
+    public $xleft;
+
     public function mount()
     {
         $person = Person::where('user_id', Auth::id())->first();
@@ -168,13 +173,21 @@ class ThesisFormatModalEdit extends Component
         $this->validate([
             'namex'          => 'required|max:255',
             'type_thesisx'   => 'required',
-            'normative_thesisx'   => 'required'
+            'normative_thesisx'   => 'required',
+            'xright'              => 'required|numeric',
+            'xleft'              => 'required|numeric',
+            'xtop'              => 'required|numeric',
+            'xbottom'              => 'required|numeric',
         ]);
 
         InveThesisFormat::find($this->format_idx)->update([
             'name'              => trim($this->namex),
             'type_thesis'       => trim($this->type_thesisx),
-            'normative_thesis'  => trim($this->normative_thesisx)
+            'normative_thesis'  => trim($this->normative_thesisx),
+            'right_margin'      => $this->xright,
+            'left_margin'       => $this->xleft,
+            'top_margin'        => $this->xtop,
+            'bottom_margin'     => $this->xbottom
         ]);
 
         $this->dispatchBrowserEvent('thesis-format-create-estudent-edit', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);

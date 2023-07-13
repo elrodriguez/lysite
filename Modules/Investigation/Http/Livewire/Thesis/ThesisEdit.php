@@ -26,7 +26,8 @@ class ThesisEdit extends Component
     public $title;
     public $thesis;
 
-    public function mount($thesis_id){
+    public function mount($thesis_id)
+    {
         $this->thesis_id = $thesis_id;
         $this->thesis = InveThesisStudent::find($thesis_id);
         $this->countries = Country::all();
@@ -38,7 +39,7 @@ class ThesisEdit extends Component
         $this->school_id = $this->thesis->school_id;
         $this->format_id = $this->thesis->format_id;
         $this->state = $this->thesis->state;
-        
+
         $this->getUniversities();
         $this->getSchools();
         $this->getFormat();
@@ -49,17 +50,21 @@ class ThesisEdit extends Component
         return view('investigation::livewire.thesis.thesis-edit');
     }
 
-    public function getUniversities(){
-        $this->universities = Universities::where('country',$this->country_id)->get();
+    public function getUniversities()
+    {
+        $this->universities = Universities::where('country', $this->country_id)->get();
     }
-    public function getSchools(){
-        $this->schools = UniversitiesSchools::where('university_id',$this->university_id)->get();
+    public function getSchools()
+    {
+        $this->schools = UniversitiesSchools::where('university_id', $this->university_id)->get();
     }
-    public function getFormat(){
-        $this->formats = InveThesisFormat::where('school_id',$this->school_id)->get();
+    public function getFormat()
+    {
+        $this->formats = InveThesisFormat::where('school_id', $this->school_id)->get();
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->validate([
             'short_name' => 'required',
@@ -68,22 +73,27 @@ class ThesisEdit extends Component
             'school_id' => 'required',
             'format_id' => 'required'
         ]);
-
+        $format = InveThesisFormat::find($this->format_id);
         $this->thesis->update([
-            'external_id' => Str::random(10),
-            'short_name' => $this->short_name,
-            'title' => $this->title,
-            'university_id' => $this->university_id,
-            'school_id' => $this->school_id,
-            'format_id' => $this->format_id,
-            'state' => $this->state ? true : false
+            'external_id'       => Str::random(10),
+            'short_name'        => $this->short_name,
+            'title'             => $this->title,
+            'university_id'     => $this->university_id,
+            'school_id'         => $this->school_id,
+            'format_id'         => $this->format_id,
+            'state'             => $this->state ? true : false,
+            'top_margin'        => $format->top_margin,
+            'bottom_margin'     => $format->bottom_margin,
+            'left_margin'       => $format->left_margin,
+            'right_margin'      => $format->right_margin
         ]);
         $this->emit('updateThesisList');
-        $this->dispatchBrowserEvent('inve-thesis-student-edit', ['tit' => 'Enhorabuena','msg' => 'Se actualizo correctamente']);
+        $this->dispatchBrowserEvent('inve-thesis-student-edit', ['tit' => 'Enhorabuena', 'msg' => 'Se actualizo correctamente']);
     }
 
-    public function parts(){
+    public function parts()
+    {
         //$this->emit('updateThesisList');
-        redirect()->route('investigation_thesis_parts',$this->thesis_id);
+        redirect()->route('investigation_thesis_parts', $this->thesis_id);
     }
 }

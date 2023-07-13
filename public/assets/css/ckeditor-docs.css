@@ -583,7 +583,8 @@ html {
 	right: 0;
 	transform: translateY(-50%);
 	z-index: 10;
-	width: 350px;
+	width: 200px;
+	font-size: 12px;
 }
 .list-comments-scroll{
 	overflow-y: auto;

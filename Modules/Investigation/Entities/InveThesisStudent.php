@@ -20,6 +20,10 @@ class InveThesisStudent extends Model
         'school_id',
         'format_id',
         'state',
+        'top_margin',
+        'bottom_margin',
+        'left_margin',
+        'right_margin'
     ];
 
     protected static function newFactory()
