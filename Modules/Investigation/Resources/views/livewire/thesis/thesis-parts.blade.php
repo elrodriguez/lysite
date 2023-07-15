@@ -737,17 +737,22 @@
     </script>
 
     <script> 
-        function __getDestroyComments(id,index){
+        function __getDestroyComments(id,index,tesis_id){
             var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
 
             if (confirmacion) {
 
                 const xhr = new XMLHttpRequest();
-                let url = '/investigation/thesis/comentary/thesis/destroy/'+id;
+                let url = '/investigation/thesis/comentary/thesis/destroy/'+id+'/'+tesis_id;
                 xhr.open('GET', url, true);
                 xhr.onload = function() {
                     if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
                         document.getElementById("ly-list-item-"+index).remove();
+                        if(response.exists === false){
+                            document.getElementById("lyc-ck-sidebar-list-comments").remove();
+                        }
+
                     } else {
                         console.log('Error: ' + xhr.status);
                     }

@@ -277,7 +277,7 @@ function __getDataComments(url){
                     // Realiza las operaciones necesarias con cada elemento del array
                     htmlUl += `<div class="alert alert-warning alert-dismissible fade show" role="alert" id="ly-list-item-${obj.selecction_id}">
                                     <small>${getElapsedTime}</small> 
-                                    <button onclick="__getDestroyComments(${obj.id},${obj.selecction_id})" type="button" class="close">
+                                    <button onclick="__getDestroyComments(${obj.id},${obj.selecction_id},${obj.thesis_student_id})" type="button" class="close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     <hr>
