@@ -39,7 +39,7 @@
                         @error('career') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="name" title="Tipo de Tésis">Tipo de Tésis*</label>
+                        <label class="form-label" for="name" title="Tipo de Tesis">Tipo de Tesis*</label>
                         <input wire:model="type_thesis" type="text" class="form-control" id="type_thesis" placeholder="dinos si será, analítica, descriptiva, experimental, etc...">
                         @error('type_thesis') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                     </div>

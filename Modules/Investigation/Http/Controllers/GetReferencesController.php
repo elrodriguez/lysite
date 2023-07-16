@@ -205,9 +205,16 @@ class GetReferencesController extends Controller
         $volumen_and_pages = "";
         if (isset($explotado[1])) {
             $volumen_and_pages = $explotado[1];
+            //dd($volumen_and_pages);
             $volumen_and_pages_no_k = $volumen_and_pages;
             $volumen_and_pages = explode(",", $volumen_and_pages);
-            $volumen_and_pages[0] = "<em>" . $volumen_and_pages[0] . "</em>";
+            $pos = strpos($volumen_and_pages[0], "(");
+            if($pos == false){
+                $parts = explode(",", $volumen_and_pages[0]);
+                $parts[0] = "<em>".$parts[0]."</em>";
+                $volumen_and_pages[0] = implode(",", $parts);
+            }
+            //$volumen_and_pages[0] = $volumen_and_pages[0];
             $volumen_and_pages  = implode(",", $volumen_and_pages);
             $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
         }
