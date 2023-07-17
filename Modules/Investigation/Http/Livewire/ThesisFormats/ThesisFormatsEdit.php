@@ -46,7 +46,8 @@ class ThesisFormatsEdit extends Component
 
     public function getTypes()
     {
-        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        //return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        return ['Cuantitativo', 'Cualitativo', 'Mixto', 'otra'];
     }
 
     public function getNormatives()

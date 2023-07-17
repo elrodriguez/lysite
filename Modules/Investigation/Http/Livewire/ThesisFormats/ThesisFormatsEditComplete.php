@@ -54,12 +54,13 @@ class ThesisFormatsEditComplete extends Component
         $this->country_id = Universities::find($this->university_id)->country;
         $this->getUniversitiesFirstLoad();
         $this->getSchools();
-        $this->school_id = $temp;        
+        $this->school_id = $temp;
     }
 
     public function getTypes()
     {
-        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        //return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        return ['Cuantitativo', 'Cualitativo', 'Mixto', 'otra'];
     }
 
     public function getNormatives()
@@ -81,7 +82,7 @@ class ThesisFormatsEditComplete extends Component
 
     protected $rules = [
         'name' => 'required|max:255|',
-        'right_margin'=>'required|numeric|regex:/^[\d]{0,2}(\.[\d]{1,2})?$/',
+        'right_margin' => 'required|numeric|regex:/^[\d]{0,2}(\.[\d]{1,2})?$/',
     ];
 
     public function save()

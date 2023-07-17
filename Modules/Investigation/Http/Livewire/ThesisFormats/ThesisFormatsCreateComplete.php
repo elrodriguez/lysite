@@ -39,7 +39,8 @@ class ThesisFormatsCreateComplete extends Component
 
     public function getTypes()
     {
-        return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        //return ['histórica', 'descriptiva', 'experimental', 'meta-descriptiva', 'metodológica', 'teorica', 'otra'];
+        return ['Cuantitativo', 'Cualitativo', 'Mixto', 'otra'];
     }
 
     public function getNormatives()
@@ -61,7 +62,7 @@ class ThesisFormatsCreateComplete extends Component
 
     protected $rules = [
         'name' => 'required|max:255|',
-        'right_margin'=>'required|numeric|regex:/^[\d]{0,2}(\.[\d]{1,2})?$/',
+        'right_margin' => 'required|numeric|regex:/^[\d]{0,2}(\.[\d]{1,2})?$/',
     ];
 
     public function save()
