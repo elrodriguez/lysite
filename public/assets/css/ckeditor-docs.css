@@ -590,3 +590,6 @@ html {
 	overflow-y: auto;
 	max-height: 280px;
 }
+.ck-link-selections{
+	cursor: pointer;
+}
