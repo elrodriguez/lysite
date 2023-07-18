@@ -213,7 +213,7 @@ function openModalReference(editor){
             </div>
             <div class="ly-ck-dialog-buttons">
 
-                <button onclick="modifyCitation()" class="ly-ck-dialog-button btn-info mr-2" type="button">
+                <button onclick="modifyCitation()" id="modify-citation-id" class="ly-ck-dialog-button btn-info mr-2" type="button">
                 <i class="fa fa-i-cursor" aria-hidden="true"></i>Modificar esta Cita
                 </button>
 

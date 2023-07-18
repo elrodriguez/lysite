@@ -1408,11 +1408,14 @@ function hideBuscar() {
         // Si el botón está oculto, se muestra
         btnBuscar.style.display = "block";
         document.getElementById("input-doi-buscar-id").style.display = "block";
+        let btnCitaManual = document.getElementById("cita-manual-id");
+        btnCitaManual.className = "ly-ck-dialog-button btn-info mr-5";
     } else {
         // Si el botón está visible, se oculta
         btnBuscar.style.display = "none";
         document.getElementById("input-doi-buscar-id").style.display = "none";
-
+        let btnCitaManual = document.getElementById("cita-manual-id");
+        btnCitaManual.className = "ly-ck-dialog-button btn-secondary mr-5";
     }
 }
 
@@ -1428,6 +1431,8 @@ function modifyCitation() {
             // Reemplazar la clase original por "alert alert-danger"
             citationDiv.className = "alert alert-primary";
             modify_able = false;
+            let btnModify = document.getElementById("modify-citation-id");
+            btnModify.className = "ly-ck-dialog-button btn-info mr-2";
 
         } else {
             // Obtener el elemento div con el id "citation-id"
@@ -1440,6 +1445,8 @@ function modifyCitation() {
             citationDiv.className = "alert alert-secondary";
             citationDiv.focus();
             modify_able = true;
+            let btnModify = document.getElementById("modify-citation-id");
+            btnModify.className = "ly-ck-dialog-button btn-secondary mr-2";
         }
     } catch (error) {
 
