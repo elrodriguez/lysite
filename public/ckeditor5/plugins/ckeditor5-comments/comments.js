@@ -281,7 +281,7 @@ function __getDataComments(url){
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     <hr>
-                                    <a onclick="focusComment(${obj.thesis_student_id},${obj.thesis_format_part_id}, ${obj.selecction_id}, '${obj.selecction_text}')" style="text-decoration: none; color: black;">${obj.commentary}</a>
+                                    <a onclick="focusComment(${obj.thesis_student_id},${obj.thesis_format_part_id}, ${obj.selecction_id}, '${obj.selecction_text}')" style="text-decoration: none; color: black; cursor: pointer;">${obj.commentary}</a>
                                 </div>`;
                     
                 });
