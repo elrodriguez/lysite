@@ -162,7 +162,7 @@ class ThesisPartsCheck extends Component
     public function getComments()
     {
         return "CARAJO";
-        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_part_id', $thesis_student->id);
+        $comments = InveThesisStudentPartSelectionComment::where('thesis_student_part_id', $this->thesis_student->id);
         return $comments;
     }
 
