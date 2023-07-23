@@ -41,7 +41,7 @@ class ThesisFormatsCreate extends Component
 
     public function getNormatives()
     {
-        return ['APA', 'Vancouver', 'Otros'];
+        return ['APA', 'Vancouver', 'ISO', 'Otro'];
     }
 
     public function render()
