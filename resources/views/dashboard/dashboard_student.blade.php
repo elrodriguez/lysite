@@ -26,7 +26,7 @@
         <div class="page-section">
             @livewire('dashboard.dashboard-student')
             @livewire('course.courses-student')
-            @livewire('forum.forum-student')
+            {{-- @livewire('forum.forum-student') --}}
         </div>
     </div>
     <x-slot name="navigation">
