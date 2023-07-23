@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label" for="type_thesis">{{ __('labels.Type Thesis') }}
+                                <label class="form-label" for="type_thesis">Enfoque de Tesis:
                                     *</label>
                                 <select
                                     wire:model.defer="type_thesis"
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label" for="normative_thesis">{{ __('labels.Normative / Style') }}
+                                <label class="form-label" for="normative_thesis">Normativa de redacción:
                                     *</label>
                                 <select
                                     wire:model.defer="normative_thesis"
