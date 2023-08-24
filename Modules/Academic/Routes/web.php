@@ -39,8 +39,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
             Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_editar'])->get('edit/{id}', 'StudentsController@edit')->name('academic_students_edit');
             Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('my_course/{id}', 'StudentsController@my_course')->name('academic_students_my_course');
             Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('take_lesson/{course_id}/{section_id}/{content_id}', 'StudentsController@take_lesson')->name('academic_students_take_lesson');
-            Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('discussions_ask/{course_id}/{section_id}/{content_id}', 'StudentsController@discussions_ask')->name('academic_students_discussions_ask');
-            Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('discussion/{course_id}/{section_id}/{content_id}/{question_id}', 'StudentsController@discussion')->name('academic_students_discussion');
+            Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('discussions_ask/{course_id}/{section_id}/{content_id}', 'StudentsController@discussions_ask')->name('academic_students_discussions_ask'); //vista para hacer preguntas
+            Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('discussion/{course_id}/{section_id}/{content_id}/{question_id}', 'StudentsController@discussion')->name('academic_students_discussion'); //vista para responder
             Route::middleware(['middleware' => 'role_or_permission:academico_alumnos_mi_curso'])->get('discussions_ask_edit/{course_id}/{section_id}/{content_id}/{question_id}', 'StudentsController@discussions_ask_edit')->name('academic_students_discussions_ask_edit');
         });
 
@@ -74,6 +74,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(funct
             Route::middleware(['middleware' => 'role_or_permission:academico_reporte_total_alumnos'])->get('students_total', 'ReportStudentController@studentTotal')->name('academic_reports_students_total');
         });
 
-        Route::middleware(['middleware' => 'role_or_permission:academico_cursos_instructor'])->get('openai', 'StudentsController@openai')->name('openai');
+        // Route::middleware(['middleware' => 'role_or_permission:academico_cursos_instructor'])->get('openai', 'StudentsController@openai')->name('openai');
     });
 });

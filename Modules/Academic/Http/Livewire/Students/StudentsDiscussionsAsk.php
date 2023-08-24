@@ -7,6 +7,9 @@ use Livewire\Component;
 use Modules\Academic\Entities\AcaCourse;
 use Modules\Academic\Entities\AcaInstructor;
 use Modules\Academic\Entities\AcaQuestion;
+use Illuminate\Support\Facades\Mail;
+use Modules\Academic\Emails\AnsweredQuestion;
+use Illuminate\Support\Facades\DB;
 
 class StudentsDiscussionsAsk extends Component
 {
@@ -19,6 +22,7 @@ class StudentsDiscussionsAsk extends Component
 
     public $question_title;
     public $question_text;
+    public $question_id;
     public $email;
 
     public $questions = [];
@@ -51,7 +55,7 @@ class StudentsDiscussionsAsk extends Component
             'question_text' => 'required'
         ]);
 
-        AcaQuestion::create([
+       $question =  AcaQuestion::create([
             'content_id' => $this->content_id,
             'question_title' => $this->question_title,
             'question_text' => $this->question_text,
@@ -59,7 +63,9 @@ class StudentsDiscussionsAsk extends Component
             'replyed_status' => false,
             'email' => $this->email ? true : false
         ]);
+        $this->question_id = $question->id;
 
+        $this->sendEmailNotification();
         $this->question_title = null;
         $this->question_text = null;
         $this->email = false;
@@ -91,4 +97,21 @@ class StudentsDiscussionsAsk extends Component
         }
         
     }
+
+    public function sendEmailNotification(){
+        $instructors = AcaInstructor::where('course_id', $this->course_id)->get();
+        $instructors =  DB::table('people')
+        ->join('aca_instructors', 'people.id', '=', 'aca_instructors.person_id')
+        ->where('aca_instructors.course_id', $this->course_id)
+        ->select('people.*')
+        ->get();
+
+        foreach ($instructors as $key => $instructor) {
+            $correo = new AnsweredQuestion($this->question_title, "a la espera de respuesta...", "ninguno", $this->question_id);
+            $correo->subject = "Un estudiante ha hecho una pregunta";
+            $email = $instructor->email;
+            Mail::to($email)->send($correo);
+        }
+    }
+
 }
