@@ -104,7 +104,7 @@
                             <small id="description-notify" class="form-text text-muted">Si no está marcado, seguirá recibiendo notificaciones en nuestro sitio web.</small>
                         </div>
                         <div class="list-group-item">
-                            <button wire:click="save" type="button" class="btn btn-accent">Publicar pregunta</button>
+                            <button wire:click="save" type="button" class="btn btn-accent" wire:loading.attr="disabled">Publicar pregunta</button>
                         </div>
                     </div>
 
