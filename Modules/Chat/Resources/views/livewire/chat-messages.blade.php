@@ -19,64 +19,49 @@
 
             <div class="ps-container ps-theme-default ps-active-y" id="cha{{ $k }}"
                 style="overflow-y: scroll !important; height:400px !important;">
-
-
-
-
-
-
                 @php
-               try {
-                $x=0;
-                $i=$chat['messages'][0]['user_id'];
-                $first=true;
-               } catch (\Throwable $th) {
-               }
+                    try {
+                        $x=0;
+                        $i=$chat['messages'][0]['user_id'];
+                        $first=true;
+                    } catch (\Throwable $th) {
+                    }
                 @endphp
                 @while ($x < count($chat['messages']))
-                        @if ($i !=$chat['messages'][$x]['user_id'] || $first)
+                    @if ($i !=$chat['messages'][$x]['user_id'] || $first)
                         <div class="{{ $chat['messages'][$x]['user_id'] == auth()->user()->id ? 'media media-chat media-chat-reverse' : 'media media-chat' }}">
                             <img class="avatar" src="{{ $chat['messages'][$x]['avatar'] ? env('APP_URL') . '/storage/' . $chat['messages'][$x]['avatar'] : ui_avatars_url($chat['messages'][$x]['avatar'],32,'none') }}" alt="...">
                             <div class="media-body">
+                            @php
+                                $first=false;
+                            @endphp
+                    @endif
+                    <p>{{ $chat['messages'][$x]['message'] }}</p>
+
+                    @if ($x==count($chat['messages'])-1)
+                            <p class="meta"><time datetime="{{ date('Y') }}">{{ $chat['messages'][$x]['created_at'] }}</time></p>
+                            </div>
+                        </div>
+                    @else
+                        @if ($i != $chat['messages'][$x+1]['user_id'] || $x == count($chat['messages']))
+                            <p class="meta">{{ $chat['messages'][$x]['created_at'] }}</p>
+                                </div>
+                                </div>
                                 @php
-                                    $first=false;
+                                        $first=true;
                                 @endphp
                         @endif
+                    @endif
 
 
-                        <p>{{ $chat['messages'][$x]['message'] }}</p>
-
-                        @if ($x==count($chat['messages'])-1)
-                                <p class="meta"><time datetime="{{ date('Y') }}">{{ $chat['messages'][$x]['created_at'] }}</time></p>
-                                </div>
-                                </div>
-                        @else
-                                    @if ($i != $chat['messages'][$x+1]['user_id'] || $x == count($chat['messages']))
-                                        <p class="meta">{{ $chat['messages'][$x]['created_at'] }}</p>
-                                            </div>
-                                            </div>
-                                            @php
-                                                    $first=true;
-                                            @endphp
-                                    @endif
-                        @endif
-
-
-                        @php
-                            try {
-                                $i=$chat['messages'][++$x]['user_id'];
-                            } catch (\Throwable $th) {
-                                //throw $th;
-                            }
-                        @endphp
+                    @php
+                        try {
+                            $i=$chat['messages'][++$x]['user_id'];
+                        } catch (\Throwable $th) {
+                            //throw $th;
+                        }
+                    @endphp
                 @endwhile
-
-
-
-
-
-
-
         </div>
 
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
@@ -135,7 +120,7 @@ $i++;
 
         //Valida que no sean ingresado ENTER dentro del textarea
         function textareaWithoutEnter($char,$id,$index) {
-
+            
             // $textarea = document.getElementById($id);
 
             // if (e.which === 13 && !e.shiftKey) {
@@ -144,6 +129,7 @@ $i++;
             //     return false;
             // }
             if ($char == 13) {
+                
                 $textarea = document.getElementById($id);
                 $texto_escapado = escape($textarea.value);
                 if (navigator.appName == "Opera" || navigator.appName == "Microsoft Internet Explorer") $texto_sin_enter =
