@@ -40,6 +40,8 @@ class CoursesList extends Component
             //DB::beginTransaction();
             $course_image = AcaCourse::find($id)->course_image;
             $course = AcaCourse::find($id);
+            $course->status = false;
+            $course->save();
             AcaCourseRatingVote::where('course_id', $id)->delete();
             AcaCourseRating::where('course_id', $id)->delete();
             $course->delete();

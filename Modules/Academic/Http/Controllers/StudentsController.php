@@ -84,7 +84,6 @@ class StudentsController extends Controller
 
             $course = AcaCourse::find($id);
             $this->video = 0;
-
             $video_url = $this->video_selector($course->main_video);
             $course->video_url = $video_url;
             $course->video_type = $this->video;

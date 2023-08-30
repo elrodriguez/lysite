@@ -48,6 +48,7 @@ class Header extends Component
             )
             ->join('aca_students', 'aca_courses.id', '=', 'aca_students.course_id')
             ->where('aca_students.person_id', $this->person_id)
+            ->where('aca_courses.status', 1)
             ->where('aca_students.registered_until', '>=', Carbon::createFromFormat('Y-m-d', date('Y-m-d')))
             ->distinct()
             ->get();
