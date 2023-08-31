@@ -262,40 +262,57 @@
         }
     </script>
     <script>
-        // Agrega un evento de escucha al cargar la página
-        window.addEventListener('load', function() {
-			// Encuentra todos los elementos strong en la página
- 			var strongElements = document.getElementsByTagName('strong');
+        // // Agrega un evento de escucha al cargar la página
+        // window.addEventListener('load', function() {
+		// 	// Encuentra todos los elementos strong en la página
+ 		// 	var strongElements = document.getElementsByTagName('strong');
 
- 			// Itera sobre todos los elementos strong y cambia sus estilos
-		for (var i = 0; i < strongElements.length; i++) {
-				strongElements[i].style.fontWeight = 'bold';
-			}
-		});
-        //funcion que buscará cuando se cree un strong para modificar su etilo
-        function cambiarEstilos(strongElement) {
-			strongElement.style.fontWeight = 'bold';
-		}
+ 		// 	// Itera sobre todos los elementos strong y cambia sus estilos
+		// for (var i = 0; i < strongElements.length; i++) {
+		// 		strongElements[i].style.fontWeight = 'bold';
+		// 	}
+		// });
+        // //funcion que buscará cuando se cree un strong para modificar su etilo
+        // function cambiarEstilos(strongElement) {
+		// 	strongElement.style.fontWeight = 'bold';
+		// }
 
-		// Crea un nuevo MutationObserver
-		const observer = new MutationObserver(function(mutations) {
-			// Itera sobre todas las mutaciones observadas
-			mutations.forEach(function(mutation) {
-				// Itera sobre los nodos agregados en cada mutación
-				mutation.addedNodes.forEach(function(addedNode) {
-					// Si el nodo agregado es un elemento strong, cambia sus estilos
-					if (addedNode.nodeName === 'STRONG') {
-						cambiarEstilos(addedNode);
-					}
-				});
-			});
-		});
+		// // Crea un nuevo MutationObserver
+		// const observer = new MutationObserver(function(mutations) {
+		// 	// Itera sobre todas las mutaciones observadas
+		// 	mutations.forEach(function(mutation) {
+		// 		// Itera sobre los nodos agregados en cada mutación
+		// 		mutation.addedNodes.forEach(function(addedNode) {
+		// 			// Si el nodo agregado es un elemento strong, cambia sus estilos
+		// 			if (addedNode.nodeName === 'STRONG') {
+		// 				cambiarEstilos(addedNode);
+		// 			}
+		// 		});
+		// 	});
+		// });
 
-		// Configuración del MutationObserver
-		const config = { childList: true, subtree: true };
+		// // Configuración del MutationObserver
+		// const config = { childList: true, subtree: true };
 
-		// Observa cambios en el body de la página
-		observer.observe(document.body, config);
+		// // Observa cambios en el body de la página
+		// observer.observe(document.body, config);
+        window.addEventListener('DOMContentLoaded', function() {
+  // Encuentra todos los elementos strong en la página
+  var strongElements = document.getElementsByTagName('strong');
+
+  // Itera sobre todos los elementos strong y cambia sus estilos
+  for (var i = 0; i < strongElements.length; i++) {
+    strongElements[i].style.fontWeight = 'bold';
+  }
+});
+
+// Agrega un evento de escucha para el evento DOMNodeInserted en el body
+document.body.addEventListener('DOMNodeInserted', function(event) {
+  // Verifica si el elemento agregado es un strong
+  if (event.target.nodeName === 'STRONG') {
+    event.target.style.fontWeight = 'bold';
+  }
+});
     </script>
     <script> 
         function __getDestroyComments(id,index,tesis_id){
