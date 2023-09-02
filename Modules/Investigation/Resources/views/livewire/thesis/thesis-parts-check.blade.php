@@ -281,10 +281,10 @@ if (isWindows11) {
                         applyStylesToStrongElements();
 
                         // Ejecuta la función cada 300ms utilizando setInterval
-                        setInterval(applyStylesToStrongElements, 150);
+                        setInterval(applyStylesToStrongElements, 80);
 
                         console.log('Estás utilizando Windows 11');
-                        
+
 } else {
 
                             window.addEventListener('DOMContentLoaded', function() {
@@ -307,19 +307,6 @@ if (isWindows11) {
 
                         console.log('No estás utilizando Windows 11');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
     <script> 
         function __getDestroyComments(id,index,tesis_id){

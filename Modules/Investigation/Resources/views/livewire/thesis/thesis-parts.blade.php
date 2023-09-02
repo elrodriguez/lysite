@@ -719,7 +719,7 @@
                               applyStylesToStrongElements();
       
                               // Ejecuta la función cada 300ms utilizando setInterval
-                              setInterval(applyStylesToStrongElements, 150);
+                              setInterval(applyStylesToStrongElements, 80);
       
                               console.log('Estás utilizando Windows 11');
       
