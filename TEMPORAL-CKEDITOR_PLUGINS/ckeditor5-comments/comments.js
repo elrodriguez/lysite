@@ -165,11 +165,9 @@ export default class comments extends Plugin {
                     const urlData2 = editor.config.get('comments.urlData') || null;
 
                     if(parameters != 'empty'){
-                       __runAjax(parameters, randomNum, textarea.value, selectedText,urlData2);
+                       __runAjax(parameters, randomNum, textarea.value, selectedText, urlData2);
                     }
-                    //_createSidebarComments(textarea.value,randomNum);
-                    
-                    
+
                 } else {
                     alert("El textarea está vacío");
                 }
@@ -185,7 +183,7 @@ export default class comments extends Plugin {
     
 }
 
-function     __runAjax(parameters, selecction_id, comment_text,selectedText,urlData2) {
+function __runAjax(parameters, selecction_id, comment_text,selectedText,urlData2) {
     // Crear objeto XMLHttpRequest
     const xhr = new XMLHttpRequest();
   
@@ -261,6 +259,7 @@ function _createSidebarComments(text,id) {
 }
 
 function __getDataComments(url){
+    console.log(url)
     const xhr = new XMLHttpRequest();
 
     xhr.open('GET', url, true);
