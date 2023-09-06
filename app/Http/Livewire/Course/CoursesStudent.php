@@ -24,6 +24,7 @@ class CoursesStudent extends Component
                                 'aca_courses.main_video'
                             )
                             ->where('person_id',$person->id)
+                            ->where('aca_courses.status', 1)
                             ->where('aca_students.registered_until', '>=', Carbon::createFromFormat('Y-m-d', date('Y-m-d')))
                             ->get();
         }

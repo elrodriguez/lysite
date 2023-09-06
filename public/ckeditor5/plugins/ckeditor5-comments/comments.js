@@ -155,11 +155,11 @@ export default class comments extends Plugin {
                     //     }
                     // });
 
-                    editor.model.change( writer => {
-                        const commentElement =  writer.createElement(confComment.element, {id: `lyc-${randomNum}`})
-                        writer.insertText(selectedText, commentElement)
-                        editor.model.insertContent(commentElement);
-                    } );
+                    // editor.model.change( writer => {
+                    //     const commentElement =  writer.createElement(confComment.element, {id: `lyc-${randomNum}`})
+                    //     writer.insertText(selectedText, commentElement)
+                    //     editor.model.insertContent(commentElement);
+                    // } );
 
                     const parameters = editor.config.get('comments.ajax') || 'empty';
 
@@ -281,7 +281,7 @@ function __getDataComments(url){
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     <hr>
-                                    <a onclick="focusComment(${obj.thesis_student_id},${obj.thesis_format_part_id}, ${obj.selecction_id}, '${obj.selecction_text}')" style="text-decoration: none; color: black; cursor: pointer;">${obj.commentary}</a>
+                                    <a class="ck-link-selections" onclick="focusComment(${obj.thesis_student_id},${obj.thesis_format_part_id}, ${obj.selecction_id}, '${obj.selecction_text}')" style="text-decoration: none; color: black;">${obj.commentary}</a>
                                 </div>`;
                     
                 });
