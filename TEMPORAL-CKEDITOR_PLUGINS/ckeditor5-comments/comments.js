@@ -217,7 +217,9 @@ function __runAjax(parameters, selecction_id, comment_text,selectedText,urlData2
         if (xhr.status === 200) {
             // Manejar respuesta exitosa
             console.log('Petición exitosa:', xhr.response);
+            console.log(urlData2)
             if (urlData2) {
+                console.log('acaesta')
                 __getDataComments(urlData2)
             }
         } else {

@@ -583,7 +583,7 @@ html {
 	right: 0;
 	transform: translateY(-50%);
 	z-index: 10;
-	width: 200px;
+	width: 360px;
 	font-size: 12px;
 }
 .list-comments-scroll{
@@ -592,4 +592,5 @@ html {
 }
 .ck-link-selections{
 	cursor: pointer;
+	text-align: justify;
 }
