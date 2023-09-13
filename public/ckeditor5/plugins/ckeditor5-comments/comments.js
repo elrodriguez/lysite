@@ -162,15 +162,12 @@ export default class comments extends Plugin {
                     // } );
 
                     const parameters = editor.config.get('comments.ajax') || 'empty';
+                    const urlData2 = editor.config.get('comments.urlData') || null;
 
                     if(parameters != 'empty'){
-                       __runAjax(parameters, randomNum, textarea.value, selectedText);
+                       __runAjax(parameters, randomNum, textarea.value, selectedText, urlData2);
                     }
-                    //_createSidebarComments(textarea.value,randomNum);
-                    const urlData2 = editor.config.get('comments.urlData') || null;
-                    if (urlData2) {
-                        __getDataComments(urlData2)
-                    }
+
                 } else {
                     alert("El textarea está vacío");
                 }
@@ -186,7 +183,7 @@ export default class comments extends Plugin {
     
 }
 
-function     __runAjax(parameters, selecction_id, comment_text,selectedText) {
+function __runAjax(parameters, selecction_id, comment_text,selectedText,urlData2) {
     // Crear objeto XMLHttpRequest
     const xhr = new XMLHttpRequest();
   
@@ -220,7 +217,11 @@ function     __runAjax(parameters, selecction_id, comment_text,selectedText) {
         if (xhr.status === 200) {
             // Manejar respuesta exitosa
             console.log('Petición exitosa:', xhr.response);
-            //updateContent();
+            console.log(urlData2)
+            if (urlData2) {
+                console.log('acaesta')
+                __getDataComments(urlData2)
+            }
         } else {
             // Manejar error
             console.error('Error en la petición:', xhr.status, xhr.statusText);
@@ -260,6 +261,7 @@ function _createSidebarComments(text,id) {
 }
 
 function __getDataComments(url){
+    console.log(url)
     const xhr = new XMLHttpRequest();
 
     xhr.open('GET', url, true);
