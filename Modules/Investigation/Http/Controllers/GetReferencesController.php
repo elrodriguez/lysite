@@ -184,21 +184,32 @@ class GetReferencesController extends Controller
             $parte_despues = substr($parte_despues, 1);
         }
         $citation = "<p>" . $parte_despues;
-
         $citation = str_replace('Elsevier B.V.', '', $citation);
-        $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
-        $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
+        //revisando si hay mas cierraParentesis para eliminar el ultimo
+        $abreParentesis = substr_count($citation, "(");
+        $cierraParentesis = substr_count($citation, ")");
+        //dd($abreParentesis,$cierraParentesis, "ABRE Y CIERA");
+        if ($cierraParentesis > $abreParentesis) {
+            $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
+            $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
+        }        
         $citation = str_replace(' (Vol. ', ', ', $citation);
         $citation = str_replace('. In ', '. ', $citation);
         $citation = str_replace('pp.', '', $citation);
         //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
         $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; 
         $nxplodes = explode('(' . $document->year . ')', $citation);
-        $nxplodes[0] = $this->getAutorforAPA($document);
+        $nxplodes[0] = $this->getAutorforAPA($document);        
         $citation = implode('(' . $document->year . ')', $nxplodes);
-
+        $source;
+        try {
+            $source = $document->source;
+        } catch (\Throwable $th) {
+            $source = "";
+        }
+        
         $year = $document->year;
-        $source = $document->source;
+        
         $explotado = explode("https://doi", $citation);
         $explotado = explode('<i>' . $source . '</i>,', $explotado[0]);
         $volumen_and_pages_no_k = "";
@@ -216,7 +227,7 @@ class GetReferencesController extends Controller
             }
             //$volumen_and_pages[0] = $volumen_and_pages[0];
             $volumen_and_pages  = implode(",", $volumen_and_pages);
-            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
+            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);            
         }
         $citation = str_replace("Elsevier Ltd.", "", $citation);
         return $citation;
