@@ -158,13 +158,14 @@ class GetReferencesController extends Controller
 
     public function generate_apa($document)
     {
-
+        //dd($document);
         // Consultando la WEB de mendeley según el ID
         $response = Http::get('https://www.mendeley.com/catalogue/' . $document->id . '/');
 
         // Get the body of the response
         $body = $response->body();
         $html = $body;
+        //dd($document);
 
         // $browsershot = new Browsershot();
         // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
@@ -192,15 +193,20 @@ class GetReferencesController extends Controller
         if ($cierraParentesis > $abreParentesis) {
             $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
             $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
-        }        
+        }   
+         
         $citation = str_replace(' (Vol. ', ', ', $citation);
         $citation = str_replace('. In ', '. ', $citation);
         $citation = str_replace('pp.', '', $citation);
         //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
-        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena; 
+        $array = explode('(', $citation);
+        $titulox = $array[0];
+        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;                                  
         $nxplodes = explode('(' . $document->year . ')', $citation);
         $nxplodes[0] = $this->getAutorforAPA($document);        
-        $citation = implode('(' . $document->year . ')', $nxplodes);
+        
+        $citation = $titulox . implode('(' . $document->year . ')', $nxplodes);
+        
         $source;
         try {
             $source = $document->source;
@@ -510,8 +516,13 @@ class GetReferencesController extends Controller
 
     public function getVolumen_and_pages($document)
     {
+        
         $year = $document->year;
-        $source = $document->source;
+        try {
+            $source = $document->source;
+        } catch (\Throwable $th) {
+            $source = "";
+        }
         $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
         $explotado = explode("https://doi", $apa_citation);
         $explotado = explode('<i>' . $source . '</i>,', $explotado[0]);
