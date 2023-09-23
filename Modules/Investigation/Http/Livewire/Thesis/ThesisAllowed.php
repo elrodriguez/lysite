@@ -30,13 +30,13 @@ class ThesisAllowed extends Component
     }
 
     public function changeAllowedThesis($id, $valor){ //id = person_id, valor = allowed
-        $person = Person::where('id', $id)->first()->paginate(10);
+        $person = Person::where('id', $id)->first();
         $person->allowed_thesis = $valor;
         $person->save();
     }
 
     public function changeAllowedParaphrase($id, $valor){ //id = person_id, valor = allowed
-        $person = Person::where('id', $id)->first()->paginate(10);
+        $person = Person::where('id', $id)->first();
         $person->paraphrase_allowed = $valor;
         $person->save();
     }
