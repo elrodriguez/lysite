@@ -5,6 +5,7 @@ namespace Modules\Investigation\Http\Livewire\Thesis;
 use App\Models\Person;
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisStudent;
+use Livewire\WithPagination;
 
 class ThesisAllowed extends Component
 {
