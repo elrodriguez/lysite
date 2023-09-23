@@ -9,7 +9,8 @@ use Livewire\WithPagination;
 
 class ThesisAllowed extends Component
 {
-    public $search;
+    use WithPagination;
+    public $search;    
 
     public function render()
     {
