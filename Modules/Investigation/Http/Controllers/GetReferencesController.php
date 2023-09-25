@@ -203,9 +203,9 @@ class GetReferencesController extends Controller
         $titulox = $array[0];
         $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;                                  
         $nxplodes = explode('(' . $document->year . ')', $citation);
-        $nxplodes[0] = $this->getAutorforAPA($document);        
-        
-        $citation = $titulox . implode('(' . $document->year . ')', $nxplodes);
+        $nxplodes[0] = $titulox;//$this->getAutorforAPA($document);
+        //$citation = $titulox . implode('(' . $document->year . ')', $nxplodes);
+        $citation = implode('(' . $document->year . ')', $nxplodes);
         
         $source;
         try {
