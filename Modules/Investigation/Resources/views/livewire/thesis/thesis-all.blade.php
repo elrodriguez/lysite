@@ -42,10 +42,12 @@
                                                         <a href="{{ route('investigation_thesis_check', $thesi->external_id) }}"
                                                             type="button" class="btn btn-info btn-sm" title="check"><i
                                                                 class="fa fa-search-plus"></i>
-                                                            </a>
+                                                        </a>
                                                     @endcan
                                                     @can('investigacion_tesis_admin_eliminar')
-                                                        <button onclick="deletes('{{ $thesi->external_id }}')" type="button" class="btn btn-danger btn-sm" title="Eliminar"><i class="fa fa-trash-alt"></i></button>
+                                                        <button onclick="deletes('{{ $thesi->external_id }}')"
+                                                            type="button" class="btn btn-danger btn-sm" title="Eliminar"><i
+                                                                class="fa fa-trash-alt"></i></button>
                                                     @endcan
                                                 </div>
                                             </td>
@@ -63,7 +65,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td class="text-end" colspan="3">
+                                        <td class="text-end" colspan="6">
                                             <div class="d-flex flex-row-reverse">
                                                 {{ $thesis->links() }}
                                             </div>
