@@ -2408,8 +2408,10 @@ body {
   position:absolute;
   width:100%;
   height:100%;
-  background-image:url(https://scontent.fchm1-1.fna.fbcdn.net/v/t39.30808-6/335262795_558403482754074_327838533367479518_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=52f669&_nc_eui2=AeFURM1bfva0DVJJq92zx44Nki2UpP3SuFSSLZSk_dK4VJAV3HwPzSLMoGCku4z1H8E&_nc_ohc=sdnK6MkNAY0AX8bqIqk&_nc_ht=scontent.fchm1-1.fna&oh=00_AfApTScTsJ0lNrFdEP2-aX86lZ0ToRy4e9LjMFY-jHpyWA&oe=650384DE);
-  background-size:cover
+  background-image:url(https://scontent.fchm1-1.fna.fbcdn.net/v/t39.30808-6/335262795_558403482754074_327838533367479518_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=52f669&_nc_eui2=AeFURM1bfva0DVJJq92zx44Nki2UpP3SuFSSLZSk_dK4VJAV3HwPzSLMoGCku4z1H8E&_nc_ohc=g3890WMCslAAX_z5Cs-&_nc_ht=scontent.fchm1-1.fna&oh=00_AfAiKbu8XTQOJwTbs6I23smIsqs_U0MlregFUHG8s5WqPQ&oe=65057F1E);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #notfound .notfound-bg:after {
   content:'';
