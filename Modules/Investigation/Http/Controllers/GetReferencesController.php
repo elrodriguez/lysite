@@ -238,7 +238,8 @@ class GetReferencesController extends Controller
                     $abreParentesis_ = substr_count($volumen_and_pages, "(");
                     $cierraParentesis_ = substr_count($volumen_and_pages, ")");
                     if($cierraParentesis_ > $abreParentesis_){
-                        $volumen_and_pages = "(".$volumen_and_pages;
+                        //$volumen_and_pages = "(".$volumen_and_pages;
+                        $volumen_and_pages = str_replace(")", "" , $volumen_and_pages);
                     }
             $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);            
         }
