@@ -869,7 +869,7 @@ function show_selected_inputs() {
             let label = document.querySelector("label[for='input-grado']");
             label.textContent = "Titulación en que especialidad o carrera:";
             let input = document.getElementById("input-grado");
-            input.placeholder = "titulación en Ingeniería Industrial, Titulación en Maestría o Doctorado";
+            input.placeholder = "Tesis de licenciatura, Tesis de Maestría o Doctorado";
             label = document.querySelector("label[for='input-institucion']");
             label.textContent = "Universidad:";
             show_input('input-enlace');
@@ -1054,7 +1054,7 @@ function show_selected_inputs() {
             let label = document.querySelector("label[for='input-grado']");
             label.textContent = "Titulación en que especialidad o carrera:";
             let input = document.getElementById("input-grado");
-            input.placeholder = "titulación en Ingeniería Industrial, Titulación en Maestría o Doctorado";
+            input.placeholder = "Tesis de licenciatura, Tesis de Maestría o Doctorado";
             label = document.querySelector("label[for='input-institucion']");
             label.textContent = "Universidad:";
             show_input('input-pais');

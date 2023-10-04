@@ -233,9 +233,12 @@ class GetReferencesController extends Controller
             }
             //$volumen_and_pages[0] = $volumen_and_pages[0];
             $volumen_and_pages  = implode(",", $volumen_and_pages);
+            $volumen_and_pages = "(".$volumen_and_pages;
             $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);            
         }
         $citation = str_replace("Elsevier Ltd.", "", $citation);
+        $citation = html_entity_decode($citation);
+        $citation = preg_replace("/, &/", " y ", $citation);
         return $citation;
     }
 
