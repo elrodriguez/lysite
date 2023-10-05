@@ -39,7 +39,7 @@ class ChatMessages extends Component
 
         $user = Person::where('user_id', $id)->first();
 
-        $this->chats[$id ."-".  Auth::id()] = [
+        $this->chats[$id . "-" .  Auth::id()] = [
             'background' => 'bg-ui-chatbox-titlebar',
             'user_id' => $id,
             'right' => 0,
@@ -62,7 +62,7 @@ class ChatMessages extends Component
                 'users.name',
                 'users.avatar'
             )
-            ->where('conversation_ids', $id ."-".  Auth::id())
+            ->where('conversation_ids', $id . "-" .  Auth::id())
             ->get();
 
         if ($msg) {
@@ -81,8 +81,8 @@ class ChatMessages extends Component
                     'created_at' => $this->gethours($ms->created_at),
                 ];
             }
-            $this->chats[$id ."-".  Auth::id()]['messages'] = $xmsg;
-            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => $id ."-". Auth::id(), 'user_id' => $id]);
+            $this->chats[$id . "-" .  Auth::id()]['messages'] = $xmsg;
+            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => $id . "-" . Auth::id(), 'user_id' => $id]);
         }
     }
     public function showChatInstructor($id)
@@ -92,7 +92,7 @@ class ChatMessages extends Component
 
         $user = Person::where('user_id', $id)->first();
 
-        $this->chats[Auth::id() ."-". $id] = [
+        $this->chats[Auth::id() . "-" . $id] = [
             'background' => 'bg-ui-chatbox-titlebar',
             'user_id' => $id,
             'right' => 0,
@@ -115,7 +115,7 @@ class ChatMessages extends Component
                 'users.name',
                 'users.avatar'
             )
-            ->where('conversation_ids', Auth::id() ."-". $id)
+            ->where('conversation_ids', Auth::id() . "-" . $id)
             ->get();
 
         if ($msgs) {
@@ -135,8 +135,8 @@ class ChatMessages extends Component
                 ];
             }
 
-            $this->chats[Auth::id() ."-".  $id]['messages'] = $xmsg;
-            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => Auth::id() ."-". $id, 'user_id' => $id]);
+            $this->chats[Auth::id() . "-" .  $id]['messages'] = $xmsg;
+            $this->dispatchBrowserEvent('scroll-button', ['success' => true, 'index' => Auth::id() . "-" . $id, 'user_id' => $id]);
         }
     }
     public function gethours($date)
@@ -157,7 +157,6 @@ class ChatMessages extends Component
                 }
             }
         }
-
     }
 
     public function addLink($cadena)
@@ -248,8 +247,9 @@ class ChatMessages extends Component
         $this->chats[$index]['background'] = 'bg-ui-chatbox-titlebar';
     }
 
-    public function is_seen_checked($index){
+    public function is_seen_checked($index)
+    {
         ChatMessage::where('conversation_ids', $index)->where('receiver', Auth::user()->id)->where('is_seen', 0)
-        ->update(['is_seen' => 1]);
+            ->update(['is_seen' => 1]);
     }
 }

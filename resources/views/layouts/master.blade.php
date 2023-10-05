@@ -73,7 +73,7 @@
     {{ $navigation }}
     <!--  livewire -->
     @if (!Auth::guest())
-    @livewire('chat::chat-messages')
+        @livewire('chat::chat-messages-new')
     @endif
     @livewireScripts
     <!-- jQuery -->
@@ -110,18 +110,18 @@
     <script src="{{ url('assets/js/cute-alert/cute-alert.js') }}"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
-    
+
     @yield('script')
     @yield('modales')
     <!-- Modal -->
     @yield('script-chat')
     <script>
-        setTimeout(function(){
+        setTimeout(function() {
             let b = document.getElementsByClassName('preloader')[0];
             b.style.display = 'none';
-        },10000);
+        }, 10000);
     </script>
-    @if(auth()->check())
+    @if (auth()->check())
         <script>
             // Verifica si la variable "user" existe en el localStorage
             if (localStorage.getItem("user_name")) {
@@ -131,7 +131,6 @@
 
             // Crea la variable "user" y asigna un valor
             localStorage.setItem("user_name", '{{ auth()->user()->name }}');
-
         </script>
     @endif
     @yield('global-modal')

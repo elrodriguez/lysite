@@ -16,8 +16,8 @@ class ContactList extends Component
     public $students = [];
     public $instructors = [];
     public $is_instructor = false;
-    public $search="";
-    public $alert_message=false;
+    public $search = "";
+    public $alert_message = false;
 
     public function mount()
     {
@@ -75,8 +75,8 @@ class ContactList extends Component
             )
             ->whereIn('course_id', $course_iids)
             ->where('people.id', '<>', $person_id)
-            ->where(function ($query){
-                $query->orWhere('full_name','like', '%' . $this->search . '%');
+            ->where(function ($query) {
+                $query->orWhere('full_name', 'like', '%' . $this->search . '%');
             })
             ->groupBy([
                 'users.id',
@@ -102,8 +102,8 @@ class ContactList extends Component
             )
             ->whereIn('course_id', $course_sids)
             ->where('people.id', '<>', $person_id)
-            ->where(function ($query){
-                $query->orWhere('full_name','like', '%' . $this->search . '%');
+            ->where(function ($query) {
+                $query->orWhere('full_name', 'like', '%' . $this->search . '%');
             })
             ->groupBy([
                 'users.id',
@@ -115,23 +115,23 @@ class ContactList extends Component
             ])
             ->get();
 
-            foreach ($this->students as $student){
-                if($student->is_seen==0 && !is_null($student->is_seen)){
-                    $this->alert_message=true;
-                    break;
-                }
+        foreach ($this->students as $student) {
+            if ($student->is_seen == 0 && !is_null($student->is_seen)) {
+                $this->alert_message = true;
+                break;
             }
-            foreach ($this->instructors as $instructor){
-                if($instructor->is_seen==0 && !is_null($instructor->is_seen)){
-                    $this->alert_message=true;
-                    break;
-                }
+        }
+        foreach ($this->instructors as $instructor) {
+            if ($instructor->is_seen == 0 && !is_null($instructor->is_seen)) {
+                $this->alert_message = true;
+                break;
             }
+        }
 
 
         $role_id = DB::table('model_has_roles')->where('model_type', User::class)->where('model_id', Auth::user()->id)->first()->role_id;
-        if (Role::find($role_id)->name == "Instructor"){
-            $this->is_instructor=true;
+        if (Role::find($role_id)->name == "Instructor") {
+            $this->is_instructor = true;
         }
     }
 
@@ -140,9 +140,9 @@ class ContactList extends Component
         $difference = now()->diff($date);
         //dd($difference, $difference->format('%s'), $difference->i, $difference->h, $difference->d);
 
-        if($difference->m>=1){
-            return $difference->m = 1 ? "hace " . $difference->m . " mes" : "hace ".$difference->m. " meses";
-        }else{
+        if ($difference->m >= 1) {
+            return $difference->m = 1 ? "hace " . $difference->m . " mes" : "hace " . $difference->m . " meses";
+        } else {
             if ($difference->d >= 1) {
                 return "hace " . $difference->d . " días";
             } else {
@@ -156,7 +156,6 @@ class ContactList extends Component
                     }
                 }
             }
-            }
-
+        }
     }
 }
