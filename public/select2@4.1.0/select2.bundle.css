@@ -952,17 +952,34 @@ RESULT:
   right: 0.5rem; }
 
 .select2-dropdown {
-  border-color: #E5E5E5; }
+  border-color: #E5E5E5; 
+}
 
 .select2-search--dropdown {
-  padding: 0.875rem; }
-  .select2-search--dropdown:before {
+  padding: 0.875rem;
+ }
+  /* .select2-search--dropdown:before {
     content: "\f002";
     font-family: 'Font Awesome 5 Pro';
     position: absolute;
     left: calc(1rem + 0.875rem);
     top: calc(0.6rem + 0.875rem);
-    color: #886ab5; }
+    color: #886ab5; } */
+
+    .select2-search--dropdown:before {
+      display: inline-block;
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      content: "\f002";
+      top: calc(0.6rem + 0.875rem);
+      left: calc(1rem + 0.875rem);
+      color: #886ab5 !important;
+  }
 
 .select2-results {
   padding: 0.875rem; }

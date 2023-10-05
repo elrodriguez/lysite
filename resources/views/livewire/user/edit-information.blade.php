@@ -11,11 +11,14 @@
                                 <div class="col-sm-4">
                                     <select wire:model="identity_document_type_id" class="form-control">
                                         <option value="">{{ __('labels.Select') }}</option>
-                                        @foreach($identity_document_types as $identity_document_type)
-                                            <option value="{{ $identity_document_type->id }}">{{ $identity_document_type->description }}</option>
+                                        @foreach ($identity_document_types as $identity_document_type)
+                                            <option value="{{ $identity_document_type->id }}">
+                                                {{ $identity_document_type->description }}</option>
                                         @endforeach
                                     </select>
-                                    @error('identity_document_type_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('identity_document_type_id')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -24,7 +27,9 @@
                                 <label class="col-form-label col-sm-3">{{ __('labels.Number') }}</label>
                                 <div class="col-sm-4">
                                     <input wire:model="number" type="text" class="form-control">
-                                    @error('number') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('number')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -33,7 +38,9 @@
                                 <label class="col-form-label col-sm-3">{{ __('labels.Name') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="names" type="text" class="form-control">
-                                    @error('names') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('names')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -42,7 +49,9 @@
                                 <label class="col-form-label col-sm-3">{{ __('labels.Middle Name') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="last_name_father" type="text" class="form-control">
-                                    @error('last_name_father') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('last_name_father')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -51,7 +60,9 @@
                                 <label class="col-form-label col-sm-3">{{ __('labels.Last Name') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="last_name_mother" type="text" class="form-control">
-                                    @error('last_name_mother') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('last_name_mother')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -61,11 +72,13 @@
                                 <div class="col-sm-4">
                                     <select wire:change="getProvinces" wire:model="country_id" class="form-control">
                                         <option value="">Seleccionar</option>
-                                        @foreach($countries as $country)
+                                        @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->description }}</option>
                                         @endforeach
                                     </select>
-                                    @error('country_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('country_id')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -75,64 +88,79 @@
                                 <div class="col-sm-9">
                                     <select wire:model="university_id" class="form-control" id="university_id">
                                         <option value="">Seleccionar</option>
-                                        @foreach($universities as $university)
+                                        @foreach ($universities as $university)
                                             <option value="{{ $university->id }}">{{ $university->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('university_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('university_id')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
-                        @if($ubigeo_active)
-                        <div class="list-group-item">
-                            <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">{{ __('labels.Region') }}</label>
-                                <div class="col-sm-4">
-                                    <select wire:change="getProvinces" wire:model="department_id" class="form-control">
-                                        <option value="">Seleccionar</option>
-                                        @foreach($departments as $department)
-                                            <option value="{{ $department->id }}">{{ $department->description }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('department_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                        @if ($ubigeo_active)
+                            <div class="list-group-item">
+                                <div class="form-group row mb-0">
+                                    <label class="col-form-label col-sm-3">{{ __('labels.Region') }}</label>
+                                    <div class="col-sm-4">
+                                        <select wire:change="getProvinces" wire:model="department_id"
+                                            class="form-control">
+                                            <option value="">Seleccionar</option>
+                                            @foreach ($departments as $department)
+                                                <option value="{{ $department->id }}">{{ $department->description }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('department_id')
+                                            <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="list-group-item">
-                            <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">{{ __('labels.Province') }}</label>
-                                <div class="col-sm-4">
-                                    <select wire:change="getDistricts" wire:model="province_id" class="form-control">
-                                        <option value="">{{ __('labels.Select') }}</option>
-                                        @foreach($provinces as $province)
-                                            <option value="{{ $province->id }}">{{ $province->description }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('province_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                            <div class="list-group-item">
+                                <div class="form-group row mb-0">
+                                    <label class="col-form-label col-sm-3">{{ __('labels.Province') }}</label>
+                                    <div class="col-sm-4">
+                                        <select wire:change="getDistricts" wire:model="province_id"
+                                            class="form-control">
+                                            <option value="">{{ __('labels.Select') }}</option>
+                                            @foreach ($provinces as $province)
+                                                <option value="{{ $province->id }}">{{ $province->description }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('province_id')
+                                            <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="list-group-item">
-                            <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">{{ __('labels.District') }}</label>
-                                <div class="col-sm-4">
-                                    <select wire:model="district_id" class="form-control">
-                                        <option value="">{{ __('labels.Select') }}</option>
-                                        @foreach($districts as $district)
-                                            <option value="{{ $district->id }}">{{ $district->description }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('district_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                            <div class="list-group-item">
+                                <div class="form-group row mb-0">
+                                    <label class="col-form-label col-sm-3">{{ __('labels.District') }}</label>
+                                    <div class="col-sm-4">
+                                        <select wire:model="district_id" class="form-control">
+                                            <option value="">{{ __('labels.Select') }}</option>
+                                            @foreach ($districts as $district)
+                                                <option value="{{ $district->id }}">{{ $district->description }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('district_id')
+                                            <span class="invalid-feedback-2">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">{{ __('labels.Address') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="address" type="text" class="form-control">
-                                    @error('address') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('address')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -141,16 +169,23 @@
                                 <label class="col-form-label col-sm-3">{{ __('labels.Mobile Number') }}</label>
                                 <div class="col-sm-4">
                                     <input wire:model="mobile_phone" type="text" class="form-control">
-                                    @error('mobile_phone') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('mobile_phone')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3" for="birth_date">{{ __('labels.Date of Birth') }}</label>
+                                <label class="col-form-label col-sm-3"
+                                    for="birth_date">{{ __('labels.Date of Birth') }}</label>
                                 <div class="col-sm-4">
-                                    <input wire:model="birth_date" onchange="this.dispatchEvent(new InputEvent('input'))" id="birth_date" type="text" class="form-control">
-                                    @error('birth_date') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    <input wire:model="birth_date"
+                                        onchange="this.dispatchEvent(new InputEvent('input'))" id="birth_date"
+                                        type="text" class="form-control">
+                                    @error('birth_date')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -163,7 +198,9 @@
                                         <option value="1">{{ __('labels.Male') }}</option>
                                         <option value="0">{{ __('labels.Female') }}</option>
                                     </select>
-                                    @error('sex') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('sex')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -172,7 +209,9 @@
                                 <label class="col-form-label col-sm-3">{{ __('labels.Email') }}</label>
                                 <div class="col-sm-9">
                                     <input wire:model="email" type="email" class="form-control" disabled>
-                                    @error('last_name_mother') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                    @error('last_name_mother')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -184,7 +223,8 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled"
+                            class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>
@@ -199,9 +239,9 @@
                 buttonText: "Okay"
             });
         });
-        document.addEventListener('livewire:load', function () {
+        document.addEventListener('livewire:load', function() {
             $("#birth_date").flatpickr();
-            //$('#university_id').select2();
+            $('#university_id').select2();
         });
     </script>
 </div>
