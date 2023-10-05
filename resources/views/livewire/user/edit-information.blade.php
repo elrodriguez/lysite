@@ -241,7 +241,7 @@
         });
         document.addEventListener('livewire:load', function() {
             $("#birth_date").flatpickr();
-            $('#university_id').select2();
+            // $('#university_id').select2();
         });
     </script>
 </div>
