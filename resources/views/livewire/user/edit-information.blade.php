@@ -248,7 +248,7 @@
 
                 // Obtener el atributo "title" del elemento
                 const title = container.getAttribute("title");
-                // Obtener el elemento select con id="university_id"
+                // Obtener el elemento select con id="university_id" es decir el Select Original de livewire
                 const select = document.getElementById("university_id");
 
                 // Recorrer las opciones del select
