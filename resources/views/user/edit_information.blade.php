@@ -41,6 +41,6 @@
         <!-- Flatpickr -->
         <script src="{{ url('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
         <script src="{{ url('assets/js/flatpickr.js') }}"></script>
-        {{-- <script src="{{ url('select2@4.1.0/select2.js') }}"></script> --}}
+        <script src="{{ url('select2@4.1.0/select2.js') }}"></script> 
     @endsection
 </x-master>

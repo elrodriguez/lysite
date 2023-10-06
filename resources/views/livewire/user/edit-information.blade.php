@@ -241,7 +241,32 @@
         });
         document.addEventListener('livewire:load', function() {
             $("#birth_date").flatpickr();
-            // $('#university_id').select2();
+            $('#university_id').select2();
+            $('#university_id').on('change', function () {
+            // Obtener el elemento con id="select2-university_id-container"
+                const container = document.getElementById("select2-university_id-container");
+
+                // Obtener el atributo "title" del elemento
+                const title = container.getAttribute("title");
+                // Obtener el elemento select con id="university_id"
+                const select = document.getElementById("university_id");
+
+                // Recorrer las opciones del select
+                for (let i = 0; i < select.options.length; i++) {
+                // Obtener el contenido de la opción actual
+                const optionText = select.options[i].textContent;
+
+
+                // Buscar el elemento option con el texto deseado
+                const selectedOption = Array.from(select.options).find(option => option.text === title);
+
+                // Obtener el valor del elemento option encontrado
+                const selectedValue = selectedOption ? selectedOption.value : null;
+                @this.university_id = selectedValue;
+                }
+                });
         });
+
+
     </script>
 </div>
