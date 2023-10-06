@@ -262,7 +262,7 @@
 
                 // Obtener el valor del elemento option encontrado
                 const selectedValue = selectedOption ? selectedOption.value : null;
-                @this.university_id = selectedValue;
+                @this.university_id = selectedValue; //aquí paso el id de la universidad
                 }
                 });
         });
