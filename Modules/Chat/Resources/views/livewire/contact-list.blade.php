@@ -1,4 +1,4 @@
-<div class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full">
+<div class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full" wire:ignore.self>
     <button id="user-list-chat"
         class="nav-link btn-flush dropdown-toggle {{ $alert_message ? 'new-message-icon-animation' : '' }}" type="button"
         data-toggle="dropdown" data-dropdown-disable-document-scroll data-caret="false">
@@ -12,7 +12,7 @@
         <div class="dropdown-menu dropdown-menu-right">
             <div data-perfect-scrollbar class="position-relative">
                 <div class="dropdown-header"><strong>Contactos</strong></div>
-                <div class="list-group list-group-flush mb-0">
+                <div class="list-group list-group-flush mb-0" style="max-height: 300px; overflow-y: auto;">
                     @if (count($instructors) > 0)
                         @foreach ($instructors as $instructor)
                             <a onclick="showChatMessagesById({{ $instructor->id }},2)" href="javascript:void(0);"
@@ -99,7 +99,8 @@
                                     </div>
                                 @endif
                                 <div class="overflujo" style="max-height:80vh; min-height:auto">
-                                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                                    <ul class="list-unstyled chat-list mt-2 mb-0"
+                                        style="max-height: 300px; overflow-y: auto;">
                                         @if (count($instructors) > 0)
                                             @foreach ($instructors as $instructor)
                                                 <li class="clearfix">
