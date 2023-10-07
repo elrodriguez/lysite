@@ -56,6 +56,7 @@ class ChatController extends Controller
                 'users.avatar'
             )
             ->where('conversation_ids', $index)
+            ->orderBy('created_at')
             ->get();
 
         if ($msg) {
