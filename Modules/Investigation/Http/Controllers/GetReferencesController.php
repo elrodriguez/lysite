@@ -246,6 +246,7 @@ class GetReferencesController extends Controller
         $citation = str_replace("Elsevier Ltd.", "", $citation);
         $citation = html_entity_decode($citation);
         $citation = preg_replace("/, &/", " y ", $citation);
+        $citation = $this->deleteMonths($citation);                
         return $citation;
     }
 
@@ -436,6 +437,7 @@ class GetReferencesController extends Controller
 
         $citation .= '</p>';
         $citation = str_replace("Elsevier Ltd.", "", $citation);
+        $citation = $this->deleteMonths($citation);   
         return $citation;
     }
 
@@ -520,6 +522,7 @@ class GetReferencesController extends Controller
         $citation = str_replace("<em>", "", $citation);
         $citation = str_replace('</em>', "", $citation);
         $citation = str_replace("Elsevier Ltd.", "", $citation);
+        $citation = $this->deleteMonths($citation);   
         return $citation;
     }
 
@@ -645,5 +648,73 @@ class GetReferencesController extends Controller
                 Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
                 */
         }
+    }
+
+    public function deleteMonths($citation){
+        $citation = str_replace("(jan)", "", $citation);
+        $citation = str_replace("(JAN)", "", $citation);
+        $citation = str_replace("(Jan)", "", $citation);        
+        $citation = str_replace("(January)", "", $citation);        
+        $citation = str_replace("(JANUARY)", "", $citation);
+        $citation = str_replace("(feb)", "", $citation);
+        $citation = str_replace("(mar)", "", $citation);
+        $citation = str_replace("(apr)", "", $citation);
+        $citation = str_replace("(may)", "", $citation);
+        $citation = str_replace("(jun)", "", $citation);
+        $citation = str_replace("(jul)", "", $citation);
+        $citation = str_replace("(aug)", "", $citation);
+        $citation = str_replace("(sep)", "", $citation);
+        $citation = str_replace("(oct)", "", $citation);
+        $citation = str_replace("(nov)", "", $citation);
+        $citation = str_replace("(dec)", "", $citation);
+
+        $citation = str_replace("(FEB)", "", $citation);
+        $citation = str_replace("(MAR)", "", $citation);
+        $citation = str_replace("(APR)", "", $citation);
+        $citation = str_replace("(MAY)", "", $citation);
+        $citation = str_replace("(JUN)", "", $citation);
+        $citation = str_replace("(JUL)", "", $citation);
+        $citation = str_replace("(AUG)", "", $citation);
+        $citation = str_replace("(SEP)", "", $citation);
+        $citation = str_replace("(OCT)", "", $citation);
+        $citation = str_replace("(NOV)", "", $citation);
+        $citation = str_replace("(DEC)", "", $citation);
+
+        $citation = str_replace("(Feb)", "", $citation);
+        $citation = str_replace("(Mar)", "", $citation);
+        $citation = str_replace("(Apr)", "", $citation);
+        $citation = str_replace("(May)", "", $citation);
+        $citation = str_replace("(Jun)", "", $citation);
+        $citation = str_replace("(Jul)", "", $citation);
+        $citation = str_replace("(Aug)", "", $citation);
+        $citation = str_replace("(Sep)", "", $citation);
+        $citation = str_replace("(Oct)", "", $citation);
+        $citation = str_replace("(Nov)", "", $citation);
+        $citation = str_replace("(Dec)", "", $citation);
+
+        $citation = str_replace("(February)", "", $citation);
+        $citation = str_replace("(March)", "", $citation);
+        $citation = str_replace("(April)", "", $citation);
+        $citation = str_replace("(May)", "", $citation);
+        $citation = str_replace("(June)", "", $citation);
+        $citation = str_replace("(July)", "", $citation);
+        $citation = str_replace("(August)", "", $citation);
+        $citation = str_replace("(September)", "", $citation);
+        $citation = str_replace("(October)", "", $citation);
+        $citation = str_replace("(November)", "", $citation);
+        $citation = str_replace("(December)", "", $citation);
+
+        $citation = str_replace("(FEBRUARY)", "", $citation);
+        $citation = str_replace("(MARCH)", "", $citation);
+        $citation = str_replace("(APRIL)", "", $citation);
+        $citation = str_replace("(MAY)", "", $citation);
+        $citation = str_replace("(JUNE)", "", $citation);
+        $citation = str_replace("(JULY)", "", $citation);
+        $citation = str_replace("(AUGUST)", "", $citation);
+        $citation = str_replace("(SEPTEMBER)", "", $citation);
+        $citation = str_replace("(OCTOBER)", "", $citation);
+        $citation = str_replace("(NOVEMBER)", "", $citation);
+        $citation = str_replace("(DECEMBER)", "", $citation);
+        return $citation;
     }
 }
