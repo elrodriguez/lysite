@@ -101,6 +101,7 @@
                                 <div class="overflujo" style="max-height:80vh; min-height:auto">
                                     <ul class="list-unstyled chat-list mt-2 mb-0"
                                         style="max-height: 300px; overflow-y: auto;">
+                                        {{-- estudiante --}}
                                         @if (count($instructors) > 0)
                                             @foreach ($instructors as $instructor)
                                                 <li class="clearfix">
