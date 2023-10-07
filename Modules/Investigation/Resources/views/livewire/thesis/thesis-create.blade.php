@@ -1,4 +1,5 @@
-<div class="">
+<div>
+
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
@@ -39,34 +40,38 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label" for="country_id">{{ __('labels.Country') }}
-                                    *</label>
-                                <select
-                                    onclick="deSelectNormative()" 
-                                    wire:model.defer="country_id"
-                                    class="form-control"
-                                    id="country_id"
-                                    wire:change="getUniversities"
-                                >
-                                    <option value="">Seleccionar</option>
-                                    @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}">{{ $country->description }}</option>
-                                    @endforeach
-                                </select>
-                                @error('country_id')
-                                    <span class="invalid-feedback-2">{{ $message }}</span>
-                                @enderror
+                                <div wire:ignore>
+                                    <label class="form-label" for="country_id">{{ __('labels.Country') }}
+                                        *</label>
+                                    <select
+                                        onclick="deSelectNormative()" 
+                                        wire:model.defer="country_id"
+                                        class="form-control"
+                                        id="country_id"
+                                        wire:change="getUniversities"
+                                    >
+                                        <option value="">Seleccionar</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->description }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('country_id')
+                                        <span class="invalid-feedback-2">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">{{ __('labels.University') }}</label>
-                                <select onclick="deSelectNormative()" wire:change="getSchools" wire:model="university_id" class="form-control" id="university_id">
-                                    <option value="">Seleccionar</option>
-                                    @foreach($universities as $university)
-                                        <option value="{{ $university->id }}">{{ $university->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('university_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                <div wire:ignore>
+                                    <label class="form-label">{{ __('labels.University') }}</label>
+                                    <select onclick="deSelectNormative()" wire:change="getSchools" wire:model="university_id" class="form-control" id="university_id">
+                                        <option value="">Seleccionar</option>
+                                        @foreach($universities as $university)
+                                            <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('university_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -176,5 +181,23 @@
         function reloadFormatStudent(){
             @this.getFormat();
         }
+    </script>
+
+    <script>
+        document.addEventListener('livewire:load', function() {
+            
+            $('#country_id').select2();
+            $('#country_id').on('select2:select', function(e) {
+                var data = e.params.data;
+                @this.country_id = data.id;               
+            });
+
+            $('#university_id').select2();
+            $('#university_id').on('select2:select', function(e) {
+                var data = e.params.data;
+                @this.university_id = data.id;
+                @this.getSchools();
+            });
+        });
     </script>
 </div>

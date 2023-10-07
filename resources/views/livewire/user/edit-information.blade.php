@@ -70,19 +70,21 @@
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">{{ __('labels.country') }}</label>
                                 <div class="col-sm-4">
-                                    <select wire:change="getProvinces" wire:model="country_id" class="form-control">
-                                        <option value="">Seleccionar</option>
-                                        @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->description }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div wire:ignore>
+                                        <select wire:change="getProvinces" wire:model="country_id" class="form-control" id="countries">
+                                            <option value="">Seleccionar</option>
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->description }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     @error('country_id')
                                         <span class="invalid-feedback-2">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                        <div class="list-group-item" wire:ignore>
+                        <div class="list-group-item">
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">{{ __('labels.University') }}</label>
                                 <div class="col-sm-9">
@@ -103,7 +105,7 @@
                                 <div class="form-group row mb-0">
                                     <label class="col-form-label col-sm-3">{{ __('labels.Region') }}</label>
                                     <div class="col-sm-4">
-                                        <select wire:change="getProvinces" wire:model="department_id"
+                                        <select wire:change="getProvinces" wire:model="department_id" id="department_id"
                                             class="form-control">
                                             <option value="">Seleccionar</option>
                                             @foreach ($departments as $department)
@@ -121,7 +123,7 @@
                                 <div class="form-group row mb-0">
                                     <label class="col-form-label col-sm-3">{{ __('labels.Province') }}</label>
                                     <div class="col-sm-4">
-                                        <select wire:change="getDistricts" wire:model="province_id"
+                                        <select wire:change="getDistricts" wire:model="province_id" id="province_id"
                                             class="form-control">
                                             <option value="">{{ __('labels.Select') }}</option>
                                             @foreach ($provinces as $province)
@@ -139,7 +141,7 @@
                                 <div class="form-group row mb-0">
                                     <label class="col-form-label col-sm-3">{{ __('labels.District') }}</label>
                                     <div class="col-sm-4">
-                                        <select wire:model="district_id" class="form-control">
+                                        <select wire:model="district_id" class="form-control" id="district_id">
                                             <option value="">{{ __('labels.Select') }}</option>
                                             @foreach ($districts as $district)
                                                 <option value="{{ $district->id }}">{{ $district->description }}
@@ -231,6 +233,10 @@
         </div>
     </form>
     <script>
+        var noloopu = true;
+        var noloopd = true;
+        var noloopp = true;
+        var noloopd = true;
         window.addEventListener('set-person-update', event => {
             cuteAlert({
                 type: "success",
@@ -242,31 +248,105 @@
         document.addEventListener('livewire:load', function() {
             $("#birth_date").flatpickr();
             $('#university_id').select2();
-            $('#university_id').on('change', function () {
-            // Obtener el elemento con id="select2-university_id-container"
-                const container = document.getElementById("select2-university_id-container");
+            $('#countries').select2();
+            $('#department_id').select2();
+            $('#province_id').select2();  
+            $('#district_id').select2();  
 
-                // Obtener el atributo "title" del elemento
-                const title = container.getAttribute("title");
-                // Obtener el elemento select con id="university_id" es decir el Select Original de livewire
-                const select = document.getElementById("university_id");
+            $('#countries').on('select2:select', function(e) {
+                var data = e.params.data;
+                console.log(data.id);
+                @this.country_id = data.id; 
+                @this.getUniversities();
+                @this.getDeparments();
+                @this.getProvinces();
+                @this.getDistricts(); 
+                @this.refreshSelect2s();   
+                      
+            });
+            
+             $('#university_id').on('select2:select', function(e) {
+                 var data = e.params.data;              
+                 @this.university_id = data.id; //aquí paso el id de la universidad
+                 @this.refreshSelect2s();
+             });
+             $('#department_id').on('select2:select', function(e) {
+                var data = e.params.data;              
+                @this.department_id = data.id; //aquí paso el id
+                console.log(data.id);
+                @this.getProvinces();
+             });
+             $('#province_id').on('select2:select', function(e) {
+                var data = e.params.data;              
+                @this.province_id = data.id; //aquí paso el id    
+                @this.getDistricts();     
+             });
+             $('#district_id').on('select2:select', function(e) {
+                var data = e.params.data;              
+                @this.district_id = data.id; //aquí paso el id                
+                @this.refreshSelect2s();
+             });
 
-                // Recorrer las opciones del select
-                for (let i = 0; i < select.options.length; i++) {
-                // Obtener el contenido de la opción actual
-                const optionText = select.options[i].textContent;
-
-
-                // Buscar el elemento option con el texto deseado
-                const selectedOption = Array.from(select.options).find(option => option.text === title);
-
-                // Obtener el valor del elemento option encontrado
-                const selectedValue = selectedOption ? selectedOption.value : null;
-                @this.university_id = selectedValue; //aquí paso el id de la universidad
-                }
-                });
         });
 
+        window.addEventListener('refreshSelect2s', event => {
+                $('#university_id').select2(); 
+                $('#department_id').select2(); 
+                $('#province_id').select2();  
+                $('#district_id').select2();  
+                // $('#countries').on('select2:select', function(e) {                      
+                //  });
+                    //activando las escuchas de nuevo
+
+                        $('#university_id').on('select2:select', function(e) {
+                            if(noloopu){
+                                var data = e.params.data;              
+                                @this.university_id = data.id; //aquí paso el id de la universidad
+                                @this.refreshSelect2s();
+                                console.log("MASD1");
+                            noloopu = false;
+                            }else{
+                                noloopu=true;
+                            }
+                        });
+                        $('#department_id').on('select2:select', function(e) {
+                            if(noloopd){
+                            var data = e.params.data;              
+                            @this.department_id = data.id; //aquí paso el id
+                            @this.province_id = "";
+                            @this.district_id = "";                            
+                            @this.getProvinces();                        
+                            console.log("MASD2");
+                            noloop = false;
+                            }else{
+                                noloopd=true;
+                            }
+                        });
+                        $('#province_id').on('select2:select', function(e) {
+                            if(noloopp){
+                                var data = e.params.data;              
+                                @this.province_id = data.id; //aquí paso el id    
+                                @this.getDistricts();   
+                                console.log("MASD3"); 
+                            noloopp = false;
+                            }else{
+                                noloopp=true;
+                            }
+ 
+                        });
+                        $('#district_id').on('select2:select', function(e) {
+
+                            if(noloopd){
+                                var data = e.params.data;              
+                                @this.district_id = data.id; //aquí paso el id                
+                                @this.refreshSelect2s();
+                                console.log("MASD4");
+                            noloopd = false;
+                            }else{
+                                noloopd=true;
+                            }
+                        });
+            });
 
     </script>
 </div>

@@ -95,13 +95,30 @@ class EditInformation extends Component
         return view('livewire.user.edit-information');
     }
 
-    public function getProvinces(){
+    public function getDeparments(){
+        if($this->country_id == 'PE'){
         $this->provinces = Province::where('department_id',$this->department_id)->get();
+        }
+    }
+    public function getProvinces(){
+        $this->provinces = Province::where('department_id',$this->department_id)->get();  
+        $this->refreshSelect2s();
+    }
+    public function getUniversities(){
+        $this->provinces = Province::where('department_id',$this->department_id)->get();  
+        $this->universities = Universities::where('country',$this->country_id)->get();
+        $this->refreshSelect2s();
     }
 
     public function getDistricts(){
         $this->districts = District::where('province_id',$this->province_id)->get();
+        $this->refreshSelect2s();
     }
+
+    public function refreshSelect2s(){
+        $this->dispatchBrowserEvent('refreshSelect2s', ['success' => true]);
+    }
+
 
     public function save(){
 
