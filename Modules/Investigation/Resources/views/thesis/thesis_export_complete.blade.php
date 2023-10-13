@@ -148,7 +148,7 @@
 					licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
 
 					exportWord: {
-						tokenUrl: 'https://95003.cke-cs.com/token/dev/02c7f269c7470a590fc91e79579c4f6e9b8b4bf58e5a5be6d23c6e444399?limit=10',
+						tokenUrl: 'https://95003.cke-cs.com/token/dev/46e503e955d7f77b38008d51eaa879208855ed5db33746b583d26ebb8dae?limit=10',
 						fileName: 'MiTesis_con_Lyonteach.docx',
 						converterOptions: {
 							format: 'A4', // Default value, you don't need to specify it explicitly for A4.
