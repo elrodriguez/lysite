@@ -93,8 +93,6 @@
                 if (this.readyState == 4 && this.status == 200) {
                     hideLoading();
                     let data = JSON.parse(this.responseText);
-
-<<<<<<< HEAD
                     createEditor(data);
                 }
             };
@@ -148,24 +146,21 @@
                             'insertTable'
                         ]
                     },
-=======
-					exportWord: {
-						tokenUrl: 'https://95003.cke-cs.com/token/dev/46e503e955d7f77b38008d51eaa879208855ed5db33746b583d26ebb8dae?limit=10',
-						fileName: 'MiTesis_con_Lyonteach.docx',
-						converterOptions: {
-							format: 'A4', // Default value, you don't need to specify it explicitly for A4.
-							margin_top: data.margins.top_margin + 'mm',
-							margin_bottom: data.margins.bottom_margin + 'mm',
-							margin_right: data.margins.right_margin + 'mm',
-							margin_left: data.margins.left_margin + 'mm'
-						}
-					}
->>>>>>> e42947188650ef11061b0e8998959f6628b415ea
 
-
+                    // exportWord: {
+                    // 	tokenUrl: 'https://95003.cke-cs.com/token/dev/46e503e955d7f77b38008d51eaa879208855ed5db33746b583d26ebb8dae?limit=10',
+                    // 	fileName: 'MiTesis_con_Lyonteach.docx',
+                    // 	converterOptions: {
+                    // 		format: 'A4', // Default value, you don't need to specify it explicitly for A4.
+                    // 		margin_top: data.margins.top_margin + 'mm',
+                    // 		margin_bottom: data.margins.bottom_margin + 'mm',
+                    // 		margin_right: data.margins.right_margin + 'mm',
+                    // 		margin_left: data.margins.left_margin + 'mm'
+                    // 	}
+                    // }
 
                     exportWord: {
-                        //converterUrl: 'https://docx-converter.cke-cs.com/v1/convert',
+                        converterUrl: 'https://docx-converter.cke-cs.com/v1/convert',
                         tokenUrl: "{{ route('ckeditor_token_generate') }}",
                         fileName: 'MiTesis_con_Lyonteach.docx',
                         converterOptions: {
