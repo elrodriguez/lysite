@@ -1,192 +1,199 @@
 <!DOCTYPE html><!--
-	Copyright (c) 2014-2023, CKSource Holding sp. z o.o. All rights reserved.
-	This file is licensed under the terms of the MIT License (see LICENSE.md).
+ Copyright (c) 2014-2023, CKSource Holding sp. z o.o. All rights reserved.
+ This file is licensed under the terms of the MIT License (see LICENSE.md).
 -->
 
 <html lang="en" dir="ltr">
-	<head>
-		<title>Exportar Thesis</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/png" href="{{ url('assets/images/logo/white-60.png') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('ckeditor5/sample/styles.css') }}">
-		<link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	</head>
-	<body data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
-		<header>
-			<div class="centered">
-				<h1>
-                    <a href="{{ route('home') }}" target="_blank" rel="noopener noreferrer">
-                        <img src="{{ url('assets/images/logo/white-60.png') }}" alt="{{ env('APP_NAME', 'Laravel') }}">
-                        {{ env('APP_NAME', 'Laravel') }}
-                    </a>
-                </h1>
-				<nav>
-					<ul>
-						{{-- <li><a href="https://ckeditor.com/docs/ckeditor5/" target="_blank" rel="noopener noreferrer">Documentation</a></li> --}}
-						<li><a href="{{ route('logout') }}" rel="noopener noreferrer">Cerrar sesión</a></li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-		<main>
-			<div class="message">
-				<div class="centered">
-					<h2>Con esta herramienta puede exportar su tesis</h2>
-				</div>
-			</div>
-			<div class="centered">
-				<div class="row">
-					<div class="document-editor__toolbar"></div>
-				</div>
-				<div class="row row-editor">
-					<div class="editor-container">
-						<div class="editor" id="editor">
-                            {{-- {!! $content_old !!} --}}
-						</div>
-					</div>
-				</div></div>
-			</div>
-		</main>
-		<footer>
-			<p>Copyright © 2003-2023,
-				<a href="{{ env('APP_URL') }}" target="_blank" rel="noopener">{{ env('APP_NAME', 'Laravel') }}</a>
-				Reservados todos los derechos.
-			</p>
-		</footer>
-		<div class="loading-overlay" id="loading-overlay">
-			<div class="loading-spinner">
-				<i class="fa fa-spinner fa-spin fa-3x"></i>
-			</div>
-		</div>
-		<script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
-		<script>
-			function showLoading() {
-				Swal.fire({
-					title: 'Cargando',
-					text: 'Por favor espera...',
-					allowOutsideClick: false,
-					allowEscapeKey: false,
-					allowEnterKey: false,
-					showConfirmButton: false,
-					onOpen: () => {
-						Swal.showLoading();
-					}
-				});
-			}
+<head>
+    <title>Exportar Thesis</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url('assets/images/logo/white-60.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('ckeditor5/sample/styles.css') }}">
+    <link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-			function hideLoading() {
-				Swal.close();
-			}
-		</script>
-		<script>
-			window.onload = function() {
-				showLoading();
-				var thesis = {{ $thesis }}
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						hideLoading();
-						let data = JSON.parse(this.responseText);
+</head>
 
-						createEditor(data);
-					}
-				};
-				xhttp.open("POST", "{{ route('investigation_thesis_export_word_datos') }}", true);
-				xhttp.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
-				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("thesis="+thesis);
-			};
-		</script>
-		<script>
-			function createEditor(data){
-				DecoupledDocumentEditor.create( document.querySelector( '.editor' ), {
-					toolbar: {
-						items: [
-							'heading',
-							'|',
-							'fontSize',
-							'fontFamily',
-							'|',
-							'fontColor',
-							'fontBackgroundColor',
-							'|',
-							'bold',
-							'italic',
-							'underline',
-							'strikethrough',
-							'|',
-							'alignment',
-							'|',
-							'numberedList',
-							'bulletedList',
-							'|',
-							'outdent',
-							'indent',
-							'|',
-							'todoList',
-							'link',
-							'blockQuote',
-							'imageUpload',
-							'|',
-							'margins',
-							'exportWord',
-							'|',
-							'undo',
-							'redo',
-							'pageBreak',
-							'|',
-							'specialCharacters',
-							'findAndReplace',
-							'mediaEmbed',
-							'insertTable'
-						]
-					},
+<body data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
+    <header>
+        <div class="centered">
+            <h1>
+                <a href="{{ route('home') }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ url('assets/images/logo/white-60.png') }}" alt="{{ env('APP_NAME', 'Laravel') }}">
+                    {{ env('APP_NAME', 'Laravel') }}
+                </a>
+            </h1>
+            <nav>
+                <ul>
+                    {{-- <li><a href="https://ckeditor.com/docs/ckeditor5/" target="_blank" rel="noopener noreferrer">Documentation</a></li> --}}
+                    <li><a href="{{ route('logout') }}" rel="noopener noreferrer">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="message">
+            <div class="centered">
+                <h2>Con esta herramienta puede exportar su tesis</h2>
+            </div>
+        </div>
+        <div class="centered">
+            <div class="row">
+                <div class="document-editor__toolbar"></div>
+            </div>
+            <div class="row row-editor">
+                <div class="editor-container">
+                    <div class="editor" id="editor">
+                        {{-- {!! $content_old !!} --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <footer>
+        <p>Copyright © 2003-2023,
+            <a href="{{ env('APP_URL') }}" target="_blank" rel="noopener">{{ env('APP_NAME', 'Laravel') }}</a>
+            Reservados todos los derechos.
+        </p>
+    </footer>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+    </div>
+    <script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
+    <script>
+        function showLoading() {
+            Swal.fire({
+                title: 'Cargando',
+                text: 'Por favor espera...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        }
 
-					licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
+        function hideLoading() {
+            Swal.close();
+        }
+    </script>
+    <script>
+        window.onload = function() {
+            showLoading();
+            var thesis = {{ $thesis }}
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    hideLoading();
+                    let data = JSON.parse(this.responseText);
 
-					exportWord: {
-						tokenUrl: 'https://95003.cke-cs.com/token/dev/02c7f269c7470a590fc91e79579c4f6e9b8b4bf58e5a5be6d23c6e444399?limit=10',
-						fileName: 'MiTesis_con_Lyonteach.docx',
-						converterOptions: {
-							format: 'A4', // Default value, you don't need to specify it explicitly for A4.
-							margin_top: data.margins.top_margin + 'mm',
-							margin_bottom: data.margins.bottom_margin + 'mm',
-							margin_right: data.margins.right_margin + 'mm',
-							margin_left: data.margins.left_margin + 'mm'
-						}
-					}
-
-				} )
-				.then( editor => {
-					window.editor = editor;
-					editor.setData( data.content );
-					// Set a custom container for the toolbar.
-					document.querySelector( '.document-editor__toolbar' ).appendChild( editor.ui.view.toolbar.element );
-					document.querySelector( '.ck-toolbar' ).classList.add( 'ck-reset_all' );
-
-					editor.editing.view.getDomRoot().style.paddingLeft = data.margins.left_margin + 'mm';
-					editor.editing.view.getDomRoot().style.paddingRight = data.margins.right_margin + 'mm';
-					editor.editing.view.getDomRoot().style.paddingTop = data.margins.top_margin + 'mm';
-					editor.editing.view.getDomRoot().style.paddingBottom = data.margins.bottom_margin + 'mm';
-				} )
-				.catch( error => {
-					console.error( 'Oops, something went wrong!' );
-					console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
-					console.warn( 'Build id: kehfuamz5tol-66hszd8qikx0' );
-					console.error( error );
-				} );
-			}
-		</script>
-		<div id="global-modal"></div>
-        <style>
-            #editor {
-                padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
-            }
-        </style>
+                    createEditor(data);
+                }
+            };
+            xhttp.open("POST", "{{ route('investigation_thesis_export_word_datos') }}", true);
+            xhttp.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("thesis=" + thesis);
+        };
+    </script>
+    <script>
+        function createEditor(data) {
+            DecoupledDocumentEditor.create(document.querySelector('.editor'), {
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'fontSize',
+                            'fontFamily',
+                            '|',
+                            'fontColor',
+                            'fontBackgroundColor',
+                            '|',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strikethrough',
+                            '|',
+                            'alignment',
+                            '|',
+                            'numberedList',
+                            'bulletedList',
+                            '|',
+                            'outdent',
+                            'indent',
+                            '|',
+                            'todoList',
+                            'link',
+                            'blockQuote',
+                            'imageUpload',
+                            '|',
+                            'margins',
+                            'exportWord',
+                            '|',
+                            'undo',
+                            'redo',
+                            'pageBreak',
+                            '|',
+                            'specialCharacters',
+                            'findAndReplace',
+                            'mediaEmbed',
+                            'insertTable'
+                        ]
+                    },
 
 
-	</body>
+
+                    exportWord: {
+                        //converterUrl: 'https://docx-converter.cke-cs.com/v1/convert',
+                        tokenUrl: "{{ route('ckeditor_token_generate') }}",
+                        fileName: 'MiTesis_con_Lyonteach.docx',
+                        converterOptions: {
+                            format: 'A4', // Default value, you don't need to specify it explicitly for A4.
+                            margin_top: data.margins.top_margin + 'mm',
+                            margin_bottom: data.margins.bottom_margin + 'mm',
+                            margin_right: data.margins.right_margin + 'mm',
+                            margin_left: data.margins.left_margin + 'mm'
+                        }
+                    }
+
+                })
+                .then(editor => {
+                    window.editor = editor;
+                    editor.setData(data.content);
+                    // Set a custom container for the toolbar.
+                    document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+                    document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+
+                    editor.editing.view.getDomRoot().style.paddingLeft = data.margins.left_margin + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingRight = data.margins.right_margin + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingTop = data.margins.top_margin + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingBottom = data.margins.bottom_margin + 'mm';
+                })
+                .catch(error => {
+                    console.error('Oops, something went wrong!');
+                    console.error(
+                        'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                    );
+                    console.warn('Build id: kehfuamz5tol-66hszd8qikx0');
+                    console.error(error);
+                });
+        }
+    </script>
+    <div id="global-modal"></div>
+    <style>
+        #editor {
+            padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
+        }
+    </style>
+
+
+</body>
+
 </html>

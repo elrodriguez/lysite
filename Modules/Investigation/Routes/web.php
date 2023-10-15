@@ -1,5 +1,6 @@
 <?php
 
+use \Firebase\JWT\JWT;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,3 +75,19 @@ Route::get('thesis_cadenas', function () {
     return  preg_replace($reg_exUrl2, "<a href='http://$0' target='_blank'>$0</a>", $cadena);
     //dd($cadena);
 })->name('thesis_cadenas');
+
+
+Route::get('ckeditor_token', function () {
+
+    $secretKey = 'AXTujEoH4PCkhvHk5wL1ujNsdv88sOPrpbGxTiwQTYMXgIHZUCvihlY5HWKu';
+
+    $payload = array(
+        'iat' => time()
+    );
+
+    $jwt = JWT::encode($payload, $secretKey, 'HS256');
+
+    // Here we are printing the token to the console. In a real usage scenario
+    // it should be returned in an HTTP response of the token endpoint.
+    return $jwt;
+})->name('ckeditor_token_generate');
