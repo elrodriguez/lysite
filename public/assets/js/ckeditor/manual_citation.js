@@ -126,10 +126,15 @@ function manual_citation(event) {
                 if (!autor.segundoApellido) espacio = "";
 
                 cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             let volnum;
@@ -146,10 +151,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre;
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
 
@@ -173,10 +183,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             let volnum;
@@ -198,10 +213,15 @@ function manual_citation(event) {
                 if (!autor.segundoApellido) espacio = "";
 
                 cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             if (edicion < 2) {
@@ -217,10 +237,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre;
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             if (edicion < 2) {
@@ -241,10 +266,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             if (edicion < 2) {
@@ -266,10 +296,15 @@ function manual_citation(event) {
                 if (!autor.segundoApellido) espacio = "";
 
                 cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             if (edicion < 2) {
@@ -285,10 +320,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre;
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             if (edicion < 2) {
@@ -310,10 +350,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             if (edicion < 2) {
@@ -338,7 +383,12 @@ function manual_citation(event) {
                 if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
 
@@ -350,10 +400,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre;
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
 
@@ -366,10 +421,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
 
@@ -529,10 +589,15 @@ function manual_citation(event) {
                 if (!autor.segundoApellido) espacio = "";
 
                 cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             concatenado = cita_autores + "(" + date + "). <em>" + title.trim() + ".</em> " + namepage.trim() + ". " + enlace.trim();
@@ -545,10 +610,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre;
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             concatenado = cita_autores + "<em>" + title.trim() + ",</em> " + anio + ". Disponible en: " + enlace.trim();
@@ -560,10 +630,15 @@ function manual_citation(event) {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
                 cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                if (index === autors.length - 1) {
+                      if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
-                    cita_autores += ", ";
+                    if (index === autors.length - 2){
+                        cita_autores += " y ";
+                    }else{
+                        cita_autores += ", ";
+                    }
+                    
                 }
             });
             concatenado = cita_autores + title.trim() + " [Internet]. " + pais + ": " + editor + "; " + anio + ". Disponible en: " + enlace.trim();
@@ -869,7 +944,7 @@ function show_selected_inputs() {
             let label = document.querySelector("label[for='input-grado']");
             label.textContent = "Titulación en que especialidad o carrera:";
             let input = document.getElementById("input-grado");
-            input.placeholder = "Tesis de licenciatura, Tesis de Maestría o Doctorado";
+            input.placeholder = "Tesis de Licenciatura, Tesis de Maestría o Doctorado";
             label = document.querySelector("label[for='input-institucion']");
             label.textContent = "Universidad:";
             show_input('input-enlace');
@@ -1054,7 +1129,7 @@ function show_selected_inputs() {
             let label = document.querySelector("label[for='input-grado']");
             label.textContent = "Titulación en que especialidad o carrera:";
             let input = document.getElementById("input-grado");
-            input.placeholder = "Tesis de licenciatura, Tesis de Maestría o Doctorado";
+            input.placeholder = "Tesis de Licenciatura, Tesis de Maestría o Doctorado";
             label = document.querySelector("label[for='input-institucion']");
             label.textContent = "Universidad:";
             show_input('input-pais');
