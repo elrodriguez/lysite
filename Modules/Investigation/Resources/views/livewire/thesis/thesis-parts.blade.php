@@ -1,16 +1,16 @@
 <div>
     @push('scripts')
-    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
-    <script src="{{ asset('assets/js/ckeditor/comments.js') }}"></script>
+        <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
+        <script src="{{ asset('assets/js/ckeditor/comments.js') }}"></script>
     @endpush
     <style>
         #editor {
             padding: {{ $top_margin }}mm {{ $right_margin }}mm {{ $bottom_margin }}mm {{ $left_margin }}mm;
         }
+
         strong {
             font-weight: bold;
         }
-
     </style>
     @stack('scripts')
     <div class="container page__container">
@@ -41,7 +41,8 @@
 
 
         <div class="form-group">
-            <label class="text-danger" id="paraphrase_left">Tienes {{ $paraphrase_left }} oportunidades de ayudas asistidas por Lyonteach(parafrasear, corregir, recomendar y proponer).</label>
+            <label class="text-danger" id="paraphrase_left">Tienes {{ $paraphrase_left }} oportunidades de ayudas
+                asistidas por Lyonteach(parafrasear, corregir, recomendar y proponer).</label>
         </div>
 
         {{-- Notas de instructor --}}
@@ -155,91 +156,94 @@
                     {{-- End Modal Indice de Contenido --}}
 
                 </div>
-                @if($focused_part)
-                <div class="col">
-                    <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-secondary" wire:click="showVideo"
-                            title="{{ __('labels.Watch a Video about') . ': ' . $focused_part->description }}">
-                            <i class="fa fa-video"></i>
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
-                            title="{{ $focused_part->information }}">
-                            <i class="fa fa-info-circle"></i>
-                        </button>
-                        @if ($focused_part->content_id != null)
-                            <button type="button" class="btn btn-secondary" onclick="watchSection()"
-                                title="{{ __('labels.Click here if you want to see this topic in the course') }}">
-                                <i class="fa fa-book"></i>
+                @if ($focused_part)
+                    <div class="col">
+                        <div class="btn-group mr-2">
+                            <button type="button" class="btn btn-secondary" wire:click="showVideo"
+                                title="{{ __('labels.Watch a Video about') . ': ' . $focused_part->description }}">
+                                <i class="fa fa-video"></i>
                             </button>
-                        @else
-                            <button type="button" class="btn btn-secondary" disabled onclick="watchSection()"
-                                title="{{ __('labels.Click here if you want to see this topic in the course') }}">
-                                <i class="fa fa-book"></i>
+                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                                title="{{ $focused_part->information }}">
+                                <i class="fa fa-info-circle"></i>
                             </button>
-                        @endif
+                            @if ($focused_part->content_id != null)
+                                <button type="button" class="btn btn-secondary" onclick="watchSection()"
+                                    title="{{ __('labels.Click here if you want to see this topic in the course') }}">
+                                    <i class="fa fa-book"></i>
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-secondary" disabled onclick="watchSection()"
+                                    title="{{ __('labels.Click here if you want to see this topic in the course') }}">
+                                    <i class="fa fa-book"></i>
+                                </button>
+                            @endif
+                        </div>
                     </div>
-                </div>
                 @endif
             </div>
         </div>
-        @if($focused_part)
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">{{ $focused_part->description }}</h5>
+        @if ($focused_part)
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $focused_part->description }}</h5>
+                </div>
             </div>
-        </div>
         @endif
     </div>
-    @if($focused_part)
-    @if ($focused_part->body == true)
-        <div class="m-5" >
-            <div class="row" id="worksheet">
-                <div wire:ignore class="col-3" id="paraphrase" style="display: none">
-                    <div class="card p-2">
-                        <div>
-                            <div class="form-group">
-                                <label for="text1">Escribe aquí lo que desee parafrasear</label>
-                                <textarea rows="8" class="form-control" wire:model='consulta' name="text1" id="text1"></textarea>
+    @if ($focused_part)
+        @if ($focused_part->body == true)
+            <div class="m-5">
+                <div class="row" id="worksheet">
+                    <div wire:ignore class="col-3" id="paraphrase" style="display: none">
+                        <div class="card p-2">
+                            <div>
+                                <div class="form-group">
+                                    <label for="text1">Escribe aquí lo que desee parafrasear</label>
+                                    <textarea rows="8" class="form-control" wire:model='consulta' name="text1" id="text1"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="text2">Aquí verá el resultado</label>
+                                    <textarea rows="8" class="form-control" wire:model='resultado' name="text2" id="text2" readonly
+                                        placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio.">{!! $resultado !!}</textarea>
+                                </div>
+                                <button onclick="closeParahrase()" type="button"
+                                    class="btn btn-success">Cancelar</button>
+                                <button type="button" class="btn btn-warning" id="paraphrasing">Copiar</button>
+                                <button class="btn btn-primary" wire:click="paraphrasing">Procesar</button>
                             </div>
-                            <div class="form-group">
-                                <label for="text2">Aquí verá el resultado</label>
-                                <textarea rows="8" class="form-control" wire:model='resultado' name="text2" id="text2" readonly placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio.">{!! $resultado !!}</textarea>
-                            </div>
-                            <button onclick="closeParahrase()" type="button" class="btn btn-success">Cancelar</button>
-                            <button type="button" class="btn btn-warning" id="paraphrasing">Copiar</button>
-                            <button class="btn btn-primary" wire:click="paraphrasing">Procesar</button>
                         </div>
                     </div>
-                </div>
 
-                <div wire:ignore class="col-12" id="documentsheet">
-                    <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
-                        data-revision-history="false">
-                        <div class="div-main">
-                            <div class="centered" wire:ignore>
-                                <div class="row">
-                                    <div class="document-editor__toolbar"></div>
-                                </div>
-                                <div class="row row-editor">
-                                    <div class="editor-container">
-                                        <div class="editor" id="editor">{!! $content_old !!}</div>
+                    <div wire:ignore class="col-12" id="documentsheet">
+                        <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false"
+                            data-revision-history="false">
+                            <div class="div-main">
+                                <div class="centered" wire:ignore>
+                                    <div class="row">
+                                        <div class="document-editor__toolbar"></div>
+                                    </div>
+                                    <div class="row row-editor">
+                                        <div class="editor-container">
+                                            <div class="editor" id="editor">{!! $content_old !!}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" >
-                        <div class="col mb-2" style="display: flex; align-items: center; justify-content: center;">
-                            <button type="button" class="btn-primary btn  mt-0" wire:loading.attr="disabled"
-                                onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
-                            </button>
+                        <div class="row">
+                            <div class="col mb-2"
+                                style="display: flex; align-items: center; justify-content: center;">
+                                <button type="button" class="btn-primary btn  mt-0" wire:loading.attr="disabled"
+                                    onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-            
-        </div>
-        {{-- <div class="container page__container">
+            {{-- <div class="container page__container">
             <div wire:ignore>
                 <div class="editor" id="editor">{!! $content_old !!}</div>
             </div>
@@ -247,7 +251,7 @@
                 <span class="invalid-feedback-2">{{ $message }}</span>
             @enderror
         </div> --}}
-        {{-- <div class="container page__container">
+            {{-- <div class="container page__container">
             @if ($commentary)
                 <div class="row">
                     <div class="col-12 mb-3">
@@ -265,13 +269,13 @@
                 </div>
             </div>
         </div> --}}
-    @else
-        <div>
-            <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
-            <input type="hidden" name="" id="editor">
+        @else
+            <div>
+                <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
+                <input type="hidden" name="" id="editor">
 
-        </div>
-    @endif
+            </div>
+        @endif
     @endif
     <div>
         {{-- modal video --}}
@@ -318,6 +322,15 @@
                 <!-- Footer desde aqui -->
 
             </div>
+            <style>
+                .ck-content p {
+                    margin-left: 25mm;
+                    margin-right: 25mm;
+                    margin-top: 25mm;
+                    margin-bottom: 25mm;
+                    /* Puedes ajustar el valor según tus necesidades */
+                }
+            </style>
             <input id="xleft-margin" type="hidden" value="{{ $left_margin }}">
             <input id="xright-margin" type="hidden" value="{{ $right_margin }}">
             <input id="xtop-margin" type="hidden" value="{{ $top_margin }}">
@@ -503,15 +516,15 @@
             // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
             // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
 
-                leftMargin = document.getElementById('xleft-margin').value;
-                rightMargin = document.getElementById('xright-margin' ).value;
-                topMargin = document.getElementById('xtop-margin').value;
-                bottomMargin = document.getElementById('xbottom-margin').value;
-                @this.set('left_margin', leftMargin);
-                @this.set('top_margin', topMargin);
-                @this.set('bottom_margin', bottomMargin);
-                @this.set('right_margin', rightMargin);
-                @this.updateMargins();
+            leftMargin = document.getElementById('xleft-margin').value;
+            rightMargin = document.getElementById('xright-margin').value;
+            topMargin = document.getElementById('xtop-margin').value;
+            bottomMargin = document.getElementById('xbottom-margin').value;
+            @this.set('left_margin', leftMargin);
+            @this.set('top_margin', topMargin);
+            @this.set('bottom_margin', bottomMargin);
+            @this.set('right_margin', rightMargin);
+            @this.updateMargins();
 
             if (document.getElementById("editor").tagName == "DIV") {
                 //data = editor.getData();
@@ -548,120 +561,110 @@
 
 
     <script>
-        
         function activeCkeditor5() {
             DecoupledDocumentEditor.create(document.querySelector('.editor'), {
-                toolbar: {
-                    items: [
-                        'heading',
-                        '|',
-                        'fontSize',
-                        'fontFamily',
-                        '|',
-                        'fontColor',
-                        'fontBackgroundColor',
-                        '|',
-                        'bold',
-                        'italic',
-                        'underline',
-                        'strikethrough',
-                        '|',
-                        'alignment',
-                        '|',
-                        'numberedList',
-                        'bulletedList',
-                        '|',
-                        'outdent',
-                        'indent',
-                        '|',
-                        'todoList',
-                        'link',
-                        'blockQuote',
-                        'imageUpload',
-                        '|',
-                        'paraphrase',
-                        'completethesis',
-                        'margins',
-                        'referenciar',
-                        'helpkeywords',
-                        'recommendation',
-                        '|',
-                        'undo',
-                        'redo',
-                        'pageBreak',
-                        '|',
-                        'specialCharacters',
-                        'findAndReplace',
-                        'mediaEmbed',
-                        'insertTable'
-                    ]
-                },
-                licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
-                simpleUpload: {
-                    uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
-                    withCredentials: true,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                },
-                marginAdjustment: {
-                    marginLeft: '20mm',
-                    marginRight: '20mm',
-                    marginTop: '20mm',
-                    marginBottom: '20mm'
-                },
-                comments: {
-                    urlData: "{{ route('investigation_thesis_get_comments',$this->thesis_id) }}"
-                },
-                references:{
-                    url:"{{ route('investigation_thesis_references') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                },
-                recommendation:{
-                    url:"{{ route('investigation_thesis_recommendation') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                },
-                helpkeywords:{
-                    url:"{{ route('investigation_thesis_grammar_correction') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                },
-                htmlSupport: {
-                    allow: [
-                        {
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'fontSize',
+                            'fontFamily',
+                            '|',
+                            'fontColor',
+                            'fontBackgroundColor',
+                            '|',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strikethrough',
+                            '|',
+                            'alignment',
+                            '|',
+                            'numberedList',
+                            'bulletedList',
+                            '|',
+                            'outdent',
+                            'indent',
+                            '|',
+                            'todoList',
+                            'link',
+                            'blockQuote',
+                            'imageUpload',
+                            '|',
+                            'paraphrase',
+                            'completethesis',
+                            'margins',
+                            'referenciar',
+                            'helpkeywords',
+                            'recommendation',
+                            '|',
+                            'undo',
+                            'redo',
+                            'pageBreak',
+                            '|',
+                            'specialCharacters',
+                            'findAndReplace',
+                            'mediaEmbed',
+                            'insertTable'
+                        ]
+                    },
+                    simpleUpload: {
+                        uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
+                        withCredentials: true,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    },
+                    comments: {
+                        urlData: "{{ route('investigation_thesis_get_comments', $this->thesis_id) }}"
+                    },
+                    references: {
+                        url: "{{ route('investigation_thesis_references') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    },
+                    recommendation: {
+                        url: "{{ route('investigation_thesis_recommendation') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    },
+                    helpkeywords: {
+                        url: "{{ route('investigation_thesis_grammar_correction') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    },
+                    htmlSupport: {
+                        allow: [{
                             name: /.*/,
                             attributes: true,
                             classes: true,
                             styles: true
-                        }
-                    ]
-                }
-            })
-            .then(editor => {
-                window.editor = editor;
-                document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
-                document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+                        }]
+                    }
+                })
+                .then(editor => {
+                    window.editor = editor;
+                    document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
+                    document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
 
-                editor.editing.view.getDomRoot().style.paddingLeft = {{ $left_margin }} + 'mm';
-                editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
-                editor.editing.view.getDomRoot().style.paddingTop = {{  $top_margin }} + 'mm';
-                editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingLeft = {{ $left_margin }} + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingRight = {{ $right_margin }} + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingTop = {{ $top_margin }} + 'mm';
+                    editor.editing.view.getDomRoot().style.paddingBottom = {{ $bottom_margin }} + 'mm';
 
 
-            })
-            .catch(error => {
-                console.error('Oops, something went wrong!');
-                console.error(
-                    'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-                );
-                console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
-                console.error(error);
-            });
+                })
+                .catch(error => {
+                    console.error('Oops, something went wrong!');
+                    console.error(
+                        'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                    );
+                    console.warn('Build id: nqbbe5edhs9m-u9490jx48w7r');
+                    console.error(error);
+                });
 
         }
     </script>
@@ -700,67 +703,66 @@
         // }
     </script>
     <script>
-        
         function applyStylesToStrongElements() {
-        // Encuentra todos los elementos strong en la página
-        var strongElements = document.getElementsByTagName('strong');
-      
-        // Itera sobre todos los elementos strong y cambia sus estilos
-        for (var i = 0; i < strongElements.length; i++) {
-          strongElements[i].style.fontWeight = 'bold';
-        }
-      }
-      
-              var isWindows11 = /Windows NT 10\.0/.test(navigator.userAgent) && /Win64/.test(navigator.userAgent);
-      
-      if (isWindows11) {    
-      
-                              // Ejecuta la función inicialmente
-                              applyStylesToStrongElements();
-      
-                              // Ejecuta la función cada 300ms utilizando setInterval
-                              setInterval(applyStylesToStrongElements, 80);
-      
-                              console.log('Estás utilizando Windows 11');
-      
-      } else {
-      
-                                  window.addEventListener('DOMContentLoaded', function() {
-                              // Encuentra todos los elementos strong en la página
-                              var strongElements = document.getElementsByTagName('strong');
-      
-                              // Itera sobre todos los elementos strong y cambia sus estilos
-                              for (var i = 0; i < strongElements.length; i++) {
-                                  strongElements[i].style.fontWeight = 'bold';
-                              }
-                              });
-      
-                              // Agrega un evento de escucha para el evento DOMNodeInserted en el body
-                              document.body.addEventListener('DOMNodeInserted', function(event) {
-                              // Verifica si el elemento agregado es un strong
-                              if (event.target.nodeName === 'STRONG') {
-                                  event.target.style.fontWeight = 'bold';
-                              }
-                              });
-      
-                              console.log('No estás utilizando Windows 11');
-      }
-          </script>
+            // Encuentra todos los elementos strong en la página
+            var strongElements = document.getElementsByTagName('strong');
 
-    <script> 
-        function __getDestroyComments(id,index,tesis_id){
+            // Itera sobre todos los elementos strong y cambia sus estilos
+            for (var i = 0; i < strongElements.length; i++) {
+                strongElements[i].style.fontWeight = 'bold';
+            }
+        }
+
+        var isWindows11 = /Windows NT 10\.0/.test(navigator.userAgent) && /Win64/.test(navigator.userAgent);
+
+        if (isWindows11) {
+
+            // Ejecuta la función inicialmente
+            applyStylesToStrongElements();
+
+            // Ejecuta la función cada 300ms utilizando setInterval
+            setInterval(applyStylesToStrongElements, 80);
+
+            console.log('Estás utilizando Windows 11');
+
+        } else {
+
+            window.addEventListener('DOMContentLoaded', function() {
+                // Encuentra todos los elementos strong en la página
+                var strongElements = document.getElementsByTagName('strong');
+
+                // Itera sobre todos los elementos strong y cambia sus estilos
+                for (var i = 0; i < strongElements.length; i++) {
+                    strongElements[i].style.fontWeight = 'bold';
+                }
+            });
+
+            // Agrega un evento de escucha para el evento DOMNodeInserted en el body
+            document.body.addEventListener('DOMNodeInserted', function(event) {
+                // Verifica si el elemento agregado es un strong
+                if (event.target.nodeName === 'STRONG') {
+                    event.target.style.fontWeight = 'bold';
+                }
+            });
+
+            console.log('No estás utilizando Windows 11');
+        }
+    </script>
+
+    <script>
+        function __getDestroyComments(id, index, tesis_id) {
             var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
 
             if (confirmacion) {
 
                 const xhr = new XMLHttpRequest();
-                let url = '/investigation/thesis/comentary/thesis/destroy/'+id+'/'+tesis_id;
+                let url = '/investigation/thesis/comentary/thesis/destroy/' + id + '/' + tesis_id;
                 xhr.open('GET', url, true);
                 xhr.onload = function() {
                     if (xhr.status === 200) {
                         const response = JSON.parse(xhr.responseText);
-                        document.getElementById("ly-list-item-"+index).remove();
-                        if(response.exists === false){
+                        document.getElementById("ly-list-item-" + index).remove();
+                        if (response.exists === false) {
                             document.getElementById("lyc-ck-sidebar-list-comments").remove();
                         }
 
@@ -770,14 +772,13 @@
                 };
 
                 xhr.onerror = function() {
-                console.log('Error de red.');
+                    console.log('Error de red.');
                 };
 
                 xhr.send();
             }
         }
-
     </script>
-    <div id="dialog-ckeditor"></div>    
-    
+    <div id="dialog-ckeditor"></div>
+
 </div>
