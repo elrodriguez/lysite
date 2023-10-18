@@ -147,21 +147,8 @@
                         ]
                     },
 
-                    exportWord: {
-                        tokenUrl: 'https://95003.cke-cs.com/token/dev/46e503e955d7f77b38008d51eaa879208855ed5db33746b583d26ebb8dae?limit=10',
-                        fileName: 'MiTesis_con_Lyonteach.docx',
-                        converterOptions: {
-                            format: 'A4', // Default value, you don't need to specify it explicitly for A4.
-                            margin_top: data.margins.top_margin + 'mm',
-                            margin_bottom: data.margins.bottom_margin + 'mm',
-                            margin_right: data.margins.right_margin + 'mm',
-                            margin_left: data.margins.left_margin + 'mm'
-                        }
-                    }
-
                     // exportWord: {
-                    //     converterUrl: 'https://docx-converter.cke-cs.com/v1/convert',
-                    //     tokenUrl: "{{ route('ckeditor_token_generate') }}",
+                    //     tokenUrl: 'https://95003.cke-cs.com/token/dev/46e503e955d7f77b38008d51eaa879208855ed5db33746b583d26ebb8dae?limit=10',
                     //     fileName: 'MiTesis_con_Lyonteach.docx',
                     //     converterOptions: {
                     //         format: 'A4', // Default value, you don't need to specify it explicitly for A4.
@@ -171,6 +158,19 @@
                     //         margin_left: data.margins.left_margin + 'mm'
                     //     }
                     // }
+
+                    exportWord: {
+                        converterUrl: 'https://docx-converter.cke-cs.com/v1/convert',
+                        tokenUrl: "{{ route('ckeditor_token_generate') }}",
+                        fileName: 'MiTesis_con_Lyonteach.docx',
+                        converterOptions: {
+                            format: 'A4', // Default value, you don't need to specify it explicitly for A4.
+                            margin_top: data.margins.top_margin + 'mm',
+                            margin_bottom: data.margins.bottom_margin + 'mm',
+                            margin_right: data.margins.right_margin + 'mm',
+                            margin_left: data.margins.left_margin + 'mm'
+                        }
+                    }
 
                 })
                 .then(editor => {

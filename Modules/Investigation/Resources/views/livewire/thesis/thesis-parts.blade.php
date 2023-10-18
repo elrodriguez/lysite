@@ -322,15 +322,7 @@
                 <!-- Footer desde aqui -->
 
             </div>
-            <style>
-                .ck-content p {
-                    margin-left: 25mm;
-                    margin-right: 25mm;
-                    margin-top: 25mm;
-                    margin-bottom: 25mm;
-                    /* Puedes ajustar el valor según tus necesidades */
-                }
-            </style>
+
             <input id="xleft-margin" type="hidden" value="{{ $left_margin }}">
             <input id="xright-margin" type="hidden" value="{{ $right_margin }}">
             <input id="xtop-margin" type="hidden" value="{{ $top_margin }}">
@@ -778,6 +770,34 @@
                 xhr.send();
             }
         }
+    </script>
+    <style id="margenes">
+
+    </style>
+    <script>
+        var topm,botm,rightm,leftm;
+        function updateMargenes(){
+        topm = @this.top_margin;
+        botm = @this.bottom_margin;
+        leftm = @this.left_margin;
+        rightm = @this.right_margin;
+     }       
+
+        window.addEventListener('margenes', event => {   
+  
+            console.log(4321);
+            updateMargenes();
+            console.log(123);
+            var styleTag = document.getElementById('margenes');
+            styleTag.textContent = ".ck-content p {\n" +
+                        "    margin-left: "+leftm+"mm;\n" +
+                        "    margin-right: "+rightm+"mm;\n" +
+                        "    margin-top: "+topm+"mm;\n" +
+                        "    margin-bottom: "+botm+"mm;\n" +
+                        "    /* Puedes ajustar el valor según tus necesidades */\n" +
+                        "}";
+        });
+
     </script>
     <div id="dialog-ckeditor"></div>
 

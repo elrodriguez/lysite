@@ -79,9 +79,10 @@ Route::get('thesis_cadenas', function () {
 
 Route::get('ckeditor_token', function () {
 
-    $secretKey = 'AXTujEoH4PCkhvHk5wL1ujNsdv88sOPrpbGxTiwQTYMXgIHZUCvihlY5HWKu';
+    $secretKey = env('CKEDITOR_SECRET_KEY');
 
     $payload = array(
+        'aud' => env('CKEDITOR_ENVIRONMENT_ID'),
         'iat' => time()
     );
 
@@ -89,5 +90,7 @@ Route::get('ckeditor_token', function () {
 
     // Here we are printing the token to the console. In a real usage scenario
     // it should be returned in an HTTP response of the token endpoint.
-    return $jwt;
+    echo $jwt;
 })->name('ckeditor_token_generate');
+
+

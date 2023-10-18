@@ -108,6 +108,7 @@ class ThesisParts extends Component
                 }
                 $this->ThesisStudentPart = $ThesisStudentPart;
             }
+            $this->margenes(); //manda evento margenes para actualizar en la vista
         } else {
             redirect()->route('home');
         }
@@ -416,5 +417,9 @@ class ThesisParts extends Component
         } else {
             $this->resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
         }
+    }
+
+    public function margenes(){
+        $this->dispatchBrowserEvent('margenes', ['success' => true]);
     }
 }
