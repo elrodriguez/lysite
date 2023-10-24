@@ -29,7 +29,7 @@ class GetArticlesRecommendationController extends Controller
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Dame un listado de títulos de 5 artículos científicos reales sobre: {" . $consulta . "} y luego presenta esta lista en idioma Español, luego presenta la misma lista traducida al ingles y finalmente presenta la misma lista traducida al portuges. además usa etiquetas html para mostrar las listas; recuerda son 3 listas una en español, otra en ingles y la ultima en portugues, al principio pon un título de la lista que estás presentando";
+                $consulta = "Dame un listado de títulos de 5 artículos científicos reales sobre: {" . $consulta . "} y luego presenta esta lista en idioma Español, luego presenta la misma lista traducida al ingles y finalmente presenta la misma lista traducida al portuges. además debes usar etiquetas html para mostrar las listas; recuerda son 3 listas una en español, otra en ingles y la ultima en portugues, no pongas título a ninguna de las 3 listas solo muestralas";
 
                 try {
                     $result = OpenAI::completions()->create([
