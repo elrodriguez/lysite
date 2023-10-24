@@ -30,7 +30,7 @@ class GrammarCorrectionController extends Controller
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Corrige la gramática y ortografía de este parrafo y dale un tono mas profesional: {" . $consulta . "}";
+                $consulta = "Corrígeme este texto en español para una mejor comprensión como si fueras un experto en literatura: {" . $consulta . "}";
 
                 try {
                     $result = OpenAI::completions()->create([
