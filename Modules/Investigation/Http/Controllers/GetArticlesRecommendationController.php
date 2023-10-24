@@ -25,7 +25,7 @@ class GetArticlesRecommendationController extends Controller
             if ($p_allowed > $p_used) {
 
                 $max_tokens = 3400;
-                $temperature = 0.6;
+                $temperature = 1;
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
