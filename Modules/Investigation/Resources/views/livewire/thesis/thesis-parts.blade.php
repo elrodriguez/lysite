@@ -470,6 +470,7 @@
                 activeCkeditor5();
             }
             updateMargenes();
+            updateContent();
         })
 
 
@@ -512,16 +513,31 @@
             // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
             // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
 
-            leftMargin = document.getElementById('xleft-margin').value;
-            rightMargin = document.getElementById('xright-margin').value;
-            topMargin = document.getElementById('xtop-margin').value;
-            bottomMargin = document.getElementById('xbottom-margin').value;
-
-            @this.set('left_margin', leftMargin);
-            @this.set('top_margin', topMargin);
-            @this.set('bottom_margin', bottomMargin);
-            @this.set('right_margin', rightMargin);
-            @this.updateMargins();
+           try {
+                        leftMargin = document.getElementById('left-margin').value;
+                        rightMargin = document.getElementById('right-margin').value;
+                        topMargin = document.getElementById('top-margin').value;
+                        bottomMargin = document.getElementById('bottom-margin').value;    
+          
+                        console.log(leftMargin, rightMargin, topMargin, bottomMargin);
+                        @this.set('left_margin', leftMargin);
+                        @this.set('top_margin', topMargin);
+                        @this.set('bottom_margin', bottomMargin);
+                        @this.set('right_margin', rightMargin);
+                        @this.updateMargins();
+           } catch (error) {
+                        leftMargin = document.getElementById('xleft-margin').value;
+                        rightMargin = document.getElementById('xright-margin').value;
+                        topMargin = document.getElementById('xtop-margin').value;
+                        bottomMargin = document.getElementById('xbottom-margin').value;    
+          
+                        console.log(leftMargin, rightMargin, topMargin, bottomMargin);
+                        @this.set('left_margin', leftMargin);
+                        @this.set('top_margin', topMargin);
+                        @this.set('bottom_margin', bottomMargin);
+                        @this.set('right_margin', rightMargin);
+                        @this.updateMargins();
+           }            
 
             if (document.getElementById("editor").tagName == "DIV") {
                 //data = editor.getData();
