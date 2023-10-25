@@ -464,11 +464,15 @@
         });
 
         document.addEventListener('livewire:load', function() {
+
             if (document.getElementById("editor").tagName == "DIV") {
                 //CKEDITOR.replace('editor');
                 activeCkeditor5();
             }
+            updateMargenes();
         })
+
+
 
         function saveThesisPartStudent() {
             updateContent();
@@ -512,6 +516,7 @@
             rightMargin = document.getElementById('xright-margin').value;
             topMargin = document.getElementById('xtop-margin').value;
             bottomMargin = document.getElementById('xbottom-margin').value;
+
             @this.set('left_margin', leftMargin);
             @this.set('top_margin', topMargin);
             @this.set('bottom_margin', bottomMargin);
@@ -775,29 +780,21 @@
 
     </style>
     <script>
-        var topm,botm,rightm,leftm;
-        function updateMargenes(){
-        topm = @this.top_margin;
-        botm = @this.bottom_margin;
-        leftm = @this.left_margin;
-        rightm = @this.right_margin;
-     }       
+        function updateMargenes() {
+            var topm = @this.top_margin;
+            var botm = @this.bottom_margin;
+            var leftm = @this.left_margin;
+            var rightm = @this.right_margin;
 
-        window.addEventListener('margenes', event => {   
-  
-            console.log(4321);
-            updateMargenes();
-            console.log(123);
             var styleTag = document.getElementById('margenes');
             styleTag.textContent = ".ck-content p {\n" +
-                        "    margin-left: "+leftm+"mm;\n" +
-                        "    margin-right: "+rightm+"mm;\n" +
-                        "    margin-top: "+topm+"mm;\n" +
-                        "    margin-bottom: "+botm+"mm;\n" +
-                        "    /* Puedes ajustar el valor según tus necesidades */\n" +
-                        "}";
-        });
-
+                "    margin-left: " + leftm + "mm;\n" +
+                "    margin-right: " + rightm + "mm;\n" +
+                "    margin-top: " + topm + "mm;\n" +
+                "    margin-bottom: " + botm + "mm;\n" +
+                "    /* Puedes ajustar el valor según tus necesidades */\n" +
+                "}";
+        }
     </script>
     <div id="dialog-ckeditor"></div>
 

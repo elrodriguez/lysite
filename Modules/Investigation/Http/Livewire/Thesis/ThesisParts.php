@@ -69,7 +69,6 @@ class ThesisParts extends Component
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
-                ->limit(1)
                 ->first();
 
             if (isset($ThesisStudentPart)) {
@@ -108,7 +107,6 @@ class ThesisParts extends Component
                 }
                 $this->ThesisStudentPart = $ThesisStudentPart;
             }
-            $this->margenes(); //manda evento margenes para actualizar en la vista
         } else {
             redirect()->route('home');
         }
@@ -117,6 +115,7 @@ class ThesisParts extends Component
     public function render()
     {
         $this->getParts();
+
         return view('investigation::livewire.thesis.thesis-parts');
     }
 
@@ -369,6 +368,7 @@ class ThesisParts extends Component
         if ($this->bottom_margin == null) $this->bottom_margin = 0;
         if ($this->left_margin == null) $this->left_margin = 0;
         if ($this->right_margin == null) $this->right_margin = 0;
+
         InveThesisStudent::where('id', $this->thesis_id)->update([
             'top_margin' => $this->top_margin,
             'bottom_margin' => $this->bottom_margin,
@@ -419,7 +419,9 @@ class ThesisParts extends Component
         }
     }
 
-    public function margenes(){
-        $this->dispatchBrowserEvent('margenes', ['success' => true]);
+    public function margenes()
+    {
+
+        $this->dispatchBrowserEvent('ckeditor-margenes', ['success' => true]);
     }
 }
