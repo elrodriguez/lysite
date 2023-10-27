@@ -6,11 +6,12 @@ use App\Models\Universities;
 use App\Models\UniversitiesSchools;
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisStudent;
-use WithPagination;
+use Livewire\WithPagination;
 
 class ThesisAll extends Component
 {
     public $search;
+    use WithPagination;
 
     public function render()
     {
