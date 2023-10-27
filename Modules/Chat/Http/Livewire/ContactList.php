@@ -4,6 +4,7 @@ namespace Modules\Chat\Http\Livewire;
 
 use App\Models\Person;
 use App\Models\User;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -88,7 +89,25 @@ class ContactList extends Component
             ])
             ->get();
 
-        $this->instructors = AcaInstructor::join('people', 'person_id', 'people.id')
+        $admins = Person::join('users', 'people.user_id', 'users.id')
+            ->join('model_has_roles', function (JoinClause $join) {
+                $join->on('model_has_roles.model_id', '=', 'users.id')
+                    ->where('model_type', User::class)
+                    ->where('role_id', 1);
+            })
+            ->select(
+                'users.id',
+                'users.is_online',
+                'users.avatar',
+                'people.full_name',
+                'people.email',
+                'users.chat_last_activity',
+                DB::raw('(SELECT MIN(is_seen) FROM chat_messages WHERE user_id = users.id ) AS is_seen'),
+                DB::raw("'Administrador' AS utype")
+            )->get()
+            ->toArray();
+
+        $instructor = AcaInstructor::join('people', 'person_id', 'people.id')
             ->join('users', 'user_id', 'users.id')
             ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
             ->select(
@@ -98,7 +117,8 @@ class ContactList extends Component
                 'people.full_name',
                 'people.email',
                 'users.chat_last_activity',
-                DB::raw('MIN(chat_messages.is_seen) as is_seen')
+                DB::raw('MIN(chat_messages.is_seen) as is_seen'),
+                DB::raw("'Instructor' AS utype")
             )
             ->whereIn('course_id', $course_sids)
             ->where('people.id', '<>', $person_id)
@@ -113,7 +133,13 @@ class ContactList extends Component
                 'people.email',
                 'users.chat_last_activity'
             ])
-            ->get();
+            ->get()
+            ->toArray();
+
+        $combinedResults = array_merge($admins, $instructor);
+
+        $this->instructors = collect($combinedResults);
+
 
         foreach ($this->students as $student) {
             if ($student->is_seen == 0 && !is_null($student->is_seen)) {
@@ -122,7 +148,7 @@ class ContactList extends Component
             }
         }
         foreach ($this->instructors as $instructor) {
-            if ($instructor->is_seen == 0 && !is_null($instructor->is_seen)) {
+            if ($instructor['is_seen'] == 0 && !is_null($instructor['is_seen'])) {
                 $this->alert_message = true;
                 break;
             }

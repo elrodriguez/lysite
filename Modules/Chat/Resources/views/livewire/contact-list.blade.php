@@ -105,28 +105,29 @@
                                         @if (count($instructors) > 0)
                                             @foreach ($instructors as $instructor)
                                                 <li class="clearfix">
-                                                    <a onclick="showChatMessagesById({{ $instructor->id }},2)"
+                                                    <a onclick="showChatMessagesById({{ $instructor['id'] }},2)"
                                                         href="javascript:void(0);">
-                                                        @if ($instructor->avatar)
-                                                            <img src="{{ url('storage/' . $instructor->avatar) }}"
+                                                        @if ($instructor['avatar'])
+                                                            <img src="{{ url('storage/' . $instructor['avatar']) }}"
                                                                 alt="avatar">
                                                         @else
-                                                            <img src="{{ ui_avatars_url($instructor->full_name, 26, 'none') }}"
+                                                            <img src="{{ ui_avatars_url($instructor['full_name'], 26, 'none') }}"
                                                                 alt="avatar">
                                                         @endif
                                                         <div class="about">
-                                                            <div id="user{{ $instructor->id }}"
-                                                                class="name {{ $instructor->is_seen == 1 || is_null($instructor->is_seen) ? '' : 'text-primary' }}">
-                                                                Instructor: {{ $instructor->full_name }}</div>
-                                                            @if ($instructor->is_online)
+                                                            <div id="user{{ $instructor['id'] }}"
+                                                                class="name {{ $instructor['is_seen'] == 1 || is_null($instructor['is_seen']) ? '' : 'text-primary' }}">
+                                                                {{ $instructor['utype'] }}:
+                                                                {{ $instructor['full_name'] }}</div>
+                                                            @if ($instructor['is_online'])
                                                                 <div class="status"> <i
                                                                         class="fa fa-user-clock online"></i>
-                                                                    {{ $this->getLastActivity($instructor->chat_last_activity) }}
+                                                                    {{ $this->getLastActivity($instructor['chat_last_activity']) }}
                                                                 </div>
                                                             @else
                                                                 <div class="status"> <i
                                                                         class="fa fa-user-clock offline"></i>
-                                                                    {{ $this->getLastActivity($instructor->chat_last_activity) }}
+                                                                    {{ $this->getLastActivity($instructor['chat_last_activity']) }}
                                                                 </div>
                                                             @endif
                                                         </div>

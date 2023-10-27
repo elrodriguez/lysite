@@ -7,7 +7,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\User\UserController;
+use App\Models\Person;
 use Modules\Investigation\Entities\InveThesisStudentPart;
+use App\Models\User;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +34,25 @@ Route::get('/prueba', function () {
     dd($html);
     //return $html;
 })->name('prueba');
+
+route::get('lista/admin', function () {
+    $admins = Person::join('users', 'people.user_id', 'users.id')
+        ->join('model_has_roles', function (JoinClause $join) {
+            $join->on('model_has_roles.model_id', '=', 'users.id')
+                ->where('model_type', User::class)
+                ->where('role_id', 1);
+        })
+        ->select(
+            'users.id',
+            'users.is_online',
+            'users.avatar',
+            'people.full_name',
+            'people.email',
+            'users.chat_last_activity',
+            DB::raw('(SELECT MIN(is_seen) FROM chat_messages WHERE user_id = users.id ) AS is_seen')
+        )->get();
+    dd($admins);
+});
 
 Route::get('/login', function () {
     return view('auth.login');
