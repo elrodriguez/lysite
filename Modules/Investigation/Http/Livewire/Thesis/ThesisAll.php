@@ -12,6 +12,7 @@ class ThesisAll extends Component
 {
     public $search;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
