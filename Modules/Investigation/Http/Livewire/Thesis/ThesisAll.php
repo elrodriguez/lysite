@@ -6,6 +6,7 @@ use App\Models\Universities;
 use App\Models\UniversitiesSchools;
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisStudent;
+use WithPagination;
 
 class ThesisAll extends Component
 {
