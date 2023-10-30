@@ -49,6 +49,7 @@ class ThesisParts extends Component
     public $left_margin;
     public $right_margin;
     public $comments;
+    public $prompt;
 
     public function mount($thesis_id, $sub_part)
     {
@@ -388,10 +389,21 @@ class ThesisParts extends Component
             if ($p_allowed > $p_used) {
                 $max_tokens = 3400;
                 $temperature = 1;
-
+                $consulta;
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "parafrasea el contenido entre las llaves: {" . $this->consulta . "}";
+                switch($this->prompt){
+                  case  0: 
+                    $consulta = "Parafraséame este texto en español como si fueras un docente universitario: ";
+                    break;
+                  case  1: 
+                    $consulta = "Parafraséame este texto en español como si fueras un experto en investigación: ";
+                    break;
+                  case  2: 
+                    $consulta = "Parafraséame este texto en español con el objetivo de reducir el mayor grado de similitud: ";
+                }
+
+                $consulta =$consulta . "{" . $this->consulta . "}";
 
                 try {
                     $result = OpenAI::completions()->create([
