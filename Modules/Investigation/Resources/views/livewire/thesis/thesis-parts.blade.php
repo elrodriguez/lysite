@@ -199,7 +199,26 @@
                         <div class="card p-2">
                             <div>
                                 <div class="form-group">
-                                    <label for="text1">Escribe aquí lo que desee parafrasear</label>
+                                    <label for="text1">Escribe aquí lo que desee parafrasear</label> <select class="form-control prompty bg-primary text-white" name="prompt">
+                                        <option value="0">Como Docente</option>
+                                        <option value="1">Como Investigador</option>
+                                        <option value="2">Disminuir Similitud</option>
+                                    </select>
+                                    <style>
+                                        .prompty:hover {
+                                            background-color: #ccc;
+                                            color: red;
+                                            animation: shake 0.4s;
+                                        }
+                                    
+                                        @keyframes shake {
+                                            0% { transform: translateX(0); }
+                                            25% { transform: translateX(-5px); }
+                                            50% { transform: translateX(5px); }
+                                            75% { transform: translateX(-5px); }
+                                            100% { transform: translateX(0); }
+                                        }
+                                    </style>
                                     <textarea rows="8" class="form-control" wire:model='consulta' name="text1" id="text1"></textarea>
                                 </div>
                                 <div class="form-group">
