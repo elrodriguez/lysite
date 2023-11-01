@@ -89,15 +89,15 @@
                     <div class="col-lg-12">
                         <div class="overflow-auto chat sticky-top">
                             <div id="plist" class="people-list overflow-auto">
-                                @if (count($students) + count($instructors) > 6)
-                                    <div class="input-group p-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" wire:keydown.enter="getSearch"
-                                            wire:model.defer="search" placeholder="Buscar...">
+                                {{-- @if (count($students) + count($instructors) > 6) --}}
+                                <div class="input-group p-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
                                     </div>
-                                @endif
+                                    <input type="text" class="form-control" wire:keydown.enter="getSearch"
+                                        wire:model.defer="search" placeholder="Buscar...">
+                                </div>
+                                {{-- @endif --}}
                                 <div class="overflujo" style="max-height:80vh; min-height:auto">
                                     <ul class="list-unstyled chat-list mt-2 mb-0"
                                         style="max-height: 300px; overflow-y: auto;">
