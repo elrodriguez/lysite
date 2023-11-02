@@ -45,29 +45,29 @@
                     @endif
                     @if (count($students) > 0)
                         @foreach ($students as $student)
-                            <a onclick="showChatMessagesById({{ $student->id }},1)" href="javascript:void(0);"
+                            <a onclick="showChatMessagesById({{ $student['id'] }},1)" href="javascript:void(0);"
                                 class="list-group-item list-group-item-action unread ">
                                 <span class="d-flex align-items-center mb-1">
                                     <small
-                                        class="text-black-50">{{ $student->is_online ? 'En línea' : 'Desconectado' }}</small>
-                                    @if ($student->is_online)
+                                        class="text-black-50">{{ $student['is_online'] ? 'En línea' : 'Desconectado' }}</small>
+                                    @if ($student['is_online'])
                                         <span class="ml-auto unread-indicator bg-success"></span>
                                     @endif
                                 </span>
                                 <span class="d-flex">
                                     <span class="avatar avatar-xs mr-2">
-                                        @if ($student->avatar)
-                                            <img src="{{ url('storage/' . $student->avatar) }}" alt="people"
+                                        @if ($student['avatar'])
+                                            <img src="{{ url('storage/' . $student['avatar']) }}" alt="people"
                                                 class="avatar-img rounded-circle" width="26px">
                                         @else
-                                            <img src="{{ ui_avatars_url($student->full_name, 26, 'none') }}"
+                                            <img src="{{ ui_avatars_url($student['full_name'], 26, 'none') }}"
                                                 alt="people" class="avatar-img rounded-circle">
                                         @endif
                                     </span>
-                                    <span id="user{{ $student->id }}"
-                                        class="flex d-flex flex-column {{ $student->is_seen == 1 || is_null($student->is_seen) ? '' : 'text-primary' }}">
-                                        <strong>{{ $student->full_name }}</strong>
-                                        <span class="text-black-70">{{ $student->email }}</span>
+                                    <span id="user{{ $student['id'] }}"
+                                        class="flex d-flex flex-column {{ $student['is_seen'] == 1 || is_null($student['is_seen']) ? '' : 'text-primary' }}">
+                                        <strong>{{ $student['full_name'] }}</strong>
+                                        <span class="text-black-70">{{ $student['email'] }}</span>
                                     </span>
                                 </span>
                             </a>
@@ -139,31 +139,31 @@
                                         @if (count($students) > 0)
                                             @foreach ($students as $student)
                                                 <li class="clearfix">
-                                                    <a onclick="showChatMessagesById({{ $student->id }},1)"
+                                                    <a onclick="showChatMessagesById({{ $student['id'] }},1)"
                                                         href="javascript:void(0);">
-                                                        @if ($student->avatar)
-                                                            <img src="{{ url('storage/' . $student->avatar) }}"
+                                                        @if ($student['avatar'])
+                                                            <img src="{{ url('storage/' . $student['avatar']) }}"
                                                                 alt="avatar">
                                                         @else
-                                                            <img src="{{ ui_avatars_url($student->full_name, 26, 'none') }}"
+                                                            <img src="{{ ui_avatars_url($student['full_name'], 26, 'none') }}"
                                                                 alt="avatar">
                                                         @endif
                                                         <div class="about">
-                                                            <div id="user{{ $student->id }}"
-                                                                class="name {{ $student->is_seen == 1 || is_null($student->is_seen) ? '' : 'text-primary' }}">
-                                                                {{ $student->full_name }}</div>
-                                                            @if ($student->is_online)
+                                                            <div id="user{{ $student['id'] }}"
+                                                                class="name {{ $student['is_seen'] == 1 || is_null($student['is_seen']) ? '' : 'text-primary' }}">
+                                                                {{ $student['full_name'] }}</div>
+                                                            @if ($student['is_online'])
                                                                 <div id="activity"
-                                                                    valor="{{ $student->chat_last_activity }}"
+                                                                    valor="{{ $student['chat_last_activity'] }}"
                                                                     class="status"> <i class="fa fa-circle online"></i>
-                                                                    {{ $this->getLastActivity($student->chat_last_activity) }}
+                                                                    {{ $this->getLastActivity($student['chat_last_activity']) }}
                                                                 </div>
                                                             @else
                                                                 <div id="activity"
-                                                                    valor="{{ $student->chat_last_activity }}"
+                                                                    valor="{{ $student['chat_last_activity'] }}"
                                                                     class="status"> <i
                                                                         class="fa fa-circle offline"></i>
-                                                                    {{ $this->getLastActivity($student->chat_last_activity) }}
+                                                                    {{ $this->getLastActivity($student['chat_last_activity']) }}
                                                                 </div>
                                                             @endif
                                                         </div>

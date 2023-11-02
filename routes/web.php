@@ -11,6 +11,7 @@ use App\Models\Person;
 use Modules\Investigation\Entities\InveThesisStudentPart;
 use App\Models\User;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -27,11 +28,14 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
 Route::get('/prueba', function () {
+
+    //dd($roles);
     //return view('prueba');
-    $string = InveThesisStudentPart::where('id', 6)->value('content');
-    $html = html_entity_decode($string, ENT_QUOTES, "UTF-8");
-    dd($html);
+    // $string = InveThesisStudentPart::where('id', 6)->value('content');
+    // $html = html_entity_decode($string, ENT_QUOTES, "UTF-8");
+    // dd($html);
     //return $html;
 })->name('prueba');
 

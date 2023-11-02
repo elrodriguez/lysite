@@ -62,7 +62,11 @@ class ContactList extends Component
             }
         }
 
-        $this->students = AcaStudent::join('people', 'person_id', 'people.id')
+        $user = Auth::user();
+
+        $roles = $user->getRoleNames();
+
+        $in_student = AcaStudent::join('people', 'person_id', 'people.id')
             ->join('users', 'user_id', 'users.id')
             ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
             ->select(
@@ -87,26 +91,63 @@ class ContactList extends Component
                 'people.email',
                 'users.chat_last_activity'
             ])
-            ->get();
-
-        $admins = Person::join('users', 'people.user_id', 'users.id')
-            ->join('model_has_roles', function (JoinClause $join) {
-                $join->on('model_has_roles.model_id', '=', 'users.id')
-                    ->where('model_type', User::class)
-                    ->where('role_id', 1);
-            })
-            ->select(
-                'users.id',
-                'users.is_online',
-                'users.avatar',
-                'people.full_name',
-                'people.email',
-                'users.chat_last_activity',
-                DB::raw('(SELECT MIN(is_seen) FROM chat_messages WHERE user_id = users.id ) AS is_seen'),
-                DB::raw("'Administrador' AS utype")
-            )->get()
+            ->get()
             ->toArray();
 
+
+
+        $admins = [];
+        $ad_students = [];
+
+        if (!$roles->contains('Admin')) {
+            $admins = Person::join('users', 'people.user_id', 'users.id')
+                ->join('model_has_roles', function (JoinClause $join) {
+                    $join->on('model_has_roles.model_id', '=', 'users.id')
+                        ->where('model_type', User::class)
+                        ->where('role_id', 1);
+                })
+                ->select(
+                    'users.id',
+                    'users.is_online',
+                    'users.avatar',
+                    'people.full_name',
+                    'people.email',
+                    'users.chat_last_activity',
+                    DB::raw('(SELECT MIN(is_seen) FROM chat_messages WHERE user_id = users.id ) AS is_seen'),
+                    DB::raw("'Administrador' AS utype")
+                )
+                ->where(function ($query) {
+                    $query->orWhere('people.full_name', 'like', '%' . $this->search . '%');
+                })
+                ->get()
+                ->toArray();
+        } else {
+            $ad_students = AcaStudent::join('people', 'person_id', 'people.id')
+                ->join('users', 'user_id', 'users.id')
+                ->select(
+                    'users.id',
+                    'users.is_online',
+                    'users.avatar',
+                    'people.full_name',
+                    'people.email',
+                    'users.chat_last_activity',
+                    DB::raw('(SELECT MIN(is_seen) FROM chat_messages WHERE user_id = users.id ) AS is_seen')
+                )
+                ->where('people.id', '<>', $person_id)
+                ->where(function ($query) {
+                    $query->orWhere('full_name', 'like', '%' . $this->search . '%');
+                })
+                ->groupBy([
+                    'users.id',
+                    'users.is_online',
+                    'users.avatar',
+                    'people.full_name',
+                    'people.email',
+                    'users.chat_last_activity'
+                ])
+                ->get()
+                ->toArray();
+        }
         $instructor = AcaInstructor::join('people', 'person_id', 'people.id')
             ->join('users', 'user_id', 'users.id')
             ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
@@ -136,13 +177,14 @@ class ContactList extends Component
             ->get()
             ->toArray();
 
-        $combinedResults = array_merge($admins, $instructor);
+        $combinedInstructors = array_merge($admins, $instructor);
+        $combinedStudents = array_merge($ad_students, $in_student);
 
-        $this->instructors = collect($combinedResults);
-
+        $this->instructors = collect($combinedInstructors);
+        $this->students = collect($combinedStudents);
 
         foreach ($this->students as $student) {
-            if ($student->is_seen == 0 && !is_null($student->is_seen)) {
+            if ($student['is_seen'] == 0 && !is_null($student['is_seen'])) {
                 $this->alert_message = true;
                 break;
             }
