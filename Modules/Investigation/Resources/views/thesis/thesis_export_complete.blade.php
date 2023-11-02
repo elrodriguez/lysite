@@ -36,7 +36,7 @@
     <main>
         <div class="message">
             <div class="centered">
-                <h2>Con esta herramienta puede exportar su tesis</h2>
+                <h2>Aquí podrá exportar su tesis: {{ $title }}</h2>
             </div>
         </div>
         <div class="centered">

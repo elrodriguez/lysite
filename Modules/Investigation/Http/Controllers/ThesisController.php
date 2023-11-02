@@ -404,12 +404,17 @@ class ThesisController extends Controller
     public function completethesis($thesis)
     {
         $thesis_margins = InveThesisStudent::where('id', $thesis)->where('user_id', Auth::id())->first();
-
-        return view('investigation::thesis.thesis_export_complete')->with('thesis', $thesis)
+        if($thesis_margins){
+            return view('investigation::thesis.thesis_export_complete')->with('thesis', $thesis)
             ->with('top_margin', $thesis_margins->top_margin)
             ->with('bottom_margin', $thesis_margins->bottom_margin)
             ->with('left_margin', $thesis_margins->left_margin)
-            ->with('right_margin', $thesis_margins->right_margin);
+            ->with('right_margin', $thesis_margins->right_margin)
+            ->with('title', $thesis_margins->title);
+        }else{
+            return redirect()->route('home');
+        }
+        
     }
     public function completethesisDatos(Request $request)
     {
