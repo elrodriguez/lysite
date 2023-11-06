@@ -394,7 +394,7 @@ class ThesisController extends Controller
         $id=Auth::id(); //lastimosamente será el id del que lo agrega que puede ser el isntructor o el estudiante, prefeririía el estudiante para q luego podamos eliminarlo todo
         //indicamos que queremos guardar un nuevo archivo en el disco local
         $path = $request->file('upload')->storeAs(
-            'thesis/student/'.$id.'/'.$randomString,
+            'thesis/user/'.$id.'/'.$randomString,
             $file_name,
             'public'
         );
