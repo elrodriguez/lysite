@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use PDF;
+use Illuminate\Support\Str;
 
 class ThesisController extends Controller
 {
@@ -388,9 +389,11 @@ class ThesisController extends Controller
         //$extension = $file->getClientOriginalExtension();
         $file_name = str_replace(' ', '_', $file->getClientOriginalName());
 
+        //genera random string
+        $randomString = Str::random(10);
         //indicamos que queremos guardar un nuevo archivo en el disco local
         $path = $request->file('upload')->storeAs(
-            'thesis',
+            'thesis/'.$randomString,
             $file_name,
             'public'
         );
