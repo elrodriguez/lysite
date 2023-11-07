@@ -143,13 +143,19 @@
                 if (this.status == 200) {
                     // La descarga ha finalizado con éxito
                     console.log('File downloaded successfully');
-                    document.getElementById('loader').style.display = "none";
-                    document.getElementById('viewer').style.display = "";
+                    showViewer();                    
                 }
             };
 
             xhr.send();
         }
+
+                function showViewer() {
+                    document.getElementById('loader').style.display = "none";
+                    document.getElementById('viewer').style.display = "";
+        }
+
+        setTimeout(showViewer, 4200);
     </script>
 
 </div>
