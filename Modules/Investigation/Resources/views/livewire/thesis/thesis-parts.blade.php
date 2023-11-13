@@ -199,7 +199,8 @@
                         <div class="card p-2">
                             <div>
                                 <div class="form-group">
-                                    <label for="text1">Escribe aquí lo que desee parafrasear</label> <select class="form-control prompty bg-primary text-white" name="prompt">
+                                    <label for="text1">Escribe aquí lo que desee parafrasear</label> <select
+                                        class="form-control prompty bg-primary text-white" name="prompt">
                                         <option value="0">Como Docente</option>
                                         <option value="1">Como Investigador</option>
                                         <option value="2">Disminuir Similitud</option>
@@ -210,13 +211,27 @@
                                             color: red;
                                             animation: shake 0.4s;
                                         }
-                                    
+
                                         @keyframes shake {
-                                            0% { transform: translateX(0); }
-                                            25% { transform: translateX(-5px); }
-                                            50% { transform: translateX(5px); }
-                                            75% { transform: translateX(-5px); }
-                                            100% { transform: translateX(0); }
+                                            0% {
+                                                transform: translateX(0);
+                                            }
+
+                                            25% {
+                                                transform: translateX(-5px);
+                                            }
+
+                                            50% {
+                                                transform: translateX(5px);
+                                            }
+
+                                            75% {
+                                                transform: translateX(-5px);
+                                            }
+
+                                            100% {
+                                                transform: translateX(0);
+                                            }
                                         }
                                     </style>
                                     <textarea rows="8" class="form-control" wire:model='consulta' name="text1" id="text1"></textarea>
@@ -532,31 +547,31 @@
             // @this.right_margin = 21 - CKEDITOR.config.ruler.sliders.right;
             // @this.left_margin = CKEDITOR.config.ruler.sliders.left;
 
-           try {
-                        leftMargin = document.getElementById('left-margin').value;
-                        rightMargin = document.getElementById('right-margin').value;
-                        topMargin = document.getElementById('top-margin').value;
-                        bottomMargin = document.getElementById('bottom-margin').value;    
-          
-                        console.log(leftMargin, rightMargin, topMargin, bottomMargin);
-                        @this.set('left_margin', leftMargin);
-                        @this.set('top_margin', topMargin);
-                        @this.set('bottom_margin', bottomMargin);
-                        @this.set('right_margin', rightMargin);
-                        @this.updateMargins();
-           } catch (error) {
-                        leftMargin = document.getElementById('xleft-margin').value;
-                        rightMargin = document.getElementById('xright-margin').value;
-                        topMargin = document.getElementById('xtop-margin').value;
-                        bottomMargin = document.getElementById('xbottom-margin').value;    
-          
-                        console.log(leftMargin, rightMargin, topMargin, bottomMargin);
-                        @this.set('left_margin', leftMargin);
-                        @this.set('top_margin', topMargin);
-                        @this.set('bottom_margin', bottomMargin);
-                        @this.set('right_margin', rightMargin);
-                        @this.updateMargins();
-           }            
+            try {
+                leftMargin = document.getElementById('left-margin').value;
+                rightMargin = document.getElementById('right-margin').value;
+                topMargin = document.getElementById('top-margin').value;
+                bottomMargin = document.getElementById('bottom-margin').value;
+
+                console.log(leftMargin, rightMargin, topMargin, bottomMargin);
+                @this.set('left_margin', leftMargin);
+                @this.set('top_margin', topMargin);
+                @this.set('bottom_margin', bottomMargin);
+                @this.set('right_margin', rightMargin);
+                @this.updateMargins();
+            } catch (error) {
+                leftMargin = document.getElementById('xleft-margin').value;
+                rightMargin = document.getElementById('xright-margin').value;
+                topMargin = document.getElementById('xtop-margin').value;
+                bottomMargin = document.getElementById('xbottom-margin').value;
+
+                console.log(leftMargin, rightMargin, topMargin, bottomMargin);
+                @this.set('left_margin', leftMargin);
+                @this.set('top_margin', topMargin);
+                @this.set('bottom_margin', bottomMargin);
+                @this.set('right_margin', rightMargin);
+                @this.updateMargins();
+            }
 
             if (document.getElementById("editor").tagName == "DIV") {
                 //data = editor.getData();
@@ -623,6 +638,7 @@
                             'blockQuote',
                             'imageUpload',
                             '|',
+                            'insertTable',
                             'paraphrase',
                             'completethesis',
                             'margins',
@@ -636,8 +652,7 @@
                             '|',
                             'specialCharacters',
                             'findAndReplace',
-                            'mediaEmbed',
-                            'insertTable'
+                            'mediaEmbed'
                         ]
                     },
                     simpleUpload: {
