@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use PDF;
+use Illuminate\Support\Str;
 
 class ThesisController extends Controller
 {
@@ -382,15 +383,18 @@ class ThesisController extends Controller
     }
 
     public function uploadImage(Request $request)
-    {
+    {   
         $file = $request->file('upload');
         //obtenemos el nombre del archivo
         //$extension = $file->getClientOriginalExtension();
         $file_name = str_replace(' ', '_', $file->getClientOriginalName());
 
+        //genera random string
+        $randomString = Str::random(10);
+        $id=Auth::id(); //lastimosamente será el id del que lo agrega que puede ser el isntructor o el estudiante, prefeririía el estudiante para q luego podamos eliminarlo todo
         //indicamos que queremos guardar un nuevo archivo en el disco local
         $path = $request->file('upload')->storeAs(
-            'thesis',
+            'thesis/user/'.$id.'/'.$randomString,
             $file_name,
             'public'
         );

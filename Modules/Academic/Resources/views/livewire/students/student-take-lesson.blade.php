@@ -1,5 +1,29 @@
 <div>
+    <script>
+        function downloadFile(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'blob';
 
+            xhr.onload = function(e) {
+                if (this.status == 200) {
+                    // La descarga ha finalizado con éxito
+                    console.log('File downloaded successfully');
+                    showViewer();                    
+                }
+            };
+
+            xhr.send();
+        }
+
+                function showViewer() {
+                    document.getElementById('loader').style.display = "none";
+                    document.getElementById('viewer').style.display = "";
+        }
+
+        setTimeout(showViewer, 4200);
+    </script>
+    
     <div class="bg-gradient-primary pb-lg-64pt py-32pt">
         <div class="container">
 
@@ -133,23 +157,5 @@
     </div>
 
 <!-- Código que corre despues de descargar el archivo, no estoy seguro si lo hace por 2da vez -->
-    <script>
-        function downloadFile(url) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.responseType = 'blob';
-
-            xhr.onload = function(e) {
-                if (this.status == 200) {
-                    // La descarga ha finalizado con éxito
-                    console.log('File downloaded successfully');
-                    document.getElementById('loader').style.display = "none";
-                    document.getElementById('viewer').style.display = "";
-                }
-            };
-
-            xhr.send();
-        }
-    </script>
-
+    
 </div>
