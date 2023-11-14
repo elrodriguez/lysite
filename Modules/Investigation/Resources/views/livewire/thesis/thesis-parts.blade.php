@@ -576,9 +576,12 @@
             if (document.getElementById("editor").tagName == "DIV") {
                 //data = editor.getData();
                 // data = editor1.getHTMLCode();
-                data = window.editor.getData();
+                if (window.editor && typeof window.editor.getData === 'function') {
+                    data = window.editor.getData();
 
-                @this.set('content', data);
+                    @this.set('content', data);
+                }
+
             }
         }
 
@@ -645,6 +648,7 @@
                             'referenciar',
                             'helpkeywords',
                             'recommendation',
+                            'indexes',
                             '|',
                             'undo',
                             'redo',
@@ -847,5 +851,4 @@
         }
     </script>
     <div id="dialog-ckeditor"></div>
-
 </div>

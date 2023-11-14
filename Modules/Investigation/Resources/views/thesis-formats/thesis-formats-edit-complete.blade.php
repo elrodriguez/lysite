@@ -10,7 +10,6 @@
     </x-slot>
     <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
         <div class="container page__container">
-
             <!-- Navbar toggler -->
             <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
                 <i class="fa fa-bars"></i>
@@ -18,7 +17,7 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-    @livewire('investigation::thesis-formats.thesis-formats-edit-complete',['thesis_format_id' => $thesis_format_id])
+    @livewire('investigation::thesis-formats.thesis-formats-edit-complete', ['thesis_format_id' => $thesis_format_id])
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>

@@ -1,12 +1,12 @@
 <x-master>
     @section('styles')
-    <link href="{{ asset('x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet"/>
-    <link type="text/css" href="{{ url('assets/css/flatpickr.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('assets/css/flatpickr.rtl.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ url('select2@4.1.0/select2.bundle.css') }}" rel="stylesheet">
-   
+        <link href="{{ asset('x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet" />
+        <link type="text/css" href="{{ url('assets/css/flatpickr.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ url('assets/css/flatpickr.rtl.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ url('select2@4.1.0/select2.bundle.css') }}" rel="stylesheet">
+
     @stop
     <x-slot name="jumbotron">
         <div class="bg-gradient-primary">
@@ -24,7 +24,8 @@
         <div class="container page__container">
 
             <!-- Navbar toggler -->
-            <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse" data-target="#navbar-submenu2">
+            <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse"
+                data-target="#navbar-submenu2">
                 <i class="fa fa-bars"></i>
             </button>
             @livewire('nav.nav-global')
@@ -40,12 +41,11 @@
         <livewire:investigation::thesis.thesis-format-modal-edit />
     @endsection
     @section('script')
-    <script src="{{ asset('x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
-            <!-- Flatpickr -->
-            <script src="{{ url('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
-            <script src="{{ url('assets/js/flatpickr.js') }}"></script>
-            <script src="{{ url('select2@4.1.0/select2.js') }}"></script>
+        <script src="{{ asset('x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>
+        <!-- Flatpickr -->
+        <script src="{{ url('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ url('assets/js/flatpickr.js') }}"></script>
+        <script src="{{ url('select2@4.1.0/select2.js') }}"></script>
 
     @stop
 </x-master>
-
