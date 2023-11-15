@@ -65,10 +65,10 @@ class ThesisParts extends Component
             $this->format_id = $this->thesis_student->format_id;
             $this->format = InveThesisFormat::where('id', $this->format_id)->get()->first();
 
-            $this->left_margin = $this->format->left_margin;
-            $this->right_margin = $this->format->right_margin;
-            $this->top_margin = $this->format->top_margin;
-            $this->bottom_margin = $this->format->bottom_margin;
+            $this->left_margin = $this->thesis_student->left_margin;  //primero carga de la tesis del estudiante para luego mas abajo
+            $this->right_margin = $this->thesis_student->right_margin;  // si es nulo lo cambia por las medidas del formato de tesis
+            $this->bottom_margin = $this->thesis_student->bottom_margin;
+            $this->top_margin = $this->thesis_student->top_margin;
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -79,11 +79,6 @@ class ThesisParts extends Component
 
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
-
-                $this->left_margin = $this->thesis_student->left_margin;
-                $this->right_margin = $this->thesis_student->right_margin;
-                $this->bottom_margin = $this->thesis_student->bottom_margin;
-                $this->top_margin = $this->thesis_student->top_margin;
 
                 //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
                 if ($this->thesis_student->left_margin == null) {
