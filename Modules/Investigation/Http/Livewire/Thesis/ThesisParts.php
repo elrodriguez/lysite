@@ -67,6 +67,8 @@ class ThesisParts extends Component
 
             $this->left_margin = $this->format->left_margin;
             $this->right_margin = $this->format->right_margin;
+            $this->top_margin = $this->format->top_margin;
+            $this->bottom_margin = $this->format->bottom_margin;
 
             $ThesisStudentPart = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
                 ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -370,7 +372,7 @@ class ThesisParts extends Component
         if ($this->left_margin == null) $this->left_margin = 0;
         if ($this->right_margin == null) $this->right_margin = 0;
 
-        InveThesisStudent::where('id', $this->focus_id)->update([ //antes guardaba en la tabla tesis y debe ser en la tabla parte de la tesis InveThesisStudentPart
+        InveThesisStudent::where('id', $this->focus_id)->update([ //se guarda en la tabla de la tesis del estudiante
             'top_margin' => $this->top_margin,
             'bottom_margin' => $this->bottom_margin,
             'left_margin' => $this->left_margin,

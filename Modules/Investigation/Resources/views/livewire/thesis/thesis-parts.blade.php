@@ -363,6 +363,7 @@
             <input id="xbottom-margin" type="hidden" value="{{ $bottom_margin }}">
         </div>
     </div>
+    <input type="hidden" id="content_old" wire:model='content_old'>
     <script>
         var data = "";
 
@@ -497,15 +498,18 @@
             });
         });
 
-        document.addEventListener('livewire:load', function() {
-
-            if (document.getElementById("editor").tagName == "DIV") {
-                //CKEDITOR.replace('editor');
+            function onPageLoad() {
+                document.addEventListener('livewire:load', function() {
+                if (document.getElementById("editor").tagName == "DIV") {
+                // CKEDITOR.replace('editor');
                 activeCkeditor5();
+                updateMargenes();
+                updateContent();
+                }
+            });
             }
-            updateMargenes();
-            updateContent();
-        })
+
+    document.addEventListener('DOMContentLoaded', onPageLoad);
 
 
 
@@ -513,9 +517,7 @@
             updateContent();
             @this.saveThesisPartStudentN(true)
         }
-    </script>
-    <input type="hidden" id="content_old" wire:model='content_old'>
-    <script>
+    
         //Codigo para el Intervalo de AutoGrabado
         var TimeSave;
         var time = 30; //se configura el tiempo en segundos.
@@ -565,7 +567,7 @@
                 topMargin = document.getElementById('xtop-margin').value;
                 bottomMargin = document.getElementById('xbottom-margin').value;
 
-                console.log(leftMargin, rightMargin, topMargin, bottomMargin);
+                console.log('With Error', leftMargin, rightMargin, topMargin, bottomMargin);
                 @this.set('left_margin', leftMargin);
                 @this.set('top_margin', topMargin);
                 @this.set('bottom_margin', bottomMargin);
