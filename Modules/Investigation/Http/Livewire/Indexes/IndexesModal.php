@@ -105,6 +105,7 @@ class IndexesModal extends Component
                     'content'       => $row->content,
                     'position'      => $row->position,
                     'page'          => $row->page,
+                    'type'          => $row->type,
                     'items'         => $this->getSubIndexes($row->id)
                 ]);
             }
@@ -124,7 +125,7 @@ class IndexesModal extends Component
                 $itemsHTML .= '
                     <div class="row" id="div-row-subitem-db-' . $k . $row->id . '">
                         <div class="col-md-1 text-right">
-                            <button onclick="addSubIndexNewJS(' . $k . ',' . $row->id . ')" type="button" class="btn btn-secondary btn-sm">
+                            <button onclick="addSubIndexNewJS(' . $k . ',' . $row->id . ',' . $this->type . ')" type="button" class="btn btn-secondary btn-sm">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>

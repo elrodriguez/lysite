@@ -5,16 +5,8 @@ import iconIndent from './icons/indent.svg';
 export default class indexes extends Plugin {
     init() {
         const editor = this.editor;
-		// Función para arrastrar el modal
-		var isDragging = false;
-		var currentX;
-		var currentY;
-		var initialX;
-		var initialY;
-		var xOffset = 0;
-		var yOffset = 0;
 
-        editor.ui.componentFactory.add('margins', locale => {
+        editor.ui.componentFactory.add('indexes', locale => {
             const view = new ButtonView( locale );
 
             view.set( {
