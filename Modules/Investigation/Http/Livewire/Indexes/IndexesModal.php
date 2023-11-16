@@ -94,6 +94,7 @@ class IndexesModal extends Component
         $index = InveThesisStudentIndex::where('type', $this->type)
             ->where('thesis_id', $this->thesis_student_id)
             ->whereNull('item_id')
+            ->orderBy('position')
             ->get();
 
         if (count($index) > 0) {
@@ -116,6 +117,7 @@ class IndexesModal extends Component
         $index = InveThesisStudentIndex::where('type', $this->type)
             ->where('thesis_id', $this->thesis_student_id)
             ->where('item_id', $id)
+            ->orderBy('position')
             ->get();
 
         $itemsHTML = '';
