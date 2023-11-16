@@ -1,7 +1,7 @@
 <div>
     @push('scripts')
-    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>    
-    <script src="{{ asset('assets/js/ckeditor/comments.js') }}"></script>
+        <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
+        <script src="{{ asset('assets/js/ckeditor/comments.js') }}"></script>
     @endpush
     <div class="container page__container">
         <ol class="breadcrumb m-0">
@@ -43,8 +43,7 @@
                                     </li>
                                 @else
                                     <li>
-                                        <a
-                                            href="{{ route('investigation_thesis_check', [$thesis_id, $part['id']]) }}">
+                                        <a href="{{ route('investigation_thesis_check', [$thesis_id, $part['id']]) }}">
                                             {{ $part['number_order'] . ' ' . $part['description'] }}</a>
                                         {!! $part['items'] !!}
                                     </li>
@@ -52,7 +51,8 @@
                             @endforeach
                         @else
                             <div class="alert alert-info">
-                                Este formato un está pendiente de contenido. vuelve a intentarlo mas tarde o comunicarse con el administrador del sitio.
+                                Este formato un está pendiente de contenido. vuelve a intentarlo mas tarde o comunicarse
+                                con el administrador del sitio.
                             </div>
                         @endif
                     </ul>
@@ -76,7 +76,8 @@
                                             <textarea class="form-control" id="editor" rows="40" cols="80">{!! $content_old !!}</textarea>
                                         </div> --}}
                                         <div wire:ignore class="col-12" id="documentsheet">
-                                            <div class="div-body" data-editor="DecoupledDocumentEditor" data-collaboration="false" data-revision-history="false">
+                                            <div class="div-body" data-editor="DecoupledDocumentEditor"
+                                                data-collaboration="false" data-revision-history="false">
                                                 <div class="div-main">
                                                     <div class="centered" wire:ignore>
                                                         <div class="row">
@@ -84,7 +85,8 @@
                                                         </div>
                                                         <div class="row row-editor">
                                                             <div class="editor-container">
-                                                                <div class="editor" id="editor">{!! $content_old !!}</div>
+                                                                <div class="editor" id="editor">
+                                                                    {!! $content_old !!}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -182,6 +184,7 @@
                         'link',
                         'blockQuote',
                         'imageUpload',
+                        'insertTable',
                         '|',
                         'comments',
                         '|',
@@ -191,8 +194,8 @@
                         '|',
                         'specialCharacters',
                         'findAndReplace',
-                        'mediaEmbed',
-                        'insertTable'
+                        'mediaEmbed'
+
                     ]
                 },
                 licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
@@ -204,47 +207,45 @@
                     }
                 },
                 comments: {
-                    ajax:{
+                    ajax: {
                         url: "{{ route('investigation_thesis_selection_comments') }}",
-                        data:{
+                        data: {
                             thesi_student_part_id: {{ $xpart_id }},
                             thesi_student_id: {{ $thesis_student->id }},
-                            thesi_format_part_id: {{ $focus_id}}
+                            thesi_format_part_id: {{ $focus_id }}
                         },
-                        method:'POST',
+                        method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     },
-                    urlData: "{{ route('investigation_thesis_get_comments',$thesis_student->id) }}"
+                    urlData: "{{ route('investigation_thesis_get_comments', $thesis_student->id) }}"
                 },
-                references:{
-                    url:"{{ route('investigation_thesis_references') }}",
+                references: {
+                    url: "{{ route('investigation_thesis_references') }}",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 },
-                recommendation:{
-                    url:"{{ route('investigation_thesis_recommendation') }}",
+                recommendation: {
+                    url: "{{ route('investigation_thesis_recommendation') }}",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 },
-                helpkeywords:{
-                    url:"{{ route('investigation_thesis_grammar_correction') }}",
+                helpkeywords: {
+                    url: "{{ route('investigation_thesis_grammar_correction') }}",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 },
                 htmlSupport: {
-                    allow: [
-                        {
-                            name: /.*/,
-                            attributes: true,
-                            classes: true,
-                            styles: true
-                        }
-                    ]
+                    allow: [{
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }]
                 }
             }).then(editor => {
                 window.editor = editor;
@@ -262,66 +263,65 @@
         }
     </script>
     <script>
-        
-  function applyStylesToStrongElements() {
-  // Encuentra todos los elementos strong en la página
-  var strongElements = document.getElementsByTagName('strong');
+        function applyStylesToStrongElements() {
+            // Encuentra todos los elementos strong en la página
+            var strongElements = document.getElementsByTagName('strong');
 
-  // Itera sobre todos los elementos strong y cambia sus estilos
-  for (var i = 0; i < strongElements.length; i++) {
-    strongElements[i].style.fontWeight = 'bold';
-  }
-}
+            // Itera sobre todos los elementos strong y cambia sus estilos
+            for (var i = 0; i < strongElements.length; i++) {
+                strongElements[i].style.fontWeight = 'bold';
+            }
+        }
 
         var isWindows11 = /Windows NT 10\.0/.test(navigator.userAgent) && /Win64/.test(navigator.userAgent);
 
-if (isWindows11) {    
+        if (isWindows11) {
 
-                        // Ejecuta la función inicialmente
-                        applyStylesToStrongElements();
+            // Ejecuta la función inicialmente
+            applyStylesToStrongElements();
 
-                        // Ejecuta la función cada 300ms utilizando setInterval
-                        setInterval(applyStylesToStrongElements, 80);
+            // Ejecuta la función cada 300ms utilizando setInterval
+            setInterval(applyStylesToStrongElements, 80);
 
-                        console.log('Estás utilizando Windows 11');
+            console.log('Estás utilizando Windows 11');
 
-} else {
+        } else {
 
-                            window.addEventListener('DOMContentLoaded', function() {
-                        // Encuentra todos los elementos strong en la página
-                        var strongElements = document.getElementsByTagName('strong');
+            window.addEventListener('DOMContentLoaded', function() {
+                // Encuentra todos los elementos strong en la página
+                var strongElements = document.getElementsByTagName('strong');
 
-                        // Itera sobre todos los elementos strong y cambia sus estilos
-                        for (var i = 0; i < strongElements.length; i++) {
-                            strongElements[i].style.fontWeight = 'bold';
-                        }
-                        });
+                // Itera sobre todos los elementos strong y cambia sus estilos
+                for (var i = 0; i < strongElements.length; i++) {
+                    strongElements[i].style.fontWeight = 'bold';
+                }
+            });
 
-                        // Agrega un evento de escucha para el evento DOMNodeInserted en el body
-                        document.body.addEventListener('DOMNodeInserted', function(event) {
-                        // Verifica si el elemento agregado es un strong
-                        if (event.target.nodeName === 'STRONG') {
-                            event.target.style.fontWeight = 'bold';
-                        }
-                        });
+            // Agrega un evento de escucha para el evento DOMNodeInserted en el body
+            document.body.addEventListener('DOMNodeInserted', function(event) {
+                // Verifica si el elemento agregado es un strong
+                if (event.target.nodeName === 'STRONG') {
+                    event.target.style.fontWeight = 'bold';
+                }
+            });
 
-                        console.log('No estás utilizando Windows 11');
-}
+            console.log('No estás utilizando Windows 11');
+        }
     </script>
-    <script> 
-        function __getDestroyComments(id,index,tesis_id){
+    <script>
+        function __getDestroyComments(id, index, tesis_id) {
             var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
 
             if (confirmacion) {
 
                 const xhr = new XMLHttpRequest();
-                let url = '/investigation/thesis/comentary/thesis/destroy/'+id+'/'+tesis_id;
+                let url = '/investigation/thesis/comentary/thesis/destroy/' + id + '/' + tesis_id;
                 xhr.open('GET', url, true);
                 xhr.onload = function() {
                     if (xhr.status === 200) {
                         const response = JSON.parse(xhr.responseText);
-                        document.getElementById("ly-list-item-"+index).remove();
-                        if(response.exists === false){
+                        document.getElementById("ly-list-item-" + index).remove();
+                        if (response.exists === false) {
                             document.getElementById("lyc-ck-sidebar-list-comments").remove();
                         }
                     } else {
@@ -330,13 +330,12 @@ if (isWindows11) {
                 };
 
                 xhr.onerror = function() {
-                console.log('Error de red.');
+                    console.log('Error de red.');
                 };
 
                 xhr.send();
             }
         }
-
     </script>
     @stack('scripts')
 </div>
