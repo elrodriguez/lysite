@@ -498,18 +498,18 @@
             });
         });
 
-            function onPageLoad() {
-                document.addEventListener('livewire:load', function() {
+        function onPageLoad() {
+            document.addEventListener('livewire:load', function() {
                 if (document.getElementById("editor").tagName == "DIV") {
-                // CKEDITOR.replace('editor');
-                activeCkeditor5();
-                updateMargenes();
-                updateContent();
+                    // CKEDITOR.replace('editor');
+                    activeCkeditor5();
+                    updateMargenes();
+                    updateContent();
                 }
             });
-            }
+        }
 
-    document.addEventListener('DOMContentLoaded', onPageLoad);
+        document.addEventListener('DOMContentLoaded', onPageLoad);
 
 
 
@@ -517,7 +517,7 @@
             updateContent();
             @this.saveThesisPartStudentN(true)
         }
-    
+
         //Codigo para el Intervalo de AutoGrabado
         var TimeSave;
         var time = 30; //se configura el tiempo en segundos.

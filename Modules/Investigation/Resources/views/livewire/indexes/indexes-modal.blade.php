@@ -35,7 +35,8 @@
                             <div class="row mb-1">
                                 <div class="col-md-1 text-right">
                                     @if ($item['id'])
-                                        <button onclick="addSubIndexNewJS({{ $k }},{{ $item['id'] }})"
+                                        <button
+                                            onclick="addSubIndexNewJS({{ $k }},{{ $item['id'] }},{{ $item['type'] }})"
                                             type="button" class="btn btn-secondary btn-sm">
                                             <i class="fa fa-plus"></i>
                                         </button>
@@ -111,7 +112,7 @@
             document.getElementById("btn-titulo-index").disabled = false;
         });
 
-        function addSubIndexNewJS(k, id) {
+        function addSubIndexNewJS(k, id, type) {
 
             var ulsubpartFormat = document.getElementById('sub-items-' + k + id);
             var divExistente = document.getElementById('div-row-subitem-' + k + id);
@@ -141,7 +142,7 @@
                         </div>
                         <div class="col-md-1 text-right p-0">
                             <div class="input-group-prepend">
-                                <button onclick="saveSubItemNewJS(${k},${id})" id="btn-new-subitem-` + k + id + `" type="button" class="btn btn-success btn-sm mr-1">
+                                <button onclick="saveSubItemNewJS(${k},${id},${type})" id="btn-new-subitem-` + k + id + `" type="button" class="btn btn-success btn-sm mr-1">
                                     <span id="span-new-subitem-` + k + id + `" class="fa fa-check"></span>
                                 </button>
                                 <button 
@@ -167,7 +168,7 @@
             }
         }
 
-        function saveSubItemNewJS(k, id) {
+        function saveSubItemNewJS(k, id, type) {
 
             var boton = document.getElementById('btn-new-subitem-' + k + id);
             var span = document.getElementById('span-new-subitem-' + k + id);
@@ -200,7 +201,7 @@
 
                 var datos = {
                     id: null,
-                    type: {{ $type }},
+                    type: type,
                     thesis_id: {{ $thesis_student_id }},
                     prefix: prefix,
                     content: content,
