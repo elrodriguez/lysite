@@ -398,7 +398,7 @@ class ThesisParts extends Component
 
                 $consulta =$consulta . "{" . $this->consulta . "}";
 
-                try {
+                try {2
                     $result = OpenAI::completions()->create([
                         'model' => 'gpt-3.5-turbo-instruct',
                         'prompt' => $consulta,
