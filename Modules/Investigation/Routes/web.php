@@ -61,6 +61,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
             Route::get('comentary/thesis/destroy/{id}/{tid}', 'ThesisStudentPartCommentaryController@destroyCommetsById')->name('investigation_thesis_destroy_comments');
         });
     });
+
+    Route::post('subindex/store', 'InveThesisStudentIndexController@store')->name('investigation_thesis_student_index_store');
 });
 
 Route::get('thesis_editor', function () {
@@ -92,5 +94,3 @@ Route::get('ckeditor_token', function () {
     // it should be returned in an HTTP response of the token endpoint.
     echo $jwt;
 })->name('ckeditor_token_generate');
-
-

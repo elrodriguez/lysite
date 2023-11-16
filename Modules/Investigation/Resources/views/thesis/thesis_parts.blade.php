@@ -81,6 +81,7 @@
         </script>
     @endsection
     @section('global-modal')
+
         <livewire:investigation::indexes.indexes-modal :thesis_student_id="$thesis_id" />
     @stop
 </x-master>
