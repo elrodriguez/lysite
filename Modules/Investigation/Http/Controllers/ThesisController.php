@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
+use Modules\Investigation\Entities\InveThesisFormat;
 use PDF;
 use Illuminate\Support\Str;
 
@@ -407,13 +408,43 @@ class ThesisController extends Controller
     }
     public function completethesis($thesis)
     {
+        $top_margin;
+        $bottom_margin;
+        $right_margin;
+        $left_margin;
         $thesis_margins = InveThesisStudent::where('id', $thesis)->where('user_id', Auth::id())->first();
+        $thesis_format_margins = InveThesisFormat::where('id', $thesis_margins->format_id)->first();
+
+        if($thesis_margins->top_margin == null){
+            $top_margin = $thesis_format_margins->top_margin;
+        }else{
+            $top_margin = $thesis_margins->top_margin;
+        }
+
+        if($thesis_margins->bottom_margin == null){
+            $bottom_margin = $thesis_format_margins->bottom_margin;
+        }else{
+            $bottom_margin = $thesis_margins->bottom_margin;
+        }
+
+        if($thesis_margins->left_margin == null){
+            $left_margin = $thesis_format_margins->left_margin;
+        }else{
+            $left_margin = $thesis_margins->left_margin;
+        }
+
+        if($thesis_margins->right_margin == null){
+            $right_margin = $thesis_format_margins->right_margin;
+        }else{
+            $right_margin = $thesis_margins->right_margin;
+        }
+        
         if($thesis_margins){
             return view('investigation::thesis.thesis_export_complete')->with('thesis', $thesis)
-            ->with('top_margin', $thesis_margins->top_margin)
-            ->with('bottom_margin', $thesis_margins->bottom_margin)
-            ->with('left_margin', $thesis_margins->left_margin)
-            ->with('right_margin', $thesis_margins->right_margin)
+            ->with('top_margin', $top_margin)
+            ->with('bottom_margin', $bottom_margin)
+            ->with('left_margin', $left_margin)
+            ->with('right_margin', $right_margin)
             ->with('title', $thesis_margins->title);
         }else{
             return redirect()->route('home');

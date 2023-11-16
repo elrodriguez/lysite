@@ -54,10 +54,10 @@ class StudentsList extends Component
             if ($student->person_id <> 1) {
                 $person = Person::find($student->person_id);
                 AcaStudent::find($id)->delete();
-                if ($person) {
-                    Person::find($student->person_id)->delete();
-                    User::find($person->user_id)->delete();
-                }
+                // if ($person) {
+                //     Person::find($student->person_id)->delete();  //NO DEBE ELIMINAR AL USUARIO NI PERSONA SOLO DEL CURSO
+                //     User::find($person->user_id)->delete();
+                // }
             }
         }
     }
