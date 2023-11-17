@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul class="nav justify-content-center">
+                    <ul class="nav justify-content-center" id="index-tabs">
                         <li class="nav-item">
                             <a class="nav-link {{ $type == 0 ? 'active' : '' }}" wire:click="activeType(0)"
                                 href="javascript:void(0)">General</a>
@@ -24,11 +24,12 @@
                                 href="javascript:void(0)">Imagenes</a>
                         </li>
                     </ul>
-                    <div wire:ignore>
+                    <div wire:ignore id="index-titulo-btn">
                         <button wire:click="addTitleIndexNew" id="btn-titulo-index" type="button"
                             class="btn btn-success btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
                     </div>
 
+                    <div id="index">
                     @if (count($items) > 0)
 
                         @foreach ($items as $k => $item)
@@ -89,7 +90,7 @@
                             </div>
                         @endforeach
                     @endif
-
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -330,8 +331,15 @@
         }
 
         function copyIndex(){
-            console.log(@this.copyIndex());
-            console.log(@this.type);
+            axios.get('{{ route("investigation_index_export",[$thesis_student_id,$type]) }}')
+            .then(function (response) {
+                // Manejar la respuesta exitosa
+                console.log("respuesta: ", response.data);
+            })
+            .catch(function (error) {
+                // Manejar el error
+                console.error(error);
+            });
         }
     </script>
 </div>

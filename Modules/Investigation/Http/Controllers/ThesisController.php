@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Investigation\Entities\InveThesisFormatPart;
 use Modules\Investigation\Entities\InveThesisStudent;
 use Modules\Investigation\Entities\InveThesisFormat;
+use Modules\Investigation\Entities\InveThesisStudentIndex;
 use PDF;
 use Illuminate\Support\Str;
 
@@ -480,5 +481,75 @@ class ThesisController extends Controller
             'content' => $content_old,
             'margins' => $margins
         ]);
+    }
+
+    public function index_export($thesis_id, $type){
+        
+        return $this->getIndexes_export($thesis_id, $type);
+
+    }
+
+    private function getIndexes_export($thesis_id, $type)
+    {
+        // $items_export = [];
+        // $index = InveThesisStudentIndex::where('type', $type)
+        //     ->where('thesis_id', $thesis_id)
+        //     ->whereNull('item_id')
+        //     ->orderBy('position')
+        //     ->get();
+
+        // if (count($index) > 0) {
+        //     foreach ($index as $row) {
+        //         array_push($items_export, [
+        //             'id'            => $row->id,
+        //             'thesis_id'     => $row->thesis_id,
+        //             'prefix'        => $row->prefix,
+        //             'content'       => $row->content,
+        //             'position'      => $row->position,
+        //             'page'          => $row->page,
+        //             'type'          => $row->type,
+        //             'items'         => $this->getSubIndexes_export($row->id, $thesis_id, $type)
+        //         ]);
+        //     }
+        // }
+
+        $items_export = "";
+        $index = InveThesisStudentIndex::where('type', $type)
+            ->where('thesis_id', $thesis_id)
+            ->whereNull('item_id')
+            ->orderBy('position')
+            ->get();
+
+        if (count($index) > 0) {
+            foreach ($index as $row) {
+                $items_export .= $row->prefix . " " . $row->content . " ..... " . $row->page . "\n" . $this->getSubIndexes_export($row->id, $thesis_id, $type);
+            }
+        }
+        return $items_export;
+    }
+
+    private function getSubIndexes_export($id, $thesis_id, $type)
+    {
+        $index = InveThesisStudentIndex::where('type', $type)
+            ->where('thesis_id', $thesis_id)
+            ->where('item_id', $id)
+            ->orderBy('position')
+            ->get();
+
+        $itemsHTML = '';
+        if (count($index) > 0) {
+            foreach ($index as $k => $row) {
+                $tab="";
+                for ($i=0; $i <= $k; $i++) { 
+                    $tab.="\t";
+                }
+
+                $itemsHTML .= $tab.
+                        $row->prefix. " " . $row->content . "....." . $row->page . "\n" .
+                        $this->getSubIndexes_export($row->id, $thesis_id, $type);
+            }
+        }
+        //dd($itemsHTML);
+        return $itemsHTML;
     }
 }

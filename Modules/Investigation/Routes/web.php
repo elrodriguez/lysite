@@ -59,6 +59,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(
             Route::post('recommendation/thesis', 'GetArticlesRecommendationController@getArticles')->name('investigation_thesis_recommendation');
             Route::get('comentary/thesis/data/{id}', 'ThesisStudentPartCommentaryController@getCommetsByThesis')->name('investigation_thesis_get_comments');
             Route::get('comentary/thesis/destroy/{id}/{tid}', 'ThesisStudentPartCommentaryController@destroyCommetsById')->name('investigation_thesis_destroy_comments');
+
+            Route::get('index/{thesis_id}/{type}', 'ThesisController@index_export')->name('investigation_index_export');
         });
     });
 
