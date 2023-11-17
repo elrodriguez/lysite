@@ -198,6 +198,36 @@
 
                     ]
                 },
+                fontFamily: {
+                    options: [
+                        'Times New Roman, serif',
+                        'Arial, sans-serif',
+                        'Courier New, monospace',
+                        'Georgia, serif',
+                        'Verdana, sans-serif'
+                    ]
+                
+                },
+                fontSize: {
+                        options: [
+                            { model: '10pt', title: '10' },
+                            { model: '11pt', title: '11' },
+                            { model: '12pt', title: '12' },
+                            { model: '14pt', title: '14' },
+                            { model: '16pt', title: '16' },
+                            { model: '18pt', title: '18' },
+                            { model: '20pt', title: '20' },
+                            { model: '24pt', title: '24' },
+                            { model: '30pt', title: '30' },
+                            { model: '36pt', title: '36' },
+                            { model: '40pt', title: '40' } 
+                        ]
+                    },
+                config: {
+                    fontFamily: {
+                        default: 'Times New Roman' // Establece "Times New Roman" como fuente predeterminada
+                    }
+                },
                 licenseKey: 'AH9z8JZzCLSSQ0QH0GEZwxX2c65Li7fafzEp7GaVXKRtezRZlEIY7lFoyIdA',
                 simpleUpload: {
                     uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
@@ -338,4 +368,9 @@
         }
     </script>
     @stack('scripts')
+    <style>
+        p {
+  font-family: "Times New Roman", Times, serif;
+}
+    </style>
 </div>
