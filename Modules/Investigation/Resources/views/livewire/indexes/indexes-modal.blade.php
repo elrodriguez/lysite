@@ -3,7 +3,8 @@
         aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <textarea name="" id="index_copy"  cols="1" rows="1" style="height: 0px; display:none;" ></textarea>
+                <input type="hidden" id="thesis-index-type" value="0">
+                <textarea name="" id="index_copy" cols="1" rows="1" style="height: 0px; display:none;"></textarea>
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalIndexesLabel">Índices</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -31,66 +32,67 @@
                     </div>
 
                     <div id="index">
-                    @if (count($items) > 0)
+                        @if (count($items) > 0)
 
-                        @foreach ($items as $k => $item)
-                            <div class="row mb-1">
-                                <div class="col-md-1 text-right">
-                                    @if ($item['id'])
-                                        <button
-                                            onclick="addSubIndexNewJS({{ $k }},{{ $item['id'] }},{{ $item['type'] }})"
-                                            type="button" class="btn btn-secondary btn-sm">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    @endif
-                                </div>
-                                <div class="col-md-1">
-                                    <input wire:model="items.{{ $k }}.prefix" id="prefix-{{ $k }}"
-                                        type="text" class="form-control form-control-sm text-right">
-                                </div>
-                                <div class="col-md-8">
-                                    <input wire:model="items.{{ $k }}.content"
-                                        id="content-{{ $k }}" type="text"
-                                        class="form-control form-control-sm" style="background: #fff">
-                                </div>
-                                <div class="col-md-1">
-                                    <input wire:model="items.{{ $k }}.page" id="page-{{ $k }}"
-                                        type="text" class="form-control form-control-sm text-right"
-                                        style="background: #fff">
-                                </div>
-                                <div class="col-md-1 text-right p-0">
-                                    <div class="input-group-prepend">
-                                        <button wire:loading.attr="disabled"
-                                            wire:click="saveTitleIndexNew({{ $k }})" type="button"
-                                            class="btn btn-success btn-sm mr-1">
-                                            <span wire:loading wire:target="saveTitleIndexNew({{ $k }})"
-                                                wire:loading.class="spinner-border spinner-border-sm"
-                                                wire:loading.class.remove="fal fa-check" class="fa fa-check"
-                                                role="status" aria-hidden="true"></span>
-                                        </button>
-                                        <button wire:click="removeTitleIndex({{ $k }})" type="button"
-                                            class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash-alt"></i>
-                                        </button>
+                            @foreach ($items as $k => $item)
+                                <div class="row mb-1">
+                                    <div class="col-md-1 text-right">
+                                        @if ($item['id'])
+                                            <button
+                                                onclick="addSubIndexNewJS({{ $k }},{{ $item['id'] }},{{ $item['type'] }})"
+                                                type="button" class="btn btn-secondary btn-sm">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input wire:model="items.{{ $k }}.prefix"
+                                            id="prefix-{{ $k }}" type="text"
+                                            class="form-control form-control-sm text-right">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input wire:model="items.{{ $k }}.content"
+                                            id="content-{{ $k }}" type="text"
+                                            class="form-control form-control-sm" style="background: #fff">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input wire:model="items.{{ $k }}.page"
+                                            id="page-{{ $k }}" type="text"
+                                            class="form-control form-control-sm text-right" style="background: #fff">
+                                    </div>
+                                    <div class="col-md-1 text-right p-0">
+                                        <div class="input-group-prepend">
+                                            <button wire:loading.attr="disabled"
+                                                wire:click="saveTitleIndexNew({{ $k }})" type="button"
+                                                class="btn btn-success btn-sm mr-1">
+                                                <span wire:loading wire:target="saveTitleIndexNew({{ $k }})"
+                                                    wire:loading.class="spinner-border spinner-border-sm"
+                                                    wire:loading.class.remove="fal fa-check" class="fa fa-check"
+                                                    role="status" aria-hidden="true"></span>
+                                            </button>
+                                            <button wire:click="removeTitleIndex({{ $k }})" type="button"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @error('items.' . $k . '.prefix')
+                                        <small>{{ $message }}</small>
+                                    @enderror
+                                    @error('items.' . $k . '.content')
+                                        <small>{{ $message }}</small>
+                                    @enderror
+                                    @error('items.' . $k . '.page')
+                                        <small>{{ $message }}</small>
+                                    @enderror
+                                    <div id="sub-items-{{ $k . $item['id'] }}" class="col-md-11 offset-md-1 mt-1">
+                                        @if ($item['items'])
+                                            {!! $item['items'] !!}
+                                        @endif
                                     </div>
                                 </div>
-                                @error('items.' . $k . '.prefix')
-                                    <small>{{ $message }}</small>
-                                @enderror
-                                @error('items.' . $k . '.content')
-                                    <small>{{ $message }}</small>
-                                @enderror
-                                @error('items.' . $k . '.page')
-                                    <small>{{ $message }}</small>
-                                @enderror
-                                <div id="sub-items-{{ $k . $item['id'] }}" class="col-md-11 offset-md-1 mt-1">
-                                    @if ($item['items'])
-                                        {!! $item['items'] !!}
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -112,6 +114,11 @@
         window.addEventListener('inve-thesis-indexes-item-store', event => {
             //let index = event.detail.keyItem;
             document.getElementById("btn-titulo-index").disabled = false;
+        });
+
+        window.addEventListener('inve-thesis-indexes-change-type', event => {
+            //let index = event.detail.keyItem;
+            document.getElementById("thesis-index-type").value = event.detail.index_type;
         });
 
         function addSubIndexNewJS(k, id, type) {
@@ -331,32 +338,38 @@
             }
         }
 
-        function copyIndex(){
-            axios.get('{{ route("investigation_index_export",[$thesis_student_id,$type]) }}')
-            .then(function (response) {
-                // Manejar la respuesta exitosa
-                var text = response.data;
-                var textarea_c = document.getElementById("index_copy");
-                textarea_c.style.display = "block";
-                textarea_c.value = text;
-                textarea_c.style.position = 'fixed'; // Asegura que el textarea sea visible
-                textarea_c.focus();
-                textarea_c.select();
+        function copyIndex() {
+            var datos = {
+                type: document.getElementById("thesis-index-type").value,
+                thesis_id: {{ $thesis_student_id }},
+            };
+            var routePost = "{{ route('investigation_index_export') }}";
 
-            try {
-                var successful = document.execCommand('copy');
-                var message = successful ? 'Texto copiado al portapapeles' : 'No se pudo copiar el texto al portapapeles';
-                console.log(message);
-            } catch (error) {
-                console.error('Error al copiar el texto al portapapeles:', error);
-            }
-            textarea_c.style.display = "none";
-            })
-            .catch(function (error) {
-                // Manejar el error
-                console.error(error);
-                textarea_c.style.display = "none";
-            });
+            axios.post(routePost, datos).then(function(response) {
+                    // Manejar la respuesta exitosa
+                    var text = response.data.html;
+                    var textarea_c = document.getElementById("index_copy");
+                    textarea_c.style.display = "block";
+                    textarea_c.value = text;
+                    textarea_c.style.position = 'fixed'; // Asegura que el textarea sea visible
+                    textarea_c.focus();
+                    textarea_c.select();
+
+                    try {
+                        var successful = document.execCommand('copy');
+                        var message = successful ? 'Texto copiado al portapapeles' :
+                            'No se pudo copiar el texto al portapapeles';
+                        console.log(message);
+                    } catch (error) {
+                        console.error('Error al copiar el texto al portapapeles:', error);
+                    }
+                    textarea_c.style.display = "none";
+                })
+                .catch(function(error) {
+                    // Manejar el error
+                    console.error(error);
+                    textarea_c.style.display = "none";
+                });
         }
     </script>
 </div>

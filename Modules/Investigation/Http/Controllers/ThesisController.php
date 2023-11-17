@@ -385,7 +385,7 @@ class ThesisController extends Controller
     }
 
     public function uploadImage(Request $request)
-    {   
+    {
         $file = $request->file('upload');
         //obtenemos el nombre del archivo
         //$extension = $file->getClientOriginalExtension();
@@ -393,10 +393,10 @@ class ThesisController extends Controller
 
         //genera random string
         $randomString = Str::random(10);
-        $id=Auth::id(); //lastimosamente será el id del que lo agrega que puede ser el isntructor o el estudiante, prefeririía el estudiante para q luego podamos eliminarlo todo
+        $id = Auth::id(); //lastimosamente será el id del que lo agrega que puede ser el isntructor o el estudiante, prefeririía el estudiante para q luego podamos eliminarlo todo
         //indicamos que queremos guardar un nuevo archivo en el disco local
         $path = $request->file('upload')->storeAs(
-            'thesis/user/'.$id.'/'.$randomString,
+            'thesis/user/' . $id . '/' . $randomString,
             $file_name,
             'public'
         );
@@ -416,41 +416,40 @@ class ThesisController extends Controller
         $thesis_margins = InveThesisStudent::where('id', $thesis)->where('user_id', Auth::id())->first();
         $thesis_format_margins = InveThesisFormat::where('id', $thesis_margins->format_id)->first();
 
-        if($thesis_margins->top_margin == null){
+        if ($thesis_margins->top_margin == null) {
             $top_margin = $thesis_format_margins->top_margin;
-        }else{
+        } else {
             $top_margin = $thesis_margins->top_margin;
         }
 
-        if($thesis_margins->bottom_margin == null){
+        if ($thesis_margins->bottom_margin == null) {
             $bottom_margin = $thesis_format_margins->bottom_margin;
-        }else{
+        } else {
             $bottom_margin = $thesis_margins->bottom_margin;
         }
 
-        if($thesis_margins->left_margin == null){
+        if ($thesis_margins->left_margin == null) {
             $left_margin = $thesis_format_margins->left_margin;
-        }else{
+        } else {
             $left_margin = $thesis_margins->left_margin;
         }
 
-        if($thesis_margins->right_margin == null){
+        if ($thesis_margins->right_margin == null) {
             $right_margin = $thesis_format_margins->right_margin;
-        }else{
+        } else {
             $right_margin = $thesis_margins->right_margin;
         }
-        
-        if($thesis_margins){
+
+        if ($thesis_margins) {
             return view('investigation::thesis.thesis_export_complete')->with('thesis', $thesis)
-            ->with('top_margin', $top_margin)
-            ->with('bottom_margin', $bottom_margin)
-            ->with('left_margin', $left_margin)
-            ->with('right_margin', $right_margin)
-            ->with('title', $thesis_margins->title);
-        }else{
+                ->with('top_margin', $top_margin)
+                ->with('bottom_margin', $bottom_margin)
+                ->with('left_margin', $left_margin)
+                ->with('right_margin', $right_margin)
+                ->with('title', $thesis_margins->title);
+        } else {
             return redirect()->route('home');
         }
-        
     }
     public function completethesisDatos(Request $request)
     {
@@ -483,10 +482,15 @@ class ThesisController extends Controller
         ]);
     }
 
-    public function index_export($thesis_id, $type){
-        
-        return $this->getIndexes_export($thesis_id, $type);
+    public function index_export(Request $request)
+    {
+        $type = $request->get('type');
+        $thesis_id = $request->get('thesis_id');
 
+        $html = $this->getIndexes_export($thesis_id, $type);
+        return response()->json([
+            'html' => $html
+        ]);
     }
 
     private function getIndexes_export($thesis_id, $type)
@@ -519,8 +523,8 @@ class ThesisController extends Controller
             ->whereNull('item_id')
             ->orderBy('position')
             ->get();
-        
-            $max_line=90;
+
+        $max_line = 90;
 
         if (count($index) > 0) {
             foreach ($index as $row) {
@@ -541,51 +545,51 @@ class ThesisController extends Controller
             ->where('item_id', $id)
             ->orderBy('position')
             ->get();
-    
+
         $itemsHTML = "";
         if (count($index) > 0) {
             foreach ($index as $k => $row) {
                 $tabulations = str_repeat("\t", $tabLevel);
-                
-                $max_line=90-($tabLevel*4);//para disminuir cada tabulacion aunque con cada letra es diferente
+
+                $max_line = 90 - ($tabLevel * 4); //para disminuir cada tabulacion aunque con cada letra es diferente
                 $totalLength = strlen($row->prefix) + strlen($row->content) + strlen($row->page);
                 $points = str_repeat(".", max(0, $max_line - $totalLength));
-                
+
                 $itemsHTML .= $tabulations . $row->prefix . " " . $row->content . $points . $row->page . "\n";
-                $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, $tabLevel+1);  //al tabLevel se le suma 1 cada que se profundiza y se resetea cuando sale de la recurrencia
+                $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, $tabLevel + 1);  //al tabLevel se le suma 1 cada que se profundiza y se resetea cuando sale de la recurrencia
                 if ($temp != "") {
                     $itemsHTML .= $temp;
                 }
             }
         }
-    
+
         return $itemsHTML;
     }
 
 
-//     private function getSubIndexes_export($id, $thesis_id, $type, $tabLevel = 1)
-// {
-//     $index = InveThesisStudentIndex::where('type', $type)
-//         ->where('thesis_id', $thesis_id)
-//         ->where('item_id', $id)
-//         ->orderBy('position')
-//         ->get();
+    //     private function getSubIndexes_export($id, $thesis_id, $type, $tabLevel = 1)
+    // {
+    //     $index = InveThesisStudentIndex::where('type', $type)
+    //         ->where('thesis_id', $thesis_id)
+    //         ->where('item_id', $id)
+    //         ->orderBy('position')
+    //         ->get();
 
-//     $itemsHTML = "";
-//     if (count($index) > 0) {
-//         foreach ($index as $k => $row) {
-//             $tabulations = str_repeat("\t", $tabLevel);
+    //     $itemsHTML = "";
+    //     if (count($index) > 0) {
+    //         foreach ($index as $k => $row) {
+    //             $tabulations = str_repeat("\t", $tabLevel);
 
-//             $itemsHTML .= $tabulations . $row->prefix . " " . $row->content . "................" . $row->page . "\n";
-//             $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, 2);
-//             if ($temp != "") {
-//                 $itemsHTML .= $temp;
-//             }
-//         }
-//     }
+    //             $itemsHTML .= $tabulations . $row->prefix . " " . $row->content . "................" . $row->page . "\n";
+    //             $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, 2);
+    //             if ($temp != "") {
+    //                 $itemsHTML .= $temp;
+    //             }
+    //         }
+    //     }
 
-//     return $itemsHTML;
-// }
+    //     return $itemsHTML;
+    // }
     // private function getSubIndexes_export($id, $thesis_id, $type)
     // {
     //     $index = InveThesisStudentIndex::where('type', $type)

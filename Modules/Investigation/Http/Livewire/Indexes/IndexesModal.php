@@ -27,6 +27,7 @@ class IndexesModal extends Component
     {
         $this->type = $type;
         $this->getIndexes();
+        $this->dispatchBrowserEvent('inve-thesis-indexes-change-type', ['index_type' => $this->type]);
     }
 
     public function addTitleIndexNew()
@@ -172,7 +173,7 @@ class IndexesModal extends Component
         return $itemsHTML;
     }
 
-    
+
     public function removeTitleSubIndex($id)
     {
         InveThesisStudentIndex::find($id)->delete();
