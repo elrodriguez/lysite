@@ -519,37 +519,96 @@ class ThesisController extends Controller
             ->whereNull('item_id')
             ->orderBy('position')
             ->get();
+        
+            $max_line=90;
 
         if (count($index) > 0) {
             foreach ($index as $row) {
-                $items_export .= $row->prefix . " " . $row->content . " ..... " . $row->page . "\n" . $this->getSubIndexes_export($row->id, $thesis_id, $type);
+                $totalLength = strlen($row->prefix) + strlen($row->content) + strlen($row->page);
+                $points = str_repeat(".", max(0, $max_line - $totalLength)); // Restamos 5 para tener en cuenta los espacios y los puntos suspensivos
+
+                $items_export .= $row->prefix . " " . $row->content . $points . $row->page . "\n";
+                $items_export .=  $this->getSubIndexes_export($row->id, $thesis_id, $type, 1);
             }
         }
         return $items_export;
     }
 
-    private function getSubIndexes_export($id, $thesis_id, $type)
+    private function getSubIndexes_export($id, $thesis_id, $type, $tabLevel = 1) //$tabLevel sirve para ver la profundidad de recurrencia y asignar las tabulaciones
     {
         $index = InveThesisStudentIndex::where('type', $type)
             ->where('thesis_id', $thesis_id)
             ->where('item_id', $id)
             ->orderBy('position')
             ->get();
-
-        $itemsHTML = '';
+    
+        $itemsHTML = "";
         if (count($index) > 0) {
             foreach ($index as $k => $row) {
-                $tab="";
-                for ($i=0; $i <= $k; $i++) { 
-                    $tab.="\t";
+                $tabulations = str_repeat("\t", $tabLevel);
+                
+                $max_line=90-($tabLevel*4);//para disminuir cada tabulacion aunque con cada letra es diferente
+                $totalLength = strlen($row->prefix) + strlen($row->content) + strlen($row->page);
+                $points = str_repeat(".", max(0, $max_line - $totalLength));
+                
+                $itemsHTML .= $tabulations . $row->prefix . " " . $row->content . $points . $row->page . "\n";
+                $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, $tabLevel+1);  //al tabLevel se le suma 1 cada que se profundiza y se resetea cuando sale de la recurrencia
+                if ($temp != "") {
+                    $itemsHTML .= $temp;
                 }
-
-                $itemsHTML .= $tab.
-                        $row->prefix. " " . $row->content . "....." . $row->page . "\n" .
-                        $this->getSubIndexes_export($row->id, $thesis_id, $type);
             }
         }
-        //dd($itemsHTML);
+    
         return $itemsHTML;
     }
+
+
+//     private function getSubIndexes_export($id, $thesis_id, $type, $tabLevel = 1)
+// {
+//     $index = InveThesisStudentIndex::where('type', $type)
+//         ->where('thesis_id', $thesis_id)
+//         ->where('item_id', $id)
+//         ->orderBy('position')
+//         ->get();
+
+//     $itemsHTML = "";
+//     if (count($index) > 0) {
+//         foreach ($index as $k => $row) {
+//             $tabulations = str_repeat("\t", $tabLevel);
+
+//             $itemsHTML .= $tabulations . $row->prefix . " " . $row->content . "................" . $row->page . "\n";
+//             $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, 2);
+//             if ($temp != "") {
+//                 $itemsHTML .= $temp;
+//             }
+//         }
+//     }
+
+//     return $itemsHTML;
+// }
+    // private function getSubIndexes_export($id, $thesis_id, $type)
+    // {
+    //     $index = InveThesisStudentIndex::where('type', $type)
+    //         ->where('thesis_id', $thesis_id)
+    //         ->where('item_id', $id)
+    //         ->orderBy('position')
+    //         ->get();
+
+    //     $itemsHTML = "\t";
+    //     if (count($index) > 0) {
+    //         foreach ($index as $k => $row) {
+
+    //             $itemsHTML .= "\t".
+    //                     $row->prefix. " " . $row->content . "....." . $row->page . "\n";
+    //             $temp=$this->getSubIndexes_export($row->id, $thesis_id, $type);
+    //             if($temp != ""){
+    //                 $itemsHTML .= "\t". $temp;
+    //             }
+    //         }
+    //     }else{
+    //         $itemsHTML="";
+    //     }
+    //     //dd($itemsHTML);
+    //     return $itemsHTML;
+    // }
 }

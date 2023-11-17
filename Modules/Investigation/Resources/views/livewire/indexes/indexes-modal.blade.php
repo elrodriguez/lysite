@@ -3,6 +3,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
+                <textarea name="" id="index_copy"  cols="1" rows="1" style="height: 0px; display:none;" ></textarea>
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalIndexesLabel">Índices</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -334,11 +335,27 @@
             axios.get('{{ route("investigation_index_export",[$thesis_student_id,$type]) }}')
             .then(function (response) {
                 // Manejar la respuesta exitosa
-                console.log("respuesta: ", response.data);
+                var text = response.data;
+                var textarea_c = document.getElementById("index_copy");
+                textarea_c.style.display = "block";
+                textarea_c.value = text;
+                textarea_c.style.position = 'fixed'; // Asegura que el textarea sea visible
+                textarea_c.focus();
+                textarea_c.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var message = successful ? 'Texto copiado al portapapeles' : 'No se pudo copiar el texto al portapapeles';
+                console.log(message);
+            } catch (error) {
+                console.error('Error al copiar el texto al portapapeles:', error);
+            }
+            textarea_c.style.display = "none";
             })
             .catch(function (error) {
                 // Manejar el error
                 console.error(error);
+                textarea_c.style.display = "none";
             });
         }
     </script>
