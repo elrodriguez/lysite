@@ -92,8 +92,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Copiar Indice</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="copyIndex()">Copiar Indice</button>
                 </div>
             </div>
         </div>
@@ -327,6 +327,11 @@
                         span.classList.add('fa-check');
                     });
             }
+        }
+
+        function copyIndex(){
+            console.log(@this.copyIndex());
+            console.log(@this.type);
         }
     </script>
 </div>

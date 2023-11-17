@@ -11,6 +11,7 @@ class IndexesModal extends Component
     public $type = 0;
 
     public $items = [];
+    public $items_export = [];
 
     public function mount($thesis_student_id)
     {
@@ -112,6 +113,32 @@ class IndexesModal extends Component
             }
         }
     }
+
+    public function getIndexes_export()
+    {
+        $this->items_export = [];
+        $index = InveThesisStudentIndex::where('type', $this->type)
+            ->where('thesis_id', $this->thesis_student_id)
+            ->whereNull('item_id')
+            ->orderBy('position')
+            ->get();
+
+        if (count($index) > 0) {
+            foreach ($index as $row) {
+                array_push($this->items_export, [
+                    'id'            => $row->id,
+                    'thesis_id'     => $row->thesis_id,
+                    'prefix'        => $row->prefix,
+                    'content'       => $row->content,
+                    'position'      => $row->position,
+                    'page'          => $row->page,
+                    'type'          => $row->type,
+                    'items'         => $this->getSubIndexes_export($row->id)
+                ]);
+            }
+        }
+    }
+
     public function getSubIndexes($id)
     {
         $index = InveThesisStudentIndex::where('type', $this->type)
@@ -170,9 +197,63 @@ class IndexesModal extends Component
         return $itemsHTML;
     }
 
+    public function getSubIndexes_export($id)
+    {
+        $index = InveThesisStudentIndex::where('type', $this->type)
+            ->where('thesis_id', $this->thesis_student_id)
+            ->where('item_id', $id)
+            ->orderBy('position')
+            ->get();
+
+        $itemsHTML = '';
+        if (count($index) > 0) {
+            foreach ($index as $k => $row) {
+
+                $itemsHTML .= '
+                    <div>
+                       <ul><li>'
+                       .$row->prefix.
+                       '</li></ul>
+                        <div class="col-md-8">
+                            <input
+                                id="subcontent-db-' . $k . $row->id . '" type="text"
+                                value="' . $row->content . '"
+                                class="form-control form-control-sm" style="background: #fff">
+                        </div>
+                        <div class="col-md-1">
+                            <input 
+                                id="subpage-db-' . $k . $row->id . '" type="text"
+                                value="' . $row->page . '"
+                                class="form-control form-control-sm text-right"
+                                style="background: #fff">
+                        </div>
+                        <div class="col-md-1">
+                            <div class="input-group-prepend">
+                                <button onclick="saveSubItemUpdateJS(' . $k . ',' . $id . ',' . $row->id . ')" id="btn-new-subitem-db-' . $k . $row->id . '" type="button" class="btn btn-success btn-sm mr-1">
+                                    <span id="span-new-subitem-db-' . $k . $row->id . '" class="fa fa-check" ></span>
+                                </button>
+                                <button onclick="removeSubItemDB(' . $k . ',' . $row->id . ')"
+                                    type="button" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="sub-items-' . $k . $row->id . '"  class="col-md-11 offset-md-1 mt-1">' . $this->getSubIndexes_export($row->id) . '</div>
+                    </div>';
+            }
+        }
+        //dd($itemsHTML);
+        return $itemsHTML;
+    }
+
     public function removeTitleSubIndex($id)
     {
         InveThesisStudentIndex::find($id)->delete();
         $this->getIndexes();
+    }
+    public function copyIndex(){ //exporta el indice para que sea copiado
+            $this->getIndexes_export();        
+            return $this->items_export;
     }
 }
