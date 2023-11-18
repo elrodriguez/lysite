@@ -12,6 +12,7 @@ class InveThesisStudentIndexController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         $id = $request->get('id');
         $sc = InveThesisStudentIndex::where('item_id', $request->get('item_id'))->get();
         $position = count($sc);

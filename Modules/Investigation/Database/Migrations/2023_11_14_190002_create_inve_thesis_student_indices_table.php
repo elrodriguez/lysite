@@ -17,7 +17,7 @@ class CreateInveThesisStudentIndicesTable extends Migration
             $table->id();
             $table->integer('type')->comment('0=general,1=tablas,2=imagen');
             $table->unsignedBigInteger('thesis_id');
-            $table->string('prefix', 6)->nullable();
+            $table->string('prefix')->nullable();
             $table->string('content', 400)->nullable();
             $table->string('position', 4)->nullable();
             $table->unsignedBigInteger('item_id')->nullable();
