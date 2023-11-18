@@ -951,13 +951,4 @@ hacerClicEnSpan();
   font-family: "Times New Roman", Times, serif;
 }
     </style>
-
-    <script>
-            document.body.addEventListener('DOMNodeInserted', function(event) {
-                // Verifica si el elemento agregado es un strong
-                if (event.target.nodeName === 'p') {
-                    event.target.style.fontFamily = '"Times New Roman", Times, serif';
-                }
-            });
-    </script>
 </div>
