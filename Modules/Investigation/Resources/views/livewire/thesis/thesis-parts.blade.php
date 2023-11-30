@@ -947,7 +947,7 @@ hacerClicEnSpan();
     </script>
     <div id="dialog-ckeditor"></div>
     <style>
-        p {
+    #editor p {
   font-family: "Times New Roman", Times, serif;
 }
     </style>
