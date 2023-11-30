@@ -100,21 +100,27 @@ class ThesisController extends Controller
                     ->select('inve_thesis_student_parts.content')
                     ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
                     ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
-                    ->where('inve_thesis_student_parts.state', true);
+                    ->where('inve_thesis_student_parts.state', true)
+                    ->orderBy('inve_thesis_student_parts.id', 'DESC')
+                    ->limit(1);
             }, 'content')
             ->selectSub(function ($query) use ($thesis_id) {
                 $query->from('inve_thesis_student_parts')
                     ->select('inve_thesis_student_parts.right_margin')
                     ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
                     ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
-                    ->where('inve_thesis_student_parts.state', true);
+                    ->where('inve_thesis_student_parts.state', true)
+                    ->orderBy('inve_thesis_student_parts.id', 'DESC')
+                    ->limit(1);
             }, 'right_margin')
             ->selectSub(function ($query) use ($thesis_id) {
                 $query->from('inve_thesis_student_parts')
                     ->select('inve_thesis_student_parts.left_margin')
                     ->where('inve_thesis_student_parts.inve_thesis_student_id', $thesis_id)
                     ->whereColumn('inve_thesis_student_parts.inve_thesis_format_part_id', 'inve_thesis_format_parts.id')
-                    ->where('inve_thesis_student_parts.state', true);
+                    ->where('inve_thesis_student_parts.state', true)
+                    ->orderBy('inve_thesis_student_parts.id', 'DESC')
+                    ->limit(1);
             }, 'left_margin')
             ->whereRaw('IF(inve_thesis_format_parts.belongs IS NULL OR inve_thesis_format_parts.belongs = "",TRUE, FALSE)')
             ->where('inve_thesis_students.person_id', $person->id)
@@ -565,5 +571,4 @@ class ThesisController extends Controller
 
         return $itemsHTML;
     }
-
 }
