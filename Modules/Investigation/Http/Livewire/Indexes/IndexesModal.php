@@ -4,6 +4,9 @@ namespace Modules\Investigation\Http\Livewire\Indexes;
 
 use Livewire\Component;
 use Modules\Investigation\Entities\InveThesisStudentIndex;
+use Modules\Investigation\Entities\InveThesisFormat;
+use Modules\Investigation\Entities\InveThesisFormatPart;
+use Modules\Investigation\Entities\InveThesisStudent;
 
 class IndexesModal extends Component
 {
@@ -15,8 +18,8 @@ class IndexesModal extends Component
 
     public function mount($thesis_student_id)
     {
-        $this->getIndexes();
         $this->thesis_student_id = $thesis_student_id;
+        $this->getIndexes();        
     }
     public function render()
     {
@@ -112,6 +115,10 @@ class IndexesModal extends Component
                     'items'         => $this->getSubIndexes($row->id)
                 ]);
             }
+        }else{ //si no tiene indice se creará
+            if($this->type==0){ //solo si es tipo general
+                $this->createIndexfromFormatThesis();
+            }
         }
     }
 
@@ -178,5 +185,47 @@ class IndexesModal extends Component
     {
         InveThesisStudentIndex::find($id)->delete();
         $this->getIndexes();
+    }
+    private function createIndexfromFormatThesis()
+    {
+        
+        $thesis_id=InveThesisStudent::find($this->thesis_student_id)->format_id;        
+        $main_indexs=InveThesisFormatPart::where('thesis_format_id', $thesis_id)
+        ->where('deleted_at', null)
+        ->where('belongs', null)->get();
+        
+        foreach ($main_indexs as $key => $item) {
+            $newIndex = new InveThesisStudentIndex();
+            $newIndex->content = $item->description;
+            $newIndex->position = $item->index_order;              
+            $newIndex->prefix = $item->number_order; 
+            $newIndex->thesis_id = $this->thesis_student_id;
+            $newIndex->page = "?";
+            $newIndex->type=0; //tipo General
+            $newIndex->save();
+            $new_item_id = $newIndex->id;
+            $this->createBelongIndexfromFormatThesis($item->id, $new_item_id);      
+        }
+        $this->getIndexes();                
+    }
+
+    private function createBelongIndexfromFormatThesis($id, $new_item_id){ //id de formato parte y el id del nuevo indice creado
+        $belong_indexs=InveThesisFormatPart::where('belongs', $id) //busco las partes que pertenecen a otra en los formatos de tesis
+            ->where('deleted_at', null)->get();
+        if(count($belong_indexs)>0){
+            foreach ($belong_indexs as $key => $item) { 
+                $newIndex = new InveThesisStudentIndex();
+                $newIndex->content = $item->description;
+                $newIndex->position = $item->index_order;              
+                $newIndex->prefix = $item->number_order; 
+                $newIndex->thesis_id = $this->thesis_student_id;
+                $newIndex->page = "?";
+                $newIndex->item_id = $new_item_id;
+                $newIndex->type=0; //tipo General
+                $newIndex->save();                
+                $new_itemId = $newIndex->id;
+                $this->createBelongIndexfromFormatThesis($item->id, $new_itemId);      
+            }
+        }    
     }
 }
