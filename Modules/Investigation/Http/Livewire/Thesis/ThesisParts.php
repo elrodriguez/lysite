@@ -65,8 +65,8 @@ class ThesisParts extends Component
             $this->format_id = $this->thesis_student->format_id;
             $this->format = InveThesisFormat::where('id', $this->format_id)->get()->first();
 
-             //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
-             if ($this->thesis_student->left_margin == null) {
+            //--------------------------------si el alumno no modificó el margen usará el de InveThesisFormat
+            if ($this->thesis_student->left_margin == null) {
                 $this->left_margin = $this->format->left_margin;
             } else {
                 $this->left_margin = $this->thesis_student->left_margin;
@@ -98,7 +98,7 @@ class ThesisParts extends Component
 
                 $this->content = $this->content_old;
                 $this->commentary = $ThesisStudentPart->commentary;
-   
+
                 $this->ThesisStudentPart = $ThesisStudentPart;
             }
         } else {
@@ -288,9 +288,9 @@ class ThesisParts extends Component
 
     public function save()
     {
-        // InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
-        //     ->where('inve_thesis_format_part_id', $this->focus_id)
-        //     ->update(['state' => false]);
+        InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
+            ->where('inve_thesis_format_part_id', $this->focus_id)
+            ->update(['state' => false]);
 
         // $max_version = InveThesisStudentPart::where('inve_thesis_student_id', $this->thesis_student->id)
         //     ->where('inve_thesis_format_part_id', $this->focus_id)
@@ -385,18 +385,18 @@ class ThesisParts extends Component
                 $consulta;
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                switch($this->prompt){
-                  case  0: 
-                    $consulta = "Parafraséame este texto en español como si fueras un docente universitario: ";
-                    break;
-                  case  1: 
-                    $consulta = "Parafraséame este texto en español como si fueras un experto en investigación: ";
-                    break;
-                  case  2: 
-                    $consulta = "Parafraséame este texto en español con el objetivo de reducir el mayor grado de similitud: ";
+                switch ($this->prompt) {
+                    case  0:
+                        $consulta = "Parafraséame este texto en español como si fueras un docente universitario: ";
+                        break;
+                    case  1:
+                        $consulta = "Parafraséame este texto en español como si fueras un experto en investigación: ";
+                        break;
+                    case  2:
+                        $consulta = "Parafraséame este texto en español con el objetivo de reducir el mayor grado de similitud: ";
                 }
 
-                $consulta =$consulta . "{" . $this->consulta . "}";
+                $consulta = $consulta . "{" . $this->consulta . "}";
 
                 try {
                     $result = OpenAI::completions()->create([
