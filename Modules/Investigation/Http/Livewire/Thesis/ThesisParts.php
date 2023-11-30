@@ -305,7 +305,8 @@ class ThesisParts extends Component
                     'student_id' => $this->thesis_student->student_id,
                     'inve_thesis_student_id' => $this->thesis_student->id,
                     'inve_thesis_format_part_id' => $this->focus_id,
-                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8")
+                    'content' => htmlentities($this->content, ENT_QUOTES, "UTF-8"),
+                    'state' => true
                 ]);
             InveThesisStudent::where('id', $this->thesis_student->id)->update([
                 'right_margin' => $this->right_margin,
