@@ -101,7 +101,7 @@ class IndexesModal extends Component
             ->whereNull('item_id')
             ->orderBy('position')
             ->get();
-        dd($index);
+
         if (count($index) > 0) {
             foreach ($index as $row) {
                 array_push($this->items, [
@@ -189,10 +189,12 @@ class IndexesModal extends Component
     private function createIndexfromFormatThesis()
     {
 
+
         $thesis_id = InveThesisStudent::find($this->thesis_student_id)->format_id;
         $main_indexs = InveThesisFormatPart::where('thesis_format_id', $thesis_id)
             ->where('deleted_at', null)
             ->where('belongs', null)->get();
+
 
         foreach ($main_indexs as $key => $item) {
             $newIndex = new InveThesisStudentIndex();
