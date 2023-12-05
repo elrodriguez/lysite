@@ -193,7 +193,7 @@ class IndexesModal extends Component
         $main_indexs=InveThesisFormatPart::where('thesis_format_id', $thesis_id)
         ->where('deleted_at', null)
         ->where('belongs', null)
-        ->orderBy('position', 'asc')
+        ->orderBy('index_order', 'asc')
         ->get();
         
         foreach ($main_indexs as $key => $item) {
