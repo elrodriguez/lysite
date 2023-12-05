@@ -6,7 +6,6 @@
         <i id="alert-message" class="material-icons ">{{ $alert_message ? 'markunreadchat' : 'group' }}</i>
 
     </button>
-
     @if (!$is_instructor && 0 > 1)
 
         <div class="dropdown-menu dropdown-menu-right">

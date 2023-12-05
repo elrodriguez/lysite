@@ -20,6 +20,9 @@ class ContactList extends Component
     public $search = "";
     public $alert_message = false;
 
+    public $trueEstudent = false;
+    public $trueInstructor = false;
+
     public function mount()
     {
         $this->loadData();
@@ -185,21 +188,32 @@ class ContactList extends Component
 
         foreach ($this->students as $student) {
             if ($student['is_seen'] == 0 && !is_null($student['is_seen'])) {
-                $this->alert_message = true;
+                if (Auth::id() == $student['id']) {
+                    $this->trueEstudent = false;
+                } else {
+                    $this->trueEstudent = true;
+                }
+
                 break;
             }
         }
         foreach ($this->instructors as $instructor) {
             if ($instructor['is_seen'] == 0 && !is_null($instructor['is_seen'])) {
-                $this->alert_message = true;
+                if (Auth::id() == $instructor['id']) {
+                    $this->trueInstructor = false;
+                } else {
+                    $this->trueInstructor = true;
+                }
                 break;
             }
         }
 
-
         $role_id = DB::table('model_has_roles')->where('model_type', User::class)->where('model_id', Auth::user()->id)->first()->role_id;
         if (Role::find($role_id)->name == "Instructor") {
             $this->is_instructor = true;
+            $this->alert_message = $this->trueInstructor;
+        } else {
+            $this->alert_message = $this->trueEstudent;
         }
     }
 

@@ -26,6 +26,9 @@ class ChatController extends Controller
             $index = Auth::id() . "-" . $id; // instructor
         }
 
+        ChatMessage::where('conversation_ids', $index)->update([
+            'is_seen' => true
+        ]);
 
         $chats = [];
 
