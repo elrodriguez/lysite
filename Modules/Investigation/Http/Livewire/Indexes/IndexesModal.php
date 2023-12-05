@@ -192,7 +192,9 @@ class IndexesModal extends Component
         $thesis_id=InveThesisStudent::find($this->thesis_student_id)->format_id;        
         $main_indexs=InveThesisFormatPart::where('thesis_format_id', $thesis_id)
         ->where('deleted_at', null)
-        ->where('belongs', null)->get();
+        ->where('belongs', null)
+        ->orderBy('position', 'asc')
+        ->get();
         
         foreach ($main_indexs as $key => $item) {
             $newIndex = new InveThesisStudentIndex();
