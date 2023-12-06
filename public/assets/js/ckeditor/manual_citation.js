@@ -141,9 +141,9 @@ function manual_citation(event) {
             if (volumen.length < 1 && numero.length < 1) {
                 volnum = "";
             } else {
-                volnum = volumen.trim() + "(" + numero.trim() + "), ";
+                volnum = "<em>" + volumen.trim() + "</em>" + "(" + numero.trim() + "), ";
             }
-            concatenado = cita_autores + "(" + anio + "). " + title.trim() + ", " + "<em>" + institucion.trim() + ", " + volnum + "</em>" + paginas + ". " + doi;
+            concatenado = cita_autores + "(" + anio + "). " + title.trim() + ", " + "<em>" + institucion.trim() + ",</em> " + volnum + paginas + ". " + doi;
 
         }
 
