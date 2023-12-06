@@ -143,7 +143,7 @@ function manual_citation(event) {
             } else {
                 volnum = "<em>" + volumen.trim() + "</em>" + "(" + numero.trim() + "), ";
             }
-            concatenado = cita_autores + "(" + anio + "). " + title.trim() + ", " + "<em>" + institucion.trim() + ",</em> " + volnum + paginas + ". " + doi;
+            concatenado = cita_autores + "(" + anio + "). " + title.trim() + ". " + "<em>" + institucion.trim() + ",</em> " + volnum + paginas + ". " + doi;
 
         }
 
