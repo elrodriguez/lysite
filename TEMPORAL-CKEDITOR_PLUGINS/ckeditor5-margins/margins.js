@@ -24,6 +24,12 @@ export default class margins extends Plugin {
             } );
 
             view.on( 'execute', () => {
+				let xleftMargin = document.getElementById('xleft-margin').value
+				let xrightMargin = document.getElementById('xright-margin').value
+				let xtopMargin = document.getElementById('xtop-margin').value
+				let xbottomMargin = document.getElementById('xbottom-margin').value
+
+
                 const form = `
 				<div id="ckmodal" class="ly-ck-dialog ly-ck-dialog-300">
 					<div class="ly-ck-dialog-header">
@@ -33,19 +39,19 @@ export default class margins extends Plugin {
 					<form class="ly-ck-dialog-form">
 						<div class="ly-ck-dialog-group-control">
 							<label class="ly-ck-dialog-label" for="left-margin">Margen Izquierdo en mm:</label>
-							<input class="ly-ck-dialog-input" type="number" id="left-margin" name="left-margin">
+							<input class="ly-ck-dialog-input" value="${xleftMargin}" type="number" id="left-margin" name="left-margin">
 						</div>
 						<div class="ly-ck-dialog-group-control">
 							<label class="ly-ck-dialog-label" for="right-margin">Margen Derecho en mm:</label>
-							<input class="ly-ck-dialog-input" type="number" id="right-margin" name="right-margin">
+							<input class="ly-ck-dialog-input" value="${xrightMargin}" type="number" id="right-margin" name="right-margin">
 						</div>
 						<div class="ly-ck-dialog-group-control">
 							<label class="ly-ck-dialog-label" for="top-margin">Margen Arriba en mm:</label>
-							<input class="ly-ck-dialog-input" type="number" id="top-margin" name="top-margin">
+							<input class="ly-ck-dialog-input" value="${xtopMargin}" type="number" id="top-margin" name="top-margin">
 						</div>
 						<div class="ly-ck-dialog-group-control">
 							<label class="ly-ck-dialog-label" for="bottom-margin">Margen Abajo en mm:</label>
-							<input class="ly-ck-dialog-input" type="number" id="bottom-margin" name="bottom-margin">
+							<input class="ly-ck-dialog-input" value="${xbottomMargin}" type="number" id="bottom-margin" name="bottom-margin">
 						</div>
 						<div class="ly-ck-dialog-buttons">
 							<button class="ly-ck-dialog-button" type="button" id="submit-margins" onclick="saving()">
