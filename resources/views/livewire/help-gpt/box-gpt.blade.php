@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="gpt-inbox_chat">
-                    <div class="gpt-chat_list">
+                    <div class="gpt-chat_list" wire:click="setBtnActive(1)">
                         <div class="gpt-chat_people">
                             <div class="gpt-chat_img">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="37" height="32"
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="gpt-chat_list">
+                    <div class="gpt-chat_list" wire:click="setBtnActive(2)">
                         <div class="gpt-chat_people">
                             <div class="gpt-chat_img">
                                 <svg class="gpt-img" id="Layer_1" viewBox="0 0 24 24"
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="gpt-chat_list">
+                    <div class="gpt-chat_list" wire:click="setBtnActive(3)">
                         <div class="gpt-chat_people">
                             <div class="gpt-chat_img">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="gpt-img"
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="gpt-chat_list">
+                    <div class="gpt-chat_list" wire:click="setBtnActive(4)">
                         <div class="gpt-chat_people">
                             <div class="gpt-chat_img">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="gpt-img"
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="gpt-chat_list">
+                    <div class="gpt-chat_list" wire:click="setBtnActive(5)">
                         <div class="gpt-chat_people">
                             <div class="gpt-chat_img">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="gpt-img"
@@ -101,58 +101,42 @@
             </div>
             <div class="gpt-mesgs">
                 <div class="gpt-msg_history">
-                    <div class="gpt-incoming_msg">
-                        <div class="gpt-incoming_msg_img"> <img class="gpt-img"
-                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                        <div class="gpt-received_msg">
-                            <div class="gpt-received_withd_msg">
-                                <p>Test which is a new approach to have all
-                                    solutions</p>
-                                <span class="gpt-time_date"> 11:01 AM | June 9</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gpt-outgoing_msg">
-                        <div class="gpt-sent_msg">
-                            <p>Test which is a new approach to have all
-                                solutions</p>
-                            <span class="gpt-time_date"> 11:01 AM | June 9</span>
-                        </div>
-                    </div>
-                    <div class="gpt-incoming_msg">
-                        <div class="gpt-incoming_msg_img"> <img class="gpt-img"
-                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                        <div class="gpt-received_msg">
-                            <div class="gpt-received_withd_msg">
-                                <p>Test, which is a new approach to have</p>
-                                <span class="gpt-time_date"> 11:01 AM | Yesterday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gpt-outgoing_msg">
-                        <div class="gpt-sent_msg">
-                            <p>Apollo University, Delhi, India Test</p>
-                            <span class="gpt-time_date"> 11:01 AM | Today</span>
-                        </div>
-                    </div>
-                    <div class="gpt-incoming_msg">
-                        <div class="gpt-incoming_msg_img"> <img class="gpt-img"
-                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                        <div class="gpt-received_msg">
-                            <div class="gpt-received_withd_msg">
-                                <p>We work directly with our designers and suppliers,
-                                    and sell direct to you, which means quality, exclusive
-                                    products, at a price anyone can afford.</p>
-                                <span class="gpt-time_date"> 11:01 AM | Today</span>
-                            </div>
-                        </div>
-                    </div>
+                    @if ($history)
+                        @if (count($historyItems) > 0)
+                            @foreach ($historyItems as $item)
+                                @if ($item->my_user)
+                                    <div class="gpt-outgoing_msg">
+                                        <div class="gpt-sent_msg">
+                                            <p>{{ $item->content }}</p>
+                                            <span
+                                                class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="gpt-incoming_msg">
+                                        <div class="gpt-incoming_msg_img">
+                                            <img class="gpt-img" src="https://ptetutorials.com/images/user-profile.png"
+                                                alt="sunil">
+                                        </div>
+                                        <div class="gpt-received_msg">
+                                            <div class="gpt-received_withd_msg">
+                                                <p>{{ $item->content }}</p>
+                                                <span
+                                                    class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
+                    @endif
                 </div>
                 <div class="gpt-type_msg">
                     <div class="gpt-input_msg_write">
-                        <input type="text" class="gpt-write_msg" placeholder="Type a message" />
-                        <button class="gpt-msg_send_btn" type="button"><i class="fa fa-location-arrow"
-                                aria-hidden="true"></i></button>
+                        <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
+                        <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button">
+                            <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -92,7 +92,7 @@
   padding: 18px 16px 10px;
 }
 .gpt-inbox_chat { 
-  height: 550px;
+  height: 610px;
 }
 
 .gpt-active_chat{ background:#ebebeb;}
@@ -142,12 +142,12 @@
   float: right;
   width: 46%;
 }
-.gpt-input_msg_write input {
+.gpt-input_msg_write textarea {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: medium none;
   color: #4c4c4c;
   font-size: 15px;
-  min-height: 48px;
+  min-height: 108px;
   width: 100%;
 }
 
@@ -169,4 +169,11 @@
 .gpt-msg_history {
   height: 516px;
   overflow-y: auto;
+}
+.gpt-chat_list:hover{ 
+  background-color: #fefefe;
+  cursor: pointer;
+}
+.gpt-chat_list:active {
+  background-color: #fefefe; /* Color durante el clic */
 }
