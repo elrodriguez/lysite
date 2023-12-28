@@ -347,10 +347,16 @@
 
             axios.post(routePost, datos).then(function(response) {
                     // Manejar la respuesta exitosa
-                    var text = response.data.html;
+                    var text = response.data.html; 
+
+                   // Crear un elemento de div temporal
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = '***\n'+text+'\n***';
+
+
                     var textarea_c = document.getElementById("index_copy");
                     textarea_c.style.display = "block";
-                    textarea_c.value = text;
+                    textarea_c.value = tempDiv.innerHTML;
                     textarea_c.style.position = 'fixed'; // Asegura que el textarea sea visible
                     textarea_c.focus();
                     textarea_c.select();
@@ -364,12 +370,14 @@
                         console.error('Error al copiar el texto al portapapeles:', error);
                     }
                     textarea_c.style.display = "none";
+                    
                 })
                 .catch(function(error) {
                     // Manejar el error
                     console.error(error);
                     textarea_c.style.display = "none";
                 });
+                
         }
     </script>
 </div>

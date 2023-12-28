@@ -493,36 +493,14 @@ class ThesisController extends Controller
         $type = $request->get('type');
         $thesis_id = $request->get('thesis_id');
 
-        $html = $this->getIndexes_export($thesis_id, $type);
+        $html = "<table>" . $this->getIndexes_export($thesis_id, $type) . "</table>";
         return response()->json([
             'html' => $html
         ]);
     }
 
     private function getIndexes_export($thesis_id, $type)
-    {
-        // $items_export = [];
-        // $index = InveThesisStudentIndex::where('type', $type)
-        //     ->where('thesis_id', $thesis_id)
-        //     ->whereNull('item_id')
-        //     ->orderBy('position')
-        //     ->get();
-
-        // if (count($index) > 0) {
-        //     foreach ($index as $row) {
-        //         array_push($items_export, [
-        //             'id'            => $row->id,
-        //             'thesis_id'     => $row->thesis_id,
-        //             'prefix'        => $row->prefix,
-        //             'content'       => $row->content,
-        //             'position'      => $row->position,
-        //             'page'          => $row->page,
-        //             'type'          => $row->type,
-        //             'items'         => $this->getSubIndexes_export($row->id, $thesis_id, $type)
-        //         ]);
-        //     }
-        // }
-
+    {      
         $items_export = "";
         $index = InveThesisStudentIndex::where('type', $type)
             ->where('thesis_id', $thesis_id)
@@ -533,11 +511,11 @@ class ThesisController extends Controller
         $max_line = 90;
 
         if (count($index) > 0) {
-            foreach ($index as $row) {
+            foreach ($index as $row) {                
                 $totalLength = strlen($row->prefix) + strlen($row->content) + strlen($row->page);
                 $points = str_repeat(".", max(0, $max_line - $totalLength)); // Restamos 5 para tener en cuenta los espacios y los puntos suspensivos
 
-                $items_export .= $row->prefix . " " . $row->content . $points . $row->page . "\n";
+                $items_export .= "<tr><td>" . $row->prefix . " " . $row->content . "</td><td>" . $points . "</td><td>" . $row->page . "</td></tr>" . "\n"; // . "\n"
                 $items_export .=  $this->getSubIndexes_export($row->id, $thesis_id, $type, 1);
             }
         }
@@ -561,7 +539,7 @@ class ThesisController extends Controller
                 $totalLength = strlen($row->prefix) + strlen($row->content) + strlen($row->page);
                 $points = str_repeat(".", max(0, $max_line - $totalLength));
 
-                $itemsHTML .= $tabulations . $row->prefix . " " . $row->content . $points . $row->page . "\n";
+                $itemsHTML .= "<tr><td>" . $tabulations . $row->prefix . " " . $row->content . "</td><td>" . $points . "</td><td>" . $row->page . "</td></tr>" . "\n"; //. "\n"
                 $temp = $this->getSubIndexes_export($row->id, $thesis_id, $type, $tabLevel + 1);  //al tabLevel se le suma 1 cada que se profundiza y se resetea cuando sale de la recurrencia
                 if ($temp != "") {
                     $itemsHTML .= $temp;
