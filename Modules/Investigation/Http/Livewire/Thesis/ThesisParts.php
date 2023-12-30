@@ -393,7 +393,7 @@ class ThesisParts extends Component
             if ($p_allowed > $p_used) {
                 $max_tokens = 3400;
                 $temperature = 0.7;
-                $consulta;
+                $consulta = null;
                 $result_text = "hubo un problema, intenta mas tarde";
 
                 switch ($this->prompt) {

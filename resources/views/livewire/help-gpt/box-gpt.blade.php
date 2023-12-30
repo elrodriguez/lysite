@@ -100,45 +100,70 @@
                 </div>
             </div>
             <div class="gpt-mesgs">
-                <div class="gpt-msg_history">
-                    @if ($history)
-                        @if (count($historyItems) > 0)
-                            @foreach ($historyItems as $item)
-                                @if ($item->my_user)
-                                    <div class="gpt-outgoing_msg">
-                                        <div class="gpt-sent_msg">
-                                            <p>{{ $item->content }}</p>
-                                            <span
-                                                class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="gpt-incoming_msg">
-                                        <div class="gpt-incoming_msg_img">
-                                            <img class="gpt-img" src="https://ptetutorials.com/images/user-profile.png"
-                                                alt="sunil">
-                                        </div>
-                                        <div class="gpt-received_msg">
-                                            <div class="gpt-received_withd_msg">
+                @if ($typeAction == 1)
+                    <div class="form-group p-2">
+                        <select wire:model="prompt" class="form-control" name="prompt">
+                            <option value="0">Como Docente</option>
+                            <option value="1">Como Investigador</option>
+                            <option value="2">Disminuir Similitud</option>
+                        </select>
+                        <label for="consulta" class="mt-2">Escribe aquí lo que desee parafrasear</label>
+                        <textarea wire:model="consulta" class="form-control mb-2" id="consulta" rows="6"></textarea>
+                        <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
+                            class="btn btn-secondary btn-sm">
+                            <div wire:loading wire:target="saveMessageUser" style="display: none"
+                                class="spinner-grow spinner-grow-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+
+                            Procesar
+                        </button>
+                    </div>
+                    <div class="p-2">
+                        <textarea wire:model="resultado" class="form-control" id="resultado" rows="6"></textarea>
+                    </div>
+                @else
+                    <div class="gpt-msg_history">
+                        @if ($history)
+                            @if (count($historyItems) > 0)
+                                @foreach ($historyItems as $item)
+                                    @if ($item->my_user)
+                                        <div class="gpt-outgoing_msg">
+                                            <div class="gpt-sent_msg">
                                                 <p>{{ $item->content }}</p>
                                                 <span
                                                     class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                @endif
-                            @endforeach
+                                    @else
+                                        <div class="gpt-incoming_msg">
+                                            <div class="gpt-incoming_msg_img">
+                                                <img class="gpt-img"
+                                                    src="https://ptetutorials.com/images/user-profile.png"
+                                                    alt="sunil">
+                                            </div>
+                                            <div class="gpt-received_msg">
+                                                <div class="gpt-received_withd_msg">
+                                                    <p>{{ $item->content }}</p>
+                                                    <span
+                                                        class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         @endif
-                    @endif
-                </div>
-                <div class="gpt-type_msg">
-                    <div class="gpt-input_msg_write">
-                        <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
-                        <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button">
-                            <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                        </button>
                     </div>
-                </div>
+                    <div class="gpt-type_msg">
+                        <div class="gpt-input_msg_write">
+                            <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
+                            <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button">
+                                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

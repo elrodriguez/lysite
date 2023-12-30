@@ -199,8 +199,8 @@
                         <div class="card p-2">
                             <div>
                                 <div class="form-group">
-                                    <label for="text1">Escribe aquí lo que desee parafrasear</label> <select
-                                        class="form-control prompty bg-primary text-white" name="prompt">
+                                    <label for="text1">Escribe aquí lo que desee parafrasear</label>
+                                    <select class="form-control prompty bg-primary text-white" name="prompt">
                                         <option value="0">Como Docente</option>
                                         <option value="1">Como Investigador</option>
                                         <option value="2">Disminuir Similitud</option>
@@ -662,35 +662,67 @@
                         ]
                     },
                     fontFamily: {
-                    options: [
-                        'Times New Roman, serif',
-                        'Arial, sans-serif',
-                        'Courier New, monospace',
-                        'Georgia, serif',
-                        'Verdana, sans-serif'
-                    ]
-                
-                },
-                fontSize: {
                         options: [
-                            { model: '10pt', title: '10' },
-                            { model: '11pt', title: '11' },
-                            { model: '12pt', title: '12' },
-                            { model: '14pt', title: '14' },
-                            { model: '16pt', title: '16' },
-                            { model: '18pt', title: '18' },
-                            { model: '20pt', title: '20' },
-                            { model: '24pt', title: '24' },
-                            { model: '30pt', title: '30' },
-                            { model: '36pt', title: '36' },
-                            { model: '40pt', title: '40' } 
+                            'Times New Roman, serif',
+                            'Arial, sans-serif',
+                            'Courier New, monospace',
+                            'Georgia, serif',
+                            'Verdana, sans-serif'
+                        ]
+
+                    },
+                    fontSize: {
+                        options: [{
+                                model: '10pt',
+                                title: '10'
+                            },
+                            {
+                                model: '11pt',
+                                title: '11'
+                            },
+                            {
+                                model: '12pt',
+                                title: '12'
+                            },
+                            {
+                                model: '14pt',
+                                title: '14'
+                            },
+                            {
+                                model: '16pt',
+                                title: '16'
+                            },
+                            {
+                                model: '18pt',
+                                title: '18'
+                            },
+                            {
+                                model: '20pt',
+                                title: '20'
+                            },
+                            {
+                                model: '24pt',
+                                title: '24'
+                            },
+                            {
+                                model: '30pt',
+                                title: '30'
+                            },
+                            {
+                                model: '36pt',
+                                title: '36'
+                            },
+                            {
+                                model: '40pt',
+                                title: '40'
+                            }
                         ]
                     },
-                config: {
-                    fontFamily: {
-                        default: 'Times New Roman' // Establece "Times New Roman" como fuente predeterminada
-                    }
-                },
+                    config: {
+                        fontFamily: {
+                            default: 'Times New Roman' // Establece "Times New Roman" como fuente predeterminada
+                        }
+                    },
                     simpleUpload: {
                         uploadUrl: "{{ route('investigation_thesis_upload_image') }}",
                         withCredentials: true,
@@ -885,70 +917,72 @@
 
     <script>
         function hacerClicEnBoton() {
-  // Buscar el botón con la clase "ck ck-button ck-off ck-dropdown__button" y el código HTML especificado
-  var botones = document.querySelectorAll('.ck.ck-button.ck-off.ck-dropdown__button');
-  var boton;
-  for (var i = 0; i < botones.length; i++) {
-    if (botones[i].innerHTML.trim() === '<path d="M11.03 3h6.149a.75.75 0 1 1 0 1.5h-5.514L11.03 3zm1.27 3h4.879a.75.75 0 1 1 0 1.5h-4.244L12.3 6zm1.27 3h3.609a.75.75 0 1 1 0 1.5h-2.973L13.57 9zm-2.754 2.5L8.038 4.785 5.261 11.5h5.555zm.62 1.5H4.641l-1.666 4.028H1.312l5.789-14h1.875l5.789 14h-1.663L11.436 13z"></path>') {
-      boton = botones[i];
-      break;
-    }
-  }
+            // Buscar el botón con la clase "ck ck-button ck-off ck-dropdown__button" y el código HTML especificado
+            var botones = document.querySelectorAll('.ck.ck-button.ck-off.ck-dropdown__button');
+            var boton;
+            for (var i = 0; i < botones.length; i++) {
+                if (botones[i].innerHTML.trim() ===
+                    '<path d="M11.03 3h6.149a.75.75 0 1 1 0 1.5h-5.514L11.03 3zm1.27 3h4.879a.75.75 0 1 1 0 1.5h-4.244L12.3 6zm1.27 3h3.609a.75.75 0 1 1 0 1.5h-2.973L13.57 9zm-2.754 2.5L8.038 4.785 5.261 11.5h5.555zm.62 1.5H4.641l-1.666 4.028H1.312l5.789-14h1.875l5.789 14h-1.663L11.436 13z"></path>'
+                    ) {
+                    boton = botones[i];
+                    break;
+                }
+            }
 
-  // Verificar si se encontró el botón
-  if (boton) {
-    // Simular un evento de clic en el botón
-    var eventoClic = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    });
-    boton.dispatchEvent(eventoClic);
-  }
-}
+            // Verificar si se encontró el botón
+            if (boton) {
+                // Simular un evento de clic en el botón
+                var eventoClic = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                boton.dispatchEvent(eventoClic);
+            }
+        }
 
 
-function hacerClicEnSpan() {
-  // Buscar el span con la clase "ck ck-button__label" y el texto "Times New Roman"
-  var spans = document.querySelectorAll('.ck.ck-button__label');
-  var span;
-  for (var i = 0; i < spans.length; i++) {
-    if (spans[i].textContent === 'Times New Roman') {
-      span = spans[i];
-      break;
-    }
-  }
+        function hacerClicEnSpan() {
+            // Buscar el span con la clase "ck ck-button__label" y el texto "Times New Roman"
+            var spans = document.querySelectorAll('.ck.ck-button__label');
+            var span;
+            for (var i = 0; i < spans.length; i++) {
+                if (spans[i].textContent === 'Times New Roman') {
+                    span = spans[i];
+                    break;
+                }
+            }
 
-  // Verificar si se encontró el span
-  if (span) {
-    // Simular un evento de clic en el span
-    var eventoClic = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    });
-    span.dispatchEvent(eventoClic);
-  }
-}
-setTimeout(function() {
+            // Verificar si se encontró el span
+            if (span) {
+                // Simular un evento de clic en el span
+                var eventoClic = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                span.dispatchEvent(eventoClic);
+            }
+        }
+        setTimeout(function() {
 
-    setTimeout(function() {
-  // Código que se ejecutará después de una pausa de 300 ms
-   // Llamar a la función para hacer clic en el botón de fuentes
-hacerClicEnBoton();
-console.log("CLICK");
-}, 444);
-setTimeout(function() {
-  // Código que se ejecutará después de una pausa de 300 ms
-// Llamar a la función para hacer clic en boton times new roman
-hacerClicEnSpan();
-}, 444);
-}, 444);
+            setTimeout(function() {
+                // Código que se ejecutará después de una pausa de 300 ms
+                // Llamar a la función para hacer clic en el botón de fuentes
+                hacerClicEnBoton();
+                console.log("CLICK");
+            }, 444);
+            setTimeout(function() {
+                // Código que se ejecutará después de una pausa de 300 ms
+                // Llamar a la función para hacer clic en boton times new roman
+                hacerClicEnSpan();
+            }, 444);
+        }, 444);
     </script>
     <div id="dialog-ckeditor"></div>
     <style>
-    #editor p {
-  font-family: "Times New Roman", Times, serif;
-}
+        #editor p {
+            font-family: "Times New Roman", Times, serif;
+        }
     </style>
 </div>

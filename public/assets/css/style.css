@@ -92,7 +92,7 @@
   padding: 18px 16px 10px;
 }
 .gpt-inbox_chat { 
-  height: 610px;
+  height: 500px;
 }
 
 .gpt-active_chat{ background:#ebebeb;}
@@ -124,9 +124,9 @@
 }
 .gpt-received_withd_msg { width: 57%;}
 .gpt-mesgs {
-  float: left;
-  padding: 30px 15px 0 25px;
-  width: 60%;
+    float: left;
+    padding: 0px;
+    width: 60%;
 }
 
  .gpt-sent_msg p {
@@ -143,15 +143,13 @@
   width: 46%;
 }
 .gpt-input_msg_write textarea {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: medium none;
   color: #4c4c4c;
   font-size: 15px;
   min-height: 108px;
   width: 100%;
 }
 
-.gpt-type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.gpt-type_msg {border-bottom: 1px solid #c4c4c4;position: relative;}
 .gpt-msg_send_btn {
   background: #05728f none repeat scroll 0 0;
   border: medium none;
