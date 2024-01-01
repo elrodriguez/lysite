@@ -7,6 +7,7 @@ use App\Models\HistoryGptItem;
 use App\Models\Person;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use OpenAI\Laravel\Facades\OpenAI;
@@ -20,6 +21,7 @@ class BoxGpt extends Component
     public $file = null;
     public $resultado = null;
     public $paraphrase_left;
+    public $normativa;
     public $prompt = 0;
 
     public function mount()
@@ -36,6 +38,7 @@ class BoxGpt extends Component
     public function setBtnActive($num)
     {
         $this->typeAction = $num;
+        $this->resultado = null;
         $this->getHistory($num);
     }
 
@@ -86,8 +89,17 @@ class BoxGpt extends Component
             'content' => $this->consulta
         ]);
 
-        $resultado = $this->paraphrasing();
+        $resultado = null;
 
+        if ($this->typeAction == 1) {
+            $resultado = $this->paraphrasing();
+        } elseif ($this->typeAction == 2) {
+            $resultado = $this->recommendations();
+        } elseif ($this->typeAction == 3) {
+            $resultado = $this->grammarCorrection();
+        } elseif ($this->typeAction == 5) {
+            $resultado = $this->references();
+        }
         HistoryGptItem::create([
             'history_id' => $history->id,
             'my_user' => false,
@@ -152,6 +164,110 @@ class BoxGpt extends Component
         } else {
             $resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
         }
+        $this->resultado = $resultado;
+        return $resultado;
+    }
+
+    public function recommendations()
+    {
+        $consulta = $this->consulta;
+        $resultado = "espera un momento...";
+
+        if (strlen($consulta) > 6) {
+            $permisos = Person::where('user_id', Auth::user()->id)->first();
+            $p_allowed = $permisos->paraphrase_allowed;
+            $p_used = $permisos->paraphrase_used;
+
+            if ($p_allowed > $p_used) {
+
+                $max_tokens = 3400;
+                $temperature = 0.7;
+
+                $result_text = "hubo un problema, intenta mas tarde";
+
+                $consulta = "Dame un listado de títulos de artículos científicos reales sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués.";
+
+                try {
+                    $result = OpenAI::completions()->create([
+                        'model' => 'gpt-3.5-turbo-instruct',
+                        'prompt' => $consulta,
+                        'max_tokens' => $max_tokens,
+                        'temperature' => $temperature,
+                    ]);
+                    $result_text = $result['choices'][0]['text'];
+                    $query_tokens = $result['usage']['prompt_tokens'];
+                    $result_tokens = $result['usage']['completion_tokens'];
+                    $consumed_tokens = $result['usage']['total_tokens'];
+                    $permisos->paraphrase_used = $p_used + 1;
+                    $permisos->save();
+                } catch (Exception $e) {
+                    $result_text = $e->getMessage();
+                }
+                $resultado = $result_text;
+            } else {
+                $resultado = "Lo siento, pero parece que has superado tu límite de consultas. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
+            }
+        } else {
+            $resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
+        }
+
+        $this->resultado = $resultado;
+        return $resultado;
+    }
+
+    public function grammarCorrection()
+    {
+        $consulta = $this->consulta;
+        $resultado = "espera un momento...";
+        if (strlen($consulta) > 6) {
+
+            $permisos = Person::where('user_id', Auth::user()->id)->first();
+            $p_allowed = $permisos->paraphrase_allowed;
+            $p_used = $permisos->paraphrase_used;
+
+            if ($p_allowed > $p_used) {
+
+                $max_tokens = 3400;
+                $temperature = 0.7;
+
+                $result_text = "hubo un problema, intenta mas tarde";
+
+                $consulta = "Corrígeme este texto en español para una mejor comprensión como si fueras un experto en literatura: {" . $consulta . "}";
+
+                try {
+                    $result = OpenAI::completions()->create([
+                        'model' => 'gpt-3.5-turbo-instruct',
+                        'prompt' => $consulta,
+                        'max_tokens' => $max_tokens,
+                        'temperature' => $temperature,
+                    ]);
+                    $result_text = $result['choices'][0]['text'];
+                    $query_tokens = $result['usage']['prompt_tokens'];
+                    $result_tokens = $result['usage']['completion_tokens'];
+                    $consumed_tokens = $result['usage']['total_tokens'];
+                    $permisos->paraphrase_used = $p_used + 1;
+                    $permisos->save();
+                } catch (Exception $e) {
+                    $result_text = $e->getMessage();
+                }
+                $resultado = $result_text;
+            } else {
+                $resultado = "Lo siento, pero parece que has superado tu límite de consultas. Para continuar utilizando este servicio, por favor comunícate con los administradores para solicitar un aumento en tu límite. Estamos aquí para ayudarte y queremos asegurarnos de que tengas la mejor experiencia posible. ¡Gracias por usar nuestro servicio!";
+            }
+        } else {
+            $resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
+        }
+        $this->resultado = $resultado;
+        return $resultado;
+    }
+
+    public function references()
+    {
+        $references = new MendeleyReferences();
+
+
+        $resultado = $references->citar($this->consulta, $this->normativa);
+
         $this->resultado = $resultado;
         return $resultado;
     }

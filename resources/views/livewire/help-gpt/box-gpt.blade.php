@@ -115,14 +115,53 @@
                                 class="spinner-grow spinner-grow-sm" role="status">
                                 <span class="sr-only">Loading...</span>
                             </div>
-
                             Procesar
                         </button>
                     </div>
                     <div class="p-2">
                         <textarea wire:model="resultado" class="form-control" id="resultado" rows="6"></textarea>
                     </div>
-                @else
+                @elseif($typeAction == 2)
+                    <div class="form-group p-2">
+                        <label for="consulta" class="mt-2">Descripción</label>
+                        <input wire:model="consulta" class="form-control mb-2" id="consulta" />
+                        <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
+                            class="btn btn-secondary btn-sm">
+                            <div wire:loading wire:target="saveMessageUser" style="display: none"
+                                class="spinner-grow spinner-grow-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Procesar
+                        </button>
+                    </div>
+                    <div class="p-2">
+                        @if ($resultado)
+                            <div class="alert alert-primary" role="alert">
+                                {{ $resultado }}
+                            </div>
+                        @endif
+                    </div>
+                @elseif($typeAction == 3)
+                    <div class="form-group p-2">
+                        <label for="consulta" class="mt-2">Texto</label>
+                        <textarea wire:model="consulta" class="form-control mb-2" id="consulta" rows="6"></textarea>
+                        <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
+                            class="btn btn-secondary btn-sm">
+                            <div wire:loading wire:target="saveMessageUser" style="display: none"
+                                class="spinner-grow spinner-grow-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Procesar
+                        </button>
+                    </div>
+                    <div class="p-2">
+                        @if ($resultado)
+                            <div class="alert alert-primary" role="alert">
+                                {{ $resultado }}
+                            </div>
+                        @endif
+                    </div>
+                @elseif($typeAction == 4)
                     <div class="gpt-msg_history">
                         @if ($history)
                             @if (count($historyItems) > 0)
@@ -162,6 +201,33 @@
                                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
                             </button>
                         </div>
+                    </div>
+                @elseif($typeAction == 5)
+                    <div class="form-group p-2">
+                        <label for="consulta" class="mt-2">DOI*</label>
+                        <input wire:model="consulta" class="form-control mb-2" id="consulta" />
+                        <label for="consulta" class="mt-2">Normativa*</label>
+                        <select wire:model="normativa" class="ly-ck-dialog-select" id="select-normativa"
+                            name="select-normativa">
+                            <option value="apa">APA</option>
+                            <option value="iso690">ISO</option>
+                            <option value="vancouver">Vancouver</option>
+                        </select>
+                        <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
+                            class="btn btn-secondary btn-sm">
+                            <div wire:loading wire:target="saveMessageUser" style="display: none"
+                                class="spinner-grow spinner-grow-sm" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Procesar
+                        </button>
+                    </div>
+                    <div class="p-2">
+                        @if ($resultado)
+                            <div class="alert alert-primary" role="alert">
+                                {!! $resultado !!}}
+                            </div>
+                        @endif
                     </div>
                 @endif
             </div>

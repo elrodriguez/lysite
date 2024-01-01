@@ -1,17 +1,12 @@
 <?php
 
-namespace Modules\Investigation\Http\Controllers;
+namespace App\Http\Livewire\HelpGpt;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use GuzzleHttp\Client;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
-//use Spatie\Browsershot\Browsershot;
+use Carbon\Carbon;
 use DateTime;
 
-class GetReferencesController extends Controller
+class MendeleyReferences
 {
     protected $client;
     public $code_consulta;
@@ -22,15 +17,9 @@ class GetReferencesController extends Controller
         $this->client = new \GuzzleHttp\Client();
     }
 
-    public function index()
+    public function citar($doi, $normative)
     {
-        return view('citar');
-    }
 
-    public function citar(Request $request)
-    {
-        //dd($request->all());
-        $doi = $request->get('input-doi');
         $is_doi = false;
         if (strpos($doi, "http") !== false) {
             if (strpos($doi, 'doi.org') !== false) {
@@ -46,7 +35,7 @@ class GetReferencesController extends Controller
             if (strpos($doi, '/') !== false) $is_doi = true;
         }
         $this->code_consulta = $doi;
-        $normativa = $request->get('select-normativa');
+        $normativa = $normative;
 
 
         $response = $this->client->request('POST', 'https://api.mendeley.com/oauth/token', [
@@ -131,7 +120,7 @@ class GetReferencesController extends Controller
             $document = json_decode($response->getBody()->getContents());
             $cita = $this->generar_cita($document, $normativa);
 
-            return response()->json(['cita' => $cita]);
+            return $cita;
         } else {
 
             return 'Intenta Nuevamente, Hubo un error en el servidor';
