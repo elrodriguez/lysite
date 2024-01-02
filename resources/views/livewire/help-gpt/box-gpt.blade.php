@@ -137,7 +137,7 @@
                     <div class="p-2">
                         @if ($resultado)
                             <div class="alert alert-primary" role="alert">
-                                {{ $resultado }}
+                                {!! $resultado !!}
                             </div>
                         @endif
                     </div>

@@ -185,7 +185,7 @@ class BoxGpt extends Component
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Dame un listado de títulos de artículos científicos reales sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués.";
+                $consulta = "Dame un listado de títulos de artículos científicos reales sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués. por favor recuerda presentar las listas dentro de etiquetas HTML";
 
                 try {
                     $result = OpenAI::completions()->create([
