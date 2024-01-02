@@ -9,18 +9,26 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index(){
-        if(Auth::user()->hasrole('Admin')){
+    public function index()
+    {
+        if (Auth::user()->hasrole('Admin')) {
             return view('dashboard.dashboard_admin');
-        }elseif(Auth::user()->hasrole('Student')){
-            if(Person::where('user_id', Auth::user()->id)->exists()){
+        } elseif (Auth::user()->hasrole('Student')) {
+            if (Person::where('user_id', Auth::user()->id)->exists()) {
                 return view('dashboard.dashboard_student');
-            }else{
+            } else {
                 return view('user.edit_information');
             }
-
-        }elseif(Auth::user()->hasrole('Instructor')){
+        } elseif (Auth::user()->hasrole('Instructor')) {
             return view('dashboard.dashboard_instructor');
         }
+    }
+    public function getCourses()
+    {
+        return view('dashboard.dashboard_student_courses');
+    }
+    public function getHelpGPT()
+    {
+        return view('helpGPT.help_gpt');
     }
 }

@@ -1,16 +1,16 @@
 @php
-$path = explode('/', request()->path());
-$path[1] = array_key_exists(1, $path) > 0 ? $path[1] : '';
-$path[2] = array_key_exists(2, $path) > 0 ? $path[2] : '';
-$path[3] = array_key_exists(3, $path) > 0 ? $path[3] : '';
-$path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
+    $path = explode('/', request()->path());
+    $path[1] = array_key_exists(1, $path) > 0 ? $path[1] : '';
+    $path[2] = array_key_exists(2, $path) > 0 ? $path[2] : '';
+    $path[3] = array_key_exists(3, $path) > 0 ? $path[3] : '';
+    $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
 @endphp
 <div class="collapse navbar-collapse" id="navbar-submenu2">
     <ul class="nav navbar-nav">
+        <li class="nav-item {{ $path[0] == 'dashboard' ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+        </li>
         @can('configuraciones')
-            <li class="nav-item {{ $path[0] == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
-            </li>
             <li class="nav-item dropdown {{ $path[0] == 'setting' ? 'active' : '' }}">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Configuración</a>
                 <div class="dropdown-menu">
@@ -89,8 +89,8 @@ $path[4] = array_key_exists(4, $path) > 0 ? $path[4] : '';
 
                     @can('investigacion_thesis_allowed')
                         <a class="dropdown-item {{ $path[0] == 'investigation' && $path[1] == 'thesis' ? 'active' : '' }}"
-                            href="{{ route('investigation_thesis_permissions_thesis_allowed') }}" data-toggle="tooltip" data-placement="right"
-                            title="permite indicar cuantas tesis puede crear una persona">
+                            href="{{ route('investigation_thesis_permissions_thesis_allowed') }}" data-toggle="tooltip"
+                            data-placement="right" title="permite indicar cuantas tesis puede crear una persona">
                             {{ __('labels.Permissions to create thesis and paraphrase') }}</a>
                     @endcan
 
