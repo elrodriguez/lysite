@@ -85,11 +85,6 @@ class BoxGpt extends Component
 
     public function saveMessageUser()
     {
-        $this->getThreadId($this->message);  //crear u obtener el thread_id
-        
-        // enviando consulta y esperando respuesta
-        //$response = $this->sendGetConsulta($this->message);
-
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -112,6 +107,10 @@ class BoxGpt extends Component
             $resultado = $this->recommendations();
         } elseif ($this->typeAction == 3) {
             $resultado = $this->grammarCorrection();
+        }    elseif($this->typeAction == 4){
+            $this->getThreadId($this->message);  //crear u obtener el thread_id
+        // enviando consulta y esperando respuesta
+        //$response = $this->sendGetConsulta($this->message);
         } elseif ($this->typeAction == 5) {
             $resultado = $this->references();
         }
