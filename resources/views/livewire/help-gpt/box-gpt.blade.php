@@ -163,7 +163,37 @@
                     </div>
                 @elseif($typeAction == 4)
                     <div class="gpt-msg_history">
-                        @if ($history)
+                        {{-- @if ($history)
+                            @if (count($historyItems) > 0)
+                                @foreach ($historyItems as $item)
+                                    @if ($item->my_user)
+                                        <div class="gpt-outgoing_msg">
+                                            <div class="gpt-sent_msg">
+                                                <p>{{ $item->content }}</p>
+                                                <span
+                                                    class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="gpt-incoming_msg">
+                                            <div class="gpt-incoming_msg_img">
+                                                <img class="gpt-img"
+                                                    src="https://ptetutorials.com/images/user-profile.png"
+                                                    alt="sunil">
+                                            </div>
+                                            <div class="gpt-received_msg">
+                                                <div class="gpt-received_withd_msg">
+                                                    <p>{{ $item->content }}</p>
+                                                    <span
+                                                        class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endif   $this->getThreadId() || $thread_id != null --}}
+                        @if (true)
                             @if (count($historyItems) > 0)
                                 @foreach ($historyItems as $item)
                                     @if ($item->my_user)

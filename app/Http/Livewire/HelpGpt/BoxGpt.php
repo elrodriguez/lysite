@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use OpenAI\Laravel\Facades\OpenAI;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Utils;
+use GuzzleHttp\Psr7\Request as GRequest;
 
 class BoxGpt extends Component
 {
@@ -23,6 +28,11 @@ class BoxGpt extends Component
     public $paraphrase_left;
     public $normativa;
     public $prompt = 0;
+    /*  Asistente de Chat GPT  */ 
+    public $thread_id = null;
+    public $run_id = null;
+    public $assistant_id = null;    
+    public $message = null;
 
     public function mount()
     {
@@ -75,6 +85,11 @@ class BoxGpt extends Component
 
     public function saveMessageUser()
     {
+        $this->getThreadId($this->message);  //crear u obtener el thread_id
+        
+        // enviando consulta y esperando respuesta
+        //$response = $this->sendGetConsulta($this->message);
+
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -86,7 +101,7 @@ class BoxGpt extends Component
             'history_id' => $history->id,
             'my_user' => true,
             'file_original_name' => null,
-            'content' => $this->consulta
+            'content' => $this->message
         ]);
 
         $resultado = null;
@@ -270,5 +285,33 @@ class BoxGpt extends Component
 
         $this->resultado = $resultado;
         return $resultado;
+    }
+    /*  Asistente de chat GPT  */
+
+    public function getThreadId($msg){
+        if($this->thread_id == null){
+            $client = new Client();
+            $promise = $client->getAsync('http://localhost:3000/create_thread');
+            $response = $promise->wait();    
+            $data = json_decode($response->getBody(), true);
+            $this->thread_id = $data['thread_id'];
+            $this->assistant_id = $data['assistant_id'];
+        }else{
+
+        }
+
+        $this->sendGetConsulta($msg);
+    }
+
+    public function sendGetConsulta($msg){
+        // creando run y haciendo consulta para obtener respuesta de la IA
+        $response = Http::post('http://localhost:3000/create_run', [
+            'user_message' => $msg,
+            'user_name' => Auth::user()->name,
+            'thread_id' => $this->thread_id,
+            'assistant_id' => $this->assistant_id,
+        ]);
+        $data = $response->json();
+        dd($this->thread_id, $response);
     }
 }
