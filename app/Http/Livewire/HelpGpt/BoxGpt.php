@@ -108,7 +108,9 @@ class BoxGpt extends Component
         } elseif ($this->typeAction == 3) {
             $resultado = $this->grammarCorrection();
         }    elseif($this->typeAction == 4){
-            $this->getThreadId($this->message);  //crear u obtener el thread_id
+            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+            //$resultado = $messages;
+            $resultado = $messages[0][0]['text']['value'];
         // enviando consulta y esperando respuesta
         //$response = $this->sendGetConsulta($this->message);
         } elseif ($this->typeAction == 5) {
@@ -299,18 +301,21 @@ class BoxGpt extends Component
 
         }
 
-        $this->sendGetConsulta($msg);
+        return $this->sendGetConsulta($msg);
     }
 
-    public function sendGetConsulta($msg){
-        // creando run y haciendo consulta para obtener respuesta de la IA
+    public function sendGetConsulta($msg)
+    {
+        // Creando run y haciendo consulta para obtener respuesta de la IA
         $response = Http::post('http://localhost:3000/create_run', [
             'user_message' => $msg,
             'user_name' => Auth::user()->name,
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
         ]);
+    
         $data = $response->json();
-        dd($this->thread_id, $response);
+        return $data;
+        // dd($this->thread_id, $response);
     }
 }
