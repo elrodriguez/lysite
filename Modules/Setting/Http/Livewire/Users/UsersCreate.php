@@ -15,7 +15,8 @@ class UsersCreate extends Component
     public $password;
     public $roles;
 
-    public function mount(){
+    public function mount()
+    {
         $this->roles = Role::all();
     }
 
@@ -24,7 +25,8 @@ class UsersCreate extends Component
         return view('setting::livewire.users.users-create');
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->validate([
             'name' => 'required|min:6|max:255',
@@ -48,6 +50,6 @@ class UsersCreate extends Component
         $this->password = null;
         $this->role_id = null;
 
-        $this->dispatchBrowserEvent('set-users-create', ['tit' => 'Enhorabuena','msg' => 'Se registró correctamente']);
+        $this->dispatchBrowserEvent('set-users-create', ['tit' => 'Enhorabuena', 'msg' => 'Se registró correctamente']);
     }
 }
