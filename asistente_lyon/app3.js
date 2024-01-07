@@ -28,6 +28,7 @@ app.post("/create_run", (req, res) => {
         thread_id: req.body.thread_id,
         assistant_id: req.body.assistant_id,
     };
+
     //console.log(data);
     createRun(data).then((thread) => {
         res.json(thread);
@@ -61,21 +62,36 @@ const createRun = async (data) => {
     //Run assistant
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
-        instructions: "Responde al usuario se llama " + data.user_name,
+        instructions:
+            "Responde al usuario solo según las instrucciones del asistente, limitate a ayudar y asistir a todo lo relacionado a investiación cientifica, tesis, articulos cientificos y similares; el usuario se llama " +
+            data.user_name,
     });
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const run_retrieve = await openai.beta.threads.runs.retrieve(
         data.thread_id, //este dato es el thread_id del hilo creado
         run.id //este es el run_id al correr el run
     );
     console.log("Datos del run: ", run);
+    console.log("STATUS DEL RUN -> ", run_retrieve["status"]);
+    let $check_run = run_retrieve["status"];
+    while ($check_run != "completed") {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        const check_run_retrieve = await openai.beta.threads.runs.retrieve(
+            data.thread_id, //este dato es el thread_id del hilo creado
+            run.id //este es el run_id al correr el run
+        );
+        console.log("STATUS DEL RUN -> ", check_run_retrieve["status"]);
+        $check_run = check_run_retrieve["status"];
+    }
 
     //obterner la respuesta de gpt
+
+    let respuesta = [];
 
     const messages = await openai.beta.threads.messages.list(
         data.thread_id // ide el thread
     );
-
-    let respuesta = [];
 
     messages.body.data.forEach((row) => {
         respuesta.push(row.content);
