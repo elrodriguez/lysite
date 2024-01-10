@@ -28,10 +28,10 @@ class BoxGpt extends Component
     public $paraphrase_left;
     public $normativa;
     public $prompt = 0;
-    /*  Asistente de Chat GPT  */ 
+    /*  Asistente de Chat GPT  */
     public $thread_id = null;
     public $run_id = null;
-    public $assistant_id = null;    
+    public $assistant_id = null;
     public $message = null;
 
     public function mount()
@@ -100,7 +100,7 @@ class BoxGpt extends Component
         ]);
 
         $resultado = null;
-
+        $messages = null;
         if ($this->typeAction == 1) {
             $resultado = $this->paraphrasing();
         } elseif ($this->typeAction == 2) {
@@ -108,14 +108,22 @@ class BoxGpt extends Component
         } elseif ($this->typeAction == 3) {
             $resultado = $this->grammarCorrection();
         }    elseif($this->typeAction == 4){
-            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
-            //$resultado = $messages;
-            $resultado = $messages[0][0]['text']['value'];
-        // enviando consulta y esperando respuesta
-        //$response = $this->sendGetConsulta($this->message);
+                $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+
+                    try {
+                        if(!isset($messages[0])){
+                        while($messages['status'] == "Pending"){
+                            $messages = $this->getPendingRun($messages);
+                        }
+                    }
+                    } catch (\Throwable $th) {
+
+                    }
+        $resultado = $messages[0][0]['text']['value'];   //la respuesta final
         } elseif ($this->typeAction == 5) {
             $resultado = $this->references();
         }
+
         HistoryGptItem::create([
             'history_id' => $history->id,
             'my_user' => false,
@@ -293,7 +301,7 @@ class BoxGpt extends Component
         if($this->thread_id == null){
             $client = new Client();
             $promise = $client->getAsync('http://localhost:3000/create_thread');
-            $response = $promise->wait();    
+            $response = $promise->wait();
             $data = json_decode($response->getBody(), true);
             $this->thread_id = $data['thread_id'];
             $this->assistant_id = $data['assistant_id'];
@@ -313,7 +321,19 @@ class BoxGpt extends Component
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
         ]);
-    
+
+        $data = $response->json();
+        return $data;
+        // dd($this->thread_id, $response);
+    }
+
+    public function getPendingRun($messages){
+        // consultamos si el run ya tiene respuesta y si es así entregue el mensaje o avise que no
+        $response = Http::post('http://localhost:3000/get_run_pending', [
+            'thread_id' => $messages['thread_id'],
+            'run_id' => $messages['run_id'],
+        ]);
+
         $data = $response->json();
         return $data;
         // dd($this->thread_id, $response);
