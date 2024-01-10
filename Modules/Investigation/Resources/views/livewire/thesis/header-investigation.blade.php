@@ -6,15 +6,15 @@
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
             @if (Auth::user()->hasrole('Admin') || Auth::user()->hasrole('Instructor'))
-            <li><a class="dropdown-item" href="{{ route('investigation_thesis_all') }}">Ver todas las tesis</a></li>
+            <a class="dropdown-item" href="{{ route('investigation_thesis_all') }}">Ver todas las tesis</a>
             @endif
-            <li><a class="dropdown-item" href="{{ route('investigation_thesis_create') }}">Crear Proyecto</a></li>
-            <li><hr class="dropdown-divider"></li>
-            @foreach ($thesis as $item)
-            <li class="dropdown-item">
-                <a href="{{ route('investigation_thesis_parts',$item->id) }}">{{ $item->short_name }}</a>
-            </li>
-            @endforeach
+            <a class="dropdown-item" href="{{ route('investigation_thesis_create') }}">Crear Proyecto</a>
+            @if(count($thesis) > 0)
+                <div class="dropdown-divider"></div>
+                @foreach ($thesis as $item)
+                    <a class="dropdown-item" href="{{ route('investigation_thesis_parts',$item->id) }}">{{ $item->short_name }}</a>
+                @endforeach
+            @endif
         </div>
     </div>
 </div>

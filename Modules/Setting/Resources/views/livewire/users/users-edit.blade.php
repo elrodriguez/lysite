@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="name">Email *</label>
                                 <input wire:model="email" type="text" class="form-control" id="email"
-                                    placeholder="Nombre ..">
+                                    placeholder="Email ..">
                                 @error('email')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="name">Contraseña *</label>
                                 <input wire:model="password" type="text" class="form-control" id="password"
-                                    placeholder="Nombre ..">
+                                    placeholder="Contraseña ..">
                                 @error('password')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
