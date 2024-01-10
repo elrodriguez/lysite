@@ -151,7 +151,11 @@ class ContactList extends Component
                 ->get()
                 ->toArray();
         }
-        $instructor = AcaInstructor::join('people', 'person_id', 'people.id')
+
+        $youHavePermision = $user->hasAnyPermission(['academico_directo_cursos', 'academico_directo_tesis']);
+        $instructor = [];
+        if($youHavePermision){
+            $instructor = AcaInstructor::join('people', 'person_id', 'people.id')
             ->join('users', 'user_id', 'users.id')
             ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
             ->select(
@@ -180,7 +184,12 @@ class ContactList extends Component
             ->get()
             ->toArray();
 
-        $combinedInstructors = array_merge($admins, $instructor);
+            $combinedInstructors = array_merge($admins, $instructor);
+        }else{
+            $combinedInstructors = $admins;
+        }
+        
+        
         $combinedStudents = array_merge($ad_students, $in_student);
 
         $this->instructors = collect($combinedInstructors);

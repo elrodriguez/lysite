@@ -85,25 +85,37 @@
                                             style="border-top: 4px solid #ffa900;">
                                             <h5 class="mb-0">${chats[key]['name']}</h5>
                                             <div class="d-flex flex-row align-items-center">
-                                                
                                                 <i onclick="closeChat()" class="fas fa-times text-muted fa-xs"></i>
                                             </div>
                                         </div>
                                         <div id="chat-scroll" class="card-body" style="position: relative; height: 400px;overflow-y: auto;">
                                         ${htmlMessages}
                                         </div>
-                                        <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-                                            <form onsubmit="sendMessageChat('${chats[key]['chat_id']}','${chats[key]['user_id']}'); return false;">
-                                                <div class="input-group mb-0">
-                                                    <input id="txt_message_chat" type="text" class="form-control" placeholder="Escribe mensaje" aria-label="Nombre de usuario del destinatario" aria-describedby="button-addon2" />
-                                                    <button class="btn btn-warning" type="submit" id="button-addon2" style="padding-top: .55rem;">
-                                                        <div id="chat-btn-spinner" class="spinner-border mr-1" role="status" style="width: 1rem; height: 1rem;display:none">
-                                                            <span class="sr-only">Loading...</span>
-                                                        </div>
-                                                        enviar
-                                                    </button>
-                                                </div>
-                                            </form>
+                                        <div class="card-footer p-3">
+                                            <div class="text-muted d-flex justify-content-start align-items-center mb-2">`;
+                                                if(chats[key]['ascended_modules']['gpt']){
+                                                    htmlChat += `<i class="fa fa-robot mr-2"></i> `;
+                                                }
+                                                if(chats[key]['ascended_modules']['cur']){
+                                                    htmlChat += `<i class="fa fa-book mr-2"></i>`;
+                                                }
+                                                if(chats[key]['ascended_modules']['tes']){
+                                                    htmlChat += `<i class="fa fa-scroll"></i> `;
+                                                }
+                                    htmlChat += `</div> 
+                                            <div class="text-muted d-flex justify-content-start align-items-center">
+                                                <form onsubmit="sendMessageChat('${chats[key]['chat_id']}','${chats[key]['user_id']}'); return false;">
+                                                    <div class="input-group mb-0">
+                                                        <input id="txt_message_chat" type="text" class="form-control" placeholder="Escribe mensaje" aria-label="Nombre de usuario del destinatario" aria-describedby="button-addon2" />
+                                                        <button class="btn btn-warning" type="submit" id="button-addon2" style="padding-top: .55rem;">
+                                                            <div id="chat-btn-spinner" class="spinner-border mr-1" role="status" style="width: 1rem; height: 1rem;display:none">
+                                                                <span class="sr-only">Loading...</span>
+                                                            </div>
+                                                            enviar
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div> 
                                         </div>
                                     </div>
                                 `;
