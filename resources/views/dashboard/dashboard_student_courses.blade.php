@@ -29,6 +29,7 @@
             {{-- @livewire('forum.forum-student') --}}
         </div>
     </div>
+
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>

@@ -23,6 +23,7 @@
                                         <th>Nombre Completo</th>
                                         <th>Teléfono</th>
                                         <th>Email</th>
+                                        <th>Funciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -36,6 +37,19 @@
                                             <td class="name align-middle">{{ $student->full_name }}</td>
                                             <td class="name align-middle">{{ $student->mobile_phone }}</td>
                                             <td class="name align-middle">{{ $student->email }}</td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    @if($student->gpt > 0)
+                                                    <i class="fa fa-robot mr-2"></i>
+                                                    @endif
+                                                    @if($student->cur > 0)
+                                                    <i class="fa fa-book mr-2"></i>
+                                                    @endif
+                                                    @if($student->tes > 0)
+                                                    <i class="fa fa-scroll"></i>
+                                                    @endif
+                                                </div>
+                                            </td>
                                         </tr>
                                         @php
                                             $total = $total + 1;
@@ -46,6 +60,7 @@
                                     <tr>
                                         <td colspan="4" class="text-right align-middle">TOTAL</td>
                                         <td class="text-center align-middle">{{ $total }}</td>
+                                        <td></td>
                                     </tr>
                                 </tfoot>
                             </table>

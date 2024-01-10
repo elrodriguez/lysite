@@ -39,7 +39,7 @@ class ChatController extends Controller
         $cur =false;
         $tes =false;
 
-        if($authUser->hasRole('Admin')){
+        if($authUser->hasRole(['Admin', 'Instructor'])){
             $modelUser = User::find($id);
             if($modelUser){
                 $gpt = $modelUser->hasPermissionTo('academico_directo_gpt');

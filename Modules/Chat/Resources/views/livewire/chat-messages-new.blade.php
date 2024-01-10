@@ -94,13 +94,13 @@
                                         <div class="card-footer p-3">
                                             <div class="text-muted d-flex justify-content-start align-items-center mb-2">`;
                                                 if(chats[key]['ascended_modules']['gpt']){
-                                                    htmlChat += `<i class="fa fa-robot mr-2"></i> `;
+                                                    htmlChat += `<i class="fa fa-robot mr-2"></i>`;
                                                 }
                                                 if(chats[key]['ascended_modules']['cur']){
                                                     htmlChat += `<i class="fa fa-book mr-2"></i>`;
                                                 }
                                                 if(chats[key]['ascended_modules']['tes']){
-                                                    htmlChat += `<i class="fa fa-scroll"></i> `;
+                                                    htmlChat += `<i class="fa fa-scroll"></i>`;
                                                 }
                                     htmlChat += `</div> 
                                             <div class="text-muted d-flex justify-content-start align-items-center">

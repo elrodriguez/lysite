@@ -29,6 +29,9 @@ class StudentsReportTotal extends Component
                 'identity_document_types.description as document_type_name',
                 'people.mobile_phone',
                 'people.email',
+                DB::raw("(SELECT COUNT(permissions.name) FROM model_has_permissions INNER JOIN permissions ON permission_id = permissions.id WHERE model_id = people.user_id AND permissions.name='academico_directo_cursos') as cur"),
+                DB::raw("(SELECT COUNT(permissions.name) FROM model_has_permissions INNER JOIN permissions ON permission_id = permissions.id WHERE model_id = people.user_id AND permissions.name='academico_directo_gpt') as gpt"),
+                DB::raw("(SELECT COUNT(permissions.name) FROM model_has_permissions INNER JOIN permissions ON permission_id = permissions.id WHERE model_id = people.user_id AND permissions.name='academico_directo_tesis') as tes")
             )
             ->groupBy([
                 'people.id',

@@ -32,6 +32,7 @@
             @livewire('dashboard.dashboard-admin')
         </div>
     </div>
+    <livewire:student-packages />
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
