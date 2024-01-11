@@ -193,8 +193,8 @@ class GetReferencesController extends Controller
         if ($cierraParentesis > $abreParentesis) {
             $posicion = strrpos($citation, "). "); // Busca la última ocurrencia de "). " en el string
             $citation = substr_replace($citation, ". ", $posicion, strlen("). ")); // Reemplaza la ocurrencia encontrada por ". "
-        }   
-         
+        }
+
         $citation = str_replace(' (Vol. ', ', ', $citation);
         $citation = str_replace('. In ', '. ', $citation);
         $citation = str_replace('pp.', '', $citation);
@@ -203,19 +203,19 @@ class GetReferencesController extends Controller
         $titulox = $array[0];
         $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;                                  
         $nxplodes = explode('(' . $document->year . ')', $citation);
-        $nxplodes[0] = $titulox;//$this->getAutorforAPA($document);
+        $nxplodes[0] = $titulox; //$this->getAutorforAPA($document);
         //$citation = $titulox . implode('(' . $document->year . ')', $nxplodes);
         $citation = implode('(' . $document->year . ')', $nxplodes);
-        
-        $source;
+
+        $source = null;
         try {
             $source = $document->source;
         } catch (\Throwable $th) {
             $source = "";
         }
-        
+
         $year = $document->year;
-        
+
         $explotado = explode("https://doi", $citation);
         $explotado = explode('<i>' . $source . '</i>,', $explotado[0]);
         $volumen_and_pages_no_k = "";
@@ -226,27 +226,27 @@ class GetReferencesController extends Controller
             $volumen_and_pages_no_k = $volumen_and_pages;
             $volumen_and_pages = explode(",", $volumen_and_pages);
             $pos = strpos($volumen_and_pages[0], "(");
-            if($pos == false){
+            if ($pos == false) {
                 $parts = explode(",", $volumen_and_pages[0]);
-                $parts[0] = "<em>".$parts[0]."</em>";
+                $parts[0] = "<em>" . $parts[0] . "</em>";
                 $volumen_and_pages[0] = implode(",", $parts);
             }
             //$volumen_and_pages[0] = $volumen_and_pages[0];
             $volumen_and_pages  = implode(",", $volumen_and_pages);
 
 
-                    $abreParentesis_ = substr_count($volumen_and_pages, "(");
-                    $cierraParentesis_ = substr_count($volumen_and_pages, ")");
-                    if($cierraParentesis_ > $abreParentesis_){
-                        //$volumen_and_pages = "(".$volumen_and_pages;
-                        $volumen_and_pages = str_replace(")", "" , $volumen_and_pages);
-                    }
-            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);            
+            $abreParentesis_ = substr_count($volumen_and_pages, "(");
+            $cierraParentesis_ = substr_count($volumen_and_pages, ")");
+            if ($cierraParentesis_ > $abreParentesis_) {
+                //$volumen_and_pages = "(".$volumen_and_pages;
+                $volumen_and_pages = str_replace(")", "", $volumen_and_pages);
+            }
+            $citation = str_replace($volumen_and_pages_no_k, $volumen_and_pages, $citation);
         }
         $citation = str_replace("Elsevier Ltd.", "", $citation);
         $citation = html_entity_decode($citation);
         $citation = preg_replace("/, &/", " y ", $citation);
-        $citation = $this->deleteMonths($citation);                
+        $citation = $this->deleteMonths($citation);
         return $citation;
     }
 
@@ -254,7 +254,7 @@ class GetReferencesController extends Controller
     {
         $authors = array();
 
-                //Obtener el nombre de los autores
+        //Obtener el nombre de los autores
         try {
             foreach ($document->authors as $author) { //solo la inicial del primer nombre
                 if ($document->type == "book") {
@@ -353,9 +353,9 @@ class GetReferencesController extends Controller
             $citation .= $authors[0] . ' y ' . $authors[1] . '. ';
         } else {
             for ($i = 0; $i < count($authors) - 1; $i++) {
-                if($i==count($authors)-2){                    
+                if ($i == count($authors) - 2) {
                     $citation .= $authors[$i] . ' ';
-                }else{                    
+                } else {
                     $citation .= $authors[$i] . '; ';
                 }
             }
@@ -437,7 +437,7 @@ class GetReferencesController extends Controller
 
         $citation .= '</p>';
         $citation = str_replace("Elsevier Ltd.", "", $citation);
-        $citation = $this->deleteMonths($citation);   
+        $citation = $this->deleteMonths($citation);
         return $citation;
     }
 
@@ -522,14 +522,14 @@ class GetReferencesController extends Controller
         $citation = str_replace("<em>", "", $citation);
         $citation = str_replace('</em>', "", $citation);
         $citation = str_replace("Elsevier Ltd.", "", $citation);
-        $citation = $this->deleteMonths($citation);   
+        $citation = $this->deleteMonths($citation);
         return $citation;
     }
 
 
     public function getVolumen_and_pages($document)
     {
-        
+
         $year = $document->year;
         try {
             $source = $document->source;
@@ -547,17 +547,17 @@ class GetReferencesController extends Controller
         $subcadenas = explode("</em>", $volumen_and_pages);
         $subca = explode('<em>', $subcadenas[0]);
         try {
-            if (is_numeric(trim($subca[1]))){
-                $volumen_and_pages = str_replace($subca[1]."</em>,", $subca[1]."</em>:", $volumen_and_pages);
-            }else{
+            if (is_numeric(trim($subca[1]))) {
+                $volumen_and_pages = str_replace($subca[1] . "</em>,", $subca[1] . "</em>:", $volumen_and_pages);
+            } else {
                 $volumen_and_pages = str_replace(",", ":", $volumen_and_pages);
             }
         } catch (\Throwable $th) {
             //throw $th;
         }
-        
-             
-        
+
+
+
         return $volumen_and_pages;
     }
 
@@ -578,20 +578,20 @@ class GetReferencesController extends Controller
     {
 
         try {
-            $site_name="";
+            $site_name = "";
             $site_name = $data['hybridGraph']['site_name'];
         } catch (\Throwable $th) {
             //throw $th;
         }
 
         try {
-            $site_title="";
+            $site_title = "";
             $site_title = $data['hybridGraph']['title'];
         } catch (\Throwable $th) {
             //throw $th;
         }
         try {
-            $url="";
+            $url = "";
             $url = $data['hybridGraph']['url'];
         } catch (\Throwable $th) {
             //throw $th;
@@ -650,11 +650,12 @@ class GetReferencesController extends Controller
         }
     }
 
-    public function deleteMonths($citation){
+    public function deleteMonths($citation)
+    {
         $citation = str_replace("(jan)", "", $citation);
         $citation = str_replace("(JAN)", "", $citation);
-        $citation = str_replace("(Jan)", "", $citation);        
-        $citation = str_replace("(January)", "", $citation);        
+        $citation = str_replace("(Jan)", "", $citation);
+        $citation = str_replace("(January)", "", $citation);
         $citation = str_replace("(JANUARY)", "", $citation);
         $citation = str_replace("(feb)", "", $citation);
         $citation = str_replace("(mar)", "", $citation);

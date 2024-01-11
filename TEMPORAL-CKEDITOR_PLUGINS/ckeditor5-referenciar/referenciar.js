@@ -1,33 +1,32 @@
-import { Plugin } from 'ckeditor5/src/core';
-import { ButtonView } from 'ckeditor5/src/ui';
-import iconReferenciar from './icons/referenciar.svg';
+import { Plugin } from "ckeditor5/src/core";
+import { ButtonView } from "ckeditor5/src/ui";
+import iconReferenciar from "./icons/referenciar.svg";
 
 export default class referenciar extends Plugin {
     init() {
         const editor = this.editor;
         // The button must be registered among the UI components of the editor
         // to be displayed in the toolbar.
-        editor.ui.componentFactory.add('referenciar', () => {
+        editor.ui.componentFactory.add("referenciar", () => {
             // The button will be an instance of ButtonView.
             const button = new ButtonView();
 
-            button.set( {
-                label: 'Referenciar',
+            button.set({
+                label: "Referenciar",
                 icon: iconReferenciar,
-                tooltip: true
-            } );
+                tooltip: true,
+            });
 
-            button.on( 'execute', () => {
+            button.on("execute", () => {
                 openModalReference(editor);
-            } );
+            });
 
             return button;
-        } );
-        
+        });
     }
 }
 
-function openModalReference(editor){
+function openModalReference(editor) {
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
@@ -52,33 +51,33 @@ function openModalReference(editor){
                 </div>
                 <div class="collapse width" id="collapseWidthExample1" >
 
-                <div class="ly-ck-dialog-group-control">
+                    <div class="ly-ck-dialog-group-control">
 
-                    <div class="btn-group btn-group-sm" role="group" aria-label="">
-                        <button onclick="select_citation('thesis')" type="button" class="btn btn-primary">Tesis</button>
-                        <button onclick="select_citation('article')" type="button" class="btn btn-primary">Artículo</button>
-                        <button onclick="select_citation('page')" type="button" class="btn btn-primary">Página Web</button>
-                        <button onclick="select_citation('book')" type="button" class="btn btn-primary">Libro Virtual</button>
-                        <button onclick="select_citation('book-fisico')" type="button" class="btn btn-primary">Libro Físico</button>
-                        <button onclick="select_citation('document-gubernamental')" type="button" class="btn btn-primary">Documento Gub.</button>
-                        
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            Doc. Legal
-                            </button>
-                            <div class="dropdown-menu">
-                                <a onclick="select_citation('document-legal-codigo-general')" class="dropdown-item" href="#">Código general</a>
-                                <a onclick="select_citation('document-legal-codigo-explicito')" class="dropdown-item" href="#">Código explícito</a>
-                                <a onclick="select_citation('document-legal-expedido-sala-penal')" class="dropdown-item" href="#">Expedido por Salas penales</a>
-                                <a onclick="select_citation('document-legal-expedido-sala-corte-suprema')" class="dropdown-item" href="#">Sala Penal perm. de Corte Suprema</a>
-                                <a onclick="select_citation('document-legal-reglamento-notarial')" class="dropdown-item" href="#">Reglamento Notarial</a>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="">
+                            <button onclick="select_citation('thesis')" type="button" class="btn btn-primary">Tesis</button>
+                            <button onclick="select_citation('article')" type="button" class="btn btn-primary">Artículo</button>
+                            <button onclick="select_citation('page')" type="button" class="btn btn-primary">Página Web</button>
+                            <button onclick="select_citation('book')" type="button" class="btn btn-primary">Libro Virtual</button>
+                            <button onclick="select_citation('book-fisico')" type="button" class="btn btn-primary">Libro Físico</button>
+                            <button onclick="select_citation('document-gubernamental')" type="button" class="btn btn-primary">Documento Gub.</button>
+                            
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Doc. Legal
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a onclick="select_citation('document-legal-codigo-general')" class="dropdown-item" href="#">Código general</a>
+                                    <a onclick="select_citation('document-legal-codigo-explicito')" class="dropdown-item" href="#">Código explícito</a>
+                                    <a onclick="select_citation('document-legal-expedido-sala-penal')" class="dropdown-item" href="#">Expedido por Salas penales</a>
+                                    <a onclick="select_citation('document-legal-expedido-sala-corte-suprema')" class="dropdown-item" href="#">Sala Penal perm. de Corte Suprema</a>
+                                    <a onclick="select_citation('document-legal-reglamento-notarial')" class="dropdown-item" href="#">Reglamento Notarial</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="ly-ck-dialog-group-control">
-                <h3 class="col-6 mx-auto" id="tipo-referencia"></h3>
-                </div>
+                    <div class="ly-ck-dialog-group-control">
+                        <h3 class="col-6 mx-auto" id="tipo-referencia"></h3>
+                    </div>
 
                     <div class="ly-ck-dialog-group-control">
                         <label class="ly-ck-dialog-label" for="input-autor">Autor/es:</label>
@@ -235,29 +234,31 @@ function openModalReference(editor){
     modalReference.innerHTML = form;
     document.body.appendChild(modalReference);
 
-    const ckcloseBtnReferenceIcon = document.querySelector( '#ly-ck-btn-dialog-close-icon' );
-    const ckcloseBtnReference = document.querySelector( '#ckcloseBtnReference' );
+    const ckcloseBtnReferenceIcon = document.querySelector(
+        "#ly-ck-btn-dialog-close-icon"
+    );
+    const ckcloseBtnReference = document.querySelector("#ckcloseBtnReference");
 
-    ckcloseBtnReference.addEventListener( 'click', () => {
+    ckcloseBtnReference.addEventListener("click", () => {
         modalReference.remove();
     });
 
-    ckcloseBtnReferenceIcon.addEventListener( 'click', () => {
+    ckcloseBtnReferenceIcon.addEventListener("click", () => {
         modalReference.remove();
     });
 
-    const formSubmit = document.getElementById('ly-ck-form-referenciar');
+    const formSubmit = document.getElementById("ly-ck-form-referenciar");
     const xhr = new XMLHttpRequest();
 
-    formSubmit.addEventListener('submit', (event) => {
+    formSubmit.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        const input = document.getElementById('input-doi');
-        const error = document.getElementById('input-doi-error');
+        const input = document.getElementById("input-doi");
+        const error = document.getElementById("input-doi-error");
 
         if (input.value.length === 0) {
-            error.textContent = 'Este campo no puede estar vacío';
-            alert('Algunos campos son necesarios')
+            error.textContent = "Este campo no puede estar vacío";
+            alert("Algunos campos son necesarios");
         } else {
             const spinner = `<div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
@@ -265,12 +266,14 @@ function openModalReference(editor){
                     </div>
                 </div>`;
 
-            const content = document.getElementById('ly-ck-dialog-references-result');
+            const content = document.getElementById(
+                "ly-ck-dialog-references-result"
+            );
             content.innerHTML = spinner;
 
-            const parameters = editor.config.get('references') || 'empty';
+            const parameters = editor.config.get("references") || "empty";
             const formData = new FormData(formSubmit);
-            
+
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     content.innerHTML = `<div class="alert alert-primary" id="citation-id" role="alert">
@@ -279,21 +282,19 @@ function openModalReference(editor){
                 }
             };
 
-            xhr.open('POST', parameters.url, true);
+            xhr.open("POST", parameters.url, true);
 
             // Definir token de seguridad antes de establecer los headers
-            const token = parameters.headers['X-CSRF-TOKEN'];
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            const token = parameters.headers["X-CSRF-TOKEN"];
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("X-CSRF-TOKEN", token);
 
             const formDataJson = {};
             for (const [key, value] of formData.entries()) {
                 formDataJson[key] = value;
             }
-            
+
             xhr.send(JSON.stringify(formDataJson));
         }
     });
-
-    
 }
