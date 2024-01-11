@@ -134,7 +134,7 @@
                         <div class="col-md-1 text-right">
                         </div>
                         <div class="col-md-1">
-                            <input 
+                            <input
                                 id="subprefix-` + k + id + `" type="text"
                                 class="form-control form-control-sm text-right">
                         </div>
@@ -144,7 +144,7 @@
                                 class="form-control form-control-sm" style="background: #fff">
                         </div>
                         <div class="col-md-1">
-                            <input 
+                            <input
                                 id="subpage-` + k + id + `" type="text"
                                 class="form-control form-control-sm text-right"
                                 style="background: #fff">
@@ -154,7 +154,7 @@
                                 <button onclick="saveSubItemNewJS(${k},${id},${type})" id="btn-new-subitem-` + k + id + `" type="button" class="btn btn-success btn-sm mr-1">
                                     <span id="span-new-subitem-` + k + id + `" class="fa fa-check"></span>
                                 </button>
-                                <button 
+                                <button
                                     onclick="removeSubItemNew(${k},${id})"
                                     type="button" class="btn btn-danger btn-sm">
                                     <i class="fa fa-trash-alt"></i>
@@ -348,9 +348,16 @@
             axios.post(routePost, datos).then(function(response) {
                     // Manejar la respuesta exitosa
                     var text = response.data.html;
+
+
+                   // Crear un elemento de div temporal
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = '***\n'+text+'\n***';
+
+
                     var textarea_c = document.getElementById("index_copy");
                     textarea_c.style.display = "block";
-                    textarea_c.value = text;
+                    textarea_c.value = tempDiv.innerHTML;
                     textarea_c.style.position = 'fixed'; // Asegura que el textarea sea visible
                     textarea_c.focus();
                     textarea_c.select();
@@ -364,12 +371,14 @@
                         console.error('Error al copiar el texto al portapapeles:', error);
                     }
                     textarea_c.style.display = "none";
+
                 })
                 .catch(function(error) {
                     // Manejar el error
                     console.error(error);
                     textarea_c.style.display = "none";
                 });
+
         }
     </script>
 </div>
