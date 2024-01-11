@@ -16,9 +16,12 @@ use Illuminate\Http\Client\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Request as GRequest;
+use Livewire\WithFileUploads;
 
 class BoxGpt extends Component
 {
+
+    use WithFileUploads;
     public $typeAction = 1;
     public $history = [];
     public $historyItems = [];
@@ -83,8 +86,10 @@ class BoxGpt extends Component
         return $formattedDate;
     }
 
-    public function saveMessageUser()
-    {
+    public function saveMessageUser(Request $request)
+    {   $fd = $this->file;
+        $this->file = $request->file('file');
+        dd($this->file, $fd);
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -132,6 +137,7 @@ class BoxGpt extends Component
         ]);
 
         $this->consulta = null;
+        $this->file = null;
     }
 
 
@@ -297,7 +303,7 @@ class BoxGpt extends Component
     }
     /*  Asistente de chat GPT  */
 
-    public function getThreadId($msg){
+    public function getThreadId($msg){  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
         if($this->thread_id == null){
             $client = new Client();
             $promise = $client->getAsync('http://localhost:3000/create_thread');
@@ -312,7 +318,7 @@ class BoxGpt extends Component
         return $this->sendGetConsulta($msg);
     }
 
-    public function sendGetConsulta($msg)
+    public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
     {
         // Creando run y haciendo consulta para obtener respuesta de la IA
         $response = Http::post('http://localhost:3000/create_run', [
@@ -320,6 +326,7 @@ class BoxGpt extends Component
             'user_name' => Auth::user()->name,
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
+            'file' => $this->file,
         ]);
 
         $data = $response->json();
@@ -327,7 +334,7 @@ class BoxGpt extends Component
         // dd($this->thread_id, $response);
     }
 
-    public function getPendingRun($messages){
+    public function getPendingRun($messages){   //consulta de respuesta cuando la espera es larga
         // consultamos si el run ya tiene respuesta y si es así entregue el mensaje o avise que no
         $response = Http::post('http://localhost:3000/get_run_pending', [
             'thread_id' => $messages['thread_id'],
@@ -337,5 +344,20 @@ class BoxGpt extends Component
         $data = $response->json();
         return $data;
         // dd($this->thread_id, $response);
+    }
+
+    public function getThreadId_w_file($msg){  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
+        if($this->thread_id == null){
+            $client = new Client();
+            $promise = $client->getAsync('http://localhost:3000/create_thread');
+            $response = $promise->wait();
+            $data = json_decode($response->getBody(), true);
+            $this->thread_id = $data['thread_id'];
+            $this->assistant_id = $data['assistant_id'];
+        }else{
+
+        }
+
+        // cambiar por el metodo para archivo return $this->sendGetConsulta($msg);
     }
 }

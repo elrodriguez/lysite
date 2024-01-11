@@ -14,13 +14,17 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+
+
+// ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
+
 app.get("/create_thread", (req, res) => {
     createThread().then((thread) => {
         res.json(thread);
     });
 });
 
-app.post("/create_run", (req, res) => {
+app.post("/create_run_", (req, res) => {
     console.log("Datos del request: ", req.body.user_name);
     let data = {
         user_message: req.body.user_message,
@@ -46,6 +50,61 @@ app.post("/get_run_pending", (req, res) => {
         res.json(thread);
     });
 });
+            //------------metodos para usar archivos
+
+            app.post("/create_run", (req, res) => {
+                console.log("Datos del request con file: ", req.body.user_name);
+
+                // Verifica si se ha enviado un archivo
+                if (req.files && req.files.file) {
+                    const file = req.files.file;
+
+                    // Obtiene la extensión del archivo
+                    const fileExtension = file.name.split('.').pop();
+
+                    // Obtiene el nombre del archivo
+                    const fileName = randomName(file.name.split('.').shift());
+
+                    const filePath = '/temp_files/asisstant/'+ fileName + '.' + fileExtension;
+
+                    // Mueve el archivo al directorio especificado
+                    file.mv(filePath, (err) => {
+                        if (err) {
+                            console.error(err);
+                            return res.status(500).send(err);
+                        }
+
+                        let data = {
+                            user_message: req.body.user_message,
+                            user_name: req.body.user_name,
+                            thread_id: req.body.thread_id,
+                            assistant_id: req.body.assistant_id,
+                            file_path: filePath
+                        };
+
+                        createRun(data).then((thread) => {
+                            res.json(thread);
+                        });
+                    });
+                } else {
+                    // No se envió ningún archivo
+                    let data = {
+                        user_message: req.body.user_message,
+                        user_name: req.body.user_name,
+                        thread_id: req.body.thread_id,
+                        assistant_id: req.body.assistant_id,
+                        file_path: null
+                    };
+
+                    createRun(data).then((thread) => {
+                        res.json(thread);
+                    });
+                }
+            });
+
+
+
+
 
 const createThread = async () => {
     //usar uno existente usando su Id
@@ -66,11 +125,28 @@ const createThread = async () => {
 };
 
 const createRun = async (data) => {
+    const archivo = data.file_path;
     console.log(data);
-    const message = await openai.beta.threads.messages.create(data.thread_id, {
-        role: "user",
-        content: data.user_message,
-    });
+
+    if(archivo != null){
+            // Upload a file with an "assistants" purpose
+                const file = await openai.files.create({
+                    file: fs.createReadStream(archivo),
+                    purpose: "assistants",
+                });
+
+                const message = await openai.beta.threads.messages.create(data.thread_id, {
+                role: "user",
+                content: data.user_message,
+                file_ids: [file.id]
+                });
+    }else{
+                const message = await openai.beta.threads.messages.create(data.thread_id, {
+                role: "user",
+                content: data.user_message,
+                });
+    }
+
     //Run assistant
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
@@ -154,6 +230,21 @@ const getPendingRun = async (data) => {
     });
     return respuesta;
 };
+
+function randomName(name) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    // Establece la semilla utilizando una cadena específica
+    Math.seedrandom(name);
+
+    for (let i = 0; i < 8; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+
+    return result;
+  }
 
 app.listen(port, () => {
     console.log(`El servidor está escuchando en el puerto ${port}`);
