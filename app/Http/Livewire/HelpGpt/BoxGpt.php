@@ -27,6 +27,7 @@ class BoxGpt extends Component
     public $historyItems = [];
     public $consulta = null;
     public $file = null;
+    public $fileName;
     public $resultado = null;
     public $paraphrase_left;
     public $normativa;
@@ -87,9 +88,22 @@ class BoxGpt extends Component
     }
 
     public function saveMessageUser(Request $request)
-    {   $fd = $this->file;
-        $this->file = $request->file('file');
-        dd($this->file, $fd);
+    {   
+        $this->fileName = null;
+        if($this->file){
+            $basePath = base_path();
+            $asistentePath = $basePath . '/asistente_lyon';
+        
+            if (!is_dir($asistentePath)) {
+                mkdir($asistentePath);
+            }
+        
+            $extension = $this->file->getClientOriginalExtension();
+            $this->fileName = $this->randomName() . '.' . $extension;
+
+            $path = $this->file->storeAs('asistente_lyon', $this->fileName);
+        }
+
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -138,6 +152,7 @@ class BoxGpt extends Component
 
         $this->consulta = null;
         $this->file = null;
+        $this->fileName = null;
     }
 
 
@@ -315,7 +330,7 @@ class BoxGpt extends Component
 
         }
 
-        return $this->sendGetConsulta($msg);
+        return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global 
     }
 
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
@@ -326,7 +341,7 @@ class BoxGpt extends Component
             'user_name' => Auth::user()->name,
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
-            'file' => $this->file,
+            'file' => $this->fileName,
         ]);
 
         $data = $response->json();
@@ -359,5 +374,16 @@ class BoxGpt extends Component
         }
 
         // cambiar por el metodo para archivo return $this->sendGetConsulta($msg);
+    }
+    public function randomName() {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $longitud = 6;
+        $codigo = '';
+    
+        for ($i = 0; $i < $longitud; $i++) {
+            $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+    
+        return $codigo;
     }
 }

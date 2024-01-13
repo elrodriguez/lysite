@@ -3,10 +3,14 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+import path from 'path';
+
 app.use(express.json());
 
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
+import fs from 'fs';
+
 
 dotenv.config();
 
@@ -54,25 +58,26 @@ app.post("/get_run_pending", (req, res) => {
 
             app.post("/create_run", (req, res) => {
                 console.log("Datos del request con file: ", req.body.user_name);
+                console.log("------->>>>>>>_>>_>_>_>_>_>_>_>_>_>_>_>_>__> \n -------->>>>>>", req.body.file);
 
                 // Verifica si se ha enviado un archivo
-                if (req.files && req.files.file) {
-                    const file = req.files.file;
+                if (req.body.file) {
+                    console.log("llegó un archivo");
+                    const directorioActual = __dirname;
+                    const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
+                    console.log(file);
+                    
+                    const file = rutaDeseada+"\\"+req.body.file;
+                    // // Obtiene la extensión del archivo
+                    // const fileExtension = file.name.split('.').pop();
 
-                    // Obtiene la extensión del archivo
-                    const fileExtension = file.name.split('.').pop();
+                    // // Obtiene el nombre del archivo
+                    // const fileName = randomName(file.name.split('.').shift());
 
-                    // Obtiene el nombre del archivo
-                    const fileName = randomName(file.name.split('.').shift());
-
-                    const filePath = '/temp_files/asisstant/'+ fileName + '.' + fileExtension;
-
-                    // Mueve el archivo al directorio especificado
-                    file.mv(filePath, (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.status(500).send(err);
-                        }
+                    // const filePath = '/temp_files/asisstant/'+ fileName + '.' + fileExtension;
+                    const filePath = file;
+                  //  Mueve el archivo al directorio especificado
+                
 
                         let data = {
                             user_message: req.body.user_message,
@@ -85,8 +90,9 @@ app.post("/get_run_pending", (req, res) => {
                         createRun(data).then((thread) => {
                             res.json(thread);
                         });
-                    });
+                    
                 } else {
+                    console.log("no llegó ningún archivo");
                     // No se envió ningún archivo
                     let data = {
                         user_message: req.body.user_message,
