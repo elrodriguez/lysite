@@ -143,35 +143,29 @@ const createRun = async (data) => {
 
                 console.log("EL ID DEL ARCHIVO ES: ", file.id);
 
-                const message = await openai.beta.threads.messages.create(data.thread_id, {
-                role: "user",
-                content: data.user_message,
-                file_ids: [file.id]
+                const message = await openai.beta.threads.messages.create(
+                data.thread_id, {
+                                role: "user",
+                                content: data.user_message,
+                                file_ids: [file.id]
                 });
                 console.log("mensaje con fileid: ", message);
-                    //Run assistant
-                    const run = await openai.beta.threads.runs.create(data.thread_id, {
-                        assistant_id: data.assistant_id,
-                        instructions:
-                            "Responde al usuario solo según las instrucciones del asistente, limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, tesis, articulos cientificos y similares; el usuario se llama " +
-                            data.user_name,
-                            file_ids:[file.id]
-                    });
     }else{
-                const message = await openai.beta.threads.messages.create(data.thread_id, {
-                role: "user",
-                content: data.user_message,
-                });
-                    //Run assistant
-                const run = await openai.beta.threads.runs.create(data.thread_id, {
-                    assistant_id: data.assistant_id,
-                    instructions:
-                        "Responde al usuario solo según las instrucciones del asistente, limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, tesis, articulos cientificos y similares; el usuario se llama " +
-                        data.user_name,
+                const message = await openai.beta.threads.messages.create(
+                data.thread_id, {
+                                role: "user",
+                                content: data.user_message,
                 });
     }
 
-
+    //Run assistant
+    const run = await openai.beta.threads.runs.create(data.thread_id, {
+        assistant_id: data.assistant_id,
+        instructions: "Responde al usuario solo según las instrucciones del asistente, "
+                    +"limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, "
+                    +"tesis, articulos cientificos y similares; el usuario se llama " + data.user_name,
+        file_id: file.id
+    });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
     const run_retrieve = await openai.beta.threads.runs.retrieve(
