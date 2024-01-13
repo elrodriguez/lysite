@@ -63,10 +63,10 @@ app.post("/get_run_pending", (req, res) => {
                 // Verifica si se ha enviado un archivo
                 if (req.body.file) {
                     console.log("llegó un archivo");
-                    const directorioActual = __dirname;
+                    const directorioActual = "//var/www//html//lysite-test//asistente_lyon";  //CAMBIAR RUTA TEST POR LA REAL
                     const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
                     console.log(file);
-                    
+
                     const file = rutaDeseada+"\\"+req.body.file;
                     // // Obtiene la extensión del archivo
                     // const fileExtension = file.name.split('.').pop();
@@ -77,7 +77,7 @@ app.post("/get_run_pending", (req, res) => {
                     // const filePath = '/temp_files/asisstant/'+ fileName + '.' + fileExtension;
                     const filePath = file;
                   //  Mueve el archivo al directorio especificado
-                
+
 
                         let data = {
                             user_message: req.body.user_message,
@@ -90,7 +90,7 @@ app.post("/get_run_pending", (req, res) => {
                         createRun(data).then((thread) => {
                             res.json(thread);
                         });
-                    
+
                 } else {
                     console.log("no llegó ningún archivo");
                     // No se envió ningún archivo
