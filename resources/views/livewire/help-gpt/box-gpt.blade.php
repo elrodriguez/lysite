@@ -162,7 +162,7 @@
                         @endif
                     </div>
                 @elseif($typeAction == 4)
-                    <div class="gpt-msg_history">
+                    <div class="gpt-msg_history p-4">
                         {{-- @if ($history)
                             @if (count($historyItems) > 0)
                                 @foreach ($historyItems as $item)

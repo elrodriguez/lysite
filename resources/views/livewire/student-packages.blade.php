@@ -99,6 +99,5 @@
                 </div>
             @endcan
         @endif
-
     </div>
 </div>

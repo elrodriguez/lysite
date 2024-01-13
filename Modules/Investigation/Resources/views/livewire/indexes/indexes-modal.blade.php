@@ -97,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="copyIndex()">Copiar Indice</button>
+                    <button type="button" class="btn btn-primary" onclick="copyIndex()">Copiar Indice al editor</button>
                 </div>
             </div>
         </div>
@@ -361,12 +361,14 @@
                     textarea_c.style.position = 'fixed'; // Asegura que el textarea sea visible
                     textarea_c.focus();
                     textarea_c.select();
-
+                    //console.log(textarea_c)
                     try {
-                        var successful = document.execCommand('copy');
-                        var message = successful ? 'Texto copiado al portapapeles' :
-                            'No se pudo copiar el texto al portapapeles';
-                        console.log(message);
+                        xEditor.setData(textarea_c.value)
+                        // var successful = document.execCommand('copy');
+                        // var message = successful ? 'Texto copiado al portapapeles' :
+                        //     'No se pudo copiar el texto al portapapeles';
+                        // console.log(message);
+                        $('#modalIndexes').modal('hide');
                     } catch (error) {
                         console.error('Error al copiar el texto al portapapeles:', error);
                     }

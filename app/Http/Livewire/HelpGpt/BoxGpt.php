@@ -86,10 +86,8 @@ class BoxGpt extends Component
         return $formattedDate;
     }
 
-    public function saveMessageUser(Request $request)
-    {   $fd = $this->file;
-        $this->file = $request->file('file');
-        dd($this->file, $fd);
+    public function saveMessageUser()
+    {   
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -112,19 +110,19 @@ class BoxGpt extends Component
             $resultado = $this->recommendations();
         } elseif ($this->typeAction == 3) {
             $resultado = $this->grammarCorrection();
-        }    elseif($this->typeAction == 4){
-                $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+        }elseif($this->typeAction == 4){
+            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
 
-                    try {
-                        if(!isset($messages[0])){
-                        while($messages['status'] == "Pending"){
-                            $messages = $this->getPendingRun($messages);
-                        }
-                    }
-                    } catch (\Throwable $th) {
+            try {
+                if(!isset($messages[0])){
+                while($messages['status'] == "Pending"){
+                    $messages = $this->getPendingRun($messages);
+                }
+            }
+            } catch (\Throwable $th) {
 
-                    }
-        $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+            }
+            $resultado = $messages[0][0]['text']['value'];   //la respuesta final
         } elseif ($this->typeAction == 5) {
             $resultado = $this->references();
         }

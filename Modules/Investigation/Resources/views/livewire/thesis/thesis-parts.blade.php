@@ -366,7 +366,7 @@
     <input type="hidden" id="content_old" wire:model='content_old'>
     <script>
         var data = "";
-
+        var xEditor;
 
         const textarea = document.getElementById('text2');
         const button = document.getElementById("paraphrasing");
@@ -762,6 +762,7 @@
                 })
                 .then(editor => {
                     window.editor = editor;
+                    xEditor = editor;
                     document.querySelector('.document-editor__toolbar').appendChild(editor.ui.view.toolbar.element);
                     document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
 
@@ -979,6 +980,17 @@
             }, 444);
         }, 444);
     </script>
+   <script>
+   
+    // Manejar el evento del clic derecho para pegar
+    document.addEventListener('contextmenu', function(event) {
+        // Prevenir la acción predeterminada del menú contextual
+        event.preventDefault();
+        // Mostrar una alerta
+        alert('No está permitido esta acción aquí.');
+    });
+    </script>
+    
     <div id="dialog-ckeditor"></div>
     <style>
         #editor p {
