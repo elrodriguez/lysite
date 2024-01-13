@@ -980,15 +980,6 @@
             }, 444);
         }, 444);
     </script>
-    <script>
-        // Manejar el evento del clic derecho para pegar
-        document.addEventListener('contextmenu', function(event) {
-            // Prevenir la acción predeterminada del menú contextual
-            event.preventDefault();
-            // Mostrar una alerta
-            alert('No está permitido esta acción aquí.');
-        });
-    </script>
 
     <div id="dialog-ckeditor"></div>
     <style>
