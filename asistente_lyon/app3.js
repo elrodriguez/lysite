@@ -163,7 +163,8 @@ const createRun = async (data) => {
         instructions: "Responde al usuario, "
                     +"limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, "
                     +"tesis, articulos cientificos y similares; el usuario se llama " + data.user_name+
-                    ". tu te llamas Lyon y si en este thread te enviaron algún archivo respondele sobre el mismo si te lo preguntan",
+                    ". tu te llamas Lyon y si en este thread te enviaron algún archivo respondele sobre el mismo si te lo preguntan"+
+                    "También solo limitate a responder sobre los archivos que se subieron en el Thread actual no respondas por archivos antiguos o que subieron en otro Thread que no sea este.",
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
