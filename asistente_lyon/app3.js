@@ -133,7 +133,7 @@ const createThread = async () => {
 const createRun = async (data) => {
     const archivo = data.file_path;
     console.log(data);
-    file_id=null;
+    let file_id=null;
     if(archivo != null){
             // Upload a file with an "assistants" purpose
                 const file = await openai.files.create({
