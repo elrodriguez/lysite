@@ -164,7 +164,7 @@ const createRun = async (data) => {
         instructions: "Responde al usuario solo según las instrucciones del asistente, "
                     +"limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, "
                     +"tesis, articulos cientificos y similares; el usuario se llama " + data.user_name,
-        file_id: file.id
+        file_ids: [file.id]
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
