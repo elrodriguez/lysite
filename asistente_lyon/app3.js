@@ -65,7 +65,7 @@ app.post("/get_run_pending", (req, res) => {
                     console.log("llegó un archivo");
                     const directorioActual = "//var/www//html//lysite-test//asistente_lyon";  //CAMBIAR RUTA TEST POR LA REAL
                     const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
-                    console.log(file);
+                    console.log(req.body.file);
 
                     const file = rutaDeseada+"\\"+req.body.file;
                     // // Obtiene la extensión del archivo
