@@ -133,7 +133,6 @@ const createThread = async () => {
 const createRun = async (data) => {
     const archivo = data.file_path;
     console.log(data);
-    let file_id=null;
     if(archivo != null){
             // Upload a file with an "assistants" purpose
                 const file = await openai.files.create({
@@ -149,7 +148,6 @@ const createRun = async (data) => {
                                 content: data.user_message,
                                 file_ids: [file.id]
                 });
-                file_id=file.id;
                 console.log("mensaje con fileid: ", message);
     }else{
                 const message = await openai.beta.threads.messages.create(
@@ -162,10 +160,10 @@ const createRun = async (data) => {
     //Run assistant
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
-        instructions: "Responde al usuario solo según las instrucciones del asistente, "
+        instructions: "Responde al usuario, "
                     +"limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, "
-                    +"tesis, articulos cientificos y similares; el usuario se llama " + data.user_name,
-        file_ids: [file_id]
+                    +"tesis, articulos cientificos y similares; el usuario se llama " + data.user_name+
+                    ". tu te llamas Lyon y si en este thread te enviaron algún archivo respondele sobre el mismo si te lo preguntan",
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
