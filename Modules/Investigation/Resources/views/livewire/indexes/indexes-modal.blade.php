@@ -97,7 +97,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="copyIndex()">Copiar Indice al editor</button>
+                    <button type="button" class="btn btn-primary" onclick="copyIndex()">Copiar Indice al
+                        editor</button>
                 </div>
             </div>
         </div>
@@ -350,9 +351,9 @@
                     var text = response.data.html;
 
 
-                   // Crear un elemento de div temporal
+                    // Crear un elemento de div temporal
                     var tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = '***\n'+text+'\n***';
+                    tempDiv.innerHTML = '***\n' + text + '\n***';
 
 
                     var textarea_c = document.getElementById("index_copy");

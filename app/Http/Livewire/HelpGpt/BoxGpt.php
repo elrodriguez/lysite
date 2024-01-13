@@ -27,6 +27,7 @@ class BoxGpt extends Component
     public $historyItems = [];
     public $consulta = null;
     public $file = null;
+    public $fileName;
     public $resultado = null;
     public $paraphrase_left;
     public $normativa;
@@ -86,8 +87,25 @@ class BoxGpt extends Component
         return $formattedDate;
     }
 
-    public function saveMessageUser()
-    {   
+
+    public function saveMessageUser(Request $request)
+    {
+        $this->fileName = null;
+        if ($this->file) {
+            $basePath = base_path();
+            $asistentePath = $basePath . '/asistente_lyon';
+
+            if (!is_dir($asistentePath)) {
+                mkdir($asistentePath);
+            }
+
+            $extension = $this->file->getClientOriginalExtension();
+            $this->fileName = $this->randomName() . '.' . $extension;
+
+            $path = $this->file->storeAs('asistente_lyon', $this->fileName);
+        }
+
+
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -110,19 +128,22 @@ class BoxGpt extends Component
             $resultado = $this->recommendations();
         } elseif ($this->typeAction == 3) {
             $resultado = $this->grammarCorrection();
-        }elseif($this->typeAction == 4){
+        } elseif ($this->typeAction == 4) {
             $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
 
             try {
-                if(!isset($messages[0])){
-                while($messages['status'] == "Pending"){
-                    $messages = $this->getPendingRun($messages);
+                if (!isset($messages[0])) {
+                    while ($messages['status'] == "Pending") {
+                        $messages = $this->getPendingRun($messages);
+                    }
                 }
-            }
             } catch (\Throwable $th) {
-
             }
-            $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+            if ($messages != false) {
+                $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+            } else {
+                $resultado = "Hubo un error vuelve a intentarlo";
+            }
         } elseif ($this->typeAction == 5) {
             $resultado = $this->references();
         }
@@ -136,6 +157,7 @@ class BoxGpt extends Component
 
         $this->consulta = null;
         $this->file = null;
+        $this->fileName = null;
     }
 
 
@@ -301,19 +323,19 @@ class BoxGpt extends Component
     }
     /*  Asistente de chat GPT  */
 
-    public function getThreadId($msg){  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
-        if($this->thread_id == null){
+    public function getThreadId($msg)
+    {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
+        if ($this->thread_id == null) {
             $client = new Client();
             $promise = $client->getAsync('http://localhost:3000/create_thread');
             $response = $promise->wait();
             $data = json_decode($response->getBody(), true);
             $this->thread_id = $data['thread_id'];
             $this->assistant_id = $data['assistant_id'];
-        }else{
-
+        } else {
         }
 
-        return $this->sendGetConsulta($msg);
+        return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
     }
 
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
@@ -324,7 +346,7 @@ class BoxGpt extends Component
             'user_name' => Auth::user()->name,
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
-            'file' => $this->file,
+            'file' => $this->fileName,
         ]);
 
         $data = $response->json();
@@ -332,7 +354,8 @@ class BoxGpt extends Component
         // dd($this->thread_id, $response);
     }
 
-    public function getPendingRun($messages){   //consulta de respuesta cuando la espera es larga
+    public function getPendingRun($messages)
+    {   //consulta de respuesta cuando la espera es larga
         // consultamos si el run ya tiene respuesta y si es así entregue el mensaje o avise que no
         $response = Http::post('http://localhost:3000/get_run_pending', [
             'thread_id' => $messages['thread_id'],
@@ -344,18 +367,30 @@ class BoxGpt extends Component
         // dd($this->thread_id, $response);
     }
 
-    public function getThreadId_w_file($msg){  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
-        if($this->thread_id == null){
+    public function getThreadId_w_file($msg)
+    {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
+        if ($this->thread_id == null) {
             $client = new Client();
             $promise = $client->getAsync('http://localhost:3000/create_thread');
             $response = $promise->wait();
             $data = json_decode($response->getBody(), true);
             $this->thread_id = $data['thread_id'];
             $this->assistant_id = $data['assistant_id'];
-        }else{
-
+        } else {
         }
 
         // cambiar por el metodo para archivo return $this->sendGetConsulta($msg);
+    }
+    public function randomName()
+    {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $longitud = 6;
+        $codigo = '';
+
+        for ($i = 0; $i < $longitud; $i++) {
+            $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+
+        return $codigo;
     }
 }

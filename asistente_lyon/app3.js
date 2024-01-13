@@ -3,10 +3,14 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+import path from 'path';
+
 app.use(express.json());
 
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
+import fs from 'fs';
+
 
 dotenv.config();
 
@@ -54,25 +58,26 @@ app.post("/get_run_pending", (req, res) => {
 
             app.post("/create_run", (req, res) => {
                 console.log("Datos del request con file: ", req.body.user_name);
+                console.log("------->>>>>>>_>>_>_>_>_>_>_>_>_>_>_>_>_>__> \n -------->>>>>>", req.body.file);
 
                 // Verifica si se ha enviado un archivo
-                if (req.files && req.files.file) {
-                    const file = req.files.file;
+                if (req.body.file) {
+                    console.log("llegó un archivo");
+                    const directorioActual = "\\var\\www\\html\\lysite-test\\asistente_lyon\\";  //CAMBIAR RUTA TEST POR LA REAL
+                    const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
+                    console.log(req.body.file);
 
-                    // Obtiene la extensión del archivo
-                    const fileExtension = file.name.split('.').pop();
+                    const file = "/var/www/html/lysite-test/asistente_lyon/asistente_lyon/"+req.body.file;
+                    // // Obtiene la extensión del archivo
+                    // const fileExtension = file.name.split('.').pop();
 
-                    // Obtiene el nombre del archivo
-                    const fileName = randomName(file.name.split('.').shift());
+                    // // Obtiene el nombre del archivo
+                    // const fileName = randomName(file.name.split('.').shift());
 
-                    const filePath = '/temp_files/asisstant/'+ fileName + '.' + fileExtension;
+                    // const filePath = '/temp_files/asisstant/'+ fileName + '.' + fileExtension;
+                    const filePath = file;
+                  //  Mueve el archivo al directorio especificado
 
-                    // Mueve el archivo al directorio especificado
-                    file.mv(filePath, (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.status(500).send(err);
-                        }
 
                         let data = {
                             user_message: req.body.user_message,
@@ -85,8 +90,9 @@ app.post("/get_run_pending", (req, res) => {
                         createRun(data).then((thread) => {
                             res.json(thread);
                         });
-                    });
+
                 } else {
+                    console.log("no llegó ningún archivo");
                     // No se envió ningún archivo
                     let data = {
                         user_message: req.body.user_message,
@@ -201,20 +207,25 @@ const getPendingRun = async (data) => {
     let check_run = null;
     let steps = 0;
     while (check_run != "completed") {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        const get_run_retrieve = await openai.beta.threads.runs.retrieve(
-            data.thread_id, //este dato es el thread_id del hilo creado
-            data.run_id //este es el run_id al correr el run
-        );
-        console.log("STATUS DEL RUN -> ", get_run_retrieve["status"]);
-        check_run = get_run_retrieve["status"];
-        steps++;
-        if(steps > 11){
-            var resp = {};
-            resp['run_id'] = get_run_retrieve['id'];
-            resp['thread_id'] = get_run_retrieve['thread_id'];
-            resp['status'] = "Pending";
-            return resp;
+        if(check_run != "failed"){
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            const get_run_retrieve = await openai.beta.threads.runs.retrieve(
+                data.thread_id, //este dato es el thread_id del hilo creado
+                data.run_id //este es el run_id al correr el run
+            );
+            console.log("STATUS DEL RUN -> ", get_run_retrieve["status"]);
+            check_run = get_run_retrieve["status"];
+            steps++;
+            if(steps > 11){
+                var resp = {};
+                resp['run_id'] = get_run_retrieve['id'];
+                resp['thread_id'] = get_run_retrieve['thread_id'];
+                resp['status'] = "Pending";
+                return resp;
+                break;
+            }
+        }else{
+            return false;
             break;
         }
     }
