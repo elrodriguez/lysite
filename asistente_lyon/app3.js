@@ -207,20 +207,25 @@ const getPendingRun = async (data) => {
     let check_run = null;
     let steps = 0;
     while (check_run != "completed") {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        const get_run_retrieve = await openai.beta.threads.runs.retrieve(
-            data.thread_id, //este dato es el thread_id del hilo creado
-            data.run_id //este es el run_id al correr el run
-        );
-        console.log("STATUS DEL RUN -> ", get_run_retrieve["status"]);
-        check_run = get_run_retrieve["status"];
-        steps++;
-        if(steps > 11){
-            var resp = {};
-            resp['run_id'] = get_run_retrieve['id'];
-            resp['thread_id'] = get_run_retrieve['thread_id'];
-            resp['status'] = "Pending";
-            return resp;
+        if(check_run != "failed"){
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            const get_run_retrieve = await openai.beta.threads.runs.retrieve(
+                data.thread_id, //este dato es el thread_id del hilo creado
+                data.run_id //este es el run_id al correr el run
+            );
+            console.log("STATUS DEL RUN -> ", get_run_retrieve["status"]);
+            check_run = get_run_retrieve["status"];
+            steps++;
+            if(steps > 11){
+                var resp = {};
+                resp['run_id'] = get_run_retrieve['id'];
+                resp['thread_id'] = get_run_retrieve['thread_id'];
+                resp['status'] = "Pending";
+                return resp;
+                break;
+            }
+        }else{
+            return false;
             break;
         }
     }
