@@ -141,11 +141,14 @@ const createRun = async (data) => {
                     purpose: "assistants",
                 });
 
+                console.log("EL ID DEL ARCHIVO ES: ", file.id);
+
                 const message = await openai.beta.threads.messages.create(data.thread_id, {
                 role: "user",
                 content: data.user_message,
                 file_ids: [file.id]
                 });
+                console.log("mensaje con fileid: ", message);
     }else{
                 const message = await openai.beta.threads.messages.create(data.thread_id, {
                 role: "user",
