@@ -88,16 +88,16 @@ class BoxGpt extends Component
     }
 
     public function saveMessageUser(Request $request)
-    {   
+    {
         $this->fileName = null;
         if($this->file){
             $basePath = base_path();
             $asistentePath = $basePath . '/asistente_lyon';
-        
+
             if (!is_dir($asistentePath)) {
                 mkdir($asistentePath);
             }
-        
+
             $extension = $this->file->getClientOriginalExtension();
             $this->fileName = $this->randomName() . '.' . $extension;
 
@@ -138,7 +138,11 @@ class BoxGpt extends Component
                     } catch (\Throwable $th) {
 
                     }
-        $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+        if($messages != false){
+            $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+        }else{
+            $resultado = "Hubo un error vuelve a intentarlo";
+        }
         } elseif ($this->typeAction == 5) {
             $resultado = $this->references();
         }
@@ -330,7 +334,7 @@ class BoxGpt extends Component
 
         }
 
-        return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global 
+        return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
     }
 
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
@@ -379,11 +383,11 @@ class BoxGpt extends Component
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $longitud = 6;
         $codigo = '';
-    
+
         for ($i = 0; $i < $longitud; $i++) {
             $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
         }
-    
+
         return $codigo;
     }
 }
