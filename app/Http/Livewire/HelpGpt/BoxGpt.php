@@ -156,7 +156,7 @@ class BoxGpt extends Component
             'file_original_name' => null,
             'content' => $resultado
         ]);
-        $this->saveFileID_deleteFile($file_id, $filename, $path);
+        //$this->saveFileID_deleteFile($file_id, $filename, $path);
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;
