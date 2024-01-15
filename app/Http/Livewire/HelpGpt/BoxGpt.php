@@ -154,7 +154,7 @@ class BoxGpt extends Component
             'file_original_name' => null,
             'content' => $resultado
         ]);
-
+        $this->emit('scrollToBottom');
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;

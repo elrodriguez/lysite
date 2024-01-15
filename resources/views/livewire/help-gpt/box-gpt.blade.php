@@ -162,37 +162,7 @@
                         @endif
                     </div>
                 @elseif($typeAction == 4)
-                    <div class="gpt-msg_history p-4">
-                        {{-- @if ($history)
-                            @if (count($historyItems) > 0)
-                                @foreach ($historyItems as $item)
-                                    @if ($item->my_user)
-                                        <div class="gpt-outgoing_msg">
-                                            <div class="gpt-sent_msg">
-                                                <p>{{ $item->content }}</p>
-                                                <span
-                                                    class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="gpt-incoming_msg">
-                                            <div class="gpt-incoming_msg_img">
-                                                <img class="gpt-img"
-                                                    src="https://ptetutorials.com/images/user-profile.png"
-                                                    alt="sunil">
-                                            </div>
-                                            <div class="gpt-received_msg">
-                                                <div class="gpt-received_withd_msg">
-                                                    <p>{{ $item->content }}</p>
-                                                    <span
-                                                        class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        @endif   $this->getThreadId() || $thread_id != null --}}
+                    <div class="gpt-msg_history p-4" id="messageContainer">
                         @if (true)
                             @if (count($historyItems) > 0)
                                 @foreach ($historyItems as $item)
@@ -223,11 +193,6 @@
                                 @endforeach
                             @endif
                         @endif
-                    </div>
-                    <div wire:loading wire:target='saveMessageUser'>
-                        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
                     </div>
                     <div class="gpt-type_msg">
                         <div class="gpt-input_msg_write">
@@ -496,4 +461,12 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            Livewire.on('scrollToBottom', () => {
+                const messageContainer = document.getElementById('messageContainer');
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            });
+        </script>
+    @endpush
 </div>
