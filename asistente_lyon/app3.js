@@ -28,20 +28,20 @@ app.get("/create_thread", (req, res) => {
     });
 });
 
-app.post("/create_run_", (req, res) => {
-    console.log("Datos del request: ", req.body.user_name);
-    let data = {
-        user_message: req.body.user_message,
-        user_name: req.body.user_name,
-        thread_id: req.body.thread_id,
-        assistant_id: req.body.assistant_id,
-    };
+// app.post("/create_run_", (req, res) => {
+//     console.log("Datos del request: ", req.body.user_name);
+//     let data = {
+//         user_message: req.body.user_message,
+//         user_name: req.body.user_name,
+//         thread_id: req.body.thread_id,
+//         assistant_id: req.body.assistant_id,
+//     };
 
-    //console.log(data);
-    createRun(data).then((thread) => {
-        res.json(thread);
-    });
-});
+//     //console.log(data);
+//     createRun(data).then((thread) => {
+//         res.json(thread);
+//     });
+// });
 
 app.post("/get_run_pending", (req, res) => {
     console.log("Datos del run pendiente: ", req.body.thread_id);
@@ -161,9 +161,9 @@ const createRun = async (data) => {
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
         instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name +
-                        "recuerda solo ayudar, o asistir con todo lo relacionado a proyectos de investigación, tesis, artículos científicos y similares de manera exclusiva no ayudes con temas ajenos; "+
+                        "recuerda solo ayudar, o asistir con todo lo relacionado a proyectos de investigación, tesis, artículos científicos y similares de manera exclusiva, no ayudes con temas ajenos; "+
                         "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+
-                        "' de la misma manera para mensajes como archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este.",
+                        "' de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -176,12 +176,13 @@ const createRun = async (data) => {
     let check_run = run_retrieve["status"];
     let steps = 0;
     while (check_run != "completed") {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 600));
         const check_run_retrieve = await openai.beta.threads.runs.retrieve(
             data.thread_id, //este dato es el thread_id del hilo creado
             run.id //este es el run_id al correr el run
         );
         console.log("STATUS DEL RUN -> ", check_run_retrieve["status"]);
+        console.log("TODO EL RUN -> ", check_run_retrieve);
         check_run = check_run_retrieve["status"];
         steps++;
         if(steps > 11){

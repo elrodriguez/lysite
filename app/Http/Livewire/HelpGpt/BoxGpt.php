@@ -5,6 +5,7 @@ namespace App\Http\Livewire\HelpGpt;
 use App\Models\HistoryGpt;
 use App\Models\HistoryGptItem;
 use App\Models\Person;
+use Modules\Investigation\Entities\AssistantGtpFilesId;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -27,7 +28,9 @@ class BoxGpt extends Component
     public $historyItems = [];
     public $consulta = null;
     public $file = null;
+    public $file_id = null;
     public $fileName;
+    public $path; // ruta completa para eliminar el archivo del servidor
     public $resultado = null;
     public $paraphrase_left;
     public $normativa;
@@ -90,22 +93,6 @@ class BoxGpt extends Component
 
     public function saveMessageUser(Request $request)
     {
-        $this->fileName = null;
-        if ($this->file) {
-            $basePath = base_path();
-            $asistentePath = $basePath . '/asistente_lyon';
-
-            if (!is_dir($asistentePath)) {
-                mkdir($asistentePath);
-            }
-
-            $extension = $this->file->getClientOriginalExtension();
-            $this->fileName = $this->randomName() . '.' . $extension;
-
-            $path = $this->file->storeAs('asistente_lyon', $this->fileName);
-        }
-
-
         $history = HistoryGpt::firstOrCreate(
             [
                 'type_action' => $this->typeAction,
@@ -129,6 +116,21 @@ class BoxGpt extends Component
         } elseif ($this->typeAction == 3) {
             $resultado = $this->grammarCorrection();
         } elseif ($this->typeAction == 4) {
+            $this->fileName = null;
+            if ($this->file) {
+                $basePath = base_path();
+                $asistentePath = $basePath . '/asistente_lyon';
+
+                if (!is_dir($asistentePath)) {
+                    mkdir($asistentePath);
+                }
+
+                $extension = $this->file->getClientOriginalExtension();
+                $this->fileName = $this->randomName() . '.' . $extension;
+
+                $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
+            }
+
             $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
 
             try {
@@ -154,11 +156,13 @@ class BoxGpt extends Component
             'file_original_name' => null,
             'content' => $resultado
         ]);
-        $this->emit('scrollToBottom');
+        $this->saveFileID_deleteFile($file_id, $filename, $path);
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;
         $this->message = null;
+        $this->path = null;
+        $this->emit('scrollToBottom'); // scroll para mostrar los mensajes (PARECE QUE NO FUNCIONA)
     }
 
 
@@ -351,6 +355,7 @@ class BoxGpt extends Component
         ]);
 
         $data = $response->json();
+        dd($data);
         return $data;
         // dd($this->thread_id, $response);
     }
@@ -393,5 +398,14 @@ class BoxGpt extends Component
         }
 
         return $codigo;
+    }
+    protected function saveFileID_deleteFile($file_id, $filename, $path){
+        AssistantGptFilesId::create([
+            'id' => $file_id, // Aquí debes proporcionar el id q te da openai
+            'filename' => $filename // Aquí debes proporcionar el nombre del archivo y su extenshon
+        ]);
+        if (file_exists($path)) {
+            unlink($path);
+        }
     }
 }
