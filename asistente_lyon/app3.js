@@ -226,6 +226,7 @@ const getPendingRun = async (data) => {
                 resp['run_id'] = get_run_retrieve['id'];
                 resp['thread_id'] = get_run_retrieve['thread_id'];
                 resp['status'] = "Pending";
+                resp['file_id'] = file.id;
                 return resp;
                 break;
             }
