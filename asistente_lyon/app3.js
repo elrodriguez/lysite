@@ -110,7 +110,7 @@ app.post("/get_run_pending", (req, res) => {
 
 
 
-let file_id= null;
+var file_id;
 
 const createThread = async () => {
     //usar uno existente usando su Id
@@ -239,7 +239,7 @@ const getPendingRun = async (data) => {
     let respuesta = [];
 
     const messages = await openai.beta.threads.messages.list(
-        data.thread_id // ide el thread
+        data.thread_id // id del thread
     );
 
     // messages.body.data.forEach((row) => {
@@ -248,7 +248,7 @@ const getPendingRun = async (data) => {
     // return respuesta;
 
     messages.body.data.forEach((row) => {
-        row.file_id = "tu_valor_del_file_id"; // Agrega la variable file_id a cada objeto row
+        row.file_id = file_id; // Agrega la variable file_id a cada objeto row
         respuesta.push(row.content);
     });
 };

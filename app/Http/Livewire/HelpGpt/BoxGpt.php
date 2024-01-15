@@ -142,6 +142,7 @@ class BoxGpt extends Component
             } catch (\Throwable $th) {
             }
             if ($messages != false) {
+                dd($messages);
                 $resultado = $messages[0][0]['text']['value'];   //la respuesta final
             } else {
                 $resultado = "Hubo un error vuelve a intentarlo";
@@ -369,7 +370,6 @@ class BoxGpt extends Component
 
         $data = $response->json();
 
-        dd($data);
         return $data;
         // dd($this->thread_id, $response);
     }
