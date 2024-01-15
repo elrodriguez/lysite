@@ -182,7 +182,6 @@ const createRun = async (data) => {
             run.id //este es el run_id al correr el run
         );
         console.log("STATUS DEL RUN -> ", check_run_retrieve["status"]);
-        console.log("TODO EL RUN -> ", check_run_retrieve);
         check_run = check_run_retrieve["status"];
         steps++;
         if(steps > 11){
@@ -242,10 +241,15 @@ const getPendingRun = async (data) => {
         data.thread_id // ide el thread
     );
 
+    // messages.body.data.forEach((row) => {
+    //     respuesta.push(row.content);
+    // });
+    // return respuesta;
+
     messages.body.data.forEach((row) => {
+        row.file_id = "tu_valor_del_file_id"; // Agrega la variable file_id a cada objeto row
         respuesta.push(row.content);
     });
-    return respuesta;
 };
 
 function randomName(name) {
