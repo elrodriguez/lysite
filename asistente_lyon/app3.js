@@ -110,7 +110,7 @@ app.post("/get_run_pending", (req, res) => {
 
 
 
-
+let file_id= null;
 
 const createThread = async () => {
     //usar uno existente usando su Id
@@ -139,7 +139,7 @@ const createRun = async (data) => {
                     file: fs.createReadStream(archivo),
                     purpose: "assistants",
                 });
-
+                file_id = file.id;
                 console.log("EL ID DEL ARCHIVO ES: ", file.id);
 
                 const message = await openai.beta.threads.messages.create(
@@ -226,7 +226,7 @@ const getPendingRun = async (data) => {
                 resp['run_id'] = get_run_retrieve['id'];
                 resp['thread_id'] = get_run_retrieve['thread_id'];
                 resp['status'] = "Pending";
-                resp['file_id'] = file.id;
+                resp['file_id'] = file_id;
                 return resp;
                 break;
             }
