@@ -158,6 +158,7 @@ class BoxGpt extends Component
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;
+        $this->message = null;
     }
 
 

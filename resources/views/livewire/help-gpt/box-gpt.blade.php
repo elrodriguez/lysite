@@ -230,7 +230,7 @@
                             <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button">
                                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
                             </button>
-                            <input type="file" id="fileUpload" name="file" wire:model="file">
+                            <input type="file" id="file" name="file" wire:model="file">
                         </div>
                     </div>
                 @elseif($typeAction == 5)
