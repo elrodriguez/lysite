@@ -224,10 +224,15 @@
                             @endif
                         @endif
                     </div>
+                    <div wire:loading wire:target='saveMessageUser'>
+                        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     <div class="gpt-type_msg">
                         <div class="gpt-input_msg_write">
                             <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
-                            <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button">
+                            <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button" wire:loading.attr="disabled">
                                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
                             </button>
                             <input type="file" id="file" name="file" wire:model="file">
