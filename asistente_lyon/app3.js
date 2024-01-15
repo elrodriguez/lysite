@@ -242,15 +242,11 @@ const getPendingRun = async (data) => {
         data.thread_id // id del thread
     );
 
-    // messages.body.data.forEach((row) => {
-    //     respuesta.push(row.content);
-    // });
-    // return respuesta;
-
     messages.body.data.forEach((row) => {
-        row.file_id = file_id; // Agrega la variable file_id a cada objeto row
         respuesta.push(row.content);
     });
+    return respuesta;
+
 };
 
 function randomName(name) {

@@ -142,7 +142,6 @@ class BoxGpt extends Component
             } catch (\Throwable $th) {
             }
             if ($messages != false) {
-                dd($messages);
                 $resultado = $messages[0][0]['text']['value'];   //la respuesta final
             } else {
                 $resultado = "Hubo un error vuelve a intentarlo";
@@ -369,25 +368,10 @@ class BoxGpt extends Component
         ]);
 
         $data = $response->json();
-
         return $data;
         // dd($this->thread_id, $response);
     }
 
-    public function getThreadId_w_file($msg)
-    {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
-        if ($this->thread_id == null) {
-            $client = new Client();
-            $promise = $client->getAsync('http://localhost:3000/create_thread');
-            $response = $promise->wait();
-            $data = json_decode($response->getBody(), true);
-            $this->thread_id = $data['thread_id'];
-            $this->assistant_id = $data['assistant_id'];
-        } else {
-        }
-
-        // cambiar por el metodo para archivo return $this->sendGetConsulta($msg);
-    }
     public function randomName()
     {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
