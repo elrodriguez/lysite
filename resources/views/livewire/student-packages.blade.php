@@ -35,7 +35,8 @@
                 </a>
             </div>
             <div class="col-12 col-sm-6 col-md-4">
-                <a href="{{ route('investigation_thesis_all') }}" class="card stack stack--hidden-hover card-featured-path overlay js-overlay">
+                <a href="{{ route('investigation_thesis_all') }}"
+                    class="card stack stack--hidden-hover card-featured-path overlay js-overlay">
                     <span class="card-featured-path__content">
                         <span data-position="center" class="js-image" data-height="250">
                             <img src="/img/graduacion.png" alt="TESIS">
@@ -87,9 +88,11 @@
                             <span class="overlay__content" style="pointer-events: all !important">
                                 <span class="overlay__action card-title mb-0">TESIS</span>
                                 <ul class="overlay__action">
-                                    @if(count($pathesis) > 0)
+                                    @if (count($pathesis) > 0)
                                         @foreach ($pathesis as $item)
-                                        <li class="text-white"><a class="text-white" href="{{ route('investigation_thesis_parts',$item->id) }}">{{ $item->short_name }}</a></li>
+                                            <li class="text-white"><a class="text-white"
+                                                    href="{{ route('investigation_thesis_parts', $item->id) }}">{{ $item->short_name }}</a>
+                                            </li>
                                         @endforeach
                                     @endif
                                 </ul>

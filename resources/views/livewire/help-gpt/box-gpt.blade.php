@@ -5,7 +5,7 @@
             <div class="gpt-inbox_people">
                 <div class="gpt-headind_srch">
                     <div class="gpt-recent_heading">
-                        <h4>GPT</h4>
+                        <h4>IA Lyon</h4>
                     </div>
                     <div class="gpt-srch_bar">
                         {{-- <div class="gpt-stylish-input-group">
