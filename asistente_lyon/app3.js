@@ -263,7 +263,7 @@ function save_in_DB(file_id, filename) {
         database: process.env.DB_DATABASE_NAME
       });
 
-      const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename) VALUES (?, ?)';
+      const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename, created_at) VALUES (?, ?, NOW())';
         const values = [file_id, filename];
 
         connection.query(insertQuery, values, (error, results) => {
