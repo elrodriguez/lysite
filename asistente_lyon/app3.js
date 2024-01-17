@@ -3,6 +3,8 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+import mysql from 'mysql2';
+
 import path from 'path';
 
 app.use(express.json());
@@ -17,7 +19,8 @@ dotenv.config();
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-
+var file_id;
+var filename;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
@@ -28,20 +31,20 @@ app.get("/create_thread", (req, res) => {
     });
 });
 
-app.post("/create_run_", (req, res) => {
-    console.log("Datos del request: ", req.body.user_name);
-    let data = {
-        user_message: req.body.user_message,
-        user_name: req.body.user_name,
-        thread_id: req.body.thread_id,
-        assistant_id: req.body.assistant_id,
-    };
+// app.post("/create_run_", (req, res) => {
+//     console.log("Datos del request: ", req.body.user_name);
+//     let data = {
+//         user_message: req.body.user_message,
+//         user_name: req.body.user_name,
+//         thread_id: req.body.thread_id,
+//         assistant_id: req.body.assistant_id,
+//     };
 
-    //console.log(data);
-    createRun(data).then((thread) => {
-        res.json(thread);
-    });
-});
+//     //console.log(data);
+//     createRun(data).then((thread) => {
+//         res.json(thread);
+//     });
+// });
 
 app.post("/get_run_pending", (req, res) => {
     console.log("Datos del run pendiente: ", req.body.thread_id);
@@ -132,33 +135,39 @@ const createThread = async () => {
 
 const createRun = async (data) => {
     const archivo = data.file_path;
+    filename = archivo;
     console.log(data);
-
     if(archivo != null){
             // Upload a file with an "assistants" purpose
                 const file = await openai.files.create({
                     file: fs.createReadStream(archivo),
                     purpose: "assistants",
                 });
+                file_id = file.id;
+                console.log("EL ID DEL ARCHIVO ES: ", file.id);
 
-                const message = await openai.beta.threads.messages.create(data.thread_id, {
-                role: "user",
-                content: data.user_message,
-                file_ids: [file.id]
+                const message = await openai.beta.threads.messages.create(
+                data.thread_id, {
+                                role: "user",
+                                content: data.user_message,
+                                file_ids: [file.id]
                 });
+                console.log("mensaje con fileid: ", message);
     }else{
-                const message = await openai.beta.threads.messages.create(data.thread_id, {
-                role: "user",
-                content: data.user_message,
+                const message = await openai.beta.threads.messages.create(
+                data.thread_id, {
+                                role: "user",
+                                content: data.user_message,
                 });
     }
 
     //Run assistant
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
-        instructions:
-            "Responde al usuario solo según las instrucciones del asistente, limitate a ayudar y/o asistir a todo lo relacionado a investiación cientifica, tesis, articulos cientificos y similares; el usuario se llama " +
-            data.user_name,
+        instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name +
+                        "recuerda solo ayudar, o asistir con todo lo relacionado a proyectos de investigación, tesis, artículos científicos y similares de manera exclusiva, no ayudes con temas ajenos; "+
+                        "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+
+                        "' de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -171,7 +180,7 @@ const createRun = async (data) => {
     let check_run = run_retrieve["status"];
     let steps = 0;
     while (check_run != "completed") {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 600));
         const check_run_retrieve = await openai.beta.threads.runs.retrieve(
             data.thread_id, //este dato es el thread_id del hilo creado
             run.id //este es el run_id al correr el run
@@ -221,6 +230,7 @@ const getPendingRun = async (data) => {
                 resp['run_id'] = get_run_retrieve['id'];
                 resp['thread_id'] = get_run_retrieve['thread_id'];
                 resp['status'] = "Pending";
+                resp['file_id'] = file_id;
                 return resp;
                 break;
             }
@@ -233,28 +243,35 @@ const getPendingRun = async (data) => {
     let respuesta = [];
 
     const messages = await openai.beta.threads.messages.list(
-        data.thread_id // ide el thread
+        data.thread_id // id del thread
     );
 
     messages.body.data.forEach((row) => {
         respuesta.push(row.content);
     });
     return respuesta;
+
 };
 
-function randomName(name) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function save_in_DB(file_id, filename) {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'lysite'
+      });
 
-    // Establece la semilla utilizando una cadena específica
-    Math.seedrandom(name);
+      const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename) VALUES (?, ?)';
+        const values = ['file_id', 'filename'];
 
-    for (let i = 0; i < 8; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
+        connection.query(insertQuery, values, (error, results) => {
+        if (error) {
+            console.error('Error al insertar los valores: ' + error.stack);
+            return;
+        }
 
-    return result;
+        console.log('Valores insertados correctamente.');
+        });
   }
 
 app.listen(port, () => {
