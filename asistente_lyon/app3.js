@@ -264,7 +264,7 @@ function save_in_DB(file_id, filename) {
       });
 
       const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename) VALUES (?, ?)';
-        const values = ['file_id', 'filename'];
+        const values = [file_id, filename];
 
         connection.query(insertQuery, values, (error, results) => {
         if (error) {
