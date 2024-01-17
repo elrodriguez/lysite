@@ -152,7 +152,9 @@ const createRun = async (data) => {
                                 content: data.user_message,
                                 file_ids: [file.id]
                 });
+                save_in_DB(file_id, filename);
                 console.log("mensaje con fileid: ", message);
+
     }else{
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
