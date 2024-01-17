@@ -273,13 +273,7 @@ function save_in_DB(file_id, filename) {
         }
 
         console.log('Valores insertados correctamente.');
-        fs.unlink(filename, (err) => {
-            if (err) {
-              console.error('Error al eliminar el archivo:', err);
-            } else {
-              console.log('Archivo eliminado correctamente');
-            }
-          });
+
         });
   }
 
