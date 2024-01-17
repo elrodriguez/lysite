@@ -3,6 +3,8 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+import mysql from 'mysql2';
+
 import path from 'path';
 
 app.use(express.json());
@@ -17,7 +19,8 @@ dotenv.config();
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-
+var file_id;
+var filename;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
@@ -110,7 +113,7 @@ app.post("/get_run_pending", (req, res) => {
 
 
 
-var file_id;
+
 
 const createThread = async () => {
     //usar uno existente usando su Id
@@ -132,6 +135,7 @@ const createThread = async () => {
 
 const createRun = async (data) => {
     const archivo = data.file_path;
+    filename = archivo;
     console.log(data);
     if(archivo != null){
             // Upload a file with an "assistants" purpose
@@ -249,19 +253,25 @@ const getPendingRun = async (data) => {
 
 };
 
-function randomName(name) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function save_in_DB(file_id, filename) {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'lysite'
+      });
 
-    // Establece la semilla utilizando una cadena específica
-    Math.seedrandom(name);
+      const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename) VALUES (?, ?)';
+        const values = ['file_id', 'filename'];
 
-    for (let i = 0; i < 8; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
+        connection.query(insertQuery, values, (error, results) => {
+        if (error) {
+            console.error('Error al insertar los valores: ' + error.stack);
+            return;
+        }
 
-    return result;
+        console.log('Valores insertados correctamente.');
+        });
   }
 
 app.listen(port, () => {
