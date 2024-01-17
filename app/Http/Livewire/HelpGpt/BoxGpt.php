@@ -18,6 +18,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Request as GRequest;
 use Livewire\WithFileUploads;
+use Modules\Investigation\Entities\AssistantGptFilesId;
 
 class BoxGpt extends Component
 {
@@ -66,6 +67,10 @@ class BoxGpt extends Component
             ->first();
         if ($this->history) {
             $this->historyItems = HistoryGptItem::where('history_id', $this->history->id)->get();
+        }
+
+        if ($this->typeAction == 4) {
+            $this->dispatchBrowserEvent('scroll-messages-updated', ['success' => true]);
         }
     }
 
@@ -146,6 +151,8 @@ class BoxGpt extends Component
             } else {
                 $resultado = "Hubo un error vuelve a intentarlo";
             }
+            ////bajar el scroll!!!!
+            $this->dispatchBrowserEvent('scroll-messages-updated', ['success' => true]);
         } elseif ($this->typeAction == 5) {
             $resultado = $this->references();
         }
@@ -162,7 +169,6 @@ class BoxGpt extends Component
         $this->fileName = null;
         $this->message = null;
         $this->path = null;
-        $this->emit('scrollToBottom'); // scroll para mostrar los mensajes (PARECE QUE NO FUNCIONA)
     }
 
 
@@ -384,7 +390,8 @@ class BoxGpt extends Component
 
         return $codigo;
     }
-    protected function saveFileID_deleteFile($file_id, $filename, $path){
+    protected function saveFileID_deleteFile($file_id, $filename, $path)
+    {
         AssistantGptFilesId::create([
             'id' => $file_id, // Aquí debes proporcionar el id q te da openai
             'filename' => $filename // Aquí debes proporcionar el nombre del archivo y su extenshon

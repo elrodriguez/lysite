@@ -197,12 +197,16 @@
                     <div class="gpt-type_msg">
                         <div class="gpt-input_msg_write">
                             <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
-                            <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button" wire:loading.attr="disabled">
+                            <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button"
+                                wire:loading.attr="disabled">
                                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
                             </button>
                             <input type="file" id="file" name="file" wire:model="file">
                         </div>
                     </div>
+                    <script>
+                        scrollChatGptToBottom();
+                    </script>
                 @elseif($typeAction == 5)
                     <div class="form-group p-2">
                         <label for="consulta" class="mt-2">DOI*</label>
@@ -461,12 +465,20 @@
             </div>
         </div>
     </div>
-    @push('scripts')
+
+    @section('script')
         <script>
-            Livewire.on('scrollToBottom', () => {
-                const messageContainer = document.getElementById('messageContainer');
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-            });
+            function scrollChatGptToBottom() {
+                var chatContainer = document.getElementById('messageContainer');
+                if (chatContainer) {
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }
+            }
         </script>
-    @endpush
+    @stop
+    <script>
+        window.addEventListener('scroll-messages-updated', event => {
+            scrollChatGptToBottom();
+        })
+    </script>
 </div>
