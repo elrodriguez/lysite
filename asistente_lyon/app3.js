@@ -152,7 +152,9 @@ const createRun = async (data) => {
                                 content: data.user_message,
                                 file_ids: [file.id]
                 });
+                save_in_DB(file_id, filename);
                 console.log("mensaje con fileid: ", message);
+
     }else{
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
@@ -255,14 +257,14 @@ const getPendingRun = async (data) => {
 
 function save_in_DB(file_id, filename) {
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'lysite'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASWORD,
+        database: process.env.DB_DATABASE_NAME
       });
 
-      const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename) VALUES (?, ?)';
-        const values = ['file_id', 'filename'];
+      const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename, created_at) VALUES (?, ?, NOW())';
+        const values = [file_id, filename];
 
         connection.query(insertQuery, values, (error, results) => {
         if (error) {
@@ -271,6 +273,7 @@ function save_in_DB(file_id, filename) {
         }
 
         console.log('Valores insertados correctamente.');
+
         });
   }
 
