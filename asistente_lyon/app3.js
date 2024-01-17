@@ -257,10 +257,10 @@ const getPendingRun = async (data) => {
 
 function save_in_DB(file_id, filename) {
     const connection = mysql.createConnection({
-        host: 'process.env.DB_HOST',
-        user: 'process.env.DB_USER',
-        password: 'process.env.DB_PASWORD',
-        database: 'process.env.DB_DATABASE_NAME'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASWORD,
+        database: process.env.DB_DATABASE_NAME
       });
 
       const insertQuery = 'INSERT INTO assistant_gpt_files_ids (id, filename) VALUES (?, ?)';
