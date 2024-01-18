@@ -1,25 +1,17 @@
 import express from "express";
-
 const app = express();
-
 import mysql from 'mysql2';
-
-import path from 'path';
-
 app.use(express.json());
 
 import * as dotenv from "dotenv";
 import { OpenAI } from "openai";
-import fs from 'fs';
-
 
 dotenv.config();
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-var file_id;
-var filename;
+
 
 file_ids_deleting();
 
@@ -43,7 +35,7 @@ function file_ids_deleting() {
         database: process.env.DB_DATABASE_NAME
       });
 
-      const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND created_at <= DATE_SUB(NOW(), INTERVAL 2 HOUR)';
+      const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND TIMESTAMPDIFF(HOUR, created_at, NOW()) >= 2';
       const deletedValue = false;
 
       connection.query(selectQuery, [deletedValue], (error, results) => {
