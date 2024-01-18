@@ -148,6 +148,13 @@ class BoxGpt extends Component
             }
             if ($messages != false) {
                 $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+
+                /////eliminar archivo subido
+
+                $ifile_path = storage_path('app/public/' . $this->path);
+                if (file_exists($ifile_path)) {
+                    @unlink($ifile_path);
+                }
             } else {
                 $resultado = "Hubo un error vuelve a intentarlo";
             }
