@@ -21,6 +21,7 @@ const openai = new OpenAI({
 var file_id;
 var filename;
 
+file_ids_deleting();
 
 
 
