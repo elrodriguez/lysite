@@ -195,13 +195,27 @@
                         @endif
                     </div>
                     <div class="gpt-type_msg">
-                        <div class="gpt-input_msg_write">
+                        <div class="gpt-input_msg_write" style="padding: 6px">
                             <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
-                            <button wire:click="saveMessageUser" class="gpt-msg_send_btn" type="button"
-                                wire:loading.attr="disabled">
-                                <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                            </button>
-                            <input type="file" id="file" name="file" wire:model="file">
+                            <div class="row justify-content-between">
+                                <div class="col align-middle">
+                                    <input type="file" id="file" name="file" wire:model="file">
+                                </div>
+                                <div class="col text-right">
+                                    <button wire:click="saveMessageUser" class="btn btn-primary" type="button"
+                                        wire:loading.attr="disabled" wire:target="saveMessageUser">
+                                        <i wire:loading.remove wire:target="saveMessageUser"
+                                            class="fa fa-location-arrow mr-2"></i>
+                                        <div wire:loading wire:target="saveMessageUser"
+                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                            style="display: none">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <span>Enviar Mensaje</span>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <script>
