@@ -12,6 +12,7 @@ class AssistantGptFilesId extends Model
     protected $fillable = [
         'id',
         'filename',
+        'deleted',
     ];
 
     protected static function newFactory()
