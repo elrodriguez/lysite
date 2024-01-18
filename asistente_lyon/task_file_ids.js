@@ -12,26 +12,15 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Crear una conexión a la base de datos
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE_NAME
-  });
-
-
 // Función principal asincrónica
 async function main() {
   try {
     await file_ids_deleting();
 
-    connection.end(); // Cerrar la conexión
     console.log('Conexión cerrada');
     console.log('Archivos Eliminados de OPENAI exitosamente...');
     process.exit(0); // Salir del proceso con éxito
   } catch (error) {
-    connection.end(); // Cerrar la conexión
     console.error('Error al eliminar los archivos: ' + error);
     process.exit(1); // Salir del proceso con un código de error
   }
@@ -42,6 +31,12 @@ main();
 // FUNCION PARA BUSQUEDA DE ARCHIVOS NO ELIMINADOS DE OPENAI
 function file_ids_deleting() {
   return new Promise((resolve, reject) => {
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASWORD,
+      database: process.env.DB_DATABASE_NAME
+    });
 
     const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND TIMESTAMPDIFF(HOUR, created_at, NOW()) >= 2';
     const deletedValue = false;
@@ -64,6 +59,7 @@ function file_ids_deleting() {
         .catch(error => reject(error)); // Rechazar la promesa en caso de error
     });
 
+    connection.end(); // Cerrar la conexión
   });
 }
 //await updateDeletedStatus(123); // Llamada a la función para actualizar el estado de eliminación con el file_id deseado
@@ -71,6 +67,12 @@ function file_ids_deleting() {
 
 async function updateDeletedStatus(file_id) {
     return new Promise((resolve, reject) => {
+      const connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASWORD,
+        database: process.env.DB_DATABASE_NAME
+      });
 
       const updateQuery = 'UPDATE assistant_gpt_files_ids SET deleted = ? WHERE id = ?';
       const deletedValue = true;
@@ -85,6 +87,7 @@ async function updateDeletedStatus(file_id) {
         resolve(); // Resolver la promesa en caso de éxito
       });
 
+      connection.end(); // Cerrar la conexión
     });
   }
 
