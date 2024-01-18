@@ -24,15 +24,17 @@ var filename;
 file_ids_deleting();
 
 
+console.log('Conexión cerrada');
+console.log('Archivos Eliminados de OPENAI exitosamente...');
+process.exit(0); // Salir del proceso con éxito
 
 
 
 
-  // Llamada a la función pasando "file-abc123" como argumento
-  //getFileData("file-abc123");
 
 
 
+// FUNCION PARA BUSQUEDA DE ARCHIVOS NO ELIMINADOS DE OPENAI
 function file_ids_deleting() {
     const connection = mysql.createConnection({
         host: process.env.DB_HOST,
@@ -52,9 +54,13 @@ function file_ids_deleting() {
 
         console.log('Filas encontradas:');
         console.log(results);
+        results.forEach(item => {
+            getFileData(item.id);
+        });
       });
   }
 
+  // ELIMINAR DE OPENAI
   async function getFileData(fileId) {
     const file = await openai.files.del(fileId);
     console.log("File Eliminado: ", file);
