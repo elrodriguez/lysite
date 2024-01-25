@@ -211,7 +211,7 @@ class BoxGpt extends Component
 
                 try {
                     $result = OpenAI::completions()->create([
-                        'model' => 'gpt-4-0613',
+                        'model' => 'gpt-3.5-turbo-instruct',
                         'prompt' => $consulta,
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,
@@ -258,7 +258,7 @@ class BoxGpt extends Component
 
                 try {
                     $result = OpenAI::completions()->create([
-                        'model' => 'gpt-4-0613',
+                        'model' => 'gpt-3.5-turbo-instruct',
                         'prompt' => $consulta,
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,
@@ -305,7 +305,7 @@ class BoxGpt extends Component
 
                 try {
                     $result = OpenAI::completions()->create([
-                        'model' => 'gpt-4-0613',
+                        'model' => 'gpt-3.5-turbo-instruct',
                         'prompt' => $consulta,
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,
