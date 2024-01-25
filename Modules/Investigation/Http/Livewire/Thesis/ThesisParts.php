@@ -411,7 +411,7 @@ class ThesisParts extends Component
 
                 try {
                     $result = OpenAI::completions()->create([
-                        'model' => 'gpt-4-1106-preview',
+                        'model' => 'gpt-3.5-turbo-instruct',
                         'prompt' => $consulta,
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,

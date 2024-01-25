@@ -14,7 +14,7 @@ class Openaiview extends Component
     public $result_tokens=0;
     public $consumed_tokens=0;
     public $parafrasear=false;
-    public $modelo="gpt-4-1106-preview";
+    public $modelo="gpt-3.5-turbo-instruct";
     public $temperature=50;
 
     public function render()
@@ -25,7 +25,7 @@ class Openaiview extends Component
     public function save()
     {
         $max_tokens=1500;
-        if($this->modelo=="gpt-4-1106-preview")$max_tokens=3300;
+        if($this->modelo=="gpt-3.5-turbo-instruct")$max_tokens=3300;
 
         $this->result_text="espera el resultado...";
         if($this->parafrasear){

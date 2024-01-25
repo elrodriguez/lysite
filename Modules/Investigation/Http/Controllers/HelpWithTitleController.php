@@ -10,7 +10,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 class HelpWithTitleController extends Controller
 {
     public function helpwithtitle(Request $request)
-    {
+    { 
         $consulta = $request->get('consulta');
         $thesisType = $request->get('thesisType'); //descriptiva, experimental, etc.
         $school = $request->get('school'); //escuela: ingenieria de sistemas, enfermería, medicina, etc
@@ -21,7 +21,7 @@ class HelpWithTitleController extends Controller
             $p_used = $permisos->paraphrase_used;
 
             if ($p_allowed > $p_used) {
-
+                
                 $max_tokens = 3400;
                 $temperature = 1;
 
@@ -31,7 +31,7 @@ class HelpWithTitleController extends Controller
 
                 try {
                     $result = OpenAI::completions()->create([
-                        'model' => 'gpt-4-1106-preview',
+                        'model' => 'gpt-3.5-turbo-instruct',
                         'prompt' => $consulta,
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,
