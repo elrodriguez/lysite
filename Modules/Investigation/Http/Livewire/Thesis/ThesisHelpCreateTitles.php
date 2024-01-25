@@ -50,7 +50,7 @@ class ThesisHelpCreateTitles extends Component
 
                 try {
                     $result = OpenAI::completions()->create([
-                        'model' => 'gpt-3.5-turbo-instruct',
+                        'model' => 'gpt-4-1106-preview',
                         'prompt' => $consulta,
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,
