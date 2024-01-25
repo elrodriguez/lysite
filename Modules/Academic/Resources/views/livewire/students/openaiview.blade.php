@@ -9,7 +9,7 @@
 
         <div class="form-controls">
             <label class="label-danger">Escoge el modelo de IA a usar</label><br>
-            <input type="radio" name="valor" value="gpt-3.5-turbo-instruct" wire:model="modelo"> Da Vinci ++++
+            <input type="radio" name="valor" value="gpt-4-0613" wire:model="modelo"> Da Vinci ++++
             <input type="radio" name="valor" value="text-curie-001" wire:model="modelo"> Curie +++
             <input type="radio" name="valor" value="text-babbage-001" wire:model="modelo"> Babbage ++
             <input type="radio" name="valor" value="text-ada-001" wire:model="modelo"> Ada +
