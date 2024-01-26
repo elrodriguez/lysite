@@ -159,7 +159,7 @@ class MendeleyReferences
         // $browsershot = new Browsershot();
         // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
         //                     ->waitUntilNetworkIdle()
-        //                     ->bodyHtml();    
+        //                     ->bodyHtml();
 
         // Convert the body to a string
         $html = (string)$html;
@@ -190,7 +190,7 @@ class MendeleyReferences
         //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
         $array = explode('(', $citation);
         $titulox = $array[0];
-        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;                                  
+        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;
         $nxplodes = explode('(' . $document->year . ')', $citation);
         $nxplodes[0] = $titulox; //$this->getAutorforAPA($document);
         //$citation = $titulox . implode('(' . $document->year . ')', $nxplodes);
@@ -282,33 +282,6 @@ class MendeleyReferences
             $citation2 .= $authors[0] . ", " . $authors[1] . ", " . $authors[2] . ", " . $authors[3] . ", " . $authors[4] . ", " . $authors[5] . " & " . $authors[6] . " ";
         }
 
-        // //Añadir el año de publicación y el título del artículo
-        // $citation .= "(" . substr($document->year, 0, 4) . "). " . $document->title . ". ";
-
-        // //Añadir el nombre de la revista
-        // if (isset($document->source)) {
-        //     $citation .= "<i>" . $document->source . "</i>";
-        // }
-
-        // //Añadir el volumen y el número (si están disponibles)
-        // if (isset($document->volume)) {
-        //     $citation .= ", " . $document->volume;
-        // }
-        // if (isset($document->issue)) {
-        //     $citation .= "(" . $document->issue . ")";
-        // }
-
-        // //Añadir las páginas
-        // if (isset($document->pages)) {
-        //     $citation .= ", " . $document->pages;
-        // }
-
-        // //Añadir el DOI
-        // if (isset($document->identifiers->doi)) {
-        //     $citation .= ' <a href="https://doi.org/' . $document->identifiers->doi . '">' . "https://doi.org/" . $document->identifiers->doi . '</a>';
-        // }
-
-        // $citation .= "</p>";
         return $citation2;
     }
 
@@ -556,7 +529,7 @@ class MendeleyReferences
         // $browsershot = new Browsershot();
         // $html = $browsershot->setURL($link)
         //                     ->waitUntilNetworkIdle()
-        //                     ->bodyHtml();                        
+        //                     ->bodyHtml();
         // // $html ahora contiene el código HTML completo de la página web
         // dd((string)$html);
 
@@ -622,7 +595,7 @@ class MendeleyReferences
             $citation = str_replace("Elsevier Ltd.", "", $citation);
             return $citation;
             /*
-                CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021. 
+                CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021.
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
 */
@@ -632,7 +605,7 @@ class MendeleyReferences
             return $citation;
 
             /*
-                Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021. 
+                Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021.
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
                 */

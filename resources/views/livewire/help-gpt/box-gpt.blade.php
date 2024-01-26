@@ -470,8 +470,8 @@
                     </div>
                     <div class="p-2" id="ly-ck-dialog-references-result">
                         @if ($resultado)
-                            <div class="alert alert-primary" role="alert">
-                                {!! $resultado !!}}
+                            <div id="citation-id" class="alert alert-primary" role="alert">
+                                {!! $resultado !!}
                             </div>
                         @endif
                     </div>
@@ -481,6 +481,7 @@
     </div>
 
     @section('script')
+    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
         <script>
             function scrollChatGptToBottom() {
                 var chatContainer = document.getElementById('messageContainer');

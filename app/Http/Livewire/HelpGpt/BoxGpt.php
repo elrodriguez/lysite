@@ -34,7 +34,7 @@ class BoxGpt extends Component
     public $path; // ruta completa para eliminar el archivo del servidor
     public $resultado = null;
     public $paraphrase_left;
-    public $normativa;
+    public $normativa="apa";
     public $prompt = 0;
     /*  Asistente de Chat GPT  */
     public $thread_id = null;
@@ -332,13 +332,18 @@ class BoxGpt extends Component
 
     public function references()
     {
-        $references = new MendeleyReferences();
+        if($this->consulta==null || $this->consulta==""){
+            $this->resultado = "Ingresa la consulta";
+            return "Ingresa la consulta";
+        }else{
+            $references = new MendeleyReferences();
 
+            $resultado = $references->citar($this->consulta, $this->normativa);
 
-        $resultado = $references->citar($this->consulta, $this->normativa);
+            $this->resultado = $resultado;
+            return $resultado;
+        }
 
-        $this->resultado = $resultado;
-        return $resultado;
     }
     /*  Asistente de chat GPT  */
 

@@ -28,7 +28,4 @@
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
-    @section('script')
-        <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
-    @endsection
 </x-master>
