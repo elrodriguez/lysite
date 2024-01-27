@@ -152,44 +152,45 @@ class ContactList extends Component
                 ->toArray();
         }
 
-        $youHavePermision = $user->hasAnyPermission(['academico_directo_cursos', 'academico_directo_tesis']);
+        //$youHavePermision = $user->hasAnyPermission(['academico_directo_cursos', 'academico_directo_tesis']);
+        $youHavePermision = $user->hasAnyPermission('academico_directo_tesis');
         $instructor = [];
-        if($youHavePermision){
+        if ($youHavePermision) {
             $instructor = AcaInstructor::join('people', 'person_id', 'people.id')
-            ->join('users', 'user_id', 'users.id')
-            ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
-            ->select(
-                'users.id',
-                'users.is_online',
-                'users.avatar',
-                'people.full_name',
-                'people.email',
-                'users.chat_last_activity',
-                DB::raw('MIN(chat_messages.is_seen) as is_seen'),
-                DB::raw("'Instructor' AS utype")
-            )
-            ->whereIn('course_id', $course_sids)
-            ->where('people.id', '<>', $person_id)
-            ->where(function ($query) {
-                $query->orWhere('full_name', 'like', '%' . $this->search . '%');
-            })
-            ->groupBy([
-                'users.id',
-                'users.is_online',
-                'users.avatar',
-                'people.full_name',
-                'people.email',
-                'users.chat_last_activity'
-            ])
-            ->get()
-            ->toArray();
+                ->join('users', 'user_id', 'users.id')
+                ->leftJoin('chat_messages', 'chat_messages.user_id', 'users.id')
+                ->select(
+                    'users.id',
+                    'users.is_online',
+                    'users.avatar',
+                    'people.full_name',
+                    'people.email',
+                    'users.chat_last_activity',
+                    DB::raw('MIN(chat_messages.is_seen) as is_seen'),
+                    DB::raw("'Instructor' AS utype")
+                )
+                ->whereIn('course_id', $course_sids)
+                ->where('people.id', '<>', $person_id)
+                ->where(function ($query) {
+                    $query->orWhere('full_name', 'like', '%' . $this->search . '%');
+                })
+                ->groupBy([
+                    'users.id',
+                    'users.is_online',
+                    'users.avatar',
+                    'people.full_name',
+                    'people.email',
+                    'users.chat_last_activity'
+                ])
+                ->get()
+                ->toArray();
 
             $combinedInstructors = array_merge($admins, $instructor);
-        }else{
+        } else {
             $combinedInstructors = $admins;
         }
-        
-        
+
+
         $combinedStudents = array_merge($ad_students, $in_student);
 
         $this->instructors = collect($combinedInstructors);
