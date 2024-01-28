@@ -40,6 +40,7 @@ class StudentsReportTotal extends Component
                 'identity_document_types.description',
                 'people.mobile_phone',
                 'people.email',
+                'people.user_id'
             ])
             ->get();
 
@@ -60,17 +61,18 @@ class StudentsReportTotal extends Component
                 'identity_document_types.description',
                 'people.mobile_phone',
                 'people.email',
-            ])->where('aca_students.person_id','=', null)
+            ])->where('aca_students.person_id', '=', null)
             ->get();
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         try {
-        DB::beginTransaction();
+            DB::beginTransaction();
             $user_id = DB::table('people')->where('id', $id)->select('user_id')->first();
             $user_id = $user_id->user_id;
-            DB::delete('delete from people where id= ?',[$id]);
-            DB::delete('delete from users where id=?',[$user_id]);
+            DB::delete('delete from people where id= ?', [$id]);
+            DB::delete('delete from users where id=?', [$user_id]);
             DB::commit();
             $res = 'success';
             $tit = 'Enhorabuena';
