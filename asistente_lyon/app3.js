@@ -273,6 +273,7 @@ function save_in_DB(file_id, filename) {
         }
 
         console.log('Valores insertados correctamente.');
+        connection.end();
 
         });
   }
