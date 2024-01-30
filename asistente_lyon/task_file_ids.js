@@ -39,7 +39,7 @@ async function main() {
 main();
 
 
-setInterval(main, 3600000); // Ejecutar la función main cada hora (3600000 milisegundos)
+setInterval(main, 10000); // Ejecutar la función main cada hora (3600000 milisegundos)
 
 // FUNCION PARA BUSQUEDA DE ARCHIVOS NO ELIMINADOS DE OPENAI
 function file_ids_deleting() {
