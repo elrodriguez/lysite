@@ -13,7 +13,7 @@ const openai = new OpenAI({
 });
 
 
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASWORD,
@@ -43,6 +43,12 @@ setInterval(main, 3600000); // Ejecutar la función main cada hora (3600000 mili
 
 // FUNCION PARA BUSQUEDA DE ARCHIVOS NO ELIMINADOS DE OPENAI
 function file_ids_deleting() {
+    connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASWORD,
+        database: process.env.DB_DATABASE_NAME
+      });
   return new Promise((resolve, reject) => {
 
     const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND TIMESTAMPDIFF(HOUR, created_at, NOW()) >= 2';
