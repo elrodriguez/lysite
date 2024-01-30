@@ -130,9 +130,8 @@ class BoxGpt extends Component
                     mkdir($asistentePath);
                 }
 
-                //$extension = $this->file->getClientOriginalExtension(); //Version php 8.3
-                $extension = pathinfo($this->file, PATHINFO_EXTENSION);
-                dd($extension);
+                $extension = $this->file->getClientOriginalExtension();
+
                 $this->fileName = $this->randomName() . '.' . $extension;
 
                 $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
