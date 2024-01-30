@@ -25,9 +25,9 @@ async function main() {
   try {
     await file_ids_deleting();
 
-    console.log('Conexión cerrada');
     console.log('Archivos Eliminados de OPENAI exitosamente...');
     connection.end(); // Cerrar la conexión
+    console.log('Conexión cerrada');
     //process.exit(0); // Salir del proceso con éxito
   } catch (error) {
     console.error('Error al eliminar los archivos: ' + error);
@@ -39,7 +39,7 @@ async function main() {
 main();
 
 
-setInterval(main, 10000); // Ejecutar la función main cada hora (3600000 milisegundos)
+setInterval(main, 3600000); // Ejecutar la función main cada hora (3600000 milisegundos)
 
 // FUNCION PARA BUSQUEDA DE ARCHIVOS NO ELIMINADOS DE OPENAI
 function file_ids_deleting() {
