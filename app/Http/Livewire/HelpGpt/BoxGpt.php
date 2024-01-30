@@ -130,7 +130,7 @@ class BoxGpt extends Component
                     mkdir($asistentePath);
                 }
 
-                $extension = $this->file->getClientOriginalExtension();
+                $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
 
                 $this->fileName = $this->randomName() . '.' . $extension;
 
