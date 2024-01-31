@@ -18,7 +18,7 @@
                                     @php
                                         setlocale(LC_TIME, 'es_ES.utf8', 'es_ES', 'esp');
                                     @endphp
-                                    <span class="text-white-60 d-block mb-16pt">Inscrito hasta: {{ $this->traducirMeses(date('d \d\e F \d\e Y', strtotime($course->registered_until))) }}</span>
+                                    <span class="text-white-60 d-block mb-16pt">Disponible hasta: {{ $this->traducirMeses(date('d \d\e F \d\e Y', strtotime($course->registered_until))) }}</span>
                                     <img src="{{ url('assets/images/illustration/achievement/128/white.png') }}"
                                         alt="achievement">
                                 </span>
