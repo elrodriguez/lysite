@@ -15,7 +15,10 @@
                             <span class="row">
                                 <span class="col-5 text-center">
                                     <span class="h5 text-white text-uppercase font-weight-normal m-0 d-block"></span>
-                                    <span class="text-white-60 d-block mb-16pt">Jun 5, 2018</span>
+                                    @php
+                                        setlocale(LC_TIME, 'es_ES.utf8', 'es_ES', 'esp');
+                                    @endphp
+                                    <span class="text-white-60 d-block mb-16pt">Inscrito hasta: {{ $this->traducirMeses(date('d \d\e F \d\e Y', strtotime($course->registered_until))) }}</span>
                                     <img src="{{ url('assets/images/illustration/achievement/128/white.png') }}"
                                         alt="achievement">
                                 </span>
