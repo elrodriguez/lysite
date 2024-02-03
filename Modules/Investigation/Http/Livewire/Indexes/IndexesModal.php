@@ -65,7 +65,7 @@ class IndexesModal extends Component
 
             $this->validate([
                 'items.' . $index . '.thesis_id' => 'required',
-                'items.' . $index . '.prefix' => 'required|max:6',
+                //'items.' . $index . '.prefix' => 'required|max:6',
                 'items.' . $index . '.content' => 'required|max:400',
                 'items.' . $index . '.page' => 'required|max:6'
             ]);
