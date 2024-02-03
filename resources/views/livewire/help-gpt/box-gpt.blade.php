@@ -178,7 +178,7 @@
                                         <div class="gpt-incoming_msg">
                                             <div class="gpt-incoming_msg_img">
                                                 <img class="gpt-img"
-                                                    src="https://ptetutorials.com/images/user-profile.png"
+                                                    src="https://www.lyonteach.com/assets/images/logo/white-60.png"
                                                     alt="sunil">
                                             </div>
                                             <div class="gpt-received_msg">
