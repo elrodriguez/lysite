@@ -23,7 +23,8 @@ class CoursesStudent extends Component
                     'aca_courses.name',
                     'aca_courses.description',
                     'aca_courses.course_image',
-                    'aca_courses.main_video'
+                    'aca_courses.main_video',
+                    'aca_students.registered_until'
                 )
                 ->where('person_id', $person->id)
                 ->where('aca_courses.status', 1)
@@ -35,5 +36,12 @@ class CoursesStudent extends Component
     public function render()
     {
         return view('livewire.course.courses-student');
+    }
+
+    public function traducirMeses($fecha) {
+        $mesesEn = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+        $mesesEs = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
+
+        return str_replace($mesesEn, $mesesEs, $fecha);
     }
 }

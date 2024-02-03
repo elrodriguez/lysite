@@ -66,11 +66,11 @@ app.post("/get_run_pending", (req, res) => {
                 // Verifica si se ha enviado un archivo
                 if (req.body.file) {
                     console.log("llegó un archivo");
-                    const directorioActual = "\\var\\www\\html\\lysite-test\\asistente_lyon\\";  //CAMBIAR RUTA TEST POR LA REAL
+                    const directorioActual = "\\var\\www\\html\\" + process.env.PROJECT_PATH + "\\asistente_lyon\\";  //CAMBIAR RUTA TEST POR LA REAL
                     const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
                     console.log(req.body.file);
 
-                    const file = "/var/www/html/lysite-test/asistente_lyon/asistente_lyon/"+req.body.file;
+                    const file = "/var/www/html/" + process.env.PROJECT_PATH + "/asistente_lyon/asistente_lyon/"+req.body.file;
                     // // Obtiene la extensión del archivo
                     // const fileExtension = file.name.split('.').pop();
 
@@ -273,6 +273,7 @@ function save_in_DB(file_id, filename) {
         }
 
         console.log('Valores insertados correctamente.');
+        connection.end();
 
         });
   }

@@ -13,7 +13,7 @@ const openai = new OpenAI({
 });
 
 
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASWORD,
@@ -25,21 +25,30 @@ async function main() {
   try {
     await file_ids_deleting();
 
-    console.log('Conexión cerrada');
     console.log('Archivos Eliminados de OPENAI exitosamente...');
     connection.end(); // Cerrar la conexión
-    process.exit(0); // Salir del proceso con éxito
+    console.log('Conexión cerrada');
+    //process.exit(0); // Salir del proceso con éxito
   } catch (error) {
     console.error('Error al eliminar los archivos: ' + error);
     connection.end(); // Cerrar la conexión
-    process.exit(1); // Salir del proceso con un código de error
+    //process.exit(1); // Salir del proceso con un código de error
   }
 }
 
 main();
 
+
+setInterval(main, 3600000); // Ejecutar la función main cada hora (3600000 milisegundos)
+
 // FUNCION PARA BUSQUEDA DE ARCHIVOS NO ELIMINADOS DE OPENAI
 function file_ids_deleting() {
+    connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASWORD,
+        database: process.env.DB_DATABASE_NAME
+      });
   return new Promise((resolve, reject) => {
 
     const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND TIMESTAMPDIFF(HOUR, created_at, NOW()) >= 2';
