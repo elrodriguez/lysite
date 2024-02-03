@@ -236,6 +236,8 @@ const getPendingRun = async (data) => {
                 return resp;
                 break;
             }
+        }else if(check_run == "failed"){
+            return "hubo un problema por favor intenta de nuevo";
         }else{
             return false;
             break;
