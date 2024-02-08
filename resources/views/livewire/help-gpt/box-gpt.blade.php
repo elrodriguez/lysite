@@ -2,7 +2,7 @@
     <h3 class="text-center">AYUDA</h3>
     <div class="gpt-messaging">
         <div class="gpt-inbox_msg">
-            <div class="gpt-inbox_people">
+            <div class="gpt-inbox_people {{ $typeAction == 4 ? 'gpt-inbox_people-width' : '' }}">
                 <div class="gpt-headind_srch">
                     <div class="gpt-recent_heading">
                         <h4>IA Lyon</h4>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="gpt-mesgs">
+            <div class="gpt-mesgs {{ $typeAction == 4 ? 'gpt-mesgs-width' : '' }}">
                 @if ($typeAction == 1)
                     <div class="form-group p-2">
                         <select wire:model="prompt" class="form-control" name="prompt">
@@ -211,7 +211,7 @@
                                             style="display: none">
                                             <span class="sr-only">Loading...</span>
                                         </div>
-                                        <span>Enviar Mensaje</span>
+                                        <span>Enviar</span>
                                     </button>
                                 </div>
                             </div>
@@ -477,11 +477,34 @@
                     </div>
                 @endif
             </div>
+            @if ($typeAction == 4)
+                <div class="gpt-prompts">
+                    <h4 class="text-center">Palabras clave</h4>
+                    <ul class="list-group list-group-flush">
+                        <button type="button" class="list-group-item list-group-item-action">Objetivos</button>
+                        <button type="button" class="list-group-item list-group-item-action">Estructura de
+                            antecedente</button>
+                        <button type="button" class="list-group-item list-group-item-action">Problemática</button>
+                        <button type="button" class="list-group-item list-group-item-action">Teorías
+                            empleadas</button>
+                        <button type="button" class="list-group-item list-group-item-action">Definiciones de
+                            variables</button>
+                        <button type="button" class="list-group-item list-group-item-action">Aporte de
+                            estudio</button>
+                        <button type="button" class="list-group-item list-group-item-action">Resultados</button>
+                        <button type="button" class="list-group-item list-group-item-action">Recomendación
+                            principal</button>
+                        <button type="button" class="list-group-item list-group-item-action">Propuesta de
+                            mejora</button>
+                        <button type="button" class="list-group-item list-group-item-action">Resumen general</button>
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 
     @section('script')
-    <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
+        <script src="{{ asset('assets/js/ckeditor/manual_citation.js') }}"></script>
         <script>
             function scrollChatGptToBottom() {
                 var chatContainer = document.getElementById('messageContainer');

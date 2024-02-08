@@ -39,7 +39,8 @@
   background: #f8f8f8 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
-  width: 40%; border-right:1px solid #c4c4c4;
+  width: 40%; 
+  border-right:1px solid #c4c4c4;
 }
 .gpt-inbox_msg {
   border: 1px solid #c4c4c4;
@@ -129,6 +130,18 @@
     width: 60%;
 }
 
+.gpt-mesgs-width {
+  width: 40% !important;
+}
+
+.gpt-prompts {
+  float: left;
+  padding: 0px;
+  width: 30%;
+}
+.gpt-inbox_people-width {
+  width: 30% !important;
+}
  .gpt-sent_msg p {
   background: #05728f none repeat scroll 0 0;
   border-radius: 3px;
