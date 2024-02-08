@@ -178,7 +178,7 @@
                                         <div class="gpt-incoming_msg">
                                             <div class="gpt-incoming_msg_img">
                                                 <img class="gpt-img"
-                                                    src="https://ptetutorials.com/images/user-profile.png"
+                                                    src="https://www.lyonteach.com/assets/images/logo/white-60.png"
                                                     alt="sunil">
                                             </div>
                                             <div class="gpt-received_msg">
@@ -196,7 +196,7 @@
                     </div>
                     <div class="gpt-type_msg">
                         <div class="gpt-input_msg_write" style="padding: 6px">
-                            <textarea wire:model="message" class="gpt-write_msg" placeholder="Type a message"></textarea>
+                            <textarea wire:model="message" class="gpt-write_msg" placeholder="Escribe tu consulta aquí..."></textarea>
                             <div class="row justify-content-between">
                                 <div class="col align-middle">
                                     <input type="file" id="file" name="file" wire:model="file">
