@@ -45,12 +45,12 @@
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="sk-double-bounce">
             <div class="sk-child sk-double-bounce1"></div>
             <div class="sk-child sk-double-bounce2"></div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Header Layout -->
     <div class="mdk-header-layout js-mdk-header-layout">
@@ -96,7 +96,7 @@
     <script src="{{ url('assets/vendor/fix-footer.js') }}"></script>
 
     <!-- Chart.js -->
-    <script src="{{ url('assets/vendor/Chart.min.js') }}"></script>
+    {{-- <script src="{{ url('assets/vendor/Chart.min.js') }}"></script> --}}
 
     <!-- App JS -->
     <script src="{{ url('assets/js/app.js') }}"></script>
@@ -111,8 +111,8 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="
-            https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
-            "></script>
+                    https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
+                    "></script>
     @yield('script')
     @yield('modales')
     <!-- Modal -->

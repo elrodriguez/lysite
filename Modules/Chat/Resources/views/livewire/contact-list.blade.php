@@ -1,9 +1,9 @@
 <div class="nav-item dropdown dropdown-notifications dropdown-menu-sm-full" wire:ignore.self>
     <button id="user-list-chat"
-        class="nav-link btn-flush dropdown-toggle {{ $alert_message ? 'new-message-icon-animation' : '' }}" type="button"
-        data-toggle="dropdown" data-dropdown-disable-document-scroll data-caret="false">
+        class="nav-link btn-flush dropdown-toggle {{ !$alert_message ? 'new-message-icon-animation' : '' }}"
+        type="button" data-toggle="dropdown" data-dropdown-disable-document-scroll data-caret="false">
 
-        <i id="alert-message" class="material-icons ">{{ $alert_message ? 'markunreadchat' : 'group' }}</i>
+        <i id="alert-message" class="material-icons ">{{ !$alert_message ? 'markunreadchat' : 'group' }}</i>
 
     </button>
     @if (!$is_instructor && 0 > 1)
@@ -484,4 +484,17 @@
             }
         }
     </script>
+    <script>
+        function playSound() {
+            const music = new Audio("{{ URL('assets/data/mp3/messagebox.mp3') }}");
+            music.play();
+            //music.loop = true;
+        }
+    </script>
+    @if (!$alert_message)
+        <script>
+            playSound();
+        </script>
+    @endif
+
 </div>

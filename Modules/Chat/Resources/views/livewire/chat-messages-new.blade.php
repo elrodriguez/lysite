@@ -66,7 +66,7 @@
             // Configura el encabezado X-CSRF-TOKEN
             xhr.setRequestHeader('X-CSRF-TOKEN', token);
 
-
+            localStorage.setItem("alert_message_sound", 1);
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
@@ -80,7 +80,8 @@
                     if (Object.keys(chats).length > 0) {
                         for (let key in chats) {
                             htmlMessages = showHtmlMessages(chats[key]['messages']);
-                            htmlChat += `<div id="inbox-chat${chats[key]['chat_id']}" class="card">
+                            htmlChat +=
+                                `<div id="inbox-chat${chats[key]['chat_id']}" class="card">
                                         <div class="card-header d-flex justify-content-between align-items-center p-3"
                                             style="border-top: 4px solid #ffa900;">
                                             <h5 class="mb-0">${chats[key]['name']}</h5>
@@ -93,16 +94,16 @@
                                         </div>
                                         <div class="card-footer p-3">
                                             <div class="text-muted d-flex justify-content-start align-items-center mb-2">`;
-                                                if(chats[key]['ascended_modules']['gpt']){
-                                                    htmlChat += `<i class="fa fa-robot mr-2"></i>`;
-                                                }
-                                                if(chats[key]['ascended_modules']['cur']){
-                                                    htmlChat += `<i class="fa fa-book mr-2"></i>`;
-                                                }
-                                                if(chats[key]['ascended_modules']['tes']){
-                                                    htmlChat += `<i class="fa fa-scroll"></i>`;
-                                                }
-                                    htmlChat += `</div> 
+                            if (chats[key]['ascended_modules']['gpt']) {
+                                htmlChat += `<i class="fa fa-robot mr-2"></i>`;
+                            }
+                            if (chats[key]['ascended_modules']['cur']) {
+                                htmlChat += `<i class="fa fa-book mr-2"></i>`;
+                            }
+                            if (chats[key]['ascended_modules']['tes']) {
+                                htmlChat += `<i class="fa fa-scroll"></i>`;
+                            }
+                            htmlChat += `</div> 
                                             <div class="text-muted d-flex justify-content-start align-items-center">
                                                 <form onsubmit="sendMessageChat('${chats[key]['chat_id']}','${chats[key]['user_id']}'); return false;">
                                                     <div class="input-group mb-0">

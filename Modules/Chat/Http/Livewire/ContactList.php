@@ -30,7 +30,6 @@ class ContactList extends Component
 
     public function render()
     {
-
         return view('chat::livewire.contact-list');
     }
 
@@ -219,13 +218,25 @@ class ContactList extends Component
         }
 
         $role_id = DB::table('model_has_roles')->where('model_type', User::class)->where('model_id', Auth::user()->id)->first()->role_id;
+
         if (Role::find($role_id)->name == "Instructor") {
             $this->is_instructor = true;
             $this->alert_message = $this->trueInstructor;
         } else {
             $this->alert_message = $this->trueEstudent;
         }
+
+        $exists = DB::table('chat_messages')->where('receiver', Auth::id())
+            ->where('is_seen', false)
+            ->exists();
+
+        if (!$exists) {
+            $this->alert_message = true;
+        } else {
+            $this->alert_message = false;
+        }
     }
+
 
     public function getLastActivity($date)
     {

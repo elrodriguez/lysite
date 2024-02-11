@@ -35,20 +35,19 @@ class ChatController extends Controller
         $user = Person::where('user_id', $id)->first();
 
         $authUser = User::find(Auth::id());
-        $gpt =false;
-        $cur =false;
-        $tes =false;
+        $gpt = false;
+        $cur = false;
+        $tes = false;
 
-        if($authUser->hasRole(['Admin', 'Instructor'])){
+        if ($authUser->hasRole(['Admin', 'Instructor'])) {
             $modelUser = User::find($id);
-            if($modelUser){
+            if ($modelUser) {
                 $gpt = $modelUser->hasPermissionTo('academico_directo_gpt');
                 $cur = $modelUser->hasPermissionTo('academico_directo_cursos');
                 $tes = $modelUser->hasPermissionTo('academico_directo_tesis');
             }
-            
         }
-        
+
 
         $chats[$index] = [
             'chat_id'       => $index,
