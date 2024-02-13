@@ -481,22 +481,92 @@
                 <div class="gpt-prompts">
                     <h4 class="text-center">Palabras clave</h4>
                     <ul class="list-group list-group-flush">
-                        <button type="button" wire:click="r_prompts(1)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Objetivos</button>
-                        <button type="button" wire:click="r_prompts(2)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Estructura de
-                            antecedente</button>
-                        <button type="button" wire:click="r_prompts(3)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Problemática</button>
-                        <button type="button" wire:click="r_prompts(4)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Teorías
-                            empleadas</button>
-                        <button type="button" wire:click="r_prompts(5)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Definiciones de
-                            variables</button>
-                        <button type="button" wire:click="r_prompts(6)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Aporte de
-                            estudio</button>
-                        <button type="button" wire:click="r_prompts(7)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Resultados</button>
-                        <button type="button" wire:click="r_prompts(8)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Recomendación
-                            principal</button>
-                        <button type="button" wire:click="r_prompts(9)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Propuesta de
-                            mejora</button>
-                        <button type="button" wire:click="r_prompts(10)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Resumen general</button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(1)" type="button"
+                            wire:click="r_prompts(1)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(1)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Objetivos
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(2)" type="button"
+                            wire:click="r_prompts(2)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(2)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Estructura de
+                            antecedente
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(3)" type="button"
+                            wire:click="r_prompts(3)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(3)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Problemática
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(4)" type="button"
+                            wire:click="r_prompts(4)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(4)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Teorías
+                            empleadas
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(5)" type="button"
+                            wire:click="r_prompts(5)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(5)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Definiciones de
+                            variables
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(6)" type="button"
+                            wire:click="r_prompts(6)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(6)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Aporte de
+                            estudio
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(7)" type="button"
+                            wire:click="r_prompts(7)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(7)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Resultados
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(8)" type="button"
+                            wire:click="r_prompts(8)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(8)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Recomendación
+                            principal
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(9)" type="button"
+                            wire:click="r_prompts(9)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(9)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Propuesta de
+                            mejora
+                        </button>
+                        <button wire:loading.attr="disabled" wire:target="r_prompts(10)" type="button"
+                            wire:click="r_prompts(10)" class="list-group-item list-group-item-action">
+                            <div wire:loading wire:target="r_prompts(10)" class="spinner-grow spinner-grow-sm mr-2"
+                                role="status" style="display: none">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            Resumen general
+                        </button>
                     </ul>
                 </div>
             @endif
