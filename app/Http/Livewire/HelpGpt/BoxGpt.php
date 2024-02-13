@@ -98,8 +98,8 @@ class BoxGpt extends Component
 
 
     public function saveMessageUser(Request $request)
-    {   $validator;
-        $file;
+    {   $validator=false;
+        $file=false;
         if(!($this->message == "" || $this->message == null)){
             $validator = true;
         }else{
