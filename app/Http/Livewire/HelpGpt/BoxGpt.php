@@ -531,16 +531,17 @@ class BoxGpt extends Component
             }
 
             $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
-
+            $break =false;
             try {
                 if (!isset($messages[0])) {
-                    while ($messages['status'] == "Pending") {
+                    while ($messages['status'] == "Pending" && $break==false) {
                         $messages = $this->getPendingRun($messages);
+                        if($messages['status'] == "failed")$break=true;
                     }
                 }
             } catch (\Throwable $th) {
             }
-            if ($messages != false) {
+            if ($messages != false && $break==false) {
                 $resultado = $messages[0][0]['text']['value'];   //la respuesta final
 
                 ///eliminar archivo subido
