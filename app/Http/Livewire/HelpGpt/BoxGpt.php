@@ -105,7 +105,7 @@ class BoxGpt extends Component
         }else{
             $this->message = "Te envío un documento.";
         }
-        if($this->file == null)$file=true;
+        if($this->file)$file=true;
 
         if($validator || $file){
             $history = HistoryGpt::firstOrCreate(
