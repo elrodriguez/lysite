@@ -66,8 +66,6 @@
             // Configura el encabezado X-CSRF-TOKEN
             xhr.setRequestHeader('X-CSRF-TOKEN', token);
 
-            localStorage.setItem("alert_message_sound", 1);
-
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     let htmlChat = '';
