@@ -103,9 +103,9 @@
                 @if ($typeAction == 1)
                     <div class="form-group p-2">
                         <select wire:model="prompt" class="form-control" name="prompt">
-                            <option value="0">Como Docente</option>
-                            <option value="1">Como Investigador</option>
-                            <option value="2">Disminuir Similitud</option>
+                            <option value="0">Como Investigador</option>
+                            <option value="1">Disminuir Similitud</option>
+                            <option value="2">Humanizar Texto</option>
                         </select>
                         <label for="consulta" class="mt-2">Escribe aquí lo que desee parafrasear</label>
                         <textarea wire:model="consulta" class="form-control mb-2" id="consulta" rows="6"></textarea>
