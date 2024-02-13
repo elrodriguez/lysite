@@ -355,6 +355,7 @@ class BoxGpt extends Component
 
     public function getThreadId($msg)
     {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
+       try {
         if ($this->thread_id == null) {
             $client = new Client();
             $promise = $client->getAsync('http://localhost:3000/create_thread');
@@ -362,10 +363,12 @@ class BoxGpt extends Component
             $data = json_decode($response->getBody(), true);
             $this->thread_id = $data['thread_id'];
             $this->assistant_id = $data['assistant_id'];
-        } else {
         }
 
         return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
+       } catch (\Throwable $th) {
+        return null;
+       }
     }
 
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
