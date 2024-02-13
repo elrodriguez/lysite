@@ -201,9 +201,9 @@
                                 <div class="form-group">
                                     <label for="text1">Escribe aquí lo que desee parafrasear</label>
                                     <select class="form-control prompty bg-primary text-white" name="prompt">
-                                        <option value="0">Como Docente</option>
-                                        <option value="1">Como Investigador</option>
-                                        <option value="2">Disminuir Similitud</option>
+                                        <option value="0">Como Investigador</option>
+                                        <option value="1">Disminuir Similitud</option>
+                                        <option value="2">Humanizar Texto</option>
                                     </select>
                                     <style>
                                         .prompty:hover {

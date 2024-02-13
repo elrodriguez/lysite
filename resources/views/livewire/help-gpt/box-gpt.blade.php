@@ -103,9 +103,9 @@
                 @if ($typeAction == 1)
                     <div class="form-group p-2">
                         <select wire:model="prompt" class="form-control" name="prompt">
-                            <option value="0">Como Docente</option>
-                            <option value="1">Como Investigador</option>
-                            <option value="2">Disminuir Similitud</option>
+                            <option value="0">Como Investigador</option>
+                            <option value="1">Disminuir Similitud</option>
+                            <option value="2">Humanizar Texto</option>
                         </select>
                         <label for="consulta" class="mt-2">Escribe aquí lo que desee parafrasear</label>
                         <textarea wire:model="consulta" class="form-control mb-2" id="consulta" rows="6"></textarea>
@@ -481,22 +481,22 @@
                 <div class="gpt-prompts">
                     <h4 class="text-center">Palabras clave</h4>
                     <ul class="list-group list-group-flush">
-                        <button type="button" class="list-group-item list-group-item-action">Objetivos</button>
-                        <button type="button" class="list-group-item list-group-item-action">Estructura de
+                        <button type="button" wire:click="r_prompts(1)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Objetivos</button>
+                        <button type="button" wire:click="r_prompts(2)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Estructura de
                             antecedente</button>
-                        <button type="button" class="list-group-item list-group-item-action">Problemática</button>
-                        <button type="button" class="list-group-item list-group-item-action">Teorías
+                        <button type="button" wire:click="r_prompts(3)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Problemática</button>
+                        <button type="button" wire:click="r_prompts(4)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Teorías
                             empleadas</button>
-                        <button type="button" class="list-group-item list-group-item-action">Definiciones de
+                        <button type="button" wire:click="r_prompts(5)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Definiciones de
                             variables</button>
-                        <button type="button" class="list-group-item list-group-item-action">Aporte de
+                        <button type="button" wire:click="r_prompts(6)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Aporte de
                             estudio</button>
-                        <button type="button" class="list-group-item list-group-item-action">Resultados</button>
-                        <button type="button" class="list-group-item list-group-item-action">Recomendación
+                        <button type="button" wire:click="r_prompts(7)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Resultados</button>
+                        <button type="button" wire:click="r_prompts(8)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Recomendación
                             principal</button>
-                        <button type="button" class="list-group-item list-group-item-action">Propuesta de
+                        <button type="button" wire:click="r_prompts(9)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Propuesta de
                             mejora</button>
-                        <button type="button" class="list-group-item list-group-item-action">Resumen general</button>
+                        <button type="button" wire:click="r_prompts(10)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Resumen general</button>
                     </ul>
                 </div>
             @endif

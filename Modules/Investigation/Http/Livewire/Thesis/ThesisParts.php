@@ -398,13 +398,15 @@ class ThesisParts extends Component
 
                 switch ($this->prompt) {
                     case  0:
-                        $consulta = "Parafraséame este texto en español como si fueras un docente universitario: ";
-                        break;
-                    case  1:
-                        $consulta = "Parafraséame este texto en español como si fueras un experto en investigación: ";
-                        break;
-                    case  2:
-                        $consulta = "Parafraséame este texto en español con el objetivo de reducir el mayor grado de similitud: ";
+                        case  0:
+                            $consulta = "Parafraséame este texto en español como si fueras un experto en investigación: ";
+                            break;
+                        case  1:
+                            $consulta = "Parafraséame este texto en español con el objetivo de reducir el mayor grado de similitud: ";
+                            break;
+                        case  2:
+                            $consulta = "Parafraséame este texto en español logrando humanizarlo por completo, asimismo, reduciendo el mayor grado de similitud posible: ";
+                            break;
                 }
 
                 $consulta = $consulta . "{" . $this->consulta . "}";

@@ -41,6 +41,7 @@ class BoxGpt extends Component
     public $run_id = null;
     public $assistant_id = null;
     public $message = null;
+    public $disableButton2 = false;
 
     public function mount()
     {
@@ -198,14 +199,16 @@ class BoxGpt extends Component
                 $result_text = "hubo un problema, intenta mas tarde";
 
                 switch ($this->prompt) {
+
                     case  0:
-                        $consulta = "Parafraséame este texto en español como si fueras un docente universitario: ";
-                        break;
-                    case  1:
                         $consulta = "Parafraséame este texto en español como si fueras un experto en investigación: ";
                         break;
-                    case  2:
+                    case  1:
                         $consulta = "Parafraséame este texto en español con el objetivo de reducir el mayor grado de similitud: ";
+                        break;
+                    case  2:
+                        $consulta = "Parafraséame este texto en español logrando humanizarlo por completo, asimismo, reduciendo el mayor grado de similitud posible: ";
+                        break;
                 }
 
                 $consulta = $consulta . "{" . $this->consulta . "}";
@@ -413,5 +416,159 @@ class BoxGpt extends Component
         if (file_exists($path)) {
             unlink($path);
         }
+    }
+
+    public function r_prompts($prompt){
+        $this->disableButton2 = true;
+
+        switch ($prompt) {
+            case 1:
+                $this->message="Objetivos del documento de investigación";
+                break;
+            case 2:
+                $this->message="Estructura de los antecedentes";
+                break;
+            case 3:
+                $this->message="Problemática de la investigación";
+                break;
+            case 4:
+                $this->message="Teorías empleadas en la investigación";
+                break;
+            case 5:
+                $this->message="Definición de las variables";
+                break;
+            case 6:
+                $this->message="Aportes del estudio";
+                break;
+            case 7:
+                $this->message="Resultados del estudio";
+                break;
+            case 8:
+                $this->message="Recomendación principal";
+                break;
+            case 9:
+                $this->message="Propuesta de mejora";
+                break;
+            case 10:
+                $this->message="Resumen general del estudio";
+                break;
+            default:
+                # code...
+                break;
+        }
+        $history = HistoryGpt::firstOrCreate(
+            [
+                'type_action' => 4, // 4 es el uso del asistente
+                'user_id'   => Auth::id()
+            ]
+        );
+
+        HistoryGptItem::create([
+            'history_id' => $history->id,
+            'my_user' => true,
+            'file_original_name' => null,
+            'content' => $this->message
+        ]);
+
+        $resultado = null;
+        $messages = null;
+
+            $this->fileName = null;
+            if ($this->file) {
+                $basePath = base_path();
+                $asistentePath = $basePath . '/asistente_lyon';
+
+                if (!is_dir($asistentePath)) {
+                    mkdir($asistentePath);
+                }
+
+                $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
+
+                $this->fileName = $this->randomName() . '.' . $extension;
+
+                $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
+            }
+
+            switch ($prompt) {
+                case 1:
+                    $this->message="Enlístame los objetivos de la investigación del documento que te envié";
+                    break;
+                case 2:
+                    $this->message="Redáctame en un párrafo de 12 líneas, el resumen de toda la investigación(del archivo que te pasé), manteniendo
+                    esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología,
+                    5) Muestra e instrumentos de recolección, 6) Resultados, y 7) Conclusión general";
+                    break;
+                case 3:
+                    $this->message="Redáctame a profundidad la problemática de la investigación del documento envíado";
+                    break;
+                case 4:
+                    $this->message="Redáctame las teorías que se utilizaron en el apartado de marco teórico y/o revisión de
+                    la literatura de esta investigación(el archivo que te pasé), y agregar a cada teoría su cita de autor";
+                    break;
+                case 5:
+                    $this->message="Enlístame los autores más representativos que definen a las variables de la investigación
+                    del documento que envié";
+                    break;
+                case 6:
+                    $this->message="Cuál es el aporte principal de esta investigación(Archivo que envié), y quiénes serían los beneficiarios directos";
+                    break;
+                case 7:
+                    $this->message="Indícame los resultados de acuerdo a cada objetivo de la investigación de este documento";
+                    break;
+                case 8:
+                    $this->message="Redáctame la recomendación principal de esta investigación";
+                    break;
+                case 9:
+                    $this->message="Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento";
+                    break;
+                case 10:
+                    $this->message="Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental
+                    de una investigación";
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+
+            try {
+                if (!isset($messages[0])) {
+                    while ($messages['status'] == "Pending") {
+                        $messages = $this->getPendingRun($messages);
+                    }
+                }
+            } catch (\Throwable $th) {
+            }
+            if ($messages != false) {
+                $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+
+                ///eliminar archivo subido
+
+                $ifile_path = storage_path('app/' . $this->path);
+                //dd($ifile_path);
+                if (file_exists($ifile_path)) {
+                    @unlink($ifile_path);
+                }
+            } else {
+                $resultado = "Hubo un error vuelve a intentarlo";
+            }
+            ////bajar el scroll!!!!
+            $this->dispatchBrowserEvent('scroll-messages-updated', ['success' => true]);
+
+        HistoryGptItem::create([
+            'history_id' => $history->id,
+            'my_user' => false,
+            'file_original_name' => null,
+            'content' => $resultado
+        ]);
+        //$this->saveFileID_deleteFile($file_id, $filename, $path);
+
+        $this->disableButton2 = false;
+        $this->consulta = null;
+        $this->file = null;
+        $this->fileName = null;
+        $this->message = null;
+        $this->path = null;
     }
 }
