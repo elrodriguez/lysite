@@ -206,7 +206,7 @@
                                         wire:loading.attr="disabled" wire:target="saveMessageUser">
                                         <i wire:loading.remove wire:target="saveMessageUser"
                                             class="fa fa-location-arrow mr-2"></i>
-                                        <div wire:loading wire:target="saveMessageUser" wire:attr="{'disabled': disableButton2}"
+                                        <div wire:loading wire:target="saveMessageUser"
                                             class="spinner-grow spinner-grow-sm mr-2" role="status"
                                             style="display: none">
                                             <span class="sr-only">Loading...</span>
@@ -481,22 +481,22 @@
                 <div class="gpt-prompts">
                     <h4 class="text-center">Palabras clave</h4>
                     <ul class="list-group list-group-flush">
-                        <button type="button" wire:click="r_prompts(1)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Objetivos</button>
-                        <button type="button" wire:click="r_prompts(2)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Estructura de
+                        <button type="button" wire:click="r_prompts(1)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Objetivos</button>
+                        <button type="button" wire:click="r_prompts(2)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Estructura de
                             antecedente</button>
-                        <button type="button" wire:click="r_prompts(3)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Problemática</button>
-                        <button type="button" wire:click="r_prompts(4)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Teorías
+                        <button type="button" wire:click="r_prompts(3)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Problemática</button>
+                        <button type="button" wire:click="r_prompts(4)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Teorías
                             empleadas</button>
-                        <button type="button" wire:click="r_prompts(5)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Definiciones de
+                        <button type="button" wire:click="r_prompts(5)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Definiciones de
                             variables</button>
-                        <button type="button" wire:click="r_prompts(6)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Aporte de
+                        <button type="button" wire:click="r_prompts(6)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Aporte de
                             estudio</button>
-                        <button type="button" wire:click="r_prompts(7)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Resultados</button>
-                        <button type="button" wire:click="r_prompts(8)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Recomendación
+                        <button type="button" wire:click="r_prompts(7)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Resultados</button>
+                        <button type="button" wire:click="r_prompts(8)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Recomendación
                             principal</button>
-                        <button type="button" wire:click="r_prompts(9)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Propuesta de
+                        <button type="button" wire:click="r_prompts(9)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Propuesta de
                             mejora</button>
-                        <button type="button" wire:click="r_prompts(10)" class="list-group-item list-group-item-action" wire:attr="{'disabled': disableButton2}">Resumen general</button>
+                        <button type="button" wire:click="r_prompts(10)" class="list-group-item list-group-item-action" ire:loading.attr="disabled" wire:target="r_prompts">Resumen general</button>
                     </ul>
                 </div>
             @endif
