@@ -41,6 +41,7 @@ class BoxGpt extends Component
     public $run_id = null;
     public $assistant_id = null;
     public $message = null;
+    public $disableButton2 = false;
 
     public function mount()
     {
@@ -416,6 +417,8 @@ class BoxGpt extends Component
     }
 
     public function r_prompts($prompt){
+        $this->disableButton2 = true;
+
         switch ($prompt) {
             case 1:
                 $this->message="Objetivos del documento de investigación";
@@ -558,6 +561,8 @@ class BoxGpt extends Component
             'content' => $resultado
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
+
+        $this->disableButton2 = false;
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;
