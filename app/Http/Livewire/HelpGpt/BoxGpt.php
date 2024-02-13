@@ -98,87 +98,98 @@ class BoxGpt extends Component
 
 
     public function saveMessageUser(Request $request)
-    {
-        $history = HistoryGpt::firstOrCreate(
-            [
-                'type_action' => $this->typeAction,
-                'user_id'   => Auth::id()
-            ]
-        );
+    {   $validator;
+        $file;
+        if(!($this->message == "" || $this->message == null)){
+            $validator = true;
+        }else{
+            $this->message = "Te envío un documento.";
+        }
+        if($this->file == null)$file=true;
 
-        HistoryGptItem::create([
-            'history_id' => $history->id,
-            'my_user' => true,
-            'file_original_name' => null,
-            'content' => $this->message
-        ]);
+        if($validator || $file){
+            $history = HistoryGpt::firstOrCreate(
+                [
+                    'type_action' => $this->typeAction,
+                    'user_id'   => Auth::id()
+                ]
+            );
 
-        $resultado = null;
-        $messages = null;
-        if ($this->typeAction == 1) {
-            $resultado = $this->paraphrasing();
-        } elseif ($this->typeAction == 2) {
-            $resultado = $this->recommendations();
-        } elseif ($this->typeAction == 3) {
-            $resultado = $this->grammarCorrection();
-        } elseif ($this->typeAction == 4) {
-            $this->fileName = null;
-            if ($this->file) {
-                $basePath = base_path();
-                $asistentePath = $basePath . '/asistente_lyon';
+            HistoryGptItem::create([
+                'history_id' => $history->id,
+                'my_user' => true,
+                'file_original_name' => null,
+                'content' => $this->message
+            ]);
 
-                if (!is_dir($asistentePath)) {
-                    mkdir($asistentePath);
-                }
+            $resultado = null;
+            $messages = null;
+            if ($this->typeAction == 1) {
+                $resultado = $this->paraphrasing();
+            } elseif ($this->typeAction == 2) {
+                $resultado = $this->recommendations();
+            } elseif ($this->typeAction == 3) {
+                $resultado = $this->grammarCorrection();
+            } elseif ($this->typeAction == 4) {
+                $this->fileName = null;
+                if ($this->file) {
+                    $basePath = base_path();
+                    $asistentePath = $basePath . '/asistente_lyon';
 
-                $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
-
-                $this->fileName = $this->randomName() . '.' . $extension;
-
-                $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
-            }
-
-            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
-
-            try {
-                if (!isset($messages[0])) {
-                    while ($messages['status'] == "Pending") {
-                        $messages = $this->getPendingRun($messages);
+                    if (!is_dir($asistentePath)) {
+                        mkdir($asistentePath);
                     }
-                }
-            } catch (\Throwable $th) {
-            }
-            if ($messages != false) {
-                $resultado = $messages[0][0]['text']['value'];   //la respuesta final
 
-                ///eliminar archivo subido
+                    $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
 
-                $ifile_path = storage_path('app/' . $this->path);
-                //dd($ifile_path);
-                if (file_exists($ifile_path)) {
-                    @unlink($ifile_path);
+                    $this->fileName = $this->randomName() . '.' . $extension;
+
+                    $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
                 }
-            } else {
-                $resultado = "Hubo un error vuelve a intentarlo";
+
+                $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+
+                try {
+                    if (!isset($messages[0])) {
+                        while ($messages['status'] == "Pending") {
+                            $messages = $this->getPendingRun($messages);
+                        }
+                    }
+                } catch (\Throwable $th) {
+                }
+                if ($messages != false) {
+                    $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+
+                    ///eliminar archivo subido
+
+                    $ifile_path = storage_path('app/' . $this->path);
+                    //dd($ifile_path);
+                    if (file_exists($ifile_path)) {
+                        @unlink($ifile_path);
+                    }
+                } else {
+                    $resultado = "Hubo un error vuelve a intentarlo";
+                }
+                ////bajar el scroll!!!!
+                $this->dispatchBrowserEvent('scroll-messages-updated', ['success' => true]);
+            } elseif ($this->typeAction == 5) {
+                $resultado = $this->references();
             }
-            ////bajar el scroll!!!!
-            $this->dispatchBrowserEvent('scroll-messages-updated', ['success' => true]);
-        } elseif ($this->typeAction == 5) {
-            $resultado = $this->references();
+
+            HistoryGptItem::create([
+                'history_id' => $history->id,
+                'my_user' => false,
+                'file_original_name' => null,
+                'content' => $resultado
+            ]);
+            //$this->saveFileID_deleteFile($file_id, $filename, $path);
+            $this->consulta = null;
+            $this->file = null;
+            $this->fileName = null;
+            $this->message = null;
+            $this->path = null;
         }
 
-        HistoryGptItem::create([
-            'history_id' => $history->id,
-            'my_user' => false,
-            'file_original_name' => null,
-            'content' => $resultado
-        ]);
-        //$this->saveFileID_deleteFile($file_id, $filename, $path);
-        $this->consulta = null;
-        $this->file = null;
-        $this->fileName = null;
-        $this->message = null;
-        $this->path = null;
     }
 
 
