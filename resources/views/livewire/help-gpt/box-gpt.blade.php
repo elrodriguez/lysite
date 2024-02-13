@@ -481,22 +481,22 @@
                 <div class="gpt-prompts">
                     <h4 class="text-center">Palabras clave</h4>
                     <ul class="list-group list-group-flush">
-                        <button type="button" class="list-group-item list-group-item-action">Objetivos</button>
-                        <button type="button" class="list-group-item list-group-item-action">Estructura de
+                        <button type="button" wire:click="r_prompts(1)" class="list-group-item list-group-item-action">Objetivos</button>
+                        <button type="button" wire:click="r_prompts(2)" class="list-group-item list-group-item-action">Estructura de
                             antecedente</button>
-                        <button type="button" class="list-group-item list-group-item-action">Problemática</button>
-                        <button type="button" class="list-group-item list-group-item-action">Teorías
+                        <button type="button" wire:click="r_prompts(3)" class="list-group-item list-group-item-action">Problemática</button>
+                        <button type="button" wire:click="r_prompts(4)" class="list-group-item list-group-item-action">Teorías
                             empleadas</button>
-                        <button type="button" class="list-group-item list-group-item-action">Definiciones de
+                        <button type="button" wire:click="r_prompts(5)" class="list-group-item list-group-item-action">Definiciones de
                             variables</button>
-                        <button type="button" class="list-group-item list-group-item-action">Aporte de
+                        <button type="button" wire:click="r_prompts(6)" class="list-group-item list-group-item-action">Aporte de
                             estudio</button>
-                        <button type="button" class="list-group-item list-group-item-action">Resultados</button>
-                        <button type="button" class="list-group-item list-group-item-action">Recomendación
+                        <button type="button" wire:click="r_prompts(7)" class="list-group-item list-group-item-action">Resultados</button>
+                        <button type="button" wire:click="r_prompts(8)" class="list-group-item list-group-item-action">Recomendación
                             principal</button>
-                        <button type="button" class="list-group-item list-group-item-action">Propuesta de
+                        <button type="button" wire:click="r_prompts(9)" class="list-group-item list-group-item-action">Propuesta de
                             mejora</button>
-                        <button type="button" class="list-group-item list-group-item-action">Resumen general</button>
+                        <button type="button" wire:click="r_prompts(10)" class="list-group-item list-group-item-action">Resumen general</button>
                     </ul>
                 </div>
             @endif
