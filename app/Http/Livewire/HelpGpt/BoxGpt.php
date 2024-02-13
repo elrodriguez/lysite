@@ -138,17 +138,19 @@ class BoxGpt extends Component
                 $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
             }
 
-            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
 
+            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+            $break =false;
             try {
                 if (!isset($messages[0])) {
-                    while ($messages['status'] == "Pending") {
+                    while ($messages['status'] == "Pending" && $break==false) {
                         $messages = $this->getPendingRun($messages);
+                        if($messages['status'] == "failed")$break=true;
                     }
                 }
             } catch (\Throwable $th) {
             }
-            if ($messages != false) {
+            if ($messages != false && $break==false) {
                 $resultado = $messages[0][0]['text']['value'];   //la respuesta final
 
                 ///eliminar archivo subido
@@ -419,7 +421,6 @@ class BoxGpt extends Component
     }
 
     public function r_prompts($prompt){
-        $this->disableButton2 = true;
 
         switch ($prompt) {
             case 1:
@@ -565,7 +566,7 @@ class BoxGpt extends Component
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
 
-        $this->disableButton2 = false;
+
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;
