@@ -151,7 +151,11 @@ class BoxGpt extends Component
             } catch (\Throwable $th) {
             }
             if ($messages != false && $break==false) {
-                $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+                try {
+                    $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+                } catch (\Throwable $th) {
+                    $resultado = "El servidor está ocupado intenta de nuevo por favor.";   //la respuesta final
+                }
 
                 ///eliminar archivo subido
 
