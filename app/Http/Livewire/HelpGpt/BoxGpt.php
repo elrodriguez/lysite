@@ -138,18 +138,24 @@ class BoxGpt extends Component
                 $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
             }
 
-            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
 
+            $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
+            $break =false;
             try {
                 if (!isset($messages[0])) {
-                    while ($messages['status'] == "Pending") {
+                    while ($messages['status'] == "Pending" && $break==false) {
                         $messages = $this->getPendingRun($messages);
+                        if($messages['status'] == "failed")$break=true;
                     }
                 }
             } catch (\Throwable $th) {
             }
-            if ($messages != false) {
-                $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+            if ($messages != false && $break==false) {
+                try {
+                    $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+                } catch (\Throwable $th) {
+                    $resultado = "El servidor está ocupado intenta de nuevo por favor.";   //la respuesta final
+                }
 
                 ///eliminar archivo subido
 
@@ -353,6 +359,7 @@ class BoxGpt extends Component
 
     public function getThreadId($msg)
     {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
+       try {
         if ($this->thread_id == null) {
             $client = new Client();
             $promise = $client->getAsync('http://localhost:3000/create_thread');
@@ -360,10 +367,12 @@ class BoxGpt extends Component
             $data = json_decode($response->getBody(), true);
             $this->thread_id = $data['thread_id'];
             $this->assistant_id = $data['assistant_id'];
-        } else {
         }
 
         return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
+       } catch (\Throwable $th) {
+        return null;
+       }
     }
 
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
@@ -419,7 +428,6 @@ class BoxGpt extends Component
     }
 
     public function r_prompts($prompt){
-        $this->disableButton2 = true;
 
         switch ($prompt) {
             case 1:
@@ -531,16 +539,17 @@ class BoxGpt extends Component
             }
 
             $messages = $this->getThreadId($this->message);  //crear u obtener el thread_id devuelve lista de mensajes
-
+            $break =false;
             try {
                 if (!isset($messages[0])) {
-                    while ($messages['status'] == "Pending") {
+                    while ($messages['status'] == "Pending" && $break==false) {
                         $messages = $this->getPendingRun($messages);
+                        if($messages['status'] == "failed")$break=true;
                     }
                 }
             } catch (\Throwable $th) {
             }
-            if ($messages != false) {
+            if ($messages != false && $break==false) {
                 $resultado = $messages[0][0]['text']['value'];   //la respuesta final
 
                 ///eliminar archivo subido
@@ -564,7 +573,7 @@ class BoxGpt extends Component
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
 
-        $this->disableButton2 = false;
+
         $this->consulta = null;
         $this->file = null;
         $this->fileName = null;
