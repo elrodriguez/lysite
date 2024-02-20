@@ -1,4 +1,4 @@
-<div class="container-fluid" style="margin-top: 20px">
+<div style="width: 100%; height: auto;padding: 40px;">
     <h3 class="text-center">AYUDA</h3>
     <div class="gpt-messaging">
         <div class="gpt-inbox_msg">
