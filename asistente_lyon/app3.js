@@ -167,8 +167,8 @@ const createRun = async (data) => {
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
         instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name +
-                        "recuerda solo ayudar, o asistir con todo lo relacionado a proyectos de investigación, tesis, artículos científicos y similares de manera exclusiva, no ayudes con temas ajenos; "+
-                        "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+
+                        "recuerda solo ayudar, asistir o responder preguntas a todo lo relacionado a proyectos de investigación, tesis, artículos científicos y similares de manera exclusiva, no ayudes con temas ajenos; "+
+                        "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+ ", o la pregunta que te acaban de hacer" +
                         "' de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
     });
 
