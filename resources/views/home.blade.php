@@ -1,243 +1,187 @@
-<x-master>
-    <x-slot name="jumbotron">
-        <div class="mdk-box mdk-box--bg-gradient-primary bg-dark js-mdk-box position-relative overflow-hidden mb-0"
-            data-effects="parallax-background blend-background">
-            <div class="mdk-box__bg">
-                <div class="mdk-box__bg-front"
-                    style="background-image: url(assets/images/1280_work-station-straight-on-view.jpg);"></div>
+@extends('layouts.lyontech')
+@section('content')
+    <!-- header section strats -->
+    <x-lyontech.header></x-lyontech.header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <div class="bannen_inner">
+        <div class="container-fluid">
+            <div class="row marginii">
+                <div class="col-xl-9 col-lg-9 col-md-6 col-sm-12">
+                    <div class="slider-text-h2">
+                        <h2 class="espacio-top"><strong>DESCUBRE</strong></h2>
+                        <h2><strong>HERRAMIENTAS DE INVESTIGACIÓN</strong></h2>
+                        <h2><strong>IMPULSADAS POR IA.</strong></h2>
+                    </div>
+                    <div class="slider-text-p">
+                        <p>Desarrolla tu investigación de manera más fácil,</p>
+                        <p> inteligente y rápida con lyonteach.</p>
+                    </div>
+                    <div class="d-flex justify-content-center justify-content-lg-end">
+                        <a class="btn btn-lg btn-outline-light" href="#" role="button"><strong
+                                style="font-size: 1.8rem;">EMPEZAR GRATIS</strong></a>
+                    </div>
+                </div>
             </div>
-            <div class="mdk-box__content">
-                <div class="container page__container py-64pt py-md-112pt">
-                    <div class="row align-items-center text-center text-md-left">
-                        <div class="col-md-6 col-lg-5 order-1 order-md-0">
-                            <h1 class="text-white">{{env('APP_NAME')}} te apoyamos con: <span
-                                    class="d-block d-md-inline-block text-scramble js-text-scramble">Tesis</span></h1>
-                            <p class="lead mb-32pt mb-lg-48pt text-white">Aprende a hacer tu tesis, hacemos asesorías, simulacros de sustentación y más...</p>
-                            <a href="library.html" class="btn btn-lg btn-white btn--raised mb-16pt">Browse Courses</a>
-                            <p class="mb-0"><a href="" class="text-white-70 text-underline"><strong>Are you a
-                                        teacher?</strong></a></p>
+        </div>
+        <!-- end slider section -->
+        <!-- Banner Start -->
+        <div class="container-fluid banner mb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="card text-center mx-0  banner-margin-left" style="width: 15rem;">
+                        <img class="card-img-top rounded-0 mt-3" src="{{ asset('theme-lyontech/images/ia.png') }}"
+                            alt="Card image cap" style="width: 80px; height: 80px; margin: auto;">
+                        <div class="card-body card-body-reduced-padding">
+                            <h5 class="card-title mb-0" style="font-size: 0.9rem;"><strong>CONSULTAS IA</strong>
+                            </h5>
+                            <p class="card-text mt-0" style="font-size: 0.8rem;">Mejora tu investigacion con la
+                                IA.</p>
+                            <button type="button" class="btn btn-dark" href="#"
+                                style="width: 180px; height: 40px;">Iniciar consultas</button>
                         </div>
-                        <div class="col-md-6 col-lg-7 order-0 order-md-1 text-center mb-32pt mb-md-0">
-                            <img src="assets/images/macbook-teal.png" alt="macbook" class="home-macbook">
+
+                    </div>
+                    <div class="card text-center mx-0 banner-margin" style=" width: 18rem;">
+                        <img class="card-img-top rounded-0 mt-3" src="{{ asset('theme-lyontech/images/tesis.png') }}"
+                            alt="Card image cap" style="width: 80px; height: 80px; margin: auto;">
+                        <div class="card-body card-body-reduced-padding">
+                            <h5 class="card-title  mb-0"style="font-size: 0.9rem;"><strong>CURSOS</strong></h5>
+                            <p class="card-text mt-0"
+                                style="font-size: 0.8rem;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
+                                Aprende investigacion de forma didactica.</p>
+                            <button type="button" class="btn btn-dark" href="#"
+                                style="width: 180px; height: 40px;">Ir a los cursos</button>
+                        </div>
+                    </div>
+                    <div class="card text-center mx-0  banner-margin-right" style="width: 15rem;">
+                        <img class="card-img-top rounded-0 mt-3" src="{{ asset('theme-lyontech/images/hoja.png') }}"
+                            alt="Card image cap" style="width: 80px; height: 80px; margin: auto;">
+                        <div class="card-body card-body-reduced-padding">
+                            <h5 class="card-title mb-0"style="font-size: 0.9rem;"><strong>HOJA DE TRABAJO</strong>
+                            </h5>
+                            <p class="card-text mt-0" style="font-size: 0.8rem;">Realiza avances online.</p>
+                            <button type="button" class="btn btn-dark" href="#"
+                                style="width: 180px; height: 40px;">Empezar</button>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="hero container text-center py-112pt">
-                    <h1 class="text-white">Learn to Code</h1>
-                    <p class="lead measure-hero-lead mx-auto mb-48pt text-white">Business, Technology and Creative Skills taught by industry experts. Explore a wide range of skills with our professional tutorials.</p>
-                    <a href="library.html" class="btn btn-lg btn-outline-white">Browse Courses</a>
-                </div> -->
-            </div>
-        </div>
-    </x-slot>
-
-    <div class="bg-white border-bottom-2 py-16pt py-sm-24pt py-md-32pt ">
-        <div class="container page__container">
-            <div class="row align-items-center">
-                <div class="d-flex col-md align-items-center border-bottom border-md-0 mb-16pt mb-md-0 pb-16pt pb-md-0">
-                    <div
-                        class="rounded-circle bg-primary w-64 h-64 d-inline-flex align-items-center justify-content-center mr-16pt">
-                        <i class="material-icons text-primary-light">subscriptions</i>
-                    </div>
-                    <div class="flex">
-                        <p class="mb-0"><strong>8,000+ Courses</strong></p>
-                        <p class="text-black-70 mb-0">Explore a wide range of skills.</p>
-                    </div>
-                </div>
-                <div class="d-flex col-md align-items-center border-bottom border-md-0 mb-16pt mb-md-0 pb-16pt pb-md-0">
-                    <div
-                        class="rounded-circle bg-primary w-64 h-64 d-inline-flex align-items-center justify-content-center mr-16pt">
-                        <i class="material-icons text-primary-light">verified_user</i>
-                    </div>
-                    <div class="flex">
-                        <p class="mb-0"><strong>By Industry Experts</strong></p>
-                        <p class="text-black-70 mb-0">Professional development from the best people.</p>
-                    </div>
-                </div>
-                <div class="d-flex col-md align-items-center">
-                    <div
-                        class="rounded-circle bg-primary w-64 h-64 d-inline-flex align-items-center justify-content-center mr-16pt">
-                        <i class="material-icons text-primary-light">update</i>
-                    </div>
-                    <div class="flex">
-                        <p class="mb-0"><strong>Unlimited Access</strong></p>
-                        <p class="text-black-70 mb-0">Unlock Library and learn any topic with one subscription.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-
-    <div class="page-section border-bottom-2">
-        <div class="container page__container">
-
-
-            @livewire('homepage::homepage.histories')
-
-
-        </div>
-    </div>
-{{--
-    <div class="page-section bg-white border-bottom-2">
-        <div class="container page__container">
-            <div class="page-headline text-center">
-                <h2>Learning Paths</h2>
-                <p class="lead text-black-70 measure-lead mx-auto">Stop guessing what to learn next and start making
-                    progress faster based on your current skill level and experience.</p>
-            </div>
-
-            <div class="row d-block js-mdk-carousel">
-                <div class="mdk-carousel__content">
-
-
-                    <div class="col-12 col-sm-6 col-md-4">
-
-                        <a href="path.html"
-                            class="card stack stack--hidden-hover card-featured-path overlay js-overlay">
-                            <span class="card-featured-path__content">
-                                <span data-position="center" class="js-image" data-height="96">
-                                    <img src="assets/images/paths/angular_430x168.png" alt="course">
-                                </span>
-                                <span class="overlay__content">
-                                    <span class="overlay__action card-title mb-0">Angular</span>
-                                </span>
-                            </span>
-                        </a>
-
+    <!-- how section -->
+    <section class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body card-bg text-right ">
+                            <h2 class="text-white"><strong>PRESENTACIÓN</strong></h2>
+                            <h4 class="text-white" style="font-size: 2.8rem;">Lyonteach </h4>
+                        </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4">
-
-                        <a href="path.html"
-                            class="card stack stack--hidden-hover card-featured-path overlay js-overlay">
-                            <span class="card-featured-path__content">
-                                <span data-position="left" class="js-image" data-height="96">
-                                    <img src="assets/images/paths/react_430x168.png" alt="course">
-                                </span>
-                                <span class="overlay__content">
-                                    <span class="overlay__action card-title mb-0">React Native</span>
-                                </span>
-                            </span>
-                        </a>
-
+                </div>
+                <div class="col-md-8 d-flex justify-content-center align-items-center">
+                    <div class="card border-0 video-container">
+                        <div class="card-body">
+                            <video width="620" height="420" controls muted playsinline>
+                                <source src="video.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento de vídeo.
+                            </video>
+                        </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4">
-
-                        <a href="path.html"
-                            class="card stack stack--hidden-hover card-featured-path overlay js-overlay">
-                            <span class="card-featured-path__content">
-                                <span data-position="center" class="js-image" data-height="96">
-                                    <img src="assets/images/paths/swift_430x168.png" alt="course">
-                                </span>
-                                <span class="overlay__content">
-                                    <span class="overlay__action card-title mb-0">Swift</span>
-                                </span>
-                            </span>
-                        </a>
-
-                    </div>
-
                 </div>
             </div>
-
-            <div class="row mt-16pt mt-lg-32pt">
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/angular_40x40@2x.png" width="40" height="40" alt="Angular"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">Angular</span>
-                            <span class="text-muted d-flex lh-1">24 courses</span>
-                        </span>
-                    </a>
+            <div class="row mt-5">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body card-bg text-s3">
+                            <h5 class="text-white"><strong>Redacta tu investigación con<strong></h5>
+                            <h5 class="text-white"><strong>soporte de la IA.<strong> </h5>
+                            <p class="text-white  mt-3">Realiza tus avances de redacción en el editor online</p>
+                            <p class="text-white">donde encontraras una guía estructurada y</p>
+                            <p class="text-white">herramientas que facilitarán tu proceso.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/react_40x40@2x.png" width="40" height="40" alt="React Native"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">React Native</span>
-                            <span class="text-muted d-flex lh-1">18 courses</span>
-                        </span>
-                    </a>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card border-0"">
+                        <div class="card-body card-bg">
+                            <a href="#"><img src="{{ asset('theme-lyontech/images/card1.jpg') }}"></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/swift_40x40@2x.png" width="40" height="40" alt="Swift"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">Swift</span>
-                            <span class="text-muted d-flex lh-1">22 courses</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/wordpress_40x40@2x.png" width="40" height="40" alt="WordPress"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">WordPress</span>
-                            <span class="text-muted d-flex lh-1">13 courses</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/swift_40x40@2x.png" width="40" height="40" alt="Swift"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">Swift</span>
-                            <span class="text-muted d-flex lh-1">22 courses</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/wordpress_40x40@2x.png" width="40" height="40" alt="WordPress"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">WordPress</span>
-                            <span class="text-muted d-flex lh-1">13 courses</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/devops_40x40@2x.png" width="40" height="40"
-                            alt="Development Tools" class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">Development Tools</span>
-                            <span class="text-muted d-flex lh-1">5 courses</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-i8-6 col-md-3 mb-16pt">
-                    <a href="path.html" class="media">
-                        <img src="assets/images/paths/react_40x40@2x.png" width="40" height="40" alt="React Native"
-                            class="media-left rounded">
-                        <span class="media-body">
-                            <span class="card-title text-body d-block mb-0">React Native</span>
-                            <span class="text-muted d-flex lh-1">18 courses</span>
-                        </span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="pt-8pt pt-md-32pt text-center">
-                <a href="paths.html" class="btn btn-outline-secondary">Browse Learning Paths</a>
             </div>
         </div>
-    </div> --}}
-
-    <div class="page-section">
-
-        @livewire('homepage::homepage.instructors')
-
+    </section>
+    <!-- end how section -->
+    <!-- about  cards section -->
+    <section class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body card-bg">
+                            <a href="#"><img src="{{ asset('theme-lyontech/images/card2.jpg') }}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card-boder-0">
+                        <div class="card-body card-bg text-s3">
+                            <h5><strong>Deja que el chatbot te ayude en </strong></h5>
+                            <h5><strong>el desarrollo de tu invesitgación. </strong></h5>
+                            <p class="text-white  mt-3">Haz preguntas al chatbot ante cualquier duda,</p>
+                            <p class="text-white">además, utiliza el prafraseador, referenciador y</p>
+                            <p class="text-white">recomendador para avanzar tu investigación.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card-boder-0">
+                        <div class="text-s3 card-body card-bg ">
+                            <h5><strong> Accede al chat con un asesor</strong></h5>
+                            <h5><strong> las 24 horas del día.</strong></h5>
+                            <p class="text-white  mt-3">Emite tus consultas en tiempo real con un experto,</p>
+                            <p class="text-white">él encargado absolvera toda duda, además de</p>
+                            <p class="text-white">corregir cualquier deficiencia que tengas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body card-bg">
+                            <a href="#"><img src="{{ asset('theme-lyontech/images/card3.jpg') }}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body card-bg">
+                            <a href="#"><img src="{{ asset('theme-lyontech/images/card4.jpg') }}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card-boder-0">
+                        <div class="text-s3 card-body card-bg ">
+                            <h5><strong>Aprende sobre investigación de </strong></h5>
+                            <h5><strong>manera didáctica y entendible.</strong> </h5>
+                            <p class="text-white mt-3">Accede a los videos y guías de investigación</p>
+                            <p class="text-white">preparados con estrategias prácticas para el</p>
+                            <p class="text-white">planteamiento de cada apartado de la investigación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end cards  section -->
     </div>
+    <!-- Banner end -->
+    <!--fin div-->
 
-
-
-
-    <x-slot name="navigation">
-        <x-navigation></x-navigation>
-    </x-slot>
-</x-master>
+    <!-- footer section -->
+    <x-lyontech.footer></x-lyontech.footer>
+    <!-- footer section -->
+@stop
