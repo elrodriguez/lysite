@@ -30,8 +30,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <button class="btn-orange" type="submit" style="margin-right: 35px;"><strong>Iniciar
-                    sesión</strong></button>
+            <a class="btn-orange" href="{{ route("login") }}" style="margin-right: 35px;"><strong>Iniciar sesión</strong></a>
             <button class="btn-orange" type="submit"><strong>Registrame</strong></button>
         </form>
     </div>
