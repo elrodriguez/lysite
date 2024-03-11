@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>LyONtEHCH</title>
+    <title>Lyonteach</title>
 
     <!-- slider stylesheet -->
     <!-- slider stylesheet -->
