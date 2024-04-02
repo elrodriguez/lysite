@@ -19,7 +19,6 @@ class MendeleyReferences
 
     public function citar($doi, $normative)
     {
-
         $is_doi = false;
         if (strpos($doi, "http") !== false) {
             if (strpos($doi, 'doi.org') !== false) {
@@ -236,6 +235,35 @@ class MendeleyReferences
         $citation = html_entity_decode($citation);
         $citation = preg_replace("/, &/", " y ", $citation);
         $citation = $this->deleteMonths($citation);
+/*
+      INICIO  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+        $string = $citation;
+
+        // Utilizamos expresiones regulares para buscar el número entre paréntesis
+        $pattern = '/\((\d+)\)/';
+        preg_match($pattern, $string, $matches);
+
+        // La posición 0 del array $matches contiene el texto completo que coincide con el patrón
+        // La posición 1 contiene el número entre paréntesis
+        $newsubstring="";
+        if (isset($matches[1])) {
+            $numeroEntreParentesis = "(".$matches[1].")";
+            $substring = strstr($string, $numeroEntreParentesis, true);
+            $contadorComas = substr_count($substring, ",");
+            if(count($document->authors)>2){
+                $newsubstring = str_replace(" y ", ", & ", $substring);
+            }else{
+                $newsubstring = str_replace(" y ", " & ", $substring);
+            }
+        } else {
+
+        }
+        $citation = str_replace($substring, $newsubstring, $citation);
+        //dd($document->authors); falta revisar lo de apellidos
+/*
+      FIN  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
         return $citation;
     }
 
