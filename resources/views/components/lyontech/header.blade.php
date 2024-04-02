@@ -29,10 +29,31 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Membresías</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn-orange" type="submit" style="margin-right: 35px;"><strong>Iniciar
-                    sesión</strong></button>
-            <button class="btn-orange" type="submit"><strong>Registrame</strong></button>
-        </form>
+        @if (Route::has('login'))
+            @auth
+                <button class="custom-button-c ml-2" type="submit" style="margin-right: 35px;">
+                    <div>
+                        <img src="{{ asset('theme-lyontech/images/corona.jpg') }}" alt="Icono">
+                    </div>
+                </button>
+                <button class="custom-button mr-3" type="submit">
+                    <div>
+                        <img src="{{ asset('theme-lyontech/images/user-black.jpg') }}" alt="Icono">
+                    </div>
+                </button>
+                <button class="custom-button mr-2" type="submit">
+                    <div>
+                        <img src="{{ asset('theme-lyontech/images/msj-black.png') }}" alt="Icono">
+                    </div>
+                </button>
+            @else
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="{{ route('ly-login') }}" class="btn-orange" type="submit" style="margin-right: 35px;">
+                        <strong> Iniciar sesión </strong>
+                    </a>
+                    <button class="btn-orange" type="submit"><strong>Registrame</strong></button>
+                </form>
+            @endauth
+        @endif
     </div>
 </nav>

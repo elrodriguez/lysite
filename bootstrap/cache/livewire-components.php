@@ -1,6 +1,7 @@
 <?php return array (
   'auth.forgot-password' => 'App\\Http\\Livewire\\Auth\\ForgotPassword',
   'auth.login-form' => 'App\\Http\\Livewire\\Auth\\LoginForm',
+  'auth.ly-login-form' => 'App\\Http\\Livewire\\Auth\\LyLoginForm',
   'auth.register-form' => 'App\\Http\\Livewire\\Auth\\RegisterForm',
   'course.courses-student' => 'App\\Http\\Livewire\\Course\\CoursesStudent',
   'dashboard.dashboard-admin' => 'App\\Http\\Livewire\\Dashboard\\DashboardAdmin',

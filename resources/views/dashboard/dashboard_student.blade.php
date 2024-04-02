@@ -1,48 +1,112 @@
-<x-master>
-    <x-slot name="jumbotron">
-        <div class="bg-gradient-primary border-bottom-white py-32pt">
-            <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                <img src="{{ url('assets/images/illustration/student/128/white.svg') }}" width="104"
-                    class="mr-md-32pt mb-32pt mb-md-0" alt="student">
-                <div class="flex mb-32pt mb-md-0">
-                    <h2 class="text-white mb-0">{{ auth()->user()->name }}</h2>
-                    <p class="lead text-white-50 d-flex align-items-center">{{ auth()->user()->email }}</p>
+@extends('layouts.lyontech')
+@section('lycss')
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
+@stop
+@section('content')
+
+    <body>
+        <div class="hero_area">
+
+            <!-- header section strats -->
+            <x-lyontech.header></x-lyontech.header>
+            <div class="media orange-medio">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="media">
+                                <div class="image-container">
+                                    <img src="{{ asset('theme-lyontech/images/user-orange.jpg') }}"
+                                        class="align-self-end  b-img-fluid" alt="Card image cap" width="120">
+                                </div>
+                                <div class="media-body text-container align-self-center">
+                                    <h5>{{ Auth::user()->name }}</h5>
+                                    <p>{{ Auth::user()->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">Editar cuenta</a>
             </div>
+            <div class="media rosado-bajo ">
+                <div class="container-fluid">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <small class="custom-padding">
+                                <h5>Aumenta tus oportunidades: </h5>
+                                <p>&nbsp;Únete a premium</p> <button class="rosadito">Mejora</button>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media mt-4">
+                <div class="container-fluid">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="media">
+                                <div class="media-body text-center text-login">
+                                    <h5 class="mb-2">
+                                        <strong style="font-size: 1.8rem;letter-spacing: 0.0em;">HERRAMIENTAS
+                                            DE
+                                            TRABAJO</strong>
+                                    </h5>
+                                    <p class="mt-1">Te presentamos las herramientas de trabajo. con ellas podrás
+                                        potenciar el desarrollo de </p>
+                                    <p class="mt-0">tu investigación, empieza ahora tu experiencia de la mano de
+                                        lyonteach</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid mt-5 mb-5">
+                <div class="row borderless">
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        <div class="card text-center">
+                            <img class="card-img-top rounded-0 mt-2" src="{{ asset('theme-lyontech/images/ia-m.png') }}"
+                                alt="Card image cap" style="width: 150px; height: 150px; margin: auto;">
+                            <div class="card-body">
+                                <h5 class=" mb-0" style="font-size: 1.2rem;">CONSULTAS IA</h5>
+                                <p class="mt-0" style="font-size: 1rem;">Mejora tu investigación con la IA.</p>
+                                <button type="button" class="btn btn-dark" href="#"
+                                    style="width: 180px; height: 40px;">Empezar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        <div class="card text-center">
+                            <img class="card-img-top rounded-0 mt-2" src="{{ asset('theme-lyontech/images/libro-m.png') }}"
+                                alt="Card image cap" style="width: 150px; height: 150px; margin: auto;">
+                            <div class="card-body">
+                                <h5 class=" mb-0"style="font-size: 1.2rem;">CURSOS</h5>
+                                <p class="mt-0"
+                                    style="font-size: 1rem;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
+                                    Aprende investigación de forma didáctica.</p>
+                                <button type="button" class="btn btn-dark" href="#"
+                                    style="width: 180px; height: 40px;">Empezar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        <div class="card text-center">
+                            <img class="card-img-top rounded-0 mt-2" src="{{ asset('theme-lyontech/images/hoja-m.png') }}"
+                                alt="Card image cap" style="width: 150px; height: 150px; margin: auto;">
+                            <div class="card-body ">
+                                <h5 class=" mb-0"style="font-size: 1.2rem;">HOJA DE TRABAJO</h5>
+                                <p class="mt-0" style="font-size: 1rem;">Realiza avances online.</p>
+                                <button type="button" class="btn btn-dark" href="#"
+                                    style="width: 180px; height: 40px;">Empezar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
-    </x-slot>
-    <div class="navbar navbar-expand-sm navbar-dark-white bg-gradient-primary p-sm-0 ">
-        <div class="container page__container">
-
-            <!-- Navbar toggler -->
-            <button class="navbar-toggler ml-n16pt" type="button" data-toggle="collapse"
-                data-target="#navbar-submenu2">
-                <span class="material-icons">people_outline</span>
-            </button>
-            @livewire('nav.nav-global')
-        </div>
-    </div>
-    </div>
-    <livewire:student-packages />
-    <x-slot name="navigation">
-        <x-navigation></x-navigation>
-    </x-slot>
-    @section('script')
-        <!-- Global Settings -->
-        <script src="{{ url('assets/js/settings.js') }}"></script>
-
-        <!-- Moment.js -->
-        <script src="{{ url('assets/vendor/moment.min.js') }}"></script>
-        <script src="{{ url('assets/vendor/moment-range.min.js') }}"></script>
-
-        <!-- Chart.js -->
-        <script src="{{ url('assets/vendor/Chart.min.js') }}"></script>
-
-        <!-- Charts JS -->
-        <script src="{{ url('assets/js/chartjs.js') }}"></script>
-
-        <!-- Chart.js Samples -->
-        <script src="{{ url('assets/js/page.student-dashboard.js') }}"></script>
-    @endsection
-</x-master>
+    </body>
+@stop

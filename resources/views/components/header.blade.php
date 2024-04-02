@@ -70,8 +70,7 @@
                             }
                         </style>
 
-                        @if (auth()->user()->hasRole('Admin') ||
-                                auth()->user()->hasRole('Instructor'))
+                        @if (auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Instructor'))
                             <div class="nav-item">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-black mr-16pt" data-toggle="dropdown"
