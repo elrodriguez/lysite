@@ -12,8 +12,10 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
+
     <title>{{ env('APP_NAME', 'Laravel') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- slider stylesheet -->
     <!-- slider stylesheet -->

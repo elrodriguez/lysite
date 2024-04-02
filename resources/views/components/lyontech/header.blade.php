@@ -29,6 +29,7 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Membresías</a>
             </li>
         </ul>
+<<<<<<< HEAD
         @if (Route::has('login'))
             @auth
                 <button class="custom-button-c ml-2" type="submit" style="margin-right: 35px;">
@@ -55,5 +56,11 @@
                 </form>
             @endauth
         @endif
+=======
+        <form class="form-inline my-2 my-lg-0">
+            <a class="btn-orange" href="{{ route("login") }}" style="margin-right: 35px;"><strong>Iniciar sesión</strong></a>
+            <button class="btn-orange" type="submit"><strong>Registrame</strong></button>
+        </form>
+>>>>>>> ac46f8122db611c7a7a5b360ab60a4a75f8cbaae
     </div>
 </nav>
