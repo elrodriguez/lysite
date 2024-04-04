@@ -10,24 +10,7 @@
 
             <!-- header section strats -->
             <x-lyontech.header></x-lyontech.header>
-            <div class="media orange-medio">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="media">
-                                <div class="image-container">
-                                    <img src="{{ asset('theme-lyontech/images/user-orange.jpg') }}"
-                                        class="align-self-end  b-img-fluid" alt="Card image cap" width="120">
-                                </div>
-                                <div class="media-body text-container align-self-center">
-                                    <h5>{{ Auth::user()->name }}</h5>
-                                    <p>{{ Auth::user()->email }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-lyontech.student-data></x-lyontech.student-data>
             <div class="media rosado-bajo ">
                 <div class="container-fluid">
                     <div class="row justify-content-center align-items-center">
@@ -85,8 +68,8 @@
                                 <p class="mt-0"
                                     style="font-size: 1rem;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
                                     Aprende investigación de forma didáctica.</p>
-                                <button type="button" class="btn btn-dark" href="#"
-                                    style="width: 180px; height: 40px;">Empezar</button>
+                                <a href="{{ asset('dashboard_courses') }}" type="button" class="btn btn-dark"
+                                    href="#" style="width: 180px; height: 40px;">Empezar</a>
                             </div>
                         </div>
                     </div>

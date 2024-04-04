@@ -25,7 +25,7 @@ class DashboardController extends Controller
     }
     public function getCourses()
     {
-        return view('dashboard.dashboard_student_courses');
+        return view('dashboard.dashboard_ly_student_courses');
     }
     public function getHelpGPT()
     {
