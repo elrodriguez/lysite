@@ -470,7 +470,7 @@ class BoxGpt extends Component
                 'user_id'   => Auth::id()
             ]
         );
-
+// se graba el mensaje corto del prompt en el registro para ver en los mensajes pero mas abajo se manda un mensaje mas largo a la IA de GPT
         HistoryGptItem::create([
             'history_id' => $history->id,
             'my_user' => true,
@@ -499,39 +499,39 @@ class BoxGpt extends Component
 
             switch ($prompt) {
                 case 1:
-                    $this->message="Enlístame los objetivos de la investigación del documento que te envié";
+                    $this->message="Enlístame los objetivos de la investigación del último documento que te envié";
                     break;
                 case 2:
-                    $this->message="Redáctame en un párrafo de 12 líneas, el resumen de toda la investigación(del archivo que te pasé), manteniendo
+                    $this->message="Redáctame en un párrafo de 12 líneas, el resumen de toda la investigación(del archivo, el último que te pasé), manteniendo
                     esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología,
                     5) Muestra e instrumentos de recolección, 6) Resultados, y 7) Conclusión general";
                     break;
                 case 3:
-                    $this->message="Redáctame a profundidad la problemática de la investigación del documento envíado";
+                    $this->message="Redáctame a profundidad la problemática de la investigación del último documento envíado";
                     break;
                 case 4:
                     $this->message="Redáctame las teorías que se utilizaron en el apartado de marco teórico y/o revisión de
-                    la literatura de esta investigación(el archivo que te pasé), y agregar a cada teoría su cita de autor";
+                    la literatura de esta investigación(el archivo, el último que te pasé), y agregar a cada teoría su cita de autor";
                     break;
                 case 5:
                     $this->message="Enlístame los autores más representativos que definen a las variables de la investigación
-                    del documento que envié";
+                    del último documento que envié";
                     break;
                 case 6:
-                    $this->message="Cuál es el aporte principal de esta investigación(Archivo que envié), y quiénes serían los beneficiarios directos";
+                    $this->message="Cuál es el aporte principal de esta investigación(Archivo que envié, el último que te pasé), y quiénes serían los beneficiarios directos";
                     break;
                 case 7:
-                    $this->message="Indícame los resultados de acuerdo a cada objetivo de la investigación de este documento";
+                    $this->message="Indícame los resultados de acuerdo a cada objetivo de la investigación de este documento, el último archivo que te pasé";
                     break;
                 case 8:
-                    $this->message="Redáctame la recomendación principal de esta investigación";
+                    $this->message="Redáctame la recomendación principal de esta investigación, el último archivo que te pasé";
                     break;
                 case 9:
-                    $this->message="Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento";
+                    $this->message="Créame una propuesta de mejora en base a las recomendaciones de la investigación de este último documento que te envie";
                     break;
                 case 10:
                     $this->message="Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental
-                    de una investigación";
+                    de una investigación de este último documento que te pasé";
                     break;
                 default:
                     # code...
