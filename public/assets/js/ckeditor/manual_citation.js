@@ -76,7 +76,7 @@ function manual_citation(event) {
     let cita_autores = "";
     refresh_values();
     // obtiene el elemento HTML del botón de opción seleccionado
-    //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;    
+    //let selectedRadioButton = document.querySelector('input[name="input-type"]:checked').value;
 
     // verificar si la cadena termina con ";"
     if (autors.endsWith(";") || autors.endsWith(".") || autors.endsWith(",")) {
@@ -125,16 +125,20 @@ function manual_citation(event) {
                 var espacio = " ";
                 if (!autor.segundoApellido) espacio = "";
 
-                cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                cita_autores += autor.primerApellido + "-" + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += ", & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             let volnum;
@@ -159,7 +163,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
 
@@ -191,7 +195,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             let volnum;
@@ -217,11 +221,15 @@ function manual_citation(event) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += ", & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             if (edicion < 2) {
@@ -245,7 +253,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             if (edicion < 2) {
@@ -274,7 +282,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             if (edicion < 2) {
@@ -300,11 +308,15 @@ function manual_citation(event) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += ", & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             if (edicion < 2) {
@@ -328,7 +340,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             if (edicion < 2) {
@@ -358,7 +370,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             if (edicion < 2) {
@@ -384,15 +396,19 @@ function manual_citation(event) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += ", & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
 
-            concatenado = cita_autores + "(" + anio + "). <em>" + title.trim() + ".</em> " + "[" + grade + ", " + institucion + "]. " + enlace;
+            concatenado = cita_autores + "(" + anio + "). <em>" + title.trim() + ".</em> " + "[" + grade + ", " + institucion + "]. " + repositorio + ". " + enlace;
 
         }
 
@@ -408,7 +424,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
 
@@ -429,7 +445,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
 
@@ -450,10 +466,14 @@ function manual_citation(event) {
                     if (!autor.segundoApellido) espacio = "";
 
                     cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                    if (index === autors.length - 1) {
-                        cita_autores += " ";
+                    if (index === autors.length - 2) {
+                        if(autors.length >= 3){
+                            cita_autores += ", & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     } else {
-                        cita_autores += ", ";
+                        cita_autores += " ";
                     }
                 });
 
@@ -588,7 +608,7 @@ function manual_citation(event) {
                 var espacio = " ";
                 if (!autor.segundoApellido) espacio = "";
 
-                cita_autores += autor.primerApellido + espacio + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                cita_autores += primeraLetraMayus(autor.primerApellido) + espacio + primeraLetraMayus(autor.segundoApellido) + ", " + autor.primerNombre[0].toUpperCase() + ".";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
@@ -597,7 +617,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             concatenado = cita_autores + "(" + date + "). <em>" + title.trim() + ".</em> " + namepage.trim() + ". " + enlace.trim();
@@ -618,7 +638,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             concatenado = cita_autores + "<em>" + title.trim() + ",</em> " + anio + ". Disponible en: " + enlace.trim();
@@ -638,7 +658,7 @@ function manual_citation(event) {
                     }else{
                         cita_autores += ", ";
                     }
-                    
+
                 }
             });
             concatenado = cita_autores + title.trim() + " [Internet]. " + pais + ": " + editor + "; " + anio + ". Disponible en: " + enlace.trim();
@@ -896,14 +916,14 @@ function show_selected_inputs() {
             show_input('input-volumen');
             show_input('input-numero');
             show_input('input-paginas');
-            show_input('input-date');           //fecha publicacion         
+            show_input('input-date');           //fecha publicacion
             show_input('input-doi-a');
         }
         //libro virtual
         if (selectedRadioButton == "book") {
             show_input('input-autor');
             show_input('input-titulo');
-            show_input('input-date');           //fecha publicacion    
+            show_input('input-date');           //fecha publicacion
             show_input('input-date-consulta');
             show_input('input-editorial');
             show_input('input-enlace');
@@ -912,7 +932,7 @@ function show_selected_inputs() {
         if (selectedRadioButton == "book-fisico") {
             show_input('input-autor');
             show_input('input-titulo');
-            show_input('input-date');           //fecha publicacion         
+            show_input('input-date');           //fecha publicacion
             show_input('input-editorial');
             show_input('input-edicion');
             show_input('input-pais');
@@ -930,7 +950,7 @@ function show_selected_inputs() {
             label = document.querySelector("label[for='input-pais']");
             label.textContent = "Ciudad:";
             show_input('input-siglas');         //Siglas de entidad
-            show_input('input-date');           //fecha publicacion 
+            show_input('input-date');           //fecha publicacion
             show_input('input-enlace');
             document.getElementById("input-siglas").placeholder = "Siglas de la entidad emisosa o nombres y apellidos del emisor ejem: María José, Perez Miñano";
         }
@@ -938,13 +958,14 @@ function show_selected_inputs() {
         if (selectedRadioButton == "thesis") {
             show_input('input-autor');
             show_input('input-titulo');
-            show_input('input-date');           //fecha publicacion         
+            show_input('input-date');           //fecha publicacion
             show_input('input-grado');
             show_input('input-institucion');
+            show_input('input-repositorio');
             let label = document.querySelector("label[for='input-grado']");
             label.textContent = "Titulación en que especialidad o carrera:";
             let input = document.getElementById("input-grado");
-            input.placeholder = "Tesis de Licenciatura, Tesis de Maestría o Doctorado";
+            input.placeholder = "Tesis de Licenciatura, Tesis gagistral o Tesis doctoral";
             label = document.querySelector("label[for='input-institucion']");
             label.textContent = "Universidad:";
             show_input('input-enlace');
@@ -965,12 +986,12 @@ function show_selected_inputs() {
             label = document.querySelector("label[for='input-siglas']");
             label.textContent = "Entidad Emisora:";
             document.getElementById('input-siglas').placeholder = "Escribe aquí...";
-            show_input('input-date');           //fecha publicacion 
+            show_input('input-date');           //fecha publicacion
             show_input('input-enlace');
 
         }
 
-        //Doc legal explícito 
+        //Doc legal explícito
         if (selectedRadioButton == "document-legal-codigo-explicito") {
             show_input('input-autor');
             let label = document.querySelector("label[for='input-autor']");
@@ -1073,8 +1094,8 @@ function show_selected_inputs() {
             show_input('input-volumen');
             show_input('input-numero');
             show_input('input-paginas');
-            show_input('input-date');                    //fecha publicacion                 
-            show_input('input-date-consulta');          //fecha consulta      
+            show_input('input-date');                    //fecha publicacion
+            show_input('input-date-consulta');          //fecha consulta
             show_input('input-doi-a');
             show_input('input-issn');
         }
@@ -1082,8 +1103,8 @@ function show_selected_inputs() {
         if (selectedRadioButton == "book") {
             show_input('input-autor');
             show_input('input-titulo');
-            show_input('input-date');           //fecha publicacion       
-            show_input('input-date-consulta');      //fecha consulta            
+            show_input('input-date');           //fecha publicacion
+            show_input('input-date-consulta');      //fecha consulta
             show_input('input-edicion');
             show_input('input-editorial');
             show_input('input-pais');
@@ -1097,7 +1118,7 @@ function show_selected_inputs() {
             show_input('input-edicion');
             show_input('input-pais');
             show_input('input-editorial');
-            show_input('input-date');           //fecha publicacion                                
+            show_input('input-date');           //fecha publicacion
             show_input('input-isbn');
         }
         //documento gubernamental
@@ -1116,7 +1137,7 @@ function show_selected_inputs() {
             label.textContent = "Nombre de la Institución o Entidad:";
             show_input('input-siglas');         //Siglas de entidad
             show_input('input-siglas');         //Siglas de entidad
-            show_input('input-date');           //fecha publicacion 
+            show_input('input-date');           //fecha publicacion
             document.getElementById("input-siglas").placeholder = "Nombre de la Institución";
             show_input('input-enlace');
         }
@@ -1135,7 +1156,7 @@ function show_selected_inputs() {
             show_input('input-pais');
             label = document.querySelector("label[for='input-pais']");
             label.textContent = "País:";
-            show_input('input-date');           //fecha publicacion                                
+            show_input('input-date');           //fecha publicacion
             show_input('input-enlace');
         }
 
@@ -1153,7 +1174,7 @@ function show_selected_inputs() {
             label = document.querySelector("label[for='input-siglas']");
             label.textContent = "Entidad Emisora:";
             document.getElementById('input-siglas').placeholder = "Poder Ejecutivo del Perú";
-            show_input('input-date');           //fecha publicacion 
+            show_input('input-date');           //fecha publicacion
             show_input('input-enlace');
             show_input('input-pais');
             label = document.querySelector("label[for='input-pais']");
@@ -1161,7 +1182,7 @@ function show_selected_inputs() {
 
         }
 
-        //Doc legal explícito 
+        //Doc legal explícito
         if (selectedRadioButton == "document-legal-codigo-explicito") {
             show_input('input-autor');
             let label = document.querySelector("label[for='input-autor']");
@@ -1263,14 +1284,14 @@ function show_selected_inputs() {
             show_input('input-volumen');
             show_input('input-numero');
             show_input('input-paginas');
-            show_input('input-date');                    //fecha publicacion     
+            show_input('input-date');                    //fecha publicacion
             show_input('input-doi-a');
         }
         //libro virtual
         if (selectedRadioButton == "book") {
             show_input('input-autor');
             show_input('input-titulo');
-            show_input('input-date');           //fecha publicacion   
+            show_input('input-date');           //fecha publicacion
             show_input('input-editorial');
             show_input('input-pais');
             show_input('input-enlace');
@@ -1282,7 +1303,7 @@ function show_selected_inputs() {
             show_input('input-pais');
             show_input('input-edicion');
             show_input('input-editorial');
-            show_input('input-date');           //fecha publicacion  
+            show_input('input-date');           //fecha publicacion
         }
         //documento gubernamental
         if (selectedRadioButton == "document-gubernamental") {
@@ -1297,14 +1318,14 @@ function show_selected_inputs() {
             label.textContent = "Ciudad:";
             show_input('input-institucion');
             show_input('input-siglas');         //Siglas de entidad
-            show_input('input-date');           //fecha publicacion 
+            show_input('input-date');           //fecha publicacion
             show_input('input-enlace');
         }
         //Tesis
         if (selectedRadioButton == "thesis") {
             show_input('input-autor');
             show_input('input-titulo');
-            show_input('input-date');           //fecha publicacion   
+            show_input('input-date');           //fecha publicacion
             show_input('input-grado');
             let label = document.querySelector("input[id='input-grado']");
             label.placeholder = "Tesis de pregrado ó Tesis de posgrado:";
@@ -1329,7 +1350,7 @@ function show_selected_inputs() {
             label = document.querySelector("label[for='input-siglas']");
             label.textContent = "Entidad Emisora:";
             document.getElementById('input-siglas').placeholder = "Poder Ejecutivo del Perú";
-            show_input('input-date');           //fecha publicacion 
+            show_input('input-date');           //fecha publicacion
             show_input('input-enlace');
             show_input('input-pais');
             label = document.querySelector("label[for='input-pais']");
@@ -1337,7 +1358,7 @@ function show_selected_inputs() {
 
         }
 
-        //Doc legal explícito 
+        //Doc legal explícito
         if (selectedRadioButton == "document-legal-codigo-explicito") {
             show_input('input-autor');
             let label = document.querySelector("label[for='input-autor']");
@@ -1528,3 +1549,7 @@ function modifyCitation() {
     }
 
 }
+
+function primeraLetraMayus(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
