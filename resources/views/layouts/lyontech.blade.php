@@ -28,7 +28,6 @@
     <!-- bootstrap core css -->
     @yield('bootstrap')
 
-
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
     <!-- Custom styles for this template -->
@@ -37,11 +36,6 @@
     <link href="{{ asset('theme-lyontech/css/responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('theme-lyontech/css/lyontech.css') }}" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/8.css') }}">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/9.css') }}">
     @yield('lycss')
 </head>
 @yield('content')

@@ -63,7 +63,8 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/register', function () {
-    return view('auth.register');
+    //return view('auth.register');
+    return view('auth.ly-register');
 })->name('register');
 
 Route::get('/home', function () {

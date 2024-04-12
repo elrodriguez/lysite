@@ -1,12 +1,5 @@
-@extends('layouts.lyontech')
-@section('bootstrap')
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/8.css') }}">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/9.css') }}">
-@stop
-@section('content')
+<x-master>
+
     <x-slot name="jumbotron">
         <div class="mdk-box bg-dark mdk-box--bg-gradient-primary js-mdk-box mb-0" data-effects="blend-background">
             <div class="mdk-box__content">
@@ -54,33 +47,32 @@
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>
-@stop
-@section('modales')
-    <div wire:ignore.self class="modal fade" id="WelcomeVideo" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ $course->name }} - {{ __('labels.Welcome Video') }}
-                    </h5>
-                    <button type="button" class="close" onclick="closeModalWelcomeVideo()" aria-label="Close">
-                        <span aria-hidden="true close-btn">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
-                        <div class="player embed-responsive-item">
-                            <div class="player__content">
-                                <div class="player__image"
-                                    style="--player-image: url(assets/images/illustration/player.svg)">
+    @section('modales')
+        <div wire:ignore.self class="modal fade" id="WelcomeVideo" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $course->name }} -
+                            {{ __('labels.Welcome Video') }}</h5>
+                        <button type="button" class="close" onclick="closeModalWelcomeVideo()" aria-label="Close">
+                            <span aria-hidden="true close-btn">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
+                            <div class="player embed-responsive-item">
+                                <div class="player__content">
+                                    <div class="player__image"
+                                        style="--player-image: url(assets/images/illustration/player.svg)">
+                                    </div>
+                                    <a href="" class="player__play">
+                                        <span class="material-icons">play_arrow</span>
+                                    </a>
                                 </div>
-                                <a href="" class="player__play">
-                                    <span class="material-icons">play_arrow</span>
-                                </a>
-                            </div>
-                            <div class="player__embed d-none">
-                                <!-- Aqui abajo va el Video -->
-                                {{-- @if ($course->video_type == 0)
+                                <div class="player__embed d-none">
+                                    <!-- Aqui abajo va el Video -->
+                                    {{-- @if ($course->video_type == 0)
                                     <iframe id="frameWelcomeVideo" class="embed-responsive-item"
                                     src="https://player.vimeo.com/video/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
                                     allowfullscreen=""></iframe>
@@ -90,45 +82,45 @@
                                     src="https://www.youtube.com/embed/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
                                     allowfullscreen=""></iframe>
                                 @endif --}}
-                                <iframe id="frameWelcomeVideo" class="embed-responsive-item" src=""
-                                    allowfullscreen=""></iframe>
-                                <!-- Aqui arriba va el Video -->
+                                    <iframe id="frameWelcomeVideo" class="embed-responsive-item" src=""
+                                        allowfullscreen=""></iframe>
+                                    <!-- Aqui arriba va el Video -->
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-btn"
-                        onclick="closeModalWelcomeVideo()">{{ __('labels.Close') }}</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close-btn"
+                            onclick="closeModalWelcomeVideo()">{{ __('labels.Close') }}</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
-@section('script')
-    <script>
-        var urlVideo = "{{ $course->video_url }}";
-        var typeVideo = "{{ $course->video_type }}";
-        var srcVideo = "";
+    @endsection
+    @section('script')
+        <script>
+            var urlVideo = "{{ $course->video_url }}";
+            var typeVideo = "{{ $course->video_type }}";
+            var srcVideo = "";
 
-        function closeModalWelcomeVideo() {
-            document.getElementById("frameWelcomeVideo").src = "";
-            $('#WelcomeVideo').modal('hide');
-        }
+            function closeModalWelcomeVideo() {
+                document.getElementById("frameWelcomeVideo").src = "";
+                $('#WelcomeVideo').modal('hide');
+            }
 
-        function openModalWelcomeVideo() {
-            if (typeVideo == '0') {
-                srcVideo = "https://player.vimeo.com/video/" + urlVideo + "?title=0&amp;byline=0&amp;portrait=0";
-                document.getElementById("frameWelcomeVideo").src = srcVideo;
+            function openModalWelcomeVideo() {
+                if (typeVideo == '0') {
+                    srcVideo = "https://player.vimeo.com/video/" + urlVideo + "?title=0&amp;byline=0&amp;portrait=0";
+                    document.getElementById("frameWelcomeVideo").src = srcVideo;
+                }
+                if (typeVideo == '1') {
+                    srcVideo = "https://www.youtube.com/embed/" + urlVideo + "?title=0&amp;byline=0&amp;portrait=0";
+                    document.getElementById("frameWelcomeVideo").src = srcVideo;
+                }
+                $('#WelcomeVideo').modal('show');
             }
-            if (typeVideo == '1') {
-                srcVideo = "https://www.youtube.com/embed/" + urlVideo + "?title=0&amp;byline=0&amp;portrait=0";
-                document.getElementById("frameWelcomeVideo").src = srcVideo;
-            }
-            $('#WelcomeVideo').modal('show');
-        }
-    </script>
-@endsection
+        </script>
+    @endsection
 </x-master>

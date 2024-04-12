@@ -16,3 +16,15 @@
         </div>
     </div>
 </div>
+<div class="media rosado-bajo ">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <small class="custom-padding">
+                    <h5>Aumenta tus oportunidades: </h5>
+                    <p>&nbsp;Únete a premium</p> <button class="rosadito">Mejora</button>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

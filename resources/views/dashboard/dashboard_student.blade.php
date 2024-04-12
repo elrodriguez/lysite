@@ -11,18 +11,7 @@
             <!-- header section strats -->
             <x-lyontech.header></x-lyontech.header>
             <x-lyontech.student-data></x-lyontech.student-data>
-            <div class="media rosado-bajo ">
-                <div class="container-fluid">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-md-6 col-md-offset-3 text-center">
-                            <small class="custom-padding">
-                                <h5>Aumenta tus oportunidades: </h5>
-                                <p>&nbsp;Únete a premium</p> <button class="rosadito">Mejora</button>
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="media mt-4">
                 <div class="container-fluid">
                     <div class="row justify-content-center align-items-center">
@@ -54,8 +43,8 @@
                             <div class="card-body">
                                 <h5 class=" mb-0" style="font-size: 1.2rem;">CONSULTAS IA</h5>
                                 <p class="mt-0" style="font-size: 1rem;">Mejora tu investigación con la IA.</p>
-                                <button type="button" class="btn btn-dark" href="#"
-                                    style="width: 180px; height: 40px;">Empezar</button>
+                                <a type="button" class="btn btn-dark" href="{{ route('help_gpt') }}"
+                                    style="width: 180px; height: 40px;">Empezar</a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +57,7 @@
                                 <p class="mt-0"
                                     style="font-size: 1rem;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
                                     Aprende investigación de forma didáctica.</p>
-                                <a href="{{ asset('dashboard_courses') }}" type="button" class="btn btn-dark"
+                                <a href="{{ route('dashboard_courses') }}" type="button" class="btn btn-dark"
                                     href="#" style="width: 180px; height: 40px;">Empezar</a>
                             </div>
                         </div>

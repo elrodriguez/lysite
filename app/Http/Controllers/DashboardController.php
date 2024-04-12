@@ -29,6 +29,6 @@ class DashboardController extends Controller
     }
     public function getHelpGPT()
     {
-        return view('helpGPT.help_gpt');
+        return view('helpGPT.ly_help_gpt');
     }
 }

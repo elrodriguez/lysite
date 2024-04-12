@@ -69,8 +69,6 @@ class StudentsController extends Controller
     {
         $id_person = Person::where('user_id', Auth::id())->get()->first()->id;
 
-
-
         try {
             $registered_until = AcaStudent::where('person_id', $id_person)->where('course_id', $id)->get()->first()->registered_until;
         } catch (\Throwable $th) {
@@ -177,7 +175,8 @@ class StudentsController extends Controller
         ]);
     }
 
-    public function openai(){
+    public function openai()
+    {
         return view('academic::students.openaiview');
     }
 }

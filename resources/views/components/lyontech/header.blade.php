@@ -52,7 +52,7 @@
                     <a href="{{ route('ly-login') }}" class="btn-orange" type="submit" style="margin-right: 35px;">
                         <strong> Iniciar sesión </strong>
                     </a>
-                    <button class="btn-orange" type="submit"><strong>Registrame</strong></button>
+                    <a href="{{ route('register') }}" class="btn-orange" type="submit"><strong>Registrame</strong></a>
                 </form>
             @endauth
         @endif
