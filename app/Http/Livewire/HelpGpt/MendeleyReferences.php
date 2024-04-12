@@ -19,6 +19,7 @@ class MendeleyReferences
 
     public function citar($doi, $normative)
     {
+        $doi = trim($doi);
         $is_doi = false;
         if (strpos($doi, "http") !== false) {
             if (strpos($doi, 'doi.org') !== false) {
@@ -238,28 +239,35 @@ class MendeleyReferences
 /*
       INICIO  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
-        $string = $citation;
 
-        // Utilizamos expresiones regulares para buscar el número entre paréntesis
-        $pattern = '/\((\d+)\)/';
-        preg_match($pattern, $string, $matches);
+if($document->type == "journal" || $document->type == "book"){
+    $string = $citation;
 
-        // La posición 0 del array $matches contiene el texto completo que coincide con el patrón
-        // La posición 1 contiene el número entre paréntesis
-        $newsubstring="";
-        if (isset($matches[1])) {
-            $numeroEntreParentesis = "(".$matches[1].")";
-            $substring = strstr($string, $numeroEntreParentesis, true);
-            $contadorComas = substr_count($substring, ",");
-            if(count($document->authors)>2){
-                $newsubstring = str_replace(" y ", ", & ", $substring);
-            }else{
-                $newsubstring = str_replace(" y ", " & ", $substring);
-            }
-        } else {
+    // Utilizamos expresiones regulares para buscar el número entre paréntesis
+    $pattern = '/\((\d+)\)/';
+    preg_match($pattern, $string, $matches);
 
+    // La posición 0 del array $matches contiene el texto completo que coincide con el patrón
+    // La posición 1 contiene el número entre paréntesis
+    $newsubstring="";
+    if (isset($matches[1])) {
+        $numeroEntreParentesis = "(".$matches[1].")";
+        $substring = strstr($string, $numeroEntreParentesis, true);
+        if(count($document->authors)>2){
+            $newsubstring = str_replace(" y ", ", & ", $substring);
+        }else{
+            $newsubstring = str_replace(" y ", " & ", $substring);
         }
-        $citation = str_replace($substring, $newsubstring, $citation);
+    } else {
+
+    }
+    $citation = str_replace($substring, $newsubstring, $citation);
+
+    if($document->type == "journal"){
+    }
+}
+
+
         //dd($document->authors); falta revisar lo de apellidos
 /*
       FIN  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,7 +282,7 @@ class MendeleyReferences
         //Obtener el nombre de los autores
         try {
             foreach ($document->authors as $author) { //solo la inicial del primer nombre
-                if ($document->type == "book") {
+                if ( $document->type == "book" || $document->type == "article") {
                     try {
                         array_push($authors, str_replace(" ", "-", $author->last_name) . ", " . substr($author->first_name, 0, 1) . ".");
                     } catch (\Throwable $th) {
@@ -428,6 +436,32 @@ class MendeleyReferences
         $citation .= '</p>';
         $citation = str_replace("Elsevier Ltd.", "", $citation);
         $citation = $this->deleteMonths($citation);
+
+        ///-ABRIL CAMBIOS 2024------------------------------------------------------------------------------------------------------------------------
+
+        if(count($document->authors)==2){
+            $string = $citation;
+            $posicion_y = strpos($string, ' y');
+
+            if ($posicion_y !== false) {
+                $citation = substr_replace($string, ' &', $posicion_y, 2);
+            } else {
+                $citation = $string;
+            }
+        }
+
+        if(count($document->authors)>=3){
+            $string = $citation;
+            $posicion_y = strpos($string, ' y');
+
+            if ($posicion_y !== false) {
+                $citation = substr_replace($string, '; &', $posicion_y, 2);
+            } else {
+                $citation = $string;
+            }
+        }
+        //////////////////////////////////////////////-------------------------------------------------------------------------------------------
+
         return $citation;
     }
 

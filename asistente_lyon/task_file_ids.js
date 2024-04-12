@@ -78,22 +78,27 @@ function file_ids_deleting() {
 
 
 async function updateDeletedStatus(file_id) {
+
+try {
     return new Promise((resolve, reject) => {
 
-      const updateQuery = 'UPDATE assistant_gpt_files_ids SET deleted = ? WHERE id = ?';
-      const deletedValue = true;
+        const updateQuery = 'UPDATE assistant_gpt_files_ids SET deleted = ? WHERE id = ?';
+        const deletedValue = true;
 
-      connection.query(updateQuery, [deletedValue, file_id], (error, results) => {
-        if (error) {
-          reject(error); // Rechazar la promesa en caso de error
-          return;
-        }
+        connection.query(updateQuery, [deletedValue, file_id], (error, results) => {
+          if (error) {
+            reject(error); // Rechazar la promesa en caso de error
+            return;
+          }
 
-        console.log(`Estado de eliminación actualizado a true para el archivo con id ${file_id}`);
-        resolve(); // Resolver la promesa en caso de éxito
+          console.log(`Estado de eliminación actualizado a true para el archivo con id ${file_id}`);
+          resolve(); // Resolver la promesa en caso de éxito
+        });
+
       });
-
-    });
+} catch (error) {
+    console.log("Error en función updateDeletedStatus con file_id: " + file_id);
+}
   }
 
 

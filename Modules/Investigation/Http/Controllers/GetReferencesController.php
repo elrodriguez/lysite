@@ -170,7 +170,7 @@ class GetReferencesController extends Controller
         // $browsershot = new Browsershot();
         // $html = $browsershot->setURL('https://www.mendeley.com/catalogue/'.$document->id.'/')
         //                     ->waitUntilNetworkIdle()
-        //                     ->bodyHtml();    
+        //                     ->bodyHtml();
 
         // Convert the body to a string
         $html = (string)$html;
@@ -201,7 +201,7 @@ class GetReferencesController extends Controller
         //Aqui abajo hay un error algunos años se muestran así (2012 y no cierra el parentesis y agrega el punto para eso lo siguiente
         $array = explode('(', $citation);
         $titulox = $array[0];
-        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;                                  
+        $citation = preg_replace('/\((\d{4,5})\./', '($1).', $citation); // reemplazar "(X." con "(X)"echo $cadena;
         $nxplodes = explode('(' . $document->year . ')', $citation);
         $nxplodes[0] = $titulox; //$this->getAutorforAPA($document);
         //$citation = $titulox . implode('(' . $document->year . ')', $nxplodes);
@@ -247,6 +247,41 @@ class GetReferencesController extends Controller
         $citation = html_entity_decode($citation);
         $citation = preg_replace("/, &/", " y ", $citation);
         $citation = $this->deleteMonths($citation);
+
+        /*
+      INICIO  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+if($document->type == "journal" || $document->type == "book"){
+    $string = $citation;
+
+    // Utilizamos expresiones regulares para buscar el número entre paréntesis
+    $pattern = '/\((\d+)\)/';
+    preg_match($pattern, $string, $matches);
+
+    // La posición 0 del array $matches contiene el texto completo que coincide con el patrón
+    // La posición 1 contiene el número entre paréntesis
+    $newsubstring="";
+    if (isset($matches[1])) {
+        $numeroEntreParentesis = "(".$matches[1].")";
+        $substring = strstr($string, $numeroEntreParentesis, true);
+        $contadorComas = substr_count($substring, ",");
+        if(count($document->authors)>2){
+            $newsubstring = str_replace(" y ", ", & ", $substring);
+        }else{
+            $newsubstring = str_replace(" y ", " & ", $substring);
+        }
+    } else {
+
+    }
+    $citation = str_replace($substring, $newsubstring, $citation);
+}
+
+        //dd($document->authors); falta revisar lo de apellidos
+/*
+      FIN  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
         return $citation;
     }
 
@@ -438,6 +473,33 @@ class GetReferencesController extends Controller
         $citation .= '</p>';
         $citation = str_replace("Elsevier Ltd.", "", $citation);
         $citation = $this->deleteMonths($citation);
+
+                ///-ABRIL CAMBIOS 2024------------------------------------------------------------------------------------------------------------------------
+
+                if(count($document->authors)==2){
+                    $string = $citation;
+                    $posicion_y = strpos($string, ' y');
+
+                    if ($posicion_y !== false) {
+                        $citation = substr_replace($string, ' &', $posicion_y, 2);
+                    } else {
+                        $citation = $string;
+                    }
+                }
+
+                if(count($document->authors)>=3){
+                    $string = $citation;
+                    $posicion_y = strpos($string, ' y');
+
+                    if ($posicion_y !== false) {
+                        $citation = substr_replace($string, '; &', $posicion_y, 2);
+                    } else {
+                        $citation = $string;
+                    }
+                }
+                //////////////////////////////////////////////-------------------------------------------------------------------------------------------
+
+
         return $citation;
     }
 
@@ -567,7 +629,7 @@ class GetReferencesController extends Controller
         // $browsershot = new Browsershot();
         // $html = $browsershot->setURL($link)
         //                     ->waitUntilNetworkIdle()
-        //                     ->bodyHtml();                        
+        //                     ->bodyHtml();
         // // $html ahora contiene el código HTML completo de la página web
         // dd((string)$html);
 
@@ -633,7 +695,7 @@ class GetReferencesController extends Controller
             $citation = str_replace("Elsevier Ltd.", "", $citation);
             return $citation;
             /*
-                CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021. 
+                CARO, Dino. Vacunagate y Public Compliance: el caso peruano. Agenda Estado de Derecho, 2021.
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido mayúscula, Nombre minúscula. Título de la página web, año. Disponible en: link de la pagina
 */
@@ -643,7 +705,7 @@ class GetReferencesController extends Controller
             return $citation;
 
             /*
-                Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021. 
+                Caro, D. Vacunagate y Public Compliance: el caso peruano [Internet]. Perú: Agenda Estado de Derecho; 2021.
                 Disponible en: https://agendaestadodederecho.com/vacunagate-y-public-compliance-el-caso-peruano/
                 Apellido, Inicial Nombre. Título [Internet]. Lugar de publicación: Editor; Fecha de publicación. Disponible en: Enlace.
                 */

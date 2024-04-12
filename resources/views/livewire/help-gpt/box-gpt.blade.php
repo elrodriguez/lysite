@@ -398,8 +398,7 @@
                         <div class="ly-ck-dialog-group-control">
                             <label class="ly-ck-dialog-label" for="input-repositorio">Repositorio:</label>
                             <input onkeyup="manual_citation(event)" class="form-control form-control-sm"
-                                type="text" id="input-repositorio" name="input-repositorio"
-                                placeholder="Repositorio de la Universidad Nacional de Ingeniería, Repositorio de la Universidad Cayetano...">
+                                type="text" id="input-repositorio" name="input-repositorio" placeholder="Ejemplos: Repositorio UCV, Repositorio UNMSM u otros...">
                             <spam id="input-repositorio-error"></span>
                         </div>
                         <div class="ly-ck-dialog-group-control">
