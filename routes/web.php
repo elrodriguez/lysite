@@ -82,4 +82,9 @@ Route::middleware(['single-session'])->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
 });
+
+Route::get('/unirme', function () {
+    return view('ly_join');
+})->name('unirme_page');
+
 require __DIR__ . '/auth.php';

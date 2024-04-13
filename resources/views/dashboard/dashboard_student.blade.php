@@ -43,8 +43,13 @@
                             <div class="card-body">
                                 <h5 class=" mb-0" style="font-size: 1.2rem;">CONSULTAS IA</h5>
                                 <p class="mt-0" style="font-size: 1rem;">Mejora tu investigación con la IA.</p>
-                                <a type="button" class="btn btn-dark" href="{{ route('help_gpt') }}"
-                                    style="width: 180px; height: 40px;">Empezar</a>
+                                @can('academico_directo_gpt')
+                                    <a type="button" class="btn btn-dark" href="{{ route('help_gpt') }}"
+                                        style="width: 180px; height: 40px;">Empezar</a>
+                                @else
+                                    <a type="button" class="btn btn-dark" href="{{ route('unirme_page') }}"
+                                        style="width: 180px; height: 40px;">Empezar</a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -57,8 +62,13 @@
                                 <p class="mt-0"
                                     style="font-size: 1rem;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
                                     Aprende investigación de forma didáctica.</p>
-                                <a href="{{ route('dashboard_courses') }}" type="button" class="btn btn-dark"
-                                    href="#" style="width: 180px; height: 40px;">Empezar</a>
+                                @can('academico_directo_cursos')
+                                    <a href="{{ route('dashboard_courses') }}" type="button" class="btn btn-dark"
+                                        href="#" style="width: 180px; height: 40px;">Empezar</a>
+                                @else
+                                    <a href="{{ route('unirme_page') }}" type="button" class="btn btn-dark" href="#"
+                                        style="width: 180px; height: 40px;">Empezar</a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -69,8 +79,13 @@
                             <div class="card-body ">
                                 <h5 class=" mb-0"style="font-size: 1.2rem;">HOJA DE TRABAJO</h5>
                                 <p class="mt-0" style="font-size: 1rem;">Realiza avances online.</p>
-                                <button type="button" class="btn btn-dark" href="#"
-                                    style="width: 180px; height: 40px;">Empezar</button>
+                                @can('academico_directo_tesis')
+                                    <a href="{{ route('unirme_page') }}" type="button" class="btn btn-dark" href="#"
+                                        style="width: 180px; height: 40px;">Empezar</a>
+                                @else
+                                    <a href="{{ route('unirme_page') }}" type="button" class="btn btn-dark" href="#"
+                                        style="width: 180px; height: 40px;">Empezar</a>
+                                @endcan
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-<div class="lyon">
+<div class="lyon" style="margin-bottom: 20px">
     <div class="container-fluid">
         <div class="row justify-content-end">
             <div class="col-md-3 col-sm-12">
@@ -52,7 +52,7 @@
                 <div class="btn-group-vertical">
                     <button class="btn-with-icon boton">
                         <div class="con-boton">
-                            <img src="images/8a.jpg" alt="Icono">
+                            <img src="{{ asset('theme-lyontech/images/8a.jpg') }}" alt="Icono">
                         </div>
                         <div class="contenido">
                             <h5 class="mb-0">PARAFRASEDOR</h5>
@@ -61,7 +61,7 @@
                     </button>
                     <button class="btn-with-icon boton">
                         <div class="con-boton">
-                            <img src="images/8b.jpg" alt="Icono">
+                            <img src="{{ asset('theme-lyontech/images/8b.jpg') }}" alt="Icono">
                         </div>
                         <div class="contenido">
                             <h5>RECOMENDADOR</h5>
@@ -70,7 +70,7 @@
                     </button>
                     <button class="btn-with-icon boton">
                         <div class="con-boton">
-                            <img src="images/8c.jpg" alt="Icono">
+                            <img src="{{ asset('theme-lyontech/images/8c.jpg') }}" alt="Icono">
                         </div>
                         <div class="contenido">
                             <h5>CORRECTOR</h5>
@@ -79,7 +79,7 @@
                     </button>
                     <button class="btn-with-icon boton">
                         <div class="con-boton">
-                            <img src="images/8d.jpg" alt="Icono">
+                            <img src="{{ asset('theme-lyontech/images/8d.jpg') }}" alt="Icono">
                         </div>
                         <div class="contenido">
                             <h5>CHATBOT</h5>
@@ -88,7 +88,7 @@
                     </button>
                     <button class="btn-with-icon boton">
                         <div class="con-boton">
-                            <img src="images/8e.jpg" alt="Icono">
+                            <img src="{{ asset('theme-lyontech/images/8e.jpg') }}" alt="Icono">
                         </div>
                         <div class="contenido">
                             <h5>REFERENCIADOR</h5>
