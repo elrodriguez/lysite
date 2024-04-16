@@ -405,10 +405,10 @@ if($document->type == "journal" || $document->type == "book"){
             $citation .= '<em>' . $document->source . '</em> ' . ' [en línea] ';
         }
 
-        $volumen_and_pages = $this->getVolumen_and_pages($document);
+        $volumen_and_pages = $this->getVolumen_and_pages_iso($document);
         //Añadir el año de publicación
         $citation .= $document->year . ', ' . $volumen_and_pages;
-
+        //-dd($volumen_and_pages);
         //Añadir las páginas
         if (isset($document->pages)) {
             $citation .= 's. ' . $document->pages . '. ';
@@ -616,6 +616,42 @@ if($document->type == "journal" || $document->type == "book"){
             }
         } catch (\Throwable $th) {
             //throw $th;
+        }
+
+
+
+        return $volumen_and_pages;
+    }
+
+    public function getVolumen_and_pages_iso($document)  //si el : va en todos cambia el metodo anterior y borra este
+    {
+
+        $year = $document->year;
+        try {
+            $source = $document->source;
+        } catch (\Throwable $th) {
+            $source = "";
+        }
+        $apa_citation = $this->generate_apa($document); //se usa porque este tiene información de paginas y volumen
+        $explotado = explode("https://doi", $apa_citation);
+        $explotado = explode('<i>' . $source . '</i>,', $explotado[0]);
+        $volumen_and_pages = "";
+        if (isset($explotado[1])) {
+            $volumen_and_pages = $explotado[1];
+        }
+        //quitar la coma si hay volumen pero no numero y cambiar por dos puntos
+        $subcadenas = explode("</em>", $volumen_and_pages);
+        $subca = explode('<em>', $subcadenas[0]);
+        try {
+                $volumen_and_pages = str_replace(", ", ": ", $volumen_and_pages);
+            if (is_numeric(trim($subca[1]))) {
+                $volumen_and_pages = str_replace($subca[1] . "</em>,", $subca[1] . "</em>:", $volumen_and_pages);
+            } else {
+                $asd = $volumen_and_pages;
+                $volumen_and_pages = str_replace(", ", ": ", $asd);
+            }
+        } catch (\Throwable $th) {
+            //dd($th);
         }
 
 
