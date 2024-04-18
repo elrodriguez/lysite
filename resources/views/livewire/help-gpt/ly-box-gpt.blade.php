@@ -390,9 +390,9 @@
 
                             <div class="mt-2">
                                 <label class="mb-0">&nbsp;&nbsp;DOI:</label>
-                                <input wire:model="consulta" id="consulta" type="text" class="form-control"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-                                    placeholder="Coleque el enlace DOI">
+                                <input wire:model="consulta" id="input-doi-buscar-id" type="text"
+                                    class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-sm" placeholder="Coleque el enlace DOI">
                                 <label class="mb-0">&nbsp;&nbsp;Normativa:</label>
                                 <select wire:model="normativa" class="form-control" id="select-normativa"
                                     name="select-normativa">
