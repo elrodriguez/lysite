@@ -125,7 +125,7 @@ function manual_citation(event) {
                 var espacio = " ";
                 if (!autor.segundoApellido) espacio = "";
 
-                cita_autores += autor.primerApellido + "-" + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                cita_autores += autor.primerApellido[0].toUpperCase() + autor.primerApellido.slice(1) + "-" + autor.segundoApellido[0].toUpperCase() + autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
@@ -152,16 +152,36 @@ function manual_citation(event) {
         }
 
         if (normativa == "iso690") {
+            // autors.forEach((autor, index) => {
+            //     autor.primerApellido = autor.primerApellido.toUpperCase();
+            //     cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+            //           if (index === autors.length - 1) {
+            //         cita_autores += " ";
+            //     } else {
+            //         if (index === autors.length - 2){
+            //             cita_autores += " y ";
+            //         }else{
+            //             cita_autores += ", ";
+            //         }
+
+            //     }
+            // });
             autors.forEach((autor, index) => {
-                autor.primerApellido = autor.primerApellido.toUpperCase();
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+                var espacio = " ";
+                if (!autor.segundoApellido) espacio = "";
+
+                cita_autores += autor.primerApellido.toUpperCase() + "-" + autor.segundoApellido.toUpperCase() + ", " + autor.primerNombre.charAt(0).toUpperCase() + autor.primerNombre.slice(1) + "";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += "; & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
-                        cita_autores += ", ";
+                        cita_autores += "; ";
                     }
 
                 }
@@ -244,14 +264,18 @@ function manual_citation(event) {
         if (normativa == "iso690") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+                cita_autores += autor.primerApellido.toUpperCase() + " " + autor.segundoApellido.toUpperCase() + ", " + autor.primerNombre.toUpperCase() + "";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += "; & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
-                        cita_autores += ", ";
+                        cita_autores += "; ";
                     }
 
                 }
@@ -319,6 +343,7 @@ function manual_citation(event) {
 
                 }
             });
+
             if (edicion < 2) {
                 edicion = "";
             } else {
@@ -329,16 +354,35 @@ function manual_citation(event) {
         }
 
         if (normativa == "iso690") {
+            // autors.forEach((autor, index) => {
+            //     autor.primerApellido = autor.primerApellido.toUpperCase();
+            //     cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+            //           if (index === autors.length - 1) {
+            //         cita_autores += " ";
+            //     } else {
+            //         if (index === autors.length - 2){
+            //             cita_autores += " y ";
+            //         }else{
+            //             cita_autores += ", ";
+            //         }
+
+            //     }
+            // });
+
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+                cita_autores += autor.primerApellido.toUpperCase() + " " + autor.segundoApellido.toUpperCase() + ", " + autor.primerNombre.toUpperCase() + "";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        if(autors.length >= 3){
+                            cita_autores += "; & ";
+                        }else{
+                        cita_autores += " & ";
+                        }
                     }else{
-                        cita_autores += ", ";
+                        cita_autores += "; ";
                     }
 
                 }
