@@ -1,6 +1,6 @@
 <div class="card ">
     <h5>Registrarme</h5>
-    <p>¿Ya estás registrado? <a href="#">Iniciar sesión </a></p>
+    <p>¿Ya estás registrado? <a href="{{ route('ly-login') }}">Iniciar sesión </a></p>
     <form wire:submit.prevent="save" class="signin-form">
         <div class="form-login">
             <label for="email"><strong>Correo electrónico</strong></label>

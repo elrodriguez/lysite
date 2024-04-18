@@ -81,10 +81,29 @@ Route::middleware(['single-session'])->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
+    Route::middleware(['auth:sanctum', 'verified'])->get('tool/worksheet', [DashboardController::class, 'getWorksheet'])->name('worksheet');
 });
 
-Route::get('/unirme', function () {
-    return view('ly_join');
+Route::get('/modo', function () {
+    return view('ly_modo');
+})->name('modo_page');
+
+Route::get('/unirme/{mod}', function ($mod) {
+    return view('ly_join', ['mod' => $mod]);
 })->name('unirme_page');
+
+Route::get('/tarjeta/{mod}', function ($mod) {
+    $precio = 0;
+    if ($mod == 'standar') {
+        $precio = 500;
+    } else if ($mod == 'premiun') {
+        $precio = 700;
+    } else {
+        $precio = 0;
+    }
+    return view('ly_tarjeta', [
+        'precio' => $precio
+    ]);
+})->name('tarjeta_page');
 
 require __DIR__ . '/auth.php';

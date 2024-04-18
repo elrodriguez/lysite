@@ -22,7 +22,10 @@
             <div class="col-md-6 col-md-offset-3 text-center">
                 <small class="custom-padding">
                     <h5>Aumenta tus oportunidades: </h5>
-                    <p>&nbsp;Únete a premium</p> <button class="rosadito">Mejora</button>
+                    <p>&nbsp;Únete a premium</p>
+                    <a href="{{ route('modo_page') }}" class="rosadito">
+                        Mejora
+                    </a>
                 </small>
             </div>
         </div>

@@ -28,7 +28,7 @@
                         <h5>Unirme</h5>
                         <p>¿Cómo quieres pagar?</p>
                         <div class="btn-group-vertical">
-                            <button class="btn-with-icon boton">
+                            <a href="{{ route('tarjeta_page', $mod) }}" class="btn-with-icon boton">
                                 <div class="con-boton">
                                     <img src="{{ asset('theme-lyontech/images/tc.png') }}" alt="Icono">
                                 </div>
@@ -40,7 +40,7 @@
                                 <div class="con-der">
                                     <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
                                 </div>
-                            </button>
+                            </a>
                             <button class="btn-with-icon boton mt-3">
                                 <div class="con-boton">
                                     <img src="{{ asset('theme-lyontech/images/bb.png') }}" alt="Icono">

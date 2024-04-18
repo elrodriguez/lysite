@@ -47,7 +47,7 @@
                                     <a type="button" class="btn btn-dark" href="{{ route('help_gpt') }}"
                                         style="width: 180px; height: 40px;">Empezar</a>
                                 @else
-                                    <a type="button" class="btn btn-dark" href="{{ route('unirme_page') }}"
+                                    <a type="button" class="btn btn-dark" href="{{ route('modo_page') }}"
                                         style="width: 180px; height: 40px;">Empezar</a>
                                 @endcan
                             </div>
@@ -66,7 +66,7 @@
                                     <a href="{{ route('dashboard_courses') }}" type="button" class="btn btn-dark"
                                         href="#" style="width: 180px; height: 40px;">Empezar</a>
                                 @else
-                                    <a href="{{ route('unirme_page') }}" type="button" class="btn btn-dark" href="#"
+                                    <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
                                         style="width: 180px; height: 40px;">Empezar</a>
                                 @endcan
                             </div>
@@ -80,10 +80,10 @@
                                 <h5 class=" mb-0"style="font-size: 1.2rem;">HOJA DE TRABAJO</h5>
                                 <p class="mt-0" style="font-size: 1rem;">Realiza avances online.</p>
                                 @can('academico_directo_tesis')
-                                    <a href="{{ route('unirme_page') }}" type="button" class="btn btn-dark" href="#"
+                                    <a href="{{ route('worksheet') }}" type="button" class="btn btn-dark" href="#"
                                         style="width: 180px; height: 40px;">Empezar</a>
                                 @else
-                                    <a href="{{ route('unirme_page') }}" type="button" class="btn btn-dark" href="#"
+                                    <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
                                         style="width: 180px; height: 40px;">Empezar</a>
                                 @endcan
                             </div>

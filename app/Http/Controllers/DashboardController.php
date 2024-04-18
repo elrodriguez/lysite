@@ -31,4 +31,8 @@ class DashboardController extends Controller
     {
         return view('helpGPT.ly_help_gpt');
     }
+    public function getWorksheet()
+    {
+        return view('ly_worksheet');
+    }
 }

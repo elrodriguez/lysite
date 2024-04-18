@@ -65,7 +65,7 @@
                         style="margin-top: 60px;">
                         <div class="modo-titulo-b">
                             <h5>Iniciar Sesión</h5>
-                            <p>¿Usuario nuevo? <a href="#">Registrarme</a></p>
+                            <p>¿Usuario nuevo? <a href="{{ route('register') }}">Registrarme</a></p>
                         </div>
                         <form class="signin-form">
                             @csrf

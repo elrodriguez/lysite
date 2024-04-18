@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
   color: #000000;
   /*background-color: #ffffff;*/
-  
+  background-color: #151618;
 }
 
 .layout_padding {
@@ -842,7 +842,7 @@ section.app_section .img-box img {
 .bannen_inner{
 	width: 100%;
 	float: left;
-	/* background-image: url(../../images/hero-bg.jpeg); */
+	background-image: url(../images/hero-bg.jpeg);
 	height: auto;
 	padding-top: 20px;
 	padding-bottom: 20px;
