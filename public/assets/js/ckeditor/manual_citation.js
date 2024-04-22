@@ -459,12 +459,13 @@ function manual_citation(event) {
         if (normativa == "iso690") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+                autor.segundoApellido = autor.segundoApellido.toUpperCase();
+                cita_autores += autor.primerApellido + " " + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase()+autor.primerNombre.slice(1) + " " + autor.segundoNombre[0].toUpperCase()+autor.segundoNombre.slice(1);
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        cita_autores += " & ";
                     }else{
                         cita_autores += ", ";
                     }
@@ -472,7 +473,7 @@ function manual_citation(event) {
                 }
             });
 
-            concatenado = cita_autores + ". <em>" + title.trim() + ".</em> Tesis [" + grade + "] " + pais.trim() + ": " + institucion.trim() + ", " + anio + ". Disponible en: " + enlace;
+            concatenado = cita_autores.trim() + ". <em>" + title.trim() + ".</em> Tesis [" + grade + "] " + pais.trim() + ": " + institucion.trim() + ", " + anio + ". Disponible en: " + enlace;
 
         }
 
@@ -576,10 +577,10 @@ function manual_citation(event) {
                     }
                 });
 
-                concatenado = cita_autores + ". <em>" + title.trim() + ".</em> " + pais.trim() + ": " + siglas.trim() + ", " + anio + ". Disponible en: " + enlace;
+                concatenado = cita_autores + ". <em>" + title.trim() + ".</em> " + pais[0].trim().toUpperCase() + pais.trim().slice(1) + ": " + siglas.trim() + ", " + anio + ". Disponible en: " + enlace;
             } else {
                 institucion[0] = institucion[0].toUpperCase();
-                concatenado = institucion + " [" + siglas.trim().toUpperCase() + "]. " + "<em>" + title.trim() + ".</em> " + pais.trim() + ": " + siglas.trim().toUpperCase() + ", " + anio + ". Disponible en: " + enlace;
+                concatenado = institucion + " [" + siglas.trim().toUpperCase() + "]. " + "<em>" + title.trim() + ".</em> " + pais[0].trim().toUpperCase() + pais.trim().slice(1) + ": " + siglas.trim().toUpperCase() + ", " + anio + ". Disponible en: " + enlace;
             }
         }
 
@@ -673,7 +674,8 @@ function manual_citation(event) {
         if (normativa == "iso690") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido.toUpperCase();
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre;
+                autor.segundoApellido = autor.segundoApellido.toUpperCase();
+                cita_autores += autor.primerApellido + " " + autor.segundoApellido + ", " + autor.primerNombre[0].toUpperCase()+autor.primerNombre.slice(1) + " " + autor.segundoNombre[0].toUpperCase()+autor.segundoNombre.slice(1);
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
@@ -685,7 +687,7 @@ function manual_citation(event) {
 
                 }
             });
-            concatenado = cita_autores + "<em>" + title.trim() + ",</em> " + anio + ". Disponible en: " + enlace.trim();
+            concatenado = cita_autores.trim() + ". <em>" + title.trim() + ",</em> " + anio + ". Disponible en: " + enlace.trim();
         }
 
 
