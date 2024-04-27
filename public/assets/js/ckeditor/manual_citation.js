@@ -206,12 +206,12 @@ function manual_citation(event) {
         if (normativa == "vancouver") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                cita_autores += autor.primerApellido[0].toUpperCase()+autor.primerApellido.slice(1)+ "-"+autor.segundoApellido[0].toUpperCase()+autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        cita_autores += ", ";
                     }else{
                         cita_autores += ", ";
                     }
@@ -224,7 +224,7 @@ function manual_citation(event) {
             } else {
                 volnum = volumen.trim() + "(" + numero.trim() + "): ";
             }
-            concatenado = cita_autores + title.trim() + ", " + institucion + ", " + anio + "; " + volnum + paginas.trim() + ". " + doi;
+            concatenado = cita_autores + title.trim() + ". " + institucion + ". " + anio + "; " + volnum + paginas.trim() + ". " + doi;
         }
 
     }
@@ -297,12 +297,12 @@ function manual_citation(event) {
         if (normativa == "vancouver") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                cita_autores += autor.primerApellido[0].toUpperCase()+autor.primerApellido.slice(1) + " " + autor.segundoApellido[0].toUpperCase()+autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
                       if (index === autors.length - 1) {
                     cita_autores += " ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        cita_autores += ", ";
                     }else{
                         cita_autores += ", ";
                     }
@@ -405,12 +405,12 @@ function manual_citation(event) {
         if (normativa == "vancouver") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                cita_autores += autor.primerApellido[0].toUpperCase()+autor.primerApellido.slice(1) + " " + autor.segundoApellido[0].toUpperCase()+autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
                       if (index === autors.length - 1) {
-                    cita_autores += " ";
+                    cita_autores += ", ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        cita_autores += ", ";
                     }else{
                         cita_autores += ", ";
                     }
@@ -423,7 +423,7 @@ function manual_citation(event) {
                 edicion = edicion + "° ed. ";
             }
 
-            concatenado = cita_autores + title.trim() + ". " + edicion + pais + ": " + editorial + "; " + anio + ".";
+            concatenado = cita_autores  + title.trim() + ". " + edicion + pais + ": " + editorial + "; " + anio + ".";
 
         }
     }
@@ -481,12 +481,12 @@ function manual_citation(event) {
         if (normativa == "vancouver") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                      if (index === autors.length - 1) {
-                    cita_autores += " ";
+                cita_autores += autor.primerApellido[0].toUpperCase()+autor.primerApellido.slice(1)+" "+autor.segundoApellido[0].toUpperCase()+autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                    if (index === autors.length - 1) {
+                    cita_autores += ", ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        cita_autores += ", ";
                     }else{
                         cita_autores += ", ";
                     }
@@ -591,8 +591,7 @@ function manual_citation(event) {
 
             if (institucion.length < 1) {  //si se escribió nombre de una persona
                 autors.forEach((autor, index) => {
-                    autor.primerApellido = autor.primerApellido;
-                    cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                    cita_autores += autor.primerApellido[0].toUpperCase()+autor.primerApellido.slice(1)+" "+autor.segundoApellido[0].toUpperCase()+autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
                     if (index === autors.length - 1) {
                         cita_autores += " ";
                     } else {
@@ -634,7 +633,7 @@ function manual_citation(event) {
                     concatenado = cita_autores + title.trim() + " [Internet]. " + pais.trim() + ": " + siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: " + enlace.trim();
                 }
             } else { //si se escribio nombre de institucion
-                concatenado = institucion + title.trim() + " [Internet]. " + pais.trim() + ": " + siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: " + enlace.trim();
+                concatenado = institucion + " " + title.trim() + " [Internet]. " + pais.trim() + ": " + siglas.trim().toUpperCase() + "; " + anio + ". Disponible en: " + enlace.trim();
             }
 
         }
@@ -695,12 +694,12 @@ function manual_citation(event) {
         if (normativa == "vancouver") {
             autors.forEach((autor, index) => {
                 autor.primerApellido = autor.primerApellido;
-                cita_autores += autor.primerApellido + ", " + autor.primerNombre[0].toUpperCase() + ".";
-                      if (index === autors.length - 1) {
-                    cita_autores += " ";
+                cita_autores += autor.primerApellido[0].toUpperCase()+autor.primerApellido.slice(1)+" "+autor.segundoApellido[0].toUpperCase()+autor.segundoApellido.slice(1) + ", " + autor.primerNombre[0].toUpperCase() + ".";
+                    if (index === autors.length - 1) {
+                    cita_autores += ", ";
                 } else {
                     if (index === autors.length - 2){
-                        cita_autores += " y ";
+                        cita_autores += ", ";
                     }else{
                         cita_autores += ", ";
                     }

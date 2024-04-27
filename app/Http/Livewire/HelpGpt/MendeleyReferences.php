@@ -485,6 +485,8 @@ if($document->type == "journal" || $document->type == "book"){
 
         //Añadir los apellidos y las iniciales de los nombres de los autores
         foreach ($authors as $key => $author) {
+
+            $author = str_replace(" ", ", ", $author);
             $name_parts = explode(" ", $author);
             $initials = "";
 
@@ -538,6 +540,7 @@ if($document->type == "journal" || $document->type == "book"){
         //     $volumen_and_pages = $explotado[1];
         // }
         $volumen_and_pages = $this->getVolumen_and_pages($document);
+        $volumen_and_pages = str_replace(",", ":", $volumen_and_pages);
         $citation = str_replace('https://dx.doi.org/', $volumen_and_pages . 'https://dx.doi.org/', $citation);
         $citation = str_replace('https://dx.doi.org/' . $this->code_consulta, '<a href="' . 'https://dx.doi.org/' . $this->code_consulta . '" target="_blank">' . 'https://dx.doi.org/' . $this->code_consulta . '</a>', $citation);
         //borrando tag <i> en vancouver no debe ir
