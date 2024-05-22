@@ -65,6 +65,12 @@
                                     <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
                                 </div>
                             </button>
+
+                            <form action="{{ route('paypal_payment') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="amount" value="5">
+                                <input type="hidden" name="full_name" value="paypal_payer">
+                                <input type="hidden" name="currecy" value="currency">
                             <button class="btn-with-icon boton mt-3 ">
                                 <div class="con-boton">
                                     <img src="{{ asset('theme-lyontech/images/paypal.png') }}" alt="Icono">
@@ -79,6 +85,7 @@
                                     <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
                                 </div>
                             </button>
+                            </form>
                         </div>
                     </div>
                 </div>
