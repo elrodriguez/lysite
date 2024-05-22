@@ -15,18 +15,20 @@ class NewUserNotification extends Mailable
     public $new_user_email;
     public $new_user_name;
     public $telephone;
+    public $unique_code;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $email, $telephone=0)
+    public function __construct($name, $email, $telephone = null, $unique_code = null)
     {
-       $this->new_user_email=$email;
-       $this->new_user_name=$name;
-       $this->telephone=$telephone;
-       if($this->telephone=="")$this->telephone=null;
+        $this->new_user_email = $email;
+        $this->new_user_name = $name;
+        $this->telephone = $telephone;
+        $this->unique_code = $unique_code;
+        if ($this->telephone == "") $this->telephone = null;
     }
 
     /**
@@ -36,6 +38,7 @@ class NewUserNotification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new-user-notification',[$this->new_user_email, $this->new_user_name, $this->telephone]);
+        // return $this->view('emails.new-user-notification', [$this->new_user_email, $this->new_user_name, $this->telephone]);
+        return $this->view('emails.new-user-notification-code', [$this->new_user_email, $this->new_user_name, $this->unique_code]);
     }
 }

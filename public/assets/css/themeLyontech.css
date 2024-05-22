@@ -1,0 +1,167 @@
+
+
+
+  [dir=ltr] .active {
+    color: #fff;
+    background-color: #ff9152;
+    border-color: #ff9152;
+  }
+  
+  [dir=ltr] .btn-border-black {
+    border: 1px solid #000;
+    border-radius: 30px;
+    padding: 2px 15px;
+  } 
+  
+  [dir=ltr] .btn-border-black:hover {
+    background-color: #ff9152;
+    color: #fff;
+    border: 2px solid #fff; 
+    border-radius: 30px;
+    padding: 2px 15px;
+  }
+
+  [dir=ltr] .box-section {
+    padding: 0px 0px 60px 0px;
+  }
+
+  [dir=ltr] .title-ia-lyon {
+    text-align: left; 
+    color: #ff9152; 
+    font-size: 1.4rem; 
+    padding: 128px 0px 0px 0px;
+  }
+  
+  [dir=ltr] .box-chrerry {
+    background-color: #ffe9db; 
+    padding: 30px 0px; 
+    margin-top: -20px;
+  }
+  
+  [dir=ltr] .tab-vertical {
+    padding: 5px 0px 0px 5px;
+  }
+  
+  [dir=ltr] .tab-vertical:hover {
+    color: #fff;
+    background-color: #ff9152;
+    border-color: #ff9152;
+  }
+  
+  [dir=ltr] .tab-vertical img{
+    width: 40px; 
+    height: 40px; 
+    margin-top: 5px;
+  }
+  
+  [dir=ltr] .tab-vertical p{
+    font-size: 12px;
+    padding: 0px;
+  }
+  
+  [dir=ltr] .list-vertical p{
+    font-size: 12px;
+    padding: 0px;
+  }
+
+  [dir=ltr] .list-vertical hr{
+    margin-top: -15px;
+  }
+
+
+  [dir=ltr] .span-small{
+    font-size: 12px;
+    text-align: center;
+    padding: 3px 8px;
+    background-color: #ff9152;
+    border-radius: 10px;
+  }
+
+  [dir=ltr] .btn-small{
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    padding: 3px 15px;
+    background-color: #ff9152;
+    border-radius: 10px;
+  }
+
+  [dir=ltr] .btn-small:hover{
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    padding: 3px 15px;
+    background-color: #000;
+    border-radius: 10px;
+  }
+  
+  [dir=ltr] .p-small{
+    font-size: 12px;
+  }
+  
+  [dir=ltr] .p-medium{
+    font-size: 15px;
+  }
+  
+  [dir=ltr] .btn-orange {
+    color: #fff;
+    background-color: #ff9152;
+    border-color: #ff9152;
+  }
+  
+  [dir=ltr] .btn-orange:hover {
+    color: #fff;
+    background-color: #e36e2b;
+    border-color: #e36e2b;
+  }
+  
+  
+  [dir=ltr] .btn-modal {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+  }
+  
+  [dir=ltr] .btn-modal:hover {
+    color: #fff;
+    background-color: #171717;
+    border-color: #171717;
+  }
+  
+  [dir=ltr] .rating:not(:checked) > input{
+    position: absolute;
+    appearance: none;
+  }
+  
+  [dir=ltr] .rating:not(:checked) > label{
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+  }
+  
+  [dir=ltr] .rating:not(:checked) > label::before{
+    content: '★';
+  }
+  
+  [dir=ltr] .rating > input:checked + label:hover,
+  [dir=ltr] .rating > input:checked + label:hover ~ label,
+  [dir=ltr] .rating > input:checked ~ label:hover,
+  [dir=ltr] .rating > input:checked ~ label:hover ~ label,
+  [dir=ltr] .rating > label:hover ~ input:checked ~ label
+  {
+    color: yellow;
+  }
+  
+  [dir=ltr] .rating:not(:checked) > label:hover,
+  [dir=ltr] .rating:not(:checked) > label:hover ~ label
+  {
+    color: yellow;
+  }
+  
+  [dir=ltr] .rating > input:checked ~ label
+  {
+    color: yellow;
+  }
+  
+  

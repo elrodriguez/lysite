@@ -35,7 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_admin',
         'is_online',
         'last_activity',
-        'country_id'
+        'country_id',
+        'unique_code',
+        'start_time_code',
+        'end_time_code'
     ];
 
     /**

@@ -857,3 +857,29 @@ section.app_section .img-box img {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+.custom-button {
+  background-color: black; /* Cambiar el color del fondo */
+  border: none; /* Eliminar borde */
+  padding: 0; /* Eliminar relleno */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+}
+
+.custom-button img {
+  width: 40px; /* Cambiar el ancho de la imagen */
+  height: 40px; /* Cambiar la altura de la imagen */
+  display: block; /* Hacer que la imagen sea un bloque para poder aplicar márgenes */
+  margin: auto; /* Centrar la imagen */
+}
+
+.custom-button-c {
+  background-color: black; /* Cambiar el color del fondo */
+  border: none; /* Eliminar borde */
+  padding: 0; /* Eliminar relleno */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+}
+
+.custom-button-c img {
+
+  display: block; /* Hacer que la imagen sea un bloque para poder aplicar márgenes */
+
+}

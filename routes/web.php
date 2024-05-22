@@ -67,6 +67,8 @@ Route::get('/register', function () {
     return view('auth.ly-register');
 })->name('register');
 
+
+
 Route::get('/home', function () {
     return view('home');
 })->name('home_page');

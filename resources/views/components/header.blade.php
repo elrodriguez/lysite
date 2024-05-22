@@ -109,44 +109,6 @@
                             </div>
                             <livewire:investigation::thesis.header-investigation />
                         @else
-                            @can('academico_directo_cursos')
-                                <div class="nav-item">
-                                    <div class="dropdown">
-                                        <a href="#" class="btn btn-black mr-16pt" data-toggle="dropdown"
-                                            aria-expanded="false" id="courses">{{ __('labels.My Courses') }}</a>
-                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
-                                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-38px, 44px, 0px);">
-
-
-                                            @if (count($courses) > 0)
-                                                @foreach ($courses as $course)
-                                                    <a href="{{ route('academic_students_my_course', $course->id) }}"
-                                                        class="dropdown-item">
-                                                        <span class="media-left mr-16pt">
-                                                            <img src="{{ asset($course->course_image) }}" width="30"
-                                                                alt="avatar" class="rounded-circle">
-                                                        </span>
-                                                        <div class="media-body">
-                                                            {{ $course->name }}
-                                                        </div>
-                                                    </a>
-                                                @endforeach
-                                            @else
-                                                <a href="{{ route('home') }}" class="dropdown-item">
-                                                    <span class="media-left mr-16pt">
-                                                        <img src="{{ url('assets/images/logo/white-60.png') }}"
-                                                            width="30" alt="avatar" class="rounded-circle">
-                                                    </span>
-                                                    <div class="media-body">
-                                                        {{ __('labels.No courses') }}
-                                                    </div>
-                                                </a>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                </div>
-                            @endcan
                             @can('academico_directo_tesis')
                                 <livewire:investigation::thesis.header-investigation />
                             @endcan

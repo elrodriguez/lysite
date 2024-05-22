@@ -12,7 +12,32 @@
     }}
     
 
+    .custom-button {
+      background-color: black; /* Cambiar el color del fondo */
+      border: none; /* Eliminar borde */
+      padding: 0; /* Eliminar relleno */
+      cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    }
   
+    .custom-button img {
+      width: 40px; /* Cambiar el ancho de la imagen */
+      height: 40px; /* Cambiar la altura de la imagen */
+      display: block; /* Hacer que la imagen sea un bloque para poder aplicar márgenes */
+      margin: auto; /* Centrar la imagen */
+    }
+  
+    .custom-button-c {
+      background-color: black; /* Cambiar el color del fondo */
+      border: none; /* Eliminar borde */
+      padding: 0; /* Eliminar relleno */
+      cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    }
+  
+    .custom-button-c img {
+  
+      display: block; /* Hacer que la imagen sea un bloque para poder aplicar márgenes */
+    
+    }
   .btn-orange:hover {
     background-color: darkorange; /* Cambia el color al pasar el ratón sobre el botón */
   }
@@ -134,7 +159,7 @@
 /* S2*/
 .video-container {
 
-  /* background-image: url(../images/fondo-card.jpg); */
+  background-image: url(../images/fondo-card.jpg);
   position: relative;
   padding-left: 50px;  /* Adjust padding as needed for desired margin */
   padding-right: 50px; 

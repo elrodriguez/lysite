@@ -1,4 +1,4 @@
-@extends('layouts.lyontech')
+@extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
@@ -25,19 +25,34 @@
                                     style="font-size: 1.8rem;letter-spacing: 0.0em;">HOJA DE TRABAJO</strong></h5>
                         </div>
                     </div>
-                    <!--          <div class="col-md-3 offset-md-3 col-sm-12">
-                                            <div class="image-der">
-                                              <img src="images/hoja-blanco.jpg"  alt="Card image cap" style="width: 100px; height: 100px; margin: auto;">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12 justify-content-center align-items-center">
-                                          <div class="row mt-5 ">
-                                            <h5 class="mb-0 "><strong style="font-size: 1.8rem;letter-spacing: 0.0em; margin-right: -40px;">HOJA DE TRABAJO</strong></h5>
-                                          </div>
-                                        </div> -->
-
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ventanaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+            aria-labelledby="tituloVentana" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" style="background-image: url({{ asset('theme-lyontech/images/modal.jpg') }});">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"
+                            style="background-color: black;">
+                            <strong>Mejorar</strong>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
+
 @stop
+@can('academico_directo_tesis')
+@else
+    @section('script')
+        <script>
+            $('#ventanaModal').modal('show');
+        </script>
+    @stop
+@endcan

@@ -1,7 +1,7 @@
 @extends('layouts.lyontech')
 @section('bootstrap')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/4.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/5.css') }}">
 @stop
 @section('content')
 
@@ -23,7 +23,10 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-6 text-left">
+
+
                     @livewire('auth.ly-register-form')
+
 
                 </div>
             </div>

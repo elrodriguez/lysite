@@ -54,7 +54,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{ $course->name }} - {{ __('labels.Welcome Video') }}</h5>
                     <button type="button" class="close" onclick="closeModalWelcomeVideo()" aria-label="Close">
-                            <span aria-hidden="true close-btn">×</span>
+                        <span aria-hidden="true close-btn">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -72,26 +72,22 @@
                                 {{-- @if ($course->video_type==0)
                                     <iframe id="frameWelcomeVideo" class="embed-responsive-item"
                                     src="https://player.vimeo.com/video/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
-                                    allowfullscreen=""></iframe>
+                                allowfullscreen=""></iframe>
                                 @endif
                                 @if ($course->video_type==1)
-                                    <iframe id="frameWelcomeVideo" class="embed-responsive-item"
-                                    src="https://www.youtube.com/embed/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0"
-                                    allowfullscreen=""></iframe>
+                                <iframe id="frameWelcomeVideo" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $course->video_url }}?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
                                 @endif --}}
-                                <iframe id="frameWelcomeVideo" class="embed-responsive-item"
-                                    src=""
-                                    allowfullscreen=""></iframe>
+                                <iframe id="frameWelcomeVideo" class="embed-responsive-item" src="" allowfullscreen=""></iframe>
                                 <!-- Aqui arriba va el Video -->
                             </div>
                         </div>
                     </div>
-    
+
                 </div>
-    
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" onclick="closeModalWelcomeVideo()">{{ __('labels.Close') }}</button>
-                </div>   
+                </div>
             </div>
         </div>
     </div>
@@ -101,26 +97,23 @@
         var urlVideo = "{{ $course->video_url }}";
         var typeVideo = "{{ $course->video_type }}";
         var srcVideo = "";
-        function closeModalWelcomeVideo(){
-            document.getElementById("frameWelcomeVideo").src="";
+
+        function closeModalWelcomeVideo() {
+            document.getElementById("frameWelcomeVideo").src = "";
             $('#WelcomeVideo').modal('hide');
         }
-        function openModalWelcomeVideo(){
-            if(typeVideo == '0'){
-                srcVideo = "https://player.vimeo.com/video/"+urlVideo+"?title=0&amp;byline=0&amp;portrait=0";
-                document.getElementById("frameWelcomeVideo").src=srcVideo;
+
+        function openModalWelcomeVideo() {
+            if (typeVideo == '0') {
+                srcVideo = "https://player.vimeo.com/video/" + urlVideo + "?title=0&amp;byline=0&amp;portrait=0";
+                document.getElementById("frameWelcomeVideo").src = srcVideo;
             }
-            if(typeVideo == '1'){
-                srcVideo = "https://www.youtube.com/embed/"+urlVideo+"?title=0&amp;byline=0&amp;portrait=0";
-                document.getElementById("frameWelcomeVideo").src=srcVideo;
+            if (typeVideo == '1') {
+                srcVideo = "https://www.youtube.com/embed/" + urlVideo + "?title=0&amp;byline=0&amp;portrait=0";
+                document.getElementById("frameWelcomeVideo").src = srcVideo;
             }
             $('#WelcomeVideo').modal('show');
         }
     </script>
     @endsection
 </x-master>
-
-
-
-
-
