@@ -88,8 +88,8 @@
                                     </h5>
                                     <p class="card-text mt-0" style="font-size: 0.8rem;">Realiza avances online.</p>
                                     @can('academico_directo_tesis')
-                                        <a href="{{ route('worksheet') }}" type="button" class="btn btn-dark" href="#"
-                                            style="width: 180px; height: 40px;">Empezar</a>
+                                        <a href="{{ route('worksheet', [13]) }}" type="button" class="btn btn-dark"
+                                            href="#" style="width: 180px; height: 40px;">Empezar</a>
                                     @else
                                         <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
                                             style="width: 180px; height: 40px;">Empezar</a>

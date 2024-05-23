@@ -85,7 +85,7 @@ Route::middleware(['single-session'])->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
     Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('tool/worksheet', [DashboardController::class, 'getWorksheet'])->name('worksheet');
+    Route::middleware(['auth:sanctum', 'verified'])->get('tool/worksheet/{thesis_id}/{sub_part?}', [DashboardController::class, 'getWorksheet'])->name('worksheet');
 });
 
 Route::get('/modo', function () {

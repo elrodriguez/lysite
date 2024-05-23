@@ -36,7 +36,7 @@
     <link type="text/css" href="{{ asset('assets/css/themeLyontech.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('assets/css/app.rtl.css') }}" rel="stylesheet">
 
-    @yield('styles')
+    @yield('lycss')
 
 </head>
 
@@ -82,8 +82,8 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="
-                            https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
-                            "></script>
+                                https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
+                                "></script>
     @yield('script')
     @yield('modales')
     <!-- Modal -->

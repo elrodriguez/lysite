@@ -27,7 +27,7 @@
                         @endcan
                         <a class="dropdown-item" href="{{ route('dashboard_courses') }}">CURSOS</a>
 
-                        <a class="dropdown-item" href="{{ route('worksheet') }}">HOJA DE TRABAJO</a>
+                        {{-- <a class="dropdown-item" href="{{ route('worksheet') }}">HOJA DE TRABAJO</a> --}}
 
                     </div>
                 </li>

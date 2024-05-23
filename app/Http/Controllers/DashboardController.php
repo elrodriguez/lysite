@@ -6,6 +6,8 @@ use App\Models\Person;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Modules\Investigation\Entities\InveThesisFormatPart;
+use Modules\Investigation\Entities\InveThesisStudent;
 
 class DashboardController extends Controller
 {
@@ -31,8 +33,21 @@ class DashboardController extends Controller
     {
         return view('helpGPT.ly_help_gpt');
     }
-    public function getWorksheet()
+
+    public function getWorksheet($thesis_id, $sub_part = 0)
     {
-        return view('ly_worksheet');
+        //para obtener el ID de la parte con el index_order mas bajo para mostrarlo al inicio cuando no se recibe parametro
+        if ($sub_part == 0) {
+            $format_id = InveThesisStudent::where('id', $thesis_id)->get()->first()->format_id;
+
+            $part = InveThesisFormatPart::where('thesis_format_id', $format_id)->where('belongs', null)->orderBy('index_order', 'ASC')->get()->first();
+            if ($part) {
+                $sub_part = $part->id;
+            }
+        }
+
+        return view('ly_worksheet')
+            ->with('thesis_id', $thesis_id)
+            ->with('sub_part', $sub_part);
     }
 }

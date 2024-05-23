@@ -83,8 +83,8 @@
                                     <h5 class=" mb-0"style="font-size: 1.2rem;">HOJA DE TRABAJO</h5>
                                     <p class="mt-0" style="font-size: 1rem;">Realiza avances online.</p>
                                     @can('academico_directo_tesis')
-                                        <a href="{{ route('worksheet') }}" type="button" class="btn btn-dark" href="#"
-                                            style="width: 180px; height: 40px;">Empezar</a>
+                                        <a href="{{ route('worksheet', [13]) }}" type="button" class="btn btn-dark"
+                                            href="#" style="width: 180px; height: 40px;">Empezar</a>
                                     @else
                                         <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
                                             style="width: 180px; height: 40px;">Empezar</a>
