@@ -14,6 +14,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PaypalController;
+use App\Models\TypeSubscription;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +89,10 @@ Route::middleware(['single-session'])->group(function () {
 });
 
 Route::get('/modo', function () {
-    return view('ly_modo');
+    $modos = TypeSubscription::limit(3)->get();
+    return view('ly_modo', [
+        'modos' => $modos
+    ]);
 })->name('modo_page');
 
 Route::get('/unirme/{mod}', function ($mod) {

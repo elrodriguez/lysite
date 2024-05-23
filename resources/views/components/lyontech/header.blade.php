@@ -92,12 +92,15 @@
                             style="width: 50px; height:auto; margin-top: -20px;" alt="Icono">
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item " href="#"><strong>Dhylam Salcedo</strong></a>
-                        <a class="dropdown-item " href="#">Dashboard</a>
+                        <a class="dropdown-item " href="#"><strong>{{ auth()->user()->name }}</strong></a>
+                        <a class="dropdown-item " href="{{ route('dashboard') }}">Dashboard</a>
+                        @can('academico_cursos_instructor')
+                            <a class="dropdown-item"
+                                href="{{ route('academic_dash_instructor_courses_list') }}">{{ __('labels.Courses') }}</a>
+                        @endcan
                         <div class="linea-blanca"></div>
-                        <a class="dropdown-item " href="#"><strong>Cuenta<strong></a>
-                        <a class="dropdown-item " href="#">Editar Cuenta</a>
-                        <a class="dropdown-item " href="#">Cerrar sesión</a>
+                        <a class="dropdown-item " href="{{ route('user_edit_account') }}">Editar Cuenta</a>
+                        <a class="dropdown-item " href="{{ route('logout') }}">Cerrar sesión</a>
 
                     </div>
                 </li>

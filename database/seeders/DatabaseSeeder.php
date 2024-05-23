@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Modules\Setting\Database\Seeders\SettingDatabaseSeeder;
 use Modules\Academic\Database\Seeders\AcademicDatabaseSeeder;
 use Modules\Investigation\Database\Seeders\InvestigationDatabaseSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,10 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class,
-            SettingDatabaseSeeder::class,
-            AcademicDatabaseSeeder::class,
-            InvestigationDatabaseSeeder::class,
+            // UserSeeder::class,
+            // SettingDatabaseSeeder::class,
+            // AcademicDatabaseSeeder::class,
+            // InvestigationDatabaseSeeder::class,
+            Subscriptions::class
         ]);
     }
 }

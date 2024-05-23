@@ -34,6 +34,10 @@
                         <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'parameters' ? 'active' : '' }}"
                             href="{{ route('setting_parameters') }}">Parametros del sistema</a>
                     @endcan
+                    @can('configuraciones_modos_suscripcion')
+                        <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'subscription' ? 'active' : '' }}"
+                            href="{{ route('setting_subscriptions') }}">Modos de Suscripción</a>
+                    @endcan
                 </div>
             </li>
         @endcan
