@@ -19,10 +19,17 @@
             <a class="dropdown-item" href="{{ route('investigation_thesis_create') }}">Crear Proyecto</a>
             @if (count($thesis) > 0)
                 <div class="dropdown-divider"></div>
-                @foreach ($thesis as $item)
-                    <a class="dropdown-item"
-                        href="{{ route('investigation_thesis_parts', $item->id) }}">{{ $item->short_name }}</a>
-                @endforeach
+
+                @if (Auth::user()->hasrole('Admin') || Auth::user()->hasrole('Instructor'))
+                    @foreach ($thesis as $item)
+                        <a class="dropdown-item"
+                            href="{{ route('investigation_thesis_parts', $item->id) }}">{{ $item->short_name }}</a>
+                    @endforeach
+                @else
+                    @foreach ($thesis as $item)
+                        <a class="dropdown-item" href="{{ route('worksheet', $item->id) }}">{{ $item->short_name }}</a>
+                    @endforeach
+                @endif
             @endif
         </div>
     </div>

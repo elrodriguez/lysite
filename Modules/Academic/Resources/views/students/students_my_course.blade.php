@@ -1,4 +1,4 @@
-@extends('layouts.lyontech')
+@extends('layouts.tutorio')
 @section('bootstrap')
     <!-- Material Design Icons -->
     <link type="text/css" href="{{ asset('assets/css/material-icons.css') }}" rel="stylesheet">
