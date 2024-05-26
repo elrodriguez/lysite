@@ -50,4 +50,24 @@ class DashboardController extends Controller
             ->with('thesis_id', $thesis_id)
             ->with('sub_part', $sub_part);
     }
+
+
+
+
+
+
+
+
+
+
+
+    
+    /* RUTAS DEL YISUS - Provicional */
+    public function thanks()
+    {
+        return view('ly_thanks');
+    }
+
+
+
 }

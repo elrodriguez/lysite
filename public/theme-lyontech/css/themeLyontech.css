@@ -207,13 +207,8 @@
   height: auto;
   align-self: center !important;
   justify-content: center !important;
+
 }
-
-
-[dir=ltr] .bg-black-transparent{
-  background-color: rgba(255,255,255,0.8);
-}
-
 
 [dir=ltr] .card h5{
   font-family: "Rubik", Bold;
@@ -325,6 +320,7 @@ color: white; /* Color del texto blanco */
 }
 
 [dir=ltr]  .card-body {
+color: white; /* Color del texto blanco */
 margin: 0; /* Elimina el margen */
 }
 

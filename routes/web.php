@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PaypalController;
 use App\Models\TypeSubscription;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,3 +121,7 @@ Route::get('/paypal/success/{paymentId}', [PaypalController::class, 'success'])-
 Route::get('/paypal/cancel/{paymentId}', [PaypalController::class, 'cancel'])->name('paypal_cancel');
 
 require __DIR__ . '/auth.php';
+
+
+/* RUTAS DEL YISUS - Provicional */
+Route::get('/thanks', [DashboardController::class, 'thanks'])->name('thanks');
