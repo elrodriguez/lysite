@@ -119,6 +119,24 @@
   border-color: #e36e2b;
 }
 
+[dir=ltr] .btn-border-white {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffffff 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+[dir=ltr] .btn-border-white:hover {
+  color: #fff;
+}
+
+
+
 
 [dir=ltr] .btn-black {
   color: #fff;

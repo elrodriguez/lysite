@@ -34,7 +34,6 @@
 
     <!-- Theme Lyontech CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/themeLyontech.css') }}">
-    <link type="text/css" href="{{ asset('assets/css/app.rtl.css') }}" rel="stylesheet">
 
     @yield('lycss')
 
