@@ -198,20 +198,11 @@
                                                                 <div class="media">
                                                                     <div class="media-body">
                                                                         <div class="box-orange-chat">
-                                                                            <h6 class="mb-0">{{ $history->user->name }}</h6>
+                                                                            <!--<h6 class="mb-0">{{ $history->user->name }}</h6>-->
                                                                             <p class="text-break">{{ $item->content }}</p>
                                                                         </div>
                                                                         <small class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
                                                                     </div>
-                                                                    @if ($history->user->avatar)
-                                                                        <img src="{{ asset('storage/' . $history->user->avatar) }}"
-                                                                            class="ml-3" alt="..."
-                                                                            style="width: 54px">
-                                                                    @else
-                                                                        <img src="{{ ui_avatars_url($history->user->name, 64, 'none') }}"
-                                                                            class="ml-3" alt="..."
-                                                                            style="width: 54px">
-                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         @else
@@ -221,7 +212,7 @@
                                                                         class="mr-3" alt="...">
                                                                     <div class="media-body">
                                                                         <div class="box-chrerry-chat">
-                                                                            <h6 class="mb-0">LyonTech</h6>
+                                                                            <!--<h6 class="mb-0">LyonTech</h6>-->
                                                                             <p class="text-break">{{ $item->content }}</p>
                                                                         </div>
                                                                         <small class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>

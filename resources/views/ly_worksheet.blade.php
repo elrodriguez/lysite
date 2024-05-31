@@ -27,7 +27,8 @@
                         </div>
                         <div class="texto">
                             <h5 class="mb-0" style="margin-left: -30px;"><strong
-                                    style="font-size: 1.8rem;letter-spacing: 0.0em;">HOJA DE TRABAJO</strong></h5>
+                                    style="font-size: 1.8rem;letter-spacing: 0.0em;">HOJA DE TRABAJO</strong>
+                            </h5>
                         </div>
                     </div>
                 </div>
