@@ -36,7 +36,7 @@
                                                     IMPULSADAS POR IA.
                                                 </h2>
                                                 <p class="lead text-white-70" style="margin-top: -15px; font-size: 28px;">
-                                                    Desarrolla tu investigación de manera más fácil, inteligente y rápida con lyonteach.
+                                                    Desarrolla tu investigación de manera más fácil, inteligente y rápida con Lyonteach.
                                                 </p>
                                             </div>
                                         </div>

@@ -1,54 +1,15 @@
 @extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
+    
+    <!--<link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
     <link rel="stylesheet" href="{{ asset('theme-lyontech/css/8.css') }}">
     <link rel="stylesheet" href="{{ asset('theme-lyontech/css/9.css') }}">
     <link rel="stylesheet" href="{{ asset('theme-lyontech/css/10.css') }}">
+    -->
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ckeditor-docs.css') }}">
 
-    <style type="text/css">
-        .ventana_flotante {
-            background: none repeat scroll 0 0 #FFFFFF;
-            border: 1px solid #DDDDDD;
-            border-radius: 5px 5px 5px 5px;
-            bottom: 10px;
-            left: auto;
-            margin-left: 5px;
-            padding: 0px 0 0;
-            position: fixed;
-            text-align: center;
-            width: 320px;
-            z-index: 15;
-        }
-
-        .index-modal-contenido {
-            background-color: aqua;
-            width: 300px;
-            padding: 10px 20px;
-            margin: 20% auto;
-            position: relative;
-        }
-
-        .index-modal {
-            background-color: rgba(0, 0, 0, .8);
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 1s;
-            z-index: 99999999;
-        }
-
-        #modalIndexTesis:target {
-            opacity: 1;
-            pointer-events: auto;
-        }
-    </style>
 @stop
 @section('content')
 

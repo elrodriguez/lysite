@@ -36,54 +36,60 @@
                     <div class="row">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(1)">
-
+                                <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
+                                    class="media-left rounded">
+                                <span class="media-body">
+                                    <h5 class="mb-0">PARAFRASEDOR</h5>
+                                    <p class="mt-0" >Cambia textos para mejorar su originalidad.</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(2)">
                                 <img src="{{ asset('assets/images/8b.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5 class="mb-0">PARAFRASEDOR</h5>
-                                    <p class="mt-0">Cambia textos para mejorar su originalidad.</p>
-                                </div>
+                                <span class="media-body">
+                                    <h5 class="mb-0">RECOMENDADOR</h5>
+                                    <p >Accede a la recomendación de articulos cientificos.</p>
+                                </span>
                             </a>
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(2)">
-
-                                <img src="{{ asset('assets/images/8b.jpg') }}" alt="Icono"
-                                    class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>RECOMENDADOR</h5>
-                                    <p>Accede a la recomendación de articulos cientificos.</p>
-                                </div>
-                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(3)">
-
-                                <img src="{{ asset('assets/images/8c.jpg') }}" alt="Icono"
+                                <img src="{{ asset('assets/images/8c.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>CORRECTOR</h5>
-                                    <p>Revisa y corrige errores gramaticales.</p>
-                                </div>
+                                <span class="media-body">
+                                    <h5 class="mb-0">CORRECTOR</h5>
+                                    <p >Revisa y corrige errores gramaticales.</p>
+                                </span>
                             </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(4)">
-
-                                <img src="{{ asset('assets/images/8d.jpg') }}" alt="Icono"
+                                <img src="{{ asset('assets/images/8d.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>CHATBOT</h5>
+                                <span class="media-body">
+                                    <h5 class="mb-0">CHATBOT</h5>
                                     <p>Haz consultas o sube archivos para cualquier duda.</p>
-                                </div>
+                                </span>
                             </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(5)">
-
-                                <img src="{{ asset('assets/images/8e.jpg') }}" alt="Icono"
+                                <img src="{{ asset('assets/images/8e.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>REFERENCIADOR</h5>
-                                    <p>Referencia a la normativa con solo un enlace.</p>
-                                </div>
+                                <span class="media-body">
+                                    <h5 class="mb-0">REFERENCIADOR</h5>
+                                    <p >Referencia a la normativa con solo un enlace.</p>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -107,7 +113,7 @@
                                 </div>
 
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
-                                    class="btn btn-primary orange-button">
+                                    class="btn btn-orange">
                                     <div wire:loading wire:target="saveMessageUser" style="display: none"
                                         class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="sr-only">Loading...</span>
@@ -131,7 +137,7 @@
                                             style="background-color: #fff;">
                                     </div>
                                     <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
-                                        class="btn btn-primary orange-button mt-2">
+                                        class="btn btn-orange mt-2">
                                         <div wire:loading wire:target="saveMessageUser" style="display: none"
                                             class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="sr-only">Loading...</span>
@@ -159,7 +165,7 @@
                                         placeholder="Escribe aquí lo que desee buscar" style="background-color: #fff;"></textarea>
                                 </div>
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
-                                    class="btn btn-primary orange-button mt-2">
+                                    class="btn btn-orange mt-2">
                                     <div wire:loading wire:target="saveMessageUser" style="display: none"
                                         class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="sr-only">Loading...</span>
@@ -178,6 +184,152 @@
                             </div>
                         </div>
                     @elseif($typeAction == 4)
+                        <div class="row box-chrerry">
+                            <div class="col-md-9" style="padding: 0px;">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="list-unstyled" id="messageContainer"
+                                                style="max-height: 350px; overflow-y: auto; background:#fff;">
+                                                @if (count($historyItems) > 0)
+                                                    @foreach ($historyItems as $item)
+                                                        @if ($item->my_user)
+                                                            <div style="padding: 15px; margin-bottom: 8px">
+                                                                <div class="media">
+                                                                    <div class="media-body">
+                                                                        <div class="box-orange-chat">
+                                                                            <h6 class="mb-0">{{ $history->user->name }}</h6>
+                                                                            <p class="text-break">{{ $item->content }}</p>
+                                                                        </div>
+                                                                        <small class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                    </div>
+                                                                    @if ($history->user->avatar)
+                                                                        <img src="{{ asset('storage/' . $history->user->avatar) }}"
+                                                                            class="ml-3" alt="..."
+                                                                            style="width: 54px">
+                                                                    @else
+                                                                        <img src="{{ ui_avatars_url($history->user->name, 64, 'none') }}"
+                                                                            class="ml-3" alt="..."
+                                                                            style="width: 54px">
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div style="padding: 15px; margin-bottom: 8px">
+                                                                <div class="media">
+                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png"
+                                                                        class="mr-3" alt="...">
+                                                                    <div class="media-body">
+                                                                        <div class="box-chrerry-chat">
+                                                                            <h6 class="mb-0">LyonTech</h6>
+                                                                            <p class="text-break">{{ $item->content }}</p>
+                                                                        </div>
+                                                                        <small class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                            <textarea wire:model="message" class="form-control" rows="3" placeholder="Escribe tu consultas aqui..." style="background-color: #fff;"></textarea>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding: 5px 0px;">
+                                    <div class="col-md-4">
+                                        <p class="span-small">Seleccionar archivo</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="p-small" >Sin archivos seleccionados</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button wire:click="saveMessageUser" wire:loading.attr="disabled"
+                                            wire:target="saveMessageUser" type="button"
+                                            class="btn btn-orange">
+                                            <i wire:loading.remove wire:target="saveMessageUser"
+                                                class="fa fa-location-arrow mr-2"></i>
+                                            <div wire:loading wire:target="saveMessageUser"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <span>Enviar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center;">
+                                        <p style="font-weight: 700;">Palabras claves</p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Objetivos</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Estructura de antecedentes</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Problematica</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Teorias empleadas</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Definiciones de las variables</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Aporte de estudio</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Resultados</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Recomendación principal</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Propuesta de mejora</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <p class="mt-0">Resumen general</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-7 pr-0">
                                 <div class="row align-items-center">
@@ -375,7 +527,6 @@
                     @elseif($typeAction == 5)
                         <div class="row align-items-center">
                             <div class="col-md-12">
-
                                 <div class="mt-2">
                                     <label class="mb-0">&nbsp;&nbsp;DOI:</label>
                                     <input wire:model="consulta" id="input-doi-buscar-id" type="text"
@@ -390,22 +541,23 @@
                                         <option value="vancouver">Vancouver</option>
                                     </select>
                                 </div>
-                                <div class="row" style="padding: 5px 0px;">
-                                    <div class="col-10 mt-1">
+                                <div class="row" style="padding: 5px 8px 5px 0px;">
+                                    <div class="col-md-9 mt-1">
                                         <a href="#" onclick="modifyCitation()" id="modify-citation-id"
-                                            class="btn-small" type="button">Modificar cita</a>
+                                            class="btn-small" type="button">Modificar cita
+                                        </a>
                                         <a href="#" onclick="copyCitation()" class="btn-small"
-                                            type="button">Copiar
-                                            cita</a>
+                                            type="button">Copiar cita
+                                        </a>
                                         <a href="#" onclick="hideBuscar()" id="cita-manual-id"
                                             data-toggle="collapse" data-target="#collapseWidthExample1"
                                             aria-expanded="false" aria-controls="collapseWidthExample1"
-                                            class="btn-small" type="button">Cita
-                                            manual</a>
+                                            class="btn-small" type="button">Cita manual
+                                        </a>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-md-3">
                                         <button wire:click="saveMessageUser" wire:loading.attr="disabled"
-                                            id="ckgetBtnReference" type="button" class="btn btn-orange">
+                                            id="ckgetBtnReference" type="button" class="btn btn-orange" style="width: 100%;">
                                             <div wire:loading wire:target="saveMessageUser" style="display: none"
                                                 class="spinner-grow spinner-grow-sm" role="status">
                                                 <span class="sr-only">Loading...</span>
