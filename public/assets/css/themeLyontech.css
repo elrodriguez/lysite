@@ -1,5 +1,8 @@
 
-
+[dir=ltr] .container-section{
+  width: 1280px;
+  margin: auto
+}
 
 [dir=ltr] .active {
   color: #fff;
@@ -20,6 +23,39 @@
   border-radius: 30px;
   padding: 2px 15px;
 }
+
+/* INPUT PERSONALIZADO */
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload button {
+  background-color: #ff9152;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.file-upload button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.file-upload .file-name {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+/* FIN INPUT PERSONALIZADO */
+
 
 [dir=ltr] .box-section {
   padding: 0px 0px 60px 0px;
@@ -84,9 +120,9 @@
 
 
 [dir=ltr] .span-small{
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
-  padding: 3px 8px;
+  padding: 3px 12px;
   background-color: #ff9152;
   border-radius: 10px;
 }
