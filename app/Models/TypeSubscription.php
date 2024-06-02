@@ -20,6 +20,7 @@ class TypeSubscription extends Model
         'detail_seven',
         'detail_eight',
         'price',
+        'dollar_price',
         'created_user_id',
         'updated_user_id',
     ];

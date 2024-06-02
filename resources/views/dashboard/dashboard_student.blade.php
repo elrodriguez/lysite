@@ -23,7 +23,7 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
                                         <p class="mt-1 text-gris">
-                                            Te presentamos las herramientas de trabajo. con ellas podrás potenciar el desarrollo de 
+                                            Te presentamos las herramientas de trabajo. con ellas podrás potenciar el desarrollo de
                                             tu investigación, empieza ahora tu experiencia de la mano de lyonteach
                                         </p>
                                     </div>
@@ -41,11 +41,12 @@
                                 <p>
                                     Mejora tu investigación con la IA.
                                 </p>
-                                @can('academico_directo_cursos')
-                                <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Empezar</a>
-                                @else
-                                <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
-                                @endcan
+                                    @can('academico_directo_gpt')
+                                    <a href="{{ route('help_gpt') }}" class="btn btn-black">Empezar</a>
+                                    @else
+                                    <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
+                                    @endcan
+
                             </div>
                         </div>
                         <div class="col-md-4" style="text-align: center; padding: 15px;">
@@ -58,11 +59,11 @@
                                     <p>
                                         Aprende investigación de forma didáctica.
                                     </p>
-                                    @can('academico_directo_gpt')
-                                    <a href="{{ route('help_gpt') }}" class="btn btn-black">Empezar</a>
-                                    @else
-                                    <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
-                                    @endcan
+                                        @can('academico_directo_cursos')
+                                        <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Empezar</a>
+                                        @else
+                                        <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
+                                        @endcan
                                 </div>
                             </div>
                         </div>
