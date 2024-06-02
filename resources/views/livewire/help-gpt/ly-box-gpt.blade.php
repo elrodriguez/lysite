@@ -39,7 +39,7 @@
                                 <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
-                                    <h5 class="mb-0">PARAFRASEDOR</h5>
+                                    <h5 class="mb-0">PARAFRASEADOR</h5>
                                     <p class="mt-0" >Cambia textos para mejorar su originalidad.</p>
                                 </span>
                             </a>
@@ -224,7 +224,7 @@
                                                 @endif
                                             </div>
                                             <textarea wire:model="message" class="form-control" rows="3" placeholder="Escribe tu consultas aqui..." style="background-color: #fff;"></textarea>
-                                        
+
                                         </div>
                                     </div>
                                 </div>
@@ -701,7 +701,7 @@
         })
     </script>
 
-    
+
     <script>
         function updateFileName() {
             const input = document.getElementById('file');
