@@ -33,7 +33,7 @@
 
             <div class="row box-chrerry">
                 <div class="col-md-4">
-                    <div class="row">
+                    <div class="row {{ $n1 ? 'active' : '' }}">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(1)">
                                 <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
@@ -45,7 +45,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row {{ $n2 ? 'active': '' }}">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(2)">
                                 <img src="{{ asset('assets/images/8b.png') }}" alt="Icono"
@@ -57,7 +57,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row {{ $n3 ? 'active': '' }}">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(3)">
                                 <img src="{{ asset('assets/images/8c.png') }}" alt="Icono"
@@ -69,7 +69,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row {{ $n4 ? 'active': '' }}">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(4)">
                                 <img src="{{ asset('assets/images/8d.png') }}" alt="Icono"
@@ -81,7 +81,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row {{ $n5 ? 'active': '' }}">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical" wire:click="setBtnActive(5)">
                                 <img src="{{ asset('assets/images/8e.png') }}" alt="Icono"

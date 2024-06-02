@@ -41,6 +41,11 @@ class LyBoxGpt extends Component
     public $assistant_id = null;
     public $message = null;
     public $disableButton2 = false;
+    public $n1 = true;
+    public $n2 = false;
+    public $n3 = false;
+    public $n4 = false;
+    public $n5 = false;
 
     public function mount()
     {
@@ -56,9 +61,54 @@ class LyBoxGpt extends Component
 
     public function setBtnActive($num)
     {
+        $this->activator($num);
         $this->typeAction = $num;
         $this->resultado = null;
         $this->getHistory($num);
+    }
+
+    private function activator($num){
+        switch ($num) {
+            case 1:
+                $this->n1=1;
+                $this->n2=0;
+                $this->n3=0;
+                $this->n4=0;
+                $this->n5=0;
+                break;
+            case 2:
+                $this->n1=0;
+                $this->n2=1;
+                $this->n3=0;
+                $this->n4=0;
+                $this->n5=0;
+                break;
+            case 3:
+                $this->n1=0;
+                $this->n2=0;
+                $this->n3=1;
+                $this->n4=0;
+                $this->n5=0;
+                break;
+            case 4:
+                $this->n1=0;
+                $this->n2=0;
+                $this->n3=0;
+                $this->n4=1;
+                $this->n5=0;
+                break;
+            case 5:
+                $this->n1=0;
+                $this->n2=0;
+                $this->n3=0;
+                $this->n4=0;
+                $this->n5=1;
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     public function getHistory($num)
