@@ -21,12 +21,11 @@
             <!-- Header Layout Content -->
             <div class="mdk-header-layout__content page-content">
 
-                <div class="hero mod-orange py-48pt text-center text-sm-left">
-                    <div class="bg-banner">
-                        <img class="img"  style="margin-top: -50px; z-index: -1;" src="theme-lyontech/images/hero-bg.jpeg" alt="">
-                        <div class="container" style="margin-top: -600px;">
+                <div class="bg-gradient" style="padding: 60px 0px 0px 0px;">
+                    <!--<img class="img"  style="margin-top: -50px; z-index: -1;" src="theme-lyontech/images/hero-bg.jpeg" alt="">-->
+                    <div class="container" style=" position: relative;">
                             <div class="row">
-                                <div class="col-md-8 col-md-offset-3">
+                                <div class="col-md-8">
                                     <div class="media-body text-container align-self-center">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -51,12 +50,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4" style="position: relative;">
+                                    <img width="170%" style="margin-top: -50px;" src="theme-Lyontech/images/alumnoHome.png" alt="">
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                     
-                <div class="container page__container">
+                <div class="container page__container" style="margin-top: -120px;">
                     <div class="row">
                         <div class="col-md-4" style="text-align: center; padding: 0px">
                             <div class="" style="background: #fff; border-radius: 60px 0px 0px 60px;">

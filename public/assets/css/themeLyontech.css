@@ -4,6 +4,11 @@
   margin: auto
 }
 
+[dir=ltr] .bg-gradient{
+  background: rgb(255,164,73);
+  background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
+}
+
 [dir=ltr] .active {
   color: #fff;
   background-color: #ff9152;
