@@ -24,7 +24,7 @@
                         <strong
                             style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                         </strong>0 <br>
-                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong>1500
+                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 1500</strong>
                         <br>
                     </p>
                 </div>
@@ -33,9 +33,9 @@
 
             <div class="row box-chrerry">
                 <div class="col-md-4">
-                    <div class="row {{ $n1 ? 'active' : '' }}">
+                    <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(1)">
+                            <a href="#" class="media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
                                 <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -45,9 +45,9 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row {{ $n2 ? 'active': '' }}">
+                    <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(2)">
+                            <a href="#" class="media tab-vertical {{ $n2 ? 'active': '' }}" wire:click="setBtnActive(2)">
                                 <img src="{{ asset('assets/images/8b.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -57,9 +57,9 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row {{ $n3 ? 'active': '' }}">
+                    <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(3)">
+                            <a href="#" class="media tab-vertical {{ $n3 ? 'active': '' }}" wire:click="setBtnActive(3)">
                                 <img src="{{ asset('assets/images/8c.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -69,9 +69,9 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row {{ $n4 ? 'active': '' }}">
+                    <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(4)">
+                            <a href="#" class="media tab-vertical {{ $n4 ? 'active': '' }}" wire:click="setBtnActive(4)">
                                 <img src="{{ asset('assets/images/8d.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -81,9 +81,9 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row {{ $n5 ? 'active': '' }}">
+                    <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(5)">
+                            <a href="#" class="media tab-vertical {{ $n5 ? 'active': '' }}" wire:click="setBtnActive(5)">
                                 <img src="{{ asset('assets/images/8e.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="mt-2">
                                     <textarea wire:model="consulta" class="form-control" id="consulta" rows="6"
-                                        placeholder="escribe aquí lo que desee parafrasear." style="background-color: #fff;"></textarea>
+                                        placeholder="Escribe aquí lo que desee parafrasear." style="background-color: #fff;"></textarea>
                                 </div>
 
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
@@ -196,26 +196,35 @@
                                                         @if ($item->my_user)
                                                             <div style="padding: 15px; margin-bottom: 8px">
                                                                 <div class="media">
-                                                                    <div class="media-body">
-                                                                        <div class="box-orange-chat">
-                                                                            <!--<h6 class="mb-0">{{ $history->user->name }}</h6>-->
-                                                                            <p class="text-break">{{ $item->content }}</p>
+                                                                    <div class="media-body" style="float:right;">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <p class="box-orange-chat mb-0"  style="float:right;">{{ $item->content }}</p>
+                                                                            </div>
                                                                         </div>
-                                                                        <small class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <small class="gpt-time_date mt-0" style="float:right;">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         @else
                                                             <div style="padding: 15px; margin-bottom: 8px">
                                                                 <div class="media">
-                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png"
-                                                                        class="mr-3" alt="...">
-                                                                    <div class="media-body">
-                                                                        <div class="box-chrerry-chat">
-                                                                            <!--<h6 class="mb-0">LyonTech</h6>-->
-                                                                            <p class="text-break">{{ $item->content }}</p>
+                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png" class="mr-3" alt="...">
+                                                                    <div class="media-body" style="float:left;">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <p class="box-chrerry-chat mb-0">{{ $item->content }}</p>
+                                                                            </div>
                                                                         </div>
-                                                                        <small class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <small class="gpt-time_date mt-0" style="float:left;">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>

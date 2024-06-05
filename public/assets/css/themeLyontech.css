@@ -1,6 +1,6 @@
 
 [dir=ltr] .container-section{
-  width: 1280px;
+  width: 1360px;
   margin: auto
 }
 
@@ -80,18 +80,21 @@
 }
 
 [dir=ltr] .box-chrerry-chat {
-  background-color: #ffe9db; 
+  background-color: #ffe9db;
+  width: 50%;
   padding: 15px; 
-  margin-top: -20px;
   border-radius: 10px;
+  font-size: 14px;
 }
 
 [dir=ltr] .box-orange-chat {
   background-color: #fb9a62;
+  width: 50%;
   padding: 15px; 
-  margin-top: -20px;
   border-radius: 10px;
+  font-size: 14px;
 }
+
 
 [dir=ltr] .tab-vertical {
   padding: 5px 0px 0px 5px;
