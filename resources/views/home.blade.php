@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="position: relative;">
-                                    <img width="170%" style="margin-top: -50px;" src="theme-Lyontech/images/alumnoHome.png" alt="">
+                                    <img class="imgHome" src="theme-Lyontech/images/alumnoHome.png" alt="">
                                 </div>
                             </div>
                     </div>
@@ -59,8 +59,8 @@
                     
                 <div class="container page__container" style="margin-top: -120px;">
                     <div class="row">
-                        <div class="col-md-4" style="text-align: center; padding: 0px">
-                            <div class="" style="background: #fff; border-radius: 60px 0px 0px 60px;">
+                        <div class="col-md-4" style="padding: 0px">
+                            <div class="box-white-home-1">
                                 <img style="width: 50%;" src="{{ asset('theme-lyontech/images/ia-m.png') }}" alt="">
                                 <h4 class="mb-0">
                                     CONSULTAS IA
@@ -75,8 +75,8 @@
                                 @endcan
                             </div>
                         </div>
-                        <div class="col-md-4" style="text-align: center; padding: 0px;">
-                            <div class="" style="background: #fff;">
+                        <div class="col-md-4" style="padding: 0px;">
+                            <div class="box-white-home-2">
                                 <div>
                                     <img style="width: 50%;" src="{{ asset('theme-lyontech/images/libro-m.png') }}" alt="">
                                     <h4 class="mb-0">
@@ -93,8 +93,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="text-align: center; padding: 0px;">
-                            <div class="" style="background: #fff; border-radius: 0px 60px 60px 0px;">
+                        <div class="col-md-4" style="padding: 0px;">
+                            <div class="box-white-home-3">
                                 <img style="width: 50%;" src="{{ asset('theme-lyontech/images/hoja-m.png') }}" alt="">
                                 <h4 class="mb-0">
                                     HOJA DE TRABAJO
@@ -110,11 +110,12 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                <div class="container" style="padding: 60px 0px;">
+                <div class="container" style="padding: 120px 0px;">
                     <div class="row" style="padding: 20px 0px;">
-                        <div class="col-md-4" style="position: relative;">
+                        <div class="col-md-4">
                             <div class="box-text" style="position: absolute;
                                     top: 50%;
                                     left: 50%;
@@ -125,7 +126,7 @@
                             </div>
                         </div>
                         <div class="col-md-8 d-flex justify-content-center align-items-center">
-                            <div class="card border-0 video-container" style="background-image: url({{ asset('theme-lyontech/images/fondo-card.jpg') }});">
+                            <div class="card border-0 video-container bg-gradient" style="padding: 20px;">
                                 <video width="100%" height="380" controls muted playsinline>
                                     <source src="video.mp4" type="video/mp4">
                                     Tu navegador no soporta el elemento de vídeo.
@@ -134,7 +135,7 @@
                         </div>
                     </div>
                     <div class="row" style="padding: 20px 0px;">
-                        <div class="col-md-6" style="position: relative;">
+                        <div class="col-md-6">
                             <div class="box-text" style="position: absolute;
                                     top: 50%;
                                     left: 5%;

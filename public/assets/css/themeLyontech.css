@@ -298,6 +298,7 @@
   font-weight: 300;
   font-size: 25px;
 }
+
 [dir=ltr] .card a{
   font-family: "Rubik", Medium;
   font-weight: 500;
@@ -320,6 +321,58 @@
 [dir=ltr] input::placeholder {
   color:#872152; 
 }
+
+
+
+[dir=ltr] .imgHome{
+  margin-top: -50px;
+  width: 170%;
+}
+
+[dir=ltr] .box-white-home-1{
+  text-align: center; 
+  background: #fff; 
+  border-radius: 60px 0px 0px 60px;
+}
+
+[dir=ltr] .box-white-home-2{
+  text-align: center; 
+  background: #fff;
+}
+
+[dir=ltr] .box-white-home-3{
+  text-align: center; 
+  background: #fff;
+  border-radius: 0px 60px 60px 0px;
+}
+
+
+/*  RESPONSIVE  */
+
+@media (max-width: 768px) {
+
+  [dir=ltr] .imgHome{
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  [dir=ltr] .box-white-home-1{
+    text-align: center; 
+    background: #fff; 
+    border-radius: 60px 60px 0px 0px;
+  }
+
+  [dir=ltr] .box-white-home-3{
+    text-align: center; 
+    background: #fff;
+    border-radius: 0px 0px 60px 60px;
+  }
+}
+  
+
+
+
+
 
 
 
@@ -507,9 +560,9 @@ color: black
 }  
 
 [dir=ltr] .btn-cent{
-  width: 70%; /* Ancho personalizado */
-  margin: 0 auto; /* Centrar horizontalmente */
-  text-align: center; /* Alinear texto en el centro */
+  width: 70%; 
+  margin: 0 auto; 
+  text-align: center;
   padding-bottom: 40px;
 }  
 
@@ -533,30 +586,25 @@ color: black
 
 [dir=ltr] .text-cuenta p{
 color: black !important;
-display: inline-block; /* Makes stars behave like inline elements */
-/* text-align: left;*/
+display: inline-block; 
 margin-top: 0;
 margin-bottom:0;
 font-family: "Rubik", Light;
 font-weight: 300;
-font-size: 25px !important; /* Increase font size */
+font-size: 25px !important; 
 
-/*margin: 0; /* Remove top and bottom margins */
-text-align: center; /* Justify text to fill the container */
+text-align: center; 
 }
 [dir=ltr] .text-cuenta-b p{
 color: black !important;
 padding-top: 20px;
-display: inline-block; /* Makes stars behave like inline elements */
-/* text-align: left;*/
+display: inline-block; 
 margin-top: 0;
 margin-bottom:0;
 font-family: "Rubik", Light;
 font-weight: 300;
-font-size: 20px !important; /* Increase font size */
-/* line-height: 1.5; Increase line spacing for readability */
-/*margin: 0; /* Remove top and bottom margins */
-text-align: left; /* Justify text to fill the container */
+font-size: 20px !important; 
+text-align: left; 
 } 
 
 
