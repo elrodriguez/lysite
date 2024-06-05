@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+Route::get('/login', [AuthenticatedSessionController::class, 'lyLogin'])
     ->middleware('guest')
     ->name('login');
 Route::get('/ly-login', [AuthenticatedSessionController::class, 'lyLogin'])
