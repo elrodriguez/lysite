@@ -3,7 +3,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 @stop
 @section('content')
-
+    <!--
     <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
         <div class="container-fluid  page__container">
             <div class="row align-content-center justify-content-center">
@@ -26,4 +26,26 @@
             </div>
         </div>
     </div>
+    -->
+
+    
+    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
+        <div class="container-fluid  page__container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="box-thanks">
+                        <h1>¡MEJORA ADQUIRIDA!</h1>
+                        <p>
+                            Haz obtenido mejores oportunidades para el desarrollo de tu investigación empieza
+                            a redactar tu investigación de la manera más fácil, ahora.
+                        </p>
+                        <a href="" class="btn-border-white-radius-10">Empezar Gratis</a>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>    
+            </div>
+        </div>
+    </div>
+
 @stop
