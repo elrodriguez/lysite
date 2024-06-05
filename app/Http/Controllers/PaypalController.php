@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\EPaymentsLog;
+use App\Models\TypeSubscription;
 
 class PaypalController extends Controller
 {
@@ -14,14 +15,15 @@ class PaypalController extends Controller
             //código de Mercado Pago MercadoPago
             dd("Implementar MercadoPago");
         }else{
-        $amount = $request->amount;
+        $subscription = TypeSubscription::find($request->id_subscription);
+        $amount = $subscription->dollar_price;
         $full_name = $request->full_name;
         $provider = new PayPalClient;
         $provider = \PayPal::setProvider();
         $currency = env('PAYPAL_CURRENCY');
         //$provider->setCurrency('PEN'); //si desea pagar en soles debe habilitarse esto en un if PEN no soporta PAYPAL
 
-        // Desde Aquí se debe registrar y poner en pendiente en la tabla de donations_logs
+        // Desde Aquí se debe registrar y poner en pendiente en la tabla de E_payments_logs
         $payment = new EPaymentsLog();  // creamos y dejamos en PE pendiente hasta que se confirme el pago
         $payment->payment_origin = "paypal";
         $payment->currency = "USD";
@@ -97,6 +99,6 @@ class PaypalController extends Controller
         $payment = EPaymentsLog::find($payment_id);
         $payment->status_order = "CA"; //Cancelado transacción no llevada a cabo
         $payment->save();
-        return redirect()->route('cms_principal');
+        return redirect()->route('home');
     }
 }

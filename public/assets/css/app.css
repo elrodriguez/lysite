@@ -70,7 +70,7 @@ html {
   line-height: 1.5;
   color: #303840;
   text-align: left;
-  background-color: #f5f7fa
+  background-color: #fff;
 }
 
 [dir=ltr] [tabindex="-1"]:focus {

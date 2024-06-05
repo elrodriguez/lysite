@@ -155,7 +155,7 @@
 
         <button class="custom-button-c ml-2" type="submit" style="margin-right: 35px;">
             <div>
-                <img src="assets/images/corona.jpg" alt="Icono">
+              <a href="{{ route('modo_page') }}"><img src="assets/images/corona.jpg" alt="Icono"></a>
             </div>
         </button>
 

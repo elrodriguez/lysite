@@ -11,213 +11,221 @@
 @stop
 @section('content')
 
-    <body>
-        <div class="hero_area">
+        <div class="hero_area" style="background: #000;">
             <!-- header section strats -->
             <x-lyontech.header></x-lyontech.header>
             <!-- end header section -->
-            <!-- slider section -->
-            <div class="bannen_inner" style="background-image: url({{ asset('theme-lyontech/images/hero-bg.jpeg') }})">
-                <div class="container-fluid">
-                    <div class="row marginii">
-                        <div class="col-xl-9 col-lg-9 col-md-6 col-sm-12">
-                            <div class="slider-text-h2">
-                                <h2 class="espacio-top"><strong>DESCUBRE</strong></h2>
-                                <h2><strong>HERRAMIENTAS DE INVESTIGACIÓN</strong></h2>
-                                <h2><strong>IMPULSADAS POR IA.</strong></h2>
-                            </div>
-                            <div class="slider-text-p">
-                                <p>Desarrolla tu investigación de manera más fácil,</p>
-                                <p> inteligente y rápida con lyonteach.</p>
-                            </div>
-                            <div class="d-flex justify-content-center justify-content-lg-end">
-                                <a class="btn btn-lg btn-outline-light" href="#" role="button"><strong
-                                        style="font-size: 1.8rem;">EMPEZAR GRATIS</strong></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end slider section -->
-                <!-- Banner Start -->
-                <div class="container-fluid banner mb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="card text-center mx-0  banner-margin-left" style="width: 15rem;">
-                                <img class="card-img-top rounded-0 mt-3" src="{{ asset('theme-lyontech/images/ia.png') }}"
-                                    alt="Card image cap" style="width: 80px; height: 80px; margin: auto;">
-                                <div class="card-body card-body-reduced-padding">
-                                    <h5 class="card-title mb-0" style="font-size: 0.9rem;"><strong>CONSULTAS
-                                            IA</strong>
-                                    </h5>
-                                    <p class="card-text mt-0" style="font-size: 0.8rem;">Mejora tu investigacion con la
-                                        IA.</p>
-                                    @can('academico_directo_gpt')
-                                        <a href="{{ route('help_gpt') }}" type="button" class="btn btn-dark" href="#"
-                                            style="width: 180px; height: 40px;">Iniciar consultas</a>
-                                    @else
-                                        <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
-                                            style="width: 180px; height: 40px;">Iniciar consultas</a>
-                                    @endcan
-                                </div>
 
-                            </div>
-                            <div class="card text-center mx-0 banner-margin" style=" width: 18rem;">
-                                <img class="card-img-top rounded-0 mt-3"
-                                    src="{{ asset('theme-lyontech/images/tesis.png') }}" alt="Card image cap"
-                                    style="width: 80px; height: 80px; margin: auto;">
-                                <div class="card-body card-body-reduced-padding">
-                                    <h5 class="card-title  mb-0"style="font-size: 0.9rem;"><strong>CURSOS</strong></h5>
-                                    <p class="card-text mt-0"
-                                        style="font-size: 0.8rem;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
-                                        Aprende investigacion de forma didactica.</p>
-                                    @can('academico_directo_cursos')
-                                        <a href="{{ route('dashboard_courses') }}" type="button" class="btn btn-dark"
-                                            href="#" style="width: 180px; height: 40px;">Ir a los cursos</a>
-                                    @else
-                                        <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
-                                            style="width: 180px; height: 40px;">Ir a los cursos</a>
-                                    @endcan
+            
+      
+            <!-- Header Layout Content -->
+            <div class="mdk-header-layout__content page-content">
+
+                <div class="bg-gradient" style="padding: 60px 0px 0px 0px;">
+                    <!--<img class="img"  style="margin-top: -50px; z-index: -1;" src="theme-lyontech/images/hero-bg.jpeg" alt="">-->
+                    <div class="container" style=" position: relative;">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="media-body text-container align-self-center">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h2 class="text-white" style="margin-top: 30px; font-size: 50px;">
+                                                    DESCUBRE
+                                                    HERRAMIENTAS DE INVESTIGACIÓN
+                                                    IMPULSADAS POR IA.
+                                                </h2>
+                                                <p class="lead text-white-70" style="margin-top: -15px; font-size: 28px;">
+                                                    Desarrolla tu investigación de manera más fácil, inteligente y rápida con Lyonteach.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4">
+                                                <a href="" class="btn-border-white">Empezar Gratis</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="position: relative;">
+                                    <img class="imgHome" src="theme-Lyontech/images/alumnoHome.png" alt="">
                                 </div>
                             </div>
-                            <div class="card text-center mx-0  banner-margin-right" style="width: 15rem;">
-                                <img class="card-img-top rounded-0 mt-3" src="{{ asset('theme-lyontech/images/hoja.png') }}"
-                                    alt="Card image cap" style="width: 80px; height: 80px; margin: auto;">
-                                <div class="card-body card-body-reduced-padding">
-                                    <h5 class="card-title mb-0"style="font-size: 0.9rem;"><strong>HOJA DE
-                                            TRABAJO</strong>
-                                    </h5>
-                                    <p class="card-text mt-0" style="font-size: 0.8rem;">Realiza avances online.</p>
-                                    @can('academico_directo_tesis')
-                                        <a href="{{ route('worksheet', [13]) }}" type="button" class="btn btn-dark"
-                                            href="#" style="width: 180px; height: 40px;">Empezar</a>
+                    </div>
+                </div>
+                    
+                <div class="container page__container" style="margin-top: -120px;">
+                    <div class="row">
+                        <div class="col-md-4" style="padding: 0px">
+                            <div class="box-white-home-1">
+                                <img style="width: 50%;" src="{{ asset('theme-lyontech/images/ia-m.png') }}" alt="">
+                                <h4 class="mb-0">
+                                    CONSULTAS IA
+                                </h4>
+                                <p>
+                                    Mejora tu investigación con la IA.
+                                </p>
+                                @can('academico_directo_cursos')
+                                <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Iniciar consultas</a>
+                                @else
+                                <a href="{{ route('modo_page') }}" class="btn btn-black">Iniciar consultas</a>
+                                @endcan
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding: 0px;">
+                            <div class="box-white-home-2">
+                                <div>
+                                    <img style="width: 50%;" src="{{ asset('theme-lyontech/images/libro-m.png') }}" alt="">
+                                    <h4 class="mb-0">
+                                        CURSOS
+                                    </h4>
+                                    <p>
+                                        Aprende investigación de forma didáctica.
+                                    </p>
+                                    @can('academico_directo_gpt')
+                                    <a href="{{ route('help_gpt') }}" class="btn btn-black">Iniciar cursos</a>
                                     @else
-                                        <a href="{{ route('modo_page') }}" type="button" class="btn btn-dark" href="#"
-                                            style="width: 180px; height: 40px;">Empezar</a>
+                                    <a href="{{ route('modo_page') }}" class="btn btn-black">Iniciar cursos</a>
                                     @endcan
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4" style="padding: 0px;">
+                            <div class="box-white-home-3">
+                                <img style="width: 50%;" src="{{ asset('theme-lyontech/images/hoja-m.png') }}" alt="">
+                                <h4 class="mb-0">
+                                    HOJA DE TRABAJO
+                                </h4>
+                                <p>
+                                    Realiza avances online.
+                                </p>
+                                @can('academico_directo_tesis')
+                                <a href="{{ route('worksheet', [13]) }}" class="btn btn-black">Empezar</a>
+                                @else
+                                <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
+                                @endcan
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-            </div>
-            <!-- how section -->
-            <section class="container-fluid">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 d-flex justify-content-center align-items-center">
-                            <div class="card border-0">
-                                <div class="card-body card-bg text-right ">
-                                    <h2 class="text-white"><strong>PRESENTACIÓN</strong></h2>
-                                    <h4 class="text-white" style="font-size: 2.8rem;">Lyonteach </h4>
-                                </div>
+
+                <div class="container" style="padding: 120px 0px;">
+                    <div class="row" style="padding: 20px 0px;">
+                        <div class="col-md-4">
+                            <div class="box-text" style="position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%); 
+                                    text-align:right;">
+                                <h1 class="text-white mb-0"><strong>PRESENTACIÓN</strong></h1>
+                                <h4 class="text-white mt-0" style="font-size: 35px;">Lyonteach </h4>
                             </div>
                         </div>
                         <div class="col-md-8 d-flex justify-content-center align-items-center">
-                            <div class="card border-0 video-container"
-                                style="background-image: url({{ asset('theme-lyontech/images/fondo-card.jpg') }});">
-                                <div class="card-body">
-                                    <video width="620" height="420" controls muted playsinline>
-                                        <source src="video.mp4" type="video/mp4">
-                                        Tu navegador no soporta el elemento de vídeo.
-                                    </video>
-                                </div>
+                            <div class="card border-0 video-container bg-gradient" style="padding: 20px;">
+                                <video width="100%" height="380" controls muted playsinline>
+                                    <source src="video.mp4" type="video/mp4">
+                                    Tu navegador no soporta el elemento de vídeo.
+                                </video>
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card border-0">
-                                <div class="card-body card-bg text-s3">
-                                    <h5 class="text-white"><strong>Redacta tu investigación con<strong></h5>
-                                    <h5 class="text-white"><strong>soporte de la IA.<strong> </h5>
-                                    <p class="text-white  mt-3">Realiza tus avances de redacción en el editor online
-                                    </p>
-                                    <p class="text-white">donde encontraras una guía estructurada y</p>
-                                    <p class="text-white">herramientas que facilitarán tu proceso.</p>
-                                </div>
+                    <div class="row" style="padding: 20px 0px;">
+                        <div class="col-md-6">
+                            <div class="box-text" style="position: absolute;
+                                    top: 50%;
+                                    left: 5%;
+                                    transform: translate(0%, -50%); 
+                                    text-align:left;">
+                                <h4 class="text-white mt-0" style="font-size: 25px;">Redacta tu investigación con soporte de la IA</h4>
+                                <p class="text-white">
+                                    Realiza tus avances de redacción en el editor online donde
+                                    encontrarás una gía estructurada y herramientas que facilitarán 
+                                    tu proceso.
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card border-0"">
-                                <div class="card-body card-bg">
-                                    <a href="#"><img src="{{ asset('theme-lyontech/images/card1.jpg') }}"></a>
-                                </div>
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card1.jpg') }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 20px 0px;">
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card2.jpg') }}">
+                            </a>
+                        </div>
+                        <div class="col-md-6" style="position: relative;">
+                            <div class="box-text" style="position: absolute;
+                                    top: 50%;
+                                    left: 5%;
+                                    transform: translate(0%, -50%); 
+                                    text-align:left;">
+                                <h4 class="text-white mt-0" style="font-size: 25px;">
+                                    Deja que el chatbot te ayude en el desarrollo de t investigación.
+                                </h4>
+                                <p class="text-white">
+                                    Haz preguntas al chatbot ante cualquier duda, además, utiliza el prafraseador, referenciador
+                                    y recomendador para avanzar tu investigación.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 20px 0px;">
+                        <div class="col-md-6" style="position: relative;">
+                            <div class="box-text" style="position: absolute;
+                                    top: 50%;
+                                    left: 5%;
+                                    transform: translate(0%, -50%); 
+                                    text-align:left;">
+                                <h4 class="text-white mt-0" style="font-size: 25px;">
+                                    Accede al chat con un asesor las 24 horas del día.
+                                </h4>
+                                <p class="text-white">
+                                    Emite tus consultas en tiempo real con un experto, él encargado absolvera toda duda, además de
+                                    corregir cualquier deficiencia que tengas.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card3.jpg') }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 20px 0px;">
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card4.jpg') }}">
+                            </a>
+                        </div>
+                        <div class="col-md-6" style="position: relative;">
+                            <div class="box-text" style="position: absolute;
+                                    top: 50%;
+                                    left: 5%;
+                                    transform: translate(0%, -50%); 
+                                    text-align:left;">
+                                <h4 class="text-white mt-0" style="font-size: 25px;">
+                                   Aprende sobre investigación de manera didáctica y entendible.
+                                </h4>
+                                <p class="text-white">
+                                    Accede a los videos y guías de investigación preparados con estrategias prácticas
+                                    para el planteamiento de cada apartado de la investigación.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- end how section -->
-            <!-- about  cards section -->
-            <section class="container-fluid">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card border-0">
-                                <div class="card-body card-bg">
-                                    <a href="#"><img src="{{ asset('theme-lyontech/images/card2.jpg') }}"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card-boder-0">
-                                <div class="card-body card-bg text-s3">
-                                    <h5><strong>Deja que el chatbot te ayude en </strong></h5>
-                                    <h5><strong>el desarrollo de tu invesitgación. </strong></h5>
-                                    <p class="text-white  mt-3">Haz preguntas al chatbot ante cualquier duda,</p>
-                                    <p class="text-white">además, utiliza el prafraseador, referenciador y</p>
-                                    <p class="text-white">recomendador para avanzar tu investigación.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card-boder-0">
-                                <div class="text-s3 card-body card-bg ">
-                                    <h5><strong> Accede al chat con un asesor</strong></h5>
-                                    <h5><strong> las 24 horas del día.</strong></h5>
-                                    <p class="text-white  mt-3">Emite tus consultas en tiempo real con un experto,</p>
-                                    <p class="text-white">él encargado absolvera toda duda, además de</p>
-                                    <p class="text-white">corregir cualquier deficiencia que tengas.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card border-0">
-                                <div class="card-body card-bg">
-                                    <a href="#"><img src="{{ asset('theme-lyontech/images/card3.jpg') }}"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card border-0">
-                                <div class="card-body card-bg">
-                                    <a href="#"><img src="{{ asset('theme-lyontech/images/card4.jpg') }}"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            <div class="card-boder-0">
-                                <div class="text-s3 card-body card-bg ">
-                                    <h5><strong>Aprende sobre investigación de </strong></h5>
-                                    <h5><strong>manera didáctica y entendible.</strong> </h5>
-                                    <p class="text-white mt-3">Accede a los videos y guías de investigación</p>
-                                    <p class="text-white">preparados con estrategias prácticas para el</p>
-                                    <p class="text-white">planteamiento de cada apartado de la investigación.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- end cards  section -->
-        </div>
-        <!-- Banner end -->
-        <!--fin div-->
+    
+            </div>
+            <!-- // END Header Layout Content -->
 
-        <!-- footer section -->
-        <x-lyontech.footer></x-lyontech.footer>
-        <!-- footer section -->
         </div>
 
-    </body>
 @stop

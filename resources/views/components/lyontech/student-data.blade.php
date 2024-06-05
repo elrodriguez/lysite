@@ -23,7 +23,7 @@
             <div class="container page__container text-center">
                 <div class="row">
                     <div class="col-md-12">
-                        <b style="font-weight: 700;">Aumenta tus oportunidades:</b>&nbsp; Únete a premium &nbsp;&nbsp;<a
+                        <b style="font-weight: 700;">Aumenta tus oportunidades:</b>&nbsp; Únete a premium. &nbsp;&nbsp;<a
                             href="{{ route('modo_page') }}" class="btn-border-black">Mejora</a>
                     </div>
                 </div>

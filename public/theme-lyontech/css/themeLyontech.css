@@ -1,13 +1,5 @@
 
-[dir=ltr] .container-section{
-  width: 1360px;
-  margin: auto
-}
 
-[dir=ltr] .bg-gradient{
-  background: rgb(255,164,73);
-  background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
-}
 
 [dir=ltr] .active {
   color: #fff;
@@ -29,39 +21,6 @@
   padding: 2px 15px;
 }
 
-/* INPUT PERSONALIZADO */
-
-.file-upload {
-  display: flex;
-  align-items: center;
-  font-family: Arial, sans-serif;
-}
-
-.file-upload input[type="file"] {
-  display: none;
-}
-
-.file-upload button {
-  background-color: #ff9152;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.file-upload button:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-.file-upload .file-name {
-  margin-left: 10px;
-  font-size: 16px;
-}
-
-/* FIN INPUT PERSONALIZADO */
-
-
 [dir=ltr] .box-section {
   padding: 0px 0px 60px 0px;
 }
@@ -78,23 +37,6 @@
   padding: 30px 0px; 
   margin-top: -20px;
 }
-
-[dir=ltr] .box-chrerry-chat {
-  background-color: #ffe9db;
-  width: 50%;
-  padding: 15px; 
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-[dir=ltr] .box-orange-chat {
-  background-color: #fb9a62;
-  width: 50%;
-  padding: 15px; 
-  border-radius: 10px;
-  font-size: 14px;
-}
-
 
 [dir=ltr] .tab-vertical {
   padding: 5px 0px 0px 5px;
@@ -128,9 +70,9 @@
 
 
 [dir=ltr] .span-small{
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
-  padding: 3px 12px;
+  padding: 3px 8px;
   background-color: #ff9152;
   border-radius: 10px;
 }
@@ -176,24 +118,6 @@
   background-color: #e36e2b;
   border-color: #e36e2b;
 }
-
-[dir=ltr] .btn-border-white {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  border: solid #ffffff 5px;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-[dir=ltr] .btn-border-white:hover {
-  color: #fff;
-}
-
-
 
 
 [dir=ltr] .btn-black {
@@ -283,13 +207,8 @@
   height: auto;
   align-self: center !important;
   justify-content: center !important;
+
 }
-
-
-[dir=ltr] .bg-black-transparent{
-  background-color: rgba(255,255,255,0.8);
-}
-
 
 [dir=ltr] .card h5{
   font-family: "Rubik", Bold;
@@ -301,7 +220,6 @@
   font-weight: 300;
   font-size: 25px;
 }
-
 [dir=ltr] .card a{
   font-family: "Rubik", Medium;
   font-weight: 500;
@@ -324,58 +242,6 @@
 [dir=ltr] input::placeholder {
   color:#872152; 
 }
-
-
-
-[dir=ltr] .imgHome{
-  margin-top: -50px;
-  width: 170%;
-}
-
-[dir=ltr] .box-white-home-1{
-  text-align: center; 
-  background: #fff; 
-  border-radius: 60px 0px 0px 60px;
-}
-
-[dir=ltr] .box-white-home-2{
-  text-align: center; 
-  background: #fff;
-}
-
-[dir=ltr] .box-white-home-3{
-  text-align: center; 
-  background: #fff;
-  border-radius: 0px 60px 60px 0px;
-}
-
-
-/*  RESPONSIVE  */
-
-@media (max-width: 768px) {
-
-  [dir=ltr] .imgHome{
-    margin-top: 10px;
-    width: 100%;
-  }
-  
-  [dir=ltr] .box-white-home-1{
-    text-align: center; 
-    background: #fff; 
-    border-radius: 60px 60px 0px 0px;
-  }
-
-  [dir=ltr] .box-white-home-3{
-    text-align: center; 
-    background: #fff;
-    border-radius: 0px 0px 60px 60px;
-  }
-}
-  
-
-
-
-
 
 
 
@@ -454,6 +320,7 @@ color: white; /* Color del texto blanco */
 }
 
 [dir=ltr]  .card-body {
+color: white; /* Color del texto blanco */
 margin: 0; /* Elimina el margen */
 }
 
@@ -563,9 +430,9 @@ color: black
 }  
 
 [dir=ltr] .btn-cent{
-  width: 70%; 
-  margin: 0 auto; 
-  text-align: center;
+  width: 70%; /* Ancho personalizado */
+  margin: 0 auto; /* Centrar horizontalmente */
+  text-align: center; /* Alinear texto en el centro */
   padding-bottom: 40px;
 }  
 
@@ -589,25 +456,30 @@ color: black
 
 [dir=ltr] .text-cuenta p{
 color: black !important;
-display: inline-block; 
+display: inline-block; /* Makes stars behave like inline elements */
+/* text-align: left;*/
 margin-top: 0;
 margin-bottom:0;
 font-family: "Rubik", Light;
 font-weight: 300;
-font-size: 25px !important; 
+font-size: 25px !important; /* Increase font size */
 
-text-align: center; 
+/*margin: 0; /* Remove top and bottom margins */
+text-align: center; /* Justify text to fill the container */
 }
 [dir=ltr] .text-cuenta-b p{
 color: black !important;
 padding-top: 20px;
-display: inline-block; 
+display: inline-block; /* Makes stars behave like inline elements */
+/* text-align: left;*/
 margin-top: 0;
 margin-bottom:0;
 font-family: "Rubik", Light;
 font-weight: 300;
-font-size: 20px !important; 
-text-align: left; 
+font-size: 20px !important; /* Increase font size */
+/* line-height: 1.5; Increase line spacing for readability */
+/*margin: 0; /* Remove top and bottom margins */
+text-align: left; /* Justify text to fill the container */
 } 
 
 

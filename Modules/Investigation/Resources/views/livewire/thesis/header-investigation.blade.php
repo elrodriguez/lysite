@@ -1,13 +1,13 @@
-<div class="nav-item">
+<div class="nav-item"  style="margin-left: 35px; padding: 20px 0px 13px 0px;">
     <div class="dropdown">
         @if (Auth::user()->hasrole('Admin') || Auth::user()->hasrole('Instructor'))
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-expanded="false">
+                data-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
                 Investigación
             </a>
         @else
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
                 Investigación
             </a>
         @endif

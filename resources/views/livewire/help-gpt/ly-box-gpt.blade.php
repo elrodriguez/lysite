@@ -1,6 +1,6 @@
 <div>
     <div class="bg-white box-section">
-        <div class="container page__container">
+        <div class="container-section page__container">
             <div class="row">
                 <div class="col-md-2 align-items-start" style="padding: 0px;">
                     <p class="title-ia-lyon">
@@ -24,7 +24,7 @@
                         <strong
                             style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                         </strong>0 <br>
-                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong>1500
+                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 1500</strong>
                         <br>
                     </p>
                 </div>
@@ -35,55 +35,61 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(1)">
-
+                            <a href="#" class="media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
+                                <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
+                                    class="media-left rounded">
+                                <span class="media-body">
+                                    <h5 class="mb-0">PARAFRASEADOR</h5>
+                                    <p class="mt-0" >Cambia textos para mejorar su originalidad.</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="media tab-vertical {{ $n2 ? 'active': '' }}" wire:click="setBtnActive(2)">
                                 <img src="{{ asset('assets/images/8b.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5 class="mb-0">PARAFRASEDOR</h5>
-                                    <p class="mt-0">Cambia textos para mejorar su originalidad.</p>
-                                </div>
+                                <span class="media-body">
+                                    <h5 class="mb-0">RECOMENDADOR</h5>
+                                    <p >Accede a la recomendación de articulos cientificos.</p>
+                                </span>
                             </a>
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(2)">
-
-                                <img src="{{ asset('assets/images/8b.jpg') }}" alt="Icono"
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="media tab-vertical {{ $n3 ? 'active': '' }}" wire:click="setBtnActive(3)">
+                                <img src="{{ asset('assets/images/8c.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>RECOMENDADOR</h5>
-                                    <p>Accede a la recomendación de articulos cientificos.</p>
-                                </div>
+                                <span class="media-body">
+                                    <h5 class="mb-0">CORRECTOR</h5>
+                                    <p >Revisa y corrige errores gramaticales.</p>
+                                </span>
                             </a>
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(3)">
-
-                                <img src="{{ asset('assets/images/8c.jpg') }}" alt="Icono"
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="media tab-vertical {{ $n4 ? 'active': '' }}" wire:click="setBtnActive(4)">
+                                <img src="{{ asset('assets/images/8d.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>CORRECTOR</h5>
-                                    <p>Revisa y corrige errores gramaticales.</p>
-                                </div>
-                            </a>
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(4)">
-
-                                <img src="{{ asset('assets/images/8d.jpg') }}" alt="Icono"
-                                    class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>CHATBOT</h5>
+                                <span class="media-body">
+                                    <h5 class="mb-0">CHATBOT</h5>
                                     <p>Haz consultas o sube archivos para cualquier duda.</p>
-                                </div>
+                                </span>
                             </a>
-                            <a href="#" class="media tab-vertical" wire:click="setBtnActive(5)">
-
-                                <img src="{{ asset('assets/images/8e.jpg') }}" alt="Icono"
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="media tab-vertical {{ $n5 ? 'active': '' }}" wire:click="setBtnActive(5)">
+                                <img src="{{ asset('assets/images/8e.png') }}" alt="Icono"
                                     class="media-left rounded">
-
-                                <div class="media-body">
-                                    <h5>REFERENCIADOR</h5>
-                                    <p>Referencia a la normativa con solo un enlace.</p>
-                                </div>
+                                <span class="media-body">
+                                    <h5 class="mb-0">REFERENCIADOR</h5>
+                                    <p >Referencia a la normativa con solo un enlace.</p>
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -103,11 +109,11 @@
                                 </div>
                                 <div class="mt-2">
                                     <textarea wire:model="consulta" class="form-control" id="consulta" rows="6"
-                                        placeholder="escribe aquí lo que desee parafrasear." style="background-color: #fff;"></textarea>
+                                        placeholder="Escribe aquí lo que desee parafrasear." style="background-color: #fff;"></textarea>
                                 </div>
 
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
-                                    class="btn btn-primary orange-button">
+                                    class="btn btn-orange">
                                     <div wire:loading wire:target="saveMessageUser" style="display: none"
                                         class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="sr-only">Loading...</span>
@@ -131,7 +137,7 @@
                                             style="background-color: #fff;">
                                     </div>
                                     <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
-                                        class="btn btn-primary orange-button mt-2">
+                                        class="btn btn-orange mt-2">
                                         <div wire:loading wire:target="saveMessageUser" style="display: none"
                                             class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="sr-only">Loading...</span>
@@ -159,7 +165,7 @@
                                         placeholder="Escribe aquí lo que desee buscar" style="background-color: #fff;"></textarea>
                                 </div>
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
-                                    class="btn btn-primary orange-button mt-2">
+                                    class="btn btn-orange mt-2">
                                     <div wire:loading wire:target="saveMessageUser" style="display: none"
                                         class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="sr-only">Loading...</span>
@@ -178,51 +184,47 @@
                             </div>
                         </div>
                     @elseif($typeAction == 4)
-                        <div class="row">
-                            <div class="col-7 pr-0">
+                        <div class="row box-chrerry">
+                            <div class="col-md-9" style="padding: 0px;">
                                 <div class="row align-items-center">
                                     <div class="col-md-12">
-
-                                        <div class="form-group mt-2 ">
+                                        <div class="form-group">
                                             <div class="list-unstyled" id="messageContainer"
-                                                style="max-height: 350px; overflow-y: auto;">
+                                                style="max-height: 350px; overflow-y: auto; background:#fff;">
                                                 @if (count($historyItems) > 0)
                                                     @foreach ($historyItems as $item)
                                                         @if ($item->my_user)
-                                                            <div
-                                                                style="background: #fff;padding: 8px;border-radius: 5px;margin-bottom: 8px">
-
+                                                            <div style="padding: 15px; margin-bottom: 8px">
                                                                 <div class="media">
-                                                                    <div class="media-body">
-                                                                        <h5 class="mt-0 mb-1">
-                                                                            {{ $history->user->name }}
-                                                                        </h5>
-                                                                        <p class="text-break">{{ $item->content }}</p>
-                                                                        <small
-                                                                            class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                    <div class="media-body" style="float:right;">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <p class="box-orange-chat mb-0"  style="float:right;">{{ $item->content }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <small class="gpt-time_date mt-0" style="float:right;">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    @if ($history->user->avatar)
-                                                                        <img src="{{ asset('storage/' . $history->user->avatar) }}"
-                                                                            class="ml-3" alt="..."
-                                                                            style="width: 64px">
-                                                                    @else
-                                                                        <img src="{{ ui_avatars_url($history->user->name, 64, 'none') }}"
-                                                                            class="ml-3" alt="..."
-                                                                            style="width: 64px">
-                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         @else
-                                                            <div
-                                                                style="background: #fff;padding: 8px;border-radius: 5px;margin-bottom: 8px">
+                                                            <div style="padding: 15px; margin-bottom: 8px">
                                                                 <div class="media">
-                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png"
-                                                                        class="mr-3" alt="...">
-                                                                    <div class="media-body">
-                                                                        <h5 class="mt-0">LyonTech</h5>
-                                                                        <p class="text-break">{{ $item->content }}</p>
-                                                                        <small
-                                                                            class="gpt-time_date">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png" class="mr-3" alt="...">
+                                                                    <div class="media-body" style="float:left;">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <p class="box-chrerry-chat mb-0">{{ $item->content }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <small class="gpt-time_date mt-0" style="float:left;">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -230,152 +232,181 @@
                                                     @endforeach
                                                 @endif
                                             </div>
-                                            <textarea wire:model="message" class="form-control" rows="3" style="background-color: #fff;"></textarea>
+                                            <textarea wire:model="message" class="form-control" rows="3" placeholder="Escribe tu consultas aqui..." style="background-color: #fff;"></textarea>
 
-                                            <div class="row" style="padding: 5px 0px;">
-                                                <div class="col-md-4">
-                                                    <span class="label">
-                                                        Seleccionar archivo
-                                                    </span>
-
-                                                    <input type="file" id="file" name="file"
-                                                        wire:model="file" class="upload-box"
-                                                        placeholder="Uplsdadoad File">
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <p class="p-small">Sin archivos seleccionados</p>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <button wire:click="saveMessageUser" wire:loading.attr="disabled"
-                                                        wire:target="saveMessageUser" type="button"
-                                                        class="btn btn-orange">
-                                                        <i wire:loading.remove wire:target="saveMessageUser"
-                                                            class="fa fa-location-arrow mr-2"></i>
-                                                        <div wire:loading wire:target="saveMessageUser"
-                                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                                            style="display: none">
-                                                            <span class="sr-only">Loading...</span>
-                                                        </div>
-                                                        <span>Enviar</span>
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <script>
-                                    scrollChatGptToBottom();
-                                </script>
+                                <div class="row" style="padding: 5px 0px;">
+                                    <div class="col-md-8">
+                                        <div class="file-upload">
+                                            <button onclick="document.getElementById('file').click()" class="span-small">Seleccionar archivo</button>
+                                            <input type="file" id="file" onchange="updateFileName()">
+                                            <span class="file-name" id="file-name" style="font-size: 11px;">Ningún archivo seleccionado</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button wire:click="saveMessageUser" wire:loading.attr="disabled"
+                                            wire:target="saveMessageUser" type="button"
+                                            class="btn btn-orange" style="margin-top: -5px; width: 100%;">
+                                            <i wire:loading.remove wire:target="saveMessageUser"
+                                                class="fa fa-location-arrow mr-2"></i>
+                                            <div wire:loading wire:target="saveMessageUser"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <span>Enviar</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-5 pl-0">
-
-
-                                <h4 class="text-center">Palabras clave</h4>
-                                <ul class="list-group list-group-flush">
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(1)" type="button"
-                                        wire:click="r_prompts(1)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(1)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Objetivos
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(2)" type="button"
-                                        wire:click="r_prompts(2)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(2)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Estructura de
-                                        antecedente
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(3)" type="button"
-                                        wire:click="r_prompts(3)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(3)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Problemática
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(4)" type="button"
-                                        wire:click="r_prompts(4)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(4)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Teorías
-                                        empleadas
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(5)" type="button"
-                                        wire:click="r_prompts(5)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(5)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Definiciones de
-                                        variables
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(6)" type="button"
-                                        wire:click="r_prompts(6)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(6)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Aporte de
-                                        estudio
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(7)" type="button"
-                                        wire:click="r_prompts(7)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(7)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Resultados
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(8)" type="button"
-                                        wire:click="r_prompts(8)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(8)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Recomendación
-                                        principal
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(9)" type="button"
-                                        wire:click="r_prompts(9)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(9)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Propuesta de
-                                        mejora
-                                    </button>
-                                    <button wire:loading.attr="disabled" wire:target="r_prompts(10)" type="button"
-                                        wire:click="r_prompts(10)" class="list-group-item list-group-item-action">
-                                        <div wire:loading wire:target="r_prompts(10)"
-                                            class="spinner-grow spinner-grow-sm mr-2" role="status"
-                                            style="display: none">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                        Resumen general
-                                    </button>
-                                </ul>
-
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center;">
+                                        <p style="font-weight: 700;">Palabras claves</p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(1)" type="button" wire:click="r_prompts(1)">
+                                            <div wire:loading wire:target="r_prompts(1)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Objetivos</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(2)" type="button" wire:click="r_prompts(2)">
+                                            <div wire:loading wire:target="r_prompts(2)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Estructura de antecedentes</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a  wire:loading.attr="disabled" wire:target="r_prompts(3)" type="button" wire:click="r_prompts(3)">
+                                            <div wire:loading wire:target="r_prompts(3)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Problematica</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(4)" type="button"
+                                            wire:click="r_prompts(4)">
+                                            <div wire:loading wire:target="r_prompts(4)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Teorias empleadas</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(5)" type="button"  wire:click="r_prompts(5)">
+                                            <div wire:loading wire:target="r_prompts(5)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Definiciones de las variables</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(6)" type="button"
+                                            wire:click="r_prompts(6)">
+                                            <div wire:loading wire:target="r_prompts(6)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Aporte de estudio</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(7)" type="button" wire:click="r_prompts(7)">
+                                            <div wire:loading wire:target="r_prompts(7)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Resultados</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(8)" type="button" wire:click="r_prompts(8)">
+                                            <div wire:loading wire:target="r_prompts(8)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Recomendación principal</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(9)" type="button" wire:click="r_prompts(9)">
+                                            <div wire:loading wire:target="r_prompts(9)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Propuesta de mejora</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 list-vertical" style="margin-top: -15px;">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(10)" type="button"
+                                            wire:click="r_prompts(10)">
+                                            <div wire:loading wire:target="r_prompts(10)"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <p class="mt-0">Resumen general</p>
+                                        </a>
+                                        <hr>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @elseif($typeAction == 5)
                         <div class="row align-items-center">
                             <div class="col-md-12">
-
                                 <div class="mt-2">
                                     <label class="mb-0">&nbsp;&nbsp;DOI:</label>
                                     <input wire:model="consulta" id="input-doi-buscar-id" type="text"
@@ -390,22 +421,23 @@
                                         <option value="vancouver">Vancouver</option>
                                     </select>
                                 </div>
-                                <div class="row" style="padding: 5px 0px;">
-                                    <div class="col-10 mt-1">
+                                <div class="row" style="padding: 5px 8px 5px 0px;">
+                                    <div class="col-md-9 mt-1">
                                         <a href="#" onclick="modifyCitation()" id="modify-citation-id"
-                                            class="btn-small" type="button">Modificar cita</a>
+                                            class="btn-small" type="button">Modificar cita
+                                        </a>
                                         <a href="#" onclick="copyCitation()" class="btn-small"
-                                            type="button">Copiar
-                                            cita</a>
+                                            type="button">Copiar cita
+                                        </a>
                                         <a href="#" onclick="hideBuscar()" id="cita-manual-id"
                                             data-toggle="collapse" data-target="#collapseWidthExample1"
                                             aria-expanded="false" aria-controls="collapseWidthExample1"
-                                            class="btn-small" type="button">Cita
-                                            manual</a>
+                                            class="btn-small" type="button">Cita manual
+                                        </a>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-md-3">
                                         <button wire:click="saveMessageUser" wire:loading.attr="disabled"
-                                            id="ckgetBtnReference" type="button" class="btn btn-orange">
+                                            id="ckgetBtnReference" type="button" class="btn btn-orange" style="width: 100%;">
                                             <div wire:loading wire:target="saveMessageUser" style="display: none"
                                                 class="spinner-grow spinner-grow-sm" role="status">
                                                 <span class="sr-only">Loading...</span>
@@ -676,5 +708,14 @@
         window.addEventListener('scroll-messages-updated', event => {
             scrollChatGptToBottom();
         })
+    </script>
+
+
+    <script>
+        function updateFileName() {
+            const input = document.getElementById('file');
+            const fileName = document.getElementById('file-name');
+            fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
+        }
     </script>
 </div>

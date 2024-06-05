@@ -68,7 +68,7 @@
 
                             <form action="{{ route('paypal_payment') }}" method="POST" style="display: inline;">
                                 @csrf
-                                <input type="hidden" name="amount" value="5">
+                                <input type="hidden" name="id_subscription" value="{{ $mod }}">
                                 <input type="hidden" name="full_name" value="paypal_payer">
                                 <input type="hidden" name="currecy" value="currency">
                             <button class="btn-with-icon boton mt-3 ">

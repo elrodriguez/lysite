@@ -14,14 +14,15 @@
 
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
-                <li class="nav-item dropdown" style="margin-left: 35px; font-size: 1.2rem;">
+                <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
                         Herramientas
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
                         @can('academico_directo_gpt')
                             <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
+                            <a class="dropdown-item" href="">HOJA DE TRABAJO</a>
                         @else
                             <a class="dropdown-item" href="{{ route('modo_page') }}">CONSULTAS IA</a>
                         @endcan
@@ -32,7 +33,7 @@
                     </div>
                 </li>
                 @can('academico_directo_cursos')
-                    <li class="nav-item dropdown " style="margin-left: 35px; font-size: 1.2rem;">
+                    <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                             id="courses">
                             {{ __('labels.My Courses') }}
@@ -71,8 +72,17 @@
                     <livewire:investigation::thesis.header-investigation />
                 @endcan
             @else
-                <li class="nav-item active" style="margin-left: 25px; font-size: 1.2rem;">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Membresías</a>
+                <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                        Herramientas
+                    </a>
+                </li>
+                <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                        Membresias
+                    </a>
                 </li>
             @endif
         </ul>
@@ -81,14 +91,14 @@
             @auth
                 <button class="custom-button-c ml-2" style="margin-right: 35px;">
                     <div>
-                        <img src="{{ asset('theme-lyontech/images/corona.jpg') }}" alt="Icono">
+                        <a href="{{ route('modo_page') }}"><img src="{{ asset('assets/images/corona.jpg') }}" alt="Icono"></a>
                     </div>
                 </button>
 
                 <li class="nav-item dropleft">
                     <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('theme-lyontech/images/user-black.jpg') }}"
+                        <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
                             style="width: 50px; height:auto; margin-top: -20px;" alt="Icono">
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
@@ -154,10 +164,10 @@
                 </li>
             @else
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="{{ route('ly-login') }}" class="btn-orange" style="margin-right: 35px;">
+                    <a href="{{ route('ly-login') }}" class="btn btn-orange" style="margin-right: 35px;">
                         <strong> Iniciar sesión </strong>
                     </a>
-                    <a href="{{ route('register') }}" class="btn-orange"><strong>Registrame</strong></a>
+                    <a href="{{ route('register') }}" class="btn btn-orange"><strong>Registrame</strong></a>
                 </form>
             @endauth
         @endif
