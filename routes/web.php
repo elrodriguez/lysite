@@ -60,9 +60,9 @@ route::get('lista/admin', function () {
     dd($admins);
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
 
 Route::get('/register', function () {
     //return view('auth.register');
