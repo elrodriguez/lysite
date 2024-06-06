@@ -54,13 +54,6 @@ class DashboardController extends Controller
 
 
 
-
-
-
-
-
-
-
     
     /* RUTAS DEL YISUS - Provicional */
     public function thanks()

@@ -1,20 +1,20 @@
 @extends('layouts.tutorio')
 @section('bootstrap')
-    <!-- Material Design Icons -->
+    <!-- Material Design Icons 
     <link type="text/css" href="{{ asset('assets/css/material-icons.css') }}" rel="stylesheet">
 
 
-    <!-- Font Awesome Icons -->
     <link type="text/css" href="{{ asset('assets/css/fontawesome.css') }}" rel="stylesheet">
 
     <link type="text/css" href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
-
+-->
 @stop
 @section('lycss')
 
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
+        <!--
+    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">-->
 
 @stop
 @section('content')

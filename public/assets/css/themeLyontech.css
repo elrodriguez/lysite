@@ -1,7 +1,7 @@
 
 [dir=ltr] .container-section{
   width: 1360px;
-  margin: auto
+  margin: auto;
 }
 
 [dir=ltr] .bg-gradient{
@@ -63,7 +63,7 @@
 
 
 [dir=ltr] .box-section {
-  padding: 0px 0px 60px 0px;
+  padding: 40px 0px 60px 0px;
 }
 
 [dir=ltr] .title-ia-lyon {
@@ -389,6 +389,19 @@
   text-decoration: none;
   text-transform: uppercase;
 }
+
+
+
+[dir=ltr] .badge-orange{
+  background: orange;
+  color: #fff;
+  padding: 5px 7px;
+}
+
+
+
+
+
 
 
 /*  RESPONSIVE  */
