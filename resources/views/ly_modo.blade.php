@@ -1,54 +1,60 @@
 @extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/12-modo.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('theme-lyontech/css/12-modo.css') }}">-->
 @stop
 @section('content')
 
-    <body class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
-        <div class="container ftco-section ">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                    <div class="container-fluid d-flex justify-content-center">
-                        <div class="card">
-                            <div class="row text-center">
-                                @if (count($modos) > 0)
-                                    @foreach ($modos as $modo)
-                                        <div class="col-md-4 col-lg-4">
-                                            <div class="card card-body">
-                                                <div class="modo-titulo text-center">
-                                                    <h5>{{ $modo->name }}</h5>
-                                                </div>
-                                                <div class="texto-orange-12 text-center mt-2">
-                                                    <h5>{{ $modo->price ?? 'GRATIS' }}</h5>
-                                                    <h4><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/{{ $modo->detail_one }}</strong>
-                                                    </h4>
-                                                </div>
-                                                <div class="modo-text" style="text-align: left;">
-                                                    <p>-{{ $modo->detail_two }}</p>
-                                                    <p>-{{ $modo->detail_three }}.</p>
-                                                    <p>-{{ $modo->detail_four }}.</p>
-                                                    <p>-{{ $modo->detail_five }}.</p>
-                                                </div>
-                                                <div class="form-group  mt-5 btn-cent" style="margin-top: 20px; ">
-                                                    @if ($modo->price > 0)
-                                                        <a href="{{ route('unirme_page', $modo->id) }}"
-                                                            class="btn btn-primary submit ">Unirse</a>
-                                                    @else
-                                                        <a href="{{ route('register') }}"
-                                                            class="btn btn-primary submit ">Registrado</a>
-                                                    @endif
-                                                </div>
-                                            </div>
+    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
+        <div class="container-fluid  page__container">
+            <div class="row align-content-center justify-content-center">
+                @if (count($modos) > 0)
+                    @foreach ($modos as $modo)
+                        <div class="col-md-4">			
+                            <div class="card">
+                                <div class="card-body mt-3">
+                                    <div class="row">
+                                        <div class="col-md-12">                                               
+                                            <h5 class="text-center" style="padding: 0px; margin: 0px;">{{ $modo->name }}</h5>
+                                            <p class="mt-0 mb-0  text-center" style="color: #000;">
+                                                <strong>{{ $modo->price ?? 'GRATIS' }}</strong>
+                                            </p>
+                                            <p class="mt-0 mb-0 text-center" style="color: #000;">
+                                                <strong>/{{ $modo->detail_one }}</strong>
+                                            </p>
                                         </div>
-                                    @endforeach
-                                @endif
-
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <ul>
+                                                <li style="text-align-last: justify;">{{ $modo->detail_two }}</li>
+                                                <li style="text-align-last: justify;">{{ $modo->detail_three }}</li>
+                                                <li style="text-align-last: justify;">{{ $modo->detail_four }}</li>
+                                                <li style="text-align-last: justify;">{{ $modo->detail_five }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    <form action="#" class="signin-form mt-2">
+                                        <div class="form-group mt-4 btn-cent mb-4">
+                                            @if ($modo->price > 0)
+                                                <a href="{{ route('unirme_page', $modo->id) }}"
+                                                    class="form-control btn btn-orange submit">Unirse</a>
+                                            @else
+                                                <a href="{{ route('register') }}"
+                                                    class="form-control btn btn-gris submit">Registrado</a>
+                                            @endif
+                                        </div>
+                                    </form>
+                                </div>    
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>    
+                    @endforeach
+                @endif  
             </div>
         </div>
-    </body>
+    </div>
+
 @stop

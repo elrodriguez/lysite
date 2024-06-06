@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+[dir=ltr] .container-center{
+  margin: auto;
+}
+
 [dir=ltr] .bg-gradient{
   background: rgb(255,164,73);
   background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
@@ -65,6 +69,8 @@
 [dir=ltr] .box-section {
   padding: 40px 0px 60px 0px;
 }
+
+
 
 [dir=ltr] .title-ia-lyon {
   text-align: left; 
@@ -169,6 +175,19 @@
   color: #fff;
   background-color: #ff9152;
   border-color: #ff9152;
+}
+
+[dir=ltr] .btn-orange:hover {
+  color: #fff;
+  background-color: #e36e2b;
+  border-color: #e36e2b;
+}
+
+
+[dir=ltr] .btn-gris {
+  color: #fff;
+  background-color: #a1a1a1;
+  border-color: #a1a1a1;
 }
 
 [dir=ltr] .btn-orange:hover {
