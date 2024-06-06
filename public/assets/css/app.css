@@ -22201,10 +22201,15 @@ html {
   background-image: linear-gradient(-128deg, #8a4182, #3289dc)
 }
 
+/*
 [dir=ltr] .bg-gradient-primary {
   background-image: linear-gradient(128deg, #1e6dbd, #3287db)
-}
+}*/
 
+
+[dir=ltr] .bg-gradient-primary {
+  background-image: linear-gradient(128deg, #ff9152, #ff9152)
+}
 
 [dir=ltr] .border-1 {
   border: 1px solid #ebeff2 !important

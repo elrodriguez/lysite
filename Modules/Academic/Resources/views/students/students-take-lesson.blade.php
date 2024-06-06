@@ -5,7 +5,7 @@
         <x-lyontech.header></x-lyontech.header>
         <x-lyontech.student-data></x-lyontech.student-data>
 
-        <div class="navbar navbar-expand-sm navbar-submenu navbar-light navbar-list p-0 m-0 align-items-center">
+        <div class="navbar navbar-expand-sm navbar-submenu navbar-light navbar-list p-0 m-0 align-items-center"> 
             <div class="container page__container">
                 <ul class="nav navbar-nav flex align-items-sm-center">
                     @if ($instruct)
@@ -38,7 +38,6 @@
             </div>
         </div>
 
-        <br>
         @livewire('academic::students.student-take-lesson', ['course_id' => $course_id, 'section_id' => $section_id, 'content_id' => $content_id])
     </body>
 @stop
