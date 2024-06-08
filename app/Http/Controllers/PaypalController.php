@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\EPaymentsLog;
 use App\Models\TypeSubscription;
+use App\Http\Controllers\AutomationController;
+use Illuminate\Support\Facades\Auth;
 
 class PaypalController extends Controller
 {
@@ -39,7 +41,7 @@ class PaypalController extends Controller
         $data = array(
           "intent" => "CAPTURE",
           "application_context" => [
-            "return_url" => route('paypal_success', $payment->id),
+            "return_url" => route('paypal_success', [$payment->id, $request->id_subscription]),
             "cancel_url" => route('paypal_cancel', $payment->id),
         ],
           "purchase_units" => array(
@@ -71,7 +73,7 @@ class PaypalController extends Controller
 
     }
 
-    public function success($payment_id, Request $request){
+    public function success($payment_id, $type_subscription_id,  Request $request){
       $provider = new PayPalClient;
       $provider = \PayPal::setProvider();
       $paypalToken = $provider->getAccessToken();
@@ -86,7 +88,11 @@ class PaypalController extends Controller
         $payment->email = $email;
         $payment->country_origin = $countryCode;
         $payment->save();
-        return redirect()->route('web_gracias_por_donar', ['donador' => $payment->name]);
+
+        $automation = new AutomationController();
+        $result = $automation->succes_payment_auto($type_subscription_id); //este metodo del controlador AutomationController debe conceder permisos para tesis e uso de IA
+
+        return view('ly_thanks');
       }else{
         $payment = EPaymentsLog::find($payment_id);
         $payment->status_order = "CA"; //Cancelado transacción no llevada a cabo
