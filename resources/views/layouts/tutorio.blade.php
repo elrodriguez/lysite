@@ -5,36 +5,45 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Take Course</title>
-
+    <title>{{ env('APP_NAME', 'Laravel') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
+    <meta name="thesis" content="index">
+    <!-- Perfect Scrollbar -->
+    <!-- Icono de la página -->
+    <link rel="shortcut icon" type="image/png" href="{{ url('assets/images/logo/white-60.png') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ url('assets/images/logo/white-60.png') }}">
 
     <!-- Perfect Scrollbar -->
-    <link type="text/css" href="{{ asset('assets/vendor/perfect-scrollbar.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/vendor/perfect-scrollbar.css') }}" rel="stylesheet">
 
     <!-- Fix Footer CSS -->
-    <link type="text/css" href="{{ asset('assets/vendor/fix-footer.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/vendor/fix-footer.css') }}" rel="stylesheet">
 
     <!-- Material Design Icons -->
-    <link type="text/css" href="{{ asset('assets/css/material-icons.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/css/material-icons.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/material-icons.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/material-icons.rtl.css') }}" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
-    <link type="text/css" href="{{ asset('assets/css/fontawesome.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/css/fontawesome.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/fontawesome.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/fontawesome.rtl.css') }}" rel="stylesheet">
 
     <!-- Preloader -->
-    <link type="text/css" href="{{ asset('assets/css/preloader.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/css/preloader.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/preloader.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/preloader.rtl.css') }}" rel="stylesheet">
 
     <!-- App CSS -->
-    <link type="text/css" href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/css/app.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/app.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/app.rtl.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
+    <link type="text/css" href="{{ url('assets/css/chat.css') }}" rel="stylesheet">
     <!-- Theme Lyontech CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/themeLyontech.css') }}">
 
+    @yield('styles')
     @yield('lycss')
 
 </head>
@@ -81,8 +90,8 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="
-                                https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
-                                "></script>
+                                                        https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
+                                                        "></script>
     @yield('script')
     @yield('modales')
     <!-- Modal -->

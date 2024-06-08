@@ -91,7 +91,8 @@
             @auth
                 <button class="custom-button-c ml-2" style="margin-right: 35px;">
                     <div>
-                        <a href="{{ route('modo_page') }}"><img src="{{ asset('assets/images/corona.jpg') }}" alt="Icono"></a>
+                        <a href="{{ route('modo_page') }}"><img src="{{ asset('assets/images/corona.jpg') }}"
+                                alt="Icono"></a>
                     </div>
                 </button>
 
@@ -115,52 +116,9 @@
                     </div>
                 </li>
                 <li class="nav-item dropleft">
-                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('theme-lyontech/images/msj-black.png') }}"
-                            style="width: 50px; height:auto; margin-top: -20px; " alt="Icono">
-                    </a>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2"
-                            action="#">
+                    <livewire:chat::ly-contact-list />
 
-                            <button class="btn" type="submit" role="button"><i
-                                    class="material-icons">search</i></button>
-                            <input type="text" class="form-control" placeholder="Buscar...?">
-                        </form>
-
-                        <span class="d-flex ml-2">
-
-                            <span class="media-left mr-16pt">
-                                <img src="assets/images/people/50/guy-6.jpg" width="40" alt="avatar"
-                                    class="rounded-circle">
-                            </span>
-                            <div class="media-body">
-                                <a class="card-title m-0" href="instructor-profile.html">administrador: Eddie Bryan</a>
-
-                                <p class="flex text-black-50 lh-1 mb-0"><span
-                                        class="material-icons icon-16pt text-black-50 mr-4pt">access_time</span><small>6
-                                        hours</small></p>
-                            </div>
-
-                        </span>
-                        <span class="d-flex mt-2 ml-2">
-                            <span class="media-left mr-16pt">
-                                <img src="assets/images/people/50/guy-6.jpg" width="40" alt="avatar"
-                                    class="rounded-circle">
-                            </span>
-                            <div class="media-body">
-                                <a class="card-title m-0 color-azul" href="instructor-profile.html">Instructor: Eddie
-                                    Bryan</a>
-                                <p class="flex text-black-50 lh-1 mb-0"><span
-                                        class="material-icons icon-16pt text-black-50 mr-4pt">access_time</span><small>6
-                                        hours</small></p>
-                            </div>
-                        </span>
-
-
-                    </div>
                 </li>
             @else
                 <form class="form-inline my-2 my-lg-0">

@@ -16,7 +16,7 @@
                                 <p>-15 días de acompañamiento del asesor virtual.</p>
                             </div>
                             <div class="form-group  mt-4 btn-cent" style="margin-top: 20px; ">
-                                <button type="submit" class="form-control btn btn-primary submit ">Registrado</button>
+                                <button type="button" class="form-control btn btn-primary submit ">Registrado</button>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                                 <p>-Acompañamiento 24 horas del asesor virtual.</p>
                             </DIV>
                             <div class="form-group-b mt-5 btn-cent">
-                                <button type="submit" class="form-control btn btn-primary submit ">Unirse</button>
+                                <button type="button" class="form-control btn btn-primary submit ">Unirse</button>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                 <p>-Acompañamiento 24 horas del asesor virtual.</p>
                             </DIV>
                             <div class="form-group-b mt-4 btn-cent">
-                                <button type="submit" class="form-control btn btn-primary submit ">Unirse</button>
+                                <button type="button" class="form-control btn btn-primary submit ">Unirse</button>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 <div>
+
     <section id="chat-container" style="background-color: #eee;">
 
         <div class="card">
