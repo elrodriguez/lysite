@@ -23,5 +23,7 @@ class TypeSubscription extends Model
         'dollar_price',
         'created_user_id',
         'updated_user_id',
+        'ai_oportunities',
+        'allowed_thesis'
     ];
 }

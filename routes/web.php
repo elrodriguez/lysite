@@ -117,7 +117,7 @@ Route::get('/tarjeta/{mod}', function ($mod) {
 
 /* PayPal */
 Route::post('/paypal/payment', [PaypalController::class, 'payment'])->name('paypal_payment');
-Route::get('/paypal/success/{paymentId}', [PaypalController::class, 'success'])->name('paypal_success');
+Route::get('/paypal/success/{paymentId}/{type_subscription_id}', [PaypalController::class, 'success'])->name('paypal_success');
 Route::get('/paypal/cancel/{paymentId}', [PaypalController::class, 'cancel'])->name('paypal_cancel');
 
 require __DIR__ . '/auth.php';
