@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\SessionHistory;
+use App\Models\TypeSubscription;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -16,8 +17,11 @@ class LyLoginForm extends Component
     public $password;
     public $rememberme = false;
 
+    public $modos = [];
+
     public function render()
     {
+        $this->modos = TypeSubscription::limit(3)->get();
         return view('livewire.auth.ly-login-form');
     }
 

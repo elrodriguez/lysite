@@ -3,59 +3,32 @@
         <div class="row g-5">
             <div class="col-lg-7 justify-content-center" style="margin-top: 95px;">
                 <div class="card-group ">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="modo-titulo text-center">
-                                <h5>MODO</h5>
-                                <h5>GRATUITO</h5>
+                    @if (count($modos) > 0)
+                        @foreach ($modos as $modo)
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="modo-titulo text-center">
+                                        <h5>{{ $modo->name }}</h5>
+                                    </div>
+                                    <div class="modo-text" style="text-align: left;">
+                                        <p>-{{ $modo->detail_two }}.</p>
+                                        <p>-{{ $modo->detail_three }}</p>
+                                        <p>-{{ $modo->detail_four }}</p>
+                                        <p>-{{ $modo->detail_five }}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    @if ($modo->price > 0)
+                                        <a href="{{ route('unirme_page', $modo->id) }}"
+                                            class="form-control btn btn-orange submit">Unirse</a>
+                                    @else
+                                        <a href="{{ route('register') }}"
+                                            class="form-control btn btn-primary submit">Registrado</a>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="modo-text" style="text-align: left;">
-                                <p>-Acceso ilimitado a los cursos.</p>
-                                <p>-Acceso ilimitado a las herramientas IA.</p>
-                                <p>-1500 oportunidades en consultas a la IA.</p>
-                                <p>-15 días de acompañamiento del asesor virtual.</p>
-                            </div>
-                            <div class="form-group  mt-4 btn-cent" style="margin-top: 20px; ">
-                                <button type="button" class="form-control btn btn-primary submit ">Registrado</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="modo-titulo text-center">
-                                <h5>MODO</h5>
-                                <h5>STANDAR</h5>
-                            </div>
-                            <DIV class="modo-text" style="text-align: left;">
-                                <p>-Acceso ilimitado a los cursos.</p>
-                                <p>-Acceso ilimitado a las herramientas IA.</p>
-                                <p>-3500 oportunidades en consultas a la IA.</p>
-                                <p>-Acompañamiento 24 horas del asesor virtual.</p>
-                            </DIV>
-                            <div class="form-group-b mt-5 btn-cent">
-                                <button type="button" class="form-control btn btn-primary submit ">Unirse</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="modo-titulo text-center">
-                                <h5>MODO</h5>
-                                <h5>PREMIUM</h5>
-                            </div>
-                            <DIV class="modo-text" style="text-align: left;">
-                                <p>-Acceso ilimitado a los cursos.</p>
-                                <p>-Acceso ilimitado a las herramientas IA.</p>
-                                <p>-Oportunidades ilimitadas en consultas a la IA.</p>
-                                <p>-Acompañamiento 24 horas del asesor virtual.</p>
-                            </DIV>
-                            <div class="form-group-b mt-4 btn-cent">
-                                <button type="button" class="form-control btn btn-primary submit ">Unirse</button>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
 
             </div>
