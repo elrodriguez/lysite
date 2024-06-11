@@ -1,6 +1,6 @@
 
 [dir=ltr] .container-section{
-  width: 1360px;
+  width: 1600px;
   margin: auto;
 }
 
@@ -131,7 +131,11 @@
 [dir=ltr] .list-vertical hr{
   margin-top: -15px;
 }
-
+/*
+[dir=ltr] .list-palabras-claves p{
+  font-size: 13px;
+  padding: 0px;
+}*/
 
 [dir=ltr] .span-small{
   font-size: 13px;

@@ -32,7 +32,7 @@
 
 
             <div class="row box-chrerry">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="row">
                         <div class="col-md-12">
                             <a href="#" class="media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     @if ($typeAction == 1)
                         <div class="row align-items-center">
                             <div class="col-md-12">
@@ -133,7 +133,7 @@
                                 <form class="datos">
                                     <div class="mt-2">
                                         <label class="mb-0">&nbsp;&nbsp;Descripción:</label>
-                                        <input wire:model="consulta" class="form-control" id="consulta"
+                                        <input wire:model="consulta" class="form-control" id="consulta" placeholder="Escribe aquí palabras clave sobre el tema que requieres"
                                             style="background-color: #fff;">
                                     </div>
                                     <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
@@ -185,7 +185,7 @@
                         </div>
                     @elseif($typeAction == 4)
                         <div class="row box-chrerry">
-                            <div class="col-md-9" style="padding: 0px;">
+                            <div class="col-md-10" style="padding: 0px;">
                                 <div class="row align-items-center">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -261,7 +261,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12" style="text-align: center;">
                                         <p style="font-weight: 700;">Palabras claves</p>

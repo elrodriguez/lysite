@@ -2,12 +2,12 @@
     <div class="dropdown">
         @if (Auth::user()->hasrole('Admin') || Auth::user()->hasrole('Instructor'))
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
+                data-toggle="dropdown" aria-expanded="false" style="font-size: 25px;">
                 Investigación
             </a>
         @else
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                aria-haspopup="true" aria-expanded="false" style="font-size: 25px;">
                 Investigación
             </a>
         @endif

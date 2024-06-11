@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('theme-lyontech/images/icon.jpg') }}" width="30" height="30" style="margin-left: 10px; ">
+        <img src="{{ asset('theme-lyontech/images/icon.jpg') }}" width="28" height="28" style="margin-left: 10px; ">
         <span class="brand-text">
             LyonTeach
         </span>
@@ -14,9 +14,9 @@
 
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
-                <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
+                <li class="nav-item dropdown" style="margin-left: 35px; padding: 15px 0px 15px 0px;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 25px;">
                         Herramientas
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
@@ -35,7 +35,7 @@
                 @can('academico_directo_cursos')
                     <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
-                            id="courses">
+                            id="courses" style="font-size: 25px;">
                             {{ __('labels.My Courses') }}
                         </a>
                         <div class="dropdown-menu card-bg min-width: 200px;" aria-labelledby="navbarDropdown">
@@ -74,13 +74,13 @@
             @else
                 <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 25px;">
                         Herramientas
                     </a>
                 </li>
                 <li class="nav-item dropdown" style="margin-left: 35px; padding: 20px 0px 15px 0px;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 25px;">
                         Membresias
                     </a>
                 </li>
