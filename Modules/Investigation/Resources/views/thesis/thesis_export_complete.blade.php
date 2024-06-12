@@ -34,7 +34,7 @@
         </div>
     </header>
     <main>
-        <div class="message">
+        <div class="message" style="background: #c51762;">
             <div class="centered">
                 <h2>Aquí podrá exportar su tesis: {{ $title }}</h2>
             </div>
@@ -50,7 +50,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </main>
     <footer>

@@ -52,7 +52,7 @@
 
 
      <div class="text-center">
-         <button class="btn btn-accent btn-lg">{{ __('labels.Email Password Reset Link') }}</button>
+         <button class="btn btn-orange btn-lg">{{ __('labels.Email Password Reset Link') }}</button>
      </div>
  </form>
 

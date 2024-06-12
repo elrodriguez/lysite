@@ -14,30 +14,36 @@
         }
     </style>
     @stack('scripts')
-    <div class="container page__container">
+
+    <br>
+    <div class="container-section-1360p page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('investigation::labels.thesis_parts') }}</li>
+            <li class="breadcrumb-item active-black">{{ __('investigation::labels.thesis_parts') }}</li>
         </ol>
     </div>
-    <div class="container page__container">
-        <div class="d-flex flex-wrap align-items-start mb-3">
-            <div class="d-flex mr-24pt">
-                <div class="flex">
-                    <a class="text-body"
-                        href="{{ route('worksheet', $thesis_student->id) }}"><strong>{{ $thesis_student->title }}</strong></a><br>
-                </div>
+    <div class="container-section-1360p page__container">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="text-body" href="{{ route('worksheet', $thesis_student->id) }}">
+                    <strong>{{ $thesis_student->title }}</strong>
+                </a>
             </div>
-            <div class="d-flex align-items-center py-4pt" style="white-space: nowrap;">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
                 <div class="btn-group" role="group">
-                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn-primary">
+                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn-orange">
                         <i class="fa fa-pencil-alt mr-1"></i>
                     </button>
                     <button onclick="deleteThesisStudent({{ $thesis_student->id }})" type="button"
-                        class="btn btn-primary"><i class="fa fa-trash-alt mr-1"></i>
+                        class="btn btn-secondary"><i class="fa fa-trash-alt mr-1"></i>
                     </button>
                 </div>
             </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
         </div>
 
 
@@ -73,7 +79,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="custom-control custom-checkbox">
-                        <input wire:model="auto_save" class="custom-control-input" type="checkbox" value=""
+                        <input wire:model="auto_save" class="custom-control-input-orange" type="checkbox" value=""
                             id="auto-saveCheck">
                         <label class="custom-control-label" for="auto-saveCheck" onclick="toggleSaving()">
                             {{ __('labels.Automatic save') }}
@@ -83,7 +89,7 @@
                 <div class="col">
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                    <button type="button" class="btn btn-orange" data-toggle="modal"
                         data-target="#exampleModalScrollable">
                         Indice de Contenidos
                     </button>
@@ -127,7 +133,7 @@
                                                 @if (count($parts) > 0)
                                                     @foreach ($parts as $part)
                                                         @if ($part['id'] == $focus_id)
-                                                            <li class="alert alert-primary">
+                                                            <li class="alert alert-cherry">
                                                                 <a class="alert-link"
                                                                     href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
                                                                     {{ $part['number_order'] . ' ' . $part['description'] }}</a>
@@ -201,7 +207,7 @@
                             <div>
                                 <div class="form-group">
                                     <label for="text1">Escribe aquí lo que desee parafrasear</label>
-                                    <select class="form-control prompty bg-primary text-white" name="prompt">
+                                    <select class="form-control prompty bg-cherry text-white" name="prompt">
                                         <option value="0">Como Investigador</option>
                                         <option value="1">Disminuir Similitud</option>
                                         <option value="2">Humanizar Texto</option>
@@ -243,9 +249,9 @@
                                         placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio.">{!! $resultado !!}</textarea>
                                 </div>
                                 <button onclick="closeParahrase()" type="button"
-                                    class="btn btn-success">Cancelar</button>
-                                <button type="button" class="btn btn-warning" id="paraphrasing">Copiar</button>
-                                <button class="btn btn-primary" wire:click="paraphrasing">Procesar</button>
+                                    class="btn btn-secondary">Cancelar</button>
+                                <button type="button" class="btn btn-cherry" id="paraphrasing">Copiar</button>
+                                <button class="btn btn-orange" wire:click="paraphrasing">Procesar</button>
                             </div>
                         </div>
                     </div>
@@ -269,7 +275,7 @@
                         <div class="row">
                             <div class="col mb-2"
                                 style="display: flex; align-items: center; justify-content: center;">
-                                <button type="button" class="btn-primary btn  mt-0" wire:loading.attr="disabled"
+                                <button type="button" class="btn-orange btn  mt-0" wire:loading.attr="disabled"
                                     onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
                                 </button>
                             </div>

@@ -4,6 +4,11 @@
   margin: auto;
 }
 
+[dir=ltr] .container-section-1360p{
+  width: 1360px;
+  margin: auto;
+}
+
 [dir=ltr] .container-center{
   margin: auto;
 }
@@ -12,6 +17,22 @@
   background: rgb(255,164,73);
   background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
 }
+
+[dir=ltr] .bg-purple{
+  background: #c51762;
+}
+
+[dir=ltr] .bg-cherry {
+  background-color: #ffb890 !important;
+}
+
+[dir=ltr] a.bg-cherry:focus,
+[dir=ltr] a.bg-cherry:hover,
+[dir=ltr] button.bg-cherry:focus,
+[dir=ltr] button.bg-cherry:hover {
+  background-color: #ffb890 !important;  
+}
+
 
 [dir=ltr] .active {
   color: #fff;
@@ -68,8 +89,52 @@
   font-size: 16px;
 }
 
+.custom-control-input-orange {
+  background-color: #ff9152;
+}
+
+[dir=ltr] .custom-control-input-orange {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  color: #fff;
+}
+
+[dir=ltr] .custom-control-input-orange:checked~.custom-control-label:before {
+  color: #fff;
+  border-color: #ff9152;
+  background-color: #ff9152;
+}
+
+[dir=ltr] .custom-control-input-orange:focus~.custom-control-label:before {
+  box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #ff9152;
+}
+
+[dir=ltr] .custom-control-input-orange:focus:not(:checked)~.custom-control-label:before {
+  border-color: #e7ebee
+}
+
+[dir=ltr] .custom-control-input-orange:not(:disabled):active~.custom-control-label:before {
+  color: #fff;
+  background-color: #c6def6;
+  border-color: #c6def6
+}
+
+[dir=ltr] .custom-control-input-orange:disabled~.custom-control-label {
+  color: #868e96
+}
+
+[dir=ltr] .custom-control-input-orange:disabled~.custom-control-label:before {
+  background-color: #e9ecef
+}
+
 /* FIN INPUT PERSONALIZADO */
 
+[dir=ltr] .alert-cherry {
+  color: #2e6092;
+  background-color: #ffe9db; 
+  border-color: #ffe9db;
+}
 
 [dir=ltr] .box-section {
   padding: 40px 0px 60px 0px;
@@ -206,6 +271,29 @@
   color: #fff;
   background-color: #e36e2b;
   border-color: #e36e2b;
+}
+
+
+[dir=ltr] .btn-cherry {
+  color: #fff;
+  background-color: #ffb890;  
+  border-color: #ffb890; 
+}
+
+[dir=ltr] .btn-cherry:hover {
+  color: #fff;
+  background-color: #e7a37c;
+  border-color: #e7a37c;
+}
+
+[dir=ltr] .btn-cherry-border {
+  color: #ffb890; 
+}
+
+[dir=ltr] .btn-cherry-border:hover {
+  color: #000;
+  background-color: #ffb890; 
+  border-color: #e7a37c;
 }
 
 [dir=ltr] .btn-gris {
