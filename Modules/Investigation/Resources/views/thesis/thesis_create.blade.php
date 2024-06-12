@@ -1,11 +1,13 @@
 <x-master>
     @section('styles')
+    <!-- Theme Lyontech CSS -->
         <link href="{{ asset('x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet" />
         <link type="text/css" href="{{ url('assets/css/flatpickr.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ url('assets/css/flatpickr.rtl.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ url('assets/css/flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ url('select2@4.1.0/select2.bundle.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/css/themeLyontech.css') }}">
 
     @stop
     <x-slot name="jumbotron">

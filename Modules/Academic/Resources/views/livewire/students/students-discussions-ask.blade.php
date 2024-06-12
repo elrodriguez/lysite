@@ -30,7 +30,6 @@
                 <div class="col-md-7">
                     <div class="page-section">
                         <h4>Hacer una pregunta</h4>
-    
                         <div class="card--connect pb-32pt pb-lg-64pt">
                             <div class="card o-hidden mb-0">
                                 <div class="card-body table--elevated">
@@ -105,7 +104,7 @@
                                 <small id="description-notify" class="form-text text-muted">Si no está marcado, seguirá recibiendo notificaciones en nuestro sitio web.</small>
                             </div>
                             <div class="list-group-item">
-                                <button wire:click="save" type="button" class="btn btn-accent" wire:loading.attr="disabled">Publicar pregunta</button>
+                                <button wire:click="save" type="button" class="btn btn-orange" wire:loading.attr="disabled">Publicar pregunta</button>
                             </div>
                         </div>
     

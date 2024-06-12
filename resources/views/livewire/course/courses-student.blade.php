@@ -1,5 +1,5 @@
 
-<div class="container page__container">
+<div class="container-section page__container">
     <div class="row">
         <div class="col-md-12 d-flex justify-content-center align-items-center" style="padding: 40px 0px;">
             <div class="image-der mr-3">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-8">
                         <div>
-                            <p class="p-medium">{{ $course->name }}</p>
+                            <p class="p-large">{{ $course->name }}</p>
                         </div>
                         <div>
                             <h5 class="mb-0">Videos: 5</h5>

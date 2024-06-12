@@ -19,6 +19,11 @@
   border-color: #ff9152;
 }
 
+[dir=ltr] .active-black {
+  color: #000;
+  font-weight: 900;
+}
+
 [dir=ltr] .btn-border-black {
   border: 1px solid #000;
   border-radius: 30px;
@@ -171,6 +176,12 @@
   font-size: 15px;
 }
 
+[dir=ltr] .p-large{
+  font-size: 20px;
+  color: #ff9152;
+  font-weight: 500;
+}
+
 [dir=ltr] .text-gris{
   color: #a5a6a5;
 }
@@ -187,6 +198,15 @@
   border-color: #e36e2b;
 }
 
+[dir=ltr] .btn-orange-border {
+  color: #ff9152;
+}
+
+[dir=ltr] .btn-orange-border:hover {
+  color: #fff;
+  background-color: #e36e2b;
+  border-color: #e36e2b;
+}
 
 [dir=ltr] .btn-gris {
   color: #fff;

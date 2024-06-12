@@ -4,7 +4,7 @@
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
             <li class="breadcrumb-item"><a href="{{ route('Investigation_universities_list') }}">{{ __('labels.Universities')}}</a></li>
-            <li class="breadcrumb-item active">{{ __('labels.New') }}</li>
+            <li class="breadcrumb-item active-black">{{ __('labels.New') }}</li>
         </ol>
     </div>
     <div class="container page__container">
@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h4 class="card-title">Formulario de registro para Nuevo proyecto de tesis</h4>
-                        <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
+                        <p style="font-size: 20px;">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
                         <div  class="flex">
@@ -90,7 +90,7 @@
                                 
                                 <div class="input-group mb-3">
                                     <div class="dropdown">
-                                        <button wire:ignore class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button wire:ignore class="btn btn-orange-border dropdown-toggle" style="border: 2px solid #ff9152;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                           Seleccionar Formato
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -98,8 +98,8 @@
                                                 <div class="dropdown-item">
                                                     <button onclick="selectionFormat({{ $format }})" type="button" class="btn btn-link">{{ $format->type_thesis.' - '.$format->normative_thesis.' - '.$format->name }}</button>
                                                     @if($format->user_id == auth()->user()->id)
-                                                    <button class="btn btn-sm btn-primary ml-2" onclick="openModalEditFormat({{ $format->id }})">Editar</button>
-                                                    <button class="btn btn-sm btn-danger ml-2" onclick="deletesFormatStudent({{ $format->id }})">Eliminar</button>
+                                                    <button class="btn btn-sm btn-orange ml-2" onclick="openModalEditFormat({{ $format->id }})">Editar</button>
+                                                    <button class="btn btn-sm btn-secondary ml-2" onclick="deletesFormatStudent({{ $format->id }})">Eliminar</button>
                                                     @endif
                                                 </div>
                                             @endforeach
@@ -113,7 +113,7 @@
                             </div>
 
 
-                            <button type="button" wire:click="saveThesisStudent" wire:loading.attr="disabled" wire:target="saveThesisStudent" class="btn btn-primary">Guardar</button>
+                            <button type="button" wire:click="saveThesisStudent" wire:loading.attr="disabled" wire:target="saveThesisStudent" class="btn btn-orange">Guardar</button>
                         </div>
                     </div>
                 </div>

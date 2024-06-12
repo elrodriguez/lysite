@@ -93,7 +93,7 @@
                     {{-- Fin Margenes generales para la tesis --}}
                 </div>
                 @if(!$this->xformat_id)
-                    <button onclick="saveNewFormatStudentJS()" type="button" class="btn btn-primary btn-sm mb-4"><i class="fa fa-check mr-1"></i>Crear Formato</button>
+                    <button onclick="saveNewFormatStudentJS()" type="button" class="btn btn-orange btn-sm mb-4"><i class="fa fa-check mr-1"></i>Crear Formato</button>
                 @endif
                 @if($this->xformat_id)
                     <button onclick="addTitlePartNewJS()" type="button" class="btn btn-success btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
