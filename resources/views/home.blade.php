@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="position: relative;">
-                                    <img class="imgHome" src="{{ asset('theme-Lyontech/images/alumnoHome.png') }}" alt="">
+                                    <img class="imgHome" src="{{ asset('theme-lyontech/images/alumnoHome.png') }}" alt="">
                                 </div>
                             </div>
                     </div>
