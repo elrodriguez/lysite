@@ -1,11 +1,10 @@
 @extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/13-unirme.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('theme-lyontech/css/13-unirme.css') }}">-->
 @stop
 @section('content')
-
-    <body class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
+    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
         <div class="container-fluid ">
             <div class="row align-content-center justify-content-center">
                 <div class="col-lg-7 col-md-7 col-sm-6">
@@ -90,7 +89,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
-    </body>
+    </div>
 @stop
