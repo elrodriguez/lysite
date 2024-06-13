@@ -1,7 +1,7 @@
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="row g-5">
-            <div class="col-lg-7 justify-content-center" style="margin-top: 95px;">
+            <div class="col-lg-7 justify-content-center" style="margin-top: 95px; padding: 30px 15px; background: #fff; border-radius: 50px;">
                 <div class="card-group ">
                     @if (count($modos) > 0)
                         @foreach ($modos as $modo)
@@ -23,23 +23,23 @@
                                             class="form-control btn btn-orange submit">Unirse</a>
                                     @else
                                         <a href="{{ route('register') }}"
-                                            class="form-control btn btn-primary submit">Registrado</a>
+                                            class="form-control btn btn-secondary submit">Registrado</a>
                                     @endif
                                 </div>
                             </div>
                         @endforeach
                     @endif
                 </div>
-
             </div>
-            <div class="col-lg-5" style="min-height: 500px;">
+            <div class="col-lg-5" style="min-height: 500px; border-radius: 10px;">
                 <div class="position-relative h-100">
                     <div class="card carta-b position-absolute w-100 h-100 rounded wow zoomIn "
                         style="margin-top: 60px;">
                         <div class="modo-titulo-b">
-                            <h5>Iniciar Sesión</h5>
-                            <p>¿Usuario nuevo? <a href="{{ route('register') }}">Registrarme</a></p>
+                            <h5 class="mb-0" >Iniciar Sesión</h5>
+                            <p class="mt-0" style="font-size: 22px;" >¿Usuario nuevo? <a href="{{ route('register') }}">Registrarme</a></p>
                         </div>
+                        <br>
                         <form class="signin-form">
                             @csrf
                             <div class="form-login">
