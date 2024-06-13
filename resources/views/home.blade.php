@@ -30,8 +30,8 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h2 class="text-white" style="margin-top: 30px; font-size: 50px;">
-                                                    DESCUBRE
-                                                    HERRAMIENTAS DE INVESTIGACIÓN
+                                                    DESCUBRE <br>
+                                                    HERRAMIENTAS DE INVESTIGACIÓN <br>
                                                     IMPULSADAS POR IA.
                                                 </h2>
                                                 <p class="lead text-white-70" style="margin-top: -15px; font-size: 28px;">
