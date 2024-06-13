@@ -41,7 +41,7 @@
 
     <link type="text/css" href="{{ url('assets/css/chat.css') }}" rel="stylesheet">
     <!-- Theme Lyontech CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/themeLyontech.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/themeLyontech.css') }}">
 
     @yield('styles')
     @yield('lycss')
