@@ -30,20 +30,20 @@
 
 
     <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
-        <div class="container-fluid  page__container">
+        <div class="container-section  page__container">
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
                     <div class="box-thanks">
-                        <h1>¡MEJORA ADQUIRIDA!</h1>
-                        <p>
+                        <h1 style="font-size: 80px;">¡MEJORA ADQUIRIDA!</h1>
+                        <p  style="font-size: 50px;">
                             Haz obtenido mejores oportunidades para el desarrollo de tu investigación empieza
                             a redactar tu investigación de la manera más fácil, ahora.
                         </p>
                         <a href="{{ route('dashboard') }}" class="btn-border-white-radius-10">¡Empezar Ahora!</a>
                     </div>
                 </div>
-                <div class="col-md-3"></div>
+                <div class="col-md-1"></div>
             </div>
         </div>
     </div>

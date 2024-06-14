@@ -4,8 +4,7 @@
     <link rel="stylesheet" href="{{ asset('theme-lyontech/css/13-unirme.css') }}">
 @stop
 @section('content')
-    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
-        
+    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">  
         <div class="container-fluid  page__container">
             <div class="row" style="padding: 20px;">
                 <div class="col-md-7">
