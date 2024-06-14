@@ -296,6 +296,29 @@
   border-color: #e7a37c;
 }
 
+
+[dir=ltr] .btn-white {
+  color: #000;
+  background-color: #fff;  
+  border-color: #fff; 
+}
+
+[dir=ltr] .btn-white:hover {
+  color: #000;
+  background-color: #e7a37c;
+  border-color: #e7a37c;
+}
+
+[dir=ltr] .btn-white-border {
+  color: #ffb890; 
+}
+
+[dir=ltr] .btn-white-border:hover {
+  color: #000;
+  background-color: #ffb890; 
+  border-color: #e7a37c;
+}
+
 [dir=ltr] .btn-gris {
   color: #fff;
   background-color: #a1a1a1;
@@ -500,7 +523,8 @@
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 10px;
-  color: #ffffff;
+  color: #000;
+  background: #fff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   border: solid #ffffff 5px;

@@ -1,89 +1,135 @@
 @extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <!--<link rel="stylesheet" href="{{ asset('theme-lyontech/css/13-unirme.css') }}">-->
+    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/13-unirme.css') }}">
 @stop
 @section('content')
     <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
-        <div class="container-fluid ">
-            <div class="row align-content-center justify-content-center">
-                <div class="col-lg-7 col-md-7 col-sm-6">
-                    <div class="container-fluid ">
-                        <div class="col-lg-12 col-md-12 col-sm-10">
-                            <div class="card card-transparent text-login">
-                                <h5>MEJORA</h5>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">
-                                    adquiere tu</p>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">cuenta
-                                    con mejores</p>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">
-                                    oportunidades.</p>
-                            </div>
-                        </div>
+        
+        <div class="container-fluid  page__container">
+            <div class="row" style="padding: 20px;">
+                <div class="col-md-7">
+                    <div class="" style="position: relative; top: 30%;">
+                        <h1 class="mb-1" style="font-size: 55px; color: #fff;">MEJORA</h1>
+                        <p class="mt-0" style="font-size: 30px; color:#fff;">
+                            Adquiere tu cuenta con mejores oportunidades.
+                        </p>
+                        <br>
+                        <a href="{{ route('dashboard') }}" class="btn-border-white-radius-10">¡Empezar Ahora!</a>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-5 col-sm-6 text-left">
-                    <div class="card " style="padding-bottom: 50px;">
-                        <h5>Unirme</h5>
-                        <p>¿Cómo quieres pagar?</p>
-                        <div class="btn-group-vertical">
-                            <a href="{{ route('tarjeta_page', $mod) }}" class="btn-with-icon boton">
-                                <div class="con-boton">
-                                    <img src="{{ asset('theme-lyontech/images/tc.png') }}" alt="Icono">
-                                </div>
-                                <div class="contenido">
-                                    <h5 class="mb-0">Nueva tarjeta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;</h5>
-                                    <p class="mt-0">Débito o crédito.</p>
-                                </div>
-                                <div class="con-der">
-                                    <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="mb-1" style="font-size: 55px; color: #fff;">Unirme</h1>
+                            <p class="mt-0" style="font-size: 20px; color:#fff;">
+                                ¿Cómo quieres pagar?
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{{ route('tarjeta_page', $mod) }}" class="btn btn-white">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="mt-1">
+                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/tc.png') }}" alt="Icono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mt-1">
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Nueva tarjeta</h4>
+                                            <p class="mt-0" style="text-align:left;">Débito o crédito.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <!--<img style="width: 100%;" src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">-->
+                                        <div class="mt-3">
+                                            <i class="fa fa-play" aria-hidden="true" style="font-size: 30px;"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </a>
-                            <button class="btn-with-icon boton mt-3">
-                                <div class="con-boton">
-                                    <img src="{{ asset('theme-lyontech/images/bb.png') }}" alt="Icono">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="" class="btn btn-white">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="mt-1">
+                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/bb.png') }}" alt="Icono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mt-1">
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Efectivo en agentes</h4>
+                                            <p class="mt-0" style="text-align:left;">Paga en efectivo.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <!--<img style="width: 100%;" src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">-->
+                                        <div class="mt-3">
+                                            <i class="fa fa-play" aria-hidden="true" style="font-size: 30px;"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="contenido">
-                                    <h5>Efectivo en agentes</h5>
-                                    <p>Paga en efectivo.</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="" class="btn btn-white">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="mt-1">
+                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/museo.png') }}" alt="Icono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mt-1">
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Banca por internet</h4>
+                                            <p class="mt-0" style="text-align:left;">Paga en efectivo.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <!--<img style="width: 100%;" src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">-->
+                                        <div class="mt-3">
+                                            <i class="fa fa-play" aria-hidden="true" style="font-size: 30px;"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="con-der">
-                                    <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
-                                </div>
-                            </button>
-                            <button class="btn-with-icon boton mt-3">
-                                <div class="con-boton">
-                                    <img src="{{ asset('theme-lyontech/images/museo.png') }}" alt="Icono">
-                                </div>
-                                <div class="contenido">
-                                    <h5>Banca por internet</h5>
-                                    <p>paga en efectivo.</p>
-                                </div>
-                                <div class="con-der">
-                                    <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
-                                </div>
-                            </button>
-
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <form action="{{ route('paypal_payment') }}" method="POST" style="display: inline;">
                                 @csrf
                                 <input type="hidden" name="id_subscription" value="{{ $mod }}">
                                 <input type="hidden" name="full_name" value="paypal_payer">
                                 <input type="hidden" name="currecy" value="currency">
-                            <button class="btn-with-icon boton mt-3 ">
-                                <div class="con-boton">
-                                    <img src="{{ asset('theme-lyontech/images/paypal.png') }}" alt="Icono">
-                                </div>
-                                <div class="contenido">
-                                    <h5>Paypal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </h5>
-                                    <p>Paga por paypal.</p>
-                                </div>
-                                <div class="con-der">
-                                    <img src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">
-                                </div>
-                            </button>
+                                <button class="btn btn-white">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="mt-1">
+                                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/paypal.png') }}" alt="Icono">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="mt-1">
+                                                <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Paypal</h4>
+                                                <p class="mt-0" style="text-align:left;">Paga por paypal</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <!--<img style="width: 100%;" src="{{ asset('theme-lyontech/images/felcha.png') }}" alt="Icono">-->
+                                            <div class="mt-3">
+                                                <i class="fa fa-play" aria-hidden="true" style="font-size: 30px;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
                             </form>
                         </div>
                     </div>
