@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('theme-lyontech/css/13-unirme.css') }}">
 @stop
 @section('content')
-    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">  
+    <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
         <div class="container-fluid  page__container">
             <div class="row" style="padding: 20px;">
                 <div class="col-md-7">
@@ -14,9 +14,6 @@
                             Adquiere tu cuenta con mejores oportunidades.
                         </p>
                         <br>
-                        <button type="button" class="btn-border-white-radius-10" data-toggle="modal" data-target="#staticBackdrop">
-                            Que dira aqui!!
-                        </button>
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -34,12 +31,14 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="mt-1">
-                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/tc.png') }}" alt="Icono">
+                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/tc.png') }}"
+                                                alt="Icono">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="mt-1">
-                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Nueva tarjeta</h4>
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Nueva
+                                                tarjeta</h4>
                                             <p class="mt-0" style="text-align:left;">Débito o crédito.</p>
                                         </div>
                                     </div>
@@ -59,12 +58,14 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="mt-1">
-                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/bb.png') }}" alt="Icono">
+                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/bb.png') }}"
+                                                alt="Icono">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="mt-1">
-                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Efectivo en agentes</h4>
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Efectivo
+                                                en agentes</h4>
                                             <p class="mt-0" style="text-align:left;">Paga en efectivo.</p>
                                         </div>
                                     </div>
@@ -84,12 +85,14 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="mt-1">
-                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/museo.png') }}" alt="Icono">
+                                            <img style="width: 100%;" src="{{ asset('theme-lyontech/images/museo.png') }}"
+                                                alt="Icono">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="mt-1">
-                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Banca por internet</h4>
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Banca por
+                                                internet</h4>
                                             <p class="mt-0" style="text-align:left;">Paga en efectivo.</p>
                                         </div>
                                     </div>
@@ -114,12 +117,14 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="mt-1">
-                                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/paypal.png') }}" alt="Icono">
+                                                <img style="width: 100%;"
+                                                    src="{{ asset('theme-lyontech/images/paypal.png') }}" alt="Icono">
                                             </div>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="mt-1">
-                                                <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Paypal</h4>
+                                                <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">
+                                                    Paypal</h4>
                                                 <p class="mt-0" style="text-align:left;">Paga por paypal</p>
                                             </div>
                                         </div>
@@ -138,22 +143,36 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Aqui el titulo</h5>
-              <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>-->
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-orange">Que dira aqui?</button>
-            </div>
-          </div>
-        </div>
-    </div>
+
 @stop
+@if (!Auth::check())
+    @section('global-modal')
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><i class="fa fa-lock mr-4"></i>Iniciar Sesión
+                            Requerido
+                        </h5>
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                      </button>-->
+                    </div>
+                    <div class="modal-body">
+                        <p>Es necesario iniciar sesión para poder hacer un pago. Por favor, inicie sesión para continuar</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ route('home') }}" type="button" class="btn btn-danger">Ir al Inicio</a>
+                        <a href="{{ route('login') }}" type="button" class="btn btn-orange">Iniciar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#staticBackdrop').modal('show');
+            });
+        </script>
+    @stop
+@endif

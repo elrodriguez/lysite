@@ -123,5 +123,5 @@ Route::get('/paypal/cancel/{paymentId}', [PaypalController::class, 'cancel'])->n
 require __DIR__ . '/auth.php';
 
 
-/* RUTAS DEL YISUS - Provicional */
+/* RUTAS DEL YISUS - Provisional */
 Route::get('/thanks', [DashboardController::class, 'thanks'])->name('thanks');
