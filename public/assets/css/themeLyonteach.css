@@ -33,6 +33,88 @@
   background-color: #ffb890 !important;  
 }
 
+/* Titulos ----------------------------------*/
+
+[dir=ltr] .title-home {
+  margin-bottom: 16px; /* 1rem */
+  color: #fff;
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: Oswald, Helvetica Neue, Arial, sans-serif;
+}
+
+[dir=ltr] .subTitle-home {
+  color: hsla(0, 0%, 100%, .7) !important;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+/* Imagenes ----------------------------------*/
+
+[dir=ltr] .img-home{
+  margin-top: -30px;
+  width: 170%;
+}
+
+/* Box ---------------------------------------*/
+
+[dir=ltr] .box-white-home-1{
+  padding: 15px 0px;
+  text-align: center; 
+  background: #fff; 
+  border-radius: 60px 0px 0px 60px;
+}
+
+[dir=ltr] .box-white-home-2{
+  padding: 15px 0px;
+  text-align: center; 
+  background: #fff;
+}
+
+[dir=ltr] .box-white-home-3{
+  padding: 15px 0px;
+  text-align: center; 
+  background: #fff;
+  border-radius: 0px 60px 60px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[dir=ltr] .box-thanks{
+  padding: 25px;
+  text-align: center;
+}
+
+[dir=ltr] .box-thanks h1{
+  color: #fff;
+  font-size: 54px;
+}
+
+[dir=ltr] .box-thanks p{
+  padding: 0px 0px 15px 0px;
+  color: #fff;
+  font-size: 30px;
+}
+
+
+
+
 
 [dir=ltr] .active {
   color: #fff;
@@ -481,43 +563,6 @@
 
 
 
-[dir=ltr] .imgHome{
-  margin-top: -50px;
-  width: 170%;
-}
-
-[dir=ltr] .box-white-home-1{
-  text-align: center; 
-  background: #fff; 
-  border-radius: 60px 0px 0px 60px;
-}
-
-[dir=ltr] .box-white-home-2{
-  text-align: center; 
-  background: #fff;
-}
-
-[dir=ltr] .box-white-home-3{
-  text-align: center; 
-  background: #fff;
-  border-radius: 0px 60px 60px 0px;
-}
-
-[dir=ltr] .box-thanks{
-  padding: 25px;
-  text-align: center;
-}
-
-[dir=ltr] .box-thanks h1{
-  color: #fff;
-  font-size: 54px;
-}
-
-[dir=ltr] .box-thanks p{
-  padding: 0px 0px 15px 0px;
-  color: #fff;
-  font-size: 30px;
-}
 
 [dir=ltr] .btn-border-white-radius-10 {
   -webkit-border-radius: 28;

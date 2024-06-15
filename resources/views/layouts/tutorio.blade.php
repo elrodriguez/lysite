@@ -40,8 +40,9 @@
     <link type="text/css" href="{{ url('assets/js/cute-alert/style.css') }}" rel="stylesheet">
 
     <link type="text/css" href="{{ url('assets/css/chat.css') }}" rel="stylesheet">
-    <!-- Theme Lyontech CSS -->
-    <link rel="stylesheet" href="{{ url('assets/css/themeLyontech.css') }}">
+    <!-- Theme Lyonteach CSS -->
+    <link rel="stylesheet" href="{{ url('assets/css/themeLyonteach.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/themeLyonteach-responsive.css') }}">
 
     @yield('styles')
     @yield('lycss')

@@ -26,32 +26,30 @@
                     <div class="container" style=" position: relative;">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="media-body text-container align-self-center">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h2 class="text-white" style="margin-top: 30px; font-size: 50px;">
-                                                    DESCUBRE <br>
-                                                    HERRAMIENTAS DE INVESTIGACIÓN <br>
-                                                    IMPULSADAS POR IA.
-                                                </h2>
-                                                <p class="lead text-white-70" style="margin-top: -15px; font-size: 28px;">
-                                                    Desarrolla tu investigación de manera más fácil, inteligente y rápida con Lyonteach.
-                                                </p>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h1 class="title-home mt-5">
+                                                DESCUBRE <br>
+                                                HERRAMIENTAS DE INVESTIGACIÓN <br>
+                                                IMPULSADAS POR IA.
+                                            </h1>
+                                            <p class="lead subTitle-home">
+                                                Desarrolla tu investigación de manera más fácil, inteligente y rápida con Lyonteach.
+                                            </p>
                                         </div>
-                                        <br>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-4"></div>
-                                            <div class="col-md-4"></div>
-                                            <div class="col-md-4">
-                                                <a href="" class="btn-border-white">Empezar Gratis</a>
-                                            </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <a href="" class="btn-border-white">Empezar Gratis</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4" style="position: relative;">
-                                    <img class="imgHome" src="{{ asset('theme-lyontech/images/alumnoHome.png') }}" alt="">
+                                <div class="col-md-4">
+                                    <img class="img-home" src="{{ asset('theme-lyontech/images/alumnoHome.png') }}" alt="">
                                 </div>
                             </div>
                     </div>
@@ -59,7 +57,7 @@
                     
                 <div class="container page__container" style="margin-top: -120px;">
                     <div class="row">
-                        <div class="col-md-4" style="padding: 0px">
+                        <div class="col-md-4" style="padding: 0px;">
                             <div class="box-white-home-1">
                                 <img style="width: 50%;" src="{{ asset('theme-lyontech/images/ia-m.png') }}" alt="">
                                 <h4 class="mb-0">
@@ -77,20 +75,18 @@
                         </div>
                         <div class="col-md-4" style="padding: 0px;">
                             <div class="box-white-home-2">
-                                <div>
-                                    <img style="width: 50%;" src="{{ asset('theme-lyontech/images/libro-m.png') }}" alt="">
-                                    <h4 class="mb-0">
-                                        CURSOS
-                                    </h4>
-                                    <p>
-                                        Aprende investigación de forma didáctica.
-                                    </p>
-                                    @can('academico_directo_gpt')
-                                    <a href="{{ route('help_gpt') }}" class="btn btn-black">Iniciar cursos</a>
-                                    @else
-                                    <a href="{{ route('modo_page') }}" class="btn btn-black">Iniciar cursos</a>
-                                    @endcan
-                                </div>
+                                <img style="width: 50%;" src="{{ asset('theme-lyontech/images/libro-m.png') }}" alt="">
+                                <h4 class="mb-0">
+                                    CURSOS
+                                </h4>
+                                <p>
+                                    Aprende investigación de forma didáctica.
+                                </p>
+                                @can('academico_directo_gpt')
+                                <a href="{{ route('help_gpt') }}" class="btn btn-black">Iniciar cursos</a>
+                                @else
+                                <a href="{{ route('modo_page') }}" class="btn btn-black">Iniciar cursos</a>
+                                @endcan
                             </div>
                         </div>
                         <div class="col-md-4" style="padding: 0px;">

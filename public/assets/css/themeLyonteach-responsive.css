@@ -1,0 +1,52 @@
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+    
+    /* Titulos ----------------------------------*/
+
+    [dir=ltr] .title-home {
+        margin-bottom: 12px; /* 2rem */
+        font-size: 35px;
+    }
+    
+    [dir=ltr] .subTitle-home {
+        color: hsla(0, 0%, 100%, .7) !important;
+        font-size: 28px;
+        line-height: 1.3;
+    }
+
+    /* Imagenes ----------------------------------*/
+    
+    [dir=ltr] .img-home{
+      margin-top: 100px;
+      margin-bottom: 80px;
+      width: 100%;
+    }
+
+    /* Box ---------------------------------------*/
+    
+    [dir=ltr] .box-white-home-1{
+      padding: 15px 0px;
+      text-align: center; 
+      background: #fff; 
+      border-radius: 60px 60px 0px 0px;
+    }
+    
+    [dir=ltr] .box-white-home-2{
+      padding: 15px 0px;
+      text-align: center; 
+      background: #fff;
+    }
+    
+    [dir=ltr] .box-white-home-3{
+        padding: 15px 0px;
+      text-align: center; 
+      background: #fff;
+      border-radius: 0px 0px 60px 60px;
+    }
+    
+    
+
+}
+
+
+/* 2K QHD. 2560 X 1440 */
