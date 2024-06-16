@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PaypalController;
 use App\Models\TypeSubscription;
+use App\Http\Controllers\DniController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -125,3 +126,7 @@ require __DIR__ . '/auth.php';
 
 /* RUTAS DEL YISUS - Provisional */
 Route::get('/thanks', [DashboardController::class, 'thanks'])->name('thanks');
+
+
+//DNI RUTAS
+Route::get('/test/consulta/dni/{dni}', [DniController::class, 'consultaDni'])->name('dni_consulta');
