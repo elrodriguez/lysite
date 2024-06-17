@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('type_subscriptions', function (Blueprint $table) {
-            $table->date('until_subscription')->nullable();
+            $table->integer('until_subscription')->nullable(); //será un entero numero de meses que se debe sumar a la subscripción si aún no vence o al día actual si ya venció
         });
     }
 
