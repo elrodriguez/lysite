@@ -98,7 +98,8 @@ Route::get('/modo', function () {
 })->name('modo_page');
 
 Route::get('/unirme/{mod}', function ($mod) {
-    return view('ly_join', ['mod' => $mod]);
+    $typeSubscription = TypeSubscription::find($mod)->name;
+    return view('ly_join', ['mod' => $mod, 'typeSubscription' => $typeSubscription]);
 })->name('unirme_page');
 
 Route::get('/tarjeta/{mod}', function ($mod) {

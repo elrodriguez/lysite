@@ -21,7 +21,7 @@
                         <div class="col-md-12">
                             <h1 class="mb-1" style="font-size: 55px; color: #fff;">Unirme</h1>
                             <p class="mt-0" style="font-size: 20px; color:#fff;">
-                                ¿Cómo quieres pagar?
+                            Estas a pundo de adquirir el plan: {{ $typeSubscription }}. ¿Cómo quieres pagar?
                             </p>
                         </div>
                     </div>

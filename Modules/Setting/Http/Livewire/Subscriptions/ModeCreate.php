@@ -18,6 +18,10 @@ class ModeCreate extends Component
     public $detail_seven;
     public $detail_eight;
     public $price;
+    public $dollar_price;
+    public $ai_oportunities;
+    public $allowed_thesis;
+    public $until_subscription;
 
     public function render()
     {
@@ -34,7 +38,11 @@ class ModeCreate extends Component
         // 'detail_six' => 'required|min:3|max:255',
         // 'detail_seven' => 'required|min:3|max:255',
         // 'detail_eight' => 'required|min:3|max:255',
-        'price' => 'required'
+        'price' => 'required',
+        'dollar_price' => 'required',
+        'ai_oportunities' => 'required',
+        'allowed_thesis' => 'required',
+        'until_subscription' => 'required'
     ];
 
     public function updated($propertyName)
@@ -57,6 +65,10 @@ class ModeCreate extends Component
             'detail_seven'      => $this->detail_seven,
             'detail_eight'      => $this->detail_eight,
             'price'             => $this->price,
+            'dollar_price'      => $this->dollar_price,
+            'ai_oportunities'   => $this->ai_oportunities,
+            'allowed_thesis'    => $this->allowed_thesis,
+            'until_subscription'=> $this->until_subscription,
             'created_user_id'   => Auth::id(),
             'updated_user_id'   => null,
         ]);
@@ -78,5 +90,9 @@ class ModeCreate extends Component
         $this->detail_seven = null;
         $this->detail_eight = null;
         $this->price = null;
+        $this->dollar_price  = null;
+        $this->ai_oportunities  = null;
+        $this->allowed_thesis  = null;
+        $this->until_subscription  = null;
     }
 }

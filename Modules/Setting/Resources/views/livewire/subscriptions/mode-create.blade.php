@@ -33,6 +33,38 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label class="form-label" for="dollar_price">Precio en Dolares*</label>
+                                <input wire:model="dollar_price" type="text" class="form-control" id="dollar_price"
+                                    placeholder="Precio en dolares ..">
+                                @error('dollar_price')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="ai_oportunities">Oportunidades de usar IA*</label>
+                                <input wire:model="ai_oportunities" type="number" class="form-control" id="ai_oportunities"
+                                    placeholder="Veces que podrán usarse el parafraseo, recomendador, IA, etc..">
+                                @error('ai_oportunities')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="until_subscription">Meses de subscripción*</label>
+                                <input wire:model="until_subscription" type="number" class="form-control" id="until_subscription"
+                                    placeholder="Suma la cantidad de meses a la subscripción">
+                                @error('until_subscription')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="allowed_thesis">Permisos para Tesis*</label>
+                                <input wire:model="allowed_thesis" type="number" class="form-control" id="allowed_thesis"
+                                    placeholder="Suma oportunidades para crear Tesis">
+                                @error('allowed_thesis')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label" for="detail_one">Forma de pago *</label>
                                 <input wire:model="detail_one" type="text" class="form-control" id="detail_one"
                                     placeholder="Forma de pago ..">

@@ -24,6 +24,7 @@ class TypeSubscription extends Model
         'created_user_id',
         'updated_user_id',
         'ai_oportunities',
-        'allowed_thesis'
+        'allowed_thesis',
+        'until_subscription'
     ];
 }

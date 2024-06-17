@@ -6,7 +6,7 @@
             <div class="form-row mt-2">
                 <div class="form-login">
                     <label>ID:</label>
-                    <input wire:model="number" type="text" required>
+                    <input wire:model="number" type="text" wire:input="consultaDni" required placeholder="ID/DNI">
                     @error('number')
                         <span class="invalid-feedback-2">{{ $message }}</span>
                     @enderror
@@ -21,14 +21,14 @@
             </div>
             <div class="form-row mt-2">
                 <div class="form-login">
-                    <label for="last_name_father">&nbsp;Apellidos:</label>
+                    <label for="last_name_father">&nbsp;1er Apellido:</label>
                     <input wire:model="last_name_father" id="last_name_father" type="text" required>
                     @error('last_name_father')
                         <span class="invalid-feedback-2">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-login">
-                    <label for="last_name_mother">&nbsp;Apellidos:</label>
+                    <label for="last_name_mother">&nbsp;2do Apellido:</label>
                     <input wire:model="last_name_mother" type="text" id="last_name_mother" required>
                     @error('last_name_mother')
                         <span class="invalid-feedback-2">{{ $message }}</span>

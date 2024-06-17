@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Http\Controllers\DniController;
 
 class LyRegisterForm extends Component
 {
@@ -163,5 +164,17 @@ class LyRegisterForm extends Component
         }
 
         return redirect()->intended('dashboard');
+    }
+
+    public function consultaDni(){
+        if(strlen($this->number)==8 && $this->country_id=='PE'){
+            $DniController = new DniController();
+            $data = $DniController->consultaDniPost($this->number);
+            $this->names = ucwords(strtolower($data['nombres']));
+            $this->last_name_father = ucwords(strtolower($data['apellidoPaterno']));
+            $this->last_name_mother = ucwords(strtolower($data['apellidoMaterno']));
+        }else{
+
+        }
     }
 }

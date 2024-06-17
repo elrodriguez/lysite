@@ -18,6 +18,10 @@ class ModeEdit extends Component
     public $detail_seven;
     public $detail_eight;
     public $price;
+    public $dollar_price;
+    public $ai_oportunities;
+    public $allowed_thesis;
+    public $until_subscription;
 
     public $sub;
 
@@ -35,6 +39,10 @@ class ModeEdit extends Component
         $this->detail_seven     = $this->sub->detail_seven;
         $this->detail_eight     = $this->sub->detail_eight;
         $this->price            = $this->sub->price;
+        $this->dollar_price     = $this->sub->dollar_price;
+        $this->ai_oportunities  = $this->sub->ai_oportunities;
+        $this->allowed_thesis   = $this->sub->allowed_thesis;
+        $this->until_subscription=$this->sub->until_subscription;
     }
 
     public function render()
@@ -52,7 +60,11 @@ class ModeEdit extends Component
         // 'detail_six' => 'required|min:3|max:255',
         // 'detail_seven' => 'required|min:3|max:255',
         // 'detail_eight' => 'required|min:3|max:255',
-        'price' => 'required'
+        'price' => 'required',
+        'dollar_price' => 'required',
+        'ai_oportunities' => 'required',
+        'allowed_thesis' => 'required',
+        'until_subscription' => 'required'
     ];
 
     public function updated($propertyName)
@@ -75,6 +87,10 @@ class ModeEdit extends Component
             'detail_seven'      => $this->detail_seven,
             'detail_eight'      => $this->detail_eight,
             'price'             => $this->price,
+            'dollar_price'      => $this->dollar_price,
+            'ai_oportunities'   => $this->ai_oportunities,
+            'allowed_thesis'    => $this->allowed_thesis,
+            'until_subscription'=> $this->until_subscription,
             'updated_user_id'   => Auth::id(),
         ]);
 
