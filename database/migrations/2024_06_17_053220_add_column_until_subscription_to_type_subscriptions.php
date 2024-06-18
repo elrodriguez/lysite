@@ -27,7 +27,6 @@ return new class extends Migration
     {
         Schema::table('type_subscriptions', function (Blueprint $table) {
             $table->dropColumn('until_subscription');
-            // Agrega más instrucciones dropColumn si es necesario
         });
     }
 };
