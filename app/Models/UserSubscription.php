@@ -15,7 +15,7 @@ class UserSubscription extends Model
         'user_id',
         'subscription_id',
         'status',
-        'created_at',
-        'updated_at'
+        'status_response',
+        'payment_response'
     ];
 }
