@@ -1,4 +1,19 @@
 
+[dir=ltr] .pc-screen{
+  display: block;
+}
+
+[dir=ltr] .table-screen{
+}
+
+[dir=ltr] .movil-screen{
+  display: none;
+}
+
+
+
+
+
 [dir=ltr] .container-section{
   width: 1600px;
   margin: auto;
@@ -33,7 +48,9 @@
   background-color: #ffb890 !important;  
 }
 
-/* Titulos ----------------------------------*/
+/* --------------------------------------------*/
+/* Títles -------------------------------------*/
+/* --------------------------------------------*/
 
 [dir=ltr] .title-home {
   margin-bottom: 16px; /* 1rem */
@@ -49,6 +66,76 @@
   font-size: 28px;
   line-height: 1.3;
 }
+
+
+/* --------------------------------------------*/
+/* Box ----------------------------------------*/
+/* --------------------------------------------*/
+
+[dir=ltr] .box-section-home {
+  padding: 120px 0px;
+}
+
+[dir=ltr] .box-presentation-home {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  text-align:right;
+}
+
+[dir=ltr] .box-presentation-home h1 {
+  color: #fff;
+  margin-bottom: 0px;
+}
+
+[dir=ltr] .box-presentation-home h4 {
+  font-size: 35px;
+  color: #fff;
+  margin-top: 0px;
+}
+
+[dir=ltr] .box-presentation-left-home {
+  padding: 20px 10px;
+}
+
+[dir=ltr] .box-presentation-right-home {
+  padding: 20px 10px;
+}
+
+[dir=ltr] .box-presentation-left-home img{
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+
+[dir=ltr] .box-presentation-right-home img{
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+
+[dir=ltr] .box-presentation-content-home {
+  margin-top: 10%;
+}
+
+[dir=ltr] .box-presentation-content-home h4{
+  font-size: 25px;
+  color: #fff;
+}
+
+[dir=ltr] .box-presentation-content-home p{
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
 
 /* Imagenes ----------------------------------*/
 

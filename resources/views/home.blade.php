@@ -108,37 +108,31 @@
                     </div>
 
                 </div>
-
-                <div class="container" style="padding: 120px 0px;">
-                    <div class="row" style="padding: 20px 0px;">
+                
+                <!-- Ver. Escritorio   -->
+                <div class="container box-section-home pc-screen">
+                    <div class="row" style="padding: 40px 0px;">
                         <div class="col-md-4">
-                            <div class="box-text" style="position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, -50%); 
-                                    text-align:right;">
-                                <h1 class="text-white mb-0"><strong>PRESENTACIÓN</strong></h1>
-                                <h4 class="text-white mt-0" style="font-size: 35px;">Lyonteach </h4>
+                            <div class="box-presentation-home">
+                                <h1><strong>PRESENTACIÓN</strong></h1>
+                                <h4>Lyonteach </h4>
                             </div>
                         </div>
-                        <div class="col-md-8 d-flex justify-content-center align-items-center">
-                            <div class="card border-0 video-container bg-gradient" style="padding: 20px;">
-                                <video width="100%" height="380" controls muted playsinline>
+                        <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 40px;">
+                            <div class="card bg-gradient">
+                                <video style="100%" controls muted playsinline>
                                     <source src="video.mp4" type="video/mp4">
                                     Tu navegador no soporta el elemento de vídeo.
                                 </video>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="padding: 20px 0px;">
+
+                    <div class="row box-presentation-left-home">
                         <div class="col-md-6">
-                            <div class="box-text" style="position: absolute;
-                                    top: 50%;
-                                    left: 5%;
-                                    transform: translate(0%, -50%); 
-                                    text-align:left;">
-                                <h4 class="text-white mt-0" style="font-size: 25px;">Redacta tu investigación con soporte de la IA</h4>
-                                <p class="text-white">
+                            <div class="box-presentation-content-home">
+                                <h4>Redacta tu investigación con soporte de la IA</h4>
+                                <p>
                                     Realiza tus avances de redacción en el editor online donde
                                     encontrarás una gía estructurada y herramientas que facilitarán 
                                     tu proceso.
@@ -147,74 +141,156 @@
                         </div>
                         <div class="col-md-6">
                             <a href="#">
-                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card1.jpg') }}">
+                                <img src="{{ asset('theme-lyontech/images/card1.jpg') }}">
                             </a>
                         </div>
                     </div>
-                    <div class="row" style="padding: 20px 0px;">
+
+                    <div class="row box-presentation-right-home">
                         <div class="col-md-6">
                             <a href="#">
-                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card2.jpg') }}">
+                                <img src="{{ asset('theme-lyontech/images/card2.jpg') }}">
                             </a>
                         </div>
-                        <div class="col-md-6" style="position: relative;">
-                            <div class="box-text" style="position: absolute;
-                                    top: 50%;
-                                    left: 5%;
-                                    transform: translate(0%, -50%); 
-                                    text-align:left;">
-                                <h4 class="text-white mt-0" style="font-size: 25px;">
+                        <div class="col-md-6">
+                            <div class="box-presentation-content-home">
+                                <h4>
                                     Deja que el chatbot te ayude en el desarrollo de t investigación.
                                 </h4>
-                                <p class="text-white">
+                                <p>
                                     Haz preguntas al chatbot ante cualquier duda, además, utiliza el prafraseador, referenciador
                                     y recomendador para avanzar tu investigación.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="padding: 20px 0px;">
-                        <div class="col-md-6" style="position: relative;">
-                            <div class="box-text" style="position: absolute;
-                                    top: 50%;
-                                    left: 5%;
-                                    transform: translate(0%, -50%); 
-                                    text-align:left;">
-                                <h4 class="text-white mt-0" style="font-size: 25px;">
-                                    Accede al chat con un asesor las 24 horas del día.
-                                </h4>
-                                <p class="text-white">
+
+                    <div class="row box-presentation-left-home">
+                        <div class="col-md-6">
+                            <div class="box-presentation-content-home">
+                                <h4> Accede al chat con un asesor las 24 horas del día.</h4>
+                                <p>
                                     Emite tus consultas en tiempo real con un experto, él encargado absolvera toda duda, además de
                                     corregir cualquier deficiencia que tengas.
                                 </p>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a href="#">
-                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card3.jpg') }}">
+                            <a href="#" class="">
+                                <img src="{{ asset('theme-lyontech/images/card3.jpg') }}">
                             </a>
                         </div>
                     </div>
-                    <div class="row" style="padding: 20px 0px;">
+                    
+                    <div class="row box-presentation-right-home">
                         <div class="col-md-6">
                             <a href="#">
-                                <img style="width: 100%;" src="{{ asset('theme-lyontech/images/card4.jpg') }}">
+                                <img src="{{ asset('theme-lyontech/images/card4.jpg') }}">
                             </a>
                         </div>
                         <div class="col-md-6" style="position: relative;">
-                            <div class="box-text" style="position: absolute;
-                                    top: 50%;
-                                    left: 5%;
-                                    transform: translate(0%, -50%); 
-                                    text-align:left;">
-                                <h4 class="text-white mt-0" style="font-size: 25px;">
+                            <div class="box-presentation-content-home">
+                                <h4>
                                    Aprende sobre investigación de manera didáctica y entendible.
                                 </h4>
-                                <p class="text-white">
+                                <p>
                                     Accede a los videos y guías de investigación preparados con estrategias prácticas
                                     para el planteamiento de cada apartado de la investigación.
                                 </p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ver. Celular   -->
+                <div class="container box-section-home movil-screen">
+                    <div class="row" style="padding: 40px 0px;">
+                        <div class="col-md-4">
+                            <div class="box-presentation-home">
+                                <h1><strong>PRESENTACIÓN</strong></h1>
+                                <h4>Lyonteach </h4>
+                            </div>
+                        </div>
+                        <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 40px;">
+                            <div class="card bg-gradient">
+                                <video style="100%" controls muted playsinline>
+                                    <source src="video.mp4" type="video/mp4">
+                                    Tu navegador no soporta el elemento de vídeo.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row box-presentation-left-home">
+                        <div class="col-md-6">
+                            <div class="box-presentation-content-home">
+                                <h4>Redacta tu investigación con soporte de la IA</h4>
+                                <p>
+                                    Realiza tus avances de redacción en el editor online donde
+                                    encontrarás una gía estructurada y herramientas que facilitarán 
+                                    tu proceso.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img src="{{ asset('theme-lyontech/images/card1.jpg') }}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row box-presentation-right-home">
+                        <div class="col-md-6">
+                            <div class="box-presentation-content-home">
+                                <h4>
+                                    Deja que el chatbot te ayude en el desarrollo de t investigación.
+                                </h4>
+                                <p>
+                                    Haz preguntas al chatbot ante cualquier duda, además, utiliza el prafraseador, referenciador
+                                    y recomendador para avanzar tu investigación.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img src="{{ asset('theme-lyontech/images/card2.jpg') }}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row box-presentation-left-home">
+                        <div class="col-md-6">
+                            <div class="box-presentation-content-home">
+                                <h4> Accede al chat con un asesor las 24 horas del día.</h4>
+                                <p>
+                                    Emite tus consultas en tiempo real con un experto, él encargado absolvera toda duda, además de
+                                    corregir cualquier deficiencia que tengas.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="">
+                                <img src="{{ asset('theme-lyontech/images/card3.jpg') }}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row box-presentation-right-home">
+                        <div class="col-md-6">
+                            <div class="box-presentation-content-home">
+                                <h4>
+                                   Aprende sobre investigación de manera didáctica y entendible.
+                                </h4>
+                                <p>
+                                    Accede a los videos y guías de investigación preparados con estrategias prácticas
+                                    para el planteamiento de cada apartado de la investigación.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="">
+                                <img src="{{ asset('theme-lyontech/images/card4.jpg') }}">
+                            </a>
                         </div>
                     </div>
                 </div>
