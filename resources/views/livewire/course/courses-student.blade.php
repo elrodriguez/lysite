@@ -27,9 +27,10 @@
                         </div>
                         <div>
                             <h5 class="mb-0">Videos: 5</h5>
-                            <h5 class="mt-0">Guías:&nbsp;&nbsp;&nbsp;13</h5> 
-                        </div>                    
-                        <div class="rating" style="margin-top: -20px;">
+                            <h5 class="mt-0">Guías:&nbsp;&nbsp;&nbsp;13</h5>
+                        </div>
+
+                        {{-- <div class="rating" style="margin-top: -20px;">
                             <input type="radio" value="1" name="rate" id="star1">
                             <label for="star1" title="text"></label>
                             <input type="radio" value="2" name="rate" id="star2">
@@ -40,10 +41,43 @@
                             <label for="star4" title="text"></label>
                             <input type="radio" value="5" name="rate" id="star5">
                             <label for="star5" title="text"></label>
+                        </div> --}}
+
+
+
+                        <div wire:ignore.self>
+                            <div  style="cursor: pointer" class="rating rating-24">
+
+                                @for ($i=0; $i < $course->rating; $i++)
+                                <div class="rating__item active"><i class="material-icons"  value="{{ $i+1 }}">star</i></div>
+                                @endfor
+
+                                @if ($course->half)
+                                <div class="rating__item"><i class="material-icons" value="{{ $i }}">star_half</i></div>
+                                @endif
+
+                                @for ($x = 0; $x < $course->empty; $x++)
+                                <div class="rating__item" value="{{ $i }}"><i class="material-icons">star_border</i></div>
+                                @endfor
+
+                            </div>
                         </div>
-                        <div style="margin-top: -20px;">
-                            <small class="mt-0">1 calificación</small>
-                        </div> 
+
+
+
+
+
+
+
+
+
+                        <div style="margin-top: 4px;">
+                            @if ($course->voters == 1)
+                                <small class="mt-0">{{ $course->voters }} calificación</small>
+                            @else
+                                <small class="mt-0">{{ $course->voters }} calificaciones</small>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </a>

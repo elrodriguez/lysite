@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Person;
 use Modules\Academic\Entities\AcaStudent;
 use Modules\Academic\Entities\AcaCourse;
+use App\Models\UserSubscription;
 
 class AutomationController extends Controller
 {
@@ -17,6 +18,7 @@ class AutomationController extends Controller
         $subscription = TypeSubscription::find($type_subscription_id);
         $ai_oportunities = $subscription->ai_oportunities;
         $allowed_thesis = $subscription->allowed_thesis;
+        $add_months = $subscription->until_subscription; //numero de meses que se ampliará la subscripción
 // agregando permisos para tesis y uso de AI
         $user = Auth::user();
         $person = $user->person;
@@ -35,28 +37,58 @@ class AutomationController extends Controller
 
         $person->save();
 
-        // dando permiso a los cursos
-        $courses = AcaCourse::where('status', 1)->get();
-        $registeredUntil = now()->addYear(); // Fecha actual + 1 año
+  // dando permiso a los cursos
+$courses = AcaCourse::where('status', 1)->get();
+$today = now();
+$registeredUntil = $today->addMonths(6);
+$newDate;
+foreach ($courses as $course) {
+    $acaStudent = AcaStudent::where('person_id', $person->id)
+                            ->where('course_id', $course->id)
+                            ->first();
 
-        foreach ($courses as $course) {
-            $acaStudent = AcaStudent::where('person_id', $person->id)
-                                    ->where('course_id', $course->id)
-                                    ->first();
-
-            if ($acaStudent) {
-                // Si el usuario ya está registrado, actualiza la fecha de registro
-                $acaStudent->registered_until = $registeredUntil;
-                $acaStudent->save();
-            } else {
-                // Si el usuario no está registrado, crea una nueva instancia de AcaStudent
-                $acaStudent = new AcaStudent();
-                $acaStudent->person_id = $person->id;
-                $acaStudent->course_id = $course->id;
-                $acaStudent->status = 1;
-                $acaStudent->registered_until = $registeredUntil;
-                $acaStudent->save();
-            }
+    if ($acaStudent) {
+        // Si el usuario ya está registrado, verificar la fecha de registro
+        if ($acaStudent->registered_until === null) {
+            // Si la fecha de registro es nula, establecer a 6 meses a partir de hoy
+            $acaStudent->registered_until = $registeredUntil;
+            $newDate=$registeredUntil;
+        } elseif (is_string($acaStudent->registered_until)) {
+            // Si la fecha de registro es un string, convertirlo a una instancia de DateTime
+            $acaStudent->registered_until = new \DateTime($acaStudent->registered_until);
+            $acaStudent->registered_until = $acaStudent->registered_until->modify('+6 months');
+            $newDate=$acaStudent->registered_until->modify('+6 months');
+        } elseif ($acaStudent->registered_until < $today) {
+            // Si la fecha de registro es anterior a hoy, actualizar a 6 meses a partir de hoy
+            $acaStudent->registered_until = $registeredUntil;
+            $newDate=$registeredUntil;
+        } else {
+            // Si la fecha de registro es posterior a hoy, sumar 6 meses a la fecha existente
+            $acaStudent->registered_until = $acaStudent->registered_until->modify('+6 months');
+            $newDate=$acaStudent->registered_until->modify('+6 months');
         }
+        $acaStudent->save();
+    } else {
+            // Si el usuario no está registrado, crear una nueva instancia de AcaStudent
+            $acaStudent = new AcaStudent();
+            $acaStudent->person_id = $person->id;
+            $acaStudent->course_id = $course->id;
+            $acaStudent->status = 1;
+            $acaStudent->registered_until = $registeredUntil;
+            $acaStudent->save();
+            $newDate=$registeredUntil;
+            }
+    }
+
+        //registrando en tabla users_subscriptions
+        $userSubscription = new UserSubscription();
+        $userSubscription->date_start = now();
+        $userSubscription->date_end = $newDate;
+        $userSubscription->user_id = $user->id;
+        $userSubscription->subscription_id = $type_subscription_id;
+        $userSubscription->status = true;
+        $userSubscription->created_at = now();
+        $userSubscription->save();
+
     }
 }
