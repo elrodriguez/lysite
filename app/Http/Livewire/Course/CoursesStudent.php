@@ -7,10 +7,12 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaStudent;
+use Modules\Academic\Entities\AcaCourseRating;
 
 class CoursesStudent extends Component
 {
     public $courses = [];
+    public $rating;
 
     public function mount()
     {
@@ -30,6 +32,12 @@ class CoursesStudent extends Component
                 ->where('aca_courses.status', 1)
                 ->where('aca_students.registered_until', '>=', Carbon::now()->format('Y-m-d'))
                 ->get();
+                foreach ($this->courses as $key => $course) {
+                    $this->Load_rating($course->id);
+                    $this->courses[$key]->rating = $this->rating->rating;
+                    $this->courses[$key]->half = $this->rating->half;
+                    $this->courses[$key]->empty = $this->rating->empty;
+                }
         }
     }
 
@@ -44,4 +52,24 @@ class CoursesStudent extends Component
 
         return str_replace($mesesEn, $mesesEs, $fecha);
     }
+
+    public function Load_rating($course_id)
+    {
+        $this->rating = AcaCourseRating::where('course_id', $course_id)->first();
+
+        if($this->rating){
+            if (fmod($this->rating->rating, 1) > 0) {
+                $this->rating->half = true;
+            }
+            $this->rating->rating = $this->rating->rating - fmod($this->rating->rating, 1);
+            if($this->rating->half){
+                $this->rating->empty = 4 - $this->rating->rating;
+            }else{
+                $this->rating->empty = 5 - $this->rating->rating;
+            }
+        }
+
+
+    }
+
 }
