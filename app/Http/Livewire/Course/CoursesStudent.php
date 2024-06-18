@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Modules\Academic\Entities\AcaStudent;
 use Modules\Academic\Entities\AcaCourseRating;
+use Modules\Academic\Entities\AcaCourseRatingVote;
 
 class CoursesStudent extends Component
 {
@@ -37,6 +38,7 @@ class CoursesStudent extends Component
                     $this->courses[$key]->rating = $this->rating->rating;
                     $this->courses[$key]->half = $this->rating->half;
                     $this->courses[$key]->empty = $this->rating->empty;
+                    $this->courses[$key]->voters = $this->rating->voters;
                 }
         }
     }
@@ -67,6 +69,8 @@ class CoursesStudent extends Component
             }else{
                 $this->rating->empty = 5 - $this->rating->rating;
             }
+
+            $this->rating->voters = AcaCourseRatingVote::where('course_id', $course_id)->count();
         }
 
 

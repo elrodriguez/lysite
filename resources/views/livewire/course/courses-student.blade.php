@@ -71,9 +71,13 @@
 
 
 
-                        {{-- <div style="margin-top: -20px;">
-                            <small class="mt-0">1 calificación</small>
-                        </div> --}}
+                        <div style="margin-top: 4px;">
+                            @if ($course->voters == 1)
+                                <small class="mt-0">{{ $course->voters }} calificación</small>
+                            @else
+                                <small class="mt-0">{{ $course->voters }} calificaciones</small>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </a>
