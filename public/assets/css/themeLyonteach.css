@@ -13,7 +13,6 @@
 
 
 
-
 [dir=ltr] .container-section{
   width: 1600px;
   margin: auto;
@@ -68,10 +67,11 @@
 }
 
 
-/* --------------------------------------------*/
-/* Box ----------------------------------------*/
-/* --------------------------------------------*/
+/* -------------------------------------------------*/
+/* Box ---------------------------------------------*/
+/* -------------------------------------------------*/
 
+/*-- Home --*/
 [dir=ltr] .box-section-home {
   padding: 120px 0px;
 }
@@ -127,7 +127,37 @@
 [dir=ltr] .box-presentation-content-home p{
   color: #fff;
 }
+/*------------*/
 
+/*-- Login --*/
+[dir=ltr] .box-plane-login {
+  padding: 0px 30px;
+}
+
+[dir=ltr] .box-plane-content-login {
+  background: #fff; 
+  padding: 30px 10px; 
+  border-radius: 20px;
+}
+
+[dir=ltr] .box-plane-card-login {
+  padding: 20px; 
+  align-items: center;
+}
+
+[dir=ltr] .box-plane-sesion {
+  padding: 0px 30px;
+}
+
+[dir=ltr] .box-plane-content-sesion {
+  background: #fff; 
+  padding: 30px 10px; 
+  border-radius: 20px;
+}
+
+[dir=ltr] .box-plane-card-sesion {
+  align-items: center;
+}
 
 
 
