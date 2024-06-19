@@ -41,7 +41,8 @@
 /* Because of sidebar `position: relative`, Edge is overriding the outline of a focused editor. */
 .ck.ck-editor__editable {
 	position: relative;
-	z-index: var(--ck-sample-editor-z-index);
+	z-index: 0;
+	/* z-index: var(--ck-sample-editor-z-index); */
 }
 
 .editor-container {
@@ -489,6 +490,7 @@ html {
 	overflow: hidden;
 	font-family: Arial, sans-serif;
 	font-size: 14px;
+	z-index: 9999999 !important;
 }
 
 .ly-ck-dialog-800{
@@ -594,3 +596,7 @@ html {
 	cursor: pointer;
 	text-align: justify;
 }
+
+.ck.ck-dropdown .ck-dropdown__arrow {
+	z-index: 0 !important;
+  }
