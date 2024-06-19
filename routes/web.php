@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PaypalController;
 use App\Models\TypeSubscription;
 use App\Http\Controllers\DniController;
+use App\Http\Controllers\MercadoPagoController;
 use App\Models\UserSubscription;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -95,8 +96,7 @@ Route::middleware(['single-session'])->group(function () {
 
         $sus = TypeSubscription::find($mod);
         $preference_id = null;
-        // use MercadoPago\Client\Preference\PreferenceClient;
-        // use MercadoPago\Client\Payment\PaymentClient;
+
         try {
             \MercadoPago\MercadoPagoConfig::setAccessToken(env('MERCADOPAGO_TOKEN'));
 
@@ -137,58 +137,10 @@ Route::middleware(['single-session'])->group(function () {
     })->name('tarjeta_page');
 
     ///////////procesar pago//////////
-    Route::middleware(['auth:sanctum', 'verified'])->put('/process_payment/{id}', function ($id) {
-        \MercadoPago\MercadoPagoConfig::setAccessToken(env('MERCADOPAGO_TOKEN'));
+    Route::middleware(['auth:sanctum', 'verified'])->put('/process_payment/{id}', [MercadoPagoController::class, 'processPayment'])->name('web_process_payment');
 
-        $client = new \MercadoPago\Client\Payment\PaymentClient();
-
-        try {
-
-            $payment = $client->create([
-                "token" => request()->get('token'),
-                "issuer_id" => request()->get('issuer_id'),
-                "payment_method_id" => request()->get('payment_method_id'),
-                "transaction_amount" => (float) request()->get('transaction_amount'),
-                "installments" => request()->get('installments'),
-                "payer" => request()->get('payer')
-            ]);
-
-            $us = UserSubscription::find($id);
-
-            if ($payment->status == 'approved') {
-
-                $us->status_response = $payment->status;
-                $us->payment_response = json_encode($payment);
-                $us->save();
-
-                return response()->json([
-                    'status' => $payment->status,
-                    'message' => $payment->status_detail,
-                    'url' => route('web_gracias_por_comprar_tu_entrada', $us->id)
-                ]);
-            } else {
-
-                return response()->json([
-                    'status' => $payment->status,
-                    'message' => $payment->status_detail,
-                    'url' => route('modo_page')
-                ]);
-
-                $us->delete();
-            }
-        } catch (\MercadoPago\Exceptions\MPApiException $e) {
-            // Manejar la excepción
-            $response = $e->getApiResponse();
-            $content  = $response->getContent();
-
-            $message = $content['message'];
-            return response()->json(['error' => 'Error al procesar el pago: ' . $message], 412);
-        }
-    })->name('web_process_payment');
-
-    Route::post('/tarjeta/success', function ($id) {
-        ///pagina de agradeciemiento
-        dd($id);
+    Route::get('/payment/success/{id}', function ($id) {
+        return view('ly_thanks');
     })->name('web_gracias_por_comprar');
 });
 
