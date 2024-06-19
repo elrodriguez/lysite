@@ -35,43 +35,47 @@
                 <div class="col-md-3">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
+                            <a href="#" class="media tab-vertical {{ $n1 ? 'active' : '' }}"
+                                wire:click="setBtnActive(1)">
                                 <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">PARAFRASEADOR</h5>
-                                    <p class="mt-0" >Cambia textos para mejorar su originalidad.</p>
+                                    <p class="mt-0">Cambia textos para mejorar su originalidad.</p>
                                 </span>
                             </a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n2 ? 'active': '' }}" wire:click="setBtnActive(2)">
+                            <a href="#" class="media tab-vertical {{ $n2 ? 'active' : '' }}"
+                                wire:click="setBtnActive(2)">
                                 <img src="{{ asset('assets/images/8b.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">RECOMENDADOR</h5>
-                                    <p >Accede a la recomendación de articulos cientificos.</p>
+                                    <p>Accede a la recomendación de articulos cientificos.</p>
                                 </span>
                             </a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n3 ? 'active': '' }}" wire:click="setBtnActive(3)">
+                            <a href="#" class="media tab-vertical {{ $n3 ? 'active' : '' }}"
+                                wire:click="setBtnActive(3)">
                                 <img src="{{ asset('assets/images/8c.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">CORRECTOR</h5>
-                                    <p >Revisa y corrige errores gramaticales.</p>
+                                    <p>Revisa y corrige errores gramaticales.</p>
                                 </span>
                             </a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n4 ? 'active': '' }}" wire:click="setBtnActive(4)">
+                            <a href="#" class="media tab-vertical {{ $n4 ? 'active' : '' }}"
+                                wire:click="setBtnActive(4)">
                                 <img src="{{ asset('assets/images/8d.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -83,12 +87,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n5 ? 'active': '' }}" wire:click="setBtnActive(5)">
+                            <a href="#" class="media tab-vertical {{ $n5 ? 'active' : '' }}"
+                                wire:click="setBtnActive(5)">
                                 <img src="{{ asset('assets/images/8e.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">REFERENCIADOR</h5>
-                                    <p >Referencia a la normativa con solo un enlace.</p>
+                                    <p>Referencia a la normativa con solo un enlace.</p>
                                 </span>
                             </a>
                         </div>
@@ -133,7 +138,8 @@
                                 <form class="datos">
                                     <div class="mt-2">
                                         <label class="mb-0">&nbsp;&nbsp;Descripción:</label>
-                                        <input wire:model="consulta" class="form-control" id="consulta" placeholder="Escribe aquí palabras clave sobre el tema que requieres"
+                                        <input wire:model="consulta" class="form-control" id="consulta"
+                                            placeholder="Escribe aquí palabras clave sobre el tema que requieres"
                                             style="background-color: #fff;">
                                     </div>
                                     <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
@@ -151,6 +157,9 @@
                                         <div class="alert alert-primary" role="alert">
                                             {!! $resultado !!}
                                         </div>
+                                    @else
+                                        <div class="alert alert-primary" style="height: 160px; padding:10px"
+                                            role="alert"></div>
                                     @endif
                                 </div>
                             </div>
@@ -199,12 +208,15 @@
                                                                     <div class="media-body" style="float:right;">
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <p class="box-orange-chat mb-0"  style="float:right;">{{ $item->content }}</p>
+                                                                                <p class="box-orange-chat mb-0"
+                                                                                    style="float:right;">
+                                                                                    {{ $item->content }}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <small class="gpt-time_date mt-0" style="float:right;">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                                <small class="gpt-time_date mt-0"
+                                                                                    style="float:right;">{{ $this->formatDateBox($item->created_at) }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -213,16 +225,19 @@
                                                         @else
                                                             <div style="padding: 15px; margin-bottom: 8px">
                                                                 <div class="media">
-                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png" class="mr-3" alt="...">
+                                                                    <img src="https://www.lyonteach.com/assets/images/logo/white-60.png"
+                                                                        class="mr-3" alt="...">
                                                                     <div class="media-body" style="float:left;">
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <p class="box-chrerry-chat mb-0">{{ $item->content }}</p>
+                                                                                <p class="box-chrerry-chat mb-0">
+                                                                                    {{ $item->content }}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <small class="gpt-time_date mt-0" style="float:left;">{{ $this->formatDateBox($item->created_at) }}</small>
+                                                                                <small class="gpt-time_date mt-0"
+                                                                                    style="float:left;">{{ $this->formatDateBox($item->created_at) }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -232,7 +247,8 @@
                                                     @endforeach
                                                 @endif
                                             </div>
-                                            <textarea wire:model="message" class="form-control" rows="3" placeholder="Escribe tu consultas aqui..." style="background-color: #fff;"></textarea>
+                                            <textarea wire:model="message" class="form-control" rows="3" placeholder="Escribe tu consultas aqui..."
+                                                style="background-color: #fff;"></textarea>
 
                                         </div>
                                     </div>
@@ -240,15 +256,17 @@
                                 <div class="row" style="padding: 5px 0px;">
                                     <div class="col-md-8">
                                         <div class="file-upload">
-                                            <button onclick="document.getElementById('file').click()" class="span-small">Seleccionar archivo</button>
+                                            <button onclick="document.getElementById('file').click()"
+                                                class="span-small">Seleccionar archivo</button>
                                             <input type="file" id="file" onchange="updateFileName()">
-                                            <span class="file-name" id="file-name" style="font-size: 11px;">Ningún archivo seleccionado</span>
+                                            <span class="file-name" id="file-name" style="font-size: 11px;">Ningún
+                                                archivo seleccionado</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <button wire:click="saveMessageUser" wire:loading.attr="disabled"
-                                            wire:target="saveMessageUser" type="button"
-                                            class="btn btn-orange" style="margin-top: -5px; width: 100%;">
+                                            wire:target="saveMessageUser" type="button" class="btn btn-orange"
+                                            style="margin-top: -5px; width: 100%;">
                                             <i wire:loading.remove wire:target="saveMessageUser"
                                                 class="fa fa-location-arrow mr-2"></i>
                                             <div wire:loading wire:target="saveMessageUser"
@@ -271,7 +289,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a wire:loading.attr="disabled" wire:target="r_prompts(1)" type="button" wire:click="r_prompts(1)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(1)" type="button"
+                                            wire:click="r_prompts(1)">
                                             <div wire:loading wire:target="r_prompts(1)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -284,7 +303,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a wire:loading.attr="disabled" wire:target="r_prompts(2)" type="button" wire:click="r_prompts(2)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(2)" type="button"
+                                            wire:click="r_prompts(2)">
                                             <div wire:loading wire:target="r_prompts(2)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -297,7 +317,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a  wire:loading.attr="disabled" wire:target="r_prompts(3)" type="button" wire:click="r_prompts(3)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(3)" type="button"
+                                            wire:click="r_prompts(3)">
                                             <div wire:loading wire:target="r_prompts(3)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -324,7 +345,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a wire:loading.attr="disabled" wire:target="r_prompts(5)" type="button"  wire:click="r_prompts(5)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(5)" type="button"
+                                            wire:click="r_prompts(5)">
                                             <div wire:loading wire:target="r_prompts(5)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -351,7 +373,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a wire:loading.attr="disabled" wire:target="r_prompts(7)" type="button" wire:click="r_prompts(7)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(7)" type="button"
+                                            wire:click="r_prompts(7)">
                                             <div wire:loading wire:target="r_prompts(7)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -364,7 +387,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a wire:loading.attr="disabled" wire:target="r_prompts(8)" type="button" wire:click="r_prompts(8)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(8)" type="button"
+                                            wire:click="r_prompts(8)">
                                             <div wire:loading wire:target="r_prompts(8)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -377,7 +401,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 list-vertical" style="margin-top: -15px;">
-                                        <a wire:loading.attr="disabled" wire:target="r_prompts(9)" type="button" wire:click="r_prompts(9)">
+                                        <a wire:loading.attr="disabled" wire:target="r_prompts(9)" type="button"
+                                            wire:click="r_prompts(9)">
                                             <div wire:loading wire:target="r_prompts(9)"
                                                 class="spinner-grow spinner-grow-sm mr-2" role="status"
                                                 style="display: none">
@@ -437,7 +462,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <button wire:click="saveMessageUser" wire:loading.attr="disabled"
-                                            id="ckgetBtnReference" type="button" class="btn btn-orange" style="width: 100%;">
+                                            id="ckgetBtnReference" type="button" class="btn btn-orange"
+                                            style="width: 100%;">
                                             <div wire:loading wire:target="saveMessageUser" style="display: none"
                                                 class="spinner-grow spinner-grow-sm" role="status">
                                                 <span class="sr-only">Loading...</span>
