@@ -432,6 +432,24 @@
   border-radius: 10px;
 }
 
+[dir=ltr] .btn-small-cherry{
+  font-size: 12px;
+  color: #000;
+  text-align: center;
+  padding: 3px 15px;
+  background-color: #ffb890;
+  border-radius: 10px;
+}
+
+[dir=ltr] .btn-small-cherry:hover{
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  padding: 3px 15px;
+  background-color: #000;
+  border-radius: 10px;
+}
+
 [dir=ltr] .p-small{
   font-size: 12px;
 }
