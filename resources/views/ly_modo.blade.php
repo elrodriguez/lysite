@@ -61,7 +61,13 @@
                                                     <h5 class="text-center" style="padding: 0px; margin: 0px;">
                                                         {{ $modo->name }}</h5>
                                                     <p class="mt-0 mb-0  text-center" style="color: #000;">
-                                                        <strong>{{ $modo->price ?? 'GRATIS' }}</strong>
+                                                        <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong>
+                                                    </p>
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000;">
+                                                        <strong>ó</strong>
+                                                    </p>
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000;">
+                                                        <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
                                                     </p>
                                                     <p class="mt-0 mb-0 text-center" style="color: #000;">
                                                         <strong>/{{ $modo->detail_one }}</strong>

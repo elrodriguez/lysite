@@ -88,7 +88,6 @@ class AutomationController extends Controller
         $userSubscription->user_id = $user->id;
         $userSubscription->subscription_id = $type_subscription_id;
         $userSubscription->status = true;
-        $userSubscription->created_at = now();
         $userSubscription->save();
     }
 }

@@ -31,6 +31,7 @@
     /* Box ----------------------------------------*/
     /* --------------------------------------------*/
     
+    /*-- Home --*/
     [dir=ltr] .box-section-home {
       padding: 180px 0px;
     }
@@ -58,9 +59,6 @@
       padding: 40px 10px;
     }
 
-
-
-
     [dir=ltr] .box-presentation-content-home {
       margin-top: 0px;
     }
@@ -72,7 +70,36 @@
     [dir=ltr] .box-presentation-content-home p{
       text-align: center;
     }
-    
+    /*------------*/
+
+    /*-- Login --*/
+    [dir=ltr] .box-plane-login {
+      padding: 60px;
+    }
+
+    [dir=ltr] .box-plane-content-login {
+      background: #fff; 
+      padding: 30px 10px; 
+      border-radius: 20px;
+    }
+
+    [dir=ltr] .box-plane-card-login {
+      padding: 20px; 
+      align-items: center;
+    }
+
+    [dir=ltr] .box-plane-sesion {
+      padding: 60px;
+    }
+
+    [dir=ltr] .box-plane-content-sesion { 
+      padding: 30px 10px; 
+      border-radius: 20px;
+    }
+
+    [dir=ltr] .box-plane-card-sesion {
+      align-items: center;
+    }
     
     
 
