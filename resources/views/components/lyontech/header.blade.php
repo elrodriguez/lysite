@@ -102,7 +102,7 @@
                 </button>
 
                 <li class="nav-item dropleft">
-                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link " id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
                             style="width: 50px; height:auto; margin-top: -20px;" alt="Icono">
