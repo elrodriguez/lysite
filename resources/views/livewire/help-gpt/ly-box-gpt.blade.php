@@ -257,7 +257,7 @@
                                     <div class="col-md-8">
                                         <div class="file-upload">
                                             <button onclick="document.getElementById('file').click()"
-                                                class="span-small">Seleccionar archivo</button>
+                                                class="btn-small-cherry">Seleccionar archivo</button>
                                             <input type="file" id="file" onchange="updateFileName()">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">Ningún
                                                 archivo seleccionado</span>
@@ -449,15 +449,15 @@
                                 <div class="row" style="padding: 5px 8px 5px 0px;">
                                     <div class="col-md-9 mt-1">
                                         <a href="#" onclick="modifyCitation()" id="modify-citation-id"
-                                            class="btn-small" type="button">Modificar cita
+                                            class="btn-small-cherry" type="button">Modificar cita
                                         </a>
-                                        <a href="#" onclick="copyCitation()" class="btn-small"
+                                        <a href="#" onclick="copyCitation()" class="btn-small-cherry"
                                             type="button">Copiar cita
                                         </a>
                                         <a href="#" onclick="hideBuscar()" id="cita-manual-id"
                                             data-toggle="collapse" data-target="#collapseWidthExample1"
                                             aria-expanded="false" aria-controls="collapseWidthExample1"
-                                            class="btn-small" type="button">Cita manual
+                                            class="btn-small-cherry" type="button">Cita manual
                                         </a>
                                     </div>
                                     <div class="col-md-3">

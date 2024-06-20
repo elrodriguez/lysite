@@ -15,12 +15,12 @@
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
-                    <a href="#" class="nav-link dropdown-toggle" 
-                                id="navbarDropdown" 
+                    <a href="#" class="nav-link dropdown-toggle"
+                                id="navbarDropdown"
                                 role="button"
-                                data-toggle="dropdown" 
+                                data-toggle="dropdown"
                                 aria-haspopup="true"
-                                aria-expanded="false" 
+                                aria-expanded="false"
                                 style="font-size: 23px;">
                         Herramientas
                     </a>
@@ -39,10 +39,10 @@
                 </li>
                 @can('academico_directo_cursos')
                     <li class="nav-item dropdown mt-3" style="padding: 0 10px;">
-                        <a href="#" class="nav-link dropdown-toggle" 
-                                    data-toggle="dropdown" 
-                                    aria-expanded="false" 
-                                    id="courses" 
+                        <a href="#" class="nav-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    aria-expanded="false"
+                                    id="courses"
                                     style="font-size: 23px;">
                             {{ __('labels.My Courses') }}
                         </a>
@@ -101,8 +101,8 @@
                     </a>
                 </button>
 
-                <li class="nav-item dropleft">
-                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                <li class="nav-item dropleft-" style="list-style-type: none;">
+                    <a class="nav-link " id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
                             style="width: 50px; height:auto; margin-top: -20px;" alt="Icono">
@@ -120,7 +120,7 @@
 
                     </div>
                 </li>
-                <li class="nav-item dropleft">
+                <li class="nav-item dropleft-" style="list-style-type: none;">
 
                     <livewire:chat::ly-contact-list />
 
