@@ -158,9 +158,25 @@
 [dir=ltr] .box-plane-card-sesion {
   align-items: center;
 }
+/*------------*/
 
+/*-- Courses List --*/
+[dir=ltr] .box-course-list {
+  background: #f3f3f3; 
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+[dir=ltr] .box-course-list img{
+  width: 100%;
+}
 
+[dir=ltr] .box-course-list:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
 
 
 
