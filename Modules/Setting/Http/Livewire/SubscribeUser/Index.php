@@ -8,6 +8,7 @@ use App\Models\UserSubscription;
 use App\Models\Person;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
@@ -41,7 +42,8 @@ class Index extends Component
         ->join('user_subscriptions', 'users.id', 'user_subscriptions.user_id')
         ->join('type_subscriptions', 'type_subscriptions.id', 'user_subscriptions.subscription_id')
         ->select('user_subscriptions.id as type_subscription_id', 'people.full_name', 'type_subscriptions.name as type_subscription',
-        'user_subscriptions.date_start', 'user_subscriptions.date_end')->where('user_subscriptions.status', '=', 1)
+        DB::raw("DATE_FORMAT(user_subscriptions.date_start, '%d-%m-%Y') as date_start"),
+        DB::raw("DATE_FORMAT(user_subscriptions.date_end, '%d-%m-%Y') as date_end"))->where('user_subscriptions.status', '=', 1)
             ->get();
     }
 

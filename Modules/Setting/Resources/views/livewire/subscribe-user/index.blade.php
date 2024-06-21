@@ -56,8 +56,8 @@
                                             </td>
                                             <td class="name align-middle">{{ $person->full_name }}</td>
                                             <td class="name align-middle">{{ $person->type_subscription }}</td>
-                                            <td class="name align-middle">{{ $person->date_start }}</td>
-                                            <td class="name align-middle">{{ $person->date_end }}</td>
+                                            <td class="name align-middle col-3">{{ $person->date_start }}</td>
+                                            <td class="name align-middle col-3">{{ $person->date_end }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
