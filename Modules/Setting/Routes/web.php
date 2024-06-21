@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\TypeSubscriptionController;
+use Modules\Setting\Http\Controllers\SubscribeUsersController;
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('setting')->group(function () {
     Route::middleware(['single-session'])->group(function () {
@@ -45,6 +46,12 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('setting')->group(functi
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_modos_suscripcion'])->get('list', [TypeSubscriptionController::class, 'index'])->name('setting_subscriptions');
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_modos_suscripcion'])->get('create', [TypeSubscriptionController::class, 'create'])->name('setting_subscriptions_create');
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_modos_suscripcion'])->get('edit/{id}', [TypeSubscriptionController::class, 'edit'])->name('setting_subscriptions_editar');
+        });
+
+        Route::group(['prefix' => 'subscribe_users'], function () {
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripcion_usuarios'])->get('list', [SubscribeUsersController::class, 'index'])->name('setting_suscripcion_usuarios');
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripcion_usuarios'])->get('create', [SubscribeUsersController::class, 'create'])->name('setting_suscripcion_usuarios_create');
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripcion_usuarios'])->get('edit/{id}', [SubscribeUsersController::class, 'edit'])->name('setting_suscripcion_usuarios_editar');
         });
     });
 });
