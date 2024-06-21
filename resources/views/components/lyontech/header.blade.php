@@ -101,7 +101,7 @@
                     </a>
                 </button>
 
-                <li class="nav-item dropleft-" style="list-style-type: none;">
+                <li class="nav-item dropleft" style="list-style-type: none;">
                     <a class="nav-link " id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
@@ -120,7 +120,7 @@
 
                     </div>
                 </li>
-                <li class="nav-item dropleft-" style="list-style-type: none;">
+                <li class="nav-item dropleft" style="list-style-type: none;">
 
                     <livewire:chat::ly-contact-list />
 
