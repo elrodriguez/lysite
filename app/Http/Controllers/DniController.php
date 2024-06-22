@@ -35,28 +35,32 @@ class DniController extends Controller
     }
 
     public function consultaDniPost($dni){
-        $token = env('API_DNI_CONSULTA');
-        $numero = $dni;
-        $client = new Client(['base_uri' => 'https://api.apis.net.pe', 'verify' => false]);
-        $parameters = [
-            'http_errors' => true,
-            'connect_timeout' => 5,
-            'headers' => [
-                'Authorization' => 'Bearer '.$token,
-                'Referer' => 'https://apis.net.pe/api-consulta-dni',
-                'User-Agent' => 'laravel/guzzle',
-                'Accept' => 'application/json',
-            ],
-            'query' => ['numero' => $numero]
-        ];
-        $res = $client->request('GET', '/v2/reniec/dni', $parameters);
+        try {
+            $token = env('API_DNI_CONSULTA');
+            $numero = $dni;
+            $client = new Client(['base_uri' => 'https://api.apis.net.pe', 'verify' => false]);
+            $parameters = [
+                'http_errors' => true,
+                'connect_timeout' => 5,
+                'headers' => [
+                    'Authorization' => 'Bearer '.$token,
+                    'Referer' => 'https://apis.net.pe/api-consulta-dni',
+                    'User-Agent' => 'laravel/guzzle',
+                    'Accept' => 'application/json',
+                ],
+                'query' => ['numero' => $numero]
+            ];
+            $res = $client->request('GET', '/v2/reniec/dni', $parameters);
 
-        if ($res->getStatusCode() == 200) {
-            $response = json_decode($res->getBody()->getContents(), true);
-            return $response;
-        } else {
-            $response =false;
-            return $response;
+            if ($res->getStatusCode() == 200) {
+                $response = json_decode($res->getBody()->getContents(), true);
+                return $response;
+            } else {
+                $response =false;
+                return $response;
+            }
+        } catch (\Throwable $th) {
+            return null;
         }
     }
 }

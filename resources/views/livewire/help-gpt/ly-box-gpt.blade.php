@@ -271,6 +271,20 @@
                                             <span>Enviar</span>
                                         </button>
                                     </div>
+                                    <div class="col-md-1">
+                                        <button wire:click="r_prompts(20)" wire:loading.attr="disabled"
+                                            wire:target="r_prompts(20)" type="button" class="btn btn-orange" title="Limpiar Contexto"
+                                            style="margin-top: -5px; width: 100%;">
+                                            <i wire:loading.remove wire:target="r_prompts"
+                                                class="fa mr-2"></i>
+                                            <div wire:loading wire:target="r_prompts"
+                                                class="spinner-grow spinner-grow-sm mr-2" role="status"
+                                                style="display: none">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <i class="fas fa-broom"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-2">

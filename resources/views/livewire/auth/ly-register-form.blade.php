@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-login">
                     <label for="names">&nbsp;Nombres:</label>
-                    <input wire:model="names" id="names" type="text" required>
+                    <input wire:model="names" id="names" type="text" {{ $inputsDisabled ? 'disabled' : '' }} required>
                     @error('number')
                         <span class="invalid-feedback-2">{{ $message }}</span>
                     @enderror
@@ -22,14 +22,14 @@
             <div class="form-row mt-2">
                 <div class="form-login">
                     <label for="last_name_father">&nbsp;1er Apellido:</label>
-                    <input wire:model="last_name_father" id="last_name_father" type="text" required>
+                    <input wire:model="last_name_father" id="last_name_father" type="text" {{ $inputsDisabled ? 'disabled' : '' }} required>
                     @error('last_name_father')
                         <span class="invalid-feedback-2">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-login">
                     <label for="last_name_mother">&nbsp;2do Apellido:</label>
-                    <input wire:model="last_name_mother" type="text" id="last_name_mother" required>
+                    <input wire:model="last_name_mother" type="text" id="last_name_mother" {{ $inputsDisabled ? 'disabled' : '' }} required>
                     @error('last_name_mother')
                         <span class="invalid-feedback-2">{{ $message }}</span>
                     @enderror
