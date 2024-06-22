@@ -587,7 +587,7 @@ class LyBoxGpt extends Component
                 $this->message = "Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación.";
                 break;
             case 20:
-                $this->message = "Olvida todo el contexto de esta conversación";
+                $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
                 break;
             default:
                 # code...
