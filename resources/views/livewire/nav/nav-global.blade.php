@@ -38,6 +38,10 @@
                         <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'subscription' ? 'active' : '' }}"
                             href="{{ route('setting_subscriptions') }}">Modos de Suscripción</a>
                     @endcan
+                    @can('configuraciones_suscripcion_usuarios')
+                        <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'subscription' ? 'active' : '' }}"
+                            href="{{ route('setting_suscripcion_usuarios') }}">Suscripciones de Usuarios</a>
+                    @endcan
                 </div>
             </li>
         @endcan

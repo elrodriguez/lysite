@@ -128,7 +128,7 @@
 
 
                                 <div class="mb-3">
-                                    <textarea wire:model="resultado" class="form-control"id="resultado" rows="5"></textarea>
+                                    <textarea wire:model="resultado" class="form-control"id="resultado" rows="5" readonly></textarea>
                                 </div>
                             </div>
                         </div>
@@ -183,13 +183,7 @@
                                     Corregir
                                 </button>
 
-                                <div class="mb-3">
-                                    @if ($resultado)
-                                        <div class="alert alert-primary" role="alert">
-                                            {{ $resultado }}
-                                        </div>
-                                    @endif
-                                </div>
+                                <textarea wire:model="resultado" class="form-control" rows="6" readonly></textarea>
                             </div>
                         </div>
                     @elseif($typeAction == 4)
