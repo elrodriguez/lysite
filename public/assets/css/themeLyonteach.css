@@ -160,6 +160,36 @@
 }
 /*------------*/
 
+
+/*-- Modo --*/
+[dir=ltr] .box-plane-modo {
+  padding: 0px 30px;
+}
+
+[dir=ltr] .box-plane-content-modo {
+  background: #fff; 
+  padding: 30px 10px; 
+  border-radius: 20px;
+}
+
+[dir=ltr] .box-plane-card-modo {
+  padding: 20px; 
+  align-items: center;
+  background: #e0e0e0;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[dir=ltr] .box-plane-card-modo:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/*------------*/
+
+
+
+
 /*-- Courses List --*/
 [dir=ltr] .box-course-list {
   background: #f3f3f3; 

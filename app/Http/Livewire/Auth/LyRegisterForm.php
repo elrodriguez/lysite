@@ -48,6 +48,7 @@ class LyRegisterForm extends Component
 
     public $universities = [];
     public $user;
+    public $inputsDisabled=false;
 
 
     public function render()
@@ -166,15 +167,46 @@ class LyRegisterForm extends Component
         return redirect()->intended('dashboard');
     }
 
-    public function consultaDni(){
-        if(strlen($this->number)==8 && $this->country_id=='PE'){
+    public function consultaDni()
+    {
+        if (strlen($this->number) == 8 && $this->country_id == 'PE') {
             $DniController = new DniController();
-            $data = $DniController->consultaDniPost($this->number);
-            $this->names = ucwords(strtolower($data['nombres']));
-            $this->last_name_father = ucwords(strtolower($data['apellidoPaterno']));
-            $this->last_name_mother = ucwords(strtolower($data['apellidoMaterno']));
-        }else{
+            $maxAttempts = 2; // Número máximo de intentos permitidos
+            $attempt = 1; // Contador de intentos
+            $rechicken = false;
+
+            // Inhabilitar los inputs
+            $this->inputsDisabled = true;
+
+            do {
+                try {
+                    $data = $DniController->consultaDniPost($this->number);
+                    $this->names = ucwords(strtolower($data['nombres']));
+                    $this->last_name_father = ucwords(strtolower($data['apellidoPaterno']));
+                    $this->last_name_mother = ucwords(strtolower($data['apellidoMaterno']));
+
+                    // Si no se produce ningún error, salimos del bucle
+                    break;
+                } catch (\Throwable $th) {
+                    $this->names = '';
+                    $this->last_name_father = '';
+                    $this->last_name_mother = '';
+                }
+
+                // Si se produce un error, esperamos 350 ms antes del siguiente intento
+                usleep(350000); // 350 ms = 350,000 microsegundos
+
+                $attempt++; // Incrementamos el contador de intentos
+            } while ($attempt <= $maxAttempts);
+
+            if ($attempt > $maxAttempts) {
+
+            }
+
+        } else {
 
         }
+        // Habilitar los inputs después de la ejecución
+        $this->inputsDisabled = false;
     }
 }

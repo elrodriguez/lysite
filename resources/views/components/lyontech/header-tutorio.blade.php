@@ -159,7 +159,7 @@
             </div>
         </button>
 
-        <li class="nav-item dropleft-" style="list-style-type: none;">
+        <li class="nav-item dropleft" style="list-style-type: none;">
             <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="assets/images/user-black.jpg" style="width: 50px; height:auto; margin-top: -20px;"
@@ -175,7 +175,7 @@
 
             </div>
         </li>
-        <li class="nav-item dropleft-" style="list-style-type: none;">
+        <li class="nav-item dropleft" style="list-style-type: none;">
             <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="assets/images/msj-black.png" style="width: 50px; height:auto; margin-top: -20px; "

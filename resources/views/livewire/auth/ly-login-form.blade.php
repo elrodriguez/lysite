@@ -50,7 +50,7 @@
                                         <label for="password"><strong>Contraseña</strong></label>
                                         <input wire:model="password" wire:keydown.enter="login" id="password" name="password"
                                             type="password" required>
-                                        <span style="right: 35px;" toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                        <span style="right: 20px;" toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                         @error('password')
                                             <span class="text-danger error">{{ $message }}</span>
                                         @enderror

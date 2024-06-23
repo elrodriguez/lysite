@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class ModeList extends Component
 {
-    public $modos;
     public $search = null;
 
     public function mount()
@@ -15,14 +14,19 @@ class ModeList extends Component
         $this->getModes();
     }
 
+    public function getSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        return view('setting::livewire.subscriptions.mode-list');
+        return view('setting::livewire.subscriptions.mode-list',['modos' => $this->getModes()]);
     }
 
     public function getModes()
     {
-        $this->modos = TypeSubscription::where('name', 'like', '%' . $this->search . '%')
+        return TypeSubscription::where('name', 'like', '%' . $this->search . '%')
             ->get();
     }
 
