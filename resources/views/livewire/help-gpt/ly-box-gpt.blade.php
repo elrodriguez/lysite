@@ -742,6 +742,7 @@
             const input = document.getElementById('file');
             const fileName = document.getElementById('file-name');
             fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
+            @this.saveMessageUser()
         }
     </script>
 </div>
