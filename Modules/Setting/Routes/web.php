@@ -14,7 +14,7 @@
 use App\Http\Controllers\TypeSubscriptionController;
 use Modules\Setting\Http\Controllers\SubscribeUsersController;
 
-Route::middleware(['auth:sanctum', 'verified'])->prefix('setting')->group(function () {
+Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->prefix('setting')->group(function () {
     Route::middleware(['single-session'])->group(function () {
         Route::group(['prefix' => 'modules'], function () {
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_modulos'])->get('list', 'ModuleController@index')->name('setting_modules');

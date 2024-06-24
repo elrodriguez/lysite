@@ -12,7 +12,7 @@ use \Firebase\JWT\JWT;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->prefix('investigation')->group(function () {
+Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->prefix('investigation')->group(function () {
     Route::middleware(['single-session'])->group(function () {
         Route::middleware(['middleware' => 'role_or_permission:investigacion'])->get('dashboard', 'InvestigationController@index')->name('investigation_dashboard');
 

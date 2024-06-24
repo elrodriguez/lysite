@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'single-session' => \App\Http\Middleware\SingleSessionMiddleware::class,
+        'auth.device' => \App\Http\Middleware\VerifyDeviceToken::class, //revisa las sesiones
 
     ];
 }

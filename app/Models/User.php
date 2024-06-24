@@ -38,7 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'country_id',
         'unique_code',
         'start_time_code',
-        'end_time_code'
+        'end_time_code',
+        'device_token'
     ];
 
     /**

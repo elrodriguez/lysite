@@ -30,6 +30,6 @@ class LogoutController extends Controller
                 ->where('user_id', Auth::id())
                 ->delete();
         }
-        return redirect('login')->with(Auth::logout());
+        return redirect('ly-login')->with(Auth::logout());
     }
 }

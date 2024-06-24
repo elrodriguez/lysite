@@ -44,7 +44,7 @@ class Index extends Component
         ->select('user_subscriptions.id as type_subscription_id', 'people.full_name', 'type_subscriptions.name as type_subscription',
         DB::raw("DATE_FORMAT(user_subscriptions.date_start, '%d-%m-%Y') as date_start"),
         DB::raw("DATE_FORMAT(user_subscriptions.date_end, '%d-%m-%Y') as date_end"))->where('user_subscriptions.status', '=', 1)
-            ->get();
+            ->paginate(10);
     }
 
     public function destroy($id)

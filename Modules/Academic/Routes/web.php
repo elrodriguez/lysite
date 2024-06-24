@@ -11,7 +11,7 @@
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->prefix('academic')->group(function () {
+Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->prefix('academic')->group(function () {
     Route::middleware(['single-session'])->group(function () {
         Route::group(['prefix' => 'courses'], function () {
             Route::middleware(['middleware' => 'role_or_permission:academico_cursos'])->get('list', 'CoursesController@index')->name('academic_courses');
