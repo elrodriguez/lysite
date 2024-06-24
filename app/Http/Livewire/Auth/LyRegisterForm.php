@@ -48,7 +48,7 @@ class LyRegisterForm extends Component
 
     public $universities = [];
     public $user;
-    public $inputsDisabled=false;
+    public $inputsDisabled = false;
 
 
     public function render()
@@ -73,6 +73,7 @@ class LyRegisterForm extends Component
                 } else {
                     $this->departments = Department::where('country_id', $this->country_id)->get();
                     $this->universities = Universities::where('country', $this->country_id)->get();
+
                     $this->info = true;
                 }
             }
@@ -94,6 +95,9 @@ class LyRegisterForm extends Component
                 'password' => Hash::make($this->password),
                 'country_id' => $this->country_id,
             ]);
+
+            $this->departments = Department::where('country_id', $this->country_id)->get();
+            $this->universities = Universities::where('country', $this->country_id)->get();
 
             $this->user_id = $this->user->id;
             $this->user->assignRole('Student');
@@ -200,11 +204,8 @@ class LyRegisterForm extends Component
             } while ($attempt <= $maxAttempts);
 
             if ($attempt > $maxAttempts) {
-
             }
-
         } else {
-
         }
         // Habilitar los inputs después de la ejecución
         $this->inputsDisabled = false;
