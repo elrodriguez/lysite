@@ -44,8 +44,8 @@ function openModalHelpKeywords(){
                 
             </div>
             <div class="ly-ck-dialog-buttons">
-                <button class="ly-ck-dialog-button mr-2" type="submit"><i class="fas fa-search"></i>Corregir</button>
-                <button id="ckcloseBtnHelpKeywords" class="ly-ck-dialog-button" type="button"><i class="fas fa-times"></i>Cancelar</button>
+                <button class="ly-ck-dialog-button btn-orange mr-2" type="submit"><i class="fas fa-search"></i>Corregir</button>
+                <button id="ckcloseBtnHelpKeywords" class="ly-ck-dialog-button btn-orange" type="button"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>`;

@@ -41,12 +41,12 @@ function openModalHelpKeywords(editor){
                 <textarea class="ly-ck-dialog-input" rows="5" id="help-texto" name="help-texto" placeholder="Escriba aquí..."></textarea>
                 <spam id="input-text-error"></span>
             </div> 
-            <div id="ly-ck-dialog-grammar-correction-result" class="ly-ck-dialog-group-control mb-2" style="overflow-x: hidden;overflow-y: auto;max-height: 150px;" >
+            <div id="ly-ck-dialog-grammar-correction-result" class="ly-ck-dialog-group-control custom-control-input-orange mb-2" style="overflow-x: hidden;overflow-y: auto;max-height: 150px;" >
                 
             </div>
             <div class="ly-ck-dialog-buttons">
-                <button class="ly-ck-dialog-button mr-2" type="submit"><i class="fas fa-search"></i>Corregir</button>
-                <button id="ckcloseBtnHelpKeywords" class="ly-ck-dialog-button" type="button"><i class="fas fa-times"></i>Cancelar</button>
+                <button class="ly-ck-dialog-button btn-orange mr-2" type="submit"><i class="fas fa-search"></i>Corregir</button>
+                <button id="ckcloseBtnHelpKeywords" class="ly-ck-dialog-button btn-orange" type="button"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>`;

@@ -46,8 +46,8 @@ function openModalRecommendation(editor){
                 
             </div>
             <div class="ly-ck-dialog-buttons">
-                <button id="ckgetBtnReference" class="ly-ck-dialog-button mr-2" type="submit"><i class="fas fa-search"></i>Buscar</button>
-                <button id="ckcloseBtnReference" class="ly-ck-dialog-button" type="button"><i class="fas fa-times"></i>Cancelar</button>
+                <button id="ckgetBtnReference" class="ly-ck-dialog-button btn-orange mr-2" type="submit"><i class="fas fa-search"></i>Buscar</button>
+                <button id="ckcloseBtnReference" class="ly-ck-dialog-button btn-orange" type="button"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>`;

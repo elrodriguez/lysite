@@ -218,19 +218,19 @@ function openModalReference(editor){
             </div>
             <div class="ly-ck-dialog-buttons">
 
-                <button onclick="modifyCitation()" id="modify-citation-id" class="ly-ck-dialog-button btn-info mr-2" type="button">
+                <button onclick="modifyCitation()" id="modify-citation-id" class="ly-ck-dialog-button btn-gris mr-2" type="button">
                 <i class="fa fa-i-cursor" aria-hidden="true"></i>Modificar esta Cita
                 </button>
 
-                <button onclick="copyCitation()" class="ly-ck-dialog-button btn-info mr-2" type="button">
+                <button onclick="copyCitation()" class="ly-ck-dialog-button btn-gris mr-2" type="button">
                 <i class="fa fa-files-o" aria-hidden="true"></i>Copiar Cita
                 </button>
 
-                <button onclick="hideBuscar()" id="cita-manual-id" class="ly-ck-dialog-button btn-info mr-5" type="button" data-toggle="collapse" data-target="#collapseWidthExample1" aria-expanded="false" aria-controls="collapseWidthExample1">
+                <button onclick="hideBuscar()" id="cita-manual-id" class="ly-ck-dialog-button btn-gris mr-5" type="button" data-toggle="collapse" data-target="#collapseWidthExample1" aria-expanded="false" aria-controls="collapseWidthExample1">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Cita Manual
                 </button>
-                <button id="ckgetBtnReference" class="ly-ck-dialog-button mr-2" type="submit"><i class="fas fa-search"></i>Buscar</button>
-                <button id="ckcloseBtnReference" class="ly-ck-dialog-button" type="button"><i class="fas fa-times"></i>Cancelar</button>
+                <button id="ckgetBtnReference" class="ly-ck-dialog-button btn-orange mr-2" type="submit"><i class="fas fa-search"></i>Buscar</button>
+                <button id="ckcloseBtnReference" class="ly-ck-dialog-button btn-orange" type="button"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>`;
