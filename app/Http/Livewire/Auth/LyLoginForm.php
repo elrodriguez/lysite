@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class LyLoginForm extends Component
 {
@@ -56,6 +58,30 @@ class LyLoginForm extends Component
                 ->update([
                     'logout_time' => Carbon::now()
                 ]);
+
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////// Device_token Sesion unica
+                // Verificar si el usuario ya tiene un token de dispositivo asignado
+                $user = User::find(Auth::id());
+
+                    $existingDeviceToken = $_COOKIE['device_token'] ?? null;
+                        // Generar un nuevo token de dispositivo
+                        $deviceToken = Str::uuid()->toString();
+
+                        // Asignar el nuevo token de dispositivo al usuario en la base de datos
+                        $user->device_token = $deviceToken;
+                        $user->save();
+
+                        // Guardar el token de dispositivo en el almacenamiento local del navegador
+                        setcookie('device_token', $deviceToken, time() + (86400 * 2), '/'); // Almacena la cookie durante 1 días
+
+
+
+
+
+                // Resto del código...
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
             return redirect()->intended('dashboard');
         } else {

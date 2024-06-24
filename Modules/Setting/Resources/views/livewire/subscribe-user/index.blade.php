@@ -12,7 +12,7 @@
                     <div class="col-lg-4">
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Modos</p>
-                        <a href="{{ route('setting_subscriptions_create') }}" type="button"
+                        <a href="{{ route('setting_suscripcion_usuarios_create') }}" type="button"
                             class="btn btn-primary">Nuevo</a>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
@@ -44,7 +44,7 @@
                                             <td class="text-center align-middle">
                                                 <div class="btn-group">
 
-                                                    <a href="{{ route('setting_subscriptions_editar', $person->type_subscription_id) }}"
+                                                    <a href="{{ route('setting_suscripcion_usuarios_editar', $person->type_subscription_id) }}"
                                                         type="button" class="btn btn-info btn-sm"><i
                                                             class="fa fa-pencil-alt"></i></a>
 
@@ -61,6 +61,15 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-end" colspan="3">
+                                            <div class="d-flex flex-row-reverse">
+                                                {{ $people->links() }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

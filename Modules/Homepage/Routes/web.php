@@ -12,7 +12,7 @@
 */
 
 
-Route::middleware(['auth:sanctum', 'verified'])->prefix('homepage')->group(function () {
+Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->prefix('homepage')->group(function () {
     Route::middleware(['single-session'])->group(function () {
         Route::group(['prefix' => 'settings'], function () {
 

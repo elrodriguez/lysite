@@ -82,17 +82,20 @@ Route::get('/home', function () {
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware(['single-session'])->group(function () {
-    Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::middleware(['auth:sanctum', 'verified'])->get('dashboard_courses', [DashboardController::class, 'getCourses'])->name('dashboard_courses');
-    Route::middleware(['auth:sanctum', 'verified'])->get('tool/IA/lyon', [DashboardController::class, 'getHelpGPT'])->name('help_gpt');
-    Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_account', [UserController::class, 'account'])->name('user_edit_account');
-    Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
-    Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
-    Route::middleware(['auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
-    Route::middleware(['auth:sanctum', 'verified'])->get('tool/worksheet/{thesis_id}/{sub_part?}', [DashboardController::class, 'getWorksheet'])->name('worksheet');
 
 
-    Route::middleware(['auth:sanctum', 'verified'])->get('/tarjeta/{mod}', function ($mod) {
+    Route::middleware(['auth.device', 'auth.device', 'auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('dashboard_courses', [DashboardController::class, 'getCourses'])->name('dashboard_courses');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('tool/IA/lyon', [DashboardController::class, 'getHelpGPT'])->name('help_gpt');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('user/edit_account', [UserController::class, 'account'])->name('user_edit_account');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('user/edit_profile', [UserController::class, 'profile'])->name('user_edit_account_profile');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('user/edit_password', [UserController::class, 'password'])->name('user_edit_account_password');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('user/edit_avatar', [UserController::class, 'avatar'])->name('user_edit_account_avatar');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('tool/worksheet/{thesis_id}/{sub_part?}', [DashboardController::class, 'getWorksheet'])->name('worksheet');
+
+
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->get('/tarjeta/{mod}', function ($mod) {
 
         $sus = TypeSubscription::find($mod);
         $preference_id = null;
@@ -137,7 +140,7 @@ Route::middleware(['single-session'])->group(function () {
     })->name('tarjeta_page');
 
     ///////////procesar pago//////////
-    Route::middleware(['auth:sanctum', 'verified'])->put('/process_payment/{id}', [MercadoPagoController::class, 'processPayment'])->name('web_process_payment');
+    Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->put('/process_payment/{id}', [MercadoPagoController::class, 'processPayment'])->name('web_process_payment');
 
     Route::get('/payment/success/{id}', function ($id) {
         return view('ly_thanks');

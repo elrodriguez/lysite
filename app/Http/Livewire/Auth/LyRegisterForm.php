@@ -65,10 +65,10 @@ class LyRegisterForm extends Component
 
         if ($userFind) {
             if ($userFind->email_verified_at) {
-                return redirect()->route('login');
+                return redirect()->route('ly-login');
             } else {
                 if (Person::where('user_id', $userFind->id)->first()) {
-                    return redirect()->route('login');
+                    return redirect()->route('ly-login');
                     $this->info = false;
                 } else {
                     $this->departments = Department::where('country_id', $this->country_id)->get();
