@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('theme-lyontech/images/icon.jpg') }}" width="28" height="28" style="margin-left: 10px; ">
+        <img src="{{ asset('theme-lyontech/images/icon.jpg') }}" 
+                style="width: 55px; heiht: 55px; "> &nbsp;
         <span class="brand-text">
             LyonTeach
         </span>

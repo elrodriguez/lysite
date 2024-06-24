@@ -9,7 +9,7 @@
                                 <div class="col-md-4">
                                     <div class="box-plane-card-login">
                                         <h2 style="text-align: center;">{{ $modo->name }}</h2>
-                                        <ul>
+                                        <ul style="height: 220px;">
                                             <li>{{ $modo->detail_two }}</li>
                                             <li>{{ $modo->detail_three }}</li>
                                             <li>{{ $modo->detail_four }}</li>
@@ -34,7 +34,7 @@
                             <div class="box-plane-card-sesion">
                                 <h1 class="mb-0" >Iniciar Sesión</h1>
                                 <p class="mt-0" style="font-size: 22px;" >¿Usuario nuevo? 
-                                    <a href="{{ route('register') }}">Registrarme</a>
+                                    <a href="{{ route('register') }}" style="color: #0059ff;">Registrarme</a>
                                 </p>
                                 <br>
                                 <form class="signin-form">
