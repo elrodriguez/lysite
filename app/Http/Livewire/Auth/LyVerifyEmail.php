@@ -65,7 +65,7 @@ class LyVerifyEmail extends Component
                 $user->save();
 
                 Auth::login($user);
-                $typeSubs = TypeSubscription::where('price', 0)->where('status', 1)->fisrt();
+                $typeSubs = TypeSubscription::where('price', 0)->where('status', 1)->first();
                 $automate_register = new AutomationController();
                 $automate_register->succes_payment_auto($typeSubs->id);
                 return redirect()->intended('dashboard');
