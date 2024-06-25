@@ -47,12 +47,22 @@ class LyBoxGpt extends Component
     public $n4 = false;
     public $n5 = false;
 
-    public function __construct()
+    public function verifyDeviceTokenUser()
     {
-        // Aplicar middleware a métodos específicos
-        $this->middleware('auth.device')->only(['getThreadId']);
-        // También puedes usar except para excluir métodos
-        // $this->middleware('mi_middleware')->except(['otroMetodo']);
+        $user = Auth::user();
+
+        $deviceToken = $_COOKIE['device_token'];
+
+        if ($user && $user->device_token && $user->device_token !== $deviceToken) {
+            $response = redirect()->route('logout')->with('error', 'Se ha iniciado sesión desde otro dispositivo.');
+
+            // Eliminar la cookie 'device_token'
+            $response->withCookie(cookie()->forget('device_token'));
+
+            return $response;
+        } else {
+            return true;
+        }
     }
 
     public function mount()
@@ -422,19 +432,21 @@ class LyBoxGpt extends Component
 
     public function getThreadId($msg)
     {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
-        try {
-            if ($this->thread_id == null) {
-                $client = new Client();
-                $promise = $client->getAsync('http://localhost:3000/create_thread');
-                $response = $promise->wait();
-                $data = json_decode($response->getBody(), true);
-                $this->thread_id = $data['thread_id'];
-                $this->assistant_id = $data['assistant_id'];
-            }
+        if ($this->verifyDeviceTokenUser()) {
+            try {
+                if ($this->thread_id == null) {
+                    $client = new Client();
+                    $promise = $client->getAsync('http://localhost:3000/create_thread');
+                    $response = $promise->wait();
+                    $data = json_decode($response->getBody(), true);
+                    $this->thread_id = $data['thread_id'];
+                    $this->assistant_id = $data['assistant_id'];
+                }
 
-            return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
-        } catch (\Throwable $th) {
-            return null;
+                return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
+            } catch (\Throwable $th) {
+                return null;
+            }
         }
     }
 
