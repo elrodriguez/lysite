@@ -11,9 +11,9 @@ class CreateForm extends Component
 {
     public $type_subscriptions;
     public $search = null;
-    public $selectedOption;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+
 
     public function render()
     {
@@ -41,12 +41,11 @@ class CreateForm extends Component
             ->paginate(5);
     }
 
-    public function changeSubcription($id)
+    public function subscribingUser($id, $type_id)
     {
-        $this->selectedOption = $id;
-    }
-    public function subscribingUser($id)
-    {
-        dd($id);
+        if($id=="" || $type_id=="0" || $type_id==""){
+        }else{
+            dd("Ahora usa el controlador de Automatización", $id, $type_id);
+        }
     }
 }
