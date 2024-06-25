@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active">Nuevo</li>
         </ol>
     </div>
-    <div class="container page__container" wire.ignore.self>
+    <div class="container page__container" wire.ignore>
         <div class="col-lg-12 p-0 mx-auto">
             <div class="card card-body mb-32pt">
                 <div class="row">
@@ -33,23 +33,31 @@
                                     <th class="text-center">Suscribir</th>
                                 </tr>
                             </thead>
-                            <tbody class="list">
+                            <tbody class="list" wire:ignore.self>
                                 @foreach ($users as $key => $user)
-                                <tr>
-                                    <td class="text-center align-middle">{{ $key + 1 }}</td>
-                                    <td class="name align-middle" title="{{ $user->names }}">{{ $user->full_name }}</td>
-                                    <td class="name align-middle">
-                                        <select name="type_subscription_id" wire:model="selectedOptions.{{ $key }}">
-                                            @foreach ($type_subscriptions as $type_sub)
-                                                <option value="{{ $type_sub->id }}">{{ $type_sub->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td class="name align-middle">
-                                        <button wire:click="subscribing({{ $user->id }}, {{ $key }})">Suscribir</button>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                    <tr>
+                                        <td class="text-center align-middle">{{ $key + 1 }}</td>
+                                        <td class="name align-middle" title="{{ $user->names }}">{{ $user->full_name }}
+                                        </td>
+                                        <td class="name align-middle">
+                                            <select name="type_subscription_id">
+                                                <option value="">SELECCIONAR</option>
+                                                @foreach ($type_subscriptions as $type_sub)
+                                                    <option wire:click="changeSubcription({{ $type_sub->id }})"
+                                                        value="{{ $type_sub->id }}">
+                                                        {{ $type_sub->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td class="name align-middle">
+                                            <button id="btn-{{ $key }}" type="button"
+                                                wire:click="subscribingUserXXXXXXX({{ $user->id }})">
+                                                Suscribir
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -174,14 +182,5 @@
             </div>
         </div>
     </div>
-    <script>
-        window.addEventListener('set-subscription-modes-create', event => {
-            cuteAlert({
-                type: "success",
-                title: event.detail.tit,
-                message: event.detail.msg,
-                buttonText: "Okay"
-            });
-        })
-    </script>
+    <script></script>
 </div>

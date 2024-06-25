@@ -14,20 +14,20 @@ class Create extends Component
 {
     public $type_subscriptions;
     protected $users;
-    public $search=null;
-    public $selectedOptions = [];
+    public $search = null;
+    public $selectedOption;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
     public function mount()
     {
-        $this->getTypeSubscriptions();
-        $this->getSearch('');
     }
 
     public function render()
     {
-        return view('setting::livewire.subscribe-user.create',['users' => $this->users]);
+        $this->getTypeSubscriptions();
+        $this->getSearch('');
+        return view('setting::livewire.subscribe-user.create', ['users' => $this->users]);
     }
 
     public function getTypeSubscriptions()
@@ -38,15 +38,21 @@ class Create extends Component
     public function getSearch()
     {
         $this->users = Person::where('names', 'like', '%' . $this->search . '%')
-        ->orWhere('last_name_father', 'like', '%' . $this->search . '%')
-        ->orWhere('last_name_mother', 'like', '%' . $this->search . '%')
-        ->orWhere('full_name', 'like', '%' . $this->search . '%')
-        ->where('users.deleted_at', null)->where('people.deleted_at', null)
-        ->join('users', 'users.id', 'people.user_id')
-        ->select('users.id as user_id', 'people.full_name', 'people.names')
-        ->paginate(5);
+            ->orWhere('last_name_father', 'like', '%' . $this->search . '%')
+            ->orWhere('last_name_mother', 'like', '%' . $this->search . '%')
+            ->orWhere('full_name', 'like', '%' . $this->search . '%')
+            ->where('users.deleted_at', null)->where('people.deleted_at', null)
+            ->join('users', 'users.id', 'people.user_id')
+            ->select('users.id as user_id', 'people.full_name', 'people.names')
+            ->paginate(5);
     }
-    public function subscribing($user_id, $key){
-        dd($user_id, $this->selectedOptions[$key]);
+
+    public function changeSubcription($id)
+    {
+        $this->selectedOption = $id;
+    }
+    public function subscribingUserXXXXXXX($id)
+    {
+        dd($id);
     }
 }

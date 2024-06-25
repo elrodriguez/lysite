@@ -67,42 +67,43 @@ class LyBoxGpt extends Component
         $this->getHistory($num);
     }
 
-    private function activator($num){
+    private function activator($num)
+    {
         switch ($num) {
             case 1:
-                $this->n1=1;
-                $this->n2=0;
-                $this->n3=0;
-                $this->n4=0;
-                $this->n5=0;
+                $this->n1 = 1;
+                $this->n2 = 0;
+                $this->n3 = 0;
+                $this->n4 = 0;
+                $this->n5 = 0;
                 break;
             case 2:
-                $this->n1=0;
-                $this->n2=1;
-                $this->n3=0;
-                $this->n4=0;
-                $this->n5=0;
+                $this->n1 = 0;
+                $this->n2 = 1;
+                $this->n3 = 0;
+                $this->n4 = 0;
+                $this->n5 = 0;
                 break;
             case 3:
-                $this->n1=0;
-                $this->n2=0;
-                $this->n3=1;
-                $this->n4=0;
-                $this->n5=0;
+                $this->n1 = 0;
+                $this->n2 = 0;
+                $this->n3 = 1;
+                $this->n4 = 0;
+                $this->n5 = 0;
                 break;
             case 4:
-                $this->n1=0;
-                $this->n2=0;
-                $this->n3=0;
-                $this->n4=1;
-                $this->n5=0;
+                $this->n1 = 0;
+                $this->n2 = 0;
+                $this->n3 = 0;
+                $this->n4 = 1;
+                $this->n5 = 0;
                 break;
             case 5:
-                $this->n1=0;
-                $this->n2=0;
-                $this->n3=0;
-                $this->n4=0;
-                $this->n5=1;
+                $this->n1 = 0;
+                $this->n2 = 0;
+                $this->n3 = 0;
+                $this->n4 = 0;
+                $this->n5 = 1;
                 break;
 
             default:
