@@ -47,6 +47,14 @@ class LyBoxGpt extends Component
     public $n4 = false;
     public $n5 = false;
 
+    public function __construct()
+    {
+        // Aplicar middleware a métodos específicos
+        $this->middleware('auth.device')->only(['getThreadId']);
+        // También puedes usar except para excluir métodos
+        // $this->middleware('mi_middleware')->except(['otroMetodo']);
+    }
+
     public function mount()
     {
         $permisos = Person::where('user_id', Auth::user()->id)->first();

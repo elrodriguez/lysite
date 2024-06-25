@@ -18,7 +18,7 @@
             @livewire('nav.nav-global')
         </div>
     </div>
-    <livewire:setting::subscribe-user.create />
+    <livewire:setting::subscribe-user.create-form />
     <x-slot name="navigation">
         <x-navigation></x-navigation>
     </x-slot>

@@ -2,32 +2,26 @@
 
 namespace Modules\Setting\Http\Livewire\SubscribeUser;
 
-use App\Models\TypeSubscription;
-use Illuminate\Support\Facades\Auth;
-use App\Models\UserSubscription;
+use Livewire\Component;
 use App\Models\Person;
+use App\Models\TypeSubscription;
 use Livewire\WithPagination;
 
-use Livewire\Component;
-
-class Create extends Component
+class CreateForm extends Component
 {
     public $type_subscriptions;
-    protected $users;
     public $search = null;
     public $selectedOption;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public function mount()
-    {
-    }
-
     public function render()
     {
         $this->getTypeSubscriptions();
         $this->getSearch('');
-        return view('setting::livewire.subscribe-user.create', ['users' => $this->users]);
+        return view('setting::livewire.subscribe-user.create-form', [
+            'users' => $this->getSearch()
+        ]);
     }
 
     public function getTypeSubscriptions()
@@ -37,7 +31,7 @@ class Create extends Component
 
     public function getSearch()
     {
-        $this->users = Person::where('names', 'like', '%' . $this->search . '%')
+        return Person::where('names', 'like', '%' . $this->search . '%')
             ->orWhere('last_name_father', 'like', '%' . $this->search . '%')
             ->orWhere('last_name_mother', 'like', '%' . $this->search . '%')
             ->orWhere('full_name', 'like', '%' . $this->search . '%')
@@ -51,7 +45,7 @@ class Create extends Component
     {
         $this->selectedOption = $id;
     }
-    public function subscribingUserXXXXXXX($id)
+    public function subscribingUser($id)
     {
         dd($id);
     }
