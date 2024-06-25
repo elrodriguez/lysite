@@ -1,4 +1,14 @@
 <div class="">
+    <style>
+        .radio-group {
+            display: flex;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+        }
+    </style>
+
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
@@ -24,7 +34,7 @@
                         <p class="text-70">todos los campos que tienen * son obligatorios para el registro</p>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
@@ -40,19 +50,20 @@
                                         <td class="name align-middle" title="{{ $user->names }}">{{ $user->full_name }}
                                         </td>
                                         <td class="name align-middle">
-                                            <select name="type_subscription_id">
-                                                <option value="">SELECCIONAR</option>
-                                                @foreach ($type_subscriptions as $type_sub)
-                                                    <option wire:click="changeSubcription({{ $type_sub->id }})"
-                                                        value="{{ $type_sub->id }}">
-                                                        {{ $type_sub->name }}
-                                                    </option>
+                                                <div class="name align-middle">
+                                                    <select class="form-control" name="type_subs" id="type_subs{{ $user->id }}">
+                                                        <option onclick="actualizarBoton(this, {{ $key }})" value="0">Seleccionar</option>
+                                                @foreach ($type_subscriptions as $keya => $type_sub)
+                                                        <option id="{{ $key }}type_subs{{ $keya }}" onclick="actualizarBoton(this, {{ $key }})" value="{{ $type_sub->id }}">{{ $type_sub->name }}</option>
+                                                    {{-- <input onclick="actualizarBoton(this, {{ $key }})" type="radio" id="{{ $key }}type_subs{{ $keya }}" name="type_subs" value="{{ $type_sub->id }}">
+                                                    <label for="{{ $key }}type_subs{{ $keya }}">{{ $type_sub->name }}</label> --}}
                                                 @endforeach
-                                            </select>
+                                                </select>
+                                                </div>
                                         </td>
                                         <td class="name align-middle">
-                                            <button id="btn-{{ $key }}" type="button"
-                                                wire:click="subscribingUser({{ $user->user_id }})">
+                                            <button class="btn btn-primary" id="btn-{{ $key }}" type="button" value=""
+                                                wire:click="subscribingUser({{ $user->user_id }}, $event.target.value)">
                                                 Suscribir
                                             </button>
                                         </td>
@@ -75,5 +86,8 @@
             </div>
         </div>
     </div>
-    <script></script>
+    <script>function actualizarBoton(radio, key) {
+        var boton = document.getElementById("btn-"+key);
+        boton.value = radio.value;
+      }</script>
 </div>
