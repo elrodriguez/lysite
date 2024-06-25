@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AutomationController;
 use App\Http\Controllers\TypeSubscriptionController;
+use App\Models\TypeSubscription;
 
 class LyVerifyEmail extends Component
 {
