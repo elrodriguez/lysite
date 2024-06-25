@@ -8,6 +8,7 @@
 	--ck-sample-color-white: #fff;
 	--ck-sample-color-green: #279863;
 	--ck-sample-color-blue: #1a9aef;
+	--ck-sample-color-gray: #a1a1a1;
 	--ck-sample-container-width: 1285px;
 	--ck-sample-sidebar-width: 350px;
 	--ck-sample-editor-min-height: 400px;
@@ -599,4 +600,12 @@ html {
 
 .ck.ck-dropdown .ck-dropdown__arrow {
 	z-index: 0 !important;
+  }
+
+  /* Yisus */
+
+  .btn-gris {
+	color: #fff;
+	background-color: #a1a1a1;
+	border-color: #a1a1a1;
   }
