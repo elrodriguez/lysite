@@ -265,8 +265,7 @@
                                         <div class="file-upload">
                                             <button onclick="document.getElementById('file').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
-                                            <input wire:model="file" type="file" id="file"
-                                                onchange="updateFileName()">
+                                            <input type="file" id="fileDocument" onchange="updateFileName()">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">
                                                 Ningún archivo seleccionado
                                             </span>
@@ -761,7 +760,7 @@
 
     <script>
         function updateFileName() {
-            const input = document.getElementById('file');
+            const input = document.getElementById('fileDocument');
             @this.file = input.files[0];
 
             const fileName = document.getElementById('file-name');
