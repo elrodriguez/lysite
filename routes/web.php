@@ -148,7 +148,7 @@ Route::middleware(['single-session'])->group(function () {
 });
 
 Route::get('/modo', function () {
-    $modos = TypeSubscription::limit(3)->get();
+    $modos = TypeSubscription::limit(4)->get();
     return view('ly_modo', [
         'modos' => $modos
     ]);
