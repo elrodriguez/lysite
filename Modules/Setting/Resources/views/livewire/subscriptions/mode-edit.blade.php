@@ -42,7 +42,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="ai_oportunities">Oportunidades de usar IA*</label>
-                                <input wire:model="ai_oportunities" type="number" class="form-control" id="ai_oportunities"
+                                <input wire:model="ai_oportunities" type="number" class="form-control"
+                                    id="ai_oportunities"
                                     placeholder="Veces que podrán usarse el parafraseo, recomendador, IA, etc..">
                                 @error('ai_oportunities')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
@@ -50,16 +51,16 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="until_subscription">Meses de subscripción*</label>
-                                <input wire:model="until_subscription" type="number" class="form-control" id="until_subscription"
-                                    placeholder="Suma la cantidad de meses a la subscripción">
+                                <input wire:model="until_subscription" type="number" class="form-control"
+                                    id="until_subscription" placeholder="Suma la cantidad de meses a la subscripción">
                                 @error('until_subscription')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="allowed_thesis">Permisos para Tesis*</label>
-                                <input wire:model="allowed_thesis" type="number" class="form-control" id="allowed_thesis"
-                                    placeholder="Suma oportunidades para crear Tesis">
+                                <input wire:model="allowed_thesis" type="number" class="form-control"
+                                    id="allowed_thesis" placeholder="Suma oportunidades para crear Tesis">
                                 @error('allowed_thesis')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
@@ -114,9 +115,17 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="detail_seven">Detalle seis </label>
-                                <input wire:model="detail_seven" type="text" class="form-control" id="detail_seven"
-                                    placeholder="Detalle seis ..">
+                                <input wire:model="detail_seven" type="text" class="form-control"
+                                    id="detail_seven" placeholder="Detalle seis ..">
                                 @error('detail_seven')
+                                    <span class="invalid-feedback-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="detail_eight">Detalle siete </label>
+                                <input wire:model="detail_eight" type="text" class="form-control"
+                                    id="detail_seven" placeholder="Detalle seis ..">
+                                @error('detail_eight')
                                     <span class="invalid-feedback-2">{{ $message }}</span>
                                 @enderror
                             </div>
