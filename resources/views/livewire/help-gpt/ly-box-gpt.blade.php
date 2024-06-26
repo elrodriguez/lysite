@@ -21,16 +21,22 @@
                 <div class="col-md-2 align-items-end" style="padding: 0px;">
                     <p style="padding: 85px 0px 0px 0px;">
                         @if ($paraphrase_left >= 5000)
-                        <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong> Ilimitadas<br>
+                            <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong> Ilimitadas<br>
                         @else
-                        <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong> {{ $paraphrase_allowed }}<br>
+                            <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong>
+                            {{ $paraphrase_allowed }}<br>
                         @endif
                         <strong
-                            style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong> {{ $paraphrase_used }}<br>
+                            style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong>
+                        {{ $paraphrase_used }}<br>
                         @if ($paraphrase_left >= 5000)
-                            <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Ilimitado</strong>
+                            <strong
+                                style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                                Ilimitado</strong>
                         @else
-                            <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $paraphrase_left }}</strong>
+                            <strong
+                                style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                                {{ $paraphrase_left }}</strong>
                         @endif
                         <br>
                     </p>
@@ -259,9 +265,11 @@
                                         <div class="file-upload">
                                             <button onclick="document.getElementById('file').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
-                                            <input type="file" id="file" onchange="updateFileName()">
-                                            <span class="file-name" id="file-name" style="font-size: 11px;">Ningún
-                                                archivo seleccionado</span>
+                                            <input wire:model="file" type="file" id="file"
+                                                onchange="updateFileName()">
+                                            <span class="file-name" id="file-name" style="font-size: 11px;">
+                                                Ningún archivo seleccionado
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
