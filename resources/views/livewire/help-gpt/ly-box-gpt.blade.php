@@ -272,7 +272,7 @@
                                         </div> --}}
 
                                         <input wire:model="file" type="file" id="fileDocument"
-                                            onchange="updateFileName()">
+                                            wire:change="saveMessageUser">
                                     </div>
                                     <div class="col-md-4">
                                         <button id="btnEnviarMessageChatBox" wire:click="saveMessageUser"
