@@ -9,7 +9,7 @@
                 <p>quiere verificar tu identidad en simples pasos.</p>
             </div>
             <div class="text-cuenta-b  ml-1 mt-2">
-                <p>Se acaba de enviar un código de 5 dígitos a la bandeja del correo</p>
+                <p>Se acaba de enviar un código de 6 dígitos a la bandeja del correo</p>
                 <p> electrónico registrado en nuestra plataforma.</p>
 
             </div>
