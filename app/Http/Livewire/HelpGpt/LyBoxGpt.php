@@ -197,6 +197,7 @@ class LyBoxGpt extends Component
             $resultado = $this->grammarCorrection();
         } elseif ($this->typeAction == 4) {
             $this->fileName = null;
+            dd($this->file);
             if ($this->file) {
                 //Agregar texto al mensaje cuando se envia nulo en mensaje
                 if ($this->message == "" || $this->message == null) {
@@ -229,7 +230,7 @@ class LyBoxGpt extends Component
             } catch (\Throwable $th) {
             }
 
-            dd($this->message, $messages, $break);
+
 
             if ($messages != false && $break == false) {
 
