@@ -230,7 +230,7 @@ class LyBoxGpt extends Component
                 }
             } catch (\Throwable $th) {
             }
-            dd($this->message);
+            //dd($this->message);
             if ($messages != false && $break == false) {
 
                 try {
