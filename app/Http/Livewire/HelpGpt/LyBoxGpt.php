@@ -232,7 +232,7 @@ class LyBoxGpt extends Component
                 try {
                     $resultado = $messages[0][0]['text']['value'];   //la respuesta final
                 } catch (\Throwable $th) {
-                    $resultado = "El servidor está ocupado intenta de nuevo por favor.";   //la respuesta final
+                    $resultado = "El servidor está ocupado intenta de nuevo por favor, o quizá ya no tienes mas oportunidades de usar esta herramienta.";   //la respuesta final
                 }
 
                 ///eliminar archivo subido
@@ -277,7 +277,7 @@ class LyBoxGpt extends Component
             $p_used = $permisos->paraphrase_used;
 
             if ($p_allowed > $p_used) {
-                $max_tokens = 3400;
+                $max_tokens = 3500;
                 $temperature = 0.7;
                 $consulta = null;
                 $result_text = "hubo un problema, intenta mas tarde";
@@ -438,19 +438,27 @@ class LyBoxGpt extends Component
     public function getThreadId($msg)
     {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
         if ($this->verifyDeviceTokenUser()) {
-            try {
-                if ($this->thread_id == null) {
-                    $client = new Client();
-                    $promise = $client->getAsync('http://localhost:3000/create_thread');
-                    $response = $promise->wait();
-                    $data = json_decode($response->getBody(), true);
-                    $this->thread_id = $data['thread_id'];
-                    $this->assistant_id = $data['assistant_id'];
+            if ($this->paraphrase_left >= 1) {
+                try {
+                    if ($this->thread_id == null) {
+                        $client = new Client();
+                        $promise = $client->getAsync('http://localhost:3000/create_thread');
+                        $response = $promise->wait();
+                        $data = json_decode($response->getBody(), true);
+                        $this->thread_id = $data['thread_id'];
+                        $this->assistant_id = $data['assistant_id'];
+                    }
+                    $permisos = Person::where('user_id', Auth::user()->id)->first();
+                    $permisos->paraphrase_used++;
+                    $permisos->save();
+                    $this->paraphrase_used++;
+                    $this->paraphrase_allowed--;
+                    return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
+                } catch (\Throwable $th) {
+                    return null;
                 }
-
-                return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
-            } catch (\Throwable $th) {
-                return null;
+            }else{
+                return $val[0] = "Parece que se agotaron tus oportunidades para usar esta herramienta";
             }
         }
     }

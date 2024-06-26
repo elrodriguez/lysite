@@ -20,10 +20,18 @@
                 </div>
                 <div class="col-md-2 align-items-end" style="padding: 0px;">
                     <p style="padding: 85px 0px 0px 0px;">
+                        @if ($paraphrase_left >= 5000)
+                        <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong> Ilimitadas<br>
+                        @else
                         <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong> {{ $paraphrase_allowed }}<br>
+                        @endif
                         <strong
                             style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong> {{ $paraphrase_used }}<br>
-                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $paraphrase_left }}</strong>
+                        @if ($paraphrase_left >= 5000)
+                            <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Ilimitado</strong>
+                        @else
+                            <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $paraphrase_left }}</strong>
+                        @endif
                         <br>
                     </p>
                 </div>
