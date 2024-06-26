@@ -228,7 +228,11 @@ class LyBoxGpt extends Component
                 }
             } catch (\Throwable $th) {
             }
+
+            dd($messages, $break);
+
             if ($messages != false && $break == false) {
+
                 try {
                     $resultado = $messages[0][0]['text']['value'];   //la respuesta final
                 } catch (\Throwable $th) {
