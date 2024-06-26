@@ -229,7 +229,7 @@ class LyBoxGpt extends Component
             } catch (\Throwable $th) {
             }
 
-            dd($messages, $break);
+            dd($this->message, $messages, $break);
 
             if ($messages != false && $break == false) {
 
@@ -441,6 +441,7 @@ class LyBoxGpt extends Component
 
     public function getThreadId($msg)
     {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
+
         if ($this->verifyDeviceTokenUser()) {
             if ($this->paraphrase_left >= 1) {
                 try {
