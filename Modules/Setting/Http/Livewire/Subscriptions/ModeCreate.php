@@ -34,7 +34,7 @@ class ModeCreate extends Component
         'detail_two' => 'required|min:3|max:255',
         'detail_three' => 'required|min:3|max:255',
         'detail_four' => 'required|min:3|max:255',
-        'detail_five' => 'required|min:3|max:255',
+        // 'detail_five' => 'required|min:3|max:255',
         // 'detail_six' => 'required|min:3|max:255',
         // 'detail_seven' => 'required|min:3|max:255',
         // 'detail_eight' => 'required|min:3|max:255',
@@ -68,7 +68,7 @@ class ModeCreate extends Component
             'dollar_price'      => $this->dollar_price,
             'ai_oportunities'   => $this->ai_oportunities,
             'allowed_thesis'    => $this->allowed_thesis,
-            'until_subscription'=> $this->until_subscription,
+            'until_subscription' => $this->until_subscription,
             'created_user_id'   => Auth::id(),
             'updated_user_id'   => null,
         ]);

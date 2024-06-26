@@ -23,6 +23,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 Route::get('/login', [AuthenticatedSessionController::class, 'lyLogin'])
     ->middleware('guest')
     ->name('login');
+
 Route::get('/ly-login', [AuthenticatedSessionController::class, 'lyLogin'])
     ->middleware('guest')
     ->name('ly-login');
