@@ -262,19 +262,22 @@
                                 </div>
                                 <div class="row" style="padding: 5px 0px;">
                                     <div class="col-md-8">
-                                        <div class="file-upload">
+                                        {{-- <div class="file-upload">
                                             <button onclick="document.getElementById('file').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
                                             <input type="file" id="fileDocument" onchange="updateFileName()">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">
                                                 Ningún archivo seleccionado
                                             </span>
-                                        </div>
+                                        </div> --}}
+
+                                        <input wire:model="file" type="file" id="fileDocument"
+                                            onchange="updateFileName()">
                                     </div>
                                     <div class="col-md-4">
-                                        <button wire:click="saveMessageUser" wire:loading.attr="disabled"
-                                            wire:target="saveMessageUser" type="button" class="btn btn-orange"
-                                            style="margin-top: -5px; width: 100%;">
+                                        <button id="btnEnviarMessageChatBox" wire:click="saveMessageUser"
+                                            wire:loading.attr="disabled" wire:target="saveMessageUser" type="button"
+                                            class="btn btn-orange" style="margin-top: -5px; width: 100%;">
                                             <i wire:loading.remove wire:target="saveMessageUser"
                                                 class="fa fa-location-arrow mr-2"></i>
                                             <div wire:loading wire:target="saveMessageUser"
@@ -760,12 +763,12 @@
 
     <script>
         function updateFileName() {
-            const input = document.getElementById('fileDocument');
-            @this.file = input.files[0];
+            // const input = document.getElementById('fileDocument');
+            // @this.file = input.files[0];
 
-            const fileName = document.getElementById('file-name');
-            fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
-            @this.saveMessageUser()
+            // const fileName = document.getElementById('file-name');
+            // fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
+            document.getElementById('btnEnviarMessageChatBox').click;
         }
     </script>
 </div>
