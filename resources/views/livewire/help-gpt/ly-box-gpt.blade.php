@@ -262,17 +262,16 @@
                                 </div>
                                 <div class="row" style="padding: 5px 0px;">
                                     <div class="col-md-8">
-                                        {{-- <div class="file-upload">
-                                            <button onclick="document.getElementById('file').click()"
+                                        <div class="file-upload">
+                                            <button onclick="document.getElementById('fileDocument').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
-                                            <input type="file" id="fileDocument" onchange="updateFileName()">
+                                            <input type="file" id="fileDocument" wire:model="file_document">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">
                                                 Ningún archivo seleccionado
                                             </span>
-                                        </div> --}}
 
-                                        <input wire:model="file" type="file" id="fileDocument"
-                                            wire:change="saveMessageUser">
+                                        </div>
+                                        {{-- <input type="file" id="fileDocument" onchange="updateFileName()"> --}}
                                     </div>
                                     <div class="col-md-4">
                                         <button id="btnEnviarMessageChatBox" wire:click="saveMessageUser"
@@ -757,18 +756,21 @@
     <script>
         window.addEventListener('scroll-messages-updated', event => {
             scrollChatGptToBottom();
-        })
+        });
+
+        document.addEventListener('livewire:load', function() {
+
+        });
     </script>
 
 
     <script>
         function updateFileName() {
-            // const input = document.getElementById('fileDocument');
-            // @this.file = input.files[0];
-
-            // const fileName = document.getElementById('file-name');
-            // fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
-            document.getElementById('btnEnviarMessageChatBox').click();
+            const input = document.getElementById('fileDocument');
+            const fileName = document.getElementById('file-name');
+            fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
+            // @this.file_document = input.files[0];
+            //@this.getFileData()
         }
     </script>
 </div>

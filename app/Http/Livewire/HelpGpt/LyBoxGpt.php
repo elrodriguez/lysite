@@ -23,11 +23,12 @@ use Modules\Investigation\Entities\AssistantGptFilesId;
 class LyBoxGpt extends Component
 {
     use WithFileUploads;
+
     public $typeAction = 1;
     public $history = [];
     public $historyItems = [];
     public $consulta = null;
-    public $file = null;
+    public $file_document = null;
     public $file_id = null;
     public $fileName;
     public $path; // ruta completa para eliminar el archivo del servidor
@@ -171,7 +172,7 @@ class LyBoxGpt extends Component
     }
 
 
-    public function saveMessageUser(Request $request)
+    public function saveMessageUser()
     {
         $history = HistoryGpt::firstOrCreate(
             [
@@ -197,8 +198,8 @@ class LyBoxGpt extends Component
             $resultado = $this->grammarCorrection();
         } elseif ($this->typeAction == 4) {
             $this->fileName = null;
-            dd($this->file);
-            if ($this->file) {
+
+            if ($this->file_document) {
                 //Agregar texto al mensaje cuando se envia nulo en mensaje
                 if ($this->message == "" || $this->message == null) {
                     $this->message = "te envío un archivo, en breve te hare preguntas sobre el mismo.";
@@ -210,11 +211,11 @@ class LyBoxGpt extends Component
                     mkdir($asistentePath);
                 }
 
-                $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
+                $extension = pathinfo($this->file_document->getClientOriginalName(), PATHINFO_EXTENSION);
 
                 $this->fileName = $this->randomName() . '.' . $extension;
 
-                $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
+                $this->path = $this->file_document->storeAs('asistente_lyon', $this->fileName);
             }
 
 
@@ -229,8 +230,6 @@ class LyBoxGpt extends Component
                 }
             } catch (\Throwable $th) {
             }
-
-
 
             if ($messages != false && $break == false) {
 
@@ -264,7 +263,7 @@ class LyBoxGpt extends Component
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
         $this->consulta = null;
-        $this->file = null;
+        $this->file_document = null;
         $this->fileName = null;
         $this->message = null;
         $this->path = null;
@@ -580,7 +579,7 @@ class LyBoxGpt extends Component
         $messages = null;
 
         $this->fileName = null;
-        if ($this->file) {
+        if ($this->file_document) {
             $basePath = base_path();
             $asistentePath = $basePath . '/asistente_lyon';
 
@@ -588,11 +587,11 @@ class LyBoxGpt extends Component
                 mkdir($asistentePath);
             }
 
-            $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $extension = pathinfo($this->file_document->getClientOriginalName(), PATHINFO_EXTENSION);
 
             $this->fileName = $this->randomName() . '.' . $extension;
 
-            $this->path = $this->file->storeAs('asistente_lyon', $this->fileName);
+            $this->path = $this->file_document->storeAs('asistente_lyon', $this->fileName);
         }
 
         switch ($prompt) {
@@ -671,9 +670,19 @@ class LyBoxGpt extends Component
 
 
         $this->consulta = null;
-        $this->file = null;
+        $this->file_document = null;
         $this->fileName = null;
         $this->message = null;
         $this->path = null;
+    }
+
+    public function updatedFileDocument($value)
+    {
+        $this->saveMessageUser();
+    }
+
+    public function getFileData()
+    {
+        dd($this->file_document);
     }
 }
