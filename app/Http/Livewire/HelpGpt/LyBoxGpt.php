@@ -678,11 +678,11 @@ class LyBoxGpt extends Component
 
     public function updatedFileDocument($value)
     {
-        $this->saveMessageUser();
+        $this->getFileData();
     }
 
     public function getFileData()
     {
-        dd($this->file_document);
+        $this->dispatchBrowserEvent('document-updated-gpt', ['success' => true]);
     }
 }

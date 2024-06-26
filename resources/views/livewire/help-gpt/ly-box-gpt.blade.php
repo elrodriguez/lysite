@@ -758,8 +758,8 @@
             scrollChatGptToBottom();
         });
 
-        document.addEventListener('livewire:load', function() {
-
+        window.addEventListener('document-updated-gpt', event => {
+            updateFileName();
         });
     </script>
 
@@ -770,7 +770,7 @@
             const fileName = document.getElementById('file-name');
             fileName.textContent = input.files.length > 0 ? input.files[0].name : 'Ningún archivo seleccionado';
             // @this.file_document = input.files[0];
-            //@this.getFileData()
+            document.getElementById('btnEnviarMessageChatBox').click()
         }
     </script>
 </div>
