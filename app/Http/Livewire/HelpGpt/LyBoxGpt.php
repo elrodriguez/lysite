@@ -33,6 +33,8 @@ class LyBoxGpt extends Component
     public $path; // ruta completa para eliminar el archivo del servidor
     public $resultado = null;
     public $paraphrase_left;
+    public $paraphrase_used;
+    public $paraphrase_allowed;
     public $normativa = "apa";
     public $prompt = 0;
     /*  Asistente de Chat GPT  */
@@ -68,7 +70,9 @@ class LyBoxGpt extends Component
     public function mount()
     {
         $permisos = Person::where('user_id', Auth::user()->id)->first();
+        $this->paraphrase_used = $permisos->paraphrase_used;
         $this->paraphrase_left = $permisos->paraphrase_allowed - $permisos->paraphrase_used;
+        $this->paraphrase_allowed = $permisos->paraphrase_allowed;
     }
 
     public function render()
@@ -307,6 +311,7 @@ class LyBoxGpt extends Component
                     $permisos->paraphrase_used = $p_used + 1;
                     $permisos->save();
                     $this->paraphrase_left--;
+                    $this->paraphrase_used++;
                 } catch (Exception $e) {
                     $result_text = $e->getMessage();
                 }

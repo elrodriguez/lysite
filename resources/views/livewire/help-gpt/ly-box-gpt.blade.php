@@ -20,11 +20,10 @@
                 </div>
                 <div class="col-md-2 align-items-end" style="padding: 0px;">
                     <p style="padding: 85px 0px 0px 0px;">
-                        <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong>1500 <br>
+                        <strong style="font-weight: 700;">OPORTUNIDADES&nbsp;:</strong> {{ $paraphrase_allowed }}<br>
                         <strong
-                            style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                        </strong>0 <br>
-                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 1500</strong>
+                            style="font-weight: 700;">UTILIZADOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong> {{ $paraphrase_used }}<br>
+                        <strong style="color: red;">DISPONIBLES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $paraphrase_left }}</strong>
                         <br>
                     </p>
                 </div>
