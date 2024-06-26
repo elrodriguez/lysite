@@ -23,7 +23,7 @@ class LyLoginForm extends Component
 
     public function render()
     {
-        $this->modos = TypeSubscription::limit(3)->get();
+        $this->modos = TypeSubscription::limit(4)->orderBy('price')->get();
         return view('livewire.auth.ly-login-form');
     }
 
@@ -60,27 +60,27 @@ class LyLoginForm extends Component
                 ]);
 
 
-                ///////////////////////////////////////////////////////////////////////////////////////////////////////// Device_token Sesion unica
-                // Verificar si el usuario ya tiene un token de dispositivo asignado
-                $user = User::find(Auth::id());
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////// Device_token Sesion unica
+            // Verificar si el usuario ya tiene un token de dispositivo asignado
+            $user = User::find(Auth::id());
 
-                    $existingDeviceToken = $_COOKIE['device_token'] ?? null;
-                        // Generar un nuevo token de dispositivo
-                        $deviceToken = Str::uuid()->toString();
+            $existingDeviceToken = $_COOKIE['device_token'] ?? null;
+            // Generar un nuevo token de dispositivo
+            $deviceToken = Str::uuid()->toString();
 
-                        // Asignar el nuevo token de dispositivo al usuario en la base de datos
-                        $user->device_token = $deviceToken;
-                        $user->save();
+            // Asignar el nuevo token de dispositivo al usuario en la base de datos
+            $user->device_token = $deviceToken;
+            $user->save();
 
-                        // Guardar el token de dispositivo en el almacenamiento local del navegador
-                        setcookie('device_token', $deviceToken, time() + (86400 * 2), '/'); // Almacena la cookie durante 1 días
-
-
+            // Guardar el token de dispositivo en el almacenamiento local del navegador
+            setcookie('device_token', $deviceToken, time() + (86400 * 2), '/'); // Almacena la cookie durante 1 días
 
 
 
-                // Resto del código...
-                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // Resto del código...
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
             return redirect()->intended('dashboard');
