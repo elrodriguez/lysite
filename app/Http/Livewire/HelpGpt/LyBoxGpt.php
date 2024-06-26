@@ -208,7 +208,7 @@ class LyBoxGpt extends Component
                 if (!is_dir($asistentePath)) {
                     mkdir($asistentePath);
                 }
-
+                dd($this->file);
                 $extension = pathinfo($this->file->getClientOriginalName(), PATHINFO_EXTENSION);
 
                 $this->fileName = $this->randomName() . '.' . $extension;
@@ -457,7 +457,7 @@ class LyBoxGpt extends Component
                 } catch (\Throwable $th) {
                     return null;
                 }
-            }else{
+            } else {
                 return $val[0] = "Parece que se agotaron tus oportunidades para usar esta herramienta";
             }
         }
