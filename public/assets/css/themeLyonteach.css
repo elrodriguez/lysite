@@ -506,7 +506,8 @@
 
 [dir=ltr] .p-large{
   font-size: 20px;
-  color: #ff9152;
+  /*color: #ff9152;*/
+  color: #000;
   font-weight: 500;
 }
 
@@ -778,7 +779,6 @@
   color: #fff;
   padding: 5px 7px;
 }
-
 
 
 

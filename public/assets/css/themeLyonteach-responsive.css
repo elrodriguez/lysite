@@ -134,7 +134,19 @@
     }
     
     
+    [dir=ltr] .title-ia-lyon {
+      padding: 30px 0px 0px 0px;
+    }
 
+    /*-- Courses List --*/
+    
+    [dir=ltr] .box-course-list {
+      padding: 30px;
+    }
+
+    [dir=ltr] .box-course-list img{
+      width: 50px;
+    }
 }
 
 

@@ -51,11 +51,11 @@
                                     <label for="password"><strong>Contraseña</strong></label>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
                                         name="password" type="password" required>
-                                    <span style="right: 20px;" toggle="#password"
-                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     @error('password')
                                         <span class="text-danger error">{{ $message }}</span>
                                     @enderror
+                                    <span style="right: 10px;" toggle="#password"
+                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 @if (session()->has('message'))
                                     <div class="alert alert-danger" role="alert">
@@ -82,7 +82,7 @@
                         <div class="box-plane-card-sesion">
                             <h1 class="mb-0">Iniciar Sesión</h1>
                             <p class="mt-0" style="font-size: 22px;">¿Usuario nuevo?
-                                <a href="{{ route('register') }}">Registrarme</a>
+                                <a href="{{ route('register') }}" style="color: #0059ff;">Registrarme</a>
                             </p>
                             <br>
                             <form class="signin-form">
@@ -98,11 +98,11 @@
                                     <label for="password"><strong>Contraseña</strong></label>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
                                         name="password" type="password" required>
-                                    <span style="right: 35px;" toggle="#password"
-                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                     @error('password')
                                         <span class="text-danger error">{{ $message }}</span>
                                     @enderror
+                                    <span style="right: 35px;" toggle="#password"
+                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 @if (session()->has('message'))
                                     <div class="alert alert-danger" role="alert">
