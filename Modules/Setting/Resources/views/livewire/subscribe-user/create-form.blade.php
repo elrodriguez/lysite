@@ -62,6 +62,7 @@
                                                 </div>
                                         </td>
                                         <td class="name align-middle">
+                                            {{-- envío el userID junto al valor del typeSubscrID --}}
                                             <button class="btn btn-primary" id="btn-{{ $key }}" type="button" value=""
                                                 wire:click="subscribingUser({{ $user->user_id }}, $event.target.value)">
                                                 Suscribir

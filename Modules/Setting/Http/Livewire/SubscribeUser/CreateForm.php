@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Person;
 use App\Models\TypeSubscription;
 use Livewire\WithPagination;
+use App\Http\Controllers\AutomationController;
 
 class CreateForm extends Component
 {
@@ -41,11 +42,13 @@ class CreateForm extends Component
             ->paginate(5);
     }
 
-    public function subscribingUser($id, $type_id)
+    public function subscribingUser($user_id, $type_subs_id)
     {
-        if($id=="" || $type_id=="0" || $type_id==""){
+        if(!($user_id=="" || $type_subs_id=="0" || $type_subs_id=="")){
+            $auto = new AutomationController();
+            $auto->succes_payment_auto($type_subs_id, $user_id);
         }else{
-            dd("Ahora usa el controlador de Automatización", $id, $type_id);
+
         }
     }
 }

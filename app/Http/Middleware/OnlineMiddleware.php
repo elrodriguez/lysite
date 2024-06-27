@@ -19,8 +19,8 @@ class OnlineMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $users_to_offline = User::where('chat_last_activity', '<', now());
-        $users_to_online = User::where('chat_last_activity', '>=', now());
+        $users_to_offline = User::where('chat_last_activity', '<', now()->subMinutes(5));
+        $users_to_online = User::where('chat_last_activity', '>=', now()->subMinutes(5));
 
         if (isset($users_to_offline)) {
             $users_to_offline->update(['is_online' => false]);
