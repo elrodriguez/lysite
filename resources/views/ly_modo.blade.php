@@ -15,7 +15,7 @@
                             @foreach ($modos as $modo)
                                 @if (!Auth::check())
                                     @if ($modo->price == 0)
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="box-plane-card-modo">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -40,7 +40,7 @@
                                                 <div class="row">
                                                     <div class="col-md-2"></div>
                                                     <div class="col-md-8">
-                                                        <ul style="height: 190px;">
+                                                        <ul style="height: 220px;">
                                                             <li>{{ $modo->detail_two }}</li>
                                                             <li>{{ $modo->detail_three }}</li>
                                                             <li>{{ $modo->detail_four }}</li>
@@ -100,7 +100,7 @@
                                     @endif
                                 @endif
                                 @if ($modo->price > 0)
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="box-plane-card-modo">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -120,9 +120,9 @@
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-8">
-                                                    <ul style="height: 190px;">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-10">
+                                                    <ul style="height: 220px;">
                                                         <li>{{ $modo->detail_two }}</li>
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
@@ -135,7 +135,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="col-md-2"></div>
+                                                <div class="col-md-1"></div>
                                             </div>
                                         </div>
                                         <!--
