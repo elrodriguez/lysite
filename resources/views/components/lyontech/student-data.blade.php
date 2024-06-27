@@ -1,6 +1,6 @@
 <div class="mdk-box bg-dark mdk-box--bg-gradient-primary js-mdk-box mb-0" data-effects="blend-background">
     <div class="mdk-box__content">
-        <div class="hero mod-orange py-48pt text-center text-sm-left">
+        <div class="hero mod-orange py-48pt text-center text-sm-left" style="background-color: #ff9152; padding: 10px;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-md-offset-3">
