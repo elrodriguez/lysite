@@ -23,6 +23,11 @@
   margin: auto;
 }
 
+[dir=ltr] .container-section-1440p{
+  width: 1440px;
+  margin: auto;
+}
+
 [dir=ltr] .container-center{
   margin: auto;
 }
@@ -139,10 +144,24 @@
   padding: 30px 10px; 
   border-radius: 20px;
 }
-
+/*
 [dir=ltr] .box-plane-card-login {
   padding: 20px; 
   align-items: center;
+}*/
+
+
+[dir=ltr] .box-plane-card-login {
+  padding: 10px; 
+  align-items: center;
+  background: #e0e0e0;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[dir=ltr] .box-plane-card-login:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 [dir=ltr] .box-plane-sesion {
