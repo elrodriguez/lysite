@@ -83,10 +83,17 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenbresia" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px;">
                         Membresias
                     </a>
+                    <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdownMenbresia">
+                        @foreach ($modos as $modo)
+                            <a class="dropdown-item" href="{{ route('unirme_page', $modo->id) }}">
+                                {{ $modo->name }}
+                            </a>
+                        @endforeach
+                    </div>
                 </li>
             @endif
         </ul>

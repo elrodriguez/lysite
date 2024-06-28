@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Lyontech;
 
+use App\Models\TypeSubscription;
 use Illuminate\View\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ class Header extends Component
     protected $paginationTheme = 'bootstrap';
     public $courses;
     public $person_id;
+    public $modos;
 
     protected $listeners = ['CoursesOpenModal' => 'openModalCourses'];
     /**
@@ -25,7 +27,7 @@ class Header extends Component
      */
     public function __construct()
     {
-        //
+        $this->modos = TypeSubscription::limit(4)->orderBy('price')->get();
     }
 
     /**
@@ -35,7 +37,10 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.lyontech.header', ['courses' => $this->getCourses()]);
+        return view('components.lyontech.header', [
+            'courses' => $this->getCourses(),
+            'modos' => $this->modos
+        ]);
     }
 
     public function getCourses()
