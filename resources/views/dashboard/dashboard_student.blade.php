@@ -81,13 +81,13 @@
                                         Realiza avances online.
                                     </p>
 
-                                    <a href="" class="btn btn-black" data-toggle="modal"
-                                        data-target="#exampleModal">Empezar</a>
+
                                     <!-- ORIGINAL PARA QUE PASEN AL MODAL SI EN CASO APRUEBA MIGUEL -->
                                     @can('academico_directo_tesis')
-                                        <a href="{{ route('worksheet', [13]) }}" class="btn btn-black">Empezar</a>
+                                        <a href="" class="btn btn-black" data-toggle="modal"
+                                            data-target="#exampleModal">Empezar</a>
                                     @else
-                                        <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
+                                        <a href="{{ route('worksheet_default') }}" class="btn btn-black">Empezar</a>
                                     @endcan
 
 
@@ -124,8 +124,8 @@
                     </div>
                     <div class="modal-footer">
                         <!--
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        -->
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                -->
                         <a href="{{ route('worksheet', [13]) }}" class="btn btn-orange"> <i class="fa fa-edit"></i>&nbsp;
                             Empezar</a>
                     </div>

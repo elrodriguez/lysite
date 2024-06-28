@@ -81,6 +81,8 @@ Route::get('/home', function () {
 
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
+Route::get('tool/default/worksheet', [DashboardController::class, 'getWorksheetDefault'])->name('worksheet_default');
+
 Route::middleware(['single-session'])->group(function () {
 
 

@@ -51,16 +51,17 @@ class DashboardController extends Controller
             ->with('sub_part', $sub_part);
     }
 
+    public function getWorksheetDefault()
+    {
+
+        return view('ly_worksheet_default');
+    }
 
 
 
-    
     /* RUTAS DEL YISUS - Provicional */
     public function thanks()
     {
         return view('ly_thanks');
     }
-
-
-
 }

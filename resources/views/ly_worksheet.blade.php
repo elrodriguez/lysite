@@ -2,11 +2,6 @@
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
-    <!--<link rel="stylesheet" href="{{ asset('theme-lyontech/css/7.css') }}">
-                <link rel="stylesheet" href="{{ asset('theme-lyontech/css/8.css') }}">
-                <link rel="stylesheet" href="{{ asset('theme-lyontech/css/9.css') }}">
-                <link rel="stylesheet" href="{{ asset('theme-lyontech/css/10.css') }}">
-                -->
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ckeditor-docs.css') }}">
 

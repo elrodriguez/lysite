@@ -101,7 +101,7 @@
                             @can('academico_directo_tesis')
                                 <a href="{{ route('worksheet', [13]) }}" class="btn btn-black">Empezar</a>
                             @else
-                                <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
+                                <a href="{{ route('worksheet_default') }}" class="btn btn-black">Empezar</a>
                             @endcan
                         </div>
                     </div>

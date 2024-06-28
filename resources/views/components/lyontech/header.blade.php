@@ -20,13 +20,12 @@
                         Herramientas
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
-                        @can('academico_directo_gpt')
-                            <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
-                            <a class="dropdown-item" href="">HOJA DE TRABAJO</a>
-                        @else
-                            <a class="dropdown-item" href="{{ route('modo_page') }}">CONSULTAS IA</a>
-                        @endcan
+
+                        <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
                         <a class="dropdown-item" href="{{ route('dashboard_courses') }}">CURSOS</a>
+
+                        <a class="dropdown-item" href="">HOJA DE TRABAJO</a>
+
 
                         {{-- <a class="dropdown-item" href="{{ route('worksheet') }}">HOJA DE TRABAJO</a> --}}
 
@@ -71,10 +70,17 @@
                 @endcan
             @else
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px;">
                         Herramientas
                     </a>
+                    <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
+                        <a class="dropdown-item" href="{{ route('dashboard_courses') }}">CURSOS</a>
+
+                        <a class="dropdown-item" href="{{ route('worksheet_default') }}">HOJA DE TRABAJO</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
