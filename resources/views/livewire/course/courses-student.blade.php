@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12 d-flex justify-content-center align-items-center" style="padding: 40px 0px;">
             <div class="image-der mr-3">
-                <img src="{{ asset('theme-lyontech/images/libro-m.png') }}" alt="Card image cap" style="width: 70px; height: 70px; margin: auto;">
+                <img src="{{ asset('theme-lyontech/images/libro-m.png') }}" alt="Card image cap" style="width: 100px; margin: auto;">
             </div>
             <div class="texto">
                 <h5 class="mb-0" style="margin-left: -10px;">
@@ -73,7 +73,7 @@
     <div class="row">
         <div class="col-md-12">
             <h5 style="text-align:center;">
-                <img style="width: 80px;" src={{ asset('theme-lyontech/images/libro-m.png') }}>
+                <img style="width: 100px;" src={{ asset('theme-lyontech/images/libro-m.png') }}>
                 <strong style="font-size: 1.8rem;letter-spacing: 0.0em;">CURSOS</strong>
             </h5>
         </div>

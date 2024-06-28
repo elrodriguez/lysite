@@ -22,8 +22,8 @@
                 <div class="row ">
                     <div class="col-md-6 col-sm-12 offset-md-3 d-flex justify-content-center align-items-center">
                         <div class="image-der mr-3">
-                            <img src="{{ asset('theme-lyontech/images/hoja-blanco.jpg') }}" alt="Card image cap"
-                                style="width: 100px; height: 100px; margin: auto;">
+                            <img src="{{ asset('theme-lyontech/images/hoja-m.png') }}" alt="Card image cap"
+                                style="width: 100px; margin: auto;">
                         </div>
                         <div class="texto">
                             <h5 class="mb-0" style="margin-left: -10px;"><strong

@@ -30,7 +30,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <ul style="height: 220px; font-size: 15px; text-align:left;">
+                                            <ul style="height: 300px; font-size: 15px; text-align:left;">
                                                 <li>{{ $modo->detail_two }}</li>
                                                 <li>{{ $modo->detail_three }}</li>
                                                 <li>{{ $modo->detail_four }}</li>

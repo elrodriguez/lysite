@@ -87,7 +87,7 @@
 
         @if (Route::has('login'))
             @auth
-                <button class="custom-button-c ml-2" style="margin-right: 35px;">
+                <button class="custom-button-c ml-2" style="margin-right: 35px; background: #ff9152;">
                     <a href="{{ route('modo_page') }}">
                         <img src="{{ asset('assets/images/corona.jpg') }}" alt="Icono">
                     </a>

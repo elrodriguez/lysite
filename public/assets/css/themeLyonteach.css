@@ -42,7 +42,7 @@
 }
 
 [dir=ltr] .bg-cherry {
-  background-color: #ffb890 !important;
+  background-color: #ffe9db !important; 
 }
 
 [dir=ltr] a.bg-cherry:focus,
@@ -163,6 +163,21 @@
   transform: translateY(-10px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
+
+[dir=ltr] .box-plane-card-dashboard {
+  background-color: #ffe9db; 
+  padding: 30px 0px; 
+  margin-top: -20px;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[dir=ltr] .box-plane-card-dashboard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+
 
 [dir=ltr] .box-plane-sesion {
   padding: 0px 30px;

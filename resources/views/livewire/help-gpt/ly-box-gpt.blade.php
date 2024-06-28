@@ -11,7 +11,7 @@
                 <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 0px;">
                     <div class="image-der mr-3">
                         <img src="{{ asset('assets/images/ai-blanco.jpg') }}" alt="Card image cap"
-                            style="width: 70px; height: 70px; margin: auto;">
+                            style="width: 100px;  margin: auto;">
                     </div>
                     <div class="texto">
                         <h5 class="mb-0" style="margin-left: -10px;">
@@ -748,7 +748,7 @@
                 <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 0px;">
                     <div class="image-der mr-3">
                         <img src="{{ asset('assets/images/ai-blanco.jpg') }}" alt="Card image cap"
-                            style="width: 70px; height: 70px; margin: auto;">
+                            style="width: 100px; margin: auto;">
                     </div>
                     <div class="texto">
                         <h5 class="mb-0" style="margin-left: -10px;">
