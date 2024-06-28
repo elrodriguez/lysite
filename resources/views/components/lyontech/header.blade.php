@@ -77,7 +77,8 @@
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
-                        <a class="dropdown-item" href="{{ route('dashboard_courses') }}">CURSOS</a>
+
+                        <a class="dropdown-item" href="{{ route('dashboard_courses_default') }}">CURSOS</a>
 
                         <a class="dropdown-item" href="{{ route('worksheet_default') }}">HOJA DE TRABAJO</a>
                     </div>

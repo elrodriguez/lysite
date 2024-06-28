@@ -25,6 +25,10 @@ class DashboardController extends Controller
             return view('dashboard.dashboard_instructor');
         }
     }
+    public function getCoursesDefault()
+    {
+        return view('dashboard.dashboard_ly_student_courses_default');
+    }
     public function getCourses()
     {
         return view('dashboard.dashboard_ly_student_courses');
