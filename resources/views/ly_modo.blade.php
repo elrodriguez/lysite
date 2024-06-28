@@ -13,92 +13,95 @@
                     <div class="row box-plane-content-modo">
                         @if (count($modos) > 0)
                             @foreach ($modos as $modo)
-                                @if (!Auth::check())
-                                    @if ($modo->price == 0)
-                                        <div class="col-md-3">
-                                            <div class="box-plane-card-modo">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h1 class="mb-0" style="text-align: center;">{{ $modo->name }}
-                                                        </h1>
-                                                        <p class="mt-0 mb-0  text-center"
-                                                            style="color: #000; font-size: 25px;">
-                                                            <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong>
-                                                            <strong>ó</strong>
-                                                        </p>
-                                                        <p class="mt-0 mb-0  text-center"
-                                                            style="color: #000; font-size: 20px;">
-                                                            <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
-                                                        </p>
-                                                        <p class="mt-0 mb-0 text-center"
-                                                            style="color: #ff9152; font-size: 20px;">
-                                                            <strong>/{{ $modo->detail_one }}</strong>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-8">
-                                                        <ul style="height: 220px;">
-                                                            <li>{{ $modo->detail_two }}</li>
-                                                            <li>{{ $modo->detail_three }}</li>
-                                                            <li>{{ $modo->detail_four }}</li>
-                                                            <li>{{ $modo->detail_five }}</li>
-                                                        </ul>
-                                                        <form action="#" class="signin-form mt-2">
-                                                            <div class="form-group mt-4 btn-cent mb-4">
-                                                                <a href="{{ route('register') }}"
-                                                                    class="form-control btn btn-gris submit">
-                                                                    Registrado
-                                                                </a>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="col-md-2"></div>
+                                @if ($modo->price == 0)
+                                    <div class="col-md-3">
+                                        <div class="box-plane-card-modo">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h1 class="mb-0" style="text-align: center;">{{ $modo->name }}
+                                                    </h1>
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 25px;">
+                                                        <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong>
+                                                        <strong>ó</strong>
+                                                    </p>
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 20px;">
+                                                        <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
+                                                    </p>
+                                                    <p class="mt-0 mb-0 text-center"
+                                                        style="color: #ff9152; font-size: 20px;">
+                                                        <strong>/{{ $modo->detail_one }}</strong>
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <!--
-                                                <div class="card">
-                                                    <div class="card-body mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <h5 class="text-center" style="padding: 0px; margin: 0px;">
-                                                                    {{ $modo->name }}</h5>
-                                                                <p class="mt-0 mb-0  text-center" style="color: #000;">
-                                                                    <strong>{{ $modo->price ?? 'GRATIS' }}</strong>
-                                                                </p>
-                                                                <p class="mt-0 mb-0 text-center" style="color: #000;">
-                                                                    <strong>/{{ $modo->detail_one }}</strong>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-md-2"></div>
-                                                            <div class="col-md-8">
-                                                                <ul>
-                                                                    <li>{{ $modo->detail_two }}</li>
-                                                                    <li>{{ $modo->detail_three }}</li>
-                                                                    <li>{{ $modo->detail_four }}</li>
-                                                                    <li>{{ $modo->detail_five }}</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2"></div>
-                                                        </div>
-                                                        <form action="#" class="signin-form mt-2">
-                                                            <div class="form-group mt-4 btn-cent mb-4">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-8">
+                                                    <ul style="height: 220px;">
+                                                        <li>{{ $modo->detail_two }}</li>
+                                                        <li>{{ $modo->detail_three }}</li>
+                                                        <li>{{ $modo->detail_four }}</li>
+                                                        <li>{{ $modo->detail_five }}</li>
+                                                    </ul>
+                                                    <form action="#" class="signin-form mt-2">
+                                                        <div class="form-group mt-4 btn-cent mb-4">
+                                                            @if (!Auth::check())
                                                                 <a href="{{ route('register') }}"
-                                                                    class="form-control btn btn-gris submit">Registrado</a>
-                
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                                    class="form-control btn btn-info submit">
+                                                                    Registrar
+                                                                </a>
+                                                            @else
+                                                                <a href="#" class="form-control btn btn-gris submit">
+                                                                    Registrado
+                                                                </a>
+                                                            @endif
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                -->
+                                                <div class="col-md-2"></div>
+                                            </div>
                                         </div>
-                                    @endif
+                                        <!--
+                                                                <div class="card">
+                                                                    <div class="card-body mt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <h5 class="text-center" style="padding: 0px; margin: 0px;">
+                                                                                    {{ $modo->name }}</h5>
+                                                                                <p class="mt-0 mb-0  text-center" style="color: #000;">
+                                                                                    <strong>{{ $modo->price ?? 'GRATIS' }}</strong>
+                                                                                </p>
+                                                                                <p class="mt-0 mb-0 text-center" style="color: #000;">
+                                                                                    <strong>/{{ $modo->detail_one }}</strong>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <div class="col-md-2"></div>
+                                                                            <div class="col-md-8">
+                                                                                <ul>
+                                                                                    <li>{{ $modo->detail_two }}</li>
+                                                                                    <li>{{ $modo->detail_three }}</li>
+                                                                                    <li>{{ $modo->detail_four }}</li>
+                                                                                    <li>{{ $modo->detail_five }}</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="col-md-2"></div>
+                                                                        </div>
+                                                                        <form action="#" class="signin-form mt-2">
+                                                                            <div class="form-group mt-4 btn-cent mb-4">
+                                                                                <a href="{{ route('register') }}"
+                                                                                    class="form-control btn btn-gris submit">Registrado</a>
+                                
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                -->
+                                    </div>
                                 @endif
+
                                 @if ($modo->price > 0)
                                     <div class="col-md-3">
                                         <div class="box-plane-card-modo">
@@ -139,46 +142,46 @@
                                             </div>
                                         </div>
                                         <!--
-                                            <div class="card">
-                                                <div class="card-body mt-3">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <h5 class="text-center" style="padding: 0px; margin: 0px;">
-                                                                {{ $modo->name }}</h5>
-                                                            <p class="mt-0 mb-0  text-center" style="color: #000;">
-                                                                <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong> <strong>ó</strong>
-                                                            </p>
-                                                            <p class="mt-0 mb-0  text-center" style="color: #000;">
-                                                                <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
-                                                            </p>
-                                                            <p class="mt-0 mb-0 text-center" style="color: #ff9152;">
-                                                                <strong>/{{ $modo->detail_one }}</strong>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-8">
-                                                            <ul>
-                                                                <li>{{ $modo->detail_two }}</li>
-                                                                <li>{{ $modo->detail_three }}</li>
-                                                                <li>{{ $modo->detail_four }}</li>
-                                                                <li>{{ $modo->detail_five }}</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-2"></div>
-                                                    </div>
-                                                    <form action="#" class="signin-form mt-2">
-                                                        <div class="form-group mt-4 btn-cent mb-4">
-            
-                                                            <a href="{{ route('unirme_page', $modo->id) }}"
-                                                                class="form-control btn btn-orange submit">Unirse</a>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            -->
+                                                            <div class="card">
+                                                                <div class="card-body mt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <h5 class="text-center" style="padding: 0px; margin: 0px;">
+                                                                                {{ $modo->name }}</h5>
+                                                                            <p class="mt-0 mb-0  text-center" style="color: #000;">
+                                                                                <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong> <strong>ó</strong>
+                                                                            </p>
+                                                                            <p class="mt-0 mb-0  text-center" style="color: #000;">
+                                                                                <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
+                                                                            </p>
+                                                                            <p class="mt-0 mb-0 text-center" style="color: #ff9152;">
+                                                                                <strong>/{{ $modo->detail_one }}</strong>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="row">
+                                                                        <div class="col-md-2"></div>
+                                                                        <div class="col-md-8">
+                                                                            <ul>
+                                                                                <li>{{ $modo->detail_two }}</li>
+                                                                                <li>{{ $modo->detail_three }}</li>
+                                                                                <li>{{ $modo->detail_four }}</li>
+                                                                                <li>{{ $modo->detail_five }}</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="col-md-2"></div>
+                                                                    </div>
+                                                                    <form action="#" class="signin-form mt-2">
+                                                                        <div class="form-group mt-4 btn-cent mb-4">
+                            
+                                                                            <a href="{{ route('unirme_page', $modo->id) }}"
+                                                                                class="form-control btn btn-orange submit">Unirse</a>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            -->
                                     </div>
                                 @endif
                             @endforeach
