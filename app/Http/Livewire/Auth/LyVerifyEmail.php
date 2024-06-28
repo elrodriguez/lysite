@@ -49,7 +49,9 @@ class LyVerifyEmail extends Component
 
     public function validateCode()
     {
-        $user = User::where('unique_code', $this->unique_code)->first();
+        $user = User::where('unique_code', $this->unique_code)
+            ->whereNull('email_verified_at')
+            ->first();
 
         if ($user) {
             // Suponiendo que tienes las fechas almacenadas en variables $start_date y $end_date
@@ -62,6 +64,7 @@ class LyVerifyEmail extends Component
             // Verifica si la fecha y hora actual está dentro del rango de las fechas con una diferencia de 5 minutos
             if ($currentDateTime->between($start_date->subMinutes(5), $end_date->addMinutes(5))) {
                 $user->email_verified_at = Carbon::now();
+                $user->unique_code = null;
                 $user->save();
 
                 Auth::login($user);
