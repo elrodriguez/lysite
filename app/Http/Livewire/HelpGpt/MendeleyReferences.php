@@ -478,14 +478,14 @@ dd($document);
         $authors = array();
 
         //Obtener el nombre de los autores
-        //dd($document);
-        foreach ($document->authors as $author) {
-            try {
-                $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
-                array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1) . "."); // inicial de nombre
-            } catch (\Throwable $th) {
-                //dd($th);
+        try {
+            foreach ($document->authors as $author) {
+
+                    $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
+                    array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1) . "."); // inicial de nombre
             }
+        } catch (\Throwable $th) {
+            //dd($th);
         }
 
         $citation = '<p>';
