@@ -34,10 +34,21 @@
                                                 <li>{{ $modo->detail_two }}</li>
                                                 <li>{{ $modo->detail_three }}</li>
                                                 <li>{{ $modo->detail_four }}</li>
+                                                @if ($modo->detail_five && $modo->detail_five !== 'null')
                                                 <li>{{ $modo->detail_five }}</li>
-                                                <li>{{ $modo->detail_six }}</li>
-                                                <li>{{ $modo->detail_seven }}</li>
-                                                <li>{{ $modo->detail_eight }}</li>
+                                                @endif
+
+                                                @if ($modo->detail_six && $modo->detail_six !== 'null')
+                                                    <li>{{ $modo->detail_six }}</li>
+                                                @endif
+
+                                                @if ($modo->detail_seven && $modo->detail_seven !== 'null')
+                                                    <li>{{ $modo->detail_seven }}</li>
+                                                @endif
+
+                                                @if ($modo->detail_eight && $modo->detail_eight !== 'null')
+                                                    <li>{{ $modo->detail_eight }}</li>
+                                                @endif
                                             </ul>
                                             @if ($modo->price > 0)
                                                 <a href="{{ route('unirme_page', $modo->id) }}"
@@ -177,10 +188,21 @@
                                         <li>{{ $modo->detail_two }}</li>
                                         <li>{{ $modo->detail_three }}</li>
                                         <li>{{ $modo->detail_four }}</li>
-                                        <li>{{ $modo->detail_five }}</li>
-                                        <li>{{ $modo->detail_six }}</li>
-                                        <li>{{ $modo->detail_seven }}</li>
-                                        <li>{{ $modo->detail_eight }}</li>
+                                        @if ($modo->detail_five && $modo->detail_five !== 'null')
+                                            <li>{{ $modo->detail_five }}</li>
+                                        @endif
+
+                                        @if ($modo->detail_six && $modo->detail_six !== 'null')
+                                            <li>{{ $modo->detail_six }}</li>
+                                        @endif
+
+                                        @if ($modo->detail_seven && $modo->detail_seven !== 'null')
+                                            <li>{{ $modo->detail_seven }}</li>
+                                        @endif
+
+                                        @if ($modo->detail_eight && $modo->detail_eight !== 'null')
+                                            <li>{{ $modo->detail_eight }}</li>
+                                        @endif
                                     </ul>
                                     @if ($modo->price > 0)
                                         <a href="{{ route('unirme_page', $modo->id) }}"
