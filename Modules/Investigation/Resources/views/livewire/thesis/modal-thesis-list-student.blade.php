@@ -21,6 +21,10 @@
                     @endforeach
                 </ul>
             </div>
+            <div class="modal-footer">
+                <a class="btn btn-orange" href="{{ route('investigation_thesis_create') }}"><i
+                        class="fa fa-plus"></i>&nbsp;Crear Proyecto</a>
+            </div>
         </div>
     </div>
 </div>
