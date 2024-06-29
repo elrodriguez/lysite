@@ -354,7 +354,7 @@ if($document->type == "journal" || $document->type == "book"){
             $citation .= $authors[0] . '. ';
         } elseif (count($authors) == 2) {
             $citation .= $authors[0] . ' y ' . $authors[1] . '. ';
-        } else {
+        } elseif (count($authors) > 2) {
             for ($i = 0; $i < count($authors) - 1; $i++) {
                 if ($i == count($authors) - 2) {
                     $citation .= $authors[$i] . ' ';
@@ -363,6 +363,8 @@ if($document->type == "journal" || $document->type == "book"){
                 }
             }
             $citation .= 'y ' . $authors[count($authors) - 1] . '. ';
+        }else{
+
         }
 
         //Añadir el título del artículo
