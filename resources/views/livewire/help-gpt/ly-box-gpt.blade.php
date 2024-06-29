@@ -1,7 +1,7 @@
 <div>
 
     <div class="bg-white box-section pc-screen">
-        <div class="container-section page__container">
+        <div class="container-section page__container" style="width:90%;">
             <div class="row">
                 <div class="col-md-2 align-items-start" style="padding: 0px;">
                     <p class="title-ia-lyon">
