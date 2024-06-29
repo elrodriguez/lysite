@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Modules\Investigation\Entities\InveThesisStudent;
 
 class Header extends Component
 
@@ -18,6 +19,7 @@ class Header extends Component
     public $courses;
     public $person_id;
     public $modos;
+    public $thesis;
 
     protected $listeners = ['CoursesOpenModal' => 'openModalCourses'];
     /**

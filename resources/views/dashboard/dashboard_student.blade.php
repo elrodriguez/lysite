@@ -85,7 +85,9 @@
                                     <!-- ORIGINAL PARA QUE PASEN AL MODAL SI EN CASO APRUEBA MIGUEL -->
                                     @can('academico_directo_tesis')
                                         <a href="" class="btn btn-black" data-toggle="modal"
-                                            data-target="#exampleModal">Empezar</a>
+                                            data-target="#modalThesisHeader">
+                                            Empezar
+                                        </a>
                                     @else
                                         <a href="{{ route('worksheet_default') }}" class="btn btn-black">Empezar</a>
                                     @endcan
@@ -99,38 +101,6 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header bg-cherry">
-                        <h4 class="modal-title" id="exampleModalLabel">
-                            <img style="width: 50px;" src="{{ asset('theme-lyontech/images/hoja-m.png') }}" alt="">
-                            HOJA DE TRABAJO
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ul>
-                            <li><a href="">Tesis 01</a></li>
-                            <li><a href="">Tesis 02</a></li>
-                            <li><a href="">Tesis 03</a></li>
-                            <li><a href="">Tesis 04</a></li>
-                            <li><a href="">Tesis 05</a></li>
-                            <li><a href="">Tesis 06</a></li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <!--
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                -->
-                        <a href="{{ route('worksheet', [13]) }}" class="btn btn-orange"> <i class="fa fa-edit"></i>&nbsp;
-                            Empezar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </body>
 @stop

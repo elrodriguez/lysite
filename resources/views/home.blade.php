@@ -98,11 +98,12 @@
                             <p>
                                 Realiza avances online.
                             </p>
-                            @can('academico_directo_tesis')
-                                <a href="{{ route('worksheet', [13]) }}" class="btn btn-black">Empezar</a>
+                            @if (Auth::check())
+                                <a href="#" class="btn btn-black" data-toggle="modal"
+                                    data-target="#modalThesisHeader">Empezar</a>
                             @else
                                 <a href="{{ route('worksheet_default') }}" class="btn btn-black">Empezar</a>
-                            @endcan
+                            @endif
                         </div>
                     </div>
                 </div>

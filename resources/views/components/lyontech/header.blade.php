@@ -24,7 +24,9 @@
                         <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
                         <a class="dropdown-item" href="{{ route('dashboard_courses') }}">CURSOS</a>
 
-                        <a class="dropdown-item" href="">HOJA DE TRABAJO</a>
+                        <a class="dropdown-item" href="" data-toggle="modal" data-target="#modalThesisHeader">
+                            HOJA DE TRABAJO
+                        </a>
 
 
                         {{-- <a class="dropdown-item" href="{{ route('worksheet') }}">HOJA DE TRABAJO</a> --}}
@@ -142,4 +144,11 @@
         @endif
 
     </div>
+    @if (Auth::check())
+        @section('global-modal')
+
+            <livewire:investigation::thesis.modal-thesis-list-student />
+
+        @stop
+    @endif
 </nav>

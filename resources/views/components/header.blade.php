@@ -134,13 +134,15 @@
                                     <div class="dropdown-header"><strong>{{ Auth::user()->name }}</strong></div>
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                     @can('academico_cursos_instructor')
-                                        <a class="dropdown-item"
-                                            href="{{ route('academic_dash_instructor_courses_list') }}">{{ __('labels.Courses') }}</a>
+                                        <a class="dropdown-item" href="{{ route('academic_dash_instructor_courses_list') }}">
+                                            {{ __('labels.Courses') }}
+                                        </a>
                                     @endcan
                                     <div class="dropdown-divider"></div>
                                     <div class="dropdown-header"><strong>{{ __('labels.Account') }}</strong></div>
-                                    <a class="dropdown-item"
-                                        href="{{ route('user_edit_account') }}">{{ __('labels.Edit Account') }}</a>
+                                    <a class="dropdown-item" href="{{ route('user_edit_account') }}">
+                                        {{ __('labels.Edit Account') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a>
                                 </div>
                             </div>
