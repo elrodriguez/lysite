@@ -42,6 +42,9 @@
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
                                                         <li>{{ $modo->detail_five }}</li>
+                                                        <li>{{ $modo->detail_six }}</li>
+                                                        <li>{{ $modo->detail_seven }}</li>
+                                                        <li>{{ $modo->detail_eight }}</li>
                                                     </ul>
                                                     <form action="#" class="signin-form mt-2">
                                                         <div class="form-group mt-4 btn-cent mb-4">
@@ -92,6 +95,9 @@
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
                                                         <li>{{ $modo->detail_five }}</li>
+                                                        <li>{{ $modo->detail_six }}</li>
+                                                        <li>{{ $modo->detail_seven }}</li>
+                                                        <li>{{ $modo->detail_eight }}</li>
                                                     </ul>
                                                     <form action="#" class="signin-form mt-2">
                                                         <div class="form-group mt-4 mb-4">
@@ -136,7 +142,7 @@
                                                                         </div>
                                                                         <form action="#" class="signin-form mt-2">
                                                                             <div class="form-group mt-4 btn-cent mb-4">
-                                
+
                                                                                 <a href="{{ route('unirme_page', $modo->id) }}"
                                                                                     class="form-control btn btn-orange submit">Unirse</a>
                                                                             </div>
