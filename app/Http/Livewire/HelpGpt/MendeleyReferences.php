@@ -333,17 +333,18 @@ if($document->type == "journal" || $document->type == "book"){
         $authors = array();
 
         //Obtener el nombre de los autores
-        foreach ($document->authors as $author) {
-            try {
-                $last_name = explode(" ", $author->last_name);
-                $last_name = mb_strtoupper($last_name[0], 'UTF-8');
-                $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
-                $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
-                $name = $last_name . ', ' . $nombre;
-                array_push($authors, $name);
-            } catch (\Throwable $th) {
-                //throw $th;
+        try {
+            foreach ($document->authors as $author) {
+
+                    $last_name = explode(" ", $author->last_name);
+                    $last_name = mb_strtoupper($last_name[0], 'UTF-8');
+                    $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
+                    $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
+                    $name = $last_name . ', ' . $nombre;
+                    array_push($authors, $name);
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         $citation = '<p>';
