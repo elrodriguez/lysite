@@ -253,9 +253,13 @@ if($document->type == "journal" || $document->type == "book"){
     if (isset($matches[1])) {
         $numeroEntreParentesis = "(".$matches[1].")";
         $substring = strstr($string, $numeroEntreParentesis, true);
-        if(count($document->authors)>2){
-            $newsubstring = str_replace(" y ", ", & ", $substring);
-        }else{
+        try {
+            if(count($document->authors)>2){
+                $newsubstring = str_replace(" y ", ", & ", $substring);
+            }else{
+                $newsubstring = str_replace(" y ", " & ", $substring);
+            }
+        } catch (\Throwable $th) {
             $newsubstring = str_replace(" y ", " & ", $substring);
         }
     } else {

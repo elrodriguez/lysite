@@ -459,7 +459,7 @@
                                     <input wire:model="consulta" id="input-doi-buscar-id" type="text" autocomplete="off"
                                         class="form-control" aria-label="Sizing example input"
                                         style="background-color: #fff;" aria-describedby="inputGroup-sizing-sm"
-                                        placeholder="Coleque el enlace DOI">
+                                        placeholder="Coloque el enlace DOI">
                                     <label class="mb-0">&nbsp;&nbsp;Normativa:</label>
                                     <select wire:model="normativa" class="form-control" id="select-normativa"
                                         name="select-normativa" style="background-color: #fff;">
@@ -1204,7 +1204,7 @@
                                     <input wire:model="consulta" id="input-doi-buscar-id" type="text" autocomplete="off"
                                         class="form-control" aria-label="Sizing example input"
                                         style="background-color: #fff;" aria-describedby="inputGroup-sizing-sm"
-                                        placeholder="Coleque el enlace DOI">
+                                        placeholder="Coloque el enlace DOI">
                                     <label class="mb-0">&nbsp;&nbsp;Normativa:</label>
                                     <select wire:model="normativa" class="form-control" id="select-normativa"
                                         name="select-normativa" style="background-color: #fff;">
