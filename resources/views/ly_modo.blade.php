@@ -35,9 +35,8 @@
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-8">
-                                                    <ul style="height: 220px;">
+                                                <div class="col-md-12">
+                                                    <ul style="height: 300px;">
                                                         <li>{{ $modo->detail_two }}</li>
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
@@ -61,7 +60,7 @@
                                                         <div class="form-group mt-4 btn-cent mb-4">
                                                             @if (!Auth::check())
                                                                 <a href="{{ route('register') }}"
-                                                                    class="form-control btn btn-info submit">
+                                                                    class="form-control btn btn-gris submit">
                                                                     Registrar
                                                                 </a>
                                                             @else
@@ -72,7 +71,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="col-md-2"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -99,9 +97,8 @@
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-10">
-                                                    <ul style="height: 220px;">
+                                                <div class="col-md-12">
+                                                    <ul style="height: 300px;">
                                                         <li>{{ $modo->detail_two }}</li>
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
@@ -128,7 +125,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="col-md-1"></div>
                                             </div>
                                         </div>
                                         <!--
