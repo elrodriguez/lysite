@@ -10,6 +10,9 @@
   display: none;
 }
 
+[dir=ltr] .layout-navbar-mini-fixed-bottom {
+  padding-bottom: 0px !important;
+}
 
 
 
@@ -35,6 +38,11 @@
 [dir=ltr] .bg-gradient{
   background: rgb(255,164,73);
   background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
+}
+
+
+[dir=ltr] .bg-orange{
+  background: #ff9152;
 }
 
 [dir=ltr] .bg-purple{
@@ -728,7 +736,7 @@
   justify-content: center;
 }
 
-[dir=ltr] .card{
+[dir=ltr] .card-new{
   border-radius: 10px;
   padding: 25px;
   width: 120%;
@@ -743,18 +751,18 @@
 }
 
 
-[dir=ltr] .card h5{
+[dir=ltr] .card-new h5{
   font-family: "Rubik", Bold;
   font-weight: 700;
   font-size: 40px;
 }
-[dir=ltr] .card p{
+[dir=ltr] .card-new p{
   font-family: "Rubik", Light;
   font-weight: 300;
   font-size: 25px;
 }
 
-[dir=ltr] .card a{
+[dir=ltr] .card-new a{
   font-family: "Rubik", Medium;
   font-weight: 500;
   font-size: 25px;

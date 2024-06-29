@@ -120,8 +120,8 @@
                         </div>
                     </div>
                     <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 40px;">
-                        <div class="card bg-gradient">
-                            <video style="100%" controls muted playsinline>
+                        <div class="card-new bg-gradient">
+                            <video style="width: 100%" controls muted playsinline>
                                 <source src="video.mp4" type="video/mp4">
                                 Tu navegador no soporta el elemento de vídeo.
                             </video>
