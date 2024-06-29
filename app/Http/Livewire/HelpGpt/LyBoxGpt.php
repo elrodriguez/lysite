@@ -447,7 +447,7 @@ class LyBoxGpt extends Component
                 try {
                     if ($this->thread_id == null) {
                         $client = new Client();
-                        $promise = $client->getAsync('http://localhost:3000/create_thread');
+                        $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
                         $response = $promise->wait();
                         $data = json_decode($response->getBody(), true);
                         $this->thread_id = $data['thread_id'];
@@ -471,7 +471,7 @@ class LyBoxGpt extends Component
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
     {
         // Creando run y haciendo consulta para obtener respuesta de la IA
-        $response = Http::post('http://localhost:3000/create_run', [
+        $response = Http::post('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_run', [
             'user_message' => $msg,
             'user_name' => Auth::user()->name,
             'thread_id' => $this->thread_id,
@@ -487,7 +487,7 @@ class LyBoxGpt extends Component
     public function getPendingRun($messages)
     {   //consulta de respuesta cuando la espera es larga
         // consultamos si el run ya tiene respuesta y si es así entregue el mensaje o avise que no
-        $response = Http::post('http://localhost:3000/get_run_pending', [
+        $response = Http::post('http://localhost:'.env('AI_ASSISTANT_PORT').'/get_run_pending', [
             'thread_id' => $messages['thread_id'],
             'run_id' => $messages['run_id'],
         ]);

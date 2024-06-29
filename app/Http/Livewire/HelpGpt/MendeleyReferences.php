@@ -253,9 +253,13 @@ if($document->type == "journal" || $document->type == "book"){
     if (isset($matches[1])) {
         $numeroEntreParentesis = "(".$matches[1].")";
         $substring = strstr($string, $numeroEntreParentesis, true);
-        if(count($document->authors)>2){
-            $newsubstring = str_replace(" y ", ", & ", $substring);
-        }else{
+        try {
+            if(count($document->authors)>2){
+                $newsubstring = str_replace(" y ", ", & ", $substring);
+            }else{
+                $newsubstring = str_replace(" y ", " & ", $substring);
+            }
+        } catch (\Throwable $th) {
             $newsubstring = str_replace(" y ", " & ", $substring);
         }
     } else {
@@ -329,17 +333,18 @@ if($document->type == "journal" || $document->type == "book"){
         $authors = array();
 
         //Obtener el nombre de los autores
-        foreach ($document->authors as $author) {
-            try {
-                $last_name = explode(" ", $author->last_name);
-                $last_name = mb_strtoupper($last_name[0], 'UTF-8');
-                $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
-                $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
-                $name = $last_name . ', ' . $nombre;
-                array_push($authors, $name);
-            } catch (\Throwable $th) {
-                //throw $th;
+        try {
+            foreach ($document->authors as $author) {
+
+                    $last_name = explode(" ", $author->last_name);
+                    $last_name = mb_strtoupper($last_name[0], 'UTF-8');
+                    $nombre = explode(" ", $author->first_name)[0]; // obtener el primer elemento del array, que será el primer nombre
+                    $nombre = ucfirst(strtolower($nombre)); // convertir la primera letra en mayúscula y el resto en minúsculas
+                    $name = $last_name . ', ' . $nombre;
+                    array_push($authors, $name);
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
         $citation = '<p>';
@@ -349,7 +354,7 @@ if($document->type == "journal" || $document->type == "book"){
             $citation .= $authors[0] . '. ';
         } elseif (count($authors) == 2) {
             $citation .= $authors[0] . ' y ' . $authors[1] . '. ';
-        } else {
+        } elseif (count($authors) > 2) {
             for ($i = 0; $i < count($authors) - 1; $i++) {
                 if ($i == count($authors) - 2) {
                     $citation .= $authors[$i] . ' ';
@@ -358,6 +363,8 @@ if($document->type == "journal" || $document->type == "book"){
                 }
             }
             $citation .= 'y ' . $authors[count($authors) - 1] . '. ';
+        }else{
+
         }
 
         //Añadir el título del artículo
@@ -439,26 +446,34 @@ if($document->type == "journal" || $document->type == "book"){
 
         ///-ABRIL CAMBIOS 2024------------------------------------------------------------------------------------------------------------------------
 
-        if(count($document->authors)==2){
-            $string = $citation;
-            $posicion_y = strpos($string, ' y');
+        try {
+            if(count($document->authors)==2){
+                $string = $citation;
+                $posicion_y = strpos($string, ' y');
 
-            if ($posicion_y !== false) {
-                $citation = substr_replace($string, ' &', $posicion_y, 2);
-            } else {
-                $citation = $string;
+                if ($posicion_y !== false) {
+                    $citation = substr_replace($string, ' &', $posicion_y, 2);
+                } else {
+                    $citation = $string;
+                }
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
 
-        if(count($document->authors)>=3){
-            $string = $citation;
-            $posicion_y = strpos($string, ' y');
+        try {
+            if(count($document->authors)>=3){
+                $string = $citation;
+                $posicion_y = strpos($string, ' y');
 
-            if ($posicion_y !== false) {
-                $citation = substr_replace($string, '; &', $posicion_y, 2);
-            } else {
-                $citation = $string;
+                if ($posicion_y !== false) {
+                    $citation = substr_replace($string, '; &', $posicion_y, 2);
+                } else {
+                    $citation = $string;
+                }
             }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
         //////////////////////////////////////////////-------------------------------------------------------------------------------------------
 
@@ -471,14 +486,14 @@ if($document->type == "journal" || $document->type == "book"){
         $authors = array();
 
         //Obtener el nombre de los autores
-        //dd($document);
-        foreach ($document->authors as $author) {
-            try {
-                $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
-                array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1) . "."); // inicial de nombre
-            } catch (\Throwable $th) {
-                //dd($th);
+        try {
+            foreach ($document->authors as $author) {
+
+                    $first_lastname = explode(" ", $author->last_name); //en vancouver solo el primer apellido
+                    array_push($authors, $first_lastname[0] . " " . substr($author->first_name, 0, 1) . "."); // inicial de nombre
             }
+        } catch (\Throwable $th) {
+            //dd($th);
         }
 
         $citation = '<p>';
