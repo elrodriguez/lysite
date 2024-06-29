@@ -445,7 +445,7 @@ if($document->type == "journal" || $document->type == "book"){
         $citation = $this->deleteMonths($citation);
 
         ///-ABRIL CAMBIOS 2024------------------------------------------------------------------------------------------------------------------------
-
+dd($document);
         if(count($document->authors)==2){
             $string = $citation;
             $posicion_y = strpos($string, ' y');
