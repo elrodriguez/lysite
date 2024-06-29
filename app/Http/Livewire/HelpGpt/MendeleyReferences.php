@@ -446,30 +446,34 @@ if($document->type == "journal" || $document->type == "book"){
 
         ///-ABRIL CAMBIOS 2024------------------------------------------------------------------------------------------------------------------------
 
-try {
-    if(count($document->authors)==2){
-        $string = $citation;
-        $posicion_y = strpos($string, ' y');
+        try {
+            if(count($document->authors)==2){
+                $string = $citation;
+                $posicion_y = strpos($string, ' y');
 
-        if ($posicion_y !== false) {
-            $citation = substr_replace($string, ' &', $posicion_y, 2);
-        } else {
-            $citation = $string;
-        }
-    }
-} catch (\Throwable $th) {
-    //throw $th;
-}
-
-        if(count($document->authors)>=3){
-            $string = $citation;
-            $posicion_y = strpos($string, ' y');
-
-            if ($posicion_y !== false) {
-                $citation = substr_replace($string, '; &', $posicion_y, 2);
-            } else {
-                $citation = $string;
+                if ($posicion_y !== false) {
+                    $citation = substr_replace($string, ' &', $posicion_y, 2);
+                } else {
+                    $citation = $string;
+                }
             }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        try {
+            if(count($document->authors)>=3){
+                $string = $citation;
+                $posicion_y = strpos($string, ' y');
+
+                if ($posicion_y !== false) {
+                    $citation = substr_replace($string, '; &', $posicion_y, 2);
+                } else {
+                    $citation = $string;
+                }
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
         //////////////////////////////////////////////-------------------------------------------------------------------------------------------
 
