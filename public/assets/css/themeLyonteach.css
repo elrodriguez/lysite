@@ -17,12 +17,19 @@
 
 
 [dir=ltr] .container-section{
-  width: 1600px;
+  /*width: 1600px;*/
+  width: 90%;
   margin: auto;
 }
 
 [dir=ltr] .container-section-1360p{
   width: 1360px;
+  margin: auto;
+}
+
+[dir=ltr] .container-section-modo{
+  /*width: 1600px;*/
+  width: 70%;
   margin: auto;
 }
 
@@ -172,6 +179,12 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
+[dir=ltr] .box-plane-card-login ul{
+  height: 360px; 
+  font-size: 15px; 
+  text-align:left;
+}
+
 [dir=ltr] .box-plane-card-dashboard {
   background-color: #ffe9db; 
   padding: 30px 0px; 
@@ -225,6 +238,10 @@
 [dir=ltr] .box-plane-card-modo:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+[dir=ltr] .box-plane-card-modo ul{
+  height: 360px; font-size: 15px;
 }
 
 /*------------*/

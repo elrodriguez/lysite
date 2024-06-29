@@ -1,4 +1,4 @@
-<div class="container-section-1440p">
+<div class="container-section">
     <div class="pc-screen">
         <div class="row">
             <div class="col-md-9 box-plane-login">
@@ -30,7 +30,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <ul style="height: 300px; font-size: 15px; text-align:left;">
+                                            <ul>
                                                 <li>{{ $modo->detail_two }}</li>
                                                 <li>{{ $modo->detail_three }}</li>
                                                 <li>{{ $modo->detail_four }}</li>
@@ -61,28 +61,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--
-                            <div class="col-md-3">
-                                <div class="box-plane-card-login">
-                                    <h2 style="text-align: center;">{{ $modo->name }}</h2>
-                                    <h3 style="text-align: center;">S/ {{ $modo->price }}</h3>
-                                    <h3 style="text-align: center;">$USD {{ $modo->dollar_price }}</h3>
-                                    <ul style="height: 220px;">
-                                        <li>{{ $modo->detail_two }}</li>
-                                        <li>{{ $modo->detail_three }}</li>
-                                        <li>{{ $modo->detail_four }}</li>
-                                        <li>{{ $modo->detail_five }}</li>
-                                    </ul>
-                                    @if ($modo->price > 0)
-                                        <a href="{{ route('unirme_page', $modo->id) }}"
-                                            class="form-control btn btn-orange submit">Unirse</a>
-                                    @else
-                                        <a href="{{ route('register') }}"
-                                            class="form-control btn btn-secondary submit">Registrado</a>
-                                    @endif
-                                </div>
-                            </div>
-                            -->
                         @endforeach
                     @endif
                 </div>
