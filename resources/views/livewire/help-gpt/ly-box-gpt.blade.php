@@ -125,7 +125,7 @@
                                     </select>
                                 </div>
                                 <div class="mt-2">
-                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6"
+                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6" autocomplete="off"
                                         placeholder="Escribe aquí lo que desee parafrasear." style="background-color: #fff;"></textarea>
                                 </div>
 
@@ -150,7 +150,7 @@
                                 <form class="datos">
                                     <div class="mt-2">
                                         <label class="mb-0">&nbsp;&nbsp;Descripción:</label>
-                                        <input wire:model="consulta" class="form-control" id="consulta"
+                                        <input wire:model="consulta" class="form-control" id="consulta" autocomplete="off"
                                             placeholder="Escribe aquí palabras clave sobre el tema que requieres"
                                             style="background-color: #fff;">
                                     </div>
@@ -182,7 +182,7 @@
 
                                 <div class="mt-2">
                                     <label class="mb-0">&nbsp;&nbsp;Texto:</label>
-                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6"
+                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6" autocomplete="off"
                                         placeholder="Escribe aquí lo que desee buscar" style="background-color: #fff;"></textarea>
                                 </div>
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
@@ -456,7 +456,7 @@
                             <div class="col-md-12">
                                 <div class="mt-2">
                                     <label class="mb-0">&nbsp;&nbsp;DOI:</label>
-                                    <input wire:model="consulta" id="input-doi-buscar-id" type="text"
+                                    <input wire:model="consulta" id="input-doi-buscar-id" type="text" autocomplete="off"
                                         class="form-control" aria-label="Sizing example input"
                                         style="background-color: #fff;" aria-describedby="inputGroup-sizing-sm"
                                         placeholder="Coleque el enlace DOI">
@@ -870,7 +870,7 @@
                                     </select>
                                 </div>
                                 <div class="mt-2">
-                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6"
+                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6" autocomplete="off"
                                         placeholder="Escribe aquí lo que desee parafrasear." style="background-color: #fff;"></textarea>
                                 </div>
 
@@ -895,7 +895,7 @@
                                 <form class="datos">
                                     <div class="mt-2">
                                         <label class="mb-0">&nbsp;&nbsp;Descripción:</label>
-                                        <input wire:model="consulta" class="form-control" id="consulta"
+                                        <input wire:model="consulta" class="form-control" id="consulta" autocomplete="off"
                                             placeholder="Escribe aquí palabras clave sobre el tema que requieres"
                                             style="background-color: #fff;">
                                     </div>
@@ -927,7 +927,7 @@
 
                                 <div class="mt-2">
                                     <label class="mb-0">&nbsp;&nbsp;Texto:</label>
-                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6"
+                                    <textarea wire:model="consulta" class="form-control" id="consulta" rows="6" autocomplete="off"
                                         placeholder="Escribe aquí lo que desee buscar" style="background-color: #fff;"></textarea>
                                 </div>
                                 <button wire:click="saveMessageUser" wire:loading.attr="disabled" type="button"
@@ -1201,7 +1201,7 @@
                             <div class="col-md-12">
                                 <div class="mt-2">
                                     <label class="mb-0">&nbsp;&nbsp;DOI:</label>
-                                    <input wire:model="consulta" id="input-doi-buscar-id" type="text"
+                                    <input wire:model="consulta" id="input-doi-buscar-id" type="text" autocomplete="off"
                                         class="form-control" aria-label="Sizing example input"
                                         style="background-color: #fff;" aria-describedby="inputGroup-sizing-sm"
                                         placeholder="Coleque el enlace DOI">
