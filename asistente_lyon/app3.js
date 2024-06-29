@@ -1,7 +1,6 @@
 import express from "express";
 
 const app = express();
-const port = 3000;
 
 import mysql from 'mysql2';
 
@@ -16,6 +15,7 @@ import fs from 'fs';
 
 dotenv.config();
 
+const port = process.env.AI_ASSISTANT_PORT;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -167,11 +167,11 @@ const createRun = async (data) => {
     //Run assistant
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
-        instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name +
+        instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name + " "+
                         "recuerda solo ayudar, asistir o responder preguntas a todo lo relacionado a proyectos de investigación, informes de tesis, artículos científicos, revisiones de literatura y trabajos similares de manera exclusiva; "+
-                        "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+ ", o la pregunta que te acaban de hacer" +
+                        "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+ ", o la pregunta que te acaban de hacer " +
                         "puedes asistir respondiendo a preguntas y consultas libres siempre que sean  del ámbito de investigación científica de literatura científica, de trabajos académicos superiores y similares; " +
-                        "' de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
+                        "'de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));

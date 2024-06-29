@@ -447,7 +447,7 @@ class LyBoxGpt extends Component
                 try {
                     if ($this->thread_id == null) {
                         $client = new Client();
-                        $promise = $client->getAsync('http://localhost:3000/create_thread');
+                        $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
                         $response = $promise->wait();
                         $data = json_decode($response->getBody(), true);
                         $this->thread_id = $data['thread_id'];
