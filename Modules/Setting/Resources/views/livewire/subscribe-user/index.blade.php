@@ -13,7 +13,7 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Modos</p>
                         <a href="{{ route('setting_suscripcion_usuarios_create') }}" type="button"
-                            class="btn btn-primary">Nuevo</a>
+                            title="Para suscribir a un nuevo usuario este debe registrarse primero" class="btn btn-primary">Nuevo</a>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
                         <!-- Wrapper -->

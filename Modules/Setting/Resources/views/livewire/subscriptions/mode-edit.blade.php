@@ -50,7 +50,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="until_subscription">Meses de subscripción*</label>
+                                <label class="form-label" for="until_subscription">Meses de subscripción(y meses para ver cursos)*</label>
                                 <input wire:model="until_subscription" type="number" class="form-control"
                                     id="until_subscription" placeholder="Suma la cantidad de meses a la subscripción">
                                 @error('until_subscription')

@@ -29,8 +29,8 @@ class LyVerifyEmail extends Component
 
     public function resendCode()
     {
-        $user = User::where('unique_code', $this->unique_code)->first();
-
+        //$user = User::where('unique_code', $this->unique_code)->first();
+        $user = Auth::user();
         $confirmationCode = Str::random(6);
         $startTime = Carbon::now();
         $endTime = $startTime->copy()->addMinutes(5);
@@ -49,7 +49,7 @@ class LyVerifyEmail extends Component
 
     public function validateCode()
     {
-        $user = User::where('unique_code', $this->unique_code)
+        $user = User::where('unique_code', trim($this->unique_code))
             ->whereNull('email_verified_at')
             ->first();
 
@@ -68,7 +68,7 @@ class LyVerifyEmail extends Component
                 $user->save();
 
                 Auth::login($user);
-                $typeSubs = TypeSubscription::where('price', 0)->where('status', 1)->first();
+                $typeSubs = TypeSubscription::where('price', 0)->first();
                 $automate_register = new AutomationController();
                 $automate_register->succes_payment_auto($typeSubs->id);
                 return redirect()->intended('dashboard');
