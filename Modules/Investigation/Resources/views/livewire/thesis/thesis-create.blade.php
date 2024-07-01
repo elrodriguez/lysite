@@ -44,7 +44,7 @@
                                     <label class="form-label" for="country_id">{{ __('labels.Country') }}
                                         *</label>
                                     <select
-                                        onclick="deSelectNormative()" 
+                                        onclick="deSelectNormative()"
                                         wire:model.defer="country_id"
                                         class="form-control"
                                         id="country_id"
@@ -87,7 +87,7 @@
 
                             <div class="form-group">
                                 <label class="form-label">{{ __('investigation::labels.formats') }}</label>
-                                
+
                                 <div class="input-group mb-3">
                                     <div class="dropdown">
                                         <button wire:ignore class="btn btn-orange-border dropdown-toggle" style="border: 2px solid #ff9152;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -124,12 +124,12 @@
     <script>
 
         function deSelectNormative(){
-            var btn = document.querySelector('.btn.btn-outline-primary.dropdown-toggle');
+            var btn = document.getElementById('dropdownMenuButton');
             btn.innerHTML = "Seleccionar Formato";
             @this.set('format_id', null);
         }
         function selectionFormat(format){
-            var btn = document.querySelector('.btn.btn-outline-primary.dropdown-toggle');
+            var btn = document.getElementById('dropdownMenuButton');
             btn.innerHTML = format.type_thesis+" - "+format.normative_thesis+" - "+format.name;
             @this.set('format_id', format.id);
         }
@@ -185,11 +185,11 @@
 
     <script>
         document.addEventListener('livewire:load', function() {
-            
+
             $('#country_id').select2();
             $('#country_id').on('select2:select', function(e) {
                 var data = e.params.data;
-                @this.country_id = data.id;               
+                @this.country_id = data.id;
             });
 
             $('#university_id').select2();

@@ -10,16 +10,26 @@
   display: none;
 }
 
+[dir=ltr] .layout-navbar-mini-fixed-bottom {
+  padding-bottom: 0px !important;
+}
 
 
 
 [dir=ltr] .container-section{
-  width: 1600px;
+  /*width: 1600px;*/
+  width: 90%;
   margin: auto;
 }
 
 [dir=ltr] .container-section-1360p{
   width: 1360px;
+  margin: auto;
+}
+
+[dir=ltr] .container-section-modo{
+  /*width: 1600px;*/
+  width: 70%;
   margin: auto;
 }
 
@@ -35,6 +45,11 @@
 [dir=ltr] .bg-gradient{
   background: rgb(255,164,73);
   background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
+}
+
+
+[dir=ltr] .bg-orange{
+  background: #ff9152;
 }
 
 [dir=ltr] .bg-purple{
@@ -164,6 +179,12 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
+[dir=ltr] .box-plane-card-login ul{
+  height: 360px; 
+  font-size: 15px; 
+  text-align:left;
+}
+
 [dir=ltr] .box-plane-card-dashboard {
   background-color: #ffe9db; 
   padding: 30px 0px; 
@@ -217,6 +238,10 @@
 [dir=ltr] .box-plane-card-modo:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+[dir=ltr] .box-plane-card-modo ul{
+  height: 360px; font-size: 15px;
 }
 
 /*------------*/
@@ -728,7 +753,7 @@
   justify-content: center;
 }
 
-[dir=ltr] .card{
+[dir=ltr] .card-new{
   border-radius: 10px;
   padding: 25px;
   width: 120%;
@@ -743,18 +768,18 @@
 }
 
 
-[dir=ltr] .card h5{
+[dir=ltr] .card-new h5{
   font-family: "Rubik", Bold;
   font-weight: 700;
   font-size: 40px;
 }
-[dir=ltr] .card p{
+[dir=ltr] .card-new p{
   font-family: "Rubik", Light;
   font-weight: 300;
   font-size: 25px;
 }
 
-[dir=ltr] .card a{
+[dir=ltr] .card-new a{
   font-family: "Rubik", Medium;
   font-weight: 500;
   font-size: 25px;

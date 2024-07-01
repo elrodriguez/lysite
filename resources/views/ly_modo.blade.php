@@ -7,7 +7,7 @@
 
     <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
 
-        <div class="container-section-1360p">
+        <div class="container-section-modo">
             <div class="row">
                 <div class="col-md-12 box-plane-modo">
                     <div class="row box-plane-content-modo">
@@ -36,7 +36,7 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <ul style="height: 300px;">
+                                                    <ul>
                                                         <li>{{ $modo->detail_two }}</li>
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
@@ -98,7 +98,7 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <ul style="height: 300px;">
+                                                    <ul>
                                                         <li>{{ $modo->detail_two }}</li>
                                                         <li>{{ $modo->detail_three }}</li>
                                                         <li>{{ $modo->detail_four }}</li>
@@ -127,47 +127,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--
-                                                                <div class="card">
-                                                                    <div class="card-body mt-3">
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <h5 class="text-center" style="padding: 0px; margin: 0px;">
-                                                                                    {{ $modo->name }}</h5>
-                                                                                <p class="mt-0 mb-0  text-center" style="color: #000;">
-                                                                                    <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong> <strong>ó</strong>
-                                                                                </p>
-                                                                                <p class="mt-0 mb-0  text-center" style="color: #000;">
-                                                                                    <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
-                                                                                </p>
-                                                                                <p class="mt-0 mb-0 text-center" style="color: #ff9152;">
-                                                                                    <strong>/{{ $modo->detail_one }}</strong>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <br>
-                                                                        <div class="row">
-                                                                            <div class="col-md-2"></div>
-                                                                            <div class="col-md-8">
-                                                                                <ul>
-                                                                                    <li>{{ $modo->detail_two }}</li>
-                                                                                    <li>{{ $modo->detail_three }}</li>
-                                                                                    <li>{{ $modo->detail_four }}</li>
-                                                                                    <li>{{ $modo->detail_five }}</li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="col-md-2"></div>
-                                                                        </div>
-                                                                        <form action="#" class="signin-form mt-2">
-                                                                            <div class="form-group mt-4 btn-cent mb-4">
-
-                                                                                <a href="{{ route('unirme_page', $modo->id) }}"
-                                                                                    class="form-control btn btn-orange submit">Unirse</a>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                                -->
                                     </div>
                                 @endif
                             @endforeach

@@ -24,7 +24,7 @@
         setTimeout(showViewer, 4200);
     </script>
     
-    <div class="bg-gradient-primary pb-lg-64pt py-32pt">
+    <div class="bg-orange pb-lg-64pt py-32pt">
         <div class="container">
 
             @if ($content->content_type_id == 1)

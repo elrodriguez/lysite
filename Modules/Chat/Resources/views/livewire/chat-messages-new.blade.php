@@ -174,7 +174,7 @@
                         </div>
                         <div class="d-flex flex-row justify-content-end mb-4 pt-1">
                             <div>
-                                <p class=" p-2 me-3 mb-3 text-white rounded-3 bg-warning">${messages[key]['message']}</p>
+                                <p class=" p-2 me-3 mb-3 text-white rounded-3 bg-warning" style="margin-left: 10px; margin-right: 10px;">${messages[key]['message']}</p>
                             </div>
                             <img src="${avatar}" alt="${messages[key]['name']}" style="width: 45px; height: 100%;border-radius: 50%;">
                         </div>

@@ -1,7 +1,6 @@
 @extends('layouts.tutorio')
 @section('content')
 
-    <body class="layout-navbar-mini-fixed-bottom">
         <x-lyontech.header></x-lyontech.header>
         <x-lyontech.student-data></x-lyontech.student-data>
 
@@ -39,5 +38,5 @@
         </div>
 
         @livewire('academic::students.student-take-lesson', ['course_id' => $course_id, 'section_id' => $section_id, 'content_id' => $content_id])
-    </body>
+    
 @stop

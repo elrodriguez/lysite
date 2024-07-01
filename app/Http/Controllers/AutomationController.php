@@ -49,7 +49,7 @@ class AutomationController extends Controller
             // dando permiso a los cursos
             $courses = AcaCourse::where('status', 1)->get();
             $today = now();
-            $registeredUntil = $today->addMonths(6);
+            $registeredUntil = $today->addMonths($add_months); //se obtiene de la tabla type_subscription, columna until_subscription
             $newDate = null;
             foreach ($courses as $course) {
                 $acaStudent = AcaStudent::where('person_id', $person->id)
@@ -97,9 +97,25 @@ class AutomationController extends Controller
             $userSubscription->subscription_id = $type_subscription_id;
             $userSubscription->status = true;
             $userSubscription->save();
+            /*
+            $ai_oportunities = $subscription->ai_oportunities;
+            $allowed_thesis = $subscription->allowed_thesis;
+            $add_months = $subscription->until_subscription; //numero de meses que se ampliará la subscripción
+            */
+
+            if($ai_oportunities>0){
+                $user->givePermissionTo('academico_directo_gpt');
+            }
+            if($add_months>0){
+                $user->givePermissionTo('academico_directo_cursos');
+            }
+            if($allowed_thesis>0){
+                $user->givePermissionTo('academico_directo_tesis');
+            }
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th); // comentar esta linea
         }
     }
 }
