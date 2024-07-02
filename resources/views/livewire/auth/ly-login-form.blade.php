@@ -85,13 +85,15 @@
                                 </div>
                                 <div class="form-login">
                                     <label for="password"><strong>Contraseña</strong></label>
+                                    <span  onclick="showPassword()" style="right: 10px;">
+                                        <i class="fa fa-eye-slash" id="ojo_que_todo_lo_ve" aria-hidden="true"></i>
+                                    </span>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
                                         name="password" type="password" required>
                                     @error('password')
                                         <span class="text-danger error">{{ $message }}</span>
                                     @enderror
-                                    <span style="right: 10px;" toggle="#password"
-                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
+
                                 </div>
                                 @if (session()->has('message'))
                                     <div class="alert alert-danger" role="alert">
@@ -132,13 +134,15 @@
                                 </div>
                                 <div class="form-login">
                                     <label for="password"><strong>Contraseña</strong></label>
+                                    <span onclick="showPassword()">
+                                        <i class="fa fa-eye-slash" id="ojo_que_todo_lo_ve" aria-hidden="true"></i>
+                                    </span>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
                                         name="password" type="password" required>
+
                                     @error('password')
                                         <span class="text-danger error">{{ $message }}</span>
                                     @enderror
-                                    <span style="right: 35px;" toggle="#password"
-                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 @if (session()->has('message'))
                                     <div class="alert alert-danger" role="alert">
@@ -196,6 +200,19 @@
                 </div>
             </div>
         </div>
-
+<script>
+    function showPassword(){
+        pass= document.getElementById('password');
+        if(pass.type=='password'){
+            pass.type='text';
+            document.getElementById('ojo_que_todo_lo_ve').classList.add('fa-eye');
+            document.getElementById('ojo_que_todo_lo_ve').classList.remove('fa-eye-slash');
+        }else{
+            pass.type='password';
+            document.getElementById('ojo_que_todo_lo_ve').classList.add('fa-eye-slash');
+            document.getElementById('ojo_que_todo_lo_ve').classList.remove('fa-eye');
+        }
+    }
+</script>
     </div>
 </div>
