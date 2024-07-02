@@ -13,7 +13,7 @@
                         <h4 class="card-title">Listado</h4>
                         <p class="text-70">Modos</p>
                         <a href="{{ route('setting_suscripcion_usuarios_create') }}" type="button"
-                            class="btn btn-primary">Nuevo</a>
+                            title="Para suscribir a un nuevo usuario este debe registrarse primero" class="btn btn-primary">Nuevo</a>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
                         <!-- Wrapper -->
@@ -48,8 +48,8 @@
                                                         type="button" class="btn btn-info btn-sm"><i
                                                             class="fa fa-pencil-alt"></i></a>
 
-                                                    <button onclick="deletes({{ $person->type_subscription_id }})" type="button"
-                                                        class="btn btn-danger btn-sm"><i
+                                                    <button onclick="deletes({{ $person->type_subscription_id }})"
+                                                        type="button" class="btn btn-danger btn-sm"><i
                                                             class="fa fa-trash-alt"></i></button>
 
                                                 </div>

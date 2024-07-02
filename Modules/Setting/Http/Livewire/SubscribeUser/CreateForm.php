@@ -44,11 +44,17 @@ class CreateForm extends Component
 
     public function subscribingUser($user_id, $type_subs_id)
     {
-        if(!($user_id=="" || $type_subs_id=="0" || $type_subs_id=="")){
+        if (!($user_id == "" || $type_subs_id == "0" || $type_subs_id == "")) {
             $auto = new AutomationController();
             $auto->succes_payment_auto($type_subs_id, $user_id);
-        }else{
-
+            $res = 'success';
+            $tit = 'Enhorabuena';
+            $msg = 'Se suscribió correctamente';
+        } else {
+            $res = 'error';
+            $tit = 'Salió mal';
+            $msg = 'No se puedo suscribir al usuario';
         }
+        $this->dispatchBrowserEvent('set-subscription-modes-user', ['res' => $res, 'tit' => $tit, 'msg' => $msg]);
     }
 }

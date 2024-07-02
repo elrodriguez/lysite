@@ -15,6 +15,7 @@ class Index extends Component
     public $search = null;
 
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public function mount()
@@ -29,21 +30,25 @@ class Index extends Component
 
     public function render()
     {
-        return view('setting::livewire.subscribe-user.index',['people' => $this->getUsers()]);
+        return view('setting::livewire.subscribe-user.index', ['people' => $this->getUsers()]);
     }
 
     public function getUsers()
     {
         return Person::where('names', 'like', '%' . $this->search . '%')
-        ->orWhere('last_name_father', 'like', '%' . $this->search . '%')
-        ->orWhere('last_name_mother', 'like', '%' . $this->search . '%')
-        ->orWhere('full_name', 'like', '%' . $this->search . '%')
-        ->join('users', 'users.id', 'people.user_id')
-        ->join('user_subscriptions', 'users.id', 'user_subscriptions.user_id')
-        ->join('type_subscriptions', 'type_subscriptions.id', 'user_subscriptions.subscription_id')
-        ->select('user_subscriptions.id as type_subscription_id', 'people.full_name', 'type_subscriptions.name as type_subscription',
-        DB::raw("DATE_FORMAT(user_subscriptions.date_start, '%d-%m-%Y') as date_start"),
-        DB::raw("DATE_FORMAT(user_subscriptions.date_end, '%d-%m-%Y') as date_end"))->where('user_subscriptions.status', '=', 1)
+            ->orWhere('last_name_father', 'like', '%' . $this->search . '%')
+            ->orWhere('last_name_mother', 'like', '%' . $this->search . '%')
+            ->orWhere('full_name', 'like', '%' . $this->search . '%')
+            ->join('users', 'users.id', 'people.user_id')
+            ->join('user_subscriptions', 'users.id', 'user_subscriptions.user_id')
+            ->join('type_subscriptions', 'type_subscriptions.id', 'user_subscriptions.subscription_id')
+            ->select(
+                'user_subscriptions.id as type_subscription_id',
+                'people.full_name',
+                'type_subscriptions.name as type_subscription',
+                DB::raw("DATE_FORMAT(user_subscriptions.date_start, '%d-%m-%Y') as date_start"),
+                DB::raw("DATE_FORMAT(user_subscriptions.date_end, '%d-%m-%Y') as date_end")
+            )->where('user_subscriptions.status', '=', 1)
             ->paginate(10);
     }
 

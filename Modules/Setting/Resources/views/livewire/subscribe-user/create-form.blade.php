@@ -50,21 +50,26 @@
                                         <td class="name align-middle" title="{{ $user->names }}">{{ $user->full_name }}
                                         </td>
                                         <td class="name align-middle">
-                                                <div class="name align-middle">
-                                                    <select class="form-control" name="type_subs" id="type_subs{{ $user->id }}">
-                                                        <option onclick="actualizarBoton(this, {{ $key }})" value="0">Seleccionar</option>
-                                                @foreach ($type_subscriptions as $keya => $type_sub)
-                                                        <option id="{{ $key }}type_subs{{ $keya }}" onclick="actualizarBoton(this, {{ $key }})" value="{{ $type_sub->id }}">{{ $type_sub->name }}</option>
-                                                    {{-- <input onclick="actualizarBoton(this, {{ $key }})" type="radio" id="{{ $key }}type_subs{{ $keya }}" name="type_subs" value="{{ $type_sub->id }}">
+                                            <div class="name align-middle">
+                                                <select class="form-control" name="type_subs"
+                                                    id="type_subs{{ $user->id }}">
+                                                    <option onclick="actualizarBoton(this, {{ $key }})"
+                                                        value="0">Seleccionar</option>
+                                                    @foreach ($type_subscriptions as $keya => $type_sub)
+                                                        <option id="{{ $key }}type_subs{{ $keya }}"
+                                                            onclick="actualizarBoton(this, {{ $key }})"
+                                                            value="{{ $type_sub->id }}">{{ $type_sub->name }}</option>
+                                                        {{-- <input onclick="actualizarBoton(this, {{ $key }})" type="radio" id="{{ $key }}type_subs{{ $keya }}" name="type_subs" value="{{ $type_sub->id }}">
                                                     <label for="{{ $key }}type_subs{{ $keya }}">{{ $type_sub->name }}</label> --}}
-                                                @endforeach
+                                                    @endforeach
                                                 </select>
-                                                </div>
+                                            </div>
                                         </td>
                                         <td class="name align-middle">
                                             {{-- envío el userID junto al valor del typeSubscrID --}}
-                                            <button class="btn btn-primary" id="btn-{{ $key }}" type="button" value=""
-                                                wire:click="subscribingUser({{ $user->user_id }}, $event.target.value)">
+                                            <button class="btn btn-primary" id="btn-{{ $key }}" type="button"
+                                                value=""
+                                                onclick="confirmaSuscripcion({{ $user->user_id }},{{ $key }})">
                                                 Suscribir
                                             </button>
                                         </td>
@@ -87,8 +92,35 @@
             </div>
         </div>
     </div>
-    <script>function actualizarBoton(radio, key) {
-        var boton = document.getElementById("btn-"+key);
-        boton.value = radio.value;
-      }</script>
+    <script>
+        function actualizarBoton(radio, key) {
+            var boton = document.getElementById("btn-" + key);
+            boton.value = radio.value;
+        }
+    </script>
+    <script>
+        function confirmaSuscripcion(id, ke) {
+            cuteAlert({
+                type: "question",
+                title: "¿Confirmar suscripcion?",
+                message: "Suscribir al Usuario la membresía seleccionada",
+                confirmText: "Okay",
+                cancelText: "Cancel"
+            }).then((e) => {
+                if (e == ("confirm")) {
+                    let but = document.getElementById("btn-" + ke);
+                    var valor = but.getAttribute('value');
+                    @this.subscribingUser(id, valor);
+                }
+            });
+        }
+        window.addEventListener('set-subscription-modes-user', event => {
+            cuteAlert({
+                type: event.detail.res,
+                title: event.detail.tit,
+                message: event.detail.msg,
+                buttonText: "Okay"
+            });
+        })
+    </script>
 </div>
