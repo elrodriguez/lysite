@@ -91,7 +91,7 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-orange" data-toggle="modal"
                         data-target="#exampleModalScrollable">
-                        Indice de Contenidos
+                        Índice de Contenidos
                     </button>
                     {{-- Begin Modal Indice de Contenido --}}
                     @section('modales')
@@ -122,7 +122,7 @@
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Indice de Contenidos
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Índice de Contenidos
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -207,10 +207,10 @@
                             <div>
                                 <div class="form-group">
                                     <label for="text1">Escribe aquí lo que desee parafrasear</label>
-                                    <select class="form-control prompty bg-cherry text-white" name="prompt">
-                                        <option value="0">Como Investigador</option>
-                                        <option value="1">Disminuir Similitud</option>
-                                        <option value="2">Humanizar Texto</option>
+                                    <select class="form-control prompty bg-orange text-white" name="prompt">
+                                        <option value="0" class="bg-orange">Como Investigador</option>
+                                        <option value="1" class="bg-orange">Disminuir Similitud</option>
+                                        <option value="2" class="bg-orange">Humanizar Texto</option>
                                     </select>
                                     <style>
                                         .prompty:hover {
@@ -323,21 +323,13 @@
         <div wire:ignore class="ventana_flotante" style="display: none" id="video-flotante">
 
             <div class="content">
-
                 <div class="header">
-
-
-
                     <button type="button" class="close" onclick="closeVideo()" aria-label="Close">
-
                         <span aria-hidden="true close-btn">×</span>
-
                     </button>
-
                 </div>
 
                 <div class="body">
-
                     <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
                         <div class="player embed-responsive-item">
                             <div class="player__content">

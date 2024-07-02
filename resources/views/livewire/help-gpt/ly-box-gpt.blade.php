@@ -106,7 +106,7 @@
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">REFERENCIADOR</h5>
-                                    <p>Referencia a la normativa con solo un enlace.</p>
+                                    <p>Referencia de acuerdo a la normativa con solo un enlace.</p>
                                 </span>
                             </a>
                         </div>

@@ -23,7 +23,7 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
                                         <p class="mt-1 text-gris">
-                                            Te presentamos las herramientas de trabajo. con ellas podrás potenciar el
+                                            Te presentamos las herramientas de trabajo, con ellas podrás potenciar el
                                             desarrollo de
                                             tu investigación, empieza ahora tu experiencia de la mano de lyonteach
                                         </p>
@@ -97,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                 </div>
             </div>
         </div>
