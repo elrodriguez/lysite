@@ -29070,7 +29070,7 @@ html {
 
 [dir=rtl] .courses-modal .nav-link.active,
 [dir=rtl] .courses-modal .tab-content .nav-link:hover {
-    color: #303840
+    color: #303840;
 }
 
 [dir=rtl] .courses-modal .menu .nav-link {

@@ -252,7 +252,7 @@
 /*-- Courses List --*/
 [dir=ltr] .box-course-list {
   background: #f3f3f3; 
-  padding: 10px;
+  padding: 0px;
   border-radius: 10px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -277,6 +277,9 @@
 [dir=ltr] .img-home{
   margin-top: 60px;
   width: 170%;
+}
+[dir=ltr] .img-courses {
+  width: 100%;
 }
 
 /* Box ---------------------------------------*/
@@ -343,6 +346,41 @@
   background-color: #ff9152;
   border-color: #ff9152;
 }
+
+[dir=ltr] .active-orange {
+  color: #ff9152;
+  background-color: #ff9152;
+  border-color: #ff9152;
+}
+
+
+[dir=rtl] .nav-link-course {
+  display: block;
+  padding: .5rem 1rem
+}
+
+[dir=rtl] .nav-link-course:focus,
+[dir=rtl] .nav-link-course:hover {
+  text-decoration: none
+}
+
+[dir=rtl] .nav-link-course.disabled {
+  color: #ff9152;
+  pointer-events: none;
+  cursor: default
+}
+
+
+[dir=rtl] .nav-link.active-orange,
+[dir=rtl] .show>.nav-link {
+    color: #fff;
+    background-color: red;
+}
+
+
+
+
+
 
 [dir=ltr] .active-black {
   color: #000;

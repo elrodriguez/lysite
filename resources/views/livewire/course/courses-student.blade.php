@@ -19,12 +19,11 @@
             <div class="box-course-list">
                 <a href="{{ route('academic_students_my_course', $course->id) }}">
                     <div class="row">
-                        <div class="col-md-2" style="padding: 0px;">
-                            <!--<img style="width: 100%;" src="{{ url($course->course_image) }}" class="card-img">-->
+                        <div class="col-md-2" style="padding: 20px; margin-left: 10px;">
                             <img class="img-courses" src="{{ asset('theme-lyontech/images/leon.png') }}">
                         </div>
-                        <div class="col-md-10">
-                            <p class="p-large">{{ $course->name }}</p>
+                        <div class="col-md-10" style="padding: 0px; margin-left: -10px;">
+                            <p class="p-large mt-2">{{ $course->name }}</p>
                             <div class="row">
                                 <div class="col-md-4">
                                     <h5 class="mb-0">Videos: 5</h5>
@@ -66,6 +65,7 @@
         @endforeach
     </div>
     @endif
+    <br>
 </div>
 
 <div class="container page__container movil-screen">
@@ -131,6 +131,7 @@
         @endforeach
     </div>
     @endif
+    <br>
 </div>
 
 
