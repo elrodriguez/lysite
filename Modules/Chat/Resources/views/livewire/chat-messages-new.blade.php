@@ -107,8 +107,9 @@
                                             <div class="text-muted d-flex justify-content-start align-items-center">
                                                 <form onsubmit="sendMessageChat('${chats[key]['chat_id']}','${chats[key]['user_id']}'); return false;">
                                                     <div class="input-group mb-0">
-                                                        <input id="txt_message_chat" type="text" class="form-control" autocomplete="off" placeholder="Escribe mensaje" aria-label="Nombre de usuario del destinatario" aria-describedby="button-addon2" />
-                                                        <br><br>
+                                                        <input width="100%" id="txt_message_chat" type="text" class="form-control" autocomplete="off" placeholder="Escribe mensaje" aria-label="Nombre de usuario del destinatario" aria-describedby="button-addon2" />
+                                                    </div>
+                                                    <div class="input-group mb-0">
                                                         <button class="btn btn-warning" type="submit" id="button-addon2" style="padding-top: .55rem;">
                                                             <div id="chat-btn-spinner" class="spinner-border mr-1" role="status" style="width: 1rem; height: 1rem;display:none">
                                                                 <span class="sr-only">Loading...</span>

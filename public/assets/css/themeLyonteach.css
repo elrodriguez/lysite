@@ -51,7 +51,6 @@
 
 [dir=ltr] .bg-orange{
   background: #ff9152;
-  background: rgb(255, 145, 82);
 }
 
 [dir=ltr] .bg-purple{
@@ -832,7 +831,7 @@
   font-size: 0.9em !important; /* Increase font size */
   margin-left: 75% !important;
 }
-
+/*
 [dir=ltr] input:focus, input:valid {
   color:#872152; 
   border: 2px solid #872052; 
@@ -841,7 +840,7 @@
 
 [dir=ltr] input::placeholder {
   color:#872152; 
-}
+}*/
 
 
 

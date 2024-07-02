@@ -1,10 +1,22 @@
 <div>
+    <style>
+        [dir=ltr] .btn-orange {
+        color: #fff;
+        background-color: #ff9152;
+        border-color: #ff9152;
+        }
+
+        [dir=ltr] .btn-orange:hover {
+        color: #fff;
+        background-color: #e36e2b;
+        border-color: #e36e2b;
+        }
+    </style>
     <div class="container page__container">
         <div class="page-section">
 
             <div class="row">
-                <div class="col-md-8">
-
+                <div class="col-md-8"
                     <h1 class="h2 mb-2">{{ $question->question_title }}</h1>
                     <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
                         <a href="{{ route('academic_students_take_lesson', [$this->course_id, $this->section_id, $this->content_id]) }}" class="mr-3">Volver</a>
@@ -51,7 +63,7 @@
                                 <label for="comment" class="form-label">{{ __('labels.Your answer') }}</label>
                                 <textarea wire:model.defer="answer_text" class="form-control" name="comment" id="comment" rows="3" placeholder="Escribe aquí para responder a {{ $question->full_name }}..."></textarea>
                             </div>
-                            <button wire:click="postReply" class="btn btn-accent">Publicar comentario</button>
+                            <button wire:click="postReply" class="btn btn-orange">Publicar comentario</button>
                         </div>
                     </div>
                     <div class="pt-3">
