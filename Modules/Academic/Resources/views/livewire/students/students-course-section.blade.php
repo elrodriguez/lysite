@@ -38,14 +38,8 @@
                         <h4 class="mb-16pt" style="padding: 0px 0px 0px 13px;">{{ __('labels.Index') }}</h4>
                     </div>
                     <nav class="nav page-nav__menu">
-                        <ul style="font-size: 14px; margin-left: -15px; list-style: none;">
-                            <li>
-                                <i class="fa fa-circle" style="font-size: 12px;"></i>
-                                <a href="">Hola</a>
-                            </li>
-                        </ul>
                         @foreach ($sections as $key => $section )
-                        <a class="nav-link active-orange" style="background: none; font-size: 14px;" href="{{ '#'.$section->id }}">gh{{ ($key + 1).". ".$section->title }}</a>
+                        <a class="nav-link active-orange" style="background: none; font-size: 14px;" href="{{ '#'.$section->id }}">{{ ($key + 1).". ".$section->title }}</a>
                         @endforeach
                     </nav>
                 </div>
