@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="form-login">
                                     <label for="password"><strong>Contraseña</strong></label>
-                                    <span  onclick="showPassword()" style="right: 10px;">
+                                    <span  onclick="showPassword()" style="right: 10px;" title="Mostrar/Ocultar Contraseña">
                                         <i class="fa fa-eye-slash" id="ojo_que_todo_lo_ve" aria-hidden="true"></i>
                                     </span>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="form-login">
                                     <label for="password"><strong>Contraseña</strong></label>
-                                    <span onclick="showPassword()">
+                                    <span onclick="showPassword()" title="Mostrar/Ocultar Contraseña">
                                         <i class="fa fa-eye-slash" id="ojo_que_todo_lo_ve" aria-hidden="true"></i>
                                     </span>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
