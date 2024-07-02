@@ -4,6 +4,7 @@
 }
 
 [dir=ltr] .table-screen{
+  display: none;
 }
 
 [dir=ltr] .movil-screen{
@@ -44,12 +45,13 @@
 
 [dir=ltr] .bg-gradient{
   background: rgb(255,164,73);
-  background: linear-gradient(126deg, rgba(255,164,73,1) 0%, rgba(255,156,73,1) 35%, rgba(197,23,98,1) 100%);
+  background: linear-gradient(126deg, rgba(255,164,73,1) 7%, rgba(255,145,82,1) 28%, rgba(197,23,98,1) 100%);
 }
 
 
 [dir=ltr] .bg-orange{
   background: #ff9152;
+  background: rgb(255, 145, 82);
 }
 
 [dir=ltr] .bg-purple{

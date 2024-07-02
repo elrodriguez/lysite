@@ -135,7 +135,7 @@
                             <h4>Redacta tu investigación con soporte de la IA</h4>
                             <p>
                                 Realiza tus avances de redacción en el editor online donde
-                                encontrarás una gía estructurada y herramientas que facilitarán
+                                encontrarás una guía estructurada y herramientas que facilitarán
                                 tu proceso.
                             </p>
                         </div>
@@ -156,7 +156,7 @@
                     <div class="col-md-6">
                         <div class="box-presentation-content-home">
                             <h4>
-                                Deja que el chatbot te ayude en el desarrollo de t investigación.
+                                Deja que el chatbot te ayude en el desarrollo de tu investigación.
                             </h4>
                             <p>
                                 Haz preguntas al chatbot ante cualquier duda, además, utiliza el prafraseador, referenciador
@@ -229,7 +229,7 @@
                             <h4>Redacta tu investigación con soporte de la IA</h4>
                             <p>
                                 Realiza tus avances de redacción en el editor online donde
-                                encontrarás una gía estructurada y herramientas que facilitarán
+                                encontrarás una guía estructurada y herramientas que facilitarán
                                 tu proceso.
                             </p>
                         </div>
@@ -245,7 +245,7 @@
                     <div class="col-md-6">
                         <div class="box-presentation-content-home">
                             <h4>
-                                Deja que el chatbot te ayude en el desarrollo de t investigación.
+                                Deja que el chatbot te ayude en el desarrollo de tu investigación.
                             </h4>
                             <p>
                                 Haz preguntas al chatbot ante cualquier duda, además, utiliza el prafraseador, referenciador

@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="#">
         <img src="{{ asset('theme-lyontech/images/icon.jpg') }}" style="width: 55px; heiht: 55px; "> &nbsp;
         <span class="brand-text">
-            LyonTeach
+            Lyonteach
         </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -86,6 +86,10 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
+                    <a class="nav-link" href="{{ route('modo_page') }}"  style="font-size: 23px;">
+                        Membresias
+                    </a>
+                    <!--
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenbresia" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px;">
                         Membresias
@@ -97,6 +101,7 @@
                             </a>
                         @endforeach
                     </div>
+                    -->
                 </li>
             @endif
         </ul>
@@ -138,7 +143,7 @@
                     <a href="{{ route('ly-login') }}" class="btn btn-orange" style="margin-right: 35px;">
                         <strong> Iniciar sesión </strong>
                     </a>
-                    <a href="{{ route('register') }}" class="btn btn-orange"><strong>Registrame</strong></a>
+                    <a href="{{ route('register') }}" class="btn btn-orange"><strong>Registrarme</strong></a>
                 </form>
             @endauth
         @endif
