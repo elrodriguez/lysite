@@ -30,7 +30,7 @@ function openModalReference(editor) {
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
-            <div><strong>Referenciar</strong></div>
+            <div><strong>Referenciador</strong></div>
             <div id="ly-ck-btn-dialog-close-icon" class="ly-ck-dialog-close-icon">&#10005;</div>
         </div>
         <form id="ly-ck-form-referenciar" class="ly-ck-dialog-form">
