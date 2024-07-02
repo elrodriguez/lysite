@@ -21,14 +21,14 @@
             </div>
             <div class="form-row mt-2">
                 <div class="form-login">
-                    <label for="last_name_father">&nbsp;1er Apellido:</label>
+                    <label for="last_name_father">&nbsp;Apellido Paterno:</label>
                     <input wire:model="last_name_father" id="last_name_father" type="text" {{ $inputsDisabled ? 'disabled' : '' }} required>
                     @error('last_name_father')
                         <span class="invalid-feedback-2">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-login">
-                    <label for="last_name_mother">&nbsp;2do Apellido:</label>
+                    <label for="last_name_mother">&nbsp; Apellido Materno:</label>
                     <input wire:model="last_name_mother" type="text" id="last_name_mother" {{ $inputsDisabled ? 'disabled' : '' }} required>
                     @error('last_name_mother')
                         <span class="invalid-feedback-2">{{ $message }}</span>
@@ -50,12 +50,12 @@
                     <label for="department_id">&nbsp;Departamento:</label>
                     <select wire:model="department_id" wire:change="getProvences" id="department_id">
                         @if (count($departments) > 0)
-                            <option value="">SELECCIONAR</option>
+                            <option value="">Seleccionar</option>
                             @foreach ($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->description }}</option>
                             @endforeach
                         @else
-                            <option value="">SIN REGISTROS</option>
+                            <option value="">Sin Rregistros</option>
                         @endif
                     </select>
                     @error('department_id')
@@ -66,12 +66,12 @@
                     <label>&nbsp;Provincia:</label>
                     <select wire:model="province_id" wire:change="getDistricts" name="provincia" id="">
                         @if (count($provinces) > 0)
-                            <option value="">SELECCIONAR</option>
+                            <option value="">Seleccionar</option>
                             @foreach ($provinces as $province)
                                 <option value="{{ $province->id }}">{{ $province->description }}</option>
                             @endforeach
                         @else
-                            <option value="">SIN REGISTROS</option>
+                            <option value="">Sin Rregistros</option>
                         @endif
                     </select>
                     @error('province_id')
@@ -82,12 +82,12 @@
                     <label for="district_id">&nbsp;Ciudad:</label>
                     <select wire:model="district_id" name="ciudad" id="district_id">
                         @if (count($districts) > 0)
-                            <option value="">SELECCIONAR</option>
+                            <option value="">Seleccionar</option>
                             @foreach ($districts as $district)
                                 <option value="{{ $district->id }}">{{ $district->description }}</option>
                             @endforeach
                         @else
-                            <option value="">SIN REGISTROS</option>
+                            <option value="">Sin Rregistros</option>
                         @endif
                     </select>
                     @error('district_id')
