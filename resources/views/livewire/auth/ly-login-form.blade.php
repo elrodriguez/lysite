@@ -14,7 +14,7 @@
                                             </h2>
                                             <p class="mt-0 mb-0  text-center"
                                                 style="color: #000; font-size: 21px;">
-                                                <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong>
+                                                <strong>S/ {{ 'GRATIS' }}</strong>
                                                 <strong>ó</strong>
                                             </p>
                                             <p class="mt-0 mb-0  text-center"
@@ -69,8 +69,8 @@
                 <div class="row box-plane-content-sesion">
                     <div class="col md-12">
                         <div class="box-plane-card-sesion">
-                            <h1 class="mb-0" style="text-align:center;">Iniciar Sesión</h1>
-                            <p class="mt-0" style="font-size: 18px; text-align:center;">¿Usuario nuevo?
+                            <h1 class="mb-0">Iniciar Sesión</h1>
+                            <p class="mt-0" style="font-size: 18px;">¿Usuario nuevo?
                                 <a href="{{ route('register') }}" style="color: #0059ff;">Registrarme</a>
                             </p>
                             <br>

@@ -182,9 +182,10 @@
 }
 
 [dir=ltr] .box-plane-card-login ul{
-  height: 360px; 
-  font-size: 15px; 
+  height: 440px; 
+  font-size: 14px; 
   text-align:left;
+  left: -10px;
 }
 
 [dir=ltr] .box-plane-card-dashboard {
