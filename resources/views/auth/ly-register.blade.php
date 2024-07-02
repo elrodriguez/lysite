@@ -13,21 +13,18 @@
                         <div class="col-lg-12 col-md-12 col-sm-10">
                             <div class="card card-transparent text-login">
                                 <h5>BIENVENIDO</h5>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">a la
-                                    prueba gratuita</p>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">de
-                                    Lyonteach.</p>
-
+                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">
+                                    a la prueba gratuita
+                                </p>
+                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">
+                                    de Lyonteach.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-6 text-left">
-
-
                     @livewire('auth.ly-register-form')
-
-
                 </div>
             </div>
 

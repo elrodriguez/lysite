@@ -135,6 +135,8 @@
                 @error('password')
                     <span class="error">{{ $message }}</span>
                 @enderror
+                <span style="right: 10px;" toggle="#password"
+                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
             </div>
             <div class="form-select ">
                 <label><strong>&nbsp;País:</strong></label>
