@@ -49,6 +49,7 @@ class LyBoxGpt extends Component
     public $n3 = false;
     public $n4 = false;
     public $n5 = false;
+    public $forget_context=false;
 
     public function verifyDeviceTokenUser()
     {
@@ -445,19 +446,27 @@ class LyBoxGpt extends Component
         if ($this->verifyDeviceTokenUser()) {
             if ($this->paraphrase_left >= 1) {
                 try {
-                    if ($this->thread_id == null) {
+                    $pasaje=false;
+                    if ($this->thread_id == null || $this->forget_context) {
                         $client = new Client();
                         $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
                         $response = $promise->wait();
                         $data = json_decode($response->getBody(), true);
                         $this->thread_id = $data['thread_id'];
                         $this->assistant_id = $data['assistant_id'];
+                        $this->forget_context=false;
+                        $pasaje=true;
                     }
                     $permisos = Person::where('user_id', Auth::user()->id)->first();
                     $permisos->paraphrase_used++;
                     $permisos->save();
-                    $this->paraphrase_used++;
-                    $this->paraphrase_allowed--;
+                    if ($pasaje==false) {
+                        $this->paraphrase_used++;
+                        $this->paraphrase_allowed--;
+                    }else{
+                        return "Hola Empecemos de Nuevo. olvidé todo lo anterior";
+                    }
+
                     return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
                 } catch (\Throwable $th) {
                     return null;
@@ -627,6 +636,7 @@ class LyBoxGpt extends Component
                 break;
             case 20:
                 $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
+                $this->forget_context = true;
                 break;
             default:
                 # code...
