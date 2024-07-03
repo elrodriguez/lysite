@@ -463,8 +463,6 @@ class LyBoxGpt extends Component
                     if ($pasaje==false) {
                         $this->paraphrase_used++;
                         $this->paraphrase_allowed--;
-                    }else{
-                        return "Hola Empecemos de Nuevo. olvidé todo lo anterior";
                     }
 
                     return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
