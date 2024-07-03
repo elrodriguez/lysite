@@ -115,7 +115,7 @@
         </script>
     @endif
     @yield('global-modal')
-
+    @yield('header-global-modal')
 </body>
 
 </html>

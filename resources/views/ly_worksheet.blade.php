@@ -35,50 +35,22 @@
 
         <livewire:investigation::thesis.ly-thesis-parts :thesis_id="$thesis_id" :sub_part="$sub_part" />
 
-        <div class="modal fade" id="ventanaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-            aria-labelledby="tituloVentana" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="background-image: url({{ asset('theme-lyontech/images/modal.jpg') }});">
-                    <div class="modal-header">
-                    </div>
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"
-                            style="background-color: black;">
-                            <strong>Mejorar</strong>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </body>
 
 @stop
-@can('academico_directo_tesis')
-    @section('script')
 
-        <script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
-        <script>
-            function openModalIndexes() {
-                $('#modalIndexes').modal('show');
-            }
-        </script>
-    @endsection
-@else
-    @section('script')
-        <script>
-            $('#ventanaModal').modal('show');
-        </script>
-        <script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
-        <script>
-            function openModalIndexes() {
-                $('#modalIndexes').modal('show');
-            }
-        </script>
-    @stop
-@endcan
+@section('script')
+
+    <script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
+    <script>
+        function openModalIndexes() {
+            $('#modalIndexes').modal('show');
+        }
+    </script>
+@endsection
+
 @section('global-modal')
     <livewire:investigation::indexes.ly-indexes-modal :thesis_student_id="$thesis_id" />
 @stop

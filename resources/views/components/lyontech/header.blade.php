@@ -86,7 +86,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
-                    <a class="nav-link" href="{{ route('modo_page') }}"  style="font-size: 23px;">
+                    <a class="nav-link" href="{{ route('modo_page') }}" style="font-size: 23px;">
                         Membresias
                     </a>
                     <!--
@@ -96,10 +96,10 @@
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdownMenbresia">
                         @foreach ($modos as $modo)
-                            <a class="dropdown-item" href="{{ route('unirme_page', $modo->id) }}">
+<a class="dropdown-item" href="{{ route('unirme_page', $modo->id) }}">
                                 {{ $modo->name }}
                             </a>
-                        @endforeach
+@endforeach
                     </div>
                     -->
                 </li>
@@ -150,7 +150,7 @@
 
     </div>
     @if (Auth::check())
-        @section('global-modal')
+        @section('header-global-modal')
 
             <livewire:investigation::thesis.modal-thesis-list-student />
 

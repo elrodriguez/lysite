@@ -16,6 +16,7 @@ class GrammarCorrectionController extends Controller
     public function grammarCorrection(Request $request)
     {
         $consulta = $request->get('help-texto');
+
         $resultado = "espera un momento...";
         if (strlen($consulta) > 6) {
 
@@ -39,6 +40,7 @@ class GrammarCorrectionController extends Controller
                         'max_tokens' => $max_tokens,
                         'temperature' => $temperature,
                     ]);
+
                     $result_text = $result['choices'][0]['text'];
                     $query_tokens = $result['usage']['prompt_tokens'];
                     $result_tokens = $result['usage']['completion_tokens'];
@@ -55,6 +57,8 @@ class GrammarCorrectionController extends Controller
         } else {
             $resultado = Auth::user()->name . " aprovecha este servicio escribiendo párrafos mas extensos que el que acabas de escribir, esta consulta no será tomada en cuenta";
         }
+
+
         return response()->json(['result' => $resultado]);
     }
 }
