@@ -41,7 +41,7 @@ function openModalHelpKeywords(editor){
                 <textarea class="ly-ck-dialog-input" rows="5" id="help-texto" name="help-texto" placeholder="Escriba aquí..."></textarea>
                 <spam id="input-text-error"></span>
             </div> 
-            <div id="ly-ck-dialog-grammar-correction-result" class="ly-ck-dialog-group-control custom-control-input-orange mb-2" style="overflow-x: hidden;overflow-y: auto;max-height: 150px;" >
+            <div id="ly-ck-dialog-grammar-correction-result" class="ly-ck-dialog-group-control mb-2" style="overflow-x: hidden;overflow-y: auto;max-height: 150px;" >
                 
             </div>
             <div class="ly-ck-dialog-buttons">
