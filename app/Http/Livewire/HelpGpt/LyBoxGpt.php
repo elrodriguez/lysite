@@ -448,14 +448,14 @@ class LyBoxGpt extends Component
                 try {
                     $pasaje=false;
                     if ($this->thread_id == null || $this->forget_context) {
+                        $this->forget_context=false;
+                        $pasaje=true;
                         $client = new Client();
                         $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
                         $response = $promise->wait();
                         $data = json_decode($response->getBody(), true);
                         $this->thread_id = $data['thread_id'];
                         $this->assistant_id = $data['assistant_id'];
-                        $this->forget_context=false;
-                        $pasaje=true;
                     }
                     $permisos = Person::where('user_id', Auth::user()->id)->first();
                     $permisos->paraphrase_used++;
