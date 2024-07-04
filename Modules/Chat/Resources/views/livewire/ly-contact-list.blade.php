@@ -1,11 +1,11 @@
 <div wire:ignore.self>
-    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+    <a class="dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <img src="{{ asset('theme-lyontech/images/msj-black.png') }}"
-            style="width: 50px; height:auto; margin-top: -20px; " alt="Icono">
+            style="width: 50px; height:auto;" alt="Icono">
     </a>
     @if (!$is_instructor && 0 > 1)
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-toggle" aria-labelledby="navbarDropdown">
             {{-- <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#">
 
                 <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
@@ -57,7 +57,7 @@
             @endif
         </div>
     @else
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-toggle" aria-labelledby="navbarDropdown">
             <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#">
 
                 <button wire:click="getSearch" class="btn" type="submit" role="button"><i
@@ -130,6 +130,10 @@
 
         </div>
         <style>
+            
+            .dropdown-toggle::after{
+                            display: none !important;
+                        }
             body {
                 background-color: #f4f7f6;
                 margin-top: 20px;
