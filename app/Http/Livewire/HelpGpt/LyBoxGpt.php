@@ -609,7 +609,7 @@ class LyBoxGpt extends Component
                 $this->message = "Ahora, redáctame en un párrafo de 12 líneas, el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
                 break;
             case 3:
-                $this->message = "Redáctame a profundidad la problemática de la investigación de este documento.";
+                $this->message = "Redáctame a profundidad la problemática de la investigación de este documento si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 4:
                 $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor.";
