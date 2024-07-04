@@ -603,7 +603,7 @@ class LyBoxGpt extends Component
 
         switch ($prompt) {
             case 1:
-                $this->message = "Enlístame los objetivos generales y específicos de la investigación de este documento el ultimo archivo que te pasé.";
+                $this->message = "Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo del ultimo archivo que te pasé.";
                 break;
             case 2:
                 $this->message = "Ahora, redáctame en un párrafo de 12 líneas, el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
