@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-6 text-left">
-                    <div class="card ">
+                    <div class="card" style="padding: 20px;">
                         <h5>Completa tus datos</h5>
                         <p>Monto a pagar: S/. {{ number_format($price, 2, '.', '') }}</p>
                         {{-- <form>
