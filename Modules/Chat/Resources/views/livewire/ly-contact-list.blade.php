@@ -78,7 +78,7 @@
                         </span>
                         <div class="media-body {{ $instructor['is_seen'] == 1 || is_null($instructor['is_seen']) ? '' : 'text-primary' }}"
                             id="user{{ $instructor['id'] }}">
-                            <a class="card-title m-0" href="#">{{ $instructor['utype'] }}:
+                            <a class="card-title m-0" href="#" style="padding: 5px 15px;">{{ $instructor['utype'] }}: 
                                 {{ $instructor['full_name'] }}</a>
 
                             <p class="flex text-black-50 lh-1 mb-0">
@@ -109,7 +109,7 @@
                         </span>
                         <div class="media-body {{ $student['is_seen'] == 1 || is_null($student['is_seen']) ? '' : 'text-primary' }}"
                             id="user{{ $student['id'] }}">
-                            <a class="card-title m-0 color-azul" href="#">{{ $student['full_name'] }}</a>
+                            <a class="card-title m-0 color-azul" href="#" style="padding: 5px 15px;">{{ $student['full_name'] }}</a>
                             <p class="flex text-black-50 lh-1 mb-0">
                                 @if ($student['is_online'])
                                     <div id="activity" valor="{{ $student['chat_last_activity'] }}" class="status"> <i
