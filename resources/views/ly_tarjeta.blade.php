@@ -9,7 +9,7 @@
     <body>
         <div class="container-section-pagar">
             <br>
-            <div class="row align-content-center justify-content-center">
+            <div class="row align-content-center">
                 <div class="col-lg-7 col-md-7 col-sm-6">
                     <div class="container-fluid ">
                         <div class="col-lg-12 col-md-12 col-sm-10">
