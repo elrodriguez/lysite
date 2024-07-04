@@ -49,6 +49,18 @@
 }
 
 
+[dir=ltr] .active-black{
+  background: #ff9152;
+}
+
+[dir=ltr] .bg-orange-worksheet{
+  background: #ff9152;
+}
+
+[dir=ltr] .bg-orange-worksheet:hover{
+  background: #000;
+}
+
 [dir=ltr] .bg-orange{
   background: #ff9152;
 }

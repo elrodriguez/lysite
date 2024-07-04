@@ -15,20 +15,20 @@
                     <ul class="nav justify-content-center" id="index-tabs">
                         <li class="nav-item">
                             <a class="nav-link {{ $type == 0 ? 'active' : '' }}" wire:click="activeType(0)"
-                                href="javascript:void(0)">General</a>
+                                href="javascript:void(0)" style="background: none;">General</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ $type == 1 ? 'active' : '' }}" wire:click="activeType(1)"
-                                href="javascript:void(0)">Tablas</a>
+                                href="javascript:void(0)" style="background: none;">Tablas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ $type == 2 ? 'active' : '' }}" wire:click="activeType(2)"
-                                href="javascript:void(0)">Imagenes</a>
+                                href="javascript:void(0)" style="background: none;">Imagenes</a>
                         </li>
                     </ul>
                     <div wire:ignore id="index-titulo-btn">
                         <button wire:click="addTitleIndexNew" id="btn-titulo-index" type="button"
-                            class="btn btn-success btn-sm mb-4"><i class="fa fa-plus mr-1"></i>Titulo</button>
+                            class=" btn-orange btn-sm mb-4" style="border: none;"><i class="fa fa-plus"></i>&nbsp; Titulo</button>
                     </div>
 
                     <div id="index">
@@ -40,7 +40,7 @@
                                         @if ($item['id'])
                                             <button
                                                 onclick="addSubIndexNewJS({{ $k }},{{ $item['id'] }},{{ $item['type'] }})"
-                                                type="button" class="btn btn-secondary btn-sm">
+                                                type="button" class="btn-secondary btn-sm" style="border: none;">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         @endif
@@ -64,14 +64,14 @@
                                         <div class="input-group-prepend">
                                             <button wire:loading.attr="disabled"
                                                 wire:click="saveTitleIndexNew({{ $k }})" type="button"
-                                                class="btn btn-success btn-sm mr-1">
+                                                class="btn-success btn-sm mr-1" style="border: none;">
                                                 <span wire:loading wire:target="saveTitleIndexNew({{ $k }})"
                                                     wire:loading.class="spinner-border spinner-border-sm"
                                                     wire:loading.class.remove="fal fa-check" class="fa fa-check"
                                                     role="status" aria-hidden="true"></span>
                                             </button>
                                             <button wire:click="removeTitleIndex({{ $k }})" type="button"
-                                                class="btn btn-danger btn-sm">
+                                                class="btn-danger btn-sm" style="border: none;">
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
                                         </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="copyIndex()">Copiar Indice al
+                    <button type="button" class="btn btn-orange" onclick="copyIndex()">Copiar Indice al
                         editor</button>
                 </div>
             </div>
@@ -152,12 +152,12 @@
                         </div>
                         <div class="col-md-1 text-right p-0">
                             <div class="input-group-prepend">
-                                <button onclick="saveSubItemNewJS(${k},${id},${type})" id="btn-new-subitem-` + k + id + `" type="button" class="btn btn-success btn-sm mr-1">
+                                <button onclick="saveSubItemNewJS(${k},${id},${type})" id="btn-new-subitem-` + k + id + `" type="button" class="btn-success btn-sm mr-1" style="border: none;">
                                     <span id="span-new-subitem-` + k + id + `" class="fa fa-check"></span>
                                 </button>
                                 <button
                                     onclick="removeSubItemNew(${k},${id})"
-                                    type="button" class="btn btn-danger btn-sm">
+                                    type="button" class="btn-danger btn-sm">
                                     <i class="fa fa-trash-alt"></i>
                                 </button>
                             </div>

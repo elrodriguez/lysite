@@ -207,15 +207,15 @@
                             <div>
                                 <div class="form-group">
                                     <label for="text1">Escribe aquí lo que desee parafrasear</label>
-                                    <select class="form-control prompty bg-orange text-white" name="prompt">
-                                        <option value="0" class="bg-orange">Como Investigador</option>
-                                        <option value="1" class="bg-orange">Disminuir Similitud</option>
-                                        <option value="2" class="bg-orange">Humanizar Texto</option>
+                                    <select class="form-control prompty text-white" name="prompt" style="background: #ff9152;">
+                                        <option value="0" class="bg-orange-worksheet">Como Investigador</option>
+                                        <option value="1" class="bg-orange-worksheet">Disminuir Similitud</option>
+                                        <option value="2" class="bg-orange-worksheet">Humanizar Texto</option>
                                     </select>
                                     <style>
                                         .prompty:hover {
                                             background-color: #ccc;
-                                            color: red;
+                                            color: #000;
                                             animation: shake 0.4s;
                                         }
 

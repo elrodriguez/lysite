@@ -27,10 +27,6 @@
                         <a class="dropdown-item" href="" data-toggle="modal" data-target="#modalThesisHeader">
                             HOJA DE TRABAJO
                         </a>
-
-
-                        {{-- <a class="dropdown-item" href="{{ route('worksheet') }}">HOJA DE TRABAJO</a> --}}
-
                     </div>
                 </li>
                 @can('academico_directo_cursos')

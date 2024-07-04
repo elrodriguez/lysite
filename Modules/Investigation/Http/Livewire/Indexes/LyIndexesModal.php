@@ -138,7 +138,7 @@ class LyIndexesModal extends Component
                 $itemsHTML .= '
                     <div class="row" id="div-row-subitem-db-' . $k . $row->id . '">
                         <div class="col-md-1 text-right">
-                            <button onclick="addSubIndexNewJS(' . $k . ',' . $row->id . ',' . $this->type . ')" type="button" class="btn btn-secondary btn-sm">
+                            <button onclick="addSubIndexNewJS(' . $k . ',' . $row->id . ',' . $this->type . ')" type="button" class="btn-secondary btn-sm" style="border: none;">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
@@ -163,11 +163,11 @@ class LyIndexesModal extends Component
                         </div>
                         <div class="col-md-1">
                             <div class="input-group-prepend">
-                                <button onclick="saveSubItemUpdateJS(' . $k . ',' . $id . ',' . $row->id . ')" id="btn-new-subitem-db-' . $k . $row->id . '" type="button" class="btn btn-success btn-sm mr-1">
+                                <button onclick="saveSubItemUpdateJS(' . $k . ',' . $id . ',' . $row->id . ')" id="btn-new-subitem-db-' . $k . $row->id . '" type="button" class="btn-success btn-sm mr-1" style="border: none;">
                                     <span id="span-new-subitem-db-' . $k . $row->id . '" class="fa fa-check" ></span>
                                 </button>
                                 <button onclick="removeSubItemDB(' . $k . ',' . $row->id . ')"
-                                    type="button" class="btn btn-danger btn-sm">
+                                    type="button" class="btn-danger btn-sm" style="none:none;">
                                     <i class="fa fa-trash-alt"></i>
                                 </button>
                             </div>

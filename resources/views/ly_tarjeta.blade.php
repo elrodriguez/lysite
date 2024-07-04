@@ -1,7 +1,7 @@
 @extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('theme-lyontech/css/14-datos.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('theme-lyontech/css/14-datos.css') }}">-->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 @stop
 @section('content')
