@@ -615,7 +615,7 @@ class LyBoxGpt extends Component
                 $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación me refiero al ultimo archivo que te pasé, y agregar a cada teoría su cita de autor.";
                 break;
             case 5:
-                $this->message = "Redáctame las definiciones más representativas de las variables de la investigación de este ultimo archivo que te pasé, y agrega su cita de autor a cada definición.";
+                $this->message = "Redáctame las definiciones más representativas de las variables de la investigación de este ultimo archivo que te pasé, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido de todo el documento o archivo.";
                 break;
             case 6:
                 $this->message = "Cuál es el aporte principal de esta investigación me refiero al ultimo archivo que te pasé, y quiénes serían los beneficiarios directos";
