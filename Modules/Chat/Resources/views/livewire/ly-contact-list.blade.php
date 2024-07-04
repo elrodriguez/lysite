@@ -58,7 +58,7 @@
         </div>
     @else
         <div class="dropdown-menu dropdown-menu-lg-right dropdown-toggle" aria-labelledby="navbarDropdown">
-            <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#">
+            <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#" style="width: 95%;">
 
                 <button wire:click="getSearch" class="btn" type="submit" role="button"><i
                         class="material-icons">search</i></button>
