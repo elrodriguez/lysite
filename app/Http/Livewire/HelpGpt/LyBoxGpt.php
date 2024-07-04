@@ -630,7 +630,7 @@ class LyBoxGpt extends Component
                 $this->message = "Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
                 break;
             case 10:
-                $this->message = "Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación.";
+                $this->message = "Resume lo más que puedas este documento(ultimo archivo que te pasé) de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
                 break;
             case 20:
                 $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
