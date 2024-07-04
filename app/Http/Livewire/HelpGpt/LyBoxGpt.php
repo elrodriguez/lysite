@@ -265,7 +265,7 @@ class LyBoxGpt extends Component
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
 
         if($this->typeAction == 4){
-            $this->consulta = null;
+            $this->consulta = null; // para que no borre la consulta salvo en el chat
         }
         $this->file_document = null;
         $this->fileName = null;
