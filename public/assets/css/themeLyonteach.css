@@ -34,6 +34,12 @@
   margin: auto;
 }
 
+[dir=ltr] .container-section-pagar{
+  /*width: 1600px;*/
+  width: 80%;
+  margin: auto;
+}
+
 [dir=ltr] .container-section-1440p{
   width: 1440px;
   margin: auto;
