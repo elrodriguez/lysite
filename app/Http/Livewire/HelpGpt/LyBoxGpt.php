@@ -263,7 +263,10 @@ class LyBoxGpt extends Component
             'content' => $resultado
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
-        $this->consulta = null;
+
+        if($this->typeAction == 4){
+            $this->consulta = null;
+        }
         $this->file_document = null;
         $this->fileName = null;
         $this->message = null;
