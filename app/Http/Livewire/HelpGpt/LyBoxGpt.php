@@ -88,6 +88,7 @@ class LyBoxGpt extends Component
         $this->activator($num);
         $this->typeAction = $num;
         $this->resultado = null;
+        $this->consulta = null;
         $this->getHistory($num);
     }
 
