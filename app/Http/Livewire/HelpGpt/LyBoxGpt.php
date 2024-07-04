@@ -88,6 +88,7 @@ class LyBoxGpt extends Component
         $this->activator($num);
         $this->typeAction = $num;
         $this->resultado = null;
+        $this->consulta = null;
         $this->getHistory($num);
     }
 
@@ -263,7 +264,10 @@ class LyBoxGpt extends Component
             'content' => $resultado
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
-        $this->consulta = null;
+
+        if($this->typeAction == 4){
+            $this->consulta = null; // para que no borre la consulta salvo en el chat
+        }
         $this->file_document = null;
         $this->fileName = null;
         $this->message = null;
@@ -348,7 +352,7 @@ class LyBoxGpt extends Component
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Dame un listado de títulos de artículos científicos sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués. por favor recuerda presentar las listas dentro de etiquetas HTML y agrega un título acorde a la respuesta entre etiquetas h3 de html";
+                $consulta = "Dame un listado de títulos de artículos científicos sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués. por favor recuerda presentar las listas dentro de etiquetas HTML ol y agrega un título acorde a la respuesta entre etiquetas h3 de html";
 
                 try {
                     $result = OpenAI::completions()->create([
@@ -612,7 +616,7 @@ class LyBoxGpt extends Component
                 $this->message = "Redáctame a profundidad la problemática de la investigación del ultimo archivo que te pasé, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 4:
-                $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación me refiero al ultimo archivo que te pasé, y agregar a cada teoría su cita de autor.";
+                $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación me refiero al ultimo archivo que te pasé, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
                 break;
             case 5:
                 $this->message = "Redáctame las definiciones más representativas de las variables de la investigación de este ultimo archivo que te pasé, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido de todo el documento o archivo.";
