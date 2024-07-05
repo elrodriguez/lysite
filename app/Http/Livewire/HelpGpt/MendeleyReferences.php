@@ -147,7 +147,7 @@ class MendeleyReferences
 
     public function generate_apa($document)
     {
-        //dd($document);
+        //dd($document->authors);
         // Consultando la WEB de mendeley según el ID
         $response = Http::get('https://www.mendeley.com/catalogue/' . $document->id . '/');
 
@@ -240,7 +240,7 @@ class MendeleyReferences
       INICIO  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-if($document->type == "journal" || $document->type == "book"){
+if($document->type == "journal" || $document->type == "book" || $document->type == "conference_proceedings"){
     $string = $citation;
 
     // Utilizamos expresiones regulares para buscar el número entre paréntesis
@@ -250,6 +250,7 @@ if($document->type == "journal" || $document->type == "book"){
     // La posición 0 del array $matches contiene el texto completo que coincide con el patrón
     // La posición 1 contiene el número entre paréntesis
     $newsubstring="";
+
     if (isset($matches[1])) {
         $numeroEntreParentesis = "(".$matches[1].")";
         $substring = strstr($string, $numeroEntreParentesis, true);
