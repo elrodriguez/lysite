@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed; z-index: 9999; width: 100%;">
     <a class="navbar-brand" href="#">
         <img src="{{ asset('theme-lyontech/images/icon.jpg') }}" style="width: 55px; heiht: 55px; "> &nbsp;
         <span class="brand-text">
@@ -14,9 +14,9 @@
 
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
-                <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
+                <li class="nav-item dropdown mt-2" style=" padding: 0px 10px;">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px;">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px; margin-top: -3px;">
                         Herramientas
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
@@ -27,14 +27,10 @@
                         <a class="dropdown-item" href="" data-toggle="modal" data-target="#modalThesisHeader">
                             HOJA DE TRABAJO
                         </a>
-
-
-                        {{-- <a class="dropdown-item" href="{{ route('worksheet') }}">HOJA DE TRABAJO</a> --}}
-
                     </div>
                 </li>
                 @can('academico_directo_cursos')
-                    <li class="nav-item dropdown mt-3" style="padding: 0 10px;">
+                    <li class="nav-item dropdown mt-2" style="padding: 0 10px;">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                             id="courses" style="font-size: 23px;">
                             {{ __('labels.My Courses') }}
@@ -114,13 +110,13 @@
                     </a>
                 </button>
 
-                <li class="nav-item dropleft" style="list-style-type: none;">
+                <li class="nav-item dropdown" style="list-style-type: none;">
                     <a class="nav-link " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
-                            style="width: 50px; height:auto; margin-top: -20px;" alt="Icono">
+                            style="width: 50px; height:auto;" alt="Icono">
                     </a>
-                    <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu card-bg dropdown-toggle dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item " href="#"><strong>{{ auth()->user()->name }}</strong></a>
                         <a class="dropdown-item " href="{{ route('dashboard') }}">Dashboard</a>
                         @can('academico_cursos_instructor')
@@ -132,8 +128,14 @@
                         <a class="dropdown-item " href="{{ route('logout') }}">Cerrar sesión</a>
 
                     </div>
+                    <style>
+                        .dropdown-toggle::after{
+                            display: none !important;
+                        }
+                    </style>
+
                 </li>
-                <li class="nav-item dropleft" style="list-style-type: none;">
+                <li class="nav-item dropdown" style="list-style-type: none;">
 
                     <livewire:chat::ly-contact-list />
 

@@ -26,12 +26,12 @@ class GrammarCorrectionController extends Controller
 
             if ($p_allowed > $p_used) {
 
-                $max_tokens = 3400;
+                $max_tokens = 3800;
                 $temperature = 0.7;
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Corrígeme este texto en español para una mejor comprensión como si fueras un experto en literatura: {" . $consulta . "}";
+                $consulta = "Corrije este texto que pongo entre llaves para una mejor comprensión, como si fueras un experto en literatura: { ". $consulta." }";
 
                 try {
                     $result = OpenAI::completions()->create([

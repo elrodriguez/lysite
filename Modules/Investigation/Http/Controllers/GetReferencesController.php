@@ -140,6 +140,7 @@ class GetReferencesController extends Controller
 
     public function generar_cita($document, $normativa)
     {
+
         if (count($document) > 0) {
             switch ($normativa) {
                 case 'apa':
@@ -252,7 +253,7 @@ class GetReferencesController extends Controller
       INICIO  Cambios Abril 2024 APA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-if($document->type == "journal" || $document->type == "book"){
+if($document->type == "journal" || $document->type == "book" || $document->type == "conference_proceedings"){
     $string = $citation;
 
     // Utilizamos expresiones regulares para buscar el número entre paréntesis

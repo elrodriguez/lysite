@@ -49,6 +49,7 @@ class LyBoxGpt extends Component
     public $n3 = false;
     public $n4 = false;
     public $n5 = false;
+    public $forget_context=false;
 
     public function verifyDeviceTokenUser()
     {
@@ -87,6 +88,7 @@ class LyBoxGpt extends Component
         $this->activator($num);
         $this->typeAction = $num;
         $this->resultado = null;
+        $this->consulta = null;
         $this->getHistory($num);
     }
 
@@ -262,7 +264,10 @@ class LyBoxGpt extends Component
             'content' => $resultado
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
-        $this->consulta = null;
+
+        if($this->typeAction == 4){
+            $this->consulta = null; // para que no borre la consulta salvo en el chat
+        }
         $this->file_document = null;
         $this->fileName = null;
         $this->message = null;
@@ -347,7 +352,7 @@ class LyBoxGpt extends Component
 
                 $result_text = "hubo un problema, intenta mas tarde";
 
-                $consulta = "Dame un listado de títulos de artículos científicos reales sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués. por favor recuerda presentar las listas dentro de etiquetas HTML";
+                $consulta = "Dame un listado de títulos de artículos científicos sobre: {" . $consulta . "} presenta esta lista en idioma inglés, luego presenta la misma lista traducida al español y finalmente presenta la misma lista traducida al portugués. por favor recuerda presentar las listas dentro de etiquetas HTML ol y agrega un título acorde a la respuesta entre etiquetas h3 de html";
 
                 try {
                     $result = OpenAI::completions()->create([
@@ -445,7 +450,10 @@ class LyBoxGpt extends Component
         if ($this->verifyDeviceTokenUser()) {
             if ($this->paraphrase_left >= 1) {
                 try {
-                    if ($this->thread_id == null) {
+                    $pasaje=false;
+                    if ($this->thread_id == null || $this->forget_context) {
+                        $this->forget_context=false;
+                        $pasaje=true;
                         $client = new Client();
                         $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
                         $response = $promise->wait();
@@ -456,8 +464,11 @@ class LyBoxGpt extends Component
                     $permisos = Person::where('user_id', Auth::user()->id)->first();
                     $permisos->paraphrase_used++;
                     $permisos->save();
-                    $this->paraphrase_used++;
-                    $this->paraphrase_allowed--;
+                    if ($pasaje==false) {
+                        $this->paraphrase_used++;
+                        $this->paraphrase_allowed--;
+                    }
+
                     return $this->sendGetConsulta($msg); //aqui ejecuta run y consulta respuesta el thread_id es variable global
                 } catch (\Throwable $th) {
                     return null;
@@ -596,37 +607,38 @@ class LyBoxGpt extends Component
 
         switch ($prompt) {
             case 1:
-                $this->message = "Enlístame los objetivos de la investigación de este documento.";
+                $this->message = "Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo del ultimo archivo que te pasé.";
                 break;
             case 2:
-                $this->message = "Ahora, redáctame en un párrafo de 12 líneas, el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
+                $this->message = "Ahora del ultimo archivo que te pasé, redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
                 break;
             case 3:
-                $this->message = "Redáctame a profundidad la problemática de la investigación de este documento.";
+                $this->message = "Redáctame a profundidad la problemática de la investigación del ultimo archivo que te pasé, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 4:
-                $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor.";
+                $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación me refiero al ultimo archivo que te pasé, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
                 break;
             case 5:
-                $this->message = "Redáctame las definiciones más representativas de las variables de la investigación de este documento, y agregar su cita de autor a cada definición.";
+                $this->message = "Redáctame las definiciones más representativas de las variables de la investigación de este ultimo archivo que te pasé, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido de todo el documento o archivo.";
                 break;
             case 6:
-                $this->message = "Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
+                $this->message = "Cuál es el aporte principal de esta investigación me refiero al ultimo archivo que te pasé, y quiénes serían los beneficiarios directos";
                 break;
             case 7:
-                $this->message = "Indícame los resultados de acuerdo a cada objetivo de la investigación de este documento.";
+                $this->message = "Indícame los resultados de acuerdo a cada objetivo de la investigación de este ultimo archivo que te pasé.";
                 break;
             case 8:
-                $this->message = "Redáctame la recomendación principal de esta investigación.";
+                $this->message = "Redáctame la recomendación principal de este ultimo archivo que te pasé.";
                 break;
             case 9:
-                $this->message = "Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
+                $this->message = "Créame una propuesta de mejora en base a las recomendaciones de la investigación de este ultimo archivo que te pasé.";
                 break;
             case 10:
-                $this->message = "Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación.";
+                $this->message = "Resume lo más que puedas este documento(ultimo archivo que te pasé) de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
                 break;
             case 20:
                 $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
+                $this->forget_context = true;
                 break;
             default:
                 # code...

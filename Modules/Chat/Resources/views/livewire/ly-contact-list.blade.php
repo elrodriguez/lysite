@@ -1,11 +1,11 @@
 <div wire:ignore.self>
-    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+    <a class="dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <img src="{{ asset('theme-lyontech/images/msj-black.png') }}"
-            style="width: 50px; height:auto; margin-top: -20px; " alt="Icono">
+            style="width: 50px; height:auto;" alt="Icono">
     </a>
     @if (!$is_instructor && 0 > 1)
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-toggle" aria-labelledby="navbarDropdown">
             {{-- <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#">
 
                 <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
@@ -57,8 +57,8 @@
             @endif
         </div>
     @else
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#">
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-toggle" aria-labelledby="navbarDropdown">
+            <form class="search-form search-form search-form-courses d-none d-md-flex mb-2 ml-2" action="#" style="width: 95%;">
 
                 <button wire:click="getSearch" class="btn" type="submit" role="button"><i
                         class="material-icons">search</i></button>
@@ -78,7 +78,7 @@
                         </span>
                         <div class="media-body {{ $instructor['is_seen'] == 1 || is_null($instructor['is_seen']) ? '' : 'text-primary' }}"
                             id="user{{ $instructor['id'] }}">
-                            <a class="card-title m-0" href="#">{{ $instructor['utype'] }}:
+                            <a class="card-title m-0" href="#" style="padding: 5px 15px;">{{ $instructor['utype'] }}: 
                                 {{ $instructor['full_name'] }}</a>
 
                             <p class="flex text-black-50 lh-1 mb-0">
@@ -109,7 +109,7 @@
                         </span>
                         <div class="media-body {{ $student['is_seen'] == 1 || is_null($student['is_seen']) ? '' : 'text-primary' }}"
                             id="user{{ $student['id'] }}">
-                            <a class="card-title m-0 color-azul" href="#">{{ $student['full_name'] }}</a>
+                            <a class="card-title m-0 color-azul" href="#" style="padding: 5px 15px;">{{ $student['full_name'] }}</a>
                             <p class="flex text-black-50 lh-1 mb-0">
                                 @if ($student['is_online'])
                                     <div id="activity" valor="{{ $student['chat_last_activity'] }}" class="status"> <i
@@ -130,6 +130,10 @@
 
         </div>
         <style>
+            
+            .dropdown-toggle::after{
+                            display: none !important;
+                        }
             body {
                 background-color: #f4f7f6;
                 margin-top: 20px;

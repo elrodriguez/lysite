@@ -80,7 +80,7 @@
                                 @error('format_id') <span class="invalid-feedback-2">{{ $message }}</span> @enderror
                             </div>
 
-                            <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-primary">Actualizar</button>
+                            <button type="submit" wire:loading.attr="disabled" wire:target="save" class="btn btn-orange">Actualizar</button>
                         </form>
                     </div>
                 </div>

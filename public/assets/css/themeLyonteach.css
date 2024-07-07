@@ -25,12 +25,18 @@
 
 [dir=ltr] .container-section-1360p{
   width: 1360px;
-  margin: auto;
+  margin: auto; 
 }
 
 [dir=ltr] .container-section-modo{
   /*width: 1600px;*/
   width: 70%;
+  margin: auto;
+}
+
+[dir=ltr] .container-section-pagar{
+  /*width: 1600px;*/
+  width: 80%;
   margin: auto;
 }
 
@@ -48,6 +54,18 @@
   background: linear-gradient(126deg, rgba(255,164,73,1) 7%, rgba(255,145,82,1) 28%, rgba(197,23,98,1) 100%);
 }
 
+
+[dir=ltr] .active-black{
+  background: #ff9152;
+}
+
+[dir=ltr] .bg-orange-worksheet{
+  background: #ff9152;
+}
+
+[dir=ltr] .bg-orange-worksheet:hover{
+  background: #000;
+}
 
 [dir=ltr] .bg-orange{
   background: #ff9152;

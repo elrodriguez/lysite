@@ -1,4 +1,4 @@
-<div class="nav-item  dropdown mt-3" style=" padding: 2px 15px;">
+<div class="nav-item  dropdown mt-2" style=" padding: 0px 10px;">
     <div class="dropdown">
         @if (Auth::user()->hasrole('Admin') || Auth::user()->hasrole('Instructor'))
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
