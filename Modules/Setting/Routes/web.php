@@ -52,6 +52,7 @@ Route::middleware(['auth.device', 'auth:sanctum', 'verified'])->prefix('setting'
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripcion_usuarios'])->get('list', [SubscribeUsersController::class, 'index'])->name('setting_suscripcion_usuarios');
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripcion_usuarios'])->get('create', [SubscribeUsersController::class, 'create'])->name('setting_suscripcion_usuarios_create');
             Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripcion_usuarios'])->get('edit/{id}', [SubscribeUsersController::class, 'edit'])->name('setting_suscripcion_usuarios_editar');
+            Route::middleware(['middleware' => 'role_or_permission:configuraciones_suscripciones_en_linea'])->get('online', [SubscribeUsersController::class, 'onlineSubscriptions'])->name('setting_online_subscriptions_list');
         });
     });
 });

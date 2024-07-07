@@ -24,4 +24,9 @@ class SubscribeUsersController extends Controller
     {
         return view('setting::subscribe-user.edit', ['subId' => $id]);
     }
+
+    public function onlineSubscriptions()
+    {
+        return view('setting::online-subscriptions.index');
+    }
 }

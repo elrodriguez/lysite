@@ -40,8 +40,13 @@
                     @endcan
                     @can('configuraciones_suscripcion_usuarios')
                         <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'subscription' ? 'active' : '' }}"
-                            href="{{ route('setting_suscripcion_usuarios') }}">Suscripciones de Usuarios</a>
+                            href="{{ route('setting_suscripcion_usuarios') }}">Suscribir Usuarios</a>
                     @endcan
+                    @can('configuraciones_suscripciones_en_linea')
+                        <a class="dropdown-item {{ $path[0] == 'setting' && $path[1] == 'subscriptions' ? 'active' : '' }}"
+                            href="{{ route('setting_online_subscriptions_list') }}">Suscripciones En Línea</a>
+                    @endcan
+
                 </div>
             </li>
         @endcan
