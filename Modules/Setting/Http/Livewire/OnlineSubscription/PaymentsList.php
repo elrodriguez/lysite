@@ -35,8 +35,10 @@ class PaymentsList extends Component
                 'user_subscriptions.date_end',
                 'user_subscriptions.payment_response',
                 'user_subscriptions.status_response',
+                'user_subscriptions.payment_server',
                 'type_subscriptions.name AS type_subscription_name'
             )
+            ->where('payment_online', true)
             ->paginate(20);
     }
 }

@@ -16,6 +16,8 @@ class UserSubscription extends Model
         'subscription_id',
         'status',
         'status_response',
-        'payment_response'
+        'payment_response',
+        'payment_server',
+        'payment_online'
     ];
 }

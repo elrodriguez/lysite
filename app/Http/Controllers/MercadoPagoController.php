@@ -36,6 +36,8 @@ class MercadoPagoController extends Controller
 
                 $us->status_response = $payment->status;
                 $us->payment_response = json_encode($payment);
+                $us->payment_server = 'mercadopago';
+                $us->payment_online = true;
                 $us->save();
 
                 $actives = new AutomationController();

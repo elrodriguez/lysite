@@ -39,7 +39,7 @@
                                         <tr>
                                             <td class="text-center align-middle">
                                                 <button
-                                                    onclick="openModalDetailsPayments({{ json_encode($subscription->payment_response) }})"
+                                                    onclick="openModalDetailsPayments({{ json_encode($subscription->payment_response) }},'{{ $subscription->payment_server }}')"
                                                     type="button" class="btn btn-info btn-sm">
                                                     <i class="fa fa-search"></i>
                                                 </button>
@@ -84,14 +84,13 @@
         </div>
     </div>
     <script>
-        function openModalDetailsPayments(data) {
+        function openModalDetailsPayments(data, medio) {
             let pay = JSON.parse(data);
             let div = document.getElementById('modalDetailsPaymentsBody');
-            document.getElementById('modalDetailsPaymentsLabel').innerHTML = 'PAGO ID: ' + pay.id;
+            document.getElementById('modalDetailsPaymentsLabel').innerHTML = 'MERCADOPAGO ID: ' + pay.id;
 
-            let medio = 1;
             let content_pay = ``;
-            if (medio == 1) {
+            if (medio == 'mercadopago') {
                 content_pay += `<dl class="row">
                     <dt class="col-sm-4">FECHA DE PAGO</dt>
                     <dd class="col-sm-8">${formatDate(pay.card.date_created)}</dd>
@@ -105,8 +104,6 @@
                     <dd class="col-sm-8">${pay.transaction_details.total_paid_amount}</dd>
                 </dl>`
             }
-
-
 
             div.innerHTML = content_pay;
 
