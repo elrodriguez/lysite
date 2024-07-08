@@ -266,7 +266,7 @@
                                         <div class="file-upload">
                                             <button onclick="document.getElementById('fileDocument').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
-                                            <input type="file" id="fileDocument" wire:model="file_document">
+                                            <input type="file" id="fileDocument" wire:model="file_document" accept=".doc, .docx, .txt, .xls, .xlsx, .pdf">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">
                                                 Ningún archivo seleccionado
                                             </span>
