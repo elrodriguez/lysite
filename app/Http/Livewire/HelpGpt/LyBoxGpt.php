@@ -607,34 +607,34 @@ class LyBoxGpt extends Component
 
         switch ($prompt) {
             case 1:
-                $this->message = "Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo del ultimo archivo que te pasé.";
+                $this->message = "del documento o archivo mas reciente que envié: Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 2:
-                $this->message = "Ahora del ultimo archivo que te pasé, redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
+                $this->message = "del documento o archivo mas reciente que envié: redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
                 break;
             case 3:
-                $this->message = "Redáctame a profundidad la problemática de la investigación del ultimo archivo que te pasé, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del documento o archivo mas reciente que envié: Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 4:
-                $this->message = "Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación me refiero al ultimo archivo que te pasé, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
+                $this->message = "del documento o archivo mas reciente que envié: Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
                 break;
             case 5:
-                $this->message = "Redáctame las definiciones más representativas de las variables de la investigación de este ultimo archivo que te pasé, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido de todo el documento o archivo.";
+                $this->message = "del documento o archivo mas reciente que envié: Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido.";
                 break;
             case 6:
-                $this->message = "Cuál es el aporte principal de esta investigación me refiero al ultimo archivo que te pasé, y quiénes serían los beneficiarios directos";
+                $this->message = "del documento o archivo mas reciente que envié: Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
                 break;
             case 7:
-                $this->message = "Indícame los resultados de acuerdo a cada objetivo de la investigación de este ultimo archivo que te pasé.";
+                $this->message = "del documento o archivo mas reciente que envié: Indícame los resultados de acuerdo a cada objetivo de la investigación.";
                 break;
             case 8:
-                $this->message = "Redáctame la recomendación principal de este ultimo archivo que te pasé.";
+                $this->message = "del documento o archivo mas reciente que envié: Redáctame la recomendación principal del documento.";
                 break;
             case 9:
-                $this->message = "Créame una propuesta de mejora en base a las recomendaciones de la investigación de este ultimo archivo que te pasé.";
+                $this->message = "del documento o archivo mas reciente que envié: Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
                 break;
             case 10:
-                $this->message = "Resume lo más que puedas este documento(ultimo archivo que te pasé) de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
+                $this->message = "del documento o archivo mas reciente que envié: Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
                 break;
             case 20:
                 $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
