@@ -656,17 +656,21 @@ class LyBoxGpt extends Component
             }
         } catch (\Throwable $th) {
         }
-        if ($messages != false && $break == false) {
-            $resultado = $messages[0][0]['text']['value'];   //la respuesta final
+        try {
+            if ($messages != false && $break == false) {
+                $resultado = $messages[0][0]['text']['value'];   //la respuesta final
 
-            ///eliminar archivo subido
+                ///eliminar archivo subido
 
-            $ifile_path = storage_path('app/' . $this->path);
-            //dd($ifile_path);
-            if (file_exists($ifile_path)) {
-                @unlink($ifile_path);
+                $ifile_path = storage_path('app/' . $this->path);
+                //dd($ifile_path);
+                if (file_exists($ifile_path)) {
+                    @unlink($ifile_path);
+                }
+            } else {
+                $resultado = "Hubo un error vuelve a intentarlo";
             }
-        } else {
+        } catch (\Throwable $th) {
             $resultado = "Hubo un error vuelve a intentarlo";
         }
         ////bajar el scroll!!!!
