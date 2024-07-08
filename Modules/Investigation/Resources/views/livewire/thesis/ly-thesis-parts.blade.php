@@ -19,7 +19,7 @@
     <div class="container-section-1360p page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
-            <li class="breadcrumb-item active-black">{{ __('investigation::labels.thesis_parts') }}</li>
+            <li class="breadcrumb-item active-black" style="background: none;">{{ __('investigation::labels.thesis_parts') }}</li>
         </ol>
     </div>
     <div class="container-section-1360p page__container">

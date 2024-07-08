@@ -104,11 +104,9 @@
 
         @if (Route::has('login'))
             @auth
-                <button class="custom-button-c ml-2" style="margin-right: 35px; background: #ff9152;">
-                    <a href="{{ route('modo_page') }}">
+                    <a href="{{ route('modo_page') }}"style="margin-right: 35px; background: #ff9152; padding: 0px 10px;">
                         <img src="{{ asset('assets/images/corona.jpg') }}" alt="Icono">
                     </a>
-                </button>
 
                 <li class="nav-item dropdown" style="list-style-type: none;">
                     <a class="nav-link " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
