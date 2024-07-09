@@ -12,17 +12,14 @@
                                             <h2 class="mb-0" style="text-align: center;">
                                                 {{ $modo->name }}
                                             </h2>
-                                            <p class="mt-0 mb-0  text-center"
-                                                style="color: #000; font-size: 21px;">
-                                                <strong>S/ {{ 'GRATIS' }}</strong>
+                                            <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
+                                                <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong>
                                                 <strong>ó</strong>
                                             </p>
-                                            <p class="mt-0 mb-0  text-center"
-                                                style="color: #000; font-size: 18px;">
+                                            <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
                                                 <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
                                             </p>
-                                            <p class="mt-0 mb-0 text-center"
-                                                style="color: #ff9152; font-size: 18px;">
+                                            <p class="mt-0 mb-0 text-center" style="color: #ff9152; font-size: 18px;">
                                                 <strong>/{{ $modo->detail_one }}</strong>
                                             </p>
                                         </div>
@@ -35,7 +32,7 @@
                                                 <li>{{ $modo->detail_three }}</li>
                                                 <li>{{ $modo->detail_four }}</li>
                                                 @if ($modo->detail_five && $modo->detail_five !== 'null')
-                                                <li>{{ $modo->detail_five }}</li>
+                                                    <li>{{ $modo->detail_five }}</li>
                                                 @endif
 
                                                 @if ($modo->detail_six && $modo->detail_six !== 'null')
@@ -85,7 +82,8 @@
                                 </div>
                                 <div class="form-login">
                                     <label for="password"><strong>Contraseña</strong></label>
-                                    <span  onclick="showPassword()" style="right: 10px;" title="Mostrar/Ocultar Contraseña">
+                                    <span onclick="showPassword()" style="right: 10px;"
+                                        title="Mostrar/Ocultar Contraseña">
                                         <i class="fa fa-eye-slash" id="ojo_que_todo_lo_ve" aria-hidden="true"></i>
                                     </span>
                                     <input wire:model="password" wire:keydown.enter="login" id="password"
@@ -200,19 +198,19 @@
                 </div>
             </div>
         </div>
-<script>
-    function showPassword(){
-        pass= document.getElementById('password');
-        if(pass.type=='password'){
-            pass.type='text';
-            document.getElementById('ojo_que_todo_lo_ve').classList.add('fa-eye');
-            document.getElementById('ojo_que_todo_lo_ve').classList.remove('fa-eye-slash');
-        }else{
-            pass.type='password';
-            document.getElementById('ojo_que_todo_lo_ve').classList.add('fa-eye-slash');
-            document.getElementById('ojo_que_todo_lo_ve').classList.remove('fa-eye');
-        }
-    }
-</script>
+        <script>
+            function showPassword() {
+                pass = document.getElementById('password');
+                if (pass.type == 'password') {
+                    pass.type = 'text';
+                    document.getElementById('ojo_que_todo_lo_ve').classList.add('fa-eye');
+                    document.getElementById('ojo_que_todo_lo_ve').classList.remove('fa-eye-slash');
+                } else {
+                    pass.type = 'password';
+                    document.getElementById('ojo_que_todo_lo_ve').classList.add('fa-eye-slash');
+                    document.getElementById('ojo_que_todo_lo_ve').classList.remove('fa-eye');
+                }
+            }
+        </script>
     </div>
 </div>
