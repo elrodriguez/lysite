@@ -39,7 +39,7 @@
                     </div>
                     <nav class="nav page-nav__menu">
                         @foreach ($sections as $key => $section )
-                        <a class="nav-link active-orange" style="background: none; font-size: 14px;" href="{{ '#'.$section->id }}">{{ ($key + 1).". ".$section->title }}</a>
+                        <a class="nav-link" style="background: none; font-size: 14px;" href="{{ '#'.$section->id }}">{{ ($key + 1).". ".$section->title }}</a>
                         @endforeach
                     </nav>
                 </div>
