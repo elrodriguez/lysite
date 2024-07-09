@@ -38,8 +38,9 @@
                         <h4 class="mb-16pt" style="padding: 0px 0px 0px 13px;">{{ __('labels.Index') }}</h4>
                     </div>
                     <nav class="nav page-nav__menu">
-                        @foreach ($sections as $key => $section )
+                        @foreach ($sections as $key => $section ) 
                         <a class="nav-link" style="background: none; font-size: 14px;" href="{{ '#'.$section->id }}">{{ ($key + 1).". ".$section->title }}</a>
+                        
                         @endforeach
                     </nav>
                 </div>

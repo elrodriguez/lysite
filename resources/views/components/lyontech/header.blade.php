@@ -105,7 +105,7 @@
         @if (Route::has('login'))
             @auth
                     <a href="{{ route('modo_page') }}"style="margin-right: 35px; background: #ff9152; padding: 0px 10px;">
-                        <img src="{{ asset('assets/images/corona.jpg') }}" alt="Icono">
+                        <img src="{{ asset('assets/images/corona.png') }}" alt="Icono">
                     </a>
 
                 <li class="nav-item dropdown" style="list-style-type: none;">

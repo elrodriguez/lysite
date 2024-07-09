@@ -114,8 +114,14 @@
                 <div class="col-md-3 page-nav" style="padding: 15px 0px 5px 10px;">
                     <div data-perfect-scrollbar data-perfect-scrollbar-wheel-propagation="true">
                         <div class="page-section pt-lg-112pt">
-                            <div class="nav page-nav__menu">
+                            <div class="nav page-nav__menu mb-0">
+                                <h6 style="margin-left: -5px;">
+                                    <i class="fa fa-circle" style="color: #ff9152; border-color: #fff; font-size: 10px;"></i> 
+                                    &nbsp;&nbsp;Antes de publicar
+                                </h6>
+                                <!--
                                 <a href="javascript:void(0)" class="nav-link active" style="background: none;">Antes de publicar</a>
+                                -->
                             </div>
                             <div class="page-nav__content">
                                 <p class="text-70">Puede haber otros estudiantes que hayan hecho la misma pregunta antes.</p>
