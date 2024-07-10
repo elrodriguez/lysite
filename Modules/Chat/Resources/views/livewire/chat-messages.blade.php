@@ -84,9 +84,10 @@
     <input id="message{{ $k }}" wire:click="focusTextArea('{{ $k }}')"
         onkeyup="textareaWithoutEnter(event.keyCode, this.id,'{{ $k }}');"
         wire:model.defer="chats.{{ $k }}.message" class="publisher-input" type="text"
-        placeholder="Escribe algo...">
+        placeholder="Escribe algo..." autocomplete="off">
     <a class="publisher-btn text-info" data-abc="true" onclick="send_w_click('{{ $k }}')"><i
-            class="fa fa-paper-plane"></i></a>
+            class="fa fa-paper-plane"></i>
+    </a>
 </div>
 
 

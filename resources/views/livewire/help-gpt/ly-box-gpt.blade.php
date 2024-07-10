@@ -48,8 +48,7 @@
                 <div class="col-md-3">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n1 ? 'active' : '' }}"
-                                wire:click="setBtnActive(1)">
+                            <a class="media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
                                 <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
@@ -61,54 +60,50 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n2 ? 'active' : '' }}"
-                                wire:click="setBtnActive(2)">
+                            <div class="media tab-vertical {{ $n2 ? 'active' : '' }}" wire:click="setBtnActive(2)">
                                 <img src="{{ asset('assets/images/8b.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">RECOMENDADOR</h5>
                                     <p>Accede a la recomendación de articulos cientificos.</p>
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n3 ? 'active' : '' }}"
-                                wire:click="setBtnActive(3)">
+                            <div class="media tab-vertical {{ $n3 ? 'active' : '' }}" wire:click="setBtnActive(3)">
                                 <img src="{{ asset('assets/images/8c.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">CORRECTOR</h5>
                                     <p>Revisa y corrige errores gramaticales.</p>
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n4 ? 'active' : '' }}"
-                                wire:click="setBtnActive(4)">
+                            <div class="media tab-vertical {{ $n4 ? 'active' : '' }}" wire:click="setBtnActive(4)">
                                 <img src="{{ asset('assets/images/8d.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">CHATBOT</h5>
                                     <p>Haz consultas o sube archivos para cualquier duda.</p>
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="media tab-vertical {{ $n5 ? 'active' : '' }}"
-                                wire:click="setBtnActive(5)">
+                            <div class="media tab-vertical {{ $n5 ? 'active' : '' }}" wire:click="setBtnActive(5)">
                                 <img src="{{ asset('assets/images/8e.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">REFERENCIADOR</h5>
                                     <p>Referencia de acuerdo a la normativa con solo un enlace.</p>
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -266,7 +261,8 @@
                                         <div class="file-upload">
                                             <button onclick="document.getElementById('fileDocument').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
-                                            <input type="file" id="fileDocument" wire:model="file_document" accept=".doc, .docx, .txt, .xls, .xlsx, .pdf">
+                                            <input type="file" id="fileDocument" wire:model="file_document"
+                                                accept=".doc, .docx, .txt, .xls, .xlsx, .pdf">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">
                                                 Ningún archivo seleccionado
                                             </span>
