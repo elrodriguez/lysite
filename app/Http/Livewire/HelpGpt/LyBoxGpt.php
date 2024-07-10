@@ -205,7 +205,7 @@ class LyBoxGpt extends Component
             if ($this->file_document) {
                 //Agregar texto al mensaje cuando se envia nulo en mensaje
                 if ($this->message == "" || $this->message == null) {
-                    $this->message = "te envío un archivo, en breve te hare preguntas sobre el mismo.";
+                    $this->message = "te envío un archivo que tiene toda la información necesaria de una investigación como resultados, conclusiones y más cargalo por completo, en breve te hare preguntas sobre el mismo.";
                 }
                 $basePath = base_path();
                 $asistentePath = $basePath . '/asistente_lyon';
