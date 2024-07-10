@@ -495,7 +495,7 @@ class LyBoxGpt extends Component
         $data = $response->json();
         $tempura = end($data);
         $tempura = $tempura["file_id"];
-        if($tempura != 'Pending' && $tempura != null){
+        if($tempura != 'Pending' && $tempura != null && strlen($tempura) > 12 ){
             $this->file_id = $tempura;
         }
         return $data;
