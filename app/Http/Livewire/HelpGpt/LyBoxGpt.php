@@ -493,6 +493,7 @@ class LyBoxGpt extends Component
         ]);
 
         $data = $response->json();
+        dd($data);
         return $data;
         // dd($this->thread_id, $response);
     }
