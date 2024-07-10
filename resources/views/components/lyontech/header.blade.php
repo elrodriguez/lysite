@@ -107,8 +107,9 @@
                     <li>
                         <br>
                         <a href="{{ route('modo_page') }}"
-                        style="margin-right: 35px; background: #ff9152; padding: 12px 15px; margin-top: 5px;">
-                            <img src="{{ asset('assets/images/corona.png') }}" alt="Icono">
+                           style="margin-right: 35px; background: #ff9152; padding: 12px 15px;">
+                            <img src="{{ asset('assets/images/corona-sola.png') }}" alt="Icono">
+                            <b style="color: #fff; font-size: 22px; margin-top: 5px;">Mejora</b>
                         </a>
                         <br>
                         <br>
