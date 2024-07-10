@@ -1226,10 +1226,9 @@ text-align: left;
 } 
 
 
-
-
-
-
+[dir=rtl] .manito {
+  cursor: pointer !important;
+}
 
 [dir=rtl] .dropdown,
 [dir=rtl] .dropleft,
