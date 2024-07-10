@@ -15,15 +15,14 @@
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 10px;">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px; margin-top: -3px;">
-                        Herramientas
+                    <a href="#" class="nav-link" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px;">
+                        Herramientas &nbsp;<i class="fa fa-angle-down" aria-hidden="true" style="margin-top: 8px;"></i>
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" href="{{ route('help_gpt') }}">CONSULTAS IA</a>
                         <a class="dropdown-item" href="{{ route('dashboard_courses') }}">CURSOS</a>
-
                         <a class="dropdown-item" href="" data-toggle="modal" data-target="#modalThesisHeader">
                             HOJA DE TRABAJO
                         </a>
@@ -33,7 +32,7 @@
                     <li class="nav-item dropdown mt-2" style="padding: 0 10px;">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
                             id="courses" style="font-size: 23px;">
-                            {{ __('labels.My Courses') }}
+                            {{ __('labels.My Courses') }}  &nbsp;<i class="fa fa-angle-down" aria-hidden="true" style="margin-top: 8px;"></i>
                         </a>
                         <div class="dropdown-menu card-bg min-width: 200px;" aria-labelledby="navbarDropdown">
                             @if (count($courses) > 0)
@@ -68,9 +67,9 @@
                 @endcan
             @else
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 23px;">
-                        Herramientas
+                        Herramientas  &nbsp;<i class="fa fa-angle-down" aria-hidden="true" style="margin-top: 8px;"></i>
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdown">
 
@@ -92,10 +91,10 @@
                     </a>
                     <div class="dropdown-menu card-bg" aria-labelledby="navbarDropdownMenbresia">
                         @foreach ($modos as $modo)
-<a class="dropdown-item" href="{{ route('unirme_page', $modo->id) }}">
+                    <a class="dropdown-item" href="{{ route('unirme_page', $modo->id) }}">
                                 {{ $modo->name }}
                             </a>
-@endforeach
+                        @endforeach
                     </div>
                     -->
                 </li>
@@ -104,7 +103,8 @@
 
         @if (Route::has('login'))
             @auth
-                    <a href="{{ route('modo_page') }}"style="margin-right: 35px; background: #ff9152; padding: 0px 10px;">
+                    <a href="{{ route('modo_page') }}"
+                       style="margin-right: 35px; background: #ff9152; padding: 0px 10px; margin-top: 5px;">
                         <img src="{{ asset('assets/images/corona.png') }}" alt="Icono">
                     </a>
 

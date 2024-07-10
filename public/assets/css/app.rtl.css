@@ -4018,7 +4018,7 @@ html {
     border-top: .3em solid;
     border-left: .3em solid transparent;
     border-bottom: 0;
-    border-right: .3em solid transparent
+    border-right: .3em solid transparent;
 }
 
 [dir=rtl] .dropdown-toggle:empty:after {

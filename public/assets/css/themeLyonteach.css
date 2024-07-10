@@ -30,7 +30,7 @@
 
 [dir=ltr] .container-section-modo{
   /*width: 1600px;*/
-  width: 70%;
+  width: 75%;
   margin: auto;
 }
 
@@ -1230,3 +1230,29 @@ text-align: left;
 
 
 
+
+[dir=rtl] .dropdown,
+[dir=rtl] .dropleft,
+[dir=rtl] .dropright,
+[dir=rtl] .dropup {
+    position: relative
+}
+
+[dir=rtl] .dropdown-toggle {
+    white-space: nowrap
+}
+
+[dir=rtl] .dropdown-toggle:after {
+    display: inline-block;
+    margin-right: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-left: .3em solid transparent;
+    border-bottom: 0;
+    border-right: .3em solid transparent;
+}
+
+[dir=rtl] .dropdown-toggle:empty:after {
+    margin-right: 0
+}

@@ -71,7 +71,7 @@
                                 <option value="{{ $province->id }}">{{ $province->description }}</option>
                             @endforeach
                         @else
-                            <option value="">Sin Rregistros</option>
+                            <option value="">Sin Registros</option>
                         @endif
                     </select>
                     @error('province_id')
@@ -87,7 +87,7 @@
                                 <option value="{{ $district->id }}">{{ $district->description }}</option>
                             @endforeach
                         @else
-                            <option value="">Sin Rregistros</option>
+                            <option value="">Sin Registros</option>
                         @endif
                     </select>
                     @error('district_id')
@@ -100,12 +100,12 @@
                     <label for="university_id">&nbsp;Universidad:</label>
                     <select wire:model="university_id" name="universidad" id="university_id">
                         @if (count($universities) > 0)
-                            <option value="">SELECCIONAR</option>
+                            <option value="">Seleccionar</option>
                             @foreach ($universities as $university)
                                 <option value="{{ $university->id }}">{{ $university->name }}</option>
                             @endforeach
                         @else
-                            <option value="">SIN REGISTROS</option>
+                            <option value="">Sin Registros</option>
                         @endif
                     </select>
                     @error('universidad')
