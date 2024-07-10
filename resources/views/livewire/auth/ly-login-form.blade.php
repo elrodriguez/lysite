@@ -12,13 +12,22 @@
                                             <h2 class="mb-0" style="text-align: center;">
                                                 {{ $modo->name }}
                                             </h2>
-                                            <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
-                                                <strong>S/ {{ $modo->price ?? 'GRATIS' }}</strong>
-                                                <strong>ó</strong>
-                                            </p>
-                                            <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
-                                                <strong>$USD {{ $modo->dollar_price ?? 'GRATIS' }}</strong>
-                                            </p>
+                                            @if ($modo->price == 0)
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
+                                                        <strong>-</strong>
+                                                    </p>
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
+                                                        <strong>-</strong>
+                                                    </p>
+                                            @else
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
+                                                        <strong>S/ {{ $modo->price }}</strong>
+                                                        <strong>ó</strong>
+                                                    </p>
+                                                    <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
+                                                        <strong>$USD {{ $modo->dollar_price }}</strong>
+                                                    </p>
+                                            @endif
                                             <p class="mt-0 mb-0 text-center" style="color: #ff9152; font-size: 18px;">
                                                 <strong>/{{ $modo->detail_one }}</strong>
                                             </p>
@@ -164,6 +173,23 @@
                             <div class="col-md-4">
                                 <div class="box-plane-card-login">
                                     <h2 style="text-align: center;">{{ $modo->name }}</h2>
+                                        @if ($modo->price == 0)
+                                                        <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
+                                                            <strong>-</strong>
+                                                            <strong></strong>
+                                                        </p>
+                                                        <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
+                                                            <strong>-</strong>
+                                                        </p>
+                                        @else
+                                                        <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
+                                                            <strong>S/ {{ $modo->price }}</strong>
+                                                            <strong>ó</strong>
+                                                        </p>
+                                                        <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
+                                                            <strong>$USD {{ $modo->dollar_price }}</strong>
+                                                        </p>
+                                        @endif
                                     <ul>
                                         <li>{{ $modo->detail_two }}</li>
                                         <li>{{ $modo->detail_three }}</li>
