@@ -499,7 +499,7 @@ class LyBoxGpt extends Component
 
             if($tempura != 'Pending' && $tempura != null && strlen($tempura) > 12 ){
                 $this->file_id = $tempura;
-                $data[0][0]['text']['value']="Parece que has enviado un documento...";
+                $data[0][0]['text']['value']="Has enviado un documento, has una consulta para poder ayudarte.";
             }
         } catch (\Throwable $th) {
         }
