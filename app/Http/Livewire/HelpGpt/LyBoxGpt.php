@@ -493,8 +493,11 @@ class LyBoxGpt extends Component
         ]);
 
         $data = $response->json();
-        $this->file_id = end($data);
-        $this->file_id = $this->file_id["file_id"];
+        $tempura = end($data);
+        $tempura = $tempura["file_id"];
+        if($tempura != 'Pending' && $tempura != null){
+            $this->file_id = $tempura;
+        }
         return $data;
         // dd($this->thread_id, $response);
     }
