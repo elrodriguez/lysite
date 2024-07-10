@@ -60,8 +60,9 @@ class LyBoxGpt extends Component
         if ($user && $user->device_token && $user->device_token !== $deviceToken) {
             $response = redirect()->route('logout')->with('error', 'Se ha iniciado sesión desde otro dispositivo.');
 
-            // Eliminar la cookie 'device_token'
-            $response->withCookie(cookie()->forget('device_token'));
+            //esta parte de abajo no es necesario creo.... 10 de julio 2024
+            // // Eliminar la cookie 'device_token'
+            // $response->withCookie(cookie()->forget('device_token'));
 
             return $response;
         } else {
@@ -447,13 +448,14 @@ class LyBoxGpt extends Component
     public function getThreadId($msg)
     {  //crea el thread y obtiene el ID, si ya existe no la crea y luego consulta respuesta
 
-        if ($this->verifyDeviceTokenUser()) {
+        //if ($this->verifyDeviceTokenUser()) {
+        if (true) { // la linea anterior debe ir por ahora la quité 10 de julio 2024
             if ($this->paraphrase_left >= 1) {
                 try {
                     $pasaje=false;
                     if ($this->thread_id == null || $this->forget_context) {
                         $this->forget_context=false;
-                        $pasaje=true;
+                        $pasaje=true; //para restar el consumo de oportunidades de IA si es true no se cobra
                         $client = new Client();
                         $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
                         $response = $promise->wait();
@@ -491,6 +493,7 @@ class LyBoxGpt extends Component
         ]);
 
         $data = $response->json();
+        dd($data);
         return $data;
         // dd($this->thread_id, $response);
     }
