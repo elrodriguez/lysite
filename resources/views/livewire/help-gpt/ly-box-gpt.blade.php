@@ -48,14 +48,14 @@
                 <div class="col-md-3">
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
+                            <div class="manito media tab-vertical {{ $n1 ? 'active' : '' }}" wire:click="setBtnActive(1)">
                                 <img src="{{ asset('assets/images/8a.png') }}" alt="Icono"
                                     class="media-left rounded">
                                 <span class="media-body">
                                     <h5 class="mb-0">PARAFRASEADOR</h5>
                                     <p class="mt-0">Cambia textos para mejorar su originalidad.</p>
                                 </span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
