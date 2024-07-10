@@ -103,41 +103,46 @@
 
         @if (Route::has('login'))
             @auth
-                    <a href="{{ route('modo_page') }}"
-                       style="margin-right: 35px; background: #ff9152; padding: 0px 10px; margin-top: 5px;">
-                        <img src="{{ asset('assets/images/corona.png') }}" alt="Icono">
-                    </a>
+                <ul class="navbar-nav mr-0">
+                    <li>
+                        <br>
+                        <a href="{{ route('modo_page') }}"
+                        style="margin-right: 35px; background: #ff9152; padding: 12px 15px; margin-top: 5px;">
+                            <img src="{{ asset('assets/images/corona.png') }}" alt="Icono">
+                        </a>
+                        <br>
+                        <br>
+                    </li>
+                    <li class="nav-item dropdown" style="list-style-type: none;">
+                        <a class="nav-link " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
+                                style="width: 50px; height:auto;" alt="Icono">
+                        </a>
+                        <div class="dropdown-menu card-bg dropdown-toggle dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item " href="#"><strong>{{ auth()->user()->name }}</strong></a>
+                            <a class="dropdown-item " href="{{ route('dashboard') }}">Dashboard</a>
+                            @can('academico_cursos_instructor')
+                                <a class="dropdown-item"
+                                    href="{{ route('academic_dash_instructor_courses_list') }}">{{ __('labels.Courses') }}</a>
+                            @endcan
+                            <div class="linea-blanca"></div>
+                            <a class="dropdown-item " href="{{ route('user_edit_account') }}">Editar Cuenta</a>
+                            <a class="dropdown-item " href="{{ route('logout') }}">Cerrar sesión</a>
 
-                <li class="nav-item dropdown" style="list-style-type: none;">
-                    <a class="nav-link " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img src="{{ asset('theme-lyontech/images/user-black.png') }}"
-                            style="width: 50px; height:auto;" alt="Icono">
-                    </a>
-                    <div class="dropdown-menu card-bg dropdown-toggle dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item " href="#"><strong>{{ auth()->user()->name }}</strong></a>
-                        <a class="dropdown-item " href="{{ route('dashboard') }}">Dashboard</a>
-                        @can('academico_cursos_instructor')
-                            <a class="dropdown-item"
-                                href="{{ route('academic_dash_instructor_courses_list') }}">{{ __('labels.Courses') }}</a>
-                        @endcan
-                        <div class="linea-blanca"></div>
-                        <a class="dropdown-item " href="{{ route('user_edit_account') }}">Editar Cuenta</a>
-                        <a class="dropdown-item " href="{{ route('logout') }}">Cerrar sesión</a>
-
-                    </div>
-                    <style>
-                        .dropdown-toggle::after{
-                            display: none !important;
-                        }
-                    </style>
-
-                </li>
-                <li class="nav-item dropdown" style="list-style-type: none;">
-
-                    <livewire:chat::ly-contact-list />
-
-                </li>
+                        </div>
+                        <style>
+                            .dropdown-toggle::after{
+                                display: none !important;
+                            }
+                        </style>
+                        <br>
+                    </li>
+                    <li class="nav-item dropdown" style="list-style-type: none;">
+                        <livewire:chat::ly-contact-list />
+                        <br>
+                    </li>
+                </ul>
             @else
                 <form class="form-inline my-2 my-lg-0">
                     <a href="{{ route('ly-login') }}" class="btn btn-orange" style="margin-right: 35px;">
