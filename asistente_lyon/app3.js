@@ -134,6 +134,7 @@ const createThread = async () => {
 };
 
 const createRun = async (data) => {
+    file_id = null;
     const archivo = data.file_path;
     filename = archivo;
     console.log(data);
@@ -213,6 +214,7 @@ const createRun = async (data) => {
     messages.body.data.forEach((row) => {
         respuesta.push(row.content);
     });
+    respuesta.push({ file_id });
     return respuesta;
 };
 
