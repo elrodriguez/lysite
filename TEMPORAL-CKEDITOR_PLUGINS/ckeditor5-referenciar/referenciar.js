@@ -38,7 +38,7 @@ function openModalReference(editor){
             <div style="max-height: 300px;overflow-x: none;overflow-y: auto;">
                 <div id="input-doi-buscar-id" class="ly-ck-dialog-group-control">
                     <label class="ly-ck-dialog-label" for="input-doi">DOI*:</label>
-                    <input class="ly-ck-dialog-input" type="text" id="input-doi" name="input-doi" placeholder="Escriba aquí...">
+                    <input autocomplete="off" class="ly-ck-dialog-input" type="text" id="input-doi" name="input-doi" placeholder="Escriba aquí...">
                     <spam id="input-doi-error"></span>
                 </div>
 

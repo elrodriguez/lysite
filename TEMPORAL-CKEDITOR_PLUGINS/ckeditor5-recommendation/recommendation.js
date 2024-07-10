@@ -32,13 +32,13 @@ function openModalRecommendation(editor){
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
-            <div><strong>recommendation</strong></div>
+            <div><strong>Recomendación</strong></div>
             <div id="ly-ck-btn-dialog-close-icon-recommendation" class="ly-ck-dialog-close-icon">&#10005;</div>
         </div>
         <form id="ly-ck-form-recommendation" class="ly-ck-dialog-form">
             <div class="ly-ck-dialog-group-control">
                 <label class="ly-ck-dialog-label" for="input-doi">Descripción:</label>
-                <input class="ly-ck-dialog-input" type="text" id="re-input-text" name="re-input-text" placeholder="Escriba aquí...">
+                <input autocomplete="off" class="ly-ck-dialog-input" type="text" id="re-input-text" name="re-input-text" placeholder="Escriba aquí...">
                 <spam id="input-re-error"></span>
             </div> 
 
@@ -86,7 +86,7 @@ function openModalRecommendation(editor){
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>`;
-
+            
             const content = document.getElementById('ly-ck-dialog-references-result');
             content.innerHTML = spinner;
 
