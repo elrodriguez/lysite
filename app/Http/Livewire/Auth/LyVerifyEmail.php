@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AutomationController;
 use App\Http\Controllers\TypeSubscriptionController;
+use App\Mail\NewUserOnlineEmail;
 use App\Models\TypeSubscription;
 
 class LyVerifyEmail extends Component
@@ -29,7 +30,7 @@ class LyVerifyEmail extends Component
 
     public function resendCode()
     {
-        //$user = User::where('unique_code', $this->unique_code)->first();
+        ///$user = User::where('unique_code', $this->unique_code)->first();
         $user = Auth::user();
         $confirmationCode = Str::random(6);
         $startTime = Carbon::now();
@@ -40,11 +41,14 @@ class LyVerifyEmail extends Component
 
         $user->save();
 
-        if (env('NOTIFICATIONS_NEW_USER')) {
-            $correo = new NewUserNotification($user->name, $user->email, null, trim($confirmationCode));
-            Mail::to(env('MAIL_TO_NOTIFICATIONS'))->send($correo);
-            $this->unique_code = null;
-        }
+
+        $newCorreo = new NewUserOnlineEmail([
+            'user_name' => $user->name,
+            'user_email' => $user->email,
+            'user_code' => trim($confirmationCode)
+        ]);
+
+        Mail::to(trim($user->email))->send($newCorreo);
     }
 
     public function validateCode()

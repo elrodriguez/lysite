@@ -29,10 +29,16 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard_ly_student_courses_default');
     }
+    public function getHelpGPTDefault()
+    {
+        return view('helpGPT.ly_help_gpt_deafult');
+    }
+
     public function getCourses()
     {
         return view('dashboard.dashboard_ly_student_courses');
     }
+
     public function getHelpGPT()
     {
         return view('helpGPT.ly_help_gpt');

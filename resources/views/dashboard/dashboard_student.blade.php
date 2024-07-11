@@ -62,11 +62,11 @@
                                         <p>
                                             Aprende investigación de forma didáctica.
                                         </p>
-                                        {{-- @can('academico_directo_cursos') --}}
-                                        <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Empezar</a>
-                                        {{-- @else
-                                        <a href="{{ route('modo_page') }}" class="btn btn-black">Empezar</a>
-                                        @endcan --}}
+                                        @can('academico_directo_cursos')
+                                            <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Empezar</a>
+                                        @else
+                                            <a href="{{ route('dashboard_courses_default') }}" class="btn btn-black">Empezar</a>
+                                        @endcan
                                     </div>
                                 </div>
                             </div>

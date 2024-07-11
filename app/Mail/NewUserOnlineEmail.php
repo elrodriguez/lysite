@@ -45,7 +45,7 @@ class NewUserOnlineEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new-user-online.blade.php', [
+        return $this->view('emails.new-user-online', [
             'data' => $this->data
         ]);
     }
