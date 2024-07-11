@@ -42,10 +42,6 @@
                                     <small class="text-muted">{{ \Carbon\Carbon::parse($question->created_at)->diffForHumans() }}</small>
                                 </p>
                                 <p>{{ $question->question_text }}</p>
-                                <div class="d-flex align-items-center">
-                                    <a href="" class="text-50 d-flex align-items-center text-decoration-0"><i class="material-icons mr-1" style="font-size: inherit;">favorite_border</i> 30</a>
-                                    <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">thumb_up</i> 130</a>
-                                </div>
                             </div>
                         </div>
                     </div>
