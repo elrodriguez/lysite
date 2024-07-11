@@ -133,6 +133,7 @@ class LyRegisterForm extends Component
         $startTime = Carbon::now();
         $endTime = $startTime->copy()->addMinutes(5);
 
+        $this->user->name = trim($this->names);
         $this->user->unique_code = $confirmationCode;
         $this->user->start_time_code = $startTime;
         $this->user->end_time_code = $endTime;
@@ -160,7 +161,7 @@ class LyRegisterForm extends Component
         ]);
 
 
-
+        ////aca se loguea el usuario
         Auth::attempt(array('email' => $this->user->email, 'password' => $this->password));
 
         //notificación de correo al correo de notificaciones .env MAIL_TO_NOTIFICATIONS si notificaciones new user está activado
@@ -175,7 +176,7 @@ class LyRegisterForm extends Component
             'user_code' => trim($confirmationCode)
         ]);
 
-        Mail::to($this->user->name)->send($newCorreo);
+        Mail::to(trim($this->email))->send($newCorreo);
 
         return redirect()->intended('dashboard');
     }

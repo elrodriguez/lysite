@@ -404,7 +404,7 @@
                                                                 <td valign="middle" width="100%"
                                                                     style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: rgb(63, 67, 69); line-height: 24px;">
                                                                     <!--[if !mso]><!--><span
-                                                                        style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]-->Lorem
+                                                                        style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]-->
                                                                         Gracias por unirte a
                                                                         {{ env('APP_NAME', 'Laravel') }}. Para finalizar
                                                                         el proceso de registro, te solicitamos que
@@ -457,9 +457,9 @@
                                                                     <table border="0" cellpadding="0"
                                                                         cellspacing="0" align="left">
                                                                         <tr>
-                                                                            <td align="center"
-                                                                                height="45"bgcolor="#4edeb5"
-                                                                                style="border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; padding-left: 30px; padding-right: 30px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); background-color: rgb(78, 222, 181);">
+                                                                            <td align="center" height="45"
+                                                                                bgcolor="#4edeb5"
+                                                                                style="border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; padding-left: 30px; padding-right: 30px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: rgb(255, 255, 255); background-color: rgb(255, 165, 0);">
                                                                                 <!--[if !mso]><!--><span
                                                                                     style="font-family: 'proxima_nova_rgbold', Helvetica; font-weight: normal;"><!--<![endif]-->
                                                                                     {{ $data['user_code'] }}
@@ -508,7 +508,7 @@
                                                                 <td valign="middle" width="100%"
                                                                     style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: rgb(63, 67, 69); line-height: 24px;">
                                                                     <!--[if !mso]><!--><span
-                                                                        style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]-->Excepteur
+                                                                        style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]-->
                                                                         ¡Estamos emocionados de
                                                                         tenerte a bordo y esperamos que disfrutes de
                                                                         todas las funcionalidades y beneficios que hemos
@@ -516,7 +516,7 @@
                                                                         <br><br>
                                                                         Gracias
                                                                         <br>
-                                                                        {{ env('APP_NAME', 'Laravel') }}
+                                                                        {{ env('APP_NAME', 'Laravel') }}.
 
                                                                         <!--[if !mso]><!--></span><!--<![endif]-->
                                                                 </td>
