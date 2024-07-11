@@ -256,7 +256,7 @@
         bgcolor="#303030"style="background-color: rgb(48, 48, 48);">
         <tr>
             <td align="center"
-                style="background-image: url('images/not6_bg_image.jpg'); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position: center center; background-repeat: no-repeat;"
+                style="background-image: url('{{ asset('img/email/notification_code/not6_bg_image.jpg') }}'); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position: center center; background-repeat: no-repeat;"
                 id="not6">
 
 
@@ -299,7 +299,8 @@
                                                     <td width="100%" height="30"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="100%"><span><img src="images/not6_icon75px.png"
+                                                    <td width="100%"><span><img
+                                                                src="{{ asset('img/email/notification_code/not6_icon75px.png') }}"
                                                                 width="75" alt="" border="0"></span>
                                                     </td>
                                                 </tr>
