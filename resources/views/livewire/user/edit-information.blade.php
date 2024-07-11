@@ -1,3 +1,4 @@
+
 <div class="container page__container">
     <form wire:submit.prevent="save">
         <div class="row">
@@ -226,7 +227,7 @@
                     @livewire('user.nav')
                     <div class="page-nav__content">
                         <button type="submit" wire:target="save" wire:loading.attr="disabled"
-                            class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
+                            class="btn btn-orange" style="padding: 5px 20px;">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>

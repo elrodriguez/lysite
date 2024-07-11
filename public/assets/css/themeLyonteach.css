@@ -288,9 +288,39 @@
 }
 
 
+/*-- Courses List --*/
+[dir=ltr] .box-unirse-list {
+  background: #dfdede; 
+  padding: 0px;
+  border-radius: 10px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[dir=ltr] .box-unirse-list img{
+  width: 100%;
+}
+
+[dir=ltr] .box-unirse-list:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
 
 
 
+[dir=ltr] .page-nav .page-nav__menu a.active:before {
+  background-color: #ff9152;
+  border-color: #fff;
+}
+
+
+[dir=ltr] .text-orange {
+  color: #ff9152;
+}
+
+[dir=rtl] .border-left-orange {
+  border-right-color: #ff9152 !important;
+}
 
 /* Imagenes ----------------------------------*/
 
@@ -459,6 +489,8 @@
   color: #fff;
 }
 
+
+
 [dir=ltr] .custom-control-input-orange:checked~.custom-control-label:before {
   color: #fff;
   border-color: #ff9152;
@@ -475,8 +507,8 @@
 
 [dir=ltr] .custom-control-input-orange:not(:disabled):active~.custom-control-label:before {
   color: #fff;
-  background-color: #c6def6;
-  border-color: #c6def6
+  border-color: #ff9152;
+  background-color: #ff9152;
 }
 
 [dir=ltr] .custom-control-input-orange:disabled~.custom-control-label {
@@ -486,6 +518,7 @@
 [dir=ltr] .custom-control-input-orange:disabled~.custom-control-label:before {
   background-color: #e9ecef
 }
+
 
 /* FIN INPUT PERSONALIZADO */
 

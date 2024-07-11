@@ -16,11 +16,10 @@
                             <div class="card card-transparent text-login">
                                 <h5>MEJORA</h5>
                                 <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">
-                                    adquiere tu</p>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">cuenta
-                                    con mejores</p>
-                                <p style="font-size: 52px; letter-spacing: -1px; word-spacing: -1px; line-height: 1;">
-                                    oportunidades</p>
+                                    Adquiere tu <br>
+                                    cuenta con mejores <br>
+                                    oportunidades
+                                </p>
                             </div>
                         </div>
                     </div>

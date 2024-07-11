@@ -12,7 +12,7 @@ export default class recommendation extends Plugin {
             const button = new ButtonView();
 
             button.set( {
-                label: 'Recomendación de Articulos',
+                label: 'Recomendador de Articulos',
                 icon: iconrecommendation,
                 tooltip: true
             } );
@@ -32,13 +32,13 @@ function openModalRecommendation(editor){
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
-            <div><strong>Recomendación</strong></div>
+            <div><strong>Recomendador de Articulos</strong></div>
             <div id="ly-ck-btn-dialog-close-icon-recommendation" class="ly-ck-dialog-close-icon">&#10005;</div>
         </div>
         <form id="ly-ck-form-recommendation" class="ly-ck-dialog-form">
             <div class="ly-ck-dialog-group-control">
                 <label class="ly-ck-dialog-label" for="input-doi">Descripción:</label>
-                <input autocomplete="off" class="ly-ck-dialog-input" type="text" id="re-input-text" name="re-input-text" placeholder="Escriba aquí...">
+                <input class="ly-ck-dialog-input" type="text" id="re-input-text" name="re-input-text" placeholder="Escriba aquí..." autocomplete="off">
                 <spam id="input-re-error"></span>
             </div> 
 
@@ -86,7 +86,7 @@ function openModalRecommendation(editor){
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>`;
-            
+
             const content = document.getElementById('ly-ck-dialog-references-result');
             content.innerHTML = spinner;
 

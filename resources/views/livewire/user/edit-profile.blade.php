@@ -45,14 +45,14 @@
                         </div>
                         <div class="list-group-item">
                             <div class="custom-control custom-checkbox">
-                                <input wire:model="np" type="checkbox" class="custom-control-input" checked id="customCheck1">
+                                <input wire:model="np" type="checkbox" class="custom-control-input-orange" checked id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">{{ __('labels.Show your real name on your profile') }}</label>
                                 <small class="form-text text-muted">{{ __('labels.If not checked, your Nickname will be displayed instead of your full name') }}.</small>
                             </div>
                         </div>
                         <div class="list-group-item">
                             <div class="custom-control custom-checkbox">
-                                <input wire:model="pp" type="checkbox" class="custom-control-input" checked id="customCheck2">
+                                <input wire:model="pp" type="checkbox" class="custom-control-input-orange" checked id="customCheck2">
                                 <label class="custom-control-label" for="customCheck2">{{ __('labels.Allow everyone to see your profile') }}</label>
                                 <small class="form-text text-muted">{{ __('labels.If it is not checked, your profile will be private and no one except you will be able to see it') }}.</small>
                             </div>
@@ -65,7 +65,7 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-orange" style="padding: 5px 20px;">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>

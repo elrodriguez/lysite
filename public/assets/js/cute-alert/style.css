@@ -324,6 +324,10 @@
   background: #2dd284;
 }
 
+.lyon-bg {
+  background: #ff9152;
+}
+
 .warning-bg {
   background: #fada5e;
 }
@@ -338,6 +342,10 @@
 
 .success-btn:hover {
   background: #6edaa4;
+}
+
+.lyon-bg:hover {
+  background: #dd783e;
 }
 
 .warning-btn:hover {
@@ -358,6 +366,10 @@
 
 .success-timer {
   background: #6edaa4;
+}
+
+.lyon-bg-timer {
+  background: #dd783e;
 }
 
 .warning-timer {

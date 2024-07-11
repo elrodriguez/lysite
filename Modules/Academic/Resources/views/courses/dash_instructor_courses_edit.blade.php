@@ -4,7 +4,7 @@
             <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
                 <img src="{{ url('assets/images/illustration/student/128/white.svg') }}" width="104" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
                 <div class="flex mb-32pt mb-md-0">
-                    <h2 class="text-white mb-0">{{ Auth()->user()->name }}</h2>
+                    <h2 class="text-white mb-0">{{ Auth()->user()->name }}ghgh</h2>
                     <p class="lead text-white-50 d-flex align-items-center">{{ auth()->user()->email }}</p>
                 </div>
                 <a href="{{ route('user_edit_account') }}" class="btn btn-outline-white">Editar cuenta</a>

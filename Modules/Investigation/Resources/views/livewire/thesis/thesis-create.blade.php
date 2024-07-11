@@ -3,8 +3,8 @@
     <div class="container page__container">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME','Laravel') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('Investigation_universities_list') }}">{{ __('labels.Universities')}}</a></li>
-            <li class="breadcrumb-item active-black">{{ __('labels.New') }}</li>
+            <li class="breadcrumb-item"><a href=""> Proyecto </a></li>
+            <li class="breadcrumb-item active-black" style="background: none;">{{ __('labels.New') }}</li>
         </ol>
     </div>
     <div class="container page__container">
@@ -26,10 +26,10 @@
 
                             <!-- Button trigger modal -->
                             <div class="form-group">
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                <button type="button" class="btn btn-warning" data-toggle="modal"
                                 data-target="#exampleModalScrollable"
-                                title="Primero debes escoger tu Escuela y el Formato de la Tesis">
-                                Ayuda para crear Título
+                                title="Primero debes escoger tu Escuela y el Formato de la Tesis" style="padding: 5px 20px;">
+                                <b style="font-size: 15px;">Ayuda para crear Título</b>
                                 </button>
                             </div>
 

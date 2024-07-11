@@ -7,26 +7,28 @@
     <div class="img js-fullheight" style="background-image: url({{ asset('theme-lyontech/images/fondo-naranja.jpg') }});">
         <div class="container-fluid  page__container">
             <div class="row" style="padding: 20px;">
-                <div class="col-md-7">
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
                     <div class="" style="position: relative; top: 30%;">
                         <h1 class="mb-1" style="font-size: 55px; color: #fff;">MEJORA</h1>
                         <p class="mt-0" style="font-size: 30px; color:#fff;">
-                            Adquiere tu cuenta con mejores oportunidades.
+                            Adquiere tu cuenta con mejores <br>
+                            oportunidades.
                         </p>
                         <br>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5" style="background: #fff; padding: 40px; border-radius: 40px;">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="mb-1" style="font-size: 55px; color: #fff;">Unirme</h1>
-                            <p class="mt-0" style="font-size: 20px; color:#fff;">
-                            Estas a pundo de adquirir el plan: {{ $typeSubscription }}. ¿Cómo quieres pagar?
+                            <h1 class="mb-1" style="font-size: 55px; color: #000">Unirme</h1>
+                            <p class="mt-0" style="font-size: 20px; color:#000;">
+                                Estas a pundo de adquirir el plan: <b style="color: #ff9152;">{{ $typeSubscription }}</b>. ¿Cómo quieres pagar?
                             </p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 box-unirse-list">
                             <a href="{{ route('tarjeta_page', $mod) }}" class="btn btn-white">
                                 <div class="row">
                                     <div class="col-md-2">
@@ -37,9 +39,9 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="mt-1">
-                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Nueva
+                                            <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">Con
                                                 tarjeta</h4>
-                                            <p class="mt-0" style="text-align:left;">Débito o crédito.</p>
+                                            <p class="mt-0" style="text-align:left;">Débito o crédito en soles.</p>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -53,7 +55,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 box-unirse-list">
                             <a href="" class="btn btn-white">
                                 <div class="row">
                                     <div class="col-md-2">
@@ -80,7 +82,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 box-unirse-list">
                             <a href="" class="btn btn-white">
                                 <div class="row">
                                     <div class="col-md-2">
@@ -107,7 +109,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 box-unirse-list">
                             <form action="{{ route('paypal_payment') }}" method="POST" style="display: inline;">
                                 @csrf
                                 <input type="hidden" name="id_subscription" value="{{ $mod }}">
@@ -125,7 +127,7 @@
                                             <div class="mt-1">
                                                 <h4 class="mb-0" style="text-transform: uppercase; text-align:left;">
                                                     Paypal</h4>
-                                                <p class="mt-0" style="text-align:left;">Paga por paypal</p>
+                                                <p class="mt-0" style="text-align:left;">Paga por paypal en dólares.</p>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
