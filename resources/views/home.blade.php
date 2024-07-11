@@ -66,11 +66,11 @@
                             <p>
                                 Mejora tu investigación con la IA.
                             </p>
-                            {{-- @can('academico_directo_cursos') --}}
-                            <a href="{{ route('help_gpt') }} " class="btn btn-black">Iniciar consultas</a>
-                            {{-- @else
-                                <a href="{{ route('modo_page') }}" class="btn btn-black">Iniciar consultas</a>
-                            @endcan --}}
+                            @if (Auth::check())
+                                <a href="{{ route('help_gpt') }} " class="btn btn-black">Iniciar consultas</a>
+                            @else
+                                <a href="{{ route('help_gpt_default') }}" class="btn btn-black">Iniciar consultas</a>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-4" style="padding: 0px;">
@@ -82,11 +82,12 @@
                             <p>
                                 Aprende investigación de forma didáctica.
                             </p>
-                            {{-- @can('academico_directo_gpt') --}}
-                            <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Iniciar cursos</a>
-                            {{-- @else
-                                <a href="{{ route('modo_page') }}" class="btn btn-black">Iniciar cursos</a>
-                            @endcan --}}
+                            @if (Auth::check())
+                                <a href="{{ route('dashboard_courses') }}" class="btn btn-black">Iniciar cursos</a>
+                            @else
+                                <a href="{{ route('dashboard_courses_default') }}" class="btn btn-black">Iniciar
+                                    cursos</a>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-4" style="padding: 0px;">
