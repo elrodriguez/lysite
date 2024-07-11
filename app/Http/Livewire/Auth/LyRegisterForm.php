@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Http\Controllers\DniController;
+use App\Mail\NewUserOnlineEmail;
 
 class LyRegisterForm extends Component
 {
@@ -167,6 +168,14 @@ class LyRegisterForm extends Component
             $correo = new NewUserNotification($this->user->name, $this->user->email, null, trim($confirmationCode));
             Mail::to(env('MAIL_TO_NOTIFICATIONS'))->send($correo);
         }
+
+        $newCorreo = new NewUserOnlineEmail([
+            'user_name' => $this->user->name,
+            'user_email' => $this->user->email,
+            'user_code' => trim($confirmationCode)
+        ]);
+
+        Mail::to($this->user->name)->send($newCorreo);
 
         return redirect()->intended('dashboard');
     }
