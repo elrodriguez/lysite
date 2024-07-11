@@ -45,7 +45,7 @@
 </head>
 
 <body class="layout-navbar-mini-fixed-bottom">
-    <div class="preloader" style="background:orange">
+    <div class="preloader" style="background:rgba(255, 145, 82, 0.8);">
         <div class="sk-double-bounce">
             <div class="sk-child sk-double-bounce1"></div>
             <div class="sk-child sk-double-bounce2"></div>

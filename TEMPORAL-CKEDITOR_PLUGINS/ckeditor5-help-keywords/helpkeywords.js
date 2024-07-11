@@ -12,7 +12,7 @@ export default class helpkeywords extends Plugin {
             const button = new ButtonView();
 
             button.set( {
-                label: 'Corrección de gramática',
+                label: 'Corrector de gramática',
                 icon: iconHelpKeywords,
                 tooltip: true
             } );
@@ -32,7 +32,7 @@ function openModalHelpKeywords(editor){
     const form = `
     <div class="ly-ck-dialog ly-ck-dialog-800">
         <div class="ly-ck-dialog-header">
-            <div><strong>Corrección de gramática</strong></div>
+            <div><strong>Corrector de gramática</strong></div>
             <div id="btn-dialog-close-iconHelpKeywords" class="ly-ck-dialog-close-icon">&#10005;</div>
         </div>
         <form id="ly-ck-formGrammarCorrection" class="ly-ck-dialog-form">
@@ -41,7 +41,7 @@ function openModalHelpKeywords(editor){
                 <textarea class="ly-ck-dialog-input" rows="5" id="help-texto" name="help-texto" placeholder="Escriba aquí..."></textarea>
                 <spam id="input-text-error"></span>
             </div> 
-            <div id="ly-ck-dialog-grammar-correction-result" class="ly-ck-dialog-group-control mb-2" style="overflow-x: hidden;overflow-y: auto;max-height: 150px;" >
+            <div id="ly-ck-dialog-grammar-correction-result" class="ly-ck-dialog-group-control custom-control-input-orange mb-2" style="overflow-x: hidden;overflow-y: auto;max-height: 150px;" >
                 
             </div>
             <div class="ly-ck-dialog-buttons">

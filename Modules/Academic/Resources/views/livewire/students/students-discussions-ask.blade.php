@@ -98,7 +98,7 @@
                             </div>
                             <div class="list-group-item">
                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input wire:model.defer="email" id="notify" type="checkbox" class="custom-control-input">
+                                    <input wire:model.defer="email" id="notify" type="checkbox" class="custom-control-input-orange">
                                     <label for="notify" class="custom-control-label">Notificarme por correo electrónico cuando alguien responda a mi pregunta</label>
                                 </div>
                                 <small id="description-notify" class="form-text text-muted">Si no está marcado, seguirá recibiendo notificaciones en nuestro sitio web.</small>
@@ -137,7 +137,7 @@
     <script>
         window.addEventListener('aca-question-publicate', event => {
             cuteAlert({
-                type: "success",
+                type: "lyon",
                 title: event.detail.tit,
                 message: event.detail.msg,
                 buttonText: "Okay"

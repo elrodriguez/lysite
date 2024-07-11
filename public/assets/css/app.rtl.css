@@ -4676,8 +4676,8 @@ html {
 }
 
 [dir=rtl] .custom-checkbox .custom-control-input:indeterminate~.custom-control-label:before {
-    border-color: #2c84dd;
-    background-color: #2c84dd
+    border-color: orange;;
+    background-color: orange;
 }
 
 [dir=rtl] .custom-checkbox .custom-control-input:indeterminate~.custom-control-label:after {
