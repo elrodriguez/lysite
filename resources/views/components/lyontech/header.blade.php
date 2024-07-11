@@ -82,7 +82,7 @@
                 </li>
                 <li class="nav-item dropdown mt-2" style=" padding: 0px 15px;">
                     <a class="nav-link" href="{{ route('modo_page') }}" style="font-size: 23px;">
-                        Membresias
+                        Membresías
                     </a>
                     <!--
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenbresia" role="button"
