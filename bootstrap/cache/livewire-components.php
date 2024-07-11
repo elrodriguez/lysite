@@ -14,6 +14,7 @@
   'forum.forum-student' => 'App\\Http\\Livewire\\Forum\\ForumStudent',
   'help-gpt.box-gpt' => 'App\\Http\\Livewire\\HelpGpt\\BoxGpt',
   'help-gpt.ly-box-gpt' => 'App\\Http\\Livewire\\HelpGpt\\LyBoxGpt',
+  'help-gpt.ly-box-gpt-default' => 'App\\Http\\Livewire\\HelpGpt\\LyBoxGptDefault',
   'modals.course-modal' => 'App\\Http\\Livewire\\Modals\\CourseModal',
   'nav.nav-global' => 'App\\Http\\Livewire\\Nav\\NavGlobal',
   'student-packages' => 'App\\Http\\Livewire\\StudentPackages',
