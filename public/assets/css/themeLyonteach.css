@@ -308,8 +308,19 @@
 
 
 
+[dir=ltr] .page-nav .page-nav__menu a.active:before {
+  background-color: #ff9152;
+  border-color: #fff;
+}
 
 
+[dir=ltr] .text-orange {
+  color: #ff9152;
+}
+
+[dir=rtl] .border-left-orange {
+  border-right-color: #ff9152 !important;
+}
 
 /* Imagenes ----------------------------------*/
 

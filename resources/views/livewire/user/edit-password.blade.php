@@ -4,8 +4,8 @@
             <div class="col-lg-9">
                 <div class="page-section">
                     <h4>{{ __('labels.change_password') }}</h4>
-                    <div class="alert alert-light border-1 border-left-3 border-left-accent d-flex mb-24pt" role="alert">
-                        <i class="material-icons text-accent mr-3">check_circle</i>
+                    <div class="alert alert-light border-1 border-left-3 border-left-orange d-flex mb-24pt" role="alert">
+                        <i class="material-icons text-orange mr-3">check_circle</i>
                         <div class="text-body">{{ __('labels.Confirm that it is you and enter your current password') }}.</div>
                     </div>
                     <div class="list-group list-group-form">
@@ -43,7 +43,7 @@
                 <div class="page-section pt-lg-112pt">
                     @livewire('user.nav')
                     <div class="page-nav__content">
-                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-accent">{{ __('labels.Save Changes') }}</button>
+                        <button type="submit" wire:target="save" wire:loading.attr="disabled" class="btn btn-orange" style="padding: 5px 20px;">{{ __('labels.Save Changes') }}</button>
                     </div>
                 </div>
             </div>
