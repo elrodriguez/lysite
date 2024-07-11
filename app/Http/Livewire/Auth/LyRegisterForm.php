@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Http\Controllers\DniController;
+use App\Mail\NewUserOnlineEmail;
 
 class LyRegisterForm extends Component
 {
@@ -132,6 +133,7 @@ class LyRegisterForm extends Component
         $startTime = Carbon::now();
         $endTime = $startTime->copy()->addMinutes(5);
 
+        $this->user->name = trim($this->names);
         $this->user->unique_code = $confirmationCode;
         $this->user->start_time_code = $startTime;
         $this->user->end_time_code = $endTime;
@@ -159,7 +161,7 @@ class LyRegisterForm extends Component
         ]);
 
 
-
+        ////aca se loguea el usuario
         Auth::attempt(array('email' => $this->user->email, 'password' => $this->password));
 
         //notificación de correo al correo de notificaciones .env MAIL_TO_NOTIFICATIONS si notificaciones new user está activado
@@ -167,6 +169,14 @@ class LyRegisterForm extends Component
             $correo = new NewUserNotification($this->user->name, $this->user->email, null, trim($confirmationCode));
             Mail::to(env('MAIL_TO_NOTIFICATIONS'))->send($correo);
         }
+
+        $newCorreo = new NewUserOnlineEmail([
+            'user_name' => $this->user->name,
+            'user_email' => $this->user->email,
+            'user_code' => trim($confirmationCode)
+        ]);
+
+        Mail::to(trim($this->email))->send($newCorreo);
 
         return redirect()->intended('dashboard');
     }

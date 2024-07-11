@@ -83,6 +83,7 @@ Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('tool/default/worksheet', [DashboardController::class, 'getWorksheetDefault'])->name('worksheet_default');
 Route::get('tool/default/courses', [DashboardController::class, 'getCoursesDefault'])->name('dashboard_courses_default');
+Route::get('tool/default/IA/lyon', [DashboardController::class, 'getHelpGPTDefault'])->name('help_gpt_default');
 
 Route::middleware(['single-session'])->group(function () {
 

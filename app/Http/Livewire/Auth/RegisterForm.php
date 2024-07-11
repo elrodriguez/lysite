@@ -46,10 +46,10 @@ class RegisterForm extends Component
         Auth::attempt(array('email' => $user->email, 'password' => $this->password));
 
         //notificación de correo al correo de notificaciones .env MAIL_TO_NOTIFICATIONS si notificaciones new user está activado
-                if (env('NOTIFICATIONS_NEW_USER')) {
-                    $correo = new NewUserNotification($user->name, $user->email, trim($this->telephone));
-                    Mail::to(env('MAIL_TO_NOTIFICATIONS'))->send($correo);
-                }
+        if (env('NOTIFICATIONS_NEW_USER')) {
+            $correo = new NewUserNotification($user->name, $user->email, trim($this->telephone));
+            Mail::to(env('MAIL_TO_NOTIFICATIONS'))->send($correo);
+        }
 
         return redirect()->intended('dashboard');
     }
