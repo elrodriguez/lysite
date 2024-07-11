@@ -386,9 +386,10 @@
             </div>
         @endif
     </div>
+
     @if ($focused_part)
         @if ($focused_part->body == true)
-            <div class="m-5">
+            <div class="container-section-1360p">
                 <div class="row" id="worksheet">
                     <div wire:ignore class="col-3" id="paraphrase" style="display: none">
                         <div class="card p-2">
@@ -461,7 +462,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2"
+                            <div class="col-md-12 mb-2"
                                 style="display: flex; align-items: center; justify-content: center;">
                                 <button type="button" class="btn-orange btn  mt-0" wire:loading.attr="disabled"
                                     onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
@@ -470,34 +471,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            {{-- <div class="container page__container">
-            <div wire:ignore>
-                <div class="editor" id="editor">{!! $content_old !!}</div>
-            </div>
-            @error('content')
-                <span class="invalid-feedback-2">{{ $message }}</span>
-            @enderror
-        </div> --}}
-            {{-- <div class="container page__container">
-            @if ($commentary)
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <label>Nota:</label>
-                        <div>{{ $commentary }}</div>
-                    </div>
-                </div>
-            @endif
-
-            <div class="row">
-                <div class="col mb-2">
-                    <button type="button" class="btn-primary btn  mt-3" wire:loading.attr="disabled"
-                        onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
-                    </button>
-                </div>
-            </div>
-        </div> --}}
         @else
             <div>
                 <h5>Esta Sección solo es un título o subtitulo sin contenido.</h5>
