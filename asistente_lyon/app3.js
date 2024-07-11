@@ -193,7 +193,7 @@ const createRun = async (data) => {
         console.log("STATUS DEL RUN -> ", check_run_retrieve["status"]);
         check_run = check_run_retrieve["status"];
         steps++;
-        if(steps > 11){
+        if(steps > 13){
             var resp = {};
             resp['run_id'] = check_run_retrieve['id'];
             resp['thread_id'] = check_run_retrieve['thread_id'];

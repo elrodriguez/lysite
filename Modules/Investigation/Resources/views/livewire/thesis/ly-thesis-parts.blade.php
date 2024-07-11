@@ -16,13 +16,201 @@
     @stack('scripts')
 
     <br>
-    <div class="container-section-1360p page__container">
+    <div class="container-section-1360p page__container pc-screen">
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
             <li class="breadcrumb-item active-black" style="background: none;">{{ __('investigation::labels.thesis_parts') }}</li>
         </ol>
     </div>
-    <div class="container-section-1360p page__container">
+    <div class="container movil-screen">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ env('APP_NAME', 'Laravel') }}</a></li>
+                    <li class="breadcrumb-item active-black" style="background: none;">{{ __('investigation::labels.thesis_parts') }}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-section-1360p page__container pc-screen">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="text-body" href="{{ route('worksheet', $thesis_student->id) }}">
+                    <strong>{{ $thesis_student->title }}</strong>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="btn-group" role="group">
+                    <button wire:click="goEdit({{ $thesis_student->id }})" type="button" class="btn btn-orange">
+                        <i class="fa fa-pencil-alt mr-1"></i>
+                    </button>
+                    <button onclick="deleteThesisStudent({{ $thesis_student->id }})" type="button"
+                        class="btn btn-secondary"><i class="fa fa-trash-alt mr-1"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="text-danger" id="paraphrase_left">Tienes {{ $paraphrase_left }} oportunidades de ayudas
+                asistidas por Lyonteach(parafrasear, corregir, recomendar y proponer).</label>
+        </div>
+
+        {{-- Notas de instructor --}}
+
+        @if ($commentary)
+            <div class="card card-body mb-3" style="background-color: rgb(181, 168, 255)">
+
+                <div class="row">
+                    <div class="col-3 mb-2">
+                        <button title="borra la nota o comentario cuando quieras." class="btn-warning btn"
+                            onclick="deleteCommentary()">
+                            Eliminar nota ->
+                        </button>
+                    </div>
+                    <div class="col-9 mb-3">
+                        <label>Nota:</label>
+                        <div>{{ $commentary }}</div>
+                    </div>
+
+                </div>
+
+            </div>
+        @endif
+
+        {{-- Contenido --}}
+        <div class="card card-body mb-3">
+            <div class="row">
+                <div class="col-3">
+                    <div class="custom-control custom-checkbox">
+                        <input wire:model="auto_save" class="custom-control-input-orange" type="checkbox" value=""
+                            id="auto-saveCheck">
+                        <label class="custom-control-label" for="auto-saveCheck" onclick="toggleSaving()">
+                            {{ __('labels.Automatic save') }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-orange" data-toggle="modal"
+                        data-target="#exampleModalScrollable">
+                        Índice de Contenidos
+                    </button>
+                    {{-- Begin Modal Indice de Contenido --}}
+                    @section('modales')
+                        <div>
+                            <!-- Modal -->
+                            <style>
+                                .modal.modal-left .modal-dialog {
+                                    max-width: 380px;
+                                    min-height: calc(100vh - 0)
+                                }
+
+                                .modal.modal-left.show .modal-dialog {
+                                    transform: translate(0, 0)
+                                }
+
+                                .modal.modal-left .modal-content {
+                                    height: calc(100vh - 0);
+                                    overflow-y: auto
+                                }
+
+                                .modal.modal-left .modal-dialog {
+                                    transform: translate(-100%, 0);
+                                    margin: 0 auto 0 0
+                                }
+                            </style>
+                            <div class="modal fade modal-left" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Índice de Contenidos
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="list-point-none">
+                                                @if (count($parts) > 0)
+                                                    @foreach ($parts as $part)
+                                                        @if ($part['id'] == $focus_id)
+                                                            <li class="alert alert-cherry">
+                                                                <a class="alert-link"
+                                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                                                {!! $part['items'] !!}
+                                                            </li>
+                                                        @else
+                                                            <li>
+                                                                <a
+                                                                    href="javascript:changeFocus({{ $thesis_id . ', ' . $part['id'] }})">
+                                                                    {{ $part['number_order'] . ' ' . $part['description'] }}</a>
+                                                                {!! $part['items'] !!}
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">{{ __('labels.Close') }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endsection
+                    {{-- End Modal Indice de Contenido --}}
+
+                </div>
+                @if ($focused_part)
+                    <div class="col">
+                        <div class="btn-group mr-2">
+                            <button type="button" class="btn btn-secondary" wire:click="showVideo"
+                                title="{{ __('labels.Watch a Video about') . ': ' . $focused_part->description }}">
+                                <i class="fa fa-video"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top"
+                                title="{{ $focused_part->information }}">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+                            @if ($focused_part->content_id != null)
+                                <button type="button" class="btn btn-secondary" onclick="watchSection()"
+                                    title="{{ __('labels.Click here if you want to see this topic in the course') }}">
+                                    <i class="fa fa-book"></i>
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-secondary" disabled onclick="watchSection()"
+                                    title="{{ __('labels.Click here if you want to see this topic in the course') }}">
+                                    <i class="fa fa-book"></i>
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+        @if ($focused_part)
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $focused_part->description }}</h5>
+                </div>
+            </div>
+        @endif
+    </div>
+    
+    <div class="container movil-screen">
         <div class="row">
             <div class="col-md-12">
                 <a class="text-body" href="{{ route('worksheet', $thesis_student->id) }}">
