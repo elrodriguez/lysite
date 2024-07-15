@@ -44,7 +44,7 @@
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <a href="{{ route('modo_page') }}" class="btn-border-white">Empezar Gratis</a>
+                                    <a href="{{ route('register') }}" class="btn-border-white">Empezar Gratis</a>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +160,8 @@
                                 Deja que el chatbot te ayude en el desarrollo de tu investigación.
                             </h4>
                             <p>
-                                Haz preguntas al chatbot ante cualquier duda, además, utiliza el parafraseador, referenciador
+                                Haz preguntas al chatbot ante cualquier duda, además, utiliza el parafraseador,
+                                referenciador
                                 y recomendador para avanzar tu investigación.
                             </p>
                         </div>
@@ -172,8 +173,8 @@
                         <div class="box-presentation-content-home">
                             <h4> Accede al chat con un asesor las 24 horas del día.</h4>
                             <p>
-                                Emite tus consultas en tiempo real con un experto, 
-                                él encargado absolvera toda duda, además, 
+                                Emite tus consultas en tiempo real con un experto,
+                                él encargado absolvera toda duda, además,
                                 de corregir cualquier deficiencia que tengas.
                             </p>
                         </div>
@@ -249,7 +250,8 @@
                                 Deja que el chatbot te ayude en el desarrollo de tu investigación.
                             </h4>
                             <p>
-                                Haz preguntas al chatbot ante cualquier duda, además, utiliza el parafraseador, referenciador
+                                Haz preguntas al chatbot ante cualquier duda, además, utiliza el parafraseador,
+                                referenciador
                                 y recomendador para avanzar tu investigación.
                             </p>
                         </div>
@@ -266,7 +268,7 @@
                         <div class="box-presentation-content-home">
                             <h4> Accede al chat con un asesor las 24 horas del día.</h4>
                             <p>
-                                Emite tus consultas en tiempo real con un experto, él encargado absolvera toda duda, 
+                                Emite tus consultas en tiempo real con un experto, él encargado absolvera toda duda,
                                 además, de corregir cualquier deficiencia que tengas.
                             </p>
                         </div>
