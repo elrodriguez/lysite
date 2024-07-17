@@ -20,12 +20,10 @@
                                                         <strong>-</strong>
                                                     </p>
                                             @else
-                                                    <!--
                                                     <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 21px;">
                                                         <strong>S/ {{ $modo->price }}</strong>
                                                         <strong>ó</strong>
                                                     </p>
-                                                    -->
                                                     <p class="mt-0 mb-0  text-center" style="color: #000; font-size: 18px;">
                                                         <strong>$USD {{ $modo->dollar_price }}</strong>
                                                     </p>
