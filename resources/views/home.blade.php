@@ -173,7 +173,7 @@
                         <div class="box-presentation-content-home">
                             <h4> Accede al chat con un asesor las 24 horas del día.</h4>
                             <p>
-                                Emite tus consultas en tiempo real con un experto,
+                                Emite tus consultas con un experto,
                                 él encargado absolvera toda duda, además,
                                 de corregir cualquier deficiencia que tengas.
                             </p>
