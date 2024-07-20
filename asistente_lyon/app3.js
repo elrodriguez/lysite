@@ -165,7 +165,7 @@ const createRun = async (data) => {
     }
 
 
-    //Run assistant
+    //Run assistant [{ type: "file_search" }],
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
         instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name + " "+
@@ -173,7 +173,7 @@ const createRun = async (data) => {
                         "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+ ", o la pregunta que te acaban de hacer " +
                         "puedes asistir respondiendo a preguntas y consultas libres siempre que sean  del ámbito de investigación científica de literatura científica, de trabajos académicos superiores y similares; " +
                         "'de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
-                        tools: [{ type: "retrieval" }],
+                        tools: [{ type: "retrieval", type: "file_search" }],
     });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
