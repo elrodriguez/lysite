@@ -173,6 +173,7 @@ const createRun = async (data) => {
                         "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+ ", o la pregunta que te acaban de hacer " +
                         "puedes asistir respondiendo a preguntas y consultas libres siempre que sean  del ámbito de investigación científica de literatura científica, de trabajos académicos superiores y similares; " +
                         "'de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
+                        model: "gpt-4o",
                         tools: [{ type: "retrieval", type: "file_search" }],
     });
 
