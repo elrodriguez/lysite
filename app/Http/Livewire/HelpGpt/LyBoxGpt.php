@@ -637,10 +637,10 @@ class LyBoxGpt extends Component
                 $this->message = "del archivo con id".$this->file_id.": Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
                 break;
             case 7:
-                $this->message = "del archivo con id".$this->file_id.": Indícame los resultados de acuerdo a cada objetivo de la investigación.";
+                $this->message = "del archivo con id".$this->file_id.": Indícame los resultados de acuerdo a cada objetivo de la investigación. revisa todo el documento y dedúcelo si no es explícito.";
                 break;
             case 8:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame la recomendación principal del documento.";
+                $this->message = "del archivo con id".$this->file_id.": Redáctame la recomendación principal del documento, averigua en todo el documento antes de responder, no tiene que estár explicito en el documento";
                 break;
             case 9:
                 $this->message = "del archivo con id".$this->file_id.": Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
