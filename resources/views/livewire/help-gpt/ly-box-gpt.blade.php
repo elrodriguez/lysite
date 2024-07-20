@@ -213,7 +213,7 @@
                                                                             <div class="col-md-12">
                                                                                 <p class="box-orange-chat mb-0"
                                                                                     style="float:right;">
-                                                                                    {{ $item->content }}</p>
+                                                                                    {!! $item->content !!}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
