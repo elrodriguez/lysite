@@ -619,34 +619,34 @@ class LyBoxGpt extends Component
 
         switch ($prompt) {
             case 1:
-                $this->message = "del archivo con id".$this->file_id.": Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo con id ".$this->file_id.": Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 2:
-                $this->message = "del archivo con id".$this->file_id.": redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
+                $this->message = "del archivo con id ".$this->file_id.": redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
                 break;
             case 3:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo con id ".$this->file_id.": Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 4:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
+                $this->message = "del archivo con id ".$this->file_id.": Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
                 break;
             case 5:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido.";
+                $this->message = "del archivo con id ".$this->file_id.": Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido.";
                 break;
             case 6:
-                $this->message = "del archivo con id".$this->file_id.": Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
+                $this->message = "del archivo con id ".$this->file_id.": Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
                 break;
             case 7:
-                $this->message = "del archivo con id".$this->file_id.": Indícame los resultados de acuerdo a cada objetivo de la investigación. revisa todo el documento y dedúcelo si no es explícito.";
+                $this->message = "del archivo con id ".$this->file_id.": Indícame los resultados de acuerdo a cada objetivo de la investigación. revisa todo el documento y dedúcelo si no es explícito.";
                 break;
             case 8:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame la recomendación principal del documento, averigua en todo el documento antes de responder, no tiene que estár explicito en el documento";
+                $this->message = "del archivo con id ".$this->file_id.": Redáctame la recomendación principal del documento, averigua en todo el documento antes de responder, no tiene que estár explicito en el documento";
                 break;
             case 9:
-                $this->message = "del archivo con id".$this->file_id.": Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
+                $this->message = "del archivo con id ".$this->file_id.": Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
                 break;
             case 10:
-                $this->message = "del archivo con id".$this->file_id.": Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
+                $this->message = "del archivo con id ".$this->file_id.": Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
                 break;
             case 20:
                 $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
