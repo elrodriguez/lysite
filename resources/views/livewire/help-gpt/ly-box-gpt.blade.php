@@ -213,7 +213,7 @@
                                                                             <div class="col-md-12">
                                                                                 <p class="box-orange-chat mb-0"
                                                                                     style="float:right;">
-                                                                                    {!! html_entity_decode($item->content) !!}</p>
+                                                                                    {!! html_entity_decode("<div>".$item->content."</div>") !!}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
