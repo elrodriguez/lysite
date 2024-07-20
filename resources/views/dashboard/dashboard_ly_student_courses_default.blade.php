@@ -10,26 +10,31 @@
     <body>
         <x-lyontech.header></x-lyontech.header>
         @livewire('course.courses-default')
-
-        <div class="modal fade" id="ventanaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-            aria-labelledby="tituloVentana" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content"
-                    style="background-image: url({{ asset('theme-lyontech/images/modal.jpg') }});no-repeat center center;background-size: cover;">
-                    <div class="modal-header" style="border: 0px">
-                    </div>
-                    <div class="modal-body" style="border: 0px">
-                    </div>
-                    <div class="modal-footer justify-content-center" style="border: 0px">
-                        <a href="{{ route('modo_page') }}" type="button" class="btn btn-secondary btn-lg"
-                            style="background-color: black;">
-                            <strong>Mejorar</strong>
-                        </a>
-                    </div>
+    </body>Está herramienta está disponible en el plan basic, standar y premium
+@stop
+@section('global-modal')
+    <div class="modal fade" id="ventanaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+        aria-labelledby="tituloVentana" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="padding: 0px 15px 0px 30px;">
+            <div class="modal-content bg-orange" style="border-radius: 10px;">
+                <div class="modal-header" style="border: 0px">
+                </div>
+                <div class="modal-body pb-0" style="border: 0px; text-align:center;">
+                    <img style="width: 50%;" src="{{ asset('assets/images/logoBlanco.png') }}" alt="">
+                    <h3 style="font-weight: 700;">
+                        ESTÁ HERRAMIENTA ESTÁ DISPONIBLE EN EL PLAN BASIC,
+                        STANDAR Y PRMIUM
+                    </h3>
+                </div>
+                <div class="modal-footer justify-content-center" style="border: 0px">
+                    <a href="{{ route('modo_page') }}" type="button" class="btn btn-secondary btn-lg"
+                        style="background-color: black;">
+                        <strong>Mejorar</strong>
+                    </a>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
 @stop
 @section('script')
     <script>

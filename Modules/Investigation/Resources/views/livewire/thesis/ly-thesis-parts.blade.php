@@ -15,6 +15,7 @@
     </style>
     @stack('scripts')
 
+    <!-- Sección 01 -->
     <br>
     <div class="container-section-1360p page__container pc-screen">
         <ol class="breadcrumb m-0">
@@ -32,7 +33,9 @@
             </div>
         </div>
     </div>
+    <!-- Sección 01 -->
     
+    <!-- Sección 02 -->
     <div class="container-section-1360p page__container pc-screen">
         <div class="row">
             <div class="col-md-12">
@@ -98,7 +101,6 @@
                     </div>
                 </div>
                 <div class="col">
-
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-orange" data-toggle="modal"
                         data-target="#exampleModalScrollable">
@@ -386,10 +388,11 @@
             </div>
         @endif
     </div>
+    <!-- Sección 02 -->
 
     @if ($focused_part)
         @if ($focused_part->body == true)
-            <div class="container-section-1360p">
+            <div class="container-section">
                 <div class="row" id="worksheet">
                     <div wire:ignore class="col-3" id="paraphrase" style="display: none">
                         <div class="card p-2">
@@ -438,9 +441,9 @@
                                         placeholder="Escribe o copia arriba un párrafo para ser parafraseado y luego haz click en 'procesar' para obtener el resultado de nuestro servicio.">{!! $resultado !!}</textarea>
                                 </div>
                                 <button onclick="closeParahrase()" type="button"
-                                    class="btn btn-secondary">Cancelar</button>
-                                <button type="button" class="btn btn-cherry" id="paraphrasing">Copiar</button>
-                                <button class="btn btn-orange" wire:click="paraphrasing">Procesar</button>
+                                    class="btn btn-secondary" style="padding: 5px 25px;">Cancelar</button>
+                                <button type="button" class="btn btn-cherry" id="paraphrasing" style="padding: 5px 25px;">Copiar</button>
+                                <button class="btn btn-orange" wire:click="paraphrasing" style="padding: 5px 25px;">Procesar</button>
                             </div>
                         </div>
                     </div>
@@ -462,7 +465,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 mb-2"
+                            <div class="col-12 mb-2"
                                 style="display: flex; align-items: center; justify-content: center;">
                                 <button type="button" class="btn-orange btn  mt-0" wire:loading.attr="disabled"
                                     onclick="saveThesisPartStudent()">{{ __('labels.Save') }}
