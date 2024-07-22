@@ -21,6 +21,7 @@ const openai = new OpenAI({
 });
 var file_id;
 var filename;
+var the_file_id;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
@@ -148,7 +149,7 @@ const createRun = async (data) => {
                     file: fs.createReadStream(archivo),
                     purpose: "assistants",
                 });
-                file_id = file.id;
+                the_file_id = file.id;
                 console.log("EL ID DEL ARCHIVO ES: ", file.id);
 
                 const message = await openai.beta.threads.messages.create(
@@ -157,7 +158,7 @@ const createRun = async (data) => {
                                 content: data.user_message,
                                 attachments:[
                                 {
-                                    "file_id":file_id,
+                                    "file_id":the_file_id,
                                     "tools":[
                                         {
                                         "type":"file_search"
@@ -177,7 +178,7 @@ const createRun = async (data) => {
                                 content: data.user_message,
                                 attachments:[
                                     {
-                                        "file_id":file_id,
+                                        "file_id":the_file_id,
                                         "tools":[
                                             {
                                             "type":"file_search"
