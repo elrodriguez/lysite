@@ -490,6 +490,7 @@ class LyBoxGpt extends Component
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
             'file' => $this->fileName,
+            'file_id' => $this->file_id;
         ]);
 
         $data = $response->json();

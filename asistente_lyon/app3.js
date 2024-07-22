@@ -66,7 +66,7 @@ app.post("/get_run_pending", (req, res) => {
                 // Verifica si se ha enviado un archivo
                 if (req.body.file) {
                     console.log("llegó un archivo");
-                    const directorioActual = "\\var\\www\\html\\" + process.env.PROJECT_PATH + "\\asistente_lyon\\";  //CAMBIAR RUTA TEST POR LA REAL
+                    const directorioActual = "\\var\\www\\html\\" + process.env.PROJECT_PATH + "\\asistente_lyon\\";
                     const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
                     console.log(req.body.file);
 
@@ -97,11 +97,16 @@ app.post("/get_run_pending", (req, res) => {
                 } else {
                     console.log("no llegó ningún archivo");
                     // No se envió ningún archivo
+                    file_id=null;
+                    if(req.body.file_id != null){
+                        file_id = req.body.file_id;
+                    }
                     let data = {
                         user_message: req.body.user_message,
                         user_name: req.body.user_name,
                         thread_id: req.body.thread_id,
                         assistant_id: req.body.assistant_id,
+                        file_ids: [file_id],
                         file_path: null
                     };
 
