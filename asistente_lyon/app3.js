@@ -144,7 +144,7 @@ const createRun = async (data) => {
     filename = archivo;
     console.log(data);
     if(archivo != null){
-        console.log("pasando archivo aqui-->");
+        console.log("pasando archivo aqui--> hay archivo not null");
             // Upload a file with an "assistants" purpose
                 const file = await openai.files.create({
                     file: fs.createReadStream(archivo),
@@ -189,6 +189,7 @@ const createRun = async (data) => {
                                     }
                                     ],
                 });
+                console.log("mensaje donde paso el file_id que ya se subió antes: ", message);
     }
 
 
