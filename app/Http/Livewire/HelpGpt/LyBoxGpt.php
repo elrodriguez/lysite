@@ -205,6 +205,7 @@ class LyBoxGpt extends Component
 
             if ($this->file_document) {
                 //Agregar texto al mensaje cuando se envia nulo en mensaje
+                $this->forget_context = true;
                 if ($this->message == "" || $this->message == null) {
                     $this->message = "voy a hacerte algunas preguntas sobre el documento que tienes.";
                 }
