@@ -152,6 +152,18 @@ const createRun = async (data) => {
                 });
                 the_file_id = file.id;
                 console.log("EL ID DEL ARCHIVO ES: ", file.id);
+                console.log("creando el vector store");
+
+                let vectorStore = await openai.beta.vectorStores.create({
+                    name: the_file_id,
+                    file_ids: [the_file_id],
+                    expires_after: {
+                      anchor: "last_active_at",
+                      hours: 2
+                    }
+                  });
+
+                  console.log("aqui se creo el vectorStore: "+vectorStore);
 
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
