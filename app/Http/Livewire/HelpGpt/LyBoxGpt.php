@@ -50,6 +50,7 @@ class LyBoxGpt extends Component
     public $n4 = false;
     public $n5 = false;
     public $forget_context=false;
+    public $vector_id=null;
 
     public function verifyDeviceTokenUser()
     {
@@ -491,12 +492,14 @@ class LyBoxGpt extends Component
             'assistant_id' => $this->assistant_id,
             'file' => $this->fileName,
             'file_ids' => $this->file_id, // de ser necesario enviar array
+            'vector_id' => $this->vector_id,
         ]);
 
         $data = $response->json();
         try {
             $tempura = end($data);
-            $tempura = $tempura["file_id"];
+            $tempura = $tempura["file_id"]; //aqui obtengo el file_id
+            $vector_id = $tempura["vectorStore_id"];//aqui obtengo el vector_id
 
             if($tempura != 'Pending' && $tempura != null && strlen($tempura) > 12 ){
                 $this->file_id = $tempura;

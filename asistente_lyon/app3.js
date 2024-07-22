@@ -83,7 +83,9 @@ app.post("/get_run_pending", (req, res) => {
                     const filePath = file;
                   //  Mueve el archivo al directorio especificado
 
-
+                    if(req.body.vector_id != null){
+                        vectorStore_id = req.body.vector_id;
+                    }
                         let data = {
                             user_message: req.body.user_message,
                             user_name: req.body.user_name,
@@ -253,6 +255,7 @@ const createRun = async (data) => {
     messages.body.data.forEach((row) => {
         respuesta.push(row.content);
     });
+    respuesta.push({vectorStore_id});
     respuesta.push({ file_id });
     return respuesta;
 };
