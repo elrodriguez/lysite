@@ -234,7 +234,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <p class="box-chrerry-chat mb-0">
-                                                                                    <div>{!! html_entity_decode($item->content) !!}</div></p>
+                                                                                    <div class="box-chrerry-chat">{!! html_entity_decode($item->content) !!}</div></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
