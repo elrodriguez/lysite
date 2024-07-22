@@ -165,7 +165,7 @@ const createRun = async (data) => {
                   });
                   vectorStore_id = vectorStore.id;
 
-                  console.log("aqui se creo el vectorStore.id: "+vectorStore.id);
+                  console.log("aqui se creo el vectorStore.id ------------->>>>> "+vectorStore.id);
 
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
