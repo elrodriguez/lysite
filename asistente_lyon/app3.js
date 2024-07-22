@@ -159,7 +159,7 @@ const createRun = async (data) => {
                     file_ids: [the_file_id],
                     expires_after: {
                       anchor: "last_active_at",
-                      hours: 2
+                      days: 1
                     }
                   });
 
