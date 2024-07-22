@@ -22,6 +22,7 @@ const openai = new OpenAI({
 var file_id;
 var filename;
 var the_file_id;
+var vectorStore_id;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
@@ -162,13 +163,14 @@ const createRun = async (data) => {
                       days: 1
                     }
                   });
+                  vectorStore_id = vectorStore.id;
 
                   console.log("aqui se creo el vectorStore.id: "+vectorStore.id);
 
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
                                 role: "user",
-                                content: data.user_message,
+                                content: "resume toda la información que hay en el vector con id: "+vectorStore_id,//data.user_message,
                                 attachments:[
                                 {
                                     "file_id":the_file_id,
