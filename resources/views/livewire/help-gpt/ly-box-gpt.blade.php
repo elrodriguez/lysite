@@ -233,8 +233,8 @@
                                                                     <div class="media-body" style="float:left;">
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <p class="box-chrerry-chat mb-0">
-                                                                                    <div class="box-chrerry-chat">{!! html_entity_decode($item->content) !!}</div></p>
+
+                                                                                    <div class="box-chrerry-chat">{!! html_entity_decode($item->content) !!}</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
