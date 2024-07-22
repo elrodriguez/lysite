@@ -214,6 +214,7 @@ const createRun = async (data) => {
             file_search: {
               vector_store_ids: [vectorStore_id]
             }
+        }
      });
     console.log("aquí justo se creó el run con datos del asistente");
     await new Promise((resolve) => setTimeout(resolve, 500));
