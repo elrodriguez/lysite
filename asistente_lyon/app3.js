@@ -144,6 +144,7 @@ const createRun = async (data) => {
     filename = archivo;
     console.log(data);
     if(archivo != null){
+        console.log("pasando archivo aqui-->");
             // Upload a file with an "assistants" purpose
                 const file = await openai.files.create({
                     file: fs.createReadStream(archivo),
@@ -168,7 +169,7 @@ const createRun = async (data) => {
                                 ],
 
                 });
-                save_in_DB(file_id, filename);
+                save_in_DB(the_file_id, filename);
                 console.log("mensaje con fileid: ", message);
 
     }else{
