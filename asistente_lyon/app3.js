@@ -97,7 +97,7 @@ app.post("/get_run_pending", (req, res) => {
                 } else {
                     console.log("no llegó ningún archivo");
                     // No se envió ningún archivo
-                    file_ids=null;
+                    let file_ids=null;
                     if(req.body.file_ids != null){
                         file_ids = req.body.file_ids;
                     }
