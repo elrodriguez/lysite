@@ -22,7 +22,7 @@ const openai = new OpenAI({
 var file_id;
 var filename;
 var the_file_id;
-var vectorStore_id=null;
+let vectorStore_id=null;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
