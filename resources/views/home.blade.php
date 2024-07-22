@@ -117,13 +117,13 @@
                     <div class="col-md-4">
                         <div class="box-presentation-home">
                             <h1><strong>PRESENTACIÓN</strong></h1>
-                            <h4>Lyonteach </h4>
+                            <h4>Lyonteach</h4>
                         </div>
                     </div>
                     <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 40px;">
                         <div class="card-new bg-gradient">
                             <div style="width: 100%" controls muted playsinline>
-                                <iframe width="640" height="315" src="https://www.youtube.com/embed/lSnAGyWDL38?si=sFpKDXSkOVddSsAG&autoplay=1&mute=1" title="Lyonteach" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                <iframe class="w-100" width="640" height="315" src="https://www.youtube.com/embed/lSnAGyWDL38?si=sFpKDXSkOVddSsAG&autoplay=1&mute=1" title="Lyonteach" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
