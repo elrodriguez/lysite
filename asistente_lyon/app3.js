@@ -22,7 +22,7 @@ const openai = new OpenAI({
 var file_id;
 var filename;
 var the_file_id;
-var vectorStore_id;
+var vectorStore_id=null;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
@@ -198,9 +198,21 @@ const createRun = async (data) => {
 
 
     //Run assistant [{ type: "file_search" }],
-    const run = await openai.beta.threads.runs.create(data.thread_id, {
-        assistant_id: data.assistant_id,
-     });
+
+    if(vectorStore_id!=null){
+        const run = await openai.beta.threads.runs.create(data.thread_id, {
+            assistant_id: data.assistant_id,
+            tool_resources: {
+                file_search: {
+                  vector_store_ids: [vectorStore_id]
+                }
+            }
+         });
+    }else{
+        const run = await openai.beta.threads.runs.create(data.thread_id, {
+            assistant_id: data.assistant_id,
+         });
+    }
     console.log("aquí justo se creó el run con datos del asistente");
     await new Promise((resolve) => setTimeout(resolve, 500));
     const run_retrieve = await openai.beta.threads.runs.retrieve(
