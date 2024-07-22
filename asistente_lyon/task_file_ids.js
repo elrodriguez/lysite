@@ -51,7 +51,7 @@ function file_ids_deleting() {
       });
   return new Promise((resolve, reject) => {
 
-    const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND TIMESTAMPDIFF(HOUR, created_at, NOW()) >= 2';
+    const selectQuery = 'SELECT * FROM assistant_gpt_files_ids WHERE deleted = ? AND TIMESTAMPDIFF(HOUR, created_at, NOW()) >= 0';
     const deletedValue = false;
 
     connection.query(selectQuery, [deletedValue], (error, results) => {
