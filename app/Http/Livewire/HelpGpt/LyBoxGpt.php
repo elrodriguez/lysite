@@ -624,7 +624,7 @@ class LyBoxGpt extends Component
 //$this->file_id
         switch ($prompt) {
             case 1:
-                $this->message = "del archivo que tienes Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo que tienes Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dímelo.";
                 break;
             case 2:
                 $this->message = "del archivo que tienes redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
