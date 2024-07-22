@@ -170,7 +170,7 @@ const createRun = async (data) => {
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
                                 role: "user",
-                                content: "resume toda la información que hay en el vector con id: "+vectorStore_id,//data.user_message,
+                                content: data.user_message,
                                 attachments:[
                                 {
                                     "file_id":the_file_id,
@@ -208,8 +208,14 @@ const createRun = async (data) => {
 
 
     //Run assistant [{ type: "file_search" }],
-    const run = await openai.beta.threads.runs.create(data.thread_id, {assistant_id: data.assistant_id});
-
+    const run = await openai.beta.threads.runs.create(data.thread_id, {
+        assistant_id: data.assistant_id,
+        tool_resources: {
+            file_search: {
+              vector_store_ids: [vectorStore_id]
+            }
+     });
+    console.log("aquí justo se creó el run con datos del asistente");
     await new Promise((resolve) => setTimeout(resolve, 500));
     const run_retrieve = await openai.beta.threads.runs.retrieve(
         data.thread_id, //este dato es el thread_id del hilo creado
