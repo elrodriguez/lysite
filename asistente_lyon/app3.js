@@ -198,9 +198,9 @@ const createRun = async (data) => {
 
 
     //Run assistant [{ type: "file_search" }],
-
+    var run;
     if(vectorStore_id!=null){
-        const run = await openai.beta.threads.runs.create(data.thread_id, {
+        run = await openai.beta.threads.runs.create(data.thread_id, {
             assistant_id: data.assistant_id,
             tool_resources: {
                 file_search: {
@@ -209,7 +209,7 @@ const createRun = async (data) => {
             }
          });
     }else{
-        const run = await openai.beta.threads.runs.create(data.thread_id, {
+        run = await openai.beta.threads.runs.create(data.thread_id, {
             assistant_id: data.assistant_id,
          });
     }
