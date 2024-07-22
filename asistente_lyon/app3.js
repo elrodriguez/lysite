@@ -21,7 +21,7 @@ const openai = new OpenAI({
 });
 var file_id;
 var filename;
-
+var file_id = null;
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
 
@@ -138,7 +138,6 @@ const createThread = async () => {
 };
 
 const createRun = async (data) => {
-    file_id = null;
     const archivo = data.file_path;
     filename = archivo;
     console.log(data);
