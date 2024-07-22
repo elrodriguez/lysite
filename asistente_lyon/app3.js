@@ -172,6 +172,7 @@ const createRun = async (data) => {
                 console.log("mensaje con fileid: ", message);
 
     }else{
+        console.log("no subo archivo pero debo pasar el: "+the_file_id);
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
                                 role: "user",
