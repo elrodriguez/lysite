@@ -155,11 +155,16 @@ const createRun = async (data) => {
                 data.thread_id, {
                                 role: "user",
                                 content: data.user_message,
-                                attachments : [
-                                    {
-                                        'file_id': file.id
-                                    }
-                                ],
+                                attachments:[
+                                {
+                                    "file_id":file_id,
+                                    "tools":[
+                                        {
+                                        "type":"file_search"
+                                        }
+                                    ]
+                                }
+                            ]
 
                 });
                 save_in_DB(file_id, filename);
