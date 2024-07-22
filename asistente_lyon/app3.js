@@ -187,21 +187,11 @@ const createRun = async (data) => {
                 console.log("mensaje con fileid: ", message);
 
     }else{
-        console.log("no subo archivo pero debo pasar el: "+the_file_id);
+        console.log("no subo archivo pero debo pasar el id del vector si existiera: ");
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
                                 role: "user",
                                 content: data.user_message,
-                                attachments:[
-                                    {
-                                        "file_id":the_file_id,
-                                        "tools":[
-                                            {
-                                            "type":"file_search"
-                                            }
-                                        ]
-                                    }
-                                    ],
                 });
                 console.log("mensaje donde paso el file_id que ya se subió antes: ", message);
     }
@@ -210,11 +200,6 @@ const createRun = async (data) => {
     //Run assistant [{ type: "file_search" }],
     const run = await openai.beta.threads.runs.create(data.thread_id, {
         assistant_id: data.assistant_id,
-        tool_resources: {
-            file_search: {
-              vector_store_ids: [vectorStore_id]
-            }
-        }
      });
     console.log("aquí justo se creó el run con datos del asistente");
     await new Promise((resolve) => setTimeout(resolve, 500));
