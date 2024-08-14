@@ -146,7 +146,7 @@ class LyBoxGpt extends Component
             ->first();
 
         if ($this->history) {
-            $this->historyItems = HistoryGptItem::where('history_id', $this->history->id)->get();
+            $this->historyItems = HistoryGptItem::where('history_id', $this->history->id)->take(30)->get();
         }
 
         if ($this->typeAction == 4) {
