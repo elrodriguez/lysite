@@ -59,7 +59,7 @@
                     <img style="width: 50%;" src="{{ asset('assets/images/logoBlanco.png') }}" alt="">
                     <h3 style="font-weight: 700;">
                         ESTÁ HERRAMIENTA ESTÁ DISPONIBLE EN EL PLAN BASIC,
-                        STANDAR Y PRMIUM
+                        STANDAR Y PREMIUM
                     </h3>
                 </div>
                 <div class="modal-footer justify-content-center" style="border: 0px">
