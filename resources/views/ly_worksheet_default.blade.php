@@ -1,7 +1,7 @@
 @extends('layouts.tutorio')
 @section('lycss')
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/ckeditor-docs.css') }}">
 
 @stop
@@ -59,7 +59,7 @@
                     <img style="width: 50%;" src="{{ asset('assets/images/logoBlanco.png') }}" alt="">
                     <h3 style="font-weight: 700;">
                         ESTÁ HERRAMIENTA ESTÁ DISPONIBLE EN EL PLAN BASIC,
-                        STANDAR Y PREMIUM
+                        STANDARD Y PREMIUM
                     </h3>
                 </div>
                 <div class="modal-footer justify-content-center" style="border: 0px">
