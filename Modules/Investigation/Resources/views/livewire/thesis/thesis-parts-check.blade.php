@@ -51,7 +51,7 @@
                             @endforeach
                         @else
                             <div class="alert alert-info">
-                                Este formato un está pendiente de contenido. vuelve a intentarlo mas tarde o comunicarse
+                                Este formato aún está pendiente de contenido. vuelve a intentarlo mas tarde o comunicarse
                                 con el administrador del sitio.
                             </div>
                         @endif
@@ -206,7 +206,7 @@
                         'Georgia, serif',
                         'Verdana, sans-serif'
                     ]
-                
+
                 },
                 fontSize: {
                         options: [
@@ -220,7 +220,7 @@
                             { model: '24pt', title: '24' },
                             { model: '30pt', title: '30' },
                             { model: '36pt', title: '36' },
-                            { model: '40pt', title: '40' } 
+                            { model: '40pt', title: '40' }
                         ]
                     },
                 config: {
