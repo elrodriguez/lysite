@@ -117,15 +117,14 @@
                     <div class="col-md-4">
                         <div class="box-presentation-home">
                             <h1><strong>PRESENTACIÓN</strong></h1>
-                            <h4>Lyonteach </h4>
+                            <h4>Lyonteach</h4>
                         </div>
                     </div>
                     <div class="col-md-8 d-flex justify-content-center align-items-center" style="padding: 40px;">
                         <div class="card-new bg-gradient">
-                            <video style="width: 100%" controls muted playsinline>
-                                <source src="video.mp4" type="video/mp4">
-                                Tu navegador no soporta el elemento de vídeo.
-                            </video>
+                            <div style="width: 100%" controls muted playsinline>
+                                <iframe class="w-100" width="640" height="315" src="https://www.youtube.com/embed/lSnAGyWDL38?si=sFpKDXSkOVddSsAG&autoplay=1&mute=1" title="Lyonteach" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +172,7 @@
                         <div class="box-presentation-content-home">
                             <h4> Accede al chat con un asesor las 24 horas del día.</h4>
                             <p>
-                                Emite tus consultas en tiempo real con un experto,
+                                Emite tus consultas con un experto,
                                 él encargado absolvera toda duda, además,
                                 de corregir cualquier deficiencia que tengas.
                             </p>

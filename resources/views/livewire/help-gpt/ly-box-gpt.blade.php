@@ -233,8 +233,8 @@
                                                                     <div class="media-body" style="float:left;">
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <p class="box-chrerry-chat mb-0">
-                                                                                    {{ $item->content }}</p>
+
+                                                                                    <div class="box-chrerry-chat">{!! html_entity_decode($item->content) !!}</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
@@ -262,7 +262,7 @@
                                             <button onclick="document.getElementById('fileDocument').click()"
                                                 class="btn-small-cherry">Seleccionar archivo</button>
                                             <input type="file" id="fileDocument" wire:model="file_document"
-                                                accept=".doc, .docx, .txt, .xls, .xlsx, .pdf">
+                                                accept=".doc, .docx, .txt, .pdf">
                                             <span class="file-name" id="file-name" style="font-size: 11px;">
                                                 Ningún archivo seleccionado
                                             </span>

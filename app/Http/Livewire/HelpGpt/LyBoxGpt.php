@@ -49,7 +49,9 @@ class LyBoxGpt extends Component
     public $n3 = false;
     public $n4 = false;
     public $n5 = false;
+
     public $forget_context = false;
+    public $vector_id = null;
 
     public function verifyDeviceTokenUser()
     {
@@ -145,7 +147,7 @@ class LyBoxGpt extends Component
             ->first();
 
         if ($this->history) {
-            $this->historyItems = HistoryGptItem::where('history_id', $this->history->id)->get();
+            $this->historyItems = HistoryGptItem::where('history_id', $this->history->id)->orderBy('created_at', 'desc')->take(70)->get()->reverse();
         }
 
         if ($this->typeAction == 4) {
@@ -204,8 +206,9 @@ class LyBoxGpt extends Component
 
             if ($this->file_document) {
                 //Agregar texto al mensaje cuando se envia nulo en mensaje
+                $this->forget_context = true;
                 if ($this->message == "" || $this->message == null) {
-                    $this->message = "te envío un archivo que tiene toda la información necesaria de una investigación como resultados, conclusiones y más, cargalo por completo, en breve te hare preguntas sobre el mismo.";
+                    $this->message = "voy a hacerte algunas preguntas sobre el documento que tienes.";
                 }
                 $basePath = base_path();
                 $asistentePath = $basePath . '/asistente_lyon';
@@ -490,12 +493,15 @@ class LyBoxGpt extends Component
             'thread_id' => $this->thread_id,
             'assistant_id' => $this->assistant_id,
             'file' => $this->fileName,
+            'file_ids' => $this->file_id, // de ser necesario enviar array
+            'vector_id' => $this->vector_id,
         ]);
 
         $data = $response->json();
         try {
             $tempura = end($data);
-            $tempura = $tempura["file_id"];
+            $tempura = $tempura["file_id"]; //aqui obtengo el file_id
+            $vector_id = $tempura["vectorStore_id"]; //aqui obtengo el vector_id
 
             if ($tempura != 'Pending' && $tempura != null && strlen($tempura) > 12) {
                 $this->file_id = $tempura;
@@ -616,40 +622,41 @@ class LyBoxGpt extends Component
 
             $this->path = $this->file_document->storeAs('asistente_lyon', $this->fileName);
         }
-
+        //$this->file_id
+        $sufijo = "responde usando código HTML y las listas en etiquetas <ul></ul>, <ol></ol> e <il></il> según sea necesario pero no crees las etiquetas '<HTML>', '<body>', '<head>' ni  '<tittle>' si puedes utiliza clases boostrap 4 en las propiedades class";
         switch ($prompt) {
             case 1:
-                $this->message = "del archivo con id" . $this->file_id . ": Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo que tienes Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dímelo. " . $sufijo;
                 break;
             case 2:
-                $this->message = "del archivo con id" . $this->file_id . ": redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
+                $this->message = "del archivo que tienes redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general. " . $sufijo;
                 break;
             case 3:
-                $this->message = "del archivo con id" . $this->file_id . ": Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo que tienes Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo. " . $sufijo;
                 break;
             case 4:
-                $this->message = "del archivo con id" . $this->file_id . ": Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
+                $this->message = "del archivo que tienes Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito " . $sufijo;
                 break;
             case 5:
-                $this->message = "del archivo con id" . $this->file_id . ": Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido.";
+                $this->message = "del archivo que tienes Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido. " . $sufijo;
                 break;
             case 6:
-                $this->message = "del archivo con id" . $this->file_id . ": Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
+                $this->message = "del archivo que tienes Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos " . $sufijo;
                 break;
             case 7:
-                $this->message = "del archivo con id" . $this->file_id . ": Indícame los resultados de acuerdo a cada objetivo de la investigación.";
+                $this->message = "del archivo que tienes Indícame los resultados de acuerdo a cada objetivo de la investigación. revisa todo el documento y dedúcelo si no es explícito. " . $sufijo;
                 break;
             case 8:
-                $this->message = "del archivo con id" . $this->file_id . ": Redáctame la recomendación principal del documento.";
+                $this->message = "del archivo que tienes Redáctame la recomendación principal del documento, averigua en todo el documento antes de responder, no tiene que estár explicito en el documento " . $sufijo;
                 break;
             case 9:
-                $this->message = "del archivo con id" . $this->file_id . ": Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
+                $this->message = "del archivo que tienes Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento " . $sufijo;
                 break;
             case 10:
-                $this->message = "del archivo con id" . $this->file_id . ": Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
+                $this->message = "del archivo que tienes Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo. " . $sufijo;
                 break;
             case 20:
-                $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
+                $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije " . $sufijo;
                 $this->forget_context = true;
                 break;
             default:

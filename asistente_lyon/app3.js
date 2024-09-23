@@ -21,6 +21,8 @@ const openai = new OpenAI({
 });
 var file_id;
 var filename;
+var the_file_id;
+let vectorStore_id=null;
 
 
 // ------------------- Metodos GET o POST DEL API ----------------------------------------------------------
@@ -66,7 +68,7 @@ app.post("/get_run_pending", (req, res) => {
                 // Verifica si se ha enviado un archivo
                 if (req.body.file) {
                     console.log("llegó un archivo");
-                    const directorioActual = "\\var\\www\\html\\" + process.env.PROJECT_PATH + "\\asistente_lyon\\";  //CAMBIAR RUTA TEST POR LA REAL
+                    const directorioActual = "\\var\\www\\html\\" + process.env.PROJECT_PATH + "\\asistente_lyon\\";
                     const rutaDeseada = path.join(directorioActual, '..', 'storage', 'app', 'asistente_lyon');
                     console.log(req.body.file);
 
@@ -81,7 +83,9 @@ app.post("/get_run_pending", (req, res) => {
                     const filePath = file;
                   //  Mueve el archivo al directorio especificado
 
-
+                    if(req.body.vector_id != null){
+                        vectorStore_id = req.body.vector_id;
+                    }
                         let data = {
                             user_message: req.body.user_message,
                             user_name: req.body.user_name,
@@ -97,6 +101,10 @@ app.post("/get_run_pending", (req, res) => {
                 } else {
                     console.log("no llegó ningún archivo");
                     // No se envió ningún archivo
+                    // let file_ids=null;
+                    // if(req.body.file_ids != null){
+                    //     file_ids = req.body.file_ids;
+                    // }
                     let data = {
                         user_message: req.body.user_message,
                         user_name: req.body.user_name,
@@ -139,42 +147,75 @@ const createRun = async (data) => {
     filename = archivo;
     console.log(data);
     if(archivo != null){
+        console.log("pasando archivo aqui--> hay archivo not null");
             // Upload a file with an "assistants" purpose
                 const file = await openai.files.create({
                     file: fs.createReadStream(archivo),
                     purpose: "assistants",
                 });
-                file_id = file.id;
+                the_file_id = file.id;
                 console.log("EL ID DEL ARCHIVO ES: ", file.id);
+                console.log("creando el vector store");
+
+                let vectorStore = await openai.beta.vectorStores.create({
+                    name: the_file_id,
+                    file_ids: [the_file_id],
+                    expires_after: {
+                      anchor: "last_active_at",
+                      days: 1
+                    }
+                  });
+                  vectorStore_id = vectorStore.id;
+
+                  console.log("aqui se creo el vectorStore.id ------------->>>>> "+vectorStore.id);
 
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
                                 role: "user",
                                 content: data.user_message,
-                                file_ids: [file.id]
+                                attachments:[
+                                {
+                                    "file_id":the_file_id,
+                                    "tools":[
+                                        {
+                                        "type":"file_search"
+                                        }
+                                    ]
+                                }
+                                ],
+
                 });
-                save_in_DB(file_id, filename);
+                save_in_DB(the_file_id, filename);
                 console.log("mensaje con fileid: ", message);
 
     }else{
+        console.log("no subo archivo pero debo pasar el id del vector si existiera: ");
                 const message = await openai.beta.threads.messages.create(
                 data.thread_id, {
                                 role: "user",
                                 content: data.user_message,
                 });
+                console.log("mensaje donde paso el file_id que ya se subió antes: ", message);
     }
 
 
-    //Run assistant
-    const run = await openai.beta.threads.runs.create(data.thread_id, {
-        assistant_id: data.assistant_id,
-        instructions:   "tu nombre como asistente es Lyon; el usuario se llama "+ data.user_name + " "+
-                        "recuerda solo ayudar, asistir o responder preguntas a todo lo relacionado a proyectos de investigación, informes de tesis, artículos científicos, revisiones de literatura y trabajos similares de manera exclusiva; "+
-                        "Recuerda solo limitarte a responder en el contexto creado en el Thread con id: '"+data.thread_id+ ", o la pregunta que te acaban de hacer " +
-                        "puedes asistir respondiendo a preguntas y consultas libres siempre que sean  del ámbito de investigación científica de literatura científica, de trabajos académicos superiores y similares; " +
-                        "'de la misma manera para mensajes y archivos no respondas ni des información sobre mensajes o archivos de otro thread que no sea este: "+data.thread_id,
-    });
-
+    //Run assistant [{ type: "file_search" }],
+    var run;
+    if(vectorStore_id!=null){
+        run = await openai.beta.threads.runs.create(data.thread_id, {
+            assistant_id: data.assistant_id,
+            tool_resources: {
+                file_search: {
+                  vector_store_ids: [vectorStore_id]
+                }
+            }
+         });
+    }else{
+        run = await openai.beta.threads.runs.create(data.thread_id, {
+            assistant_id: data.assistant_id,
+         });
+    }
+    console.log("aquí justo se creó el run con datos del asistente");
     await new Promise((resolve) => setTimeout(resolve, 500));
     const run_retrieve = await openai.beta.threads.runs.retrieve(
         data.thread_id, //este dato es el thread_id del hilo creado
@@ -214,6 +255,7 @@ const createRun = async (data) => {
     messages.body.data.forEach((row) => {
         respuesta.push(row.content);
     });
+    respuesta.push({vectorStore_id});
     respuesta.push({ file_id });
     return respuesta;
 };
