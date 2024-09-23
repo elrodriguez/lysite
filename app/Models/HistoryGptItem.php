@@ -15,4 +15,9 @@ class HistoryGptItem extends Model
         'file_original_name',
         'content'
     ];
+
+    public function getContentAttribute($value)
+    {
+        return html_entity_decode($value, ENT_QUOTES, "UTF-8");
+    }
 }

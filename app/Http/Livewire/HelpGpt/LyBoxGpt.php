@@ -49,7 +49,7 @@ class LyBoxGpt extends Component
     public $n3 = false;
     public $n4 = false;
     public $n5 = false;
-    public $forget_context=false;
+    public $forget_context = false;
 
     public function verifyDeviceTokenUser()
     {
@@ -188,7 +188,7 @@ class LyBoxGpt extends Component
             'history_id' => $history->id,
             'my_user' => true,
             'file_original_name' => null,
-            'content' => $this->message
+            'content' => htmlentities($this->message, ENT_QUOTES, "UTF-8")
         ]);
 
         $resultado = null;
@@ -266,7 +266,7 @@ class LyBoxGpt extends Component
         ]);
         //$this->saveFileID_deleteFile($file_id, $filename, $path);
 
-        if($this->typeAction == 4){
+        if ($this->typeAction == 4) {
             $this->consulta = null; // para que no borre la consulta salvo en el chat
         }
         $this->file_document = null;
@@ -452,12 +452,12 @@ class LyBoxGpt extends Component
         if (true) { // la linea anterior debe ir por ahora la quité 10 de julio 2024
             if ($this->paraphrase_left >= 1) {
                 try {
-                    $pasaje=false;
+                    $pasaje = false;
                     if ($this->thread_id == null || $this->forget_context) {
-                        $this->forget_context=false;
-                        $pasaje=true; //para restar el consumo de oportunidades de IA si es true no se cobra
+                        $this->forget_context = false;
+                        $pasaje = true; //para restar el consumo de oportunidades de IA si es true no se cobra
                         $client = new Client();
-                        $promise = $client->getAsync('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_thread');
+                        $promise = $client->getAsync('http://localhost:' . env('AI_ASSISTANT_PORT') . '/create_thread');
                         $response = $promise->wait();
                         $data = json_decode($response->getBody(), true);
                         $this->thread_id = $data['thread_id'];
@@ -466,7 +466,7 @@ class LyBoxGpt extends Component
                     $permisos = Person::where('user_id', Auth::user()->id)->first();
                     $permisos->paraphrase_used++;
                     $permisos->save();
-                    if ($pasaje==false) {
+                    if ($pasaje == false) {
                         $this->paraphrase_used++;
                         $this->paraphrase_allowed--;
                     }
@@ -484,7 +484,7 @@ class LyBoxGpt extends Component
     public function sendGetConsulta($msg)   //consulta respuesta y verificar si existe archivo q pasar file
     {
         // Creando run y haciendo consulta para obtener respuesta de la IA
-        $response = Http::post('http://localhost:'.env('AI_ASSISTANT_PORT').'/create_run', [
+        $response = Http::post('http://localhost:' . env('AI_ASSISTANT_PORT') . '/create_run', [
             'user_message' => $msg,
             'user_name' => Auth::user()->name,
             'thread_id' => $this->thread_id,
@@ -497,9 +497,9 @@ class LyBoxGpt extends Component
             $tempura = end($data);
             $tempura = $tempura["file_id"];
 
-            if($tempura != 'Pending' && $tempura != null && strlen($tempura) > 12 ){
+            if ($tempura != 'Pending' && $tempura != null && strlen($tempura) > 12) {
                 $this->file_id = $tempura;
-                $data[0][0]['text']['value']="Has enviado un documento, has una consulta para poder ayudarte.";
+                $data[0][0]['text']['value'] = "Has enviado un documento, has una consulta para poder ayudarte.";
             }
         } catch (\Throwable $th) {
         }
@@ -510,7 +510,7 @@ class LyBoxGpt extends Component
     public function getPendingRun($messages)
     {   //consulta de respuesta cuando la espera es larga
         // consultamos si el run ya tiene respuesta y si es así entregue el mensaje o avise que no
-        $response = Http::post('http://localhost:'.env('AI_ASSISTANT_PORT').'/get_run_pending', [
+        $response = Http::post('http://localhost:' . env('AI_ASSISTANT_PORT') . '/get_run_pending', [
             'thread_id' => $messages['thread_id'],
             'run_id' => $messages['run_id'],
         ]);
@@ -619,34 +619,34 @@ class LyBoxGpt extends Component
 
         switch ($prompt) {
             case 1:
-                $this->message = "del archivo con id".$this->file_id.": Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo con id" . $this->file_id . ": Enlístame los objetivos generales y específicos de la investigación, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 2:
-                $this->message = "del archivo con id".$this->file_id.": redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
+                $this->message = "del archivo con id" . $this->file_id . ": redáctame en un párrafo de 12 líneas el resumen de toda la investigación, manteniendo esta estructura: 1) Apellido y nombre de autor, 2) Año, 3) Título de la investigación, 4) Metodología, 5) Muestra y instrumentos de recolección, 6) Resultados, y 7) Conclusión general.";
                 break;
             case 3:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo.";
+                $this->message = "del archivo con id" . $this->file_id . ": Redáctame a profundidad la problemática de la investigación, si no lo dice explicitamente deducelo y dimelo.";
                 break;
             case 4:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
+                $this->message = "del archivo con id" . $this->file_id . ": Redáctame las teorías de cada variable que se utilizaron en el apartado de marco teórico y/o revisión  de la literatura de esta investigación, y agregar a cada teoría su cita de autor, deducelo del documento si no está explicito";
                 break;
             case 5:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido.";
+                $this->message = "del archivo con id" . $this->file_id . ": Redáctame las definiciones más representativas de las variables de la investigación, y agrega su cita de autor a cada definición. si no lo dice explicitamente definelo del contenido.";
                 break;
             case 6:
-                $this->message = "del archivo con id".$this->file_id.": Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
+                $this->message = "del archivo con id" . $this->file_id . ": Cuál es el aporte principal de esta investigación, y quiénes serían los beneficiarios directos";
                 break;
             case 7:
-                $this->message = "del archivo con id".$this->file_id.": Indícame los resultados de acuerdo a cada objetivo de la investigación.";
+                $this->message = "del archivo con id" . $this->file_id . ": Indícame los resultados de acuerdo a cada objetivo de la investigación.";
                 break;
             case 8:
-                $this->message = "del archivo con id".$this->file_id.": Redáctame la recomendación principal del documento.";
+                $this->message = "del archivo con id" . $this->file_id . ": Redáctame la recomendación principal del documento.";
                 break;
             case 9:
-                $this->message = "del archivo con id".$this->file_id.": Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
+                $this->message = "del archivo con id" . $this->file_id . ": Créame una propuesta de mejora en base a las recomendaciones de la investigación de este documento.";
                 break;
             case 10:
-                $this->message = "del archivo con id".$this->file_id.": Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
+                $this->message = "del archivo con id" . $this->file_id . ": Resume lo más que puedas este documento de acuerdo a lo que consideres como elemental de una investigación, aunque el documento no sea una investigación resumelo.";
                 break;
             case 20:
                 $this->message = "Olvida todo el contexto de esta conversación, has borrón y cuenta nueva como si no supieras nada de lo que hablamos salvo mi nombre si ya te lo dije";
