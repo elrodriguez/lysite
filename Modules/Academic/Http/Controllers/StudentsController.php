@@ -99,7 +99,8 @@ class StudentsController extends Controller
                 'instruct'  => $instruct
             ]);
         } else {
-            return view('academic::students.students-plazo-vencido');
+            //return view('academic::students.students-plazo-vencido');
+            return route('dashboard_courses_default');
         }
     }
     public function video_selector($url)
