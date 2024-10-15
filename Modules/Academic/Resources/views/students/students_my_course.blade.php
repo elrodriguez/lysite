@@ -82,7 +82,8 @@
             }
 
             if (!hasModalBeenShown()) {
-                showModal();
+                var strps = {{ $course->video_url }};
+                if (strps && strps.length > 3) showModal();
             }
 
             $('#welcomeModal').on('hidden.bs.modal', function () {
