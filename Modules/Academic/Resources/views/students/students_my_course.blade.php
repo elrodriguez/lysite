@@ -33,6 +33,29 @@
 
 
         <!-- Welcome Modal -->
+        <style>
+            /* Estilos para el borde del modal */
+            #welcomeModal .modal-content {
+                border: 5px solid #ff9152;
+            }
+
+                /* Estilos para la parte superior del modal (fondo rojo) */
+            #welcomeModal .modal-body {
+                background-color: #ff9152; /* Color de fondo rojo para la parte superior del modal */
+                color: white; /* Color del texto en la parte superior del modal */
+            }
+
+            /* Estilos para el botón de cierre del modal */
+            #welcomeModal .modal-header .close {
+                color: #ff9152;
+            }
+
+            /* Estilos para la parte inferior del modal */
+            #welcomeModal .modal-footer {
+                background-color: #ffbc94; /* Color de fondo oscuro para la parte inferior del modal */
+                color: white; /* Color del texto en la parte inferior del modal */
+            }
+        </style>
         @if (isset($course->video_url))
         <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
