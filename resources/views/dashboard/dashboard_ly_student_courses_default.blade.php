@@ -10,7 +10,7 @@
     <body>
         <x-lyontech.header></x-lyontech.header>
         @livewire('course.courses-default')
-    </body>Está herramienta está disponible en el plan basic, standar y premium
+    </body>Esta herramienta está disponible en el plan basic, standar y premium
 @stop
 @section('global-modal')
     <div class="modal fade" id="ventanaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
@@ -22,7 +22,7 @@
                 <div class="modal-body pb-0" style="border: 0px; text-align:center;">
                     <img style="width: 50%;" src="{{ asset('assets/images/logoBlanco.png') }}" alt="">
                     <h3 style="font-weight: 700;">
-                        ESTÁ HERRAMIENTA ESTÁ DISPONIBLE EN EL PLAN BASIC,
+                        ESTA HERRAMIENTA ESTÁ DISPONIBLE EN EL PLAN BASIC,
                         STANDAR Y PREMIUM
                     </h3>
                 </div>
