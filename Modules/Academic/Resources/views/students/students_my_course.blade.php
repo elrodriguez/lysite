@@ -66,10 +66,11 @@
             }
 
             function hideModal() {
-                $('#welcomeModal').modal('hide');
                 var src = video.src;
                 video.src = '';
                 video.src = src;
+                $('#welcomeModal').modal('hide');
+
             }
 
             function setModalShown() {
