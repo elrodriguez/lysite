@@ -17,18 +17,18 @@ class VerifyDeviceToken
 
     public function handle($request, Closure $next) //descomentar el codigo para activar las Sesiones unicas
     {
-        // $user = $this->auth->user();
+        $user = $this->auth->user();
 
-        // $deviceToken = $_COOKIE['device_token'];
+        $deviceToken = $_COOKIE['device_token'];
 
-        //     if ($user && $user->device_token && $user->device_token !== $deviceToken) {
-        //         $response = redirect()->route('logout')->with('error', 'Se ha iniciado sesión desde otro dispositivo.');
+            if ($user && $user->device_token && $user->device_token !== $deviceToken) {
+                $response = redirect()->route('logout')->with('error', 'Se ha iniciado sesión desde otro dispositivo.');
 
-        //         // Eliminar la cookie 'device_token'
-        //         $response->withCookie(cookie()->forget('device_token'));
+                // Eliminar la cookie 'device_token'
+                $response->withCookie(cookie()->forget('device_token'));
 
-        //         return $response;
-        //     }
+                return $response;
+            }
 
 
         return $next($request);
