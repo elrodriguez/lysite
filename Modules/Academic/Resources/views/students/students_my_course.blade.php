@@ -43,7 +43,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div style="padding:61.88% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/{{ $course->video_url }}?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="LYONTEACH VIDEO PRESENTACION FINAL"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+                        <div style="padding:61.88% 0 0 0;position:relative;"><iframe id="videoPlayer" src="https://player.vimeo.com/video/{{ $course->video_url }}?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="LYONTEACH VIDEO PRESENTACION FINAL"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
@@ -59,6 +59,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var welcomeModal = document.getElementById('welcomeModal');
             var openModalBtn = document.getElementById('openModalBtn');
+            var video = document.getElementById('videoPlayer');
 
             function showModal() {
                 $('#welcomeModal').modal('show');
@@ -66,6 +67,9 @@
 
             function hideModal() {
                 $('#welcomeModal').modal('hide');
+                var src = video.src;
+                video.src = '';
+                video.src = src;
             }
 
             function setModalShown() {
