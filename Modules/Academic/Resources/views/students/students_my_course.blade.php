@@ -89,6 +89,9 @@
 
             $('#welcomeModal').on('hidden.bs.modal', function () {
                 setModalShown();
+                var src = video.src;
+                video.src = '';
+                video.src = src;
             });
 
             openModalBtn.addEventListener('click', function() {
